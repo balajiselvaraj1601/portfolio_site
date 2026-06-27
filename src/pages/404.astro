@@ -1,0 +1,46 @@
+---
+import Layout from '@layouts/Layout.astro';
+---
+
+<Layout title="Page not found — Balaji Selvaraj" path="/404" description="The page you were looking for could not be found.">
+  <section class="notfound">
+    <div class="container notfound__inner">
+      <p class="notfound__code">404</p>
+      <h1 class="notfound__title">Page not found</h1>
+      <p class="notfound__text">
+        The page you were looking for doesn’t exist or may have moved.
+      </p>
+      <div class="notfound__actions">
+        <a class="btn btn-primary" href="/">Back to home</a>
+        <a class="btn" href="/#projects">View projects</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .notfound {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-24);
+  }
+  .notfound__code {
+    font-size: clamp(3rem, 2rem + 6vw, 6rem);
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+  .notfound__title {
+    margin-block: var(--space-3) var(--space-3);
+  }
+  .notfound__text {
+    color: var(--text-muted);
+    margin-bottom: var(--space-8);
+  }
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

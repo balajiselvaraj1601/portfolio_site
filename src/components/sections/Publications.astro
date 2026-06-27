@@ -1,0 +1,9 @@
+---
+import Section from '@components/Section.astro';
+import LinkList from '@components/LinkList.astro';
+import { publications, site } from '@lib/content';
+---
+
+<Section id="publications" title={site.sections.publications.title}>
+  <LinkList items={publications.items} />
+</Section>

@@ -1,0 +1,9 @@
+---
+import Section from '@components/Section.astro';
+import LabeledDetailList from '@components/LabeledDetailList.astro';
+import { awards, site } from '@lib/content';
+---
+
+<Section id="awards" title={site.sections.awards.title}>
+  <LabeledDetailList items={awards.items} />
+</Section>

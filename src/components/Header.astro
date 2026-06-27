@@ -1,0 +1,311 @@
+---
+import { site, visibleNav } from '@lib/content';
+import Icon from './Icon.astro';
+---
+
+<header class="site-header" id="site-header">
+  <div class="container site-header__inner">
+    <a href="#hero" class="brand">{site.name}</a>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <ul class="nav__list">
+        {
+          visibleNav.map((item) => (
+            <li>
+              <a class="nav__link" href={`#${item.id}`} data-nav={item.id}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="site-header__actions">
+      <a
+        class="btn btn-primary resume-btn"
+        href={site.resume.path}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Icon name="download" size={16} />
+        <span class="resume-btn__label">Résumé</span>
+      </a>
+
+      <button
+        type="button"
+        class="theme-toggle"
+        id="theme-toggle"
+        aria-label="Toggle color theme"
+      >
+        <Icon name="sun" size={18} class="theme-toggle__sun" />
+        <Icon name="moon" size={18} class="theme-toggle__moon" />
+      </button>
+
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <Icon name="menu" size={22} class="nav-toggle__open" />
+        <Icon name="close" size={22} class="nav-toggle__close" />
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 85%, transparent);
+    backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease);
+  }
+  .site-header.is-scrolled {
+    border-bottom-color: var(--border);
+    box-shadow: var(--shadow);
+  }
+  .site-header__inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    min-height: var(--header-h);
+  }
+  .brand {
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+    margin-right: auto;
+  }
+
+  .nav__list {
+    display: flex;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+  }
+  .nav__link {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: var(--fs-small);
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color var(--dur) var(--ease),
+      background-color var(--dur) var(--ease);
+  }
+  .nav__link:hover {
+    color: var(--text);
+  }
+  .nav__link[aria-current='true'] {
+    color: var(--accent);
+    background: color-mix(in srgb, var(--accent) 12%, transparent);
+  }
+
+  .site-header__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .theme-toggle,
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    background: var(--bg-elev);
+    color: var(--text);
+  }
+  .theme-toggle:hover,
+  .nav-toggle:hover {
+    border-color: var(--accent);
+  }
+  .nav-toggle {
+    display: none;
+  }
+
+  /* Theme toggle icon swap driven by [data-theme] on <html> */
+  :global(html[data-theme='dark']) .theme-toggle__moon,
+  :global(html:not([data-theme='dark'])) .theme-toggle__sun {
+    display: none;
+  }
+
+  /* ── Responsive: collapse nav into a mobile menu below tablet ─────────── */
+  @media (max-width: 900px) {
+    .nav-toggle {
+      display: inline-flex;
+    }
+    .resume-btn__label {
+      display: none;
+    }
+    .nav {
+      position: fixed;
+      inset: var(--header-h) 0 0 0;
+      background: var(--bg);
+      padding: var(--space-6);
+      transform: translateX(100%);
+      visibility: hidden;
+      transition: transform var(--dur) var(--ease),
+        visibility var(--dur) var(--ease);
+      overflow-y: auto;
+    }
+    .nav.is-open {
+      transform: translateX(0);
+      visibility: visible;
+    }
+    .nav__list {
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+    .nav__link {
+      display: block;
+      padding: var(--space-3) var(--space-4);
+      font-size: 1.05rem;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav {
+        transition: none;
+      }
+    }
+  }
+
+  /* When closed on desktop, both toggle icons: show only menu icon on mobile */
+  .nav-toggle__close {
+    display: none;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__open {
+    display: none;
+  }
+  .nav-toggle[aria-expanded='true'] .nav-toggle__close {
+    display: inline-block;
+  }
+</style>
+
+<script>
+  // ── Theme toggle ───────────────────────────────────────────────────────
+  const toggle = document.getElementById('theme-toggle');
+  toggle?.addEventListener('click', () => {
+    const root = document.documentElement;
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try {
+      localStorage.setItem('theme', next);
+    } catch {}
+  });
+
+  // ── Sticky header elevation on scroll ──────────────────────────────────
+  const header = document.getElementById('site-header');
+  const onScroll = () => {
+    header?.classList.toggle('is-scrolled', window.scrollY > 8);
+  };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Mobile menu (focus-trapped, Esc to close) ──────────────────────────
+  const navToggle = document.getElementById('nav-toggle');
+  const nav = document.getElementById('primary-nav');
+  const links = nav ? Array.from(nav.querySelectorAll('a')) : [];
+
+  function setMenu(open: boolean) {
+    nav?.classList.toggle('is-open', open);
+    navToggle?.setAttribute('aria-expanded', String(open));
+    navToggle?.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.body.style.overflow = open ? 'hidden' : '';
+    if (open) links[0]?.focus();
+  }
+  const isOpen = () => navToggle?.getAttribute('aria-expanded') === 'true';
+
+  navToggle?.addEventListener('click', () => setMenu(!isOpen()));
+
+  // Close on link click (in-page navigation) and return focus.
+  links.forEach((a) =>
+    a.addEventListener('click', () => {
+      if (isOpen()) setMenu(false);
+    })
+  );
+
+  document.addEventListener('keydown', (e) => {
+    if (!isOpen()) return;
+    if (e.key === 'Escape') {
+      setMenu(false);
+      (navToggle as HTMLElement)?.focus();
+    }
+    if (e.key === 'Tab') {
+      // simple focus trap across nav links + toggle
+      const focusables = [navToggle, ...links].filter(Boolean) as HTMLElement[];
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  });
+
+  // Reset menu state when resizing back to desktop.
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 900 && isOpen()) setMenu(false);
+  });
+
+  // ── Scroll-spy active nav indicator ────────────────────────────────────
+  const navLinks = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('.nav__link[data-nav]')
+  );
+  const byId = new Map(navLinks.map((l) => [l.dataset.nav, l]));
+  const sections = navLinks
+    .map((l) => document.getElementById(l.dataset.nav!))
+    .filter(Boolean) as HTMLElement[];
+
+  if ('IntersectionObserver' in window && sections.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((l) => l.removeAttribute('aria-current'));
+            byId.get(entry.target.id)?.setAttribute('aria-current', 'true');
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+    );
+    sections.forEach((s) => observer.observe(s));
+  }
+
+  // ── Entrance reveal ─────────────────────────────────────────────────────
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reveals = Array.from(document.querySelectorAll('.reveal'));
+  if (reduce || !('IntersectionObserver' in window)) {
+    reveals.forEach((el) => el.classList.add('is-visible'));
+  } else {
+    const ro = new IntersectionObserver(
+      (entries, obs) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible');
+            obs.unobserve(e.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.05 }
+    );
+    reveals.forEach((el) => ro.observe(el));
+  }
+</script>

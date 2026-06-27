@@ -1,0 +1,129 @@
+---
+import Section from '@components/Section.astro';
+import { experience, site } from '@lib/content';
+
+function periodLabel(p: { start: string; end: string | null; endLabel: string }) {
+  const end = p.endLabel || p.end || '';
+  return end ? `${p.start} – ${end}` : p.start;
+}
+---
+
+<Section id="experience" title={site.sections.experience.title}>
+  <ol class="timeline">
+    {
+      experience.roles.map((role) => (
+        <li class="role">
+          <div class="role__marker" aria-hidden="true" />
+          <div class="role__body">
+            <header class="role__head">
+              <h3 class="role__title">{role.position}</h3>
+              <p class="role__meta">
+                <span class="role__org">{role.organization}</span>
+                <span class="role__period">{periodLabel(role.period)}</span>
+              </p>
+            </header>
+
+            {role.projects.map((project) => (
+              <div class="proj">
+                {project.name && <h4 class="proj__name">{project.name}</h4>}
+                <ul class="proj__bullets">
+                  {project.bullets.map((b) => (
+                    <li class:list={['proj__bullet', { 'is-secondary': b.tier === 'secondary' }]}>
+                      {b.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</Section>
+
+<style>
+  .timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-12);
+  }
+  .role {
+    position: relative;
+    padding-left: var(--space-8);
+  }
+  /* single rail */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border);
+  }
+  .timeline {
+    position: relative;
+  }
+  .role__marker {
+    position: absolute;
+    left: 0;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .role__title {
+    font-size: 1.2rem;
+  }
+  .role__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-3);
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+    margin-top: 2px;
+    max-width: none;
+  }
+  .role__org {
+    font-weight: 600;
+    color: var(--text);
+  }
+  .proj {
+    margin-top: var(--space-6);
+  }
+  .proj__name {
+    font-size: 1rem;
+    color: var(--accent);
+    margin-bottom: var(--space-2);
+  }
+  .proj__bullets {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+    max-width: var(--maxw-text);
+  }
+  .proj__bullet {
+    position: relative;
+    padding-left: var(--space-4);
+  }
+  .proj__bullet::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--text-muted);
+  }
+  .proj__bullet.is-secondary {
+    color: var(--text-muted);
+    font-size: 0.97rem;
+  }
+</style>

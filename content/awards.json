@@ -1,0 +1,12 @@
+{
+  "title": "Awards & Recognition",
+  "items": [
+    { "label": "Kaggle", "detail": "Global Rank 652/200K+ — Top 0.3% (2 Silver, 7 Bronze)" },
+    { "label": "EVP Level", "detail": "R&D Award — Biopharma Science & Innovation" },
+    { "label": "CIO Level", "detail": "IT Excellence — AI for CT analysis" },
+    { "label": "Senior Director Level", "detail": "GraphITE — Oncology contribution" },
+    { "label": "Director Level", "detail": "10 awards at AstraZeneca" },
+    { "label": "Associate Director Level", "detail": "8 awards at AstraZeneca" },
+    { "label": "Academic", "detail": "NCAT Top 4 nationally — IIT Delhi" }
+  ]
+}

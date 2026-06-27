@@ -1,0 +1,81 @@
+---
+import Section from '@components/Section.astro';
+import Icon from '@components/Icon.astro';
+import { profile, site } from '@lib/content';
+---
+
+<Section id="contact" title={site.sections.contact.title}>
+  <p class="contact__lead">
+    Open to AI leadership roles, research collaborations, and conversations with peers.
+  </p>
+  <ul class="contact__list">
+    {
+      profile.contact.map((c) => (
+        <li class="contact__item">
+          {c.href ? (
+            <a
+              class="contact__link"
+              href={c.href}
+              {...c.href.startsWith('http')
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {}}
+            >
+              <Icon name={c.icon as any} size={20} />
+              <span>{c.label}</span>
+            </a>
+          ) : (
+            <span class="contact__link contact__link--static">
+              <Icon name={c.icon as any} size={20} />
+              <span>{c.label}</span>
+            </span>
+          )}
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .contact__lead {
+    margin-bottom: var(--space-8);
+    font-size: 1.1rem;
+    max-width: var(--maxw-text);
+  }
+  .contact__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .contact__list {
+      grid-template-columns: repeat(2, 1fr);
+      max-width: 720px;
+    }
+  }
+  .contact__link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elev);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+  a.contact__link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .contact__link :global(svg) {
+    color: var(--accent);
+    flex: none;
+  }
+  .contact__link--static {
+    color: var(--text-muted);
+  }
+</style>

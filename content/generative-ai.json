@@ -1,0 +1,8 @@
+{
+  "title": "Generative AI",
+  "items": [
+    { "text": "Deployed NemoClaw in an isolated VPC to run a sandboxed AI assistant with policy-managed egress, runtime isolation, and strict tool/network controls. Enhanced autonomous-workflow security and reliability through granular governance policies, reduced attack surface, and safe long-running execution." },
+    { "text": "Developed an autonomous BI agent ingesting supplier catalogs, prices, and demand signals to source cost-effective raw materials. Engineered LLM agents with planning, tool-calling, validation loops, and human-in-the-loop guardrails to ensure reliable and auditable procurement decisions." },
+    { "text": "Architected and developed a multimodal Retrieval-Augmented Generation (RAG) pipeline that unified text, image, and tabular data into a shared embedding space. Integrated reranking and citation grounding to reduce hallucination and deliver traceable, context-aware information retrieval." }
+  ]
+}

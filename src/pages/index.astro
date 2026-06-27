@@ -1,0 +1,47 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { visibleNav } from '@lib/content';
+
+import Hero from '@components/sections/Hero.astro';
+import About from '@components/sections/About.astro';
+import Impact from '@components/sections/Impact.astro';
+import Experience from '@components/sections/Experience.astro';
+import Projects from '@components/sections/Projects.astro';
+import GenerativeAI from '@components/sections/GenerativeAI.astro';
+import Skills from '@components/sections/Skills.astro';
+import Mentorship from '@components/sections/Mentorship.astro';
+import Education from '@components/sections/Education.astro';
+import Awards from '@components/sections/Awards.astro';
+import Publications from '@components/sections/Publications.astro';
+import Conferences from '@components/sections/Conferences.astro';
+import Kaggle from '@components/sections/Kaggle.astro';
+import Contact from '@components/sections/Contact.astro';
+
+// Section id → component. index.astro renders these in the order declared by
+// site.json.nav (and only those marked visible) — order is never hardcoded here.
+const SECTIONS: Record<string, any> = {
+  hero: Hero,
+  about: About,
+  impact: Impact,
+  experience: Experience,
+  projects: Projects,
+  'generative-ai': GenerativeAI,
+  skills: Skills,
+  mentorship: Mentorship,
+  education: Education,
+  awards: Awards,
+  publications: Publications,
+  conferences: Conferences,
+  kaggle: Kaggle,
+  contact: Contact,
+};
+---
+
+<Layout path="/">
+  {
+    visibleNav.map((item) => {
+      const Section = SECTIONS[item.id];
+      return Section ? <Section /> : null;
+    })
+  }
+</Layout>

@@ -1,0 +1,88 @@
+---
+import { site, profile } from '@lib/content';
+import Icon from './Icon.astro';
+
+const social = profile.contact.filter(
+  (c) => c.href && (c.type === 'linkedin' || c.type === 'kaggle' || c.type === 'email')
+);
+const year = '2026'; // build-time constant; bump when re-deriving content
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__inner">
+    <p class="site-footer__copy">© {year} {site.name}</p>
+
+    <ul class="site-footer__social">
+      {
+        social.map((c) => (
+          <li>
+            <a
+              href={c.href!}
+              aria-label={c.label}
+              {...c.href!.startsWith('http')
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {}}
+            >
+              <Icon name={c.icon as any} size={18} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a href="#hero" class="site-footer__top">
+      Back to top <Icon name="arrow-up" size={15} />
+    </a>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    padding-block: var(--space-8);
+    color: var(--text-muted);
+  }
+  .site-footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+  .site-footer__copy {
+    margin: 0;
+    font-size: var(--fs-small);
+  }
+  .site-footer__social {
+    display: flex;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__social a {
+    display: inline-flex;
+    width: 38px;
+    height: 38px;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .site-footer__social a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+  .site-footer__top {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    text-decoration: none;
+  }
+  .site-footer__top:hover {
+    color: var(--accent);
+  }
+</style>

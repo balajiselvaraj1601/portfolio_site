@@ -1,0 +1,50 @@
+---
+import Section from '@components/Section.astro';
+import Chip from '@components/Chip.astro';
+import { skills, site } from '@lib/content';
+---
+
+<Section id="skills" title={site.sections.skills.title}>
+  <div class="skills">
+    {
+      skills.categories.map((cat) => (
+        <div class="skills__group">
+          <h3 class="skills__label">{cat.label}</h3>
+          <ul class="skills__chips">
+            {cat.skills.map((s) => (
+              <li>
+                <Chip>{s}</Chip>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .skills {
+    display: grid;
+    gap: var(--space-8);
+  }
+  @media (min-width: 768px) {
+    .skills {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-8) var(--space-12);
+    }
+  }
+  .skills__label {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+  }
+  .skills__chips {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+</style>

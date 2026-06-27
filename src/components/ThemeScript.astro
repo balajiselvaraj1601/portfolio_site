@@ -1,0 +1,22 @@
+---
+// Inline, render-blocking theme bootstrap. Runs before first paint so there is
+// no flash of incorrect theme (requirement M5). Sets data-theme on <html> from
+// a persisted choice, falling back to the OS preference.
+---
+
+<script is:inline>
+  (function () {
+    try {
+      var stored = localStorage.getItem('theme');
+      var theme =
+        stored === 'light' || stored === 'dark'
+          ? stored
+          : window.matchMedia('(prefers-color-scheme: dark)').matches
+            ? 'dark'
+            : 'light';
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {
+      /* localStorage unavailable — CSS prefers-color-scheme fallback applies */
+    }
+  })();
+</script>

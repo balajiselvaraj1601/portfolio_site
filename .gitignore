@@ -1,0 +1,22 @@
+# Stack: Astro (chosen 2026-06-27).
+
+# Build output & dependencies
+node_modules/
+dist/
+.astro/
+*.tsbuildinfo
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Logs / env
+*.log
+.env
+.env.*
+!.env.example

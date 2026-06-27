@@ -1,0 +1,20 @@
+{
+  "title": "Publications",
+  "items": [
+    {
+      "label": "JITC 2021",
+      "title": "GraphITE: unsupervised graph embeddings for multiplex immunofluorescence image exploration",
+      "url": "https://jitc.bmj.com/lookup/doi/10.1136/jitc-2021-SITC2021.822"
+    },
+    {
+      "label": "bioRxiv 2021",
+      "title": "Image model embeddings for digital pathology and drug development via self-supervised learning",
+      "url": "https://doi.org/10.1101/2021.09.20.461088"
+    },
+    {
+      "label": "bioRxiv 2021",
+      "title": "An unsupervised graph embeddings approach to multiplex immunofluorescence image exploration",
+      "url": "https://doi.org/10.1101/2021.06.09.447654"
+    }
+  ]
+}

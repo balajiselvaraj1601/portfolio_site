@@ -1,0 +1,49 @@
+---
+import Section from '@components/Section.astro';
+import LinkList from '@components/LinkList.astro';
+import Icon from '@components/Icon.astro';
+import { kaggle, site } from '@lib/content';
+---
+
+<Section id="kaggle" title={site.sections.kaggle.title}>
+  <div class="kaggle__rank card">
+    <p class="kaggle__rank-text">{kaggle.rank}</p>
+    <a
+      class="kaggle__profile"
+      href={kaggle.profile}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Kaggle profile
+      <Icon name="external" size={15} />
+    </a>
+  </div>
+
+  <LinkList items={kaggle.items} class="kaggle__list" />
+</Section>
+
+<style>
+  .kaggle__rank {
+    padding: var(--space-6);
+    margin-bottom: var(--space-6);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+  .kaggle__rank-text {
+    font-size: 1.15rem;
+    font-weight: 650;
+    margin: 0;
+    max-width: none;
+  }
+  .kaggle__profile {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-size: var(--fs-small);
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>

@@ -1,0 +1,57 @@
+---
+import Section from '@components/Section.astro';
+import { education, site } from '@lib/content';
+---
+
+<Section id="education" title={site.sections.education.title}>
+  <div class="edu">
+    {
+      education.records.map((r) => (
+        <article class="edu__record card">
+          <h3 class="edu__degree">{r.degree}</h3>
+          <p class="edu__inst">{r.institution}</p>
+          <p class="edu__meta">
+            <span>{r.period}</span>
+            {r.gpa && <span>· {r.gpa}</span>}
+            {r.achievement && <span class="edu__badge">{r.achievement}</span>}
+          </p>
+        </article>
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .edu {
+    display: grid;
+    gap: var(--space-4);
+  }
+  .edu__record {
+    padding: var(--space-6);
+    max-width: var(--maxw-text);
+  }
+  .edu__degree {
+    font-size: 1.15rem;
+  }
+  .edu__inst {
+    color: var(--text);
+    margin-top: 2px;
+  }
+  .edu__meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+    margin-top: var(--space-2);
+    max-width: none;
+  }
+  .edu__badge {
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent);
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 999px;
+  }
+</style>

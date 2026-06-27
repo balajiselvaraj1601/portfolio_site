@@ -1,0 +1,26 @@
+---
+// Section primitive: anchored landmark with an accessible name tied to its
+// heading (a11y: <section aria-labelledby>). Heading can be hidden (Hero).
+interface Props {
+  id: string;
+  title: string;
+  /** Hide the visual heading but keep it for screen readers. */
+  hideTitle?: boolean;
+  class?: string;
+}
+const { id, title, hideTitle = false, class: cls } = Astro.props;
+const headingId = `${id}-heading`;
+---
+
+<section
+  id={id}
+  class:list={['section', 'reveal', cls]}
+  aria-labelledby={headingId}
+>
+  <div class="container">
+    <h2 id={headingId} class:list={['section__title', { 'visually-hidden': hideTitle }]}>
+      {title}
+    </h2>
+    <slot />
+  </div>
+</section>

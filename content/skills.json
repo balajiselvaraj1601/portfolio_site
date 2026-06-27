@@ -1,0 +1,30 @@
+{
+  "title": "Skills, Tools & Technologies",
+  "note": "Rebuilt from the resume's `tools` section (hidden in the resume render but the correct source for a Skills UI), cross-checked against experience bullets.",
+  "categories": [
+    {
+      "label": "ML & Deep Learning",
+      "skills": ["PyTorch", "Contrastive Learning", "Vision Foundation Models", "Graph Neural Networks", "Multi-modal AI", "Self-Supervised Learning", "TensorFlow"]
+    },
+    {
+      "label": "Clinical & Domain AI",
+      "skills": ["Medical Imaging (CT, Endoscopy, Echo, Pathology)", "Drug Safety Prediction", "Tumour Segmentation", "Single-Cell Genomics", "Computational Pathology"]
+    },
+    {
+      "label": "LLM Frameworks & Agents",
+      "skills": ["LangChain", "LlamaIndex", "NemoClaw", "Google ADK", "Med-PaLM", "LLM Embeddings", "Retrieval-Augmented Generation (RAG)"]
+    },
+    {
+      "label": "AI Developer Tools",
+      "skills": ["Claude Code", "GitHub Copilot", "Cursor"]
+    },
+    {
+      "label": "Cloud & MLOps",
+      "skills": ["AWS ML Pipeline", "Distributed Training", "Model Parallelism", "Online Learning", "GxP Infrastructure", "Docker"]
+    },
+    {
+      "label": "Leadership & Delivery",
+      "skills": ["AI Programme Management", "Stakeholder Alignment", "Cross-functional Team Leadership", "Research Collaboration"]
+    }
+  ]
+}

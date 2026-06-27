@@ -1,0 +1,37 @@
+---
+// Renders a list of text items. Used by Impact, Generative AI, Mentorship.
+interface Props {
+  items: { text: string }[];
+  class?: string;
+}
+const { items, class: cls } = Astro.props;
+---
+
+<ul class:list={['bullet-list', cls]}>
+  {items.map((item) => <li>{item.text}</li>)}
+</ul>
+
+<style>
+  .bullet-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--maxw-text);
+  }
+  .bullet-list li {
+    position: relative;
+    padding-left: var(--space-6);
+    line-height: var(--lh-body);
+  }
+  .bullet-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+</style>

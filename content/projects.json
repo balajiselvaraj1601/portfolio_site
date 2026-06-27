@@ -1,0 +1,125 @@
+{
+  "title": "Selected Projects",
+  "note": "Derived view of headline projects from experience.json, shaped for a card/detail UI. experience.json remains the source of truth for bullets.",
+  "projects": [
+    {
+      "id": "drug-safety-ai-platform",
+      "name": "Drug Safety AI Platform",
+      "org": "AstraZeneca, Sweden",
+      "period": "2023–Present",
+      "role": "AI Lead",
+      "summary": "Model-agnostic multimodal AI platform integrating omics, imaging, and molecular features for drug-safety prediction at scale, within a $3M+ SVP-sponsored initiative.",
+      "highlights": [
+        "Projected $20M-$50M annual savings by reducing animal studies and compressing safety timelines from 5 to 3 years.",
+        "Productionized ML pipelines with online learning, confidence estimation, and joint embedding.",
+        "Broad Institute collaboration on Cell Painting and omics pipelines."
+      ],
+      "tags": ["Multimodal AI", "Drug Safety", "Omics", "MLOps", "Foundation Models"],
+      "domain": "Biopharma R&D"
+    },
+    {
+      "id": "tumor-recurrence-prediction",
+      "name": "Tumor Recurrence Prediction",
+      "org": "AstraZeneca, Sweden",
+      "period": "2023–Present",
+      "role": "AI Lead",
+      "summary": "Novel tumor recurrence prediction pipeline using single-cell transcriptomics, generalizable across drugs, treatment conditions, and data sources, for a Chief Scientist-sponsored oncology initiative.",
+      "highlights": [
+        "90% F1 on internal benchmarks across Osimertinib-treated cell lines; 13%+ over SOTA on public datasets.",
+        "Integrated Med-PaLM LLM embeddings and AZ Biological Insights Knowledge Graph representations.",
+        "Reduced pipeline compute time 30% via Optuna-driven hyperparameter search."
+      ],
+      "tags": ["Single-Cell Genomics", "LLM Embeddings", "Knowledge Graph", "Oncology"],
+      "domain": "Translational Oncology"
+    },
+    {
+      "id": "foundation-model-framework",
+      "name": "Foundation Model Framework",
+      "org": "AstraZeneca, Sweden",
+      "period": "2023–Present",
+      "role": "Architect",
+      "summary": "Reusable cross-platform framework standardizing training, inference, and evaluation of vision foundation models, scaled across CT, Endoscopy, and Echocardiography.",
+      "highlights": [
+        "Deployed across 3 clinical imaging modalities and 3 internal AZ infrastructures.",
+        "Accelerated onboarding of new imaging use cases for rapid experimentation and deployment.",
+        "Endoscopy model deployed in a clinical study ranking gastrointestinal tissue damage severity."
+      ],
+      "tags": ["Vision Foundation Models", "Medical Imaging", "Reusable Framework"],
+      "domain": "Clinical Imaging"
+    },
+    {
+      "id": "ct-segmentation-oncology",
+      "name": "CT Tumor Segmentation",
+      "org": "AstraZeneca, India",
+      "period": "2022–2023",
+      "role": "Engineer",
+      "summary": "Next-generation CT tumor segmentation pipeline delivered in 6 months, with Dice scores 46% above SOTA, enabling $0.5M in follow-on funding.",
+      "highlights": [
+        "Radiologist-inspired dynamic window function and test-time augmentation improved Dice by 11% and 7%.",
+        "Exceeded stakeholder targets by 4-5x on NSCLC tumor segmentation benchmarks.",
+        "Reduced training time 20% and GPU memory 15-20% via model and data parallelism."
+      ],
+      "tags": ["Segmentation", "CT Imaging", "NSCLC", "Distributed Training"],
+      "domain": "Oncology Imaging"
+    },
+    {
+      "id": "digital-pathology-foundation-models",
+      "name": "Foundation Models for Digital Pathology",
+      "org": "AstraZeneca, India",
+      "period": "2020–2022",
+      "role": "AI Lead",
+      "summary": "Scalable, reusable histopathology foundation model platform on AWS, delivering contrastive and inpainting model variants at 60% lower GPU compute cost.",
+      "highlights": [
+        "End-to-end AWS ML pipeline: ingestion, preprocessing, distributed training, interpretability, inference.",
+        "Contrastive foundation models matched SOTA at reduced GPU compute cost.",
+        "GxP-compliant Label Studio annotation tooling for pathologists; led a 4-member team."
+      ],
+      "tags": ["Self-Supervised Learning", "Contrastive Learning", "Digital Pathology", "AWS"],
+      "domain": "Digital Pathology"
+    },
+    {
+      "id": "gnn-clinical-imaging",
+      "name": "Graph Neural Networks & Clinical Imaging",
+      "org": "AstraZeneca, India",
+      "period": "2020–2022",
+      "role": "Engineer",
+      "summary": "GNN-based pipeline for survival and response prediction on multiplex immunofluorescence histopathology slides, mapping the tumor microenvironment.",
+      "highlights": [
+        "Graph-embedding pipelines across NSCLC and HNSCC solid-tumor cohorts.",
+        "Modular preprocessing extracting graphs from multispectral gigapixel histopathology images."
+      ],
+      "tags": ["Graph Neural Networks", "Histopathology", "Tumor Microenvironment"],
+      "domain": "Computational Pathology"
+    },
+    {
+      "id": "enterprise-vision-analytics",
+      "name": "Enterprise Vision Analytics",
+      "org": "HCL Technology, India",
+      "period": "2017–2020",
+      "role": "Lead Engineer",
+      "summary": "Production face, video, and pose analytics platforms — real-time recognition, person re-identification, multi-object tracking, and behavior analysis across enterprise deployments.",
+      "highlights": [
+        "Real-time face recognition, verification, and identity clustering across 2 client deployments.",
+        "ReID and MOT pipelines robust to lighting, camera motion, and multi-scene conditions.",
+        "Edge-optimized model compression and Docker-based modular deployment."
+      ],
+      "tags": ["Computer Vision", "Edge AI", "ReID", "Pose Estimation"],
+      "domain": "Enterprise Vision"
+    },
+    {
+      "id": "clinical-imaging-systems-iitm",
+      "name": "Clinical Imaging Systems",
+      "org": "HTIC & ICSR, IIT Madras",
+      "period": "2016–2017",
+      "role": "Project Associate",
+      "summary": "Real-time clinical imaging systems — 4K neonatal retinal imaging, GPU endoscopy with digital NBI, mouse-brain 3D reconstruction, and ultrasound-guided robotic navigation.",
+      "highlights": [
+        "Digital NBI pipeline eliminated dedicated hardware, cutting ~$5K per device.",
+        "Real-time endoscopy system with 10+ modules on NVIDIA Jetson TX1.",
+        "Neuron-connectivity toolbox delivered to Cold Spring Harbor Laboratory and RIKEN."
+      ],
+      "tags": ["Real-Time Imaging", "Embedded GPU", "Medical Devices", "3D Reconstruction"],
+      "domain": "Academic Research"
+    }
+  ]
+}

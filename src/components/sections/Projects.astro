@@ -1,0 +1,144 @@
+---
+import Section from '@components/Section.astro';
+import Chip from '@components/Chip.astro';
+import Icon from '@components/Icon.astro';
+import { projects, site } from '@lib/content';
+---
+
+<Section id="projects" title={site.sections.projects.title}>
+  <ul class="projects-grid">
+    {
+      projects.projects.map((p) => (
+        <li>
+          <article class="project card">
+            <p class="project__domain">{p.domain}</p>
+            <h3 class="project__name">{p.name}</h3>
+            <p class="project__meta">
+              {p.role} · {p.org} · {p.period}
+            </p>
+            <p class="project__summary">{p.summary}</p>
+
+            <ul class="project__tags">
+              {p.tags.map((t) => (
+                <li>
+                  <Chip>{t}</Chip>
+                </li>
+              ))}
+            </ul>
+
+            <details class="project__details">
+              <summary class="project__summary-toggle">
+                <span>Highlights</span>
+                <Icon name="chevron" size={16} class="project__chevron" />
+              </summary>
+              <ul class="project__highlights">
+                {p.highlights.map((h) => (
+                  <li>{h}</li>
+                ))}
+              </ul>
+            </details>
+          </article>
+        </li>
+      ))
+    }
+  </ul>
+</Section>
+
+<style>
+  .projects-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 640px) {
+    .projects-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 1100px) {
+    .projects-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .project {
+    height: 100%;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    transition: border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .project:hover {
+      transform: translateY(-3px);
+      border-color: var(--accent);
+    }
+  }
+  .project__domain {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    margin-bottom: var(--space-2);
+  }
+  .project__name {
+    font-size: 1.2rem;
+    margin-bottom: var(--space-1);
+  }
+  .project__meta {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    margin-bottom: var(--space-3);
+    max-width: none;
+  }
+  .project__summary {
+    margin-bottom: var(--space-4);
+  }
+  .project__tags {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .project__details {
+    margin-top: auto;
+    border-top: 1px solid var(--border);
+    padding-top: var(--space-3);
+  }
+  .project__summary-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    cursor: pointer;
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--text);
+    list-style: none;
+  }
+  .project__summary-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .project__chevron {
+    transition: transform var(--dur) var(--ease);
+    color: var(--text-muted);
+  }
+  .project__details[open] .project__chevron {
+    transform: rotate(180deg);
+  }
+  .project__highlights {
+    margin: var(--space-3) 0 0;
+    padding-left: 1.1em;
+    display: grid;
+    gap: var(--space-2);
+    font-size: 0.97rem;
+    color: var(--text);
+  }
+</style>

@@ -1,0 +1,58 @@
+{
+  "name": "Balaji Selvaraj",
+  "title": "Technical AI Leader",
+  "tagline": "Technical AI Leader building production AI for oncology, drug safety, and biopharma R&D.",
+  "location": "Gothenburg, Sweden",
+  "nav": [
+    { "id": "hero", "label": "Home" },
+    { "id": "about", "label": "About" },
+    { "id": "impact", "label": "Impact" },
+    { "id": "experience", "label": "Experience" },
+    { "id": "projects", "label": "Projects" },
+    { "id": "generative-ai", "label": "Generative AI" },
+    { "id": "skills", "label": "Skills" },
+    { "id": "mentorship", "label": "Mentorship" },
+    { "id": "education", "label": "Education" },
+    { "id": "awards", "label": "Awards" },
+    { "id": "publications", "label": "Publications" },
+    { "id": "conferences", "label": "Conferences" },
+    { "id": "kaggle", "label": "Kaggle" },
+    { "id": "contact", "label": "Contact" }
+  ],
+  "sections": {
+    "hero": { "title": "", "source": "profile.json", "visible": true },
+    "about": { "title": "About", "source": "profile.json", "visible": true },
+    "impact": { "title": "Strategic Impact", "source": "strategic-impact.json", "visible": true },
+    "experience": { "title": "Experience", "source": "experience.json", "visible": true },
+    "projects": { "title": "Selected Projects", "source": "projects.json", "visible": true },
+    "generative-ai": { "title": "Generative AI", "source": "generative-ai.json", "visible": true },
+    "skills": { "title": "Skills, Tools & Technologies", "source": "skills.json", "visible": true },
+    "mentorship": { "title": "Mentorship", "source": "mentorship.json", "visible": true },
+    "education": { "title": "Education", "source": "education.json", "visible": true },
+    "awards": { "title": "Awards & Recognition", "source": "awards.json", "visible": true },
+    "publications": { "title": "Publications", "source": "publications.json", "visible": true },
+    "conferences": { "title": "Conferences", "source": "conferences.json", "visible": true },
+    "kaggle": { "title": "Kaggle Competitions", "source": "kaggle.json", "visible": true },
+    "contact": { "title": "Contact", "source": "profile.json", "visible": true }
+  },
+  "seo": {
+    "title": "Balaji Selvaraj — Technical AI Leader",
+    "description": "Technical AI Leader with 12+ years across product, services, and startups. Leading distributed AI teams delivering oncology, drug-safety, and biopharma R&D AI at AstraZeneca. Kaggle top 0.3%.",
+    "keywords": [
+      "Technical AI Leader", "Applied AI", "Machine Learning", "Deep Learning",
+      "Medical Imaging AI", "Drug Safety AI", "Foundation Models", "Oncology AI",
+      "AstraZeneca", "Kaggle", "MLOps", "AI Engineering Lead"
+    ],
+    "ogImage": "/assets/og/og-image.png",
+    "twitterCard": "summary_large_image"
+  },
+  "resume": {
+    "label": "Download résumé (PDF)",
+    "path": "/assets/resume/balaji-selvaraj-resume.pdf"
+  },
+  "theme": {
+    "tokensRef": "docs/design-direction.md",
+    "default": "system",
+    "modes": ["light", "dark"]
+  }
+}

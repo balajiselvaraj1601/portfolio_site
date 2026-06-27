@@ -1,0 +1,82 @@
+---
+import { site, profile } from '@lib/content';
+
+interface Props {
+  /** Page title; defaults to the site SEO title. */
+  title?: string;
+  description?: string;
+  /** Path of the current page relative to the site root, e.g. "/" or "/404". */
+  path?: string;
+}
+
+const { title, description, path = '/' } = Astro.props;
+
+const pageTitle = title ?? site.seo.title;
+const pageDesc = description ?? site.seo.description;
+
+// Absolute URLs derive from `Astro.site` (set once in astro.config.mjs → SSOT).
+// If `site` is unset (e.g. local dev without config), fall back to the request origin.
+const origin = Astro.site ?? new URL(Astro.url.origin);
+const canonical = new URL(path, origin).href;
+const ogImage = new URL(site.seo.ogImage, origin).href;
+
+// JSON-LD Person — derived from profile.json (seo.md template, kept in sync).
+const linkedin = profile.contact.find((c) => c.type === 'linkedin')?.href;
+const kaggle = profile.contact.find((c) => c.type === 'kaggle')?.href;
+const email = profile.contact.find((c) => c.type === 'email')?.href;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.title,
+  ...(email ? { email } : {}),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Gothenburg',
+    addressCountry: 'SE',
+  },
+  url: new URL('/', origin).href,
+  sameAs: [linkedin, kaggle].filter(Boolean),
+  knowsAbout: site.seo.keywords,
+  worksFor: { '@type': 'Organization', name: 'AstraZeneca' },
+};
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{pageTitle}</title>
+<meta name="description" content={pageDesc} />
+<meta name="keywords" content={site.seo.keywords.join(', ')} />
+<link rel="canonical" href={canonical} />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Theme color per scheme -->
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#0b0d10" media="(prefers-color-scheme: dark)" />
+
+<!-- Icons & manifest -->
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/assets/icons/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+<!-- OpenGraph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDesc} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:alt" content={`${profile.name} — ${profile.title}`} />
+<meta property="og:locale" content="en" />
+
+<!-- Twitter -->
+<meta name="twitter:card" content={site.seo.twitterCard} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDesc} />
+<meta name="twitter:image" content={ogImage} />
+
+<!-- JSON-LD Person -->
+<script
+  type="application/ld+json"
+  set:html={JSON.stringify(jsonLd)}
+/>

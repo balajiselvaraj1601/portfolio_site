@@ -1,0 +1,172 @@
+{
+  "title": "Experience",
+  "roles": [
+    {
+      "position": "Senior Deep Learning Engineer",
+      "organization": "AstraZeneca, Sweden",
+      "period": { "start": "2023", "end": null, "endLabel": "Present" },
+      "projects": [
+        {
+          "name": "Drug Safety AI Platform",
+          "bullets": [
+            { "text": "AI Lead within a $3M+ SVP-sponsored drug safety initiative — building predictive toxicology models projected to save $20M-$50M annually by reducing animal studies, compressing safety timelines from 5 to 3 years, and improving compound prioritization.", "tier": "primary" },
+            { "text": "Architected a model-agnostic multimodal AI platform integrating omics, imaging, and molecular features for drug safety prediction at scale.", "tier": "primary" },
+            { "text": "Designed the platform for cross-assay, cross-compound scalability, integrating multi-vendor biological data across heterogeneous modalities.", "tier": "primary" },
+            { "text": "Productionized ML pipelines with online learning, confidence estimation, multimodal augmentation, and joint embedding for drug safety prediction.", "tier": "primary" },
+            { "text": "Oversaw 3 parallel drug safety delivery streams with a 12-member team, managing stakeholders, resources, risks, and technical direction.", "tier": "primary" },
+            { "text": "Initiated a collaboration with Dr. Shantanu Singh (Senior Group Leader, Broad Institute) to co-develop computational pipelines for Cell Painting and omics.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Tumor Recurrence Prediction — Translational Oncology",
+          "bullets": [
+            { "text": "AI Lead for a Chief Scientist-sponsored oncology initiative developing a novel tumor recurrence prediction pipeline using single-cell transcriptomics.", "tier": "primary" },
+            { "text": "Engineered a pipeline generalizable across drugs, treatment conditions, and heterogeneous data sources (organoids, xenografts, and clinical studies).", "tier": "primary" },
+            { "text": "Integrated Med-PaLM LLM embeddings and AZ Biological Insights Knowledge Graph representations to enrich model inputs and improve signal quality.", "tier": "primary" },
+            { "text": "Achieved 90% F1 on internal benchmarks across Osimertinib-treated cell lines and improved 13%+ over state-of-the-art baselines on public datasets.", "tier": "primary" },
+            { "text": "Reduced pipeline compute time by 30% via Optuna-driven hyperparameter search and systematic profiling across training and evaluation stages.", "tier": "primary" },
+            { "text": "Led a 2-member engineering team over 6 months, driving technical direction, experimentation strategy, roadmap ownership, and end-to-end delivery.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Foundation Model Framework",
+          "bullets": [
+            { "text": "Architected a reusable cross-platform framework to accelerate onboarding of new imaging use cases and enable rapid experimentation and deployment.", "tier": "primary" },
+            { "text": "Designed the framework to standardize training, inference, and evaluation of vision foundation models, and deployed it across 3 internal infrastructures.", "tier": "primary" },
+            { "text": "Scaled the foundation model framework across 3 clinical imaging modalities — CT, Endoscopy, and Echocardiography — and 3 internal AZ infrastructures.", "tier": "primary" },
+            { "text": "Deployed the endoscopy vision model and inference pipeline from the framework in a clinical study for ranking gastrointestinal tissue damage severity.", "tier": "secondary" }
+          ]
+        }
+      ]
+    },
+    {
+      "position": "Senior Consultant Level 2",
+      "organization": "AstraZeneca, India",
+      "period": { "start": "2022", "end": "2023", "endLabel": "" },
+      "projects": [
+        {
+          "name": "CT Segmentation — Oncology Imaging",
+          "bullets": [
+            { "text": "Delivered a next-generation CT tumor segmentation pipeline in 6 months, with Dice scores 46% above SOTA, directly enabling $0.5M in follow-on funding.", "tier": "primary" },
+            { "text": "Developed a radiologist-inspired dynamic window function and test-time augmentation, improving segmentation Dice by 11% and 7% respectively.", "tier": "primary" },
+            { "text": "Exceeded stakeholder performance targets by 4-5x, achieving a 46% Dice improvement over state-of-the-art on NSCLC tumor segmentation benchmarks.", "tier": "primary" },
+            { "text": "Validated pipeline generalizability across independent clinical trial datasets and challenging out-of-distribution imaging cohorts, including POSEIDON.", "tier": "primary" },
+            { "text": "Reduced end-to-end training time by 20% and GPU memory by 15-20% through model parallelism and distributed data-parallel training strategies.", "tier": "primary" }
+          ]
+        }
+      ]
+    },
+    {
+      "position": "Senior Consultant Level 1",
+      "organization": "AstraZeneca, India",
+      "period": { "start": "2020", "end": "2022", "endLabel": "" },
+      "projects": [
+        {
+          "name": "Foundation Models for Digital Pathology",
+          "bullets": [
+            { "text": "AI Lead for an Executive Director-sponsored initiative developing a scalable, reusable histopathology foundation model platform on AWS infrastructure.", "tier": "primary" },
+            { "text": "Architected an end-to-end AWS ML pipeline spanning data ingestion, preprocessing, distributed training, model interpretability, and inference.", "tier": "primary" },
+            { "text": "Trained contrastive learning-based histopathology foundation models matching state-of-the-art benchmark performance at reduced GPU compute cost.", "tier": "primary" },
+            { "text": "Engineered an ink-removal pipeline using classical image processing techniques, achieving performance parity with deep learning-based methods.", "tier": "primary" },
+            { "text": "Built, deployed, and maintained a Label Studio annotation tool for pathologists within a GxP-compliant, multi-user internal AI-Bench environment.", "tier": "primary" },
+            { "text": "Led a 4-member engineering team to deliver 2 contrastive and inpainting histopathology foundation model variants at 60% lower GPU compute costs.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Graph Neural Networks & Clinical Imaging",
+          "bullets": [
+            { "text": "Developed a Graph Neural Network-based pipeline for survival and response prediction on multiplex immunofluorescence histopathology slides.", "tier": "primary" },
+            { "text": "Deployed graph-embedding pipelines to map the tumor microenvironment across NSCLC and HNSCC solid-tumor cohorts for response prediction.", "tier": "primary" },
+            { "text": "Modularized preprocessing pipelines to extract and encode graphs with features derived from multispectral gigapixel histopathology images.", "tier": "primary" }
+          ]
+        }
+      ]
+    },
+    {
+      "position": "Lead Engineer",
+      "organization": "HCL Technology, India",
+      "period": { "start": "2017", "end": "2020", "endLabel": "" },
+      "projects": [
+        {
+          "name": "Face Analytics",
+          "bullets": [
+            { "text": "Delivered an enterprise face analytics platform with real-time recognition, verification, and identity clustering across 2 client deployments.", "tier": "primary" },
+            { "text": "Automated model optimization, compression, and deployment pipelines specifically targeting resource-constrained edge production environments.", "tier": "primary" },
+            { "text": "Accelerated enterprise use-case onboarding through modular, Docker-based components, configurable model pipelines, and scalable deployment tooling.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Video Analytics",
+          "bullets": [
+            { "text": "Engineered scalable video analytics pipelines for person re-identification (ReID) and multi-object tracking (MOT) across indoor and outdoor surveillance.", "tier": "primary" },
+            { "text": "Developed robust label-based tracking algorithms resilient to lighting variability, camera motion, and multi-scene operational conditions.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Pose & Behavior Analysis",
+          "bullets": [
+            { "text": "Shipped a production-grade multi-environment pose estimation pipeline for an enterprise client spanning indoor, outdoor, and controlled settings.", "tier": "primary" },
+            { "text": "Automated the activity recognition, behavioral monitoring, and event detection algorithms using TensorFlow-based pose-derived spatiotemporal features.", "tier": "primary" },
+            { "text": "Engineered thermal-imaging-based physiological monitoring pipelines for real-time body vitals estimation across diverse operational environments.", "tier": "primary" }
+          ]
+        }
+      ]
+    },
+    {
+      "position": "Project Associate",
+      "organization": "HTIC & ICSR, IIT Madras, India",
+      "period": { "start": "2016", "end": "2017", "endLabel": "" },
+      "projects": [
+        {
+          "name": "Neonatal Retinal Imaging",
+          "bullets": [
+            { "text": "Shipped an end-to-end retinal image processing pipeline for clinical deployment in a first-of-its-kind 4K neonatal retinal imaging scanner.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Endoscopy GPU System",
+          "bullets": [
+            { "text": "Proposed and developed a digital Narrow Band Imaging (NBI) pipeline, eliminating dedicated hardware and reducing customer costs by ~$5K per device.", "tier": "primary" },
+            { "text": "Led development and deployment of a clinical-grade real-time endoscopy video processing system with 10+ integrated modules on NVIDIA Jetson TX1.", "tier": "primary" },
+            { "text": "Engineered real-time algorithms for polyp detection, blood vessel segmentation, illumination correction, enhancement, inpainting, and artifact removal.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Mouse Brain Architecture",
+          "bullets": [
+            { "text": "Developed algorithms for cellular segmentation, cross-modality image alignment, and 3D reconstruction from multimodal serial-section 2D images.", "tier": "primary" },
+            { "text": "Pioneered algorithms for neuron connectivity analysis, neuron tracing, and neuronal network topology mapping from coordinate-based 3D points.", "tier": "primary" },
+            { "text": "Built and delivered a neuron-connectivity toolbox to Dr. Partha Mitra at Cold Spring Harbor Laboratory and researchers at RIKEN Brain Science Institute.", "tier": "primary" }
+          ]
+        },
+        {
+          "name": "Ultrasound-Guided Robotic Navigation",
+          "bullets": [
+            { "text": "Championed Verification & Validation (V&V) protocols for an ultrasound-guided (US-guided) robotic navigation system for liver tumor ablation.", "tier": "primary" },
+            { "text": "Designed and validated US-US and US-CT registration pipelines capable of aligning multimodal images with temporal and orientation variations.", "tier": "primary" },
+            { "text": "Built 3D ultrasound reconstruction and oblique plane visualization workflows, and defined protocols for image acquisition, segmentation, and registration.", "tier": "primary" }
+          ]
+        }
+      ]
+    },
+    {
+      "position": "Clinical Application Engineer",
+      "organization": "Healthware Pvt Ltd, India",
+      "period": { "start": "2014", "end": "2016", "endLabel": "" },
+      "projects": [
+        {
+          "name": null,
+          "bullets": [
+            { "text": "Directed alignment as primary liaison across clinicians, biomedical engineers, sales teams, service teams, and hospital leadership spanning 50+ sites.", "tier": "primary" },
+            { "text": "Built KOL networks and reference ecosystems through site visits, clinical demonstrations, and advocacy programs influencing purchasing decisions.", "tier": "primary" },
+            { "text": "Headed value-based pre-sales engagements covering needs assessments, clinical evaluations, economic justification, and competitive displacement.", "tier": "primary" },
+            { "text": "Developed commercial assets including competitive matrices, objection-handling guides, and case studies to strengthen market positioning.", "tier": "primary" },
+            { "text": "Managed customer implementations including site setup, deployment, go-live execution, post-deployment stabilization, and proactive issue resolution.", "tier": "primary" },
+            { "text": "Standardized clinical workflows with SOPs, safety protocols, checklists, quick-reference cards, and parameter preset libraries across sites.", "tier": "primary" },
+            { "text": "Designed scalable train-the-trainer and role-based training programs across surgical specialties to accelerate adoption and sustained product utilization.", "tier": "primary" }
+          ]
+        }
+      ]
+    }
+  ]
+}

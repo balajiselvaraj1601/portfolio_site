@@ -1,0 +1,42 @@
+{
+  "name": "Balaji Selvaraj",
+  "title": "Technical AI Leader",
+  "location": "Gothenburg, Sweden",
+  "summary": [
+    "Technical AI Leader with 12+ years spanning product, services, and startup environments, leading a globally distributed AI team across 5 countries.",
+    "Delivered AI programs across Oncology, Biopharma R&D, and CPSS, supporting AstraZeneca's 3 R&D priority areas over three consecutive years.",
+    "Ranked top 0.3% globally on Kaggle (652/200K+ data scientists), with AI experience in medical imaging, speech, OCR, energy, climate and wildlife.",
+    "Established research collaborations with the Broad Institute and IIT Madras to co-develop cutting-edge AI models and computational pipelines.",
+    "Scaled a multicultural AI engineering team from 1 to 12 members across 5 countries, with engineers distributed across India, UK, Sweden, Mexico, and China."
+  ],
+  "contact": [
+    {
+      "type": "email",
+      "label": "balaji.selvaraj.ai@outlook.com",
+      "value": "balaji.selvaraj.ai@outlook.com",
+      "href": "mailto:balaji.selvaraj.ai@outlook.com",
+      "icon": "email"
+    },
+    {
+      "type": "linkedin",
+      "label": "LinkedIn",
+      "value": "balaji-selvaraj",
+      "href": "https://www.linkedin.com/in/balaji-selvaraj-a2987572/",
+      "icon": "linkedin"
+    },
+    {
+      "type": "kaggle",
+      "label": "Kaggle",
+      "value": "dhakshiin1601",
+      "href": "https://www.kaggle.com/dhakshiin1601",
+      "icon": "kaggle"
+    },
+    {
+      "type": "location",
+      "label": "Gothenburg, Sweden",
+      "value": "Gothenburg, Sweden",
+      "href": null,
+      "icon": "location"
+    }
+  ]
+}

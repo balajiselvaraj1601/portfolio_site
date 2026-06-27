@@ -1,0 +1,23 @@
+---
+// Quiet pill for tags / skills.
+interface Props {
+  class?: string;
+}
+const { class: cls } = Astro.props;
+---
+
+<span class:list={['chip', cls]}><slot /></span>
+
+<style>
+  .chip {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg);
+    color: var(--text-muted);
+    font-size: var(--fs-small);
+    line-height: 1.4;
+    white-space: nowrap;
+  }
+</style>

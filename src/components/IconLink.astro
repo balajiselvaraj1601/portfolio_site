@@ -1,0 +1,45 @@
+---
+import Icon from './Icon.astro';
+// A labeled icon link. External links get safe rel + new tab.
+interface Props {
+  href: string;
+  label: string;
+  icon: 'email' | 'linkedin' | 'kaggle' | 'location' | 'external' | 'download';
+  /** Force external behavior; auto-detected for http(s) + mailto stays same-tab. */
+  external?: boolean;
+  class?: string;
+}
+const { href, label, icon, external, class: cls } = Astro.props;
+const isHttp = href.startsWith('http');
+const isExternal = external ?? isHttp;
+---
+
+<a
+  href={href}
+  class:list={['icon-link', cls]}
+  {...isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+>
+  <Icon name={icon} size={18} />
+  <span>{label}</span>
+</a>
+
+<style>
+  .icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text);
+    text-decoration: none;
+    transition: color var(--dur) var(--ease);
+  }
+  .icon-link:hover {
+    color: var(--accent);
+  }
+  .icon-link :global(svg) {
+    color: var(--text-muted);
+    flex: none;
+  }
+  .icon-link:hover :global(svg) {
+    color: var(--accent);
+  }
+</style>

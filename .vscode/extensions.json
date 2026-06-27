@@ -1,0 +1,6 @@
+{
+  // Tracked (the only .vscode file not gitignored). Simple Browser (the preview
+  // pane) is built into VS Code and needs no extension; this just adds the official
+  // Astro language/editor support.
+  "recommendations": ["astro-build.astro-vscode"]
+}

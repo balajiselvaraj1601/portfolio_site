@@ -1,0 +1,20 @@
+---
+import Section from '@components/Section.astro';
+import { profile, site } from '@lib/content';
+const title = site.sections.about.title;
+---
+
+<Section id="about" title={title} class="about">
+  <div class="about__body">
+    {profile.summary.map((line) => <p>{line}</p>)}
+  </div>
+</Section>
+
+<style>
+  .about__body {
+    display: grid;
+    gap: var(--space-4);
+    max-width: var(--maxw-text);
+    font-size: 1.1rem;
+  }
+</style>

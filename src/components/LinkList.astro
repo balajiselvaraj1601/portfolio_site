@@ -1,0 +1,81 @@
+---
+import Icon from './Icon.astro';
+// External link list: label + title + external-link icon.
+// Used by Publications, Conferences, Kaggle.
+interface Props {
+  items: { label: string; title?: string; url: string }[];
+  class?: string;
+}
+const { items, class: cls } = Astro.props;
+---
+
+<ul class:list={['link-list', cls]}>
+  {
+    items.map((item) => (
+      <li class="link-list__item">
+        <a
+          href={item.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-list__link"
+        >
+          <span class="link-list__label">{item.label}</span>
+          {item.title && <span class="link-list__title">{item.title}</span>}
+          <Icon name="external" size={15} class="link-list__icon" />
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .link-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .link-list__link {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg-elev);
+    color: var(--text);
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease),
+      transform var(--dur) var(--ease);
+  }
+  .link-list__link:hover {
+    border-color: var(--accent);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .link-list__link:hover {
+      transform: translateX(2px);
+    }
+  }
+  .link-list__label {
+    font-size: var(--fs-small);
+    font-weight: 600;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .link-list__title {
+    color: var(--text);
+  }
+  .link-list__icon {
+    color: var(--text-muted);
+    align-self: center;
+  }
+  @media (max-width: 640px) {
+    .link-list__link {
+      grid-template-columns: 1fr auto;
+    }
+    .link-list__label {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

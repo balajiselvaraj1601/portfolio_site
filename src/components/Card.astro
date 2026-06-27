@@ -1,0 +1,19 @@
+---
+// Elevated surface container primitive.
+interface Props {
+  as?: string;
+  class?: string;
+}
+const { as: Tag = 'div', class: cls } = Astro.props;
+---
+
+<Tag class:list={['card', cls]}><slot /></Tag>
+
+<style>
+  .card {
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+</style>
