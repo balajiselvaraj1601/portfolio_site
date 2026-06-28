@@ -2,7 +2,7 @@
 import Section from '@components/Section.astro';
 import Icon from '@components/Icon.astro';
 import EntityLink from '@components/EntityLink.astro';
-import { education, site, getEntityUrl } from '@lib/content';
+import { education, site, getEntityUrl, logoSrc } from '@lib/content';
 
 function formatGpa(gpa?: string) {
   if (!gpa) return '';
@@ -15,9 +15,15 @@ function formatGpa(gpa?: string) {
     {
       education.records.map((edu) => (
       <div class="edu-block">
-        <div class="edu-icon" aria-hidden="true">
-          <Icon name="graduation" size={24} />
-        </div>
+        {logoSrc(edu.entity) ? (
+          <div class="edu-logo">
+            <img src={logoSrc(edu.entity)} alt={`${edu.institution} logo`} loading="lazy" />
+          </div>
+        ) : (
+          <div class="edu-icon" aria-hidden="true">
+            <Icon name="graduation" size={24} />
+          </div>
+        )}
         <div class="edu-text">
           <h4>Education</h4>
           <h3>{edu.degree}</h3>
@@ -59,6 +65,26 @@ function formatGpa(gpa?: string) {
     background: var(--accent-soft);
     border: 1px solid var(--border-strong);
     color: var(--accent-ll);
+  }
+  .edu-logo {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 44px;
+    padding: 6px 8px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .edu-logo img {
+    display: block;
+    max-width: 100%;
+    max-height: 28px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .edu-text h4 {
     margin-bottom: 0.3rem;

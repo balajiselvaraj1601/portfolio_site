@@ -3,7 +3,7 @@ import Section from '@components/Section.astro';
 import ProjectAccordion from '@components/ProjectAccordion.astro';
 import Chip from '@components/Chip.astro';
 import EntityLink from '@components/EntityLink.astro';
-import { experience, site, getEntityUrl } from '@lib/content';
+import { experience, site, getEntityUrl, logoSrc } from '@lib/content';
 
 function periodLabel(p: { start: string; end: string | null; endLabel: string }) {
   const end = p.endLabel || p.end || '';
@@ -58,6 +58,11 @@ function periodLabel(p: { start: string; end: string | null; endLabel: string })
             hidden={ri !== 0}
           >
             <div class="role-header">
+              {logoSrc(role.entity) && (
+                <div class="role-logo">
+                  <img src={logoSrc(role.entity)} alt={`${role.organization} logo`} loading="lazy" />
+                </div>
+              )}
               <h3>{role.position}</h3>
               <div class="role-meta">
                 <span>
@@ -178,6 +183,26 @@ function periodLabel(p: { start: string; end: string | null; endLabel: string })
   }
   .role-header {
     margin-bottom: 2rem;
+  }
+  .role-logo {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 44px;
+    max-width: 160px;
+    padding: 6px 10px;
+    margin-bottom: 0.75rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .role-logo img {
+    display: block;
+    max-width: 140px;
+    max-height: 30px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .role-header h3 {
     font-size: 1.5rem;

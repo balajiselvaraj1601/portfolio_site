@@ -1,6 +1,7 @@
 ---
 import Icon from '@components/Icon.astro';
 import { resolveIcon, type IconName } from '@lib/icons';
+import { logoSrc } from '@lib/content';
 import type { VisionBoard } from '@schemas';
 
 type Hub = VisionBoard['hubs'][number];
@@ -39,8 +40,8 @@ const nodes = satellites.map((icon, i) => {
 
     <!-- centre mark -->
     <div class="hub__center">
-      {center.kind === 'logo' ? (
-        <img src={`/assets/logos/${center.asset}.svg`} alt={center.alt ?? ''} loading="lazy" />
+      {center.kind === 'logo' && logoSrc(center.asset) ? (
+        <img src={logoSrc(center.asset)} alt={center.alt ?? ''} loading="lazy" />
       ) : (
         <Icon name={resolveIcon(center.name, 'brain') as IconName} size={44} />
       )}

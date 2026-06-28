@@ -1,7 +1,7 @@
 ---
 import Section from '@components/Section.astro';
 import EntityLink from '@components/EntityLink.astro';
-import { affiliations, site, getEntityUrl, resolveAffiliationEntity } from '@lib/content';
+import { affiliations, site, getEntityUrl, resolveAffiliationEntity, logoSrc } from '@lib/content';
 
 const title = site.sections.affiliations.title;
 ---
@@ -12,9 +12,9 @@ const title = site.sections.affiliations.title;
       affiliations.items.map((a) => (
         <div class="collab-item">
           {
-            a.logo ? (
+            logoSrc(a.logo) ? (
               <div class="collab-logo">
-                <img src={`/assets/logos/${a.logo}.svg`} alt={`${a.name} logo`} loading="lazy" />
+                <img src={logoSrc(a.logo)} alt={`${a.name} logo`} loading="lazy" />
               </div>
             ) : (
               <div class="collab-dot" aria-hidden="true"></div>

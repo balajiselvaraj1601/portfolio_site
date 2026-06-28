@@ -1,7 +1,7 @@
 ---
 import Section from '@components/Section.astro';
 import EntityLink from '@components/EntityLink.astro';
-import { profile, skills, site, getEntityUrl } from '@lib/content';
+import { profile, skills, site, getEntityUrl, logoSrc } from '@lib/content';
 
 interface Props {
   withSkills?: boolean;
@@ -59,7 +59,13 @@ function splitHeading(heading: string, emphasis?: string) {
             <h4 class="vision__collabs-heading">External Collaborations</h4>
             {vision.collaborations.map((c) => (
               <div class="collab-item">
-                <div class="collab-dot" aria-hidden="true"></div>
+                {logoSrc(c.entity) ? (
+                  <div class="collab-logo">
+                    <img src={logoSrc(c.entity)} alt={`${c.org} logo`} loading="lazy" />
+                  </div>
+                ) : (
+                  <div class="collab-dot" aria-hidden="true"></div>
+                )}
                 <div class="collab-text">
                   <strong>
                     <EntityLink href={getEntityUrl(c.entity)} label={c.org} />

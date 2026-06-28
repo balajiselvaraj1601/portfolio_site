@@ -2,7 +2,7 @@
 import Icon from '@components/Icon.astro';
 import EntityLink from '@components/EntityLink.astro';
 import { resolveIcon, type IconName } from '@lib/icons';
-import { getEntityUrl } from '@lib/content';
+import { getEntityUrl, logoSrc } from '@lib/content';
 import type { VisionBoard } from '@schemas';
 
 type Program = VisionBoard['programs'][number];
@@ -32,8 +32,8 @@ const { title, label, variant, badge, lines, entity } = Astro.props;
   </ul>
 
   <div class:list={['pcard__badge', { 'pcard__badge--logo': badge.kind === 'logo' }]} aria-hidden="true">
-    {badge.kind === 'logo' ? (
-      <img src={`/assets/logos/${badge.asset}.svg`} alt={badge.alt ?? ''} loading="lazy" />
+    {badge.kind === 'logo' && logoSrc(badge.asset) ? (
+      <img src={logoSrc(badge.asset)} alt={badge.alt ?? ''} loading="lazy" />
     ) : (
       <Icon name={resolveIcon(badge.name, 'target') as IconName} size={30} />
     )}

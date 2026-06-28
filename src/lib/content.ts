@@ -1,3 +1,4 @@
+import fs from 'node:fs';
 import type { z } from 'zod';
 import {
   siteSchema,
@@ -117,6 +118,20 @@ export function getEntityUrl(slug?: string): string | undefined {
 export function getEntityName(slug?: string): string | undefined {
   if (!slug) return undefined;
   return entities[slug]?.name;
+}
+
+// Preference order: vector first, then raster formats. The filesystem is the
+// single source of truth for which logo assets exist (scanned once at build).
+const LOGO_EXTS = ['svg', 'png', 'webp', 'avif'] as const;
+const logoFiles = new Set(fs.readdirSync('public/assets/logos'));
+
+/** Resolve a logo URL from a slug, picking the best available extension. */
+export function logoSrc(slug?: string): string | undefined {
+  if (!slug) return undefined;
+  for (const ext of LOGO_EXTS) {
+    if (logoFiles.has(`${slug}.${ext}`)) return `/assets/logos/${slug}.${ext}`;
+  }
+  return undefined;
 }
 
 /** Affiliation items may omit `entity` when `logo` slug matches the registry. */
