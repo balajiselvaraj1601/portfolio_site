@@ -1,6 +1,7 @@
 ---
 import { site, navItems } from '@lib/content';
 import Monogram from '@components/Monogram.astro';
+import Icon from '@components/Icon.astro';
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isActive = (path: string) => (path.replace(/\/$/, '') || '/') === current;
@@ -69,10 +70,7 @@ const lastName = rest.join(' ');
         aria-label="Save page as HTML"
         title="Save page as HTML"
       >
-        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M13 14H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h8l3 3v8a1 1 0 0 1-1 1Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
-          <path d="M5 2v3h5V2M5 14v-5h6v5" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
-        </svg>
+        <Icon name="save" size={16} />
         <span class="save-btn__spinner" aria-hidden="true"></span>
       </button>
       <button

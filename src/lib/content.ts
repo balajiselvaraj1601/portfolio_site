@@ -120,9 +120,10 @@ export function getEntityName(slug?: string): string | undefined {
   return entities[slug]?.name;
 }
 
-// Preference order: vector first, then raster formats. The filesystem is the
-// single source of truth for which logo assets exist (scanned once at build).
-const LOGO_EXTS = ['svg', 'png', 'webp', 'avif'] as const;
+// Preference order: PNG first (logos are shipped as PNG), then other formats.
+// The filesystem is the single source of truth for which logo assets exist
+// (scanned once at build).
+const LOGO_EXTS = ['png', 'svg', 'webp', 'avif'] as const;
 const logoFiles = new Set(fs.readdirSync('public/assets/logos'));
 
 /** Resolve a logo URL from a slug, picking the best available extension. */

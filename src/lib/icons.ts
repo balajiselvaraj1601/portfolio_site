@@ -48,6 +48,7 @@ export const iconNameSchema = z.enum([
   'table',
   'pulse',
   'image',
+  'save',
 ]);
 
 export type IconName = z.infer<typeof iconNameSchema>;
