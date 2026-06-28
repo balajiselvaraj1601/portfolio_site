@@ -26,14 +26,6 @@
     { "label": "View Impact →", "href": "/#impact", "variant": "primary" },
     { "label": "Download Resume", "href": "/assets/resume/balaji-selvaraj-resume.pdf", "variant": "secondary" }
   ],
-  "techStack": [
-    { "label": "PyTorch" },
-    { "label": "Foundation Models" },
-    { "label": "AWS" },
-    { "label": "LangChain" },
-    { "label": "Docker" },
-    { "label": "RAG" }
-  ],
   "portrait": {
     "src": "/assets/images/balaji.png",
     "alt": "Portrait of Balaji Selvaraj",
@@ -157,13 +149,6 @@
       "value": "Top 0.3% globally · Rank #652 worldwide",
       "href": "https://www.kaggle.com/dhakshiin1601",
       "icon": "kaggle"
-    },
-    {
-      "type": "github",
-      "label": "GitHub",
-      "value": "Code. Projects. Impact.",
-      "href": "https://github.com/",
-      "icon": "github"
     },
     {
       "type": "location",

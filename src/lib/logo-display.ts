@@ -1,5 +1,5 @@
 /** Light/white marks that render on the dark card without a white pill. */
-const PLAIN_LOGO_SLUGS = new Set(['jitc']);
+const PLAIN_LOGO_SLUGS = new Set(['jitc', 'hcl']);
 
 export function logoUsesBadge(slug?: string, override?: boolean): boolean {
   if (override !== undefined) return override;

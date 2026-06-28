@@ -50,7 +50,7 @@ function isExternal(href: string) {
         {profile.metrics.map((m) => (
           <div class="hero-stat" role="listitem">
             <div class="hero-stat__num">{m.value}</div>
-            <div class="hero-stat__label">{m.label}</div>
+            <div class="hero-stat__label metric-label">{m.label}</div>
           </div>
         ))}
       </div>
@@ -368,7 +368,6 @@ function isExternal(href: string) {
   }
   .hero-stat__label {
     font-size: 0.8rem;
-    color: var(--text-muted);
     letter-spacing: 0.05em;
     margin-top: 0.35rem;
     line-height: 1.3;

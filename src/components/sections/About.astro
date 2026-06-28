@@ -2,7 +2,7 @@
 import Section from '@components/ui/Section.astro';
 import LeadershipCard from '@components/cards/LeadershipCard.astro';
 import { aboutCardIcon } from '@lib/icons';
-import { profile, site } from '@lib/content';
+import { profile, site, collaborations, getEntityUrl, logoSrc } from '@lib/content';
 const title = site.sections.about.title;
 ---
 
@@ -16,6 +16,32 @@ const title = site.sections.about.title;
         subtitle={card.items.slice(0, 2).join(' · ')}
       />
     ))}
+  </div>
+
+  <div class="about__collabs reveal">
+    <h3 class="about__collabs-heading">{collaborations.title}</h3>
+    <ul class="about__collabs-list" role="list">
+      {
+        collaborations.items.map((item) => {
+          const href = getEntityUrl(item.entity);
+          const src = logoSrc(item.logo);
+          if (!href || !src) return null;
+          return (
+            <li>
+              <a
+                href={href}
+                class="about__collab-mark"
+                aria-label={item.name}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={src} alt="" loading="lazy" />
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
   </div>
 </Section>
 
@@ -31,5 +57,54 @@ const title = site.sections.about.title;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: var(--stack-sm);
+  }
+  .about__collabs {
+    margin-top: var(--space-10);
+  }
+  .about__collabs-heading {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+  .about__collabs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .about__collab-mark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 120px;
+    height: 48px;
+    padding: var(--space-2) var(--space-4);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .about__collab-mark:hover {
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 1px rgba(155, 94, 232, 0.25);
+  }
+  .about__collab-mark:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .about__collab-mark img {
+    display: block;
+    max-width: 120px;
+    max-height: 28px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
 </style>

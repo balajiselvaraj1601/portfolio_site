@@ -1,0 +1,9 @@
+{
+  "title": "Collaborations",
+  "items": [
+    { "name": "Broad Institute", "logo": "broad-institute", "entity": "broad-institute" },
+    { "name": "Cold Spring Harbor Laboratory", "logo": "cshl", "entity": "cshl" },
+    { "name": "IIT Madras", "logo": "iit-madras", "entity": "iit-madras" },
+    { "name": "Uppsala University", "logo": "uppsala-university", "entity": "uppsala-university" }
+  ]
+}

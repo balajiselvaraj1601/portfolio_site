@@ -55,7 +55,7 @@
     { "icon": "funding", "title": "Secured 0.5M$ Funds", "lines": ["Multiple times for Team"] },
     { "icon": "chart", "title": "3 Scorecard", "lines": ["Aligned Projects"] },
     { "icon": "target", "title": "Strategic Team Positioning", "lines": ["within (7 Internal Groups", "3 Startups)"] },
-    { "icon": "team", "title": "Scaled Team", "lines": ["1 to 11 members"] },
+    { "icon": "team", "title": "Scaled Team", "lines": ["1 to 12 members"] },
     { "icon": "globe", "title": "Global Team Management", "lines": ["UK, Sweden,", "India, Mexico, China"] }
   ]
 }

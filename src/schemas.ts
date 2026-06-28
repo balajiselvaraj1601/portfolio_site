@@ -152,14 +152,6 @@ export const profileSchema = z.object({
       label: z.string(),
     })
     .optional(),
-  techStack: z
-    .array(
-      z.object({
-        label: z.string(),
-        icon: iconNameSchema.optional(),
-      })
-    )
-    .optional(),
   portrait: z
     .object({
       src: z.string(),
@@ -335,7 +327,6 @@ export const projectsSchema = z.object({
 /* ── skills.json ───────────────────────────────────────────────────────── */
 export const skillsSchema = z.object({
   title: z.string(),
-  note: z.string().optional(),
   categories: z.array(
     z.object({ label: z.string(), skills: z.array(z.string()) })
   ),
@@ -408,8 +399,8 @@ export const kaggleSchema = z.object({
 /* ── entities.json ─────────────────────────────────────────────────────── */
 export const entitiesSchema = z.record(z.string(), EntityRecord);
 
-/* ── affiliations.json ─────────────────────────────────────────────────── */
-export const affiliationsSchema = z.object({
+/* ── collaborations.json ───────────────────────────────────────────────── */
+export const collaborationsSchema = z.object({
   title: z.string(),
   items: z.array(
     z.object({
@@ -434,7 +425,7 @@ export type Awards = z.infer<typeof awardsSchema>;
 export type LinkList = z.infer<typeof linkListSchema>;
 export type Speakers = z.infer<typeof speakersSchema>;
 export type Kaggle = z.infer<typeof kaggleSchema>;
-export type Affiliations = z.infer<typeof affiliationsSchema>;
+export type Collaborations = z.infer<typeof collaborationsSchema>;
 export type Entities = z.infer<typeof entitiesSchema>;
 export type EntityRecord = z.infer<typeof EntityRecord>;
 

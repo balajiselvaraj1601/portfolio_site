@@ -1,6 +1,5 @@
 {
   "title": "Skills, Tools & Technologies",
-  "note": "Rebuilt from the resume's `tools` section (hidden in the resume render but the correct source for a Skills UI), cross-checked against experience bullets.",
   "categories": [
     {
       "label": "ML & Deep Learning",

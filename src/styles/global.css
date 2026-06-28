@@ -237,6 +237,8 @@ h3 {
   font-size: var(--fs-h3);
 }
 h4 {
+  /* h4 is a micro-label/kicker, not prose — use mono to match eyebrows & labels */
+  font-family: var(--font-mono);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--accent-ll);
@@ -313,6 +315,11 @@ button {
 }
 .eyebrow--red {
   color: var(--accent-red-light);
+}
+.metric-label {
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  line-height: 1.4;
 }
 .accent {
   color: var(--accent-light);

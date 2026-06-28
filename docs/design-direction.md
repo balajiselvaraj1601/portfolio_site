@@ -33,10 +33,39 @@ Purple biopharma palette. Dark theme is the primary design target; light theme u
 
 ## Typography
 
-- **Display:** DM Serif Display (headings, brand logotype)
-- **Body/UI:** Inter Variable (sans)
-- **Labels:** JetBrains Mono (eyebrows, meta, footer)
-- **Scale (rem):** h1 `clamp(2.8rem, 6vw, 5.5rem)`, h2 `clamp(2rem, 4vw, 3rem)`, body `0.95–1.0625`, eyebrow `0.72`
+Three font roles — map by **semantic role**, not per-component preference. Tokens live in
+`src/styles/global.css` (`--font-display`, `--font-sans`, `--font-mono`).
+
+| Role | Font | Use |
+|------|------|-----|
+| Display | DM Serif Display | h1/h2, brand wordmark, editorial pull-quotes |
+| Body / UI | Inter Variable | Body copy, h3/h4 card titles, nav, buttons, content chips |
+| Labels / meta | JetBrains Mono | Eyebrows, dates, venues, stat numbers, micro-badges, footer strip |
+
+**Canonical mapping**
+
+| Element type | Font | Weight / style |
+|--------------|------|----------------|
+| Primary display heading (h1, h2) | DM Serif Display | 400, tight line-height |
+| Brand wordmark | DM Serif Display | 400 |
+| Editorial pull-quote | DM Serif Display | 400 |
+| Card title (h3) | Inter | 600–700 |
+| Category label (h4) | Inter | 600, uppercase, tracked |
+| Body / long-form | Inter | 400 |
+| Nav links, buttons | Inter | 500–600 |
+| Skill / content chips | Inter | 500 |
+| Eyebrow / kicker | JetBrains Mono | 400, uppercase, wide tracking |
+| Metadata (date, venue, domain) | JetBrains Mono | 400 |
+| Stat / metric number | JetBrains Mono | 600 |
+| Stat / metric label | JetBrains Mono | 400 (utility: `.metric-label`) |
+| Micro-badge / status | JetBrains Mono | 600, uppercase |
+| Footer identity strip | JetBrains Mono | 400, uppercase |
+| Quote attribution | JetBrains Mono | 400, normal (not italic) |
+| Non-Latin script (e.g. Tamil) | Inter | 400 — never DM Serif |
+
+**Scale (rem):** h1 `clamp(2.8rem, 6vw, 5.5rem)`, h2 `clamp(2rem, 4vw, 3rem)`, body `0.95–1.0625`, eyebrow `0.72`
+
+**Do not change:** nav stays Inter (scannability); skill/chip tags stay Inter (readable content tokens).
 
 ## Spacing & layout
 

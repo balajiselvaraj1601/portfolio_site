@@ -9,7 +9,7 @@ const { value, label, class: cls } = Astro.props;
 
 <div class:list={['metric-card', 'card', cls]}>
   <p class="metric-card__value">{value}</p>
-  <p class="metric-card__label">{label}</p>
+  <p class="metric-card__label metric-label">{label}</p>
 </div>
 
 <style>
@@ -28,8 +28,6 @@ const { value, label, class: cls } = Astro.props;
   }
   .metric-card__label {
     font-size: var(--fs-small);
-    color: var(--text-muted);
     max-width: none;
-    line-height: 1.4;
   }
 </style>

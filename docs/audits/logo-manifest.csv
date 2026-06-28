@@ -9,9 +9,10 @@ iit-madras,IIT Madras,public/assets/logos/iit-madras.png,assets/source/logos/iit
 jitc,Journal for ImmunoTherapy of Cancer,public/assets/logos/jitc.png,assets/source/logos/jitc.png,"official website, manually trimmed — https://jitc.bmj.com",publications.json,ok
 kaggle,Kaggle,public/assets/logos/kaggle.png,assets/source/logos/kaggle.png,"official website, manually trimmed — https://www.kaggle.com",vision-board.json,ok
 cshl,Cold Spring Harbor Laboratory,public/assets/logos/cshl.png,assets/source/logos/cshl.png,"official website, manually trimmed — https://www.cshl.edu",profile.json (vision collaborations),ok
-hcl,HCLTech,public/assets/logos/hcl.png,assets/source/logos/hcl.png,"official website, manually trimmed — https://www.hcltech.com",experience.json,ok
+hcl,HCLTech,public/assets/logos/hcl.png,assets/source/logos/hcl.png,"official SVG — https://www.hcltech.com/themes/custom/hcltech/images/hcltech-logo.svg (transparent wordmark)",experience.json,ok
 healthware,Healthware,public/assets/logos/healthware.png,assets/source/logos/healthware.png,"official website, manually trimmed — https://healthwareindia.com",experience.json,ok
 htic,"HTIC, IIT Madras",public/assets/logos/htic.png,assets/source/logos/htic.png,"official website, manually trimmed — https://www.hticiitm.org",experience.json,ok
 srec,Sri Ramakrishna Engineering College,public/assets/logos/srec.png,assets/source/logos/srec.png,"official website, manually trimmed — https://srec.ac.in",education.json,ok
 brain,"Multimodal AI concept mark",public/assets/logos/brain.png,assets/source/logos/brain.png,"generated concept mark (image_gen) — brain + modality nodes, accent #6C2FBF",vision-board.json,ok
 riken-bsi,RIKEN Brain Science Institute,public/assets/logos/riken-bsi.png,assets/source/logos/riken-bsi.png,"official website — https://bsi.riken.jp/common/img/site_logo_pageheader.png",profile.json (vision collaborations),ok
+uppsala-university,Uppsala University,public/assets/logos/uppsala-university.png,assets/source/logos/logo_uppsala.png,"official website, manually trimmed — https://www.uu.se/en",collaborations.json,ok

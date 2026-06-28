@@ -62,7 +62,7 @@ const { title, label, variant, badge, lines, entity } = Astro.props;
   }
   .pcard__head {
     background: var(--pc);
-    color: #fff;
+    color: var(--accent-contrast);
     padding: var(--space-4) 5rem var(--space-4) var(--space-5);
   }
   .pcard__title {
@@ -70,13 +70,13 @@ const { title, label, variant, badge, lines, entity } = Astro.props;
     font-weight: 700;
     line-height: 1.2;
     margin: 0;
-    color: #fff;
+    color: var(--accent-contrast);
   }
   .pcard__title :global(.pcard__title-link) {
-    color: #fff;
+    color: var(--accent-contrast);
   }
   .pcard__title :global(.pcard__title-link:hover) {
-    color: #fff;
+    color: var(--accent-contrast);
     opacity: 0.92;
   }
   .pcard__label {
@@ -127,7 +127,7 @@ const { title, label, variant, badge, lines, entity } = Astro.props;
     box-shadow: var(--shadow-sm);
   }
   .pcard__badge--logo {
-    background: #fff;
+    background: var(--bg-elev);
   }
   .pcard__badge img {
     width: 74%;

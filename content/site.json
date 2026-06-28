@@ -21,7 +21,6 @@
         "leadership",
         "skills",
         "timeline",
-        "affiliations",
         "publications",
         "contact"
       ]
@@ -52,9 +51,9 @@
       "path": "/research",
       "seo": {
         "title": "Research — Balaji Selvaraj",
-        "description": "Publications, conference talks, speaking engagements, and generative-AI research across medical imaging and drug development."
+        "description": "Publications, conference talks, and speaking engagements across medical imaging and drug development."
       },
-      "sections": ["generative-ai", "publications", "conferences", "speakers", "contact"]
+      "sections": ["publications", "conferences", "speakers", "contact"]
     },
     {
       "id": "recognition",
@@ -101,7 +100,6 @@
     "leadership": { "title": "Leadership", "source": "person/profile.json", "visible": true },
     "skills": { "title": "Technology Expertise", "source": "work/skills.json", "visible": true },
     "timeline": { "title": "Career Timeline", "source": "work/experience.json", "visible": true },
-    "affiliations": { "title": "Affiliations", "source": "person/affiliations.json", "visible": true },
     "experience": { "title": "Experience", "source": "work/experience.json", "visible": true },
     "experience-intro": { "title": "Experience", "source": "work/experience.json", "visible": true },
     "projects-intro": { "title": "Selected Projects", "source": "work/projects.json", "visible": true },

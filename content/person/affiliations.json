@@ -1,9 +1,0 @@
-{
-  "title": "Affiliations",
-  "items": [
-    { "name": "AstraZeneca", "logo": "astrazeneca", "entity": "astrazeneca" },
-    { "name": "Broad Institute", "logo": "broad-institute", "entity": "broad-institute" },
-    { "name": "IIT Madras", "logo": "iit-madras", "entity": "iit-madras" },
-    { "name": "EU Research Consortium", "logo": "eu-research-consortium", "entity": "persist-seq" }
-  ]
-}

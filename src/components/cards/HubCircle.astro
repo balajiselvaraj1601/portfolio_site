@@ -41,7 +41,7 @@ const nodes = satellites.map((icon, i) => {
     <!-- centre mark -->
     <div class="hub__center">
       {center.kind === 'logo' && logoSrc(center.asset) ? (
-        <img src={logoSrc(center.asset)} alt={center.alt ?? ''} loading="lazy" />
+        <img src={logoSrc(center.asset)} alt={center.alt ?? label} loading="lazy" />
       ) : (
         <Icon name={resolveIcon(center.name, 'brain') as IconName} size={44} />
       )}
@@ -114,7 +114,7 @@ const nodes = satellites.map((icon, i) => {
     z-index: 2;
   }
   .hub__center:has(img) {
-    background: #fff;
+    background: var(--bg-elev);
   }
   .hub__center img {
     width: 72%;
@@ -140,7 +140,7 @@ const nodes = satellites.map((icon, i) => {
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--accent-contrast);
     background: var(--hub-accent);
     padding: 0.4rem 2.2rem;
     border-radius: 100px;

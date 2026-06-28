@@ -1,6 +1,7 @@
 ---
 import { logoSrc } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
+import { youtubeId } from '@lib/youtube';
 import type { Speakers } from '@schemas';
 
 type Item = Speakers['items'][number];
@@ -12,15 +13,6 @@ interface Props {
 const { item } = Astro.props;
 const logoUrl = logoSrc(item.logo);
 const showLogoBadge = logoUsesBadge(item.logo, item.logoBadge);
-
-/** Extract an 11-char YouTube video id from common URL shapes. */
-function youtubeId(url?: string): string | null {
-  if (!url) return null;
-  const m = url.match(
-    /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]{11})/
-  );
-  return m ? m[1] : null;
-}
 
 const ytId = youtubeId(item.youtube);
 const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null;
@@ -52,8 +44,9 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
   </header>
 
   <h3 class="speaking-card__title">
-    <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}</a>
+    <a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}<span class="visually-hidden"> (opens in new window)</span></a>
   </h3>
+  {item.description && <hr class="speaking-card__divider" aria-hidden="true" />}
   <p class="speaking-card__desc">{item.description}</p>
 
   {
@@ -63,9 +56,9 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
         href={item.youtube}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label={`Watch ${item.title} on YouTube`}
+        aria-label={`Watch ${item.title} on YouTube (opens in new window)`}
       >
-        <img src={ytThumb!} alt="" loading="lazy" />
+        <img src={ytThumb!} alt={`Video thumbnail: ${item.title}`} loading="lazy" />
         <span class="speaking-card__play" aria-hidden="true">
           <svg viewBox="0 0 68 48" width="68" height="48" focusable="false">
             <path
@@ -169,12 +162,14 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
   }
 
   .speaking-card__location {
+    font-family: var(--font-mono);
     font-size: 0.8rem;
     color: var(--text-muted);
     white-space: nowrap;
   }
 
   .speaking-card__date {
+    font-family: var(--font-mono);
     font-size: 0.78rem;
     color: var(--text-muted);
     white-space: nowrap;
@@ -196,6 +191,12 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
 
   .speaking-card__title a:hover {
     color: var(--accent-light);
+  }
+
+  .speaking-card__divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 1rem 0;
   }
 
   .speaking-card__desc {

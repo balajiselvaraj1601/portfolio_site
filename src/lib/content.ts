@@ -14,13 +14,13 @@ import {
   linkListSchema,
   speakersSchema,
   kaggleSchema,
-  affiliationsSchema,
+  collaborationsSchema,
   entitiesSchema,
 } from '@schemas';
 
 import siteRaw from '@content/site.json';
 import profileRaw from '@content/person/profile.json';
-import affiliationsRaw from '@content/person/affiliations.json';
+import collaborationsRaw from '@content/person/collaborations.json';
 import strategicImpactRaw from '@content/work/strategic-impact.json';
 import visionBoardRaw from '@content/work/vision-board.json';
 import experienceRaw from '@content/work/experience.json';
@@ -102,10 +102,10 @@ export const speakers = load(
   speakersRaw
 );
 export const kaggle = load('recognition/kaggle.json', kaggleSchema, kaggleRaw);
-export const affiliations = load(
-  'person/affiliations.json',
-  affiliationsSchema,
-  affiliationsRaw
+export const collaborations = load(
+  'person/collaborations.json',
+  collaborationsSchema,
+  collaborationsRaw
 );
 export const entities = load('entities.json', entitiesSchema, entitiesRaw);
 
@@ -135,15 +135,6 @@ export function logoSrc(slug?: string): string | undefined {
   }
   return undefined;
 }
-
-/** Affiliation items may omit `entity` when `logo` slug matches the registry. */
-export function resolveAffiliationEntity(item: {
-  entity?: string;
-  logo?: string;
-}): string | undefined {
-  return item.entity ?? item.logo;
-}
-
 export const sectionData = {
   hero: profile,
   about: profile,
@@ -152,7 +143,7 @@ export const sectionData = {
   leadership: profile,
   skills,
   timeline: experience,
-  affiliations,
+  collaborations,
   experience,
   'experience-intro': experience,
   projects,

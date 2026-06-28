@@ -50,5 +50,9 @@
   "gartner": {
     "name": "Gartner",
     "url": "https://www.gartner.com"
+  },
+  "uppsala-university": {
+    "name": "Uppsala University",
+    "url": "https://www.uu.se/en"
   }
 }

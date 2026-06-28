@@ -3,6 +3,7 @@ import Icon from '@components/ui/Icon.astro';
 import { resolveIcon, type IconName } from '@lib/icons';
 import { logoSrc } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
+import { youtubeId } from '@lib/youtube';
 
 interface Props {
   icon?: string;
@@ -32,14 +33,6 @@ const iconName = resolveIcon(icon, 'document') as IconName;
 const isStacked = variant === 'stacked';
 const showLogoBadge = logoUsesBadge(logo, logoBadgeOverride);
 
-/** Extract an 11-char YouTube video id from common URL shapes. */
-function youtubeId(url?: string): string | null {
-  if (!url) return null;
-  const m = url.match(
-    /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]{11})/
-  );
-  return m ? m[1] : null;
-}
 const ytId = youtubeId(youtube);
 const ytEmbed = ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : null;
 const logoUrl = logoSrc(logo);
@@ -70,7 +63,7 @@ const logoUrl = logoSrc(logo);
   {
     href ? (
       <h3>
-        <a href={href} target="_blank" rel="noopener noreferrer">{title}</a>
+        <a href={href} target="_blank" rel="noopener noreferrer">{title}<span class="visually-hidden"> (opens in new window)</span></a>
       </h3>
     ) : (
       <h3>{title}</h3>
