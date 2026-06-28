@@ -14,7 +14,7 @@ import { publications, site } from '@lib/content';
   <div class="research-grid reveal">
     {
       publications.items.map((p) => (
-        <ResearchCard venue={p.label} title={p.title} href={p.url} />
+        <ResearchCard venue={p.label} title={p.title} href={p.url} youtube={p.youtube} image={p.image} logo={p.logo} />
       ))
     }
   </div>

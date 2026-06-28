@@ -41,6 +41,7 @@ content/**/*.json -> src/lib/content.ts -> src/schemas.ts -> src/components/Sect
 
 | Area | Read |
 |---|---|
+| Icon / logo audit (Claude skill) | `.claude/skills/portfolio-icon-audit/SKILL.md` |
 | Setup and commands | `docs/getting-started.md` |
 | Architecture and data flow | `docs/architecture.md` |
 | Content editing | `docs/content-editing.md`, `content/README.md` |

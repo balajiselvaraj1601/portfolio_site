@@ -1,10 +1,10 @@
 ---
 ---
-<canvas id="hero-canvas" class="hero-canvas" aria-hidden="true"></canvas>
+<canvas id="particle-canvas" class="particle-canvas" aria-hidden="true"></canvas>
 
 <style>
-  .hero-canvas {
-    position: absolute;
+  .particle-canvas {
+    position: fixed;
     inset: 0;
     width: 100%;
     height: 100%;
@@ -15,91 +15,76 @@
 </style>
 
 <script>
-  const canvas = document.getElementById('hero-canvas') as HTMLCanvasElement | null;
-  if (canvas && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  (function () {
+    const canvas = document.getElementById('particle-canvas') as HTMLCanvasElement | null;
+    if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    if (ctx) {
-      let W = 0;
-      let H = 0;
-      let particles: Array<{
-        x: number;
-        y: number;
-        vx: number;
-        vy: number;
-        r: number;
-        update: () => void;
-      }> = [];
-      let animId = 0;
-      const N = 80;
+    if (!ctx) return;
 
-      function resize() {
-        const parent = canvas.parentElement;
-        if (!parent) return;
-        W = canvas.width = parent.offsetWidth;
-        H = canvas.height = parent.offsetHeight;
-      }
+    let W = 0, H = 0;
+    const N = 80;
+    type Particle = { x: number; y: number; vx: number; vy: number; r: number };
+    let particles: Particle[] = [];
 
-      function makeParticle() {
-        const p = {
-          x: Math.random() * W,
-          y: Math.random() * H,
-          vx: (Math.random() - 0.5) * 0.4,
-          vy: (Math.random() - 0.5) * 0.4,
-          r: Math.random() * 2 + 1,
-          update() {
-            p.x += p.vx;
-            p.y += p.vy;
-            if (p.x < 0 || p.x > W) p.vx *= -1;
-            if (p.y < 0 || p.y > H) p.vy *= -1;
-          },
-        };
-        return p;
-      }
+    function resize() {
+      W = canvas.width = canvas.offsetWidth;
+      H = canvas.height = canvas.offsetHeight;
+    }
 
-      function init() {
-        particles = [];
-        for (let i = 0; i < N; i++) particles.push(makeParticle());
-      }
+    function makeParticle(): Particle {
+      return {
+        x: Math.random() * W,
+        y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4,
+        r: Math.random() * 2 + 1,
+      };
+    }
 
-      function draw() {
-        ctx.clearRect(0, 0, W, H);
-        for (let i = 0; i < N; i++) {
-          for (let j = i + 1; j < N; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < 120) {
-              ctx.beginPath();
-              ctx.strokeStyle = `rgba(155, 94, 232, ${0.15 * (1 - dist / 120)})`;
-              ctx.lineWidth = 0.5;
-              ctx.moveTo(particles[i].x, particles[i].y);
-              ctx.lineTo(particles[j].x, particles[j].y);
-              ctx.stroke();
-            }
+    function init() {
+      particles = [];
+      for (let i = 0; i < N; i++) particles.push(makeParticle());
+    }
+
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < N; i++) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        if (p.x < 0 || p.x > W) p.vx *= -1;
+        if (p.y < 0 || p.y > H) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(155, 94, 232, 0.7)';
+        ctx.fill();
+        for (let j = i + 1; j < N; j++) {
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 130) {
+            const alpha = (1 - dist / 130) * 0.35;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(108, 47, 191, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
           }
         }
-        particles.forEach((p) => {
-          p.update();
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-          ctx.fillStyle = 'rgba(155, 94, 232, 0.6)';
-          ctx.fill();
-        });
-        animId = requestAnimationFrame(draw);
       }
-
-      resize();
-      init();
-      draw();
-
-      let resizeTimer: ReturnType<typeof setTimeout>;
-      window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          resize();
-          init();
-        }, 150);
-      });
+      requestAnimationFrame(draw);
     }
-  }
+
+    resize();
+    init();
+    draw();
+
+    let resizeTimer: ReturnType<typeof setTimeout>;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => { resize(); init(); }, 150);
+    });
+  })();
 </script>

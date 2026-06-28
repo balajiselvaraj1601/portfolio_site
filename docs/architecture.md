@@ -66,7 +66,7 @@ TypeScript types are derived via `z.infer<typeof schema>` — no parallel hand-w
 
 ### Multi-page layout
 
-The site is a set of routes (`/`, `/experience`, `/projects`, `/research`, `/recognition`, `/contact`), one
+The site is a set of routes (`/`, `/experience`, `/projects`, `/research`, `/recognition`, `/vision`, `/contact`), one
 per entry in `site.json.pages`. Each page groups several sections; section order within a page
 comes from that page's `sections` array, filtered by `sections[id].visible`.
 

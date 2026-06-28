@@ -1,0 +1,59 @@
+{
+  "header": "AI Leadership & Strategic Impact",
+  "hubs": [
+    {
+      "id": "idea",
+      "label": "IDEA",
+      "variant": "purple",
+      "center": { "kind": "logo", "asset": "kaggle", "alt": "Kaggle" },
+      "satellites": ["target", "lightbulb", "chart", "book", "handshake", "globe"]
+    },
+    {
+      "id": "vision",
+      "label": "VISION",
+      "variant": "red",
+      "center": { "kind": "logo", "asset": "brain", "alt": "Multimodal AI" },
+      "satellites": ["graph", "document", "table", "pulse", "image", "blocks"]
+    }
+  ],
+  "programs": [
+    {
+      "title": "Drug Safety",
+      "label": "SVP Backed",
+      "variant": "purple",
+      "badge": { "kind": "icon", "name": "pill" },
+      "lines": ["20–50M$ Annual Savings", "Secured Project (for my group)", "Lead Development"]
+    },
+    {
+      "title": "Broad Institute",
+      "label": "Senior Group Leader",
+      "variant": "purple",
+      "badge": { "kind": "logo", "asset": "broad-institute", "alt": "Broad Institute" },
+      "lines": ["Initiated Collaboration", "Mr. Shantanu Singh", "MultiModal computation pipelines"]
+    },
+    {
+      "title": "Persister Analysis",
+      "label": "Chief Scientist Backed",
+      "variant": "red",
+      "badge": { "kind": "icon", "name": "microscope" },
+      "lines": ["Persister-Seq Consortium", "Secured Project (for my group)", "Lead Development"]
+    },
+    {
+      "title": "AACR Conference",
+      "label": "Conference Presentation",
+      "variant": "red",
+      "badge": { "kind": "logo", "asset": "aacr", "alt": "AACR" },
+      "lines": ["Presented in 2025", "3 month AI pipeline development", "2 AI engineers"]
+    }
+  ],
+  "orgHeader": "Leadership & Organizational Impact",
+  "orgCards": [
+    { "icon": "trophy", "title": "EVP Level AWARD", "lines": ["For Drug Safety Platform"] },
+    { "icon": "presentation", "title": "Gartner Submission", "lines": ["GITC Chennai", "Multimodal Vision"] },
+    { "icon": "funding", "title": "Secured 0.5M$ Funds", "lines": ["Multiple times for Team"] },
+    { "icon": "chart", "title": "3 Scorecard", "lines": ["Aligned Projects"] },
+    { "icon": "target", "title": "Strategic Team Positioning", "lines": ["within (7 Internal Groups", "3 Startups)"] },
+    { "icon": "team", "title": "Scaled Team", "lines": ["1 to 11 members"] },
+    { "icon": "globe", "title": "Global Team Management", "lines": ["UK, Sweden,", "India, Mexico, China"] }
+  ]
+}

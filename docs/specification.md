@@ -10,11 +10,13 @@ Primary structure: **multi-page**, grouping the full section set (see `content/s
 sections`) into a few themed routes (keeps the nav short while giving heavy content its own URL).
 
 ```
-/              About (Home)  → hero, about, featured-projects, impact, contact-teaser
-/experience    Experience    → experience-intro, timeline, experience, mentorship, impact, contact-teaser
+/              About (Home)  → hero, about, featured-projects, impact, vision, leadership,
+                               timeline, affiliations, featured-publications, contact-teaser
+/experience    Experience    → experience-intro, experience, mentorship, impact, contact-teaser
 /projects      Projects      → projects-intro, featured-case-studies, projects, contact-teaser
-/research      Research      → generative-ai, publications, conferences, contact-teaser
-/recognition   Recognition   → awards, kaggle, education, contact-teaser
+/research      Research      → publications, conferences, speakers, kaggle
+/recognition   Recognition   → awards, education, contact-teaser
+/vision        Vision        → vision-board
 /contact       Contact       → contact
 /404           custom not-found page
 ```
@@ -80,12 +82,12 @@ Reused primitives (define once, use everywhere): `Section` (heading + anchor + c
 | Hero | `person/profile.json` | `headline`, `metrics[]`, `ctas[]`, photo | Split layout; metric cards; value-oriented CTAs |
 | About | `person/profile.json` | `aboutIntro`, `aboutCards[]` | Intro paragraph + scan cards |
 | Featured Projects | `work/projects.json` | `projects[]` where `featured: true` | Top 3 cards; link to `/projects` |
-| Strategic Impact | `work/strategic-impact.json` | `journey[]`, `programs[]`, `leadershipCards[]` | Journey row + program cards + leadership cards |
+| Strategic Impact | `work/strategic-impact.json` | `metrics[]`, `highlights[]`, optional `journey[]`, `programs[]`, `leadershipCards[]` | Metric grid + highlights; optional journey/programs/cards on `/experience` |
 | Vision | `person/profile.json` | `vision.heading`, `vision.paragraphs[]` | Narrative prose block (`variant="alt"`) |
 | Leadership | `person/profile.json` | `leadershipPhilosophy.statement` | Pull-quote block |
 | Skills | `work/skills.json` | `categories[] -> skills[]` | Grouped skill chips |
 | Career Timeline | `work/experience.json` | `roles[]` (org, position, period, mission) | Compact vertical rail |
-| Affiliations | `person/affiliations.json` | `items[].name` | Text badge strip |
+| Affiliations | `person/affiliations.json` | `items[].name`, optional `items[].logo` | Org list with optional logo SVG in `public/assets/logos/` |
 | Featured Publications | `research/publications.json` | `items[]` (top N) | Link cards; CTA to `/research` |
 | Contact Teaser | `person/profile.json` | (static lead + CTA) | Button to `/contact` |
 | Experience Intro | `work/experience.json` | `title`, `intro`, `snapshot[]` | Section lead-in + metric cards |
@@ -99,7 +101,9 @@ Reused primitives (define once, use everywhere): `Section` (heading + anchor + c
 | Awards | `recognition/awards.json` | `items[]` (`label`, `detail`) | Label + detail rows |
 | Publications | `research/publications.json` | `items[]` (`label`, `title`, `url`) | External links |
 | Conferences | `research/conferences.json` | `items[]` (`label`, `title`, `url`) | External links; `[SPEAKER]/[PRESENTER]` tags in label |
-| Kaggle | `recognition/kaggle.json` | `rank`, `profile`, `items[]` (`label`, `url`) | Show rank prominently; link each competition |
+| Speakers | `research/speakers.json` | `items[]` (`label`, `title`, `url`) | Speaking engagements (ResearchCard) |
+| Vision Board | `work/vision-board.json` | `hubs[]`, `programs[]`, `orgCards[]` | Infographic layout on `/vision` |
+| Kaggle | `recognition/kaggle.json` | `rank`, `profile`, `items[]` (`label`, `url`) | Show rank prominently; link each competition (also on `/research`) |
 | Contact | `person/profile.json` | `contact[]` (email, linkedin, kaggle, location) | `mailto:` for email; external links `rel="noopener noreferrer"` |
 
 The renderer should map `site.json.sections[id].source` → file, and `…title` → heading text.

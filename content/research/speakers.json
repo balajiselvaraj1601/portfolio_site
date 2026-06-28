@@ -1,0 +1,19 @@
+{
+  "title": "Speaking Engagements",
+  "items": [
+    {
+      "label": "GAIA 2025 [SPEAKER]",
+      "title": "Transformative AI and single-cell technologies revolutionizing healthcare",
+      "url": "https://www.gaia.fish/2025",
+      "youtube": "https://www.youtube.com/watch?v=YOtXxiU048M",
+      "logo": "gaia"
+    },
+    {
+      "label": "AACR 2025 [PRESENTER]",
+      "title": "AI-driven identification of drug-tolerant persister cells in lung cancer",
+      "url": "https://aacrjournals.org/cancerres/article/85/8_Supplement_1/6312/759545/Abstract-6312-AI-Driven-Identification-of-Drug",
+      "image": "/assets/images/aacr-2025.png",
+      "logo": "aacr"
+    }
+  ]
+}

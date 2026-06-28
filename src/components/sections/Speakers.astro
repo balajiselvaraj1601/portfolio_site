@@ -1,0 +1,23 @@
+---
+import Section from '@components/Section.astro';
+import ResearchCard from '@components/ResearchCard.astro';
+import { speakers, site } from '@lib/content';
+---
+
+<Section id="speakers" title={site.sections.speakers.title} variant="default">
+  <div class="research-grid reveal">
+    {
+      speakers.items.map((p) => (
+        <ResearchCard venue={p.label} title={p.title} href={p.url} youtube={p.youtube} image={p.image} logo={p.logo} icon="presentation" />
+      ))
+    }
+  </div>
+</Section>
+
+<style>
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+</style>

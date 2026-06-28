@@ -1,0 +1,128 @@
+---
+import Section from '@components/Section.astro';
+import BoardHeader from '@components/BoardHeader.astro';
+import HubCircle from '@components/HubCircle.astro';
+import ProgramBadgeCard from '@components/ProgramBadgeCard.astro';
+import OrgImpactCard from '@components/OrgImpactCard.astro';
+import Icon from '@components/Icon.astro';
+import { visionBoard } from '@lib/content';
+
+const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
+---
+
+<Section id="vision-board" title="" hideTitle variant="full" class="vboard">
+  <BoardHeader title={header} flank="in" />
+
+  <div class="vboard__flow reveal">
+    <div class="vboard__hubs">
+      {hubs.map((hub) => (
+        <HubCircle
+          center={hub.center}
+          satellites={hub.satellites}
+          label={hub.label}
+          variant={hub.variant}
+        />
+      ))}
+    </div>
+
+    <span class="vboard__arrow" aria-hidden="true">
+      <Icon name="chevron-right" size={26} />
+      <Icon name="chevron-right" size={26} />
+    </span>
+
+    <div class="vboard__programs">
+      {programs.map((p) => (
+        <ProgramBadgeCard
+          title={p.title}
+          label={p.label}
+          variant={p.variant}
+          badge={p.badge}
+          lines={p.lines}
+        />
+      ))}
+    </div>
+  </div>
+
+  <div class="vboard__org reveal">
+    <BoardHeader title={orgHeader} flank="out" />
+    <div class="vboard__org-grid">
+      {orgCards.map((c) => (
+        <OrgImpactCard icon={c.icon} title={c.title} lines={c.lines} />
+      ))}
+    </div>
+  </div>
+</Section>
+
+<style>
+  .vboard :global(.container) {
+    max-width: 1240px;
+  }
+
+  /* ── top flow: hubs → arrow → 2×2 program grid ──────────────────────── */
+  .vboard__flow {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
+    gap: var(--space-8);
+    margin-top: var(--space-12);
+  }
+  .vboard__hubs {
+    display: flex;
+    align-items: center;
+    gap: var(--space-6);
+  }
+  .vboard__arrow {
+    display: inline-flex;
+    color: var(--accent);
+  }
+  .vboard__arrow :global(svg) {
+    margin-inline: -7px;
+  }
+  .vboard__programs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+
+  /* ── bottom band: org/leadership cards ──────────────────────────────── */
+  .vboard__org {
+    margin-top: var(--space-16);
+  }
+  .vboard__org-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: var(--space-4);
+    margin-top: var(--space-10);
+  }
+
+  /* ── responsive ─────────────────────────────────────────────────────── */
+  @media (max-width: 1100px) {
+    .vboard__flow {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      gap: var(--space-10);
+    }
+    .vboard__arrow {
+      transform: rotate(90deg);
+    }
+    .vboard__programs {
+      width: 100%;
+    }
+    .vboard__org-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media (max-width: 760px) {
+    .vboard__hubs {
+      flex-direction: column;
+    }
+    .vboard__org-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 560px) {
+    .vboard__programs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

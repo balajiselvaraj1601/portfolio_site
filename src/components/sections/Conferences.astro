@@ -8,7 +8,7 @@ import { conferences, site } from '@lib/content';
   <div class="research-grid reveal">
     {
       conferences.items.map((p) => (
-        <ResearchCard venue={p.label} title={p.title} href={p.url} icon="presentation" />
+        <ResearchCard venue={p.label} title={p.title} href={p.url} youtube={p.youtube} image={p.image} logo={p.logo} icon="presentation" />
       ))
     }
   </div>

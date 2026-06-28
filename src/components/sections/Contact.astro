@@ -1,17 +1,19 @@
 ---
 import Section from '@components/Section.astro';
-import ContactLink from '@components/ContactLink.astro';
 import Icon from '@components/Icon.astro';
-import { profile, site, education } from '@lib/content';
+import { resolveIcon, type IconName } from '@lib/icons';
+import { profile } from '@lib/content';
 
-const publicContact = profile.contact.filter((c) => c.type !== 'phone');
-const edu = education.records[0];
-const { contactPage } = profile;
+const { contactPage, contactQuote } = profile;
 
-function formatGpa(gpa?: string) {
-  if (!gpa) return '';
-  return gpa.toLowerCase().startsWith('cgpa') ? gpa : `CGPA ${gpa}`;
-}
+// Social/connect cards: every contact entry with a link (location has none).
+const connectCards = profile.contact.filter((c) => c.href);
+const emailHref =
+  profile.contact.find((c) => c.type === 'email')?.href ?? undefined;
+
+const isExternal = (href: string) => href.startsWith('http');
+const actionLabel = (type: string) =>
+  type === 'email' ? 'Send email' : 'View profile';
 
 const titleParts = contactPage.titleHighlight
   ? {
@@ -29,7 +31,8 @@ const titleParts = contactPage.titleHighlight
 ---
 
 <Section id="contact" title="" hideTitle eyebrow={contactPage.eyebrow} variant="alt">
-  <div class="contact-layout reveal">
+  <div class="contact-grid reveal">
+    <!-- Left: pitch + actions -->
     <div class="contact-left">
       <h2 class="contact__title">
         {
@@ -45,178 +48,293 @@ const titleParts = contactPage.titleHighlight
         }
       </h2>
       <p class="contact-subtitle">{profile.contactIntro}</p>
-      <div class="contact-links">
+
+      <div class="contact-actions">
         {
-          publicContact.map((c) => (
-            <ContactLink
-              label={c.label}
-              value={c.value}
-              href={c.href}
-              icon={c.icon}
-            />
-          ))
+          emailHref && (
+            <a class="btn btn-primary" href={emailHref}>
+              <Icon name="email" size={18} />
+              {contactPage.emailButtonLabel}
+            </a>
+          )
+        }
+        {
+          contactPage.bookingHref && (
+            <a
+              class="btn btn-secondary"
+              href={contactPage.bookingHref}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="calendar" size={18} />
+              {contactPage.bookCallLabel}
+            </a>
+          )
         }
       </div>
 
+      <p class="response-time">
+        <Icon name="clock" size={16} />
+        {contactPage.responseTime}
+      </p>
+
       {
-        edu && (
-          <div class="edu-block">
-            <div class="edu-icon" aria-hidden="true">
-              <Icon name="graduation" size={24} />
-            </div>
-            <div class="edu-text">
-              <h4>Education</h4>
-              <h3>{edu.degree}</h3>
-              <p>
-                {edu.institution} · {edu.period}
-                {edu.gpa && ` · ${formatGpa(edu.gpa)}`}
-              </p>
-            </div>
-            {
-              edu.achievement && (
-                <div class="gold-badge">{edu.achievement}</div>
-              )
-            }
-          </div>
+        contactQuote && (
+          <blockquote class="contact-quote">
+            <p>{contactQuote.text}</p>
+            <cite>— {contactQuote.author}</cite>
+          </blockquote>
         )
       }
     </div>
 
+    <!-- Right: connect cards + CTA banner -->
     <div class="contact-right">
-      <h3 class="contact-right__title">{contactPage.interestsHeading}</h3>
-      <ul class="interests-list">
-        {profile.contactInterests.map((interest) => (
-          <li>{interest}</li>
-        ))}
-      </ul>
-
-      <div class="cv-card card">
-        <p class="eyebrow">{contactPage.resumeEyebrow}</p>
-        <p class="cv-desc">{contactPage.resumeDescription}</p>
-        <a class="btn btn-primary" href={site.resume.path} target="_blank" rel="noopener noreferrer">
-          {contactPage.resumeLabel}
-        </a>
+      <div class="connect-header">
+        <span>{contactPage.connectHeading}</span>
+        <span class="connect-rule" aria-hidden="true"></span>
       </div>
+
+      <div class="connect-grid">
+        {
+          connectCards.map((c) => {
+            const external = c.href ? isExternal(c.href) : false;
+            return (
+              <a
+                class="connect-card card"
+                href={c.href!}
+                {...(external
+                  ? { target: '_blank', rel: 'noopener noreferrer' }
+                  : {})}
+              >
+                <span class="connect-badge" aria-hidden="true">
+                  <Icon name={resolveIcon(c.icon, 'link') as IconName} size={22} />
+                </span>
+                <h3 class="connect-name">{c.label}</h3>
+                <p class="connect-val">{c.value}</p>
+                <span class="connect-action">
+                  {actionLabel(c.type)}
+                  <Icon name="arrow-right" size={16} />
+                </span>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      {
+        emailHref && (
+          <a class="connect-banner card" href={emailHref}>
+            <span class="connect-banner__icon" aria-hidden="true">
+              <Icon name="handshake" size={26} />
+            </span>
+            <span class="connect-banner__text">
+              {contactPage.ctaText}{' '}
+              <strong>{contactPage.ctaLinkText}</strong>
+            </span>
+            <span class="connect-banner__arrow" aria-hidden="true">
+              <Icon name="arrow-right" size={20} />
+            </span>
+          </a>
+        )
+      }
     </div>
   </div>
 </Section>
 
 <style>
-  .contact-layout {
+  .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     margin-top: 1rem;
+    align-items: start;
   }
+
+  /* ── Left column ──────────────────────────────────────────── */
   .contact__title {
     font-family: var(--font-display);
     font-size: var(--fs-h2);
     font-weight: 400;
     line-height: 1.1;
     color: var(--heading);
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
   .contact-subtitle {
     color: var(--text-muted);
     margin-bottom: 2rem;
     font-size: 0.95rem;
+    max-width: 38ch;
+  }
+  .contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .response-time {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+  }
+  .response-time :global(svg) {
+    color: var(--accent-light);
+    flex-shrink: 0;
+  }
+  .contact-quote {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elev);
+    padding: 1.5rem 1.75rem;
+    margin: 0;
+    position: relative;
+  }
+  .contact-quote::before {
+    content: '\201C';
+    position: absolute;
+    top: 0.4rem;
+    left: 0.9rem;
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    line-height: 1;
+    color: var(--accent-light);
+    opacity: 0.5;
+  }
+  .contact-quote p {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0 0 0.75rem;
+    padding-left: 1.5rem;
     max-width: none;
   }
-  .contact-links {
+  .contact-quote cite {
+    display: block;
+    padding-left: 1.5rem;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--accent-ll);
+  }
+
+  /* ── Right column ─────────────────────────────────────────── */
+  .connect-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .connect-rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--border-strong), transparent);
+  }
+  .connect-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .connect-card {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 2.5rem;
-  }
-  .edu-block {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 10px;
+    gap: 0.4rem;
     padding: 1.5rem;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
+    text-decoration: none;
   }
-  .edu-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
+  .connect-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-shrink: 0;
+    margin-bottom: 0.75rem;
     background: var(--accent-soft);
     border: 1px solid var(--border-strong);
     color: var(--accent-ll);
   }
-  .edu-text h4 {
-    margin-bottom: 0.3rem;
-  }
-  .edu-text h3 {
-    font-size: 0.95rem;
-    font-weight: 700;
-  }
-  .edu-text p {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 0.2rem;
-    max-width: none;
-  }
-  .gold-badge {
-    margin-left: auto;
-    background: linear-gradient(135deg, #f5c518, #c8960c);
-    color: #000;
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.25rem 0.6rem;
-    border-radius: 4px;
-    flex-shrink: 0;
-    margin-top: 0.2rem;
-  }
-  .contact-right__title {
+  .connect-name {
     font-size: 1rem;
     font-weight: 700;
-    margin-bottom: 1.25rem;
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.75rem;
+    color: var(--heading);
   }
-  .interests-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-  .interests-list li {
-    font-size: 0.88rem;
-    padding-left: 1rem;
-    position: relative;
-    max-width: none;
-  }
-  .interests-list li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent-light);
-    font-size: 0.7rem;
-  }
-  .cv-card {
-    padding: 1.5rem;
-    text-align: center;
-  }
-  .cv-desc {
-    font-size: 0.83rem;
+  .connect-val {
+    font-size: 0.82rem;
     color: var(--text-muted);
-    margin-bottom: 1.25rem;
+    margin: 0;
     max-width: none;
+    flex: 1;
   }
+  .connect-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: 0.85rem;
+    padding-top: 0.85rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-light);
+  }
+  .connect-action :global(svg) {
+    transition: transform var(--dur) var(--ease);
+  }
+  .connect-card:hover .connect-action :global(svg) {
+    transform: translateX(3px);
+  }
+
+  .connect-banner {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    text-decoration: none;
+  }
+  .connect-banner__icon {
+    flex-shrink: 0;
+    color: var(--accent-light);
+  }
+  .connect-banner__text {
+    flex: 1;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+  .connect-banner__text strong {
+    display: block;
+    font-weight: 600;
+    color: var(--accent-light);
+  }
+  .connect-banner__arrow {
+    flex-shrink: 0;
+    color: var(--accent-light);
+    transition: transform var(--dur) var(--ease);
+  }
+  .connect-banner:hover .connect-banner__arrow {
+    transform: translateX(4px);
+  }
+
+  /* ── Responsive ───────────────────────────────────────────── */
   @media (max-width: 900px) {
-    .contact-layout {
+    .contact-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
+    }
+    .contact-subtitle {
+      max-width: none;
+    }
+  }
+  @media (max-width: 560px) {
+    .connect-grid {
+      grid-template-columns: 1fr;
     }
   }
 </style>

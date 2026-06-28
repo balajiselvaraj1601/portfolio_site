@@ -1,0 +1,134 @@
+---
+import Icon from '@components/Icon.astro';
+import { resolveIcon, type IconName } from '@lib/icons';
+import type { VisionBoard } from '@schemas';
+
+type Program = VisionBoard['programs'][number];
+
+interface Props {
+  title: string;
+  label: string;
+  variant: Program['variant'];
+  badge: Program['badge'];
+  lines: string[];
+}
+
+const { title, label, variant, badge, lines } = Astro.props;
+---
+
+<article class:list={['pcard', `pcard--${variant}`]}>
+  <header class="pcard__head">
+    <h3 class="pcard__title">{title}</h3>
+    <p class="pcard__label">{label}</p>
+  </header>
+
+  <ul class="pcard__lines">
+    {lines.map((line) => <li>{line}</li>)}
+  </ul>
+
+  <div class:list={['pcard__badge', { 'pcard__badge--logo': badge.kind === 'logo' }]} aria-hidden="true">
+    {badge.kind === 'logo' ? (
+      <img src={`/assets/logos/${badge.asset}.svg`} alt={badge.alt ?? ''} loading="lazy" />
+    ) : (
+      <Icon name={resolveIcon(badge.name, 'target') as IconName} size={30} />
+    )}
+  </div>
+</article>
+
+<style>
+  .pcard {
+    --pc: var(--accent);
+    --pc-soft: var(--accent-soft);
+    position: relative;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding-bottom: var(--space-5);
+    overflow: hidden;
+    transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease);
+  }
+  .pcard--red {
+    --pc: var(--accent-red);
+    --pc-soft: var(--accent-red-soft);
+  }
+  .pcard:hover {
+    border-color: var(--pc);
+    transform: translateY(-3px);
+  }
+  .pcard__head {
+    background: var(--pc);
+    color: #fff;
+    padding: var(--space-4) 5rem var(--space-4) var(--space-5);
+  }
+  .pcard__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0;
+    color: #fff;
+  }
+  .pcard__label {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin: 0.35rem 0 0;
+    opacity: 0.92;
+  }
+  .pcard__lines {
+    list-style: none;
+    margin: var(--space-4) 0 0;
+    padding: 0 var(--space-5);
+    display: grid;
+    gap: 0.4rem;
+  }
+  .pcard__lines li {
+    position: relative;
+    padding-left: 1rem;
+    color: var(--text);
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+  .pcard__lines li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--pc);
+  }
+  .pcard__badge {
+    position: absolute;
+    top: var(--space-4);
+    right: var(--space-5);
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--bg-elev);
+    border: 3px solid var(--pc);
+    color: var(--pc);
+    box-shadow: var(--shadow-sm);
+  }
+  .pcard__badge--logo {
+    background: #fff;
+  }
+  .pcard__badge img {
+    width: 74%;
+    height: 74%;
+    object-fit: contain;
+  }
+  @media (max-width: 520px) {
+    .pcard__head {
+      padding-right: var(--space-5);
+    }
+    .pcard__badge {
+      position: static;
+      margin: var(--space-4) var(--space-5) 0;
+    }
+  }
+</style>

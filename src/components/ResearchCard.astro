@@ -8,15 +8,37 @@ interface Props {
   title: string;
   description?: string;
   href?: string;
+  youtube?: string;
+  image?: string;
+  logo?: string;
 }
-const { icon, venue, title, description, href } = Astro.props;
+const { icon, venue, title, description, href, youtube, image, logo } = Astro.props;
 const iconName = resolveIcon(icon, 'document') as IconName;
+
+/** Extract an 11-char YouTube video id from common URL shapes. */
+function youtubeId(url?: string): string | null {
+  if (!url) return null;
+  const m = url.match(
+    /(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?v=|embed\/|v\/|shorts\/))([\w-]{11})/
+  );
+  return m ? m[1] : null;
+}
+const ytId = youtubeId(youtube);
+const ytEmbed = ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : null;
 ---
 
 <article class="rcard">
-  <div class="rcard-icon" aria-hidden="true">
-    <Icon name={iconName} size={22} />
-  </div>
+  {
+    logo ? (
+      <div class="rcard-logo">
+        <img src={`/assets/logos/${logo}.svg`} alt={venue} loading="lazy" />
+      </div>
+    ) : (
+      <div class="rcard-icon" aria-hidden="true">
+        <Icon name={iconName} size={22} />
+      </div>
+    )
+  }
   <div class="venue">{venue}</div>
   {
     href ? (
@@ -27,7 +49,29 @@ const iconName = resolveIcon(icon, 'document') as IconName;
       <h3>{title}</h3>
     )
   }
+  {
+    image && (
+      <div class="rcard-media">
+        <img src={image} alt={`${venue} — ${title}`} loading="lazy" />
+      </div>
+    )
+  }
   {description && <p>{description}</p>}
+  {
+    ytEmbed && (
+      <div class="rcard-video">
+        <iframe
+          src={ytEmbed}
+          title={`${title} — video`}
+          loading="lazy"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+        />
+      </div>
+    )
+  }
 </article>
 
 <style>
@@ -55,6 +99,24 @@ const iconName = resolveIcon(icon, 'document') as IconName;
     border: 1px solid var(--border-strong);
     color: var(--accent-ll);
   }
+  .rcard-logo {
+    display: inline-flex;
+    align-items: center;
+    min-height: 40px;
+    padding: 6px 12px;
+    margin-bottom: 0.85rem;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow-sm);
+  }
+  .rcard-logo img {
+    display: block;
+    max-height: 28px;
+    width: auto;
+    max-width: 180px;
+    object-fit: contain;
+  }
   .venue {
     font-family: var(--font-mono);
     font-size: 0.7rem;
@@ -80,5 +142,39 @@ const iconName = resolveIcon(icon, 'document') as IconName;
     color: var(--text-muted);
     line-height: 1.6;
     max-width: none;
+  }
+  .rcard-media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0.85rem 0 0.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  .rcard-media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .rcard-video {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    margin: 0.85rem 0 0.6rem;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: #000;
+  }
+  .rcard-video iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
   }
 </style>

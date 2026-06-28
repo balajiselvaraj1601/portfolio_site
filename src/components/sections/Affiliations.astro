@@ -10,7 +10,15 @@ const title = site.sections.affiliations.title;
     {
       affiliations.items.map((a) => (
         <div class="collab-item">
-          <div class="collab-dot" aria-hidden="true"></div>
+          {
+            a.logo ? (
+              <div class="collab-logo">
+                <img src={`/assets/logos/${a.logo}.svg`} alt={`${a.name} logo`} loading="lazy" />
+              </div>
+            ) : (
+              <div class="collab-dot" aria-hidden="true"></div>
+            )
+          }
           <div class="collab-text">{a.name}</div>
         </div>
       ))
@@ -31,7 +39,7 @@ const title = site.sections.affiliations.title;
     padding: 1.1rem 1.25rem;
     display: flex;
     gap: 0.75rem;
-    align-items: flex-start;
+    align-items: center;
   }
   .collab-dot {
     width: 8px;
@@ -39,7 +47,26 @@ const title = site.sections.affiliations.title;
     border-radius: 50%;
     background: var(--accent-light);
     flex-shrink: 0;
-    margin-top: 0.4rem;
+  }
+  .collab-logo {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 96px;
+    height: 40px;
+    padding: 6px 10px;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .collab-logo img {
+    display: block;
+    max-width: 120px;
+    max-height: 26px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
   }
   .collab-text {
     font-size: 0.85rem;

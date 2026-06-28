@@ -1,13 +1,43 @@
 ---
-import { site } from '@lib/content';
+import { site, profile } from '@lib/content';
+import Icon from '@components/Icon.astro';
+import { resolveIcon, type IconName } from '@lib/icons';
+
+const year = new Date().getFullYear();
+const socialLinks = profile.contact.filter((c) => c.href && c.type !== 'location');
+const tagline = site.tagline.trim();
 ---
 
 <footer class="site-footer">
   <div class="container site-footer__inner">
-    <p class="site-footer__mono">
-      {site.name.toUpperCase()} · {site.title.toUpperCase()} · {site.location.toUpperCase()}
-    </p>
-    <p class="site-footer__tagline">{site.tagline}</p>
+    <div class="site-footer__meta">
+      <p class="site-footer__mono">
+        {site.name.toUpperCase()} · {site.title.toUpperCase()} · {site.location.toUpperCase()}
+      </p>
+      {tagline && <p class="site-footer__tagline">{tagline}</p>}
+      <p class="site-footer__copyright">© {year} {site.name}. All rights reserved.</p>
+    </div>
+
+    <ul class="site-footer__social" aria-label="Social links">
+      {
+        socialLinks.map((c) => (
+          <li>
+            <a
+              class="site-footer__social-link"
+              href={c.href!}
+              aria-label={c.label}
+              {...(c.href!.startsWith('http')
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              <Icon name={resolveIcon(c.icon, 'email') as IconName} size={18} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <a href="#" class="site-footer__top" id="back-to-top">Back to top</a>
   </div>
 </footer>
 
@@ -15,7 +45,26 @@ import { site } from '@lib/content';
   .site-footer {
     border-top: 1px solid var(--border);
     padding-block: var(--space-8);
+  }
+  .site-footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4) var(--space-6);
     text-align: center;
+  }
+  .site-footer__meta {
+    flex: 1 1 100%;
+  }
+  @media (min-width: 768px) {
+    .site-footer__meta {
+      flex: 1 1 auto;
+      text-align: left;
+    }
+    .site-footer__inner {
+      justify-content: space-between;
+    }
   }
   .site-footer__mono {
     font-family: var(--font-mono);
@@ -31,4 +80,52 @@ import { site } from '@lib/content';
     opacity: 0.7;
     max-width: none;
   }
+  .site-footer__copyright {
+    margin: var(--space-2) 0 0;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    max-width: none;
+  }
+  .site-footer__social {
+    display: flex;
+    gap: var(--space-2);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-footer__social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    background: var(--bg-elev);
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+  }
+  .site-footer__social-link:hover {
+    border-color: var(--accent);
+    color: var(--accent-light);
+  }
+  .site-footer__top {
+    font-size: var(--fs-small);
+    font-weight: 500;
+    color: var(--text-muted);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .site-footer__top:hover {
+    color: var(--accent-light);
+  }
 </style>
+
+<script>
+  document.getElementById('back-to-top')?.addEventListener('click', (e) => {
+    e.preventDefault();
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+</script>

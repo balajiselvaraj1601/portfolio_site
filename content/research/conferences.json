@@ -2,24 +2,22 @@
   "title": "Conferences",
   "items": [
     {
-      "label": "GAIA 2025 [SPEAKER]",
-      "title": "Transformative AI and single-cell technologies revolutionizing healthcare",
-      "url": "https://www.gaia.fish/2025"
-    },
-    {
-      "label": "AACR 2025 [PRESENTER]",
-      "title": "AI-driven identification of drug-tolerant persister cells in lung cancer",
-      "url": "https://aacrjournals.org/cancerres/article/85/8_Supplement_1/6312/759545/Abstract-6312-AI-Driven-Identification-of-Drug"
-    },
-    {
       "label": "AACR 2024",
       "title": "Fast, interactive, AI-assisted 3D lung tumor segmentation",
-      "url": "https://aacrjournals.org/cancerres/article/84/6_Supplement/887/741446/Abstract-887-Fast-interactive-AI-assisted-3D-lung"
+      "url": "https://aacrjournals.org/cancerres/article/84/6_Supplement/887/741446/Abstract-887-Fast-interactive-AI-assisted-3D-lung",
+      "logo": "aacr"
     },
     {
       "label": "AACR 2023",
       "title": "Improving non-small cell lung cancer segmentation on a challenging dataset",
-      "url": "https://aacrjournals.org/cancerres/article/83/7_Supplement/5427/719631/Abstract-5427-Improving-non-small-cell-lung-cancer"
+      "url": "https://aacrjournals.org/cancerres/article/83/7_Supplement/5427/719631/Abstract-5427-Improving-non-small-cell-lung-cancer",
+      "logo": "aacr"
+    },
+    {
+      "label": "AACR 2021",
+      "title": "Leveraging graphs to do hypothesis & data-driven research using multiplex immunofluorescence images",
+      "url": "https://aacrjournals.org/clincancerres/article/27/5_Supplement/PR-05/32768/Abstract-PR-05-Leveraging-graphs-to-do-novel",
+      "logo": "aacr"
     }
   ]
 }

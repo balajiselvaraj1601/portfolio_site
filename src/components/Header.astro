@@ -64,6 +64,19 @@ const lastName = rest.join(' ');
       <a class="btn btn-primary nav-cta" href="/contact">Get in Touch</a>
       <button
         type="button"
+        class="save-btn"
+        id="save-btn"
+        aria-label="Save page as HTML"
+        title="Save page as HTML"
+      >
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 14H3a1 1 0 0 1-1-1V3a1 1 0 0 1 1-1h8l3 3v8a1 1 0 0 1-1 1Z" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+          <path d="M5 2v3h5V2M5 14v-5h6v5" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+        </svg>
+        <span class="save-btn__spinner" aria-hidden="true"></span>
+      </button>
+      <button
+        type="button"
         class="theme-toggle"
         id="theme-toggle"
         aria-label="Toggle color theme"
@@ -196,9 +209,10 @@ const lastName = rest.join(' ');
   .nav-resume {
     background: color-mix(in srgb, var(--bg-elev) 72%, transparent);
   }
+  .save-btn,
   .theme-toggle,
   .nav-toggle {
-    display: inline-flex;
+    display: none;
     align-items: center;
     justify-content: center;
     width: 36px;
@@ -209,12 +223,32 @@ const lastName = rest.join(' ');
     color: var(--text);
     font-size: 1rem;
   }
+  .save-btn {
+    position: relative;
+  }
+  .save-btn:hover,
   .theme-toggle:hover,
   .nav-toggle:hover {
     border-color: var(--accent);
   }
-  .nav-toggle {
+  .save-btn[aria-busy='true'] svg {
+    opacity: 0;
+  }
+  .save-btn__spinner {
     display: none;
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border: 2px solid var(--border-strong);
+    border-top-color: var(--accent-light);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  .save-btn[aria-busy='true'] .save-btn__spinner {
+    display: block;
+  }
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
   :global(html[data-theme='dark']) .theme-toggle__moon,
   :global(html:not([data-theme='dark'])) .theme-toggle__sun {
@@ -277,5 +311,7 @@ const lastName = rest.join(' ');
 
 <script>
   import { initSiteChrome } from '../scripts/site-chrome';
+  import { savePage } from '../scripts/save-page';
   initSiteChrome();
+  document.getElementById('save-btn')?.addEventListener('click', savePage);
 </script>

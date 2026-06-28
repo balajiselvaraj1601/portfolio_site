@@ -22,19 +22,21 @@ If the change affects page structure, section order, or the overall narrative, u
 | File | Sections affected | Typical edits |
 |------|-------------------|---------------|
 | `site.json` | Global meta, nav, pages, SEO, résumé link | Title, tagline, nav labels, page sections, hide a section |
-| `person/profile.json` | Hero, About, Leadership, Contact | Headline, metrics, CTAs, about cards, contact interests |
-| `person/affiliations.json` | Affiliations strip | Organization names |
-| `work/strategic-impact.json` | Strategic Impact | `metrics[]` and `highlights[]` |
-| `work/experience.json` | Experience timeline, Career timeline | Roles, optional `mission`, bullets, tier |
-| `work/projects.json` | Project cards, Featured projects | Summaries, case-study fields, `featured`, tags |
-| `work/skills.json` | Skills | Categories and skill chips |
+| `person/profile.json` | Hero, About, Vision, Leadership, Contact | Headline, metrics, CTAs, about cards, vision, contact interests, `contactPage` copy |
+| `person/affiliations.json` | Affiliations strip | Organization names; optional `logo` slug → `public/assets/logos/{slug}.svg` |
+| `work/strategic-impact.json` | Strategic Impact | `metrics[]`, `highlights[]`; optional `journey[]`, `programs[]`, `leadershipCards[]` for rich layout |
+| `work/vision-board.json` | Vision page (`/vision`) | Infographic hubs, program cards, org impact cards |
+| `work/experience.json` | Experience timeline, Career timeline, Experience intro | Roles, optional `mission`, `snapshot[]`, bullets, tier |
+| `work/projects.json` | Project cards, Featured projects, Projects intro | Summaries, case-study fields, `featured`, `snapshot[]`, tags |
+| `work/skills.json` | Skills (embedded in Vision on home) | Categories and skill chips |
 | `work/mentorship.json` | Mentorship | Bullet items |
-| `research/generative-ai.json` | Generative AI | Bullet items |
-| `research/publications.json` | Publications | Title + URL links |
+| `research/generative-ai.json` | Generative AI (when section is wired) | Bullet items |
+| `research/publications.json` | Publications, Featured publications | Title + URL links |
 | `research/conferences.json` | Conferences | Title + URL links |
+| `research/speakers.json` | Speaking engagements | Title + URL links |
 | `recognition/education.json` | Education | Degree records |
 | `recognition/awards.json` | Awards | Label + detail rows |
-| `recognition/kaggle.json` | Kaggle | Rank line + competition links |
+| `recognition/kaggle.json` | Kaggle (Research page) | Rank line + competition links |
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
 
@@ -139,7 +141,9 @@ Schemas live in `src/schemas.ts`. Key constraints:
 | Schema | Notable rules |
 |--------|---------------|
 | `siteSchema` | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`; `resume.path` is a site-root path |
-| `profileSchema` | hero/about/contact fields drive the public profile; `contact[].href` is nullable for location |
+| `profileSchema` | hero/about/contact fields drive the public profile; optional `vision`, `contactPage`, `techStack`; `contact[].href` nullable for location |
+| `impactSchema` | `metrics[]` + `highlights[]` required; optional `journey[]`, `programs[]`, `leadershipCards[]` |
+| `affiliationsSchema` | `items[].name` required; optional `items[].logo` slug |
 | `experienceSchema` | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable |
 | `projectsSchema` | `id` must be unique slug; `highlights` and `tags` are string arrays |
 | `linkListSchema` | Publications/conferences: `url` must be valid URL |

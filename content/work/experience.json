@@ -122,6 +122,7 @@
       "projects": [
         {
           "name": "CT Segmentation — Oncology Imaging",
+          "icon": "scan",
           "bullets": [
             {
               "text": "Delivered a next-generation CT tumor segmentation pipeline in six months, with Dice scores 46% above SOTA, directly enabling $0.5M in follow-on funding.",
@@ -161,6 +162,7 @@
       "projects": [
         {
           "name": "Foundation Models for Digital Pathology",
+          "icon": "microscope",
           "bullets": [
             {
               "text": "AI Lead for an Executive Director-sponsored initiative developing a scalable, reusable histopathology foundation model platform on AWS infrastructure.",
@@ -190,6 +192,7 @@
         },
         {
           "name": "Graph Neural Networks & Clinical Imaging",
+          "icon": "graph",
           "bullets": [
             {
               "text": "Developed a Graph Neural Network-based pipeline for survival and response prediction on multiplex immunofluorescence histopathology slides.",
@@ -221,6 +224,7 @@
       "projects": [
         {
           "name": "Face Analytics",
+          "icon": "vision",
           "bullets": [
             {
               "text": "Delivered an enterprise face analytics platform with real-time recognition, verification, and identity clustering across two client deployments.",
@@ -238,6 +242,7 @@
         },
         {
           "name": "Video Analytics",
+          "icon": "scan",
           "bullets": [
             {
               "text": "Engineered scalable video analytics pipelines for person re-identification (ReID) and multi-object tracking (MOT) across indoor and outdoor surveillance.",
@@ -251,6 +256,7 @@
         },
         {
           "name": "Pose & Behavior Analysis",
+          "icon": "pulse",
           "bullets": [
             {
               "text": "Shipped a production-grade multi-environment pose estimation pipeline for an enterprise client spanning indoor, outdoor, and controlled settings.",
@@ -283,6 +289,7 @@
       "projects": [
         {
           "name": "Neonatal Retinal Imaging",
+          "icon": "scan",
           "bullets": [
             {
               "text": "Shipped an end-to-end retinal image processing pipeline for clinical deployment in a first-of-its-kind 4K neonatal retinal imaging scanner.",
@@ -292,6 +299,7 @@
         },
         {
           "name": "Endoscopy GPU System",
+          "icon": "scan",
           "bullets": [
             {
               "text": "Proposed and developed a digital Narrow Band Imaging (NBI) pipeline, eliminating dedicated hardware and reducing customer costs by ~$5K per device.",
@@ -309,6 +317,7 @@
         },
         {
           "name": "Mouse Brain Architecture",
+          "icon": "brain",
           "bullets": [
             {
               "text": "Developed algorithms for cellular segmentation, cross-modality image alignment, and 3D reconstruction from multimodal serial-section 2D images.",
@@ -326,6 +335,7 @@
         },
         {
           "name": "Ultrasound-Guided Robotic Navigation",
+          "icon": "target",
           "bullets": [
             {
               "text": "Championed Verification & Validation (V&V) protocols for an ultrasound-guided (US-guided) robotic navigation system for liver tumor ablation.",

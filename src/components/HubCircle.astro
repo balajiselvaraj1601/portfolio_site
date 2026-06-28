@@ -1,0 +1,147 @@
+---
+import Icon from '@components/Icon.astro';
+import { resolveIcon, type IconName } from '@lib/icons';
+import type { VisionBoard } from '@schemas';
+
+type Hub = VisionBoard['hubs'][number];
+
+interface Props {
+  center: Hub['center'];
+  satellites: Hub['satellites'];
+  label: string;
+  variant: Hub['variant'];
+}
+
+const { center, satellites, label, variant } = Astro.props;
+
+// Geometry for the hub-and-spoke ring (matches the 300×300 SVG viewBox below).
+const SIZE = 300;
+const C = SIZE / 2; // centre
+const RING = 108; // satellite ring radius
+const START = -90; // first satellite at top, then clockwise every 60°
+
+const nodes = satellites.map((icon, i) => {
+  const angle = ((START + i * (360 / satellites.length)) * Math.PI) / 180;
+  return {
+    icon: resolveIcon(icon, 'diamond') as IconName,
+    x: C + RING * Math.cos(angle),
+    y: C + RING * Math.sin(angle),
+  };
+});
+---
+
+<figure class:list={['hub', `hub--${variant}`]}>
+  <div class="hub__ring">
+    <!-- dotted spokes from centre to each satellite -->
+    <svg class="hub__spokes" viewBox={`0 0 ${SIZE} ${SIZE}`} aria-hidden="true">
+      {nodes.map((n) => <line x1={C} y1={C} x2={n.x} y2={n.y} />)}
+    </svg>
+
+    <!-- centre mark -->
+    <div class="hub__center">
+      {center.kind === 'logo' ? (
+        <img src={`/assets/logos/${center.asset}.svg`} alt={center.alt ?? ''} loading="lazy" />
+      ) : (
+        <Icon name={resolveIcon(center.name, 'brain') as IconName} size={44} />
+      )}
+    </div>
+
+    <!-- satellites -->
+    {nodes.map((n) => (
+      <span
+        class="hub__sat"
+        style={`left:${(n.x / SIZE) * 100}%;top:${(n.y / SIZE) * 100}%`}
+        aria-hidden="true"
+      >
+        <Icon name={n.icon} size={22} />
+      </span>
+    ))}
+  </div>
+  <figcaption class="hub__label">{label}</figcaption>
+</figure>
+
+<style>
+  .hub {
+    --hub-accent: var(--accent);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .hub--red {
+    --hub-accent: var(--accent-red);
+  }
+  .hub__ring {
+    position: relative;
+    width: 300px;
+    max-width: 78vw;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 50% 38%, var(--bg-elev), var(--bg-alt));
+    border: 1px solid var(--border-strong);
+    box-shadow: var(--shadow-md);
+  }
+  .hub__spokes {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .hub__spokes line {
+    stroke: var(--hub-accent);
+    stroke-width: 1.4;
+    stroke-dasharray: 2 5;
+    stroke-linecap: round;
+    opacity: 0.55;
+  }
+  .hub__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 30%;
+    height: 30%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--bg-elev);
+    border: 2px solid var(--hub-accent);
+    box-shadow: 0 0 0 5px var(--bg);
+    color: var(--hub-accent);
+    z-index: 2;
+  }
+  .hub__center:has(img) {
+    background: #fff;
+  }
+  .hub__center img {
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
+  }
+  .hub__sat {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 17%;
+    height: 17%;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: var(--bg-elev);
+    border: 1.5px solid var(--hub-accent);
+    color: var(--hub-accent);
+    box-shadow: 0 0 0 4px var(--bg);
+  }
+  .hub__label {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--hub-accent);
+    padding: 0.4rem 2.2rem;
+    border-radius: 100px;
+  }
+</style>

@@ -5,9 +5,13 @@ export const iconNameSchema = z.enum([
   'email',
   'linkedin',
   'kaggle',
+  'github',
   'location',
   'external',
   'download',
+  'clock',
+  'calendar',
+  'arrow-right',
   'sun',
   'moon',
   'menu',
@@ -38,6 +42,12 @@ export const iconNameSchema = z.enum([
   'graph',
   'dna',
   'vision',
+  'lightbulb',
+  'book',
+  'handshake',
+  'table',
+  'pulse',
+  'image',
 ]);
 
 export type IconName = z.infer<typeof iconNameSchema>;

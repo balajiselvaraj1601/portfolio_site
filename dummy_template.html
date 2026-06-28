@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Balaji Selvaraj — AI Technical Lead</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:        #0D0B1E;
+    --bg2:       #13102B;
+    --card:      #1A1530;
+    --card2:     #211D3A;
+    --purple:    #6C2FBF;
+    --purple-l:  #9B5EE8;
+    --purple-ll: #C4A0F5;
+    --red:       #C0182A;
+    --red-l:     #E8485A;
+    --text:      #E8E0F5;
+    --muted:     #9085B8;
+    --white:     #FFFFFF;
+    --border:    rgba(108,47,191,0.25);
+    --border2:   rgba(108,47,191,0.5);
+    --mono:      'JetBrains Mono', monospace;
+    --serif:     'DM Serif Display', serif;
+    --sans:      'Inter', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── TOP NAV ─── */
+  #topnav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 60px;
+    background: rgba(13,11,30,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+  #topnav .logo {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--white);
+    letter-spacing: 0.02em;
+  }
+  #topnav .logo span { color: var(--purple-l); }
+  #topnav nav { display: flex; gap: 0.25rem; }
+  #topnav nav a {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    padding: 0.4rem 0.85rem;
+    border-radius: 4px;
+    transition: color 0.2s, background 0.2s;
+  }
+  #topnav nav a:hover, #topnav nav a.active {
+    color: var(--white);
+    background: rgba(108,47,191,0.2);
+  }
+  .nav-cta {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: var(--purple);
+    border: none;
+    padding: 0.45rem 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--purple-l); }
+
+  /* ─── DOT NAV ─── */
+  #dotnav {
+    position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%);
+    z-index: 999;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--muted);
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+  }
+  .dot.active { background: var(--purple-l); transform: scale(1.5); }
+  .dot:hover { background: var(--purple-ll); }
+
+  /* ─── SECTIONS ─── */
+  section {
+    min-height: 100vh;
+    padding: 100px 2.5rem 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-full {
+    max-width: 100%;
+    padding: 100px 0 80px;
+  }
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2.5rem;
+  }
+
+  /* ─── SECTION LABELS ─── */
+  .eyebrow {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--purple-l);
+    margin-bottom: 1rem;
+  }
+  .eyebrow-red { color: var(--red-l); }
+
+  h1 { font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5.5rem); line-height: 1.05; color: var(--white); }
+  h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; color: var(--white); }
+  h3 { font-family: var(--sans); font-size: 1.15rem; font-weight: 600; color: var(--white); }
+  h4 { font-family: var(--sans); font-size: 0.9rem; font-weight: 600; color: var(--purple-ll); letter-spacing: 0.05em; text-transform: uppercase; }
+  p { color: var(--text); font-size: 0.95rem; line-height: 1.75; }
+
+  .accent { color: var(--purple-l); }
+  .accent-red { color: var(--red-l); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding-top: 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  #hero-canvas {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    opacity: 0.35;
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 2; max-width: 900px; }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(108,47,191,0.15);
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    color: var(--purple-ll);
+    margin-bottom: 2rem;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--purple-l);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+  .hero-title { margin-bottom: 1.5rem; }
+  .hero-title em { font-style: italic; color: var(--purple-ll); }
+  .hero-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 620px;
+    margin-bottom: 3rem;
+    line-height: 1.8;
+  }
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 1.5rem;
+    max-width: 700px;
+    margin-bottom: 3rem;
+  }
+  .hero-stat { border-left: 2px solid var(--purple); padding-left: 1rem; }
+  .hero-stat .num {
+    font-family: var(--mono);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1;
+  }
+  .hero-stat .num span { color: var(--purple-l); font-size: 1.2rem; }
+  .hero-stat .label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    margin-top: 0.25rem;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--purple); color: var(--white);
+    padding: 0.75rem 1.75rem; border-radius: 4px; border: none;
+    cursor: pointer; text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--purple-l); transform: translateY(-1px); }
+  .btn-secondary {
+    font-size: 0.82rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    background: transparent; color: var(--purple-ll);
+    padding: 0.75rem 1.75rem; border-radius: 4px;
+    border: 1px solid var(--border2);
+    cursor: pointer; text-decoration: none;
+    transition: border-color 0.2s, color 0.2s, transform 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--purple-l); color: var(--white); transform: translateY(-1px); }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(to right, transparent, var(--border2), transparent);
+    margin: 0;
+  }
+
+  /* ─── IMPACT SECTION ─── */
+  #impact { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%); max-width: 100%; padding: 100px 2.5rem 80px; }
+  #impact .section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .impact-header { text-align: center; margin-bottom: 4rem; }
+  .impact-header h2 { margin-bottom: 1rem; }
+  .impact-header p { max-width: 580px; margin: 0 auto; color: var(--muted); }
+
+  .impact-journey {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 4rem;
+    padding: 2.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+  }
+  .journey-node {
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0.75rem;
+  }
+  .journey-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.75rem;
+    border: 2px solid var(--border2);
+    background: var(--card2);
+  }
+  .journey-icon.purple { border-color: var(--purple); background: rgba(108,47,191,0.15); }
+  .journey-icon.red { border-color: var(--red); background: rgba(192,24,42,0.15); }
+  .journey-label { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--purple-ll); }
+  .journey-arrow {
+    font-size: 1.5rem; color: var(--purple-l); opacity: 0.7;
+    display: flex; align-items: center;
+  }
+
+  .impact-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+  }
+  .impact-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .impact-card:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .impact-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(to right, var(--purple), var(--purple-l));
+  }
+  .impact-card.red-top::before { background: linear-gradient(to right, var(--red), var(--red-l)); }
+  .impact-card-head {
+    display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem;
+  }
+  .ic-icon {
+    width: 48px; height: 48px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.25rem;
+    background: rgba(108,47,191,0.15);
+    border: 1px solid var(--border2);
+    flex-shrink: 0;
+  }
+  .ic-icon.red { background: rgba(192,24,42,0.12); border-color: rgba(192,24,42,0.4); }
+  .impact-card h3 { font-size: 1.1rem; margin-bottom: 0.15rem; }
+  .backed-tag {
+    font-family: var(--mono); font-size: 0.65rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--red-l);
+    background: rgba(192,24,42,0.12);
+    border: 1px solid rgba(192,24,42,0.3);
+    padding: 0.15rem 0.5rem; border-radius: 3px;
+    display: inline-block; margin-bottom: 0.75rem;
+  }
+  .backed-tag.purple-tag { color: var(--purple-ll); background: rgba(108,47,191,0.12); border-color: rgba(108,47,191,0.3); }
+  .impact-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .impact-bullets li {
+    font-size: 0.88rem; color: var(--text);
+    padding-left: 1.1rem; position: relative;
+  }
+  .impact-bullets li::before {
+    content: '▸'; position: absolute; left: 0;
+    color: var(--purple-l); font-size: 0.7rem; top: 0.15rem;
+  }
+
+  /* Leadership cards */
+  .leadership-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  .lcard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: border-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .lcard:hover { border-color: var(--purple); transform: translateY(-3px); }
+  .lcard-icon {
+    width: 52px; height: 52px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--purple), var(--red));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+  }
+  .lcard-title {
+    font-size: 0.82rem; font-weight: 700; color: var(--white);
+    margin-bottom: 0.4rem; line-height: 1.3;
+  }
+  .lcard-sub { font-size: 0.76rem; color: var(--muted); line-height: 1.4; }
+
+  /* ─── WORK / EXPERIENCE ─── */
+  #work { background: var(--bg); }
+
+  .work-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+  }
+  .work-timeline { position: relative; }
+  .timeline-line {
+    position: absolute; left: 16px; top: 0; bottom: 0; width: 2px;
+    background: linear-gradient(to bottom, var(--purple), var(--red), transparent);
+  }
+  .tl-item {
+    position: relative; padding-left: 44px; padding-bottom: 2rem; cursor: pointer;
+  }
+  .tl-dot {
+    position: absolute; left: 8px; top: 4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--purple);
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .tl-item.active .tl-dot { background: var(--purple); }
+  .tl-item:hover .tl-dot { border-color: var(--purple-l); }
+  .tl-year {
+    font-family: var(--mono); font-size: 0.72rem; color: var(--purple-l);
+    letter-spacing: 0.08em; margin-bottom: 0.2rem;
+  }
+  .tl-role { font-size: 0.82rem; font-weight: 600; color: var(--white); line-height: 1.3; }
+  .tl-company { font-size: 0.75rem; color: var(--muted); margin-top: 0.15rem; }
+
+  .work-panel { display: none; }
+  .work-panel.active { display: block; }
+
+  .role-header { margin-bottom: 2rem; }
+  .role-header h3 { font-size: 1.5rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+  .role-meta {
+    display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+    font-family: var(--mono); font-size: 0.75rem;
+    color: var(--muted); margin-bottom: 0.75rem;
+  }
+  .role-meta span { display: flex; align-items: center; gap: 0.4rem; }
+  .role-description { color: var(--text); font-size: 0.9rem; line-height: 1.8; max-width: 680px; margin-bottom: 2rem; }
+
+  .projects-grid { display: flex; flex-direction: column; gap: 1rem; }
+  .proj-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  .proj-card:hover { border-color: var(--border2); }
+  .proj-header {
+    padding: 1.25rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+  .proj-title-row { display: flex; align-items: center; gap: 0.75rem; }
+  .proj-icon {
+    width: 36px; height: 36px; border-radius: 8px; flex-shrink: 0;
+    background: rgba(108,47,191,0.15);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .proj-name { font-size: 0.92rem; font-weight: 600; color: var(--white); }
+  .proj-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+  .proj-arrow { color: var(--muted); font-size: 0.9rem; transition: transform 0.25s; flex-shrink: 0; }
+  .proj-card.open .proj-arrow { transform: rotate(180deg); }
+  .proj-body {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease;
+    padding: 0 1.5rem;
+  }
+  .proj-card.open .proj-body { max-height: 600px; }
+  .proj-inner { padding: 0.5rem 0 1.5rem; border-top: 1px solid var(--border); }
+  .proj-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+  .proj-bullets li {
+    font-size: 0.85rem; color: var(--text); padding-left: 1.25rem; position: relative; line-height: 1.6;
+  }
+  .proj-bullets li::before { content: '▸'; position: absolute; left: 0; color: var(--purple-l); font-size: 0.7rem; top: 0.15rem; }
+
+  /* ─── RESEARCH ─── */
+  #research { background: var(--bg2); }
+
+  .research-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+  }
+  .rcard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.75rem;
+    transition: border-color 0.3s, transform 0.2s;
+  }
+  .rcard:hover { border-color: var(--border2); transform: translateY(-2px); }
+  .rcard-icon { font-size: 1.5rem; margin-bottom: 0.75rem; }
+  .rcard h3 { font-size: 0.95rem; font-weight: 600; color: var(--white); margin-bottom: 0.5rem; }
+  .rcard .venue {
+    font-family: var(--mono); font-size: 0.7rem; color: var(--purple-ll);
+    letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.5rem;
+  }
+  .rcard p { font-size: 0.83rem; color: var(--muted); line-height: 1.6; }
+
+  .awards-section { margin-top: 4rem; }
+  .awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  .award-pill {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .award-pip {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--purple-l); flex-shrink: 0; margin-top: 0.4rem;
+  }
+  .award-pip.red { background: var(--red-l); }
+  .award-pip.gold { background: #F5C518; }
+  .award-text { font-size: 0.83rem; color: var(--text); line-height: 1.5; }
+  .award-text strong { color: var(--white); display: block; margin-bottom: 0.1rem; }
+
+  /* Kaggle */
+  .kaggle-section { margin-top: 4rem; }
+  .kaggle-hero {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+  }
+  .kaggle-rank-big {
+    font-family: var(--mono); font-size: 3rem; font-weight: 600;
+    color: var(--white); line-height: 1;
+  }
+  .kaggle-rank-big span { color: var(--purple-l); font-size: 1.5rem; }
+  .kaggle-desc { flex: 1; min-width: 200px; }
+  .kaggle-desc h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
+  .kaggle-desc p { font-size: 0.85rem; color: var(--muted); }
+  .comp-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
+  }
+  .comp-tag {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.8rem; color: var(--text);
+    display: flex; gap: 0.5rem; align-items: center;
+  }
+  .comp-tag::before {
+    content: '🏆'; font-size: 0.75rem;
+  }
+
+  /* ─── SKILLS & VISION ─── */
+  #skills { background: var(--bg); }
+
+  .vision-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-top: 3rem;
+    align-items: start;
+  }
+  .vision-text h2 { margin-bottom: 1rem; }
+  .vision-text p { color: var(--muted); margin-bottom: 1.25rem; font-size: 0.92rem; line-height: 1.85; }
+  .collab-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    display: flex; gap: 0.75rem; align-items: flex-start;
+  }
+  .collab-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--purple-l); flex-shrink: 0; margin-top: 0.4rem; }
+  .collab-text { font-size: 0.85rem; line-height: 1.6; }
+  .collab-text strong { color: var(--white); }
+
+  .skills-panel {}
+  .skill-group { margin-bottom: 2.5rem; }
+  .skill-group h4 { margin-bottom: 1rem; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .skill-tag {
+    font-size: 0.78rem; font-weight: 500;
+    background: var(--card2); border: 1px solid var(--border);
+    border-radius: 4px; padding: 0.35rem 0.7rem;
+    color: var(--text);
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .skill-tag:hover { border-color: var(--purple-l); color: var(--white); }
+  .skill-tag.hot { border-color: rgba(108,47,191,0.4); color: var(--purple-ll); background: rgba(108,47,191,0.08); }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--bg2); }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    margin-top: 3rem;
+  }
+  .contact-left h2 { margin-bottom: 0.75rem; }
+  .contact-left .subtitle { color: var(--muted); margin-bottom: 2rem; font-size: 0.95rem; }
+  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; }
+  .clink {
+    display: flex; gap: 0.75rem; align-items: center;
+    font-size: 0.88rem; color: var(--text); text-decoration: none;
+    padding: 0.85rem 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 8px;
+    transition: border-color 0.25s, color 0.25s;
+  }
+  .clink:hover { border-color: var(--purple); color: var(--white); }
+  .clink-icon { font-size: 1.1rem; width: 24px; text-align: center; }
+  .clink-label { font-weight: 500; }
+  .clink-val { margin-left: auto; color: var(--muted); font-size: 0.8rem; }
+
+  .refs-section {}
+  .refs-section h3 { font-size: 1rem; font-weight: 700; color: var(--white); margin-bottom: 1.25rem; border-bottom: 1px solid var(--border); padding-bottom: 0.75rem; }
+  .ref-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.1rem 1.25rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.25s;
+  }
+  .ref-card:hover { border-color: var(--border2); }
+  .ref-name { font-weight: 600; color: var(--white); font-size: 0.88rem; margin-bottom: 0.2rem; }
+  .ref-title { font-size: 0.78rem; color: var(--purple-ll); line-height: 1.4; }
+  .ref-org { font-size: 0.76rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .edu-block {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .edu-icon { font-size: 1.75rem; }
+  .edu-text h4 { font-size: 0.7rem; color: var(--purple-ll); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.3rem; }
+  .edu-text h3 { font-size: 0.95rem; font-weight: 700; color: var(--white); }
+  .edu-text p { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+  .gold-badge {
+    margin-left: auto; background: linear-gradient(135deg, #F5C518, #C8960C);
+    color: #000; font-size: 0.65rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25rem 0.6rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.2rem;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.78rem;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    font-family: var(--mono);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── SCROLL FADE IN ─── */
+  .fade-in {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    #topnav nav { display: none; }
+    .work-layout { grid-template-columns: 1fr; }
+    .work-timeline { max-height: 200px; overflow-x: auto; display: flex; flex-direction: row; gap: 0; padding-bottom: 0.5rem; }
+    .timeline-line { display: none; }
+    .tl-item { padding-left: 0; padding-right: 1.5rem; padding-bottom: 0; white-space: nowrap; }
+    .tl-dot { display: none; }
+    .vision-split, .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+    .impact-grid { grid-template-columns: 1fr; }
+    .impact-journey { grid-template-columns: 1fr; gap: 1rem; }
+    .journey-arrow { transform: rotate(90deg); justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP NAV -->
+<header id="topnav">
+  <div class="logo">Balaji <span>Selvaraj</span></div>
+  <nav>
+    <a href="#hero" class="active" data-page="0">Home</a>
+    <a href="#impact" data-page="1">Impact</a>
+    <a href="#work" data-page="2">Work</a>
+    <a href="#research" data-page="3">Research</a>
+    <a href="#skills" data-page="4">Skills</a>
+    <a href="#contact" data-page="5">Contact</a>
+  </nav>
+  <a href="mailto:balaji.selvaraj.ai@outlook.com" class="nav-cta">Get in Touch</a>
+</header>
+
+<!-- DOT NAV -->
+<div id="dotnav" aria-label="Page navigation">
+  <div class="dot active" data-target="hero" title="Home"></div>
+  <div class="dot" data-target="impact" title="Impact"></div>
+  <div class="dot" data-target="work" title="Work"></div>
+  <div class="dot" data-target="research" title="Research"></div>
+  <div class="dot" data-target="skills" title="Skills"></div>
+  <div class="dot" data-target="contact" title="Contact"></div>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 1 — HERO -->
+<!-- ═══════════════════════════════════════ -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content fade-in">
+    <div class="hero-tag">AI Technical Lead · Biopharma R&D · Gothenburg, Sweden</div>
+    <h1 class="hero-title">
+      Turning <em>biological data</em><br>
+      into clinical impact
+    </h1>
+    <p class="hero-sub">
+      12+ years leading globally distributed AI teams across oncology, drug safety, and biopharma R&D. Translating bottom-up AI vision into SVP- and Chief Scientist-sponsored strategic programs at AstraZeneca.
+    </p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="num">12<span>+</span></div>
+        <div class="label">Years in AI &amp; ML</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">652</div>
+        <div class="label">Kaggle Global Rank / 200K+</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">$50<span>M</span></div>
+        <div class="label">Projected Annual Savings</div>
+      </div>
+      <div class="hero-stat">
+        <div class="num">5</div>
+        <div class="label">Countries, 12-Member Team</div>
+      </div>
+    </div>
+    <div class="hero-ctas">
+      <a href="#impact" class="btn-primary">View Impact →</a>
+      <a href="#work" class="btn-secondary">Explore Work</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 2 — IMPACT -->
+<!-- ═══════════════════════════════════════ -->
+<section id="impact">
+  <div class="impact-header fade-in">
+    <div class="eyebrow">AI Leadership &amp; Strategic Impact</div>
+    <h2>From <span class="accent">Kaggle idea</span> to executive-sponsored programs</h2>
+    <p>Independently sourced, pitched, and secured two major AI initiatives — one SVP-sponsored saving $20–50M annually, one Chief Scientist-sponsored within a €14M EU consortium.</p>
+  </div>
+
+  <!-- Journey row -->
+  <div class="impact-journey fade-in">
+    <div class="journey-node">
+      <div class="journey-icon purple">🏆</div>
+      <div>
+        <div class="journey-label">Idea</div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">Top 0.3% Kaggle<br>signals &amp; patterns</p>
+      </div>
+    </div>
+    <div class="journey-arrow">›››</div>
+    <div class="journey-node">
+      <div class="journey-icon purple">🧠</div>
+      <div>
+        <div class="journey-label">Vision</div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">Multimodal AI<br>platform architecture</p>
+      </div>
+    </div>
+    <div class="journey-arrow">›››</div>
+    <div class="journey-node">
+      <div class="journey-icon red">🚀</div>
+      <div>
+        <div class="journey-label">Execution</div>
+        <p style="font-size:0.8rem;color:var(--muted);margin-top:0.3rem;">SVP + Chief Scientist<br>backed programs</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Impact cards 2x2 -->
+  <div class="impact-grid fade-in">
+    <div class="impact-card">
+      <div class="impact-card-head">
+        <div class="ic-icon">💊</div>
+        <div>
+          <h3>Drug Safety Platform</h3>
+          <span class="backed-tag">SVP Backed · $3M+ Initiative</span>
+        </div>
+      </div>
+      <ul class="impact-bullets">
+        <li>Projected $20M–$50M in annual savings by reducing animal studies</li>
+        <li>Compressed safety timelines from 5 to 3 years</li>
+        <li>Secured project funding and led development with 12-member team</li>
+        <li>Architected model-agnostic multimodal platform: omics + imaging + molecular</li>
+      </ul>
+    </div>
+    <div class="impact-card">
+      <div class="impact-card-head">
+        <div class="ic-icon">🏛️</div>
+        <div>
+          <h3>Broad Institute Collaboration</h3>
+          <span class="backed-tag purple-tag">Senior Group Leader Partnership</span>
+        </div>
+      </div>
+      <ul class="impact-bullets">
+        <li>Initiated collaboration with Dr. Shantanu Singh (Senior Group Leader)</li>
+        <li>Co-developing computational pipelines for Cell Painting &amp; omics</li>
+        <li>MultiModal computation pipelines at research frontier</li>
+        <li>Bridging pharma R&amp;D with academic research excellence</li>
+      </ul>
+    </div>
+    <div class="impact-card red-top">
+      <div class="impact-card-head">
+        <div class="ic-icon red">🔬</div>
+        <div>
+          <h3>Persister Analysis — Oncology</h3>
+          <span class="backed-tag">Chief Scientist Backed · €14M EU Consortium</span>
+        </div>
+      </div>
+      <ul class="impact-bullets">
+        <li>Persister-Seq Consortium across 14 partner institutions in Europe</li>
+        <li>Novel tumor recurrence prediction using single-cell transcriptomics</li>
+        <li>90% F1 on internal benchmarks; 13%+ over state-of-the-art</li>
+        <li>Secured project and led end-to-end development</li>
+      </ul>
+    </div>
+    <div class="impact-card red-top">
+      <div class="impact-card-head">
+        <div class="ic-icon red">🎤</div>
+        <div>
+          <h3>AACR 2025 Conference</h3>
+          <span class="backed-tag">Conference Presenter</span>
+        </div>
+      </div>
+      <ul class="impact-bullets">
+        <li>Presented at AACR 2025 — top oncology research conference globally</li>
+        <li>AI-driven identification of drug-tolerant persister cells in lung cancer</li>
+        <li>3-month AI pipeline development cycle with 2 AI engineers</li>
+        <li>Also presented at AACR 2024 &amp; 2023 on CT tumor segmentation</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Leadership & Org Impact cards -->
+  <div class="fade-in" style="margin-top:3rem;">
+    <div class="eyebrow eyebrow-red" style="text-align:center;margin-bottom:2rem;">Leadership &amp; Organizational Impact</div>
+    <div class="leadership-cards">
+      <div class="lcard">
+        <div class="lcard-icon">🏆</div>
+        <div class="lcard-title">EVP Level Award</div>
+        <div class="lcard-sub">For Drug Safety Platform</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">📊</div>
+        <div class="lcard-title">Gartner Submission</div>
+        <div class="lcard-sub">GITC Chennai Multimodal Vision</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">💰</div>
+        <div class="lcard-title">$0.5M+ Secured</div>
+        <div class="lcard-sub">Multiple times for team</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">🎯</div>
+        <div class="lcard-title">3 Scorecard</div>
+        <div class="lcard-sub">Aligned projects</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">🔗</div>
+        <div class="lcard-title">Strategic Positioning</div>
+        <div class="lcard-sub">7 internal groups · 3 startups</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">👥</div>
+        <div class="lcard-title">Scaled Team</div>
+        <div class="lcard-sub">1 → 12 members</div>
+      </div>
+      <div class="lcard">
+        <div class="lcard-icon">🌍</div>
+        <div class="lcard-title">Global Management</div>
+        <div class="lcard-sub">UK · Sweden · India · Mexico · China</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 3 — WORK / EXPERIENCE -->
+<!-- ═══════════════════════════════════════ -->
+<section id="work">
+  <div class="eyebrow fade-in">Experience</div>
+  <h2 class="fade-in">Building AI at the <span class="accent">frontier</span> of medicine</h2>
+
+  <div class="work-layout">
+    <!-- Timeline -->
+    <div class="work-timeline fade-in">
+      <div class="timeline-line"></div>
+      <div class="tl-item active" data-panel="az2">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2023 – Present</div>
+        <div class="tl-role">Senior Deep Learning Engineer / AI Associate Principal</div>
+        <div class="tl-company">AstraZeneca, Sweden</div>
+      </div>
+      <div class="tl-item" data-panel="az1">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2020 – 2023</div>
+        <div class="tl-role">Senior Consultant L1 &amp; L2</div>
+        <div class="tl-company">AstraZeneca, India</div>
+      </div>
+      <div class="tl-item" data-panel="hcl">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2017 – 2020</div>
+        <div class="tl-role">Lead Engineer</div>
+        <div class="tl-company">HCL Technology, India</div>
+      </div>
+      <div class="tl-item" data-panel="iit">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2016 – 2017</div>
+        <div class="tl-role">Project Associate</div>
+        <div class="tl-company">HTIC &amp; ICSR, IIT Madras</div>
+      </div>
+      <div class="tl-item" data-panel="hw">
+        <div class="tl-dot"></div>
+        <div class="tl-year">2014 – 2016</div>
+        <div class="tl-role">Clinical Application Engineer</div>
+        <div class="tl-company">Healthware Pvt Ltd</div>
+      </div>
+    </div>
+
+    <!-- Panels -->
+    <div class="work-panels fade-in">
+
+      <!-- AZ Senior -->
+      <div class="work-panel active" id="panel-az2">
+        <div class="role-header">
+          <h3>Senior Deep Learning Engineer / AI Associate Principal</h3>
+          <div class="role-meta">
+            <span>🏢 AstraZeneca</span>
+            <span>📍 Gothenburg, Sweden</span>
+            <span>📅 2023 – Present</span>
+          </div>
+          <p class="role-description">Leading an AI team of 12 across 5 countries (India, UK, Sweden, Mexico, China), delivering across AstraZeneca's 3 R&D priority areas in Oncology, Drug Safety, and CPSS. Translating vision into SVP-sponsored and Chief Scientist-sponsored programs.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card open">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">💊</div>
+                <div>
+                  <div class="proj-name">Drug Safety AI Platform</div>
+                  <div class="proj-sub">AI Technical Lead · SVP-Sponsored · $3M+</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>AI Lead within a $3M+ SVP-sponsored initiative — predictive toxicology models saving $20–50M annually</li>
+                  <li>Architected model-agnostic multimodal AI platform integrating omics, imaging, and molecular features</li>
+                  <li>Productionized ML pipelines with online learning, confidence estimation, multimodal augmentation</li>
+                  <li>Oversaw 3 parallel delivery streams with 12-member team</li>
+                  <li>Initiated collaboration with Dr. Shantanu Singh at Broad Institute for Cell Painting pipelines</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🔬</div>
+                <div>
+                  <div class="proj-name">Tumor Recurrence Prediction</div>
+                  <div class="proj-sub">AI Technical Lead · Translational Oncology · Chief Scientist</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Chief Scientist-sponsored: novel tumor recurrence pipeline using single-cell transcriptomics</li>
+                  <li>Integrated Med-PaLM LLM embeddings + AZ Biological Insights Knowledge Graph</li>
+                  <li>90% F1 on internal benchmarks; 13%+ over state-of-the-art on public datasets</li>
+                  <li>Reduced compute time 30% via Optuna-driven hyperparameter search</li>
+                  <li>Part of Persister-Seq Consortium — €14M EU research program with 14 partner institutions</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🧱</div>
+                <div>
+                  <div class="proj-name">Foundation Model Framework</div>
+                  <div class="proj-sub">AI Architect · CT · Endoscopy · Echo</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Architected reusable cross-platform framework for vision foundation models across 3 AZ infrastructures</li>
+                  <li>Standardized training, inference, and evaluation pipelines — CT, Endoscopy, Echocardiography</li>
+                  <li>Deployed endoscopy vision model in clinical study for GI tissue damage severity ranking</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AZ L1/L2 -->
+      <div class="work-panel" id="panel-az1">
+        <div class="role-header">
+          <h3>Senior Consultant Level 1 &amp; Level 2</h3>
+          <div class="role-meta">
+            <span>🏢 AstraZeneca</span>
+            <span>📍 India</span>
+            <span>📅 2020 – 2023</span>
+          </div>
+          <p class="role-description">Delivered AI across oncology imaging and digital pathology, securing follow-on funding through exceptional performance. Established the foundation model platform that scaled across AZ's imaging infrastructure.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card open">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🫁</div>
+                <div>
+                  <div class="proj-name">CT Tumor Segmentation</div>
+                  <div class="proj-sub">AI Architect · Oncology Imaging · NSCLC</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Delivered next-gen CT tumor segmentation in 6 months with Dice scores 46% above SOTA</li>
+                  <li>Directly enabled $0.5M in follow-on funding — exceeded targets by 4–5x</li>
+                  <li>Radiologist-inspired dynamic window function improved Dice by 11%; test-time augmentation +7%</li>
+                  <li>Reduced training time 20% and GPU memory 15–20% via model parallelism</li>
+                  <li>Validated across independent clinical trial datasets including POSEIDON cohort</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🔭</div>
+                <div>
+                  <div class="proj-name">Digital Pathology Foundation Models</div>
+                  <div class="proj-sub">AI Technical Lead · AWS · Histopathology</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Executive Director-sponsored initiative: scalable histopathology foundation model on AWS</li>
+                  <li>End-to-end AWS ML pipeline: ingestion, preprocessing, distributed training, interpretability, inference</li>
+                  <li>Trained contrastive learning models matching SOTA at 60% lower GPU compute cost</li>
+                  <li>Engineered ink-removal pipeline matching deep learning methods via classical image processing</li>
+                  <li>Led 4-member team to deliver 2 foundation model variants (contrastive &amp; inpainting)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🕸️</div>
+                <div>
+                  <div class="proj-name">Graph Neural Networks — Tumor Microenvironment</div>
+                  <div class="proj-sub">AI Architect · GNN · Multiplex Immunofluorescence</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>GNN pipeline for survival and response prediction on multiplex immunofluorescence slides</li>
+                  <li>Deployed graph-embedding pipelines mapping tumor microenvironment in NSCLC and HNSCC cohorts</li>
+                  <li>Modularized preprocessing for multispectral gigapixel histopathology images</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- HCL -->
+      <div class="work-panel" id="panel-hcl">
+        <div class="role-header">
+          <h3>Lead Engineer</h3>
+          <div class="role-meta">
+            <span>🏢 HCL Technology</span>
+            <span>📍 India</span>
+            <span>📅 2017 – 2020</span>
+          </div>
+          <p class="role-description">Led enterprise-scale computer vision system delivery across face analytics, video surveillance, pose estimation, and thermal physiological monitoring for multiple client deployments.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card open">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">👤</div>
+                <div>
+                  <div class="proj-name">Face &amp; Video Analytics</div>
+                  <div class="proj-sub">Lead Engineer · Edge Deployment · ReID + MOT</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Enterprise face analytics: real-time recognition, verification, identity clustering — 2 client deployments</li>
+                  <li>Automated model optimization and compression pipelines for resource-constrained edge environments</li>
+                  <li>Scalable video analytics for person ReID and multi-object tracking (MOT) across indoor/outdoor surveillance</li>
+                  <li>Thermal-imaging-based physiological monitoring for real-time body vitals estimation</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🚶</div>
+                <div>
+                  <div class="proj-name">Pose &amp; Behavior Analysis</div>
+                  <div class="proj-sub">Production pipeline · Activity Recognition</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Production-grade multi-environment pose estimation for enterprise client (indoor, outdoor, controlled)</li>
+                  <li>Automated activity recognition, behavioral monitoring, and event detection with TensorFlow spatiotemporal features</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- IIT Madras -->
+      <div class="work-panel" id="panel-iit">
+        <div class="role-header">
+          <h3>Project Associate</h3>
+          <div class="role-meta">
+            <span>🏢 HTIC &amp; ICSR, IIT Madras</span>
+            <span>📍 Chennai, India</span>
+            <span>📅 2016 – 2017</span>
+          </div>
+          <p class="role-description">Research-grade medical imaging and neuroscience algorithm development, collaborating with international neuroscience institutes including Cold Spring Harbor Laboratory and RIKEN Brain Science Institute.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card open">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">👁️</div>
+                <div>
+                  <div class="proj-name">Neonatal Retinal Imaging &amp; Endoscopy System</div>
+                  <div class="proj-sub">Clinical deployment · NVIDIA Jetson TX1</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>End-to-end retinal processing pipeline for first-of-its-kind 4K neonatal retinal imaging scanner</li>
+                  <li>Proposed digital NBI pipeline, eliminating dedicated hardware — saving ~$5K per device</li>
+                  <li>Clinical-grade real-time endoscopy video processing system with 10+ modules on NVIDIA Jetson TX1</li>
+                  <li>Polyp detection, blood vessel segmentation, illumination correction, inpainting, artifact removal</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="proj-card">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🧬</div>
+                <div>
+                  <div class="proj-name">Mouse Brain Architecture &amp; Neuron Connectivity</div>
+                  <div class="proj-sub">Cold Spring Harbor · RIKEN Brain Science Institute</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>Cellular segmentation, cross-modality alignment, 3D reconstruction from serial-section 2D images</li>
+                  <li>Neuron connectivity analysis, neuron tracing, neuronal network topology mapping from 3D coordinates</li>
+                  <li>Delivered neuron-connectivity toolbox to Dr. Partha Mitra (Cold Spring Harbor Lab) &amp; RIKEN</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Healthware -->
+      <div class="work-panel" id="panel-hw">
+        <div class="role-header">
+          <h3>Clinical Application Engineer</h3>
+          <div class="role-meta">
+            <span>🏢 Healthware Pvt Ltd</span>
+            <span>📍 India</span>
+            <span>📅 2014 – 2016</span>
+          </div>
+          <p class="role-description">Clinical and commercial role spanning ultrasound-guided robotic navigation for liver tumor ablation — bridging engineering, clinical workflow, pre-sales, and hospital leadership across 50+ sites.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="proj-card open">
+            <div class="proj-header" onclick="toggleProj(this)">
+              <div class="proj-title-row">
+                <div class="proj-icon">🤖</div>
+                <div>
+                  <div class="proj-name">US-Guided Robotic Navigation</div>
+                  <div class="proj-sub">V&amp;V · US-US &amp; US-CT Registration · 50+ Sites</div>
+                </div>
+              </div>
+              <div class="proj-arrow">▾</div>
+            </div>
+            <div class="proj-body">
+              <div class="proj-inner">
+                <ul class="proj-bullets">
+                  <li>V&amp;V protocols for ultrasound-guided robotic navigation for liver tumor ablation</li>
+                  <li>Designed US-US and US-CT registration pipelines with temporal and orientation variation handling</li>
+                  <li>Built 3D ultrasound reconstruction and oblique plane visualization workflows</li>
+                  <li>Primary liaison across clinicians, biomedical engineers, sales teams, and hospital leadership — 50+ sites</li>
+                  <li>Developed KOL networks, competitive matrices, and pre-sales engagement frameworks</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /work-panels -->
+  </div><!-- /work-layout -->
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 4 — RESEARCH & RECOGNITION -->
+<!-- ═══════════════════════════════════════ -->
+<section id="research">
+  <div class="eyebrow fade-in">Research &amp; Recognition</div>
+  <h2 class="fade-in">Published, presented, and <span class="accent">peer-recognized</span></h2>
+
+  <div class="research-grid fade-in">
+    <div class="rcard">
+      <div class="rcard-icon">📄</div>
+      <div class="venue">JITC 2021</div>
+      <h3>GraphITE: Unsupervised Graph Embeddings for Multiplex Immunofluorescence</h3>
+      <p>Novel unsupervised approach to tumor microenvironment exploration using graph neural networks on multiplex immunofluorescence image data.</p>
+    </div>
+    <div class="rcard">
+      <div class="rcard-icon">🧬</div>
+      <div class="venue">bioRxiv 2021</div>
+      <h3>Image Model Embeddings for Digital Pathology via Self-Supervised Learning</h3>
+      <p>Applying self-supervised representation learning to digital pathology and drug development — enabling label-efficient downstream tasks.</p>
+    </div>
+    <div class="rcard">
+      <div class="rcard-icon">🕸️</div>
+      <div class="venue">bioRxiv 2021</div>
+      <h3>Unsupervised Graph Embeddings for Multiplex Immunofluorescence Exploration</h3>
+      <p>Extension of the GraphITE approach exploring spatial and phenotypic tumor heterogeneity without labeled training data.</p>
+    </div>
+    <div class="rcard">
+      <div class="rcard-icon">🎤</div>
+      <div class="venue">GAIA 2025 · Speaker</div>
+      <h3>Transformative AI and Single-Cell Technologies Revolutionizing Healthcare</h3>
+      <p>Invited speaker presenting on the intersection of cutting-edge AI methods and single-cell biology in transforming oncology R&D.</p>
+    </div>
+    <div class="rcard">
+      <div class="rcard-icon">🔬</div>
+      <div class="venue">AACR 2025 · Presenter</div>
+      <h3>AI-Driven Identification of Drug-Tolerant Persister Cells in Lung Cancer</h3>
+      <p>Presented the Persister-Seq pipeline identifying drug-tolerant cancer cell subpopulations using single-cell transcriptomics and AI.</p>
+    </div>
+    <div class="rcard">
+      <div class="rcard-icon">🫁</div>
+      <div class="venue">AACR 2024 &amp; 2023 · Presenter</div>
+      <h3>AI-Assisted 3D Lung Tumor Segmentation + NSCLC Segmentation</h3>
+      <p>Two consecutive years presenting advances in AI-driven CT tumor segmentation for non-small cell lung cancer cohorts.</p>
+    </div>
+  </div>
+
+  <!-- Awards -->
+  <div class="awards-section fade-in">
+    <div class="eyebrow" style="margin-bottom:1rem;">Awards &amp; Recognition</div>
+    <div class="awards-grid">
+      <div class="award-pill">
+        <div class="award-pip gold"></div>
+        <div class="award-text"><strong>EVP Level R&D Award</strong>Biopharma Science &amp; Innovation, AstraZeneca</div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pip gold"></div>
+        <div class="award-text"><strong>CIO Level IT Excellence</strong>AI for CT Analysis</div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pip"></div>
+        <div class="award-text"><strong>Senior Director Level</strong>GraphITE Oncology Contribution</div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pip"></div>
+        <div class="award-text"><strong>10× Director Level Awards</strong>AstraZeneca</div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pip"></div>
+        <div class="award-text"><strong>8× Associate Director Level Awards</strong>AstraZeneca</div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pip red"></div>
+        <div class="award-text"><strong>NCAT Top 4 Nationally</strong>Academic — IIT Delhi</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kaggle -->
+  <div class="kaggle-section fade-in">
+    <div class="eyebrow" style="margin-bottom:1rem;">Kaggle Competitions</div>
+    <div class="kaggle-hero">
+      <div>
+        <div class="kaggle-rank-big">#652<span>/200K+</span></div>
+        <div style="font-family:var(--mono);font-size:0.72rem;color:var(--purple-l);letter-spacing:0.08em;margin-top:0.3rem;">TOP 0.3% GLOBALLY · 2 SILVER · 7 BRONZE</div>
+      </div>
+      <div class="kaggle-desc">
+        <h3>Medical Imaging, Speech, Climate &amp; Wildlife</h3>
+        <p>Competed across diverse domains — medical imaging, sign language recognition, whale identification, energy forecasting, contrails detection, and GI tract imaging.</p>
+      </div>
+    </div>
+    <div class="comp-list">
+      <div class="comp-tag">APTOS 2019 — Blindness Detection</div>
+      <div class="comp-tag">Bengali.AI Handwritten Grapheme</div>
+      <div class="comp-tag">Google — Isolated Sign Language Recognition</div>
+      <div class="comp-tag">Happywhale — Whale &amp; Dolphin Identification</div>
+      <div class="comp-tag">Open Problems — Multimodal Single-Cell Integration</div>
+      <div class="comp-tag">UW-Madison GI Tract Image Segmentation</div>
+      <div class="comp-tag">Bengali.AI Speech Recognition</div>
+      <div class="comp-tag">Google Research — Identify Contrails</div>
+      <div class="comp-tag">Enefit — Predict Energy Behavior</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 5 — SKILLS & VISION -->
+<!-- ═══════════════════════════════════════ -->
+<section id="skills">
+  <div class="eyebrow fade-in">Skills &amp; Vision</div>
+  <div class="vision-split">
+    <div class="vision-text fade-in">
+      <h2>Multimodal AI at the <em>edge of biology</em></h2>
+      <p>Shaped an innovative multimodal AI vision aligned with AstraZeneca's 2030 Gene &amp; Cell Therapy ambitions — a vision independently developed bottom-up and later submitted to Gartner by GITC Chennai.</p>
+      <p>The philosophy: integrate heterogeneous biological signals — omics, imaging, molecular, single-cell — into unified learned representations that generalize across compounds, diseases, and data sources.</p>
+      <p>Currently architecting AI systems where <span class="accent">model-agnostic platforms</span> can adapt to new modalities, cross-assay contexts, and heterogeneous vendor data without re-engineering from scratch.</p>
+
+      <div style="margin-top:2rem;">
+        <h4 style="margin-bottom:1rem;">External Collaborations</h4>
+        <div class="collab-item">
+          <div class="collab-dot"></div>
+          <div class="collab-text"><strong>Broad Institute</strong> — Dr. Shantanu Singh (Senior Group Leader): co-developing Cell Painting &amp; omics computational pipelines</div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-dot"></div>
+          <div class="collab-text"><strong>IIT Madras</strong> — Research collaboration to co-develop cutting-edge AI models and computational pipelines</div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-dot"></div>
+          <div class="collab-text"><strong>Cold Spring Harbor Laboratory</strong> — Neuron connectivity toolbox delivery to Dr. Partha Mitra</div>
+        </div>
+        <div class="collab-item">
+          <div class="collab-dot"></div>
+          <div class="collab-text"><strong>RIKEN Brain Science Institute</strong> — Neuroscience imaging and 3D reconstruction algorithms</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;">
+        <h4 style="margin-bottom:0.75rem;">Mentorship</h4>
+        <p style="font-size:0.88rem;color:var(--muted);">Coached 4-student team to Top 4 nationally at Smart India Hackathon (200K+ participants). Mentored 7 AI/ML graduate trainees — 4 progressed to full-time industry roles.</p>
+      </div>
+    </div>
+
+    <div class="skills-panel fade-in">
+      <div class="skill-group">
+        <h4>AI / ML Core</h4>
+        <div class="skill-tags">
+          <span class="skill-tag hot">Foundation Models</span>
+          <span class="skill-tag hot">Multimodal AI</span>
+          <span class="skill-tag hot">Self-Supervised Learning</span>
+          <span class="skill-tag hot">RAG Pipelines</span>
+          <span class="skill-tag">Graph Neural Networks</span>
+          <span class="skill-tag">Contrastive Learning</span>
+          <span class="skill-tag">LLM Integration</span>
+          <span class="skill-tag">Online Learning</span>
+          <span class="skill-tag">Hyperparameter Optimization</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Medical Imaging</h4>
+        <div class="skill-tags">
+          <span class="skill-tag hot">CT Segmentation</span>
+          <span class="skill-tag hot">Digital Pathology</span>
+          <span class="skill-tag hot">Multiplex Immunofluorescence</span>
+          <span class="skill-tag">Endoscopy AI</span>
+          <span class="skill-tag">Ultrasound Registration</span>
+          <span class="skill-tag">Echocardiography</span>
+          <span class="skill-tag">Retinal Imaging</span>
+          <span class="skill-tag">3D Reconstruction</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Omics &amp; Biology</h4>
+        <div class="skill-tags">
+          <span class="skill-tag hot">Single-Cell Transcriptomics</span>
+          <span class="skill-tag hot">Cell Painting</span>
+          <span class="skill-tag">Drug Safety Prediction</span>
+          <span class="skill-tag">Predictive Toxicology</span>
+          <span class="skill-tag">Knowledge Graphs</span>
+          <span class="skill-tag">Omics Integration</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Infrastructure &amp; GenAI</h4>
+        <div class="skill-tags">
+          <span class="skill-tag hot">AWS ML Pipelines</span>
+          <span class="skill-tag">Distributed Training</span>
+          <span class="skill-tag">Model Parallelism</span>
+          <span class="skill-tag">Edge Deployment</span>
+          <span class="skill-tag">LLM Agents</span>
+          <span class="skill-tag">Autonomous Workflows</span>
+          <span class="skill-tag">PyTorch / TensorFlow</span>
+          <span class="skill-tag">Optuna</span>
+          <span class="skill-tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <h4>Computer Vision</h4>
+        <div class="skill-tags">
+          <span class="skill-tag">Object Detection &amp; Tracking</span>
+          <span class="skill-tag">ReID / MOT</span>
+          <span class="skill-tag">Pose Estimation</span>
+          <span class="skill-tag">Face Recognition</span>
+          <span class="skill-tag">Video Analytics</span>
+          <span class="skill-tag">OCR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════════ -->
+<!-- PAGE 6 — CONTACT & REFERENCES -->
+<!-- ═══════════════════════════════════════ -->
+<section id="contact">
+  <div class="eyebrow fade-in">Contact</div>
+  <div class="contact-layout">
+    <div class="contact-left fade-in">
+      <h2>Let's build something <span class="accent">important</span></h2>
+      <p class="subtitle">Open to discussing AI leadership opportunities, research collaborations, and advisory roles in biopharma and precision medicine.</p>
+
+      <div class="contact-links">
+        <a href="mailto:balaji.selvaraj.ai@outlook.com" class="clink">
+          <span class="clink-icon">✉️</span>
+          <span class="clink-label">Email</span>
+          <span class="clink-val">balaji.selvaraj.ai@outlook.com</span>
+        </a>
+        <a href="tel:+46722165898" class="clink">
+          <span class="clink-icon">📱</span>
+          <span class="clink-label">Phone (SE)</span>
+          <span class="clink-val">(+46) 722 165 898</span>
+        </a>
+        <a href="tel:+91769711218" class="clink">
+          <span class="clink-icon">📱</span>
+          <span class="clink-label">Phone (IN)</span>
+          <span class="clink-val">(+91) 769 711 218</span>
+        </a>
+        <a href="https://www.linkedin.com/in/balaji-selvaraj-ai/" target="_blank" class="clink">
+          <span class="clink-icon">💼</span>
+          <span class="clink-label">LinkedIn</span>
+          <span class="clink-val">balaji-selvaraj-ai</span>
+        </a>
+        <a href="https://www.kaggle.com/" target="_blank" class="clink">
+          <span class="clink-icon">🏆</span>
+          <span class="clink-label">Kaggle</span>
+          <span class="clink-val">Rank #652 / Top 0.3%</span>
+        </a>
+        <div class="clink">
+          <span class="clink-icon">📍</span>
+          <span class="clink-label">Location</span>
+          <span class="clink-val">Gothenburg, Sweden</span>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="edu-block">
+        <div class="edu-icon">🎓</div>
+        <div class="edu-text">
+          <h4>Education</h4>
+          <h3>B.E. Biomedical Engineering</h3>
+          <p>Sri Ramakrishna Engineering College · 2010–2014 · CGPA 9.03</p>
+        </div>
+        <div class="gold-badge">🥇 Gold Medal</div>
+      </div>
+    </div>
+
+    <div class="fade-in">
+      <div class="refs-section">
+        <h3>Professional References</h3>
+        <div class="ref-card">
+          <div class="ref-name">Ultan McDermott</div>
+          <div class="ref-title">Chief Scientist — CS Oncology Drug Resistance</div>
+          <div class="ref-org">AstraZeneca, UK</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Amrik Mahal</div>
+          <div class="ref-title">Executive Director, R&D IT — Research &amp; Early Therapeutic Areas</div>
+          <div class="ref-org">AstraZeneca, UK</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Christopher Innocenti</div>
+          <div class="ref-title">Director, R&D IT — AI Strategy &amp; Innovation, Deep Learning Engineering</div>
+          <div class="ref-org">AstraZeneca, Sweden</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Bjarki Johannesson</div>
+          <div class="ref-title">Director — Cell Painting &amp; Predictive Safety</div>
+          <div class="ref-org">AstraZeneca, Sweden</div>
+        </div>
+        <div class="ref-card">
+          <div class="ref-name">Ravichander Rajendran</div>
+          <div class="ref-title">Director, EDO — Data Modeling &amp; Analysis</div>
+          <div class="ref-org">AstraZeneca, India</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2rem;padding:1.5rem;background:var(--card);border:1px solid var(--border);border-radius:10px;text-align:center;">
+        <div class="eyebrow" style="justify-content:center;display:flex;margin-bottom:0.75rem;">Download CV</div>
+        <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1.25rem;">Full resume with complete project details, publications, and reference contacts.</p>
+        <a href="#" class="btn-primary" style="display:inline-block;">⬇ Download PDF Resume</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="font-family:var(--mono);letter-spacing:0.1em;">
+    BALAJI SELVARAJ · AI TECHNICAL LEAD · GOTHENBURG, SWEDEN
+  </div>
+  <div style="margin-top:0.5rem;opacity:0.5;">
+    Biopharma R&D · Oncology AI · Foundation Models · Drug Safety · Multimodal AI
+  </div>
+</footer>
+
+<script>
+/* ─── CANVAS PARTICLE NETWORK ─── */
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [], animId;
+  const N = 80;
+
+  function resize() {
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+
+  function Particle() {
+    this.x = Math.random() * W;
+    this.y = Math.random() * H;
+    this.vx = (Math.random() - 0.5) * 0.4;
+    this.vy = (Math.random() - 0.5) * 0.4;
+    this.r = Math.random() * 2 + 1;
+  }
+
+  Particle.prototype.update = function() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if (this.x < 0 || this.x > W) this.vx *= -1;
+    if (this.y < 0 || this.y > H) this.vy *= -1;
+  };
+
+  function init() {
+    particles = [];
+    for (let i = 0; i < N; i++) particles.push(new Particle());
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (let i = 0; i < N; i++) {
+      const p = particles[i];
+      p.update();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(155, 94, 232, 0.7)';
+      ctx.fill();
+      for (let j = i + 1; j < N; j++) {
+        const q = particles[j];
+        const dx = p.x - q.x, dy = p.y - q.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 130) {
+          const alpha = (1 - dist / 130) * 0.35;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(q.x, q.y);
+          ctx.strokeStyle = `rgba(108, 47, 191, ${alpha})`;
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+    }
+    animId = requestAnimationFrame(draw);
+  }
+
+  resize();
+  init();
+  draw();
+  window.addEventListener('resize', () => { resize(); init(); });
+})();
+
+/* ─── SCROLL SPY & DOT NAV ─── */
+const sections = ['hero','impact','work','research','skills','contact'];
+const dots = document.querySelectorAll('.dot');
+const navLinks = document.querySelectorAll('#topnav nav a');
+
+dots.forEach(d => {
+  d.addEventListener('click', () => {
+    document.getElementById(d.dataset.target).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+
+function updateActive() {
+  let current = 0;
+  sections.forEach((id, i) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    if (window.scrollY >= el.offsetTop - 200) current = i;
+  });
+  dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  navLinks.forEach((a, i) => a.classList.toggle('active', i === current));
+}
+window.addEventListener('scroll', updateActive, { passive: true });
+
+/* ─── FADE IN ON SCROLL ─── */
+const fadeEls = document.querySelectorAll('.fade-in');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }});
+}, { threshold: 0.1 });
+fadeEls.forEach(el => io.observe(el));
+// Hero fires immediately
+document.querySelector('#hero .fade-in').classList.add('visible');
+
+/* ─── TIMELINE TABS ─── */
+const tlItems = document.querySelectorAll('.tl-item');
+const panels = document.querySelectorAll('.work-panel');
+
+tlItems.forEach(item => {
+  item.addEventListener('click', () => {
+    tlItems.forEach(i => i.classList.remove('active'));
+    panels.forEach(p => p.classList.remove('active'));
+    item.classList.add('active');
+    const panelId = 'panel-' + item.dataset.panel;
+    const panel = document.getElementById(panelId);
+    if (panel) panel.classList.add('active');
+  });
+});
+
+/* ─── PROJECT ACCORDION ─── */
+function toggleProj(header) {
+  const card = header.closest('.proj-card');
+  card.classList.toggle('open');
+}
+</script>
+</body>
+</html>

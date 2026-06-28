@@ -1,10 +1,8 @@
 ---
 import { profile } from '@lib/content';
 import Icon from '@components/Icon.astro';
-import HeroCanvas from '@components/HeroCanvas.astro';
 import AvailabilityBadge from '@components/AvailabilityBadge.astro';
 import Portrait from '@components/Portrait.astro';
-import TechIconRow from '@components/TechIconRow.astro';
 
 function isExternal(href: string) {
   return href.startsWith('http') || href.startsWith('/assets/');
@@ -12,7 +10,6 @@ function isExternal(href: string) {
 ---
 
 <section id="hero" class="hero reveal" aria-labelledby="hero-heading">
-  <HeroCanvas />
   <div class="container hero__grid">
     <div class="hero__copy">
       {profile.heroTag && <div class="hero-tag">{profile.heroTag}</div>}
@@ -81,13 +78,6 @@ function isExternal(href: string) {
         ))}
       </div>
 
-      {profile.techStack && profile.techStack.length > 0 && (
-        <TechIconRow
-          eyebrow="Core stack"
-          items={profile.techStack}
-          class="hero__tech"
-        />
-      )}
     </div>
 
     {profile.portrait && (
@@ -102,6 +92,18 @@ function isExternal(href: string) {
       </div>
     )}
   </div>
+
+  {profile.heroQuote && (
+    <div class="hero-quote-bar container">
+      <blockquote class="hero-quote" cite="Thiruvalluvar">
+        <p class="hero-quote__tamil" lang="ta">{profile.heroQuote.tamil}</p>
+        <p class="hero-quote__translation">
+          <em lang="en">{profile.heroQuote.translation}</em>
+        </p>
+        <cite class="hero-quote__author">— {profile.heroQuote.author}</cite>
+      </blockquote>
+    </div>
+  )}
 </section>
 
 <style>
@@ -110,7 +112,6 @@ function isExternal(href: string) {
     min-height: calc(100vh - var(--header-h));
     display: flex;
     flex-direction: column;
-    justify-content: center;
     padding-block: calc(var(--header-h) + var(--space-8)) var(--space-16);
     overflow: hidden;
     background: var(--hero-gradient);
@@ -153,23 +154,24 @@ function isExternal(href: string) {
   .hero__grid {
     position: relative;
     z-index: 1;
+    flex: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: var(--space-12);
-    align-items: start;
+    align-items: center;
+    align-content: center;
   }
   @media (min-width: 1024px) {
     .hero__grid {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: var(--space-16);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: var(--space-12);
       align-items: center;
     }
   }
   .hero__copy {
     display: flex;
     flex-direction: column;
-    gap: var(--space-6);
-    max-width: 900px;
+    gap: var(--space-8);
   }
   .hero__greeting {
     font-family: var(--font-mono);
@@ -181,7 +183,7 @@ function isExternal(href: string) {
   }
   .hero__title {
     font-family: var(--font-display);
-    font-size: var(--fs-h1);
+    font-size: clamp(3rem, 6.5vw, 5.5rem);
     line-height: 1.05;
     color: var(--heading);
     margin: 0;
@@ -192,17 +194,57 @@ function isExternal(href: string) {
     color: var(--accent-ll);
   }
   .hero__sub {
-    font-size: 1.05rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
-    max-width: 620px;
+    max-width: 580px;
     margin: 0;
-    line-height: 1.8;
+    line-height: 1.85;
+  }
+  .hero-quote-bar {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: var(--space-8);
+    padding-bottom: var(--space-6);
+  }
+  .hero-quote {
+    margin: 0;
+    padding: var(--space-4) 0 0;
+    border: 0;
+    border-top: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    max-width: 36rem;
+    text-align: center;
+  }
+  .hero-quote__tamil {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--heading);
+    margin: 0 0 0.35rem;
+  }
+  .hero-quote__translation {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin: 0 0 0.5rem;
+    line-height: 1.6;
+  }
+  .hero-quote__translation em {
+    font-style: italic;
+  }
+  .hero-quote__author {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: 0.06em;
+    color: var(--accent-ll);
+    font-style: normal;
   }
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-6);
-    max-width: 700px;
     margin: 0;
   }
   @media (min-width: 640px) {
@@ -216,16 +258,16 @@ function isExternal(href: string) {
   }
   .hero-stat__num {
     font-family: var(--font-mono);
-    font-size: 2rem;
+    font-size: clamp(2rem, 3vw, 2.75rem);
     font-weight: 600;
     color: var(--heading);
     line-height: 1;
   }
   .hero-stat__label {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-muted);
     letter-spacing: 0.05em;
-    margin-top: 0.25rem;
+    margin-top: 0.35rem;
     line-height: 1.3;
     max-width: none;
   }
@@ -235,12 +277,13 @@ function isExternal(href: string) {
     gap: var(--space-3);
     margin: 0;
   }
-  .hero__tech {
-    margin-top: var(--space-2);
-  }
   .hero__portrait {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  .hero__portrait :global(.portrait) {
+    width: clamp(280px, 100%, 560px);
   }
   @media (max-width: 1023px) {
     .hero__portrait {

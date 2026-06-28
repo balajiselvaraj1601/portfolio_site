@@ -1,0 +1,16 @@
+---
+import Layout from '@layouts/Layout.astro';
+import SectionRenderer from '@components/SectionRenderer.astro';
+import { pages } from '@lib/content';
+
+const page = pages.find((p) => p.id === 'vision')!;
+---
+
+<Layout
+  path={page.path}
+  title={page.seo.title}
+  description={page.seo.description}
+  dotNavSections={page.sections ?? []}
+>
+  <SectionRenderer sections={page.sections} pageId={page.id} />
+</Layout>

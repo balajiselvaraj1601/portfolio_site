@@ -1,0 +1,78 @@
+---
+import Icon from '@components/Icon.astro';
+
+interface Props {
+  title: string;
+  /** Chevron direction flanking the title: 'in' points toward it, 'out' away. */
+  flank?: 'in' | 'out';
+}
+
+const { title, flank = 'in' } = Astro.props;
+---
+
+<div class:list={['bhead', `bhead--${flank}`]}>
+  <span class="bhead__rule" aria-hidden="true"></span>
+  <span class="bhead__chev bhead__chev--left" aria-hidden="true">
+    <Icon name="chevron-right" size={16} />
+    <Icon name="chevron-right" size={16} />
+  </span>
+  <h2 class="bhead__title">{title}</h2>
+  <span class="bhead__chev bhead__chev--right" aria-hidden="true">
+    <Icon name="chevron-right" size={16} />
+    <Icon name="chevron-right" size={16} />
+  </span>
+  <span class="bhead__rule" aria-hidden="true"></span>
+</div>
+
+<style>
+  .bhead {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+  }
+  .bhead__rule {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent));
+  }
+  .bhead__rule:last-child {
+    background: linear-gradient(90deg, var(--accent-red), transparent);
+  }
+  .bhead__title {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--heading);
+    margin: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .bhead__chev {
+    display: inline-flex;
+    color: var(--accent);
+  }
+  .bhead__chev :global(svg) {
+    margin-inline: -5px;
+  }
+  /* 'in' → chevrons point toward the title (left group flipped). */
+  .bhead--in .bhead__chev--left {
+    transform: scaleX(-1);
+  }
+  .bhead--in .bhead__chev--right {
+    color: var(--accent-red);
+  }
+  /* 'out' → chevrons point away from the title (right group flipped). */
+  .bhead--out .bhead__chev--right {
+    transform: scaleX(-1);
+    color: var(--accent-red);
+  }
+  @media (max-width: 600px) {
+    .bhead__title {
+      white-space: normal;
+      font-size: 1.15rem;
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 {
   "name": "Balaji Selvaraj",
   "title": "Technical AI Leader",
-  "tagline": "Building production AI that transforms drug discovery, oncology, and patient safety at AstraZeneca.",
+  "tagline": "",
   "location": "Gothenburg, Sweden",
   "pages": [
     {
@@ -33,7 +33,7 @@
         "title": "Experience — Balaji Selvaraj",
         "description": "12+ years building and leading production AI across drug safety, oncology, and clinical imaging — career timeline, role-by-role impact, and mentorship."
       },
-      "sections": ["experience-intro", "timeline", "experience", "mentorship", "impact", "contact-teaser"]
+      "sections": ["experience-intro", "experience", "mentorship", "impact", "contact-teaser"]
     },
     {
       "id": "projects",
@@ -51,9 +51,9 @@
       "path": "/research",
       "seo": {
         "title": "Research — Balaji Selvaraj",
-        "description": "Publications, conference talks, and generative-AI research across medical imaging and drug development."
+        "description": "Publications, conference talks, speaking engagements, and generative-AI research across medical imaging and drug development."
       },
-      "sections": ["generative-ai", "publications", "conferences", "contact-teaser"]
+      "sections": ["publications", "conferences", "speakers", "kaggle"]
     },
     {
       "id": "recognition",
@@ -63,7 +63,17 @@
         "title": "Recognition — Balaji Selvaraj",
         "description": "Education, awards, and Kaggle competition results."
       },
-      "sections": ["awards", "kaggle", "education", "contact-teaser"]
+      "sections": ["awards", "education", "contact-teaser"]
+    },
+    {
+      "id": "vision",
+      "label": "Vision",
+      "path": "/vision",
+      "seo": {
+        "title": "Vision — Balaji Selvaraj",
+        "description": "AI leadership & strategic impact — from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
+      },
+      "sections": ["vision-board"]
     },
     {
       "id": "contact",
@@ -87,6 +97,7 @@
     "about": { "title": "About", "source": "person/profile.json", "visible": true },
     "impact": { "title": "Strategic Impact", "source": "work/strategic-impact.json", "visible": true },
     "vision": { "title": "Vision", "source": "person/profile.json", "visible": true },
+    "vision-board": { "title": "Vision", "source": "work/vision-board.json", "visible": true },
     "featured-projects": { "title": "Featured Projects", "source": "work/projects.json", "visible": true },
     "leadership": { "title": "Leadership", "source": "person/profile.json", "visible": true },
     "skills": { "title": "Technology Expertise", "source": "work/skills.json", "visible": true },
@@ -105,6 +116,7 @@
     "awards": { "title": "Awards & Recognition", "source": "recognition/awards.json", "visible": true },
     "publications": { "title": "Publications", "source": "research/publications.json", "visible": true },
     "conferences": { "title": "Conferences", "source": "research/conferences.json", "visible": true },
+    "speakers": { "title": "Speaking Engagements", "source": "research/speakers.json", "visible": true },
     "kaggle": { "title": "Kaggle Competitions", "source": "recognition/kaggle.json", "visible": true },
     "contact": { "title": "Contact", "source": "person/profile.json, recognition/education.json", "visible": true }
   },

@@ -1,0 +1,68 @@
+---
+import Icon from '@components/Icon.astro';
+import { resolveIcon, type IconName } from '@lib/icons';
+
+interface Props {
+  icon: string;
+  title: string;
+  lines: string[];
+}
+
+const { icon, title, lines } = Astro.props;
+const iconName = resolveIcon(icon, 'diamond') as IconName;
+---
+
+<article class="ocard">
+  <div class="ocard__icon" aria-hidden="true">
+    <Icon name={iconName} size={24} />
+  </div>
+  <h3 class="ocard__title">{title}</h3>
+  <div class="ocard__body">
+    {lines.map((line) => <p>{line}</p>)}
+  </div>
+</article>
+
+<style>
+  .ocard {
+    position: relative;
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-left: 4px solid transparent;
+    border-image: linear-gradient(180deg, var(--accent), var(--accent-red)) 1;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: var(--space-6) var(--space-4) var(--space-5);
+    text-align: center;
+    transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .ocard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .ocard__icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin: 0 auto var(--space-4);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--accent), var(--accent-red));
+  }
+  .ocard__title {
+    font-size: 0.86rem;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0 0 var(--space-3);
+    color: var(--accent);
+  }
+  .ocard__body {
+    display: grid;
+    gap: 0.15rem;
+  }
+  .ocard__body p {
+    margin: 0;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: var(--text-muted);
+  }
+</style>

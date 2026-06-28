@@ -17,6 +17,9 @@ const LabeledLink = z.object({
   label: z.string(),
   title: z.string(),
   url: z.string().url(),
+  youtube: z.string().url().optional(),
+  image: z.string().optional(),
+  logo: z.string().optional(),
 });
 const VariantColor = z.enum(['purple', 'red']);
 const PageSeo = z.object({ title: z.string(), description: z.string() });
@@ -78,6 +81,13 @@ export const profileSchema = z.object({
       tail: z.string().optional(),
     })
     .optional(),
+  heroQuote: z
+    .object({
+      tamil: z.string(),
+      translation: z.string(),
+      author: z.string(),
+    })
+    .optional(),
   metrics: z.array(MetricItem),
   ctas: z.array(
     z.object({
@@ -102,13 +112,24 @@ export const profileSchema = z.object({
       mentorship: z.string().optional(),
     })
     .optional(),
-  contactInterests: z.array(z.string()),
   contactIntro: z.string().optional(),
+  contactQuote: z
+    .object({
+      text: z.string(),
+      author: z.string(),
+    })
+    .optional(),
   contactPage: z.object({
     title: z.string(),
     titleHighlight: z.string().optional(),
     eyebrow: z.string(),
-    interestsHeading: z.string(),
+    responseTime: z.string(),
+    connectHeading: z.string(),
+    emailButtonLabel: z.string(),
+    bookCallLabel: z.string(),
+    bookingHref: z.string().nullable().optional(),
+    ctaText: z.string(),
+    ctaLinkText: z.string(),
     resumeEyebrow: z.string(),
     resumeDescription: z.string(),
     resumeLabel: z.string(),
@@ -189,6 +210,43 @@ export const impactSchema = z.object({
       })
     )
     .optional(),
+});
+
+/* ── vision-board.json (Impact infographic page) ───────────────────────── */
+// Image-exact copy for the /vision infographic. Intentionally distinct from the
+// longer prose in strategic-impact.json — same facts, condensed visual wording.
+const VisionMark = z.discriminatedUnion('kind', [
+  z.object({ kind: z.literal('icon'), name: iconNameSchema }),
+  z.object({ kind: z.literal('logo'), asset: z.string(), alt: z.string().optional() }),
+]);
+export const visionBoardSchema = z.object({
+  header: z.string(),
+  hubs: z.array(
+    z.object({
+      id: z.string(),
+      label: z.string(),
+      variant: VariantColor,
+      center: VisionMark,
+      satellites: z.array(iconNameSchema),
+    })
+  ),
+  programs: z.array(
+    z.object({
+      title: z.string(),
+      label: z.string(),
+      variant: VariantColor,
+      badge: VisionMark,
+      lines: z.array(z.string()),
+    })
+  ),
+  orgHeader: z.string(),
+  orgCards: z.array(
+    z.object({
+      icon: iconNameSchema,
+      title: z.string(),
+      lines: z.array(z.string()),
+    })
+  ),
 });
 
 /* ── generative-ai / mentorship (text-item lists) ──────────────────────── */
@@ -316,13 +374,14 @@ export const kaggleSchema = z.object({
 /* ── affiliations.json ─────────────────────────────────────────────────── */
 export const affiliationsSchema = z.object({
   title: z.string(),
-  items: z.array(z.object({ name: z.string() })),
+  items: z.array(z.object({ name: z.string(), logo: z.string().optional() })),
 });
 
 /* ── derived types (SSOT → z.infer, no parallel interfaces) ────────────── */
 export type Site = z.infer<typeof siteSchema>;
 export type Profile = z.infer<typeof profileSchema>;
 export type Impact = z.infer<typeof impactSchema>;
+export type VisionBoard = z.infer<typeof visionBoardSchema>;
 export type TextList = z.infer<typeof textListSchema>;
 export type Experience = z.infer<typeof experienceSchema>;
 export type Projects = z.infer<typeof projectsSchema>;
