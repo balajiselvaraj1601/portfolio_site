@@ -1,20 +1,24 @@
 # Page Brief - Research
 
-**Page:** `research`  
-**Route:** `/research`
+**Page:** `research` (nav view on `/#research`)  
+**Route:** `/research` redirects to `/#research`
 
 ## Items
 
 | Item (section id) | Source | Question | Weight |
 |---|---|---|---|
-| `generative-ai` | `content/research/generative-ai.json` | How does it work? | light |
 | `publications` | `content/research/publications.json` | Why should I trust it? | medium |
 | `conferences` | `content/research/conferences.json` | Why should I trust it? | medium |
 | `speakers` | `content/research/speakers.json` | Why should I trust it? | medium |
-| `contact` | `content/person/profile.json` | What should I do next? | accent |
 
 ## Structure
 
-`generative-ai` -> `publications` -> `conferences` -> `speakers` -> `contact`
+`publications` -> `conferences` -> `speakers`
 
-The page must separate current applied/research direction from publications, conference proof, and speaking engagements, then close with the full contact section.
+The view separates publication and conference proof from speaking engagements. The contact CTA is
+the dedicated **Contact** view.
+
+## Shelved
+
+**Generative AI** (`generative-ai`) is temporarily removed from the Research view. Content lives
+at `content/drafts/research/generative-ai.json`. Re-enable steps: [content-editing.md](../content-editing.md).

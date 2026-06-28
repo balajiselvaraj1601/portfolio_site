@@ -88,22 +88,27 @@ TypeScript types are derived via `z.infer<typeof schema>` — no parallel hand-w
 
 ## Rendering model
 
-### Single-page home with nav views
+### Single-page scroll with nav anchors
 
-All sections render once on `/` in the order defined by `site.json → pages[id=home].sections`.
-Header nav does not load separate pages — it activates a **view** that shows only the sections
-listed in that page entry's `viewSections`, using hash URLs (`/#research`, `/#experience`, …).
+All sections render once on `/` in the order defined by `site.json → pages[id=home].sections`
+and are **always visible** — the home page is a continuous scroll through every section, grouped
+contiguously in nav-button order. Header nav does not load separate pages and does not hide
+anything; clicking a button **scrolls** to that view's first section (hash URLs `/#research`,
+`/#experience`, …) and a scroll-spy keeps the active button in sync as you scroll.
 
 Legacy route files under `src/pages/` (`experience.astro`, `research.astro`, …) are thin
 redirect stubs to the matching hash on `/`.
 
 ```typescript
 // index.astro
-<SectionRenderer sections={homeSections} pageId="home" navViews={true} />
+<SectionRenderer sections={homeSections} navViews={true} />
 
 // section-views.ts (client)
-activateView('research', views); // shows publications, conferences, speakers
+initSectionViews({ views, defaultView }); // nav buttons scroll to a view's first section; spy tracks scroll
 ```
+
+The `viewSections` arrays still group sections under exactly one nav button (validated at build
+time) — they now drive the scroll target and active-state mapping rather than visibility.
 
 Adding a section requires: JSON under `content/`, Zod schema, section component, entry in
 `SectionRenderer`, `sections[id]` in `site.json`, listing in `home.sections`, and assignment
@@ -113,10 +118,11 @@ to at least one `viewSections` array. `content.ts` validates view wiring at buil
 
 JS provides progressive enhancement on `/`:
 
-- Nav view filtering (`section-views.ts`) — without JS, all sections remain visible
+- Nav scroll + scroll-spy (`section-views.ts`) — buttons scroll to a section; active state tracks
+  scroll position. Without JS, all sections remain visible and hash anchors still jump natively.
 - Theme toggle + `localStorage` persistence
 - Mobile menu (focus trap, Esc to close)
-- Active view state in header; dot nav filtered to active view
+- Active nav state in header; dot nav spans all sections and highlights the one in view
 - Entrance reveal animations (skipped when `prefers-reduced-motion`)
 
 Core content is fully readable without JavaScript.

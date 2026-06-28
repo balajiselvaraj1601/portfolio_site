@@ -22,24 +22,39 @@ If the change affects page structure, section order, or the overall narrative, u
 | File | Sections affected | Typical edits |
 |------|-------------------|---------------|
 | `site.json` | Global meta, nav, pages, SEO, résumé link | Title, tagline, nav labels, page sections, hide a section |
-| `person/profile.json` | Hero, About, Vision, Leadership, Contact | Headline, metrics, CTAs, about cards, vision, contact interests, `contactPage` copy |
+| `person/profile.json` | Hero, merged About/Leadership, Technical Vision, Contact | Headline, metrics, CTAs, about cards, leadership philosophy, vision, contact interests, `contactPage` copy |
 | `person/affiliations.json` | Affiliations strip | Organization names; optional `logo` slug → `public/assets/logos/{slug}.svg`; optional `entity` slug → URL in `entities.json` |
 | `entities.json` | Entity links (global registry) | Slug → `{ name, url }` for organizations referenced across sections |
 | `work/strategic-impact.json` | Strategic Impact | `metrics[]`, `highlights[]`; optional `journey[]`, `programs[]`, `leadershipCards[]` for rich layout |
-| `work/vision-board.json` | Vision page (`/vision`) | Infographic hubs, program cards, org impact cards |
-| `work/experience.json` | Experience timeline, Career timeline, Experience intro | Roles, optional `mission`, `snapshot[]`, bullets, tier |
+| `work/vision-board.json` | Vision view (`/#vision`) | Infographic hubs, program cards, org impact cards |
+| `work/experience.json` | Experience intro, tabbed role detail | Roles, optional `mission`, `snapshot[]`, bullets, tier |
 | `work/projects.json` | Project cards, Featured projects, Projects intro | Summaries, case-study fields, `featured`, `snapshot[]`, tags |
-| `work/skills.json` | Skills (embedded in Vision on home) | Categories and skill chips |
+| `work/skills.json` | Skills (About view) | Categories and skill chips |
 | `work/mentorship.json` | Mentorship | Bullet items |
-| `research/generative-ai.json` | Generative AI (when section is wired) | Bullet items |
 | `research/publications.json` | Publications, Featured publications | Title + URL links |
 | `research/conferences.json` | Conferences | Title + URL links |
 | `research/speakers.json` | Speaking engagements | Title + URL links |
 | `recognition/education.json` | Education | Degree records |
 | `recognition/awards.json` | Awards | Label + detail rows |
-| `recognition/kaggle.json` | Kaggle (Research page) | Rank line + competition links |
+| `recognition/kaggle.json` | Kaggle (Recognition view) | Rank line + competition links |
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
+
+### Draft / shelved content
+
+Content under `content/drafts/` is **not wired to the live site**. Currently shelved:
+
+| File | Section | Notes |
+|------|---------|-------|
+| `drafts/research/generative-ai.json` | Generative AI (Research view) | Bullet items; registry entry in `site.json` with `visible: false` |
+
+**Re-enable Generative AI:**
+
+1. Move `content/drafts/research/generative-ai.json` → `content/research/generative-ai.json`
+2. Restore import/export in `src/lib/content.ts` (`generativeAi` + `sectionData['generative-ai']`)
+3. Change `GenerativeAI.astro` to import `generativeAi` from `@lib/content` (not the draft path)
+4. Re-add `generative-ai` to `home.sections` and research `sections` / `viewSections` in `site.json`
+5. Set `sections["generative-ai"].visible` to `true` and update `source` to `research/generative-ai.json`
 
 ## Common tasks
 
@@ -60,12 +75,13 @@ Also update `person/profile.json` → `title` if the hero should match.
 
 Edit `content/site.json`:
 
-- **Reorder within a page** — change the order of ids in that page's `pages[].sections` array.
-- **Move to another page** — move the id from one page's `sections` array to another's.
+- **Reorder on `/`** — change the order of ids in `pages[id=home].sections` (full DOM order).
+- **Change which nav view shows a section** — edit that page's `viewSections` array (each section
+  id should appear in exactly one view).
 - **Show/hide** — toggle `sections[id].visible`.
 
-Do **not** reorder sections in the route files under `src/pages/` — each route renders the
-section list from its `pages` entry in `site.json` via `SectionRenderer`.
+Do **not** reorder sections in `src/pages/index.astro` — it reads the home section list from
+`site.json` via `SectionRenderer`.
 
 ### Update SEO meta
 
@@ -121,7 +137,7 @@ Keep summaries consistent with `work/experience.json` — `work/projects.json` i
 ### Update contact links
 
 Edit `content/person/profile.json` → `contact` array. Allowed public types: `email`, `linkedin`,
-`kaggle`, `location`.
+`github`, `kaggle`, `location`.
 
 ```json
 {

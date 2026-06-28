@@ -27,7 +27,6 @@ import experienceRaw from '@content/work/experience.json';
 import projectsRaw from '@content/work/projects.json';
 import skillsRaw from '@content/work/skills.json';
 import mentorshipRaw from '@content/work/mentorship.json';
-import generativeAiRaw from '@content/research/generative-ai.json';
 import publicationsRaw from '@content/research/publications.json';
 import conferencesRaw from '@content/research/conferences.json';
 import speakersRaw from '@content/research/speakers.json';
@@ -69,11 +68,6 @@ export const experience = load(
   experienceRaw
 );
 export const projects = load('work/projects.json', projectsSchema, projectsRaw);
-export const generativeAi = load(
-  'research/generative-ai.json',
-  textListSchema,
-  generativeAiRaw
-);
 export const skills = load('work/skills.json', skillsSchema, skillsRaw);
 export const mentorship = load(
   'work/mentorship.json',
@@ -137,19 +131,17 @@ export function logoSrc(slug?: string): string | undefined {
 }
 export const sectionData = {
   hero: profile,
-  about: profile,
+  thirukural: profile,
   impact: strategicImpact,
   'vision-board': visionBoard,
   leadership: profile,
   skills,
-  timeline: experience,
   collaborations,
   experience,
   'experience-intro': experience,
   projects,
   'projects-intro': projects,
   'featured-case-studies': projects,
-  'generative-ai': generativeAi,
   mentorship,
   education,
   awards,

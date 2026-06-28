@@ -68,6 +68,7 @@ Populated at build time from `content/person/profile.json` and `site.seo.keyword
   "url": "https://balajiselvaraj1601.github.io/",
   "sameAs": [
     "https://www.linkedin.com/in/balaji-selvaraj-a2987572/",
+    "https://github.com/balajiselvaraj1601",
     "https://www.kaggle.com/dhakshiin1601"
   ],
   "knowsAbout": ["Technical AI Leader", "Applied AI", "…"],
@@ -87,8 +88,12 @@ Generated automatically by `@astrojs/sitemap` (pinned 3.6.0). Output:
 - `dist/sitemap-index.xml`
 - `dist/sitemap-0.xml`
 
-Do not hand-maintain sitemap XML. Adding routes (e.g. `/projects/:id`) will auto-include them
-once pages exist under `src/pages/`.
+The sitemap lists **`/` only** as the canonical content URL. Legacy redirect stubs
+(`/experience`, `/projects`, …) are filtered out in `astro.config.mjs` because they are
+`noindex` JS redirects to hash views on `/`. Hash URLs (`/#experience`, etc.) are intentionally
+not in the sitemap — search engines index the full single-page DOM at `/`.
+
+Do not hand-maintain sitemap XML.
 
 ## robots.txt
 

@@ -1,7 +1,15 @@
 ---
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
-import { profile, site } from '@lib/content';
+import LeadershipCard from '@components/cards/LeadershipCard.astro';
+import { aboutCardIcon } from '@lib/icons';
+import {
+  profile,
+  site,
+  collaborations,
+  getEntityUrl,
+  logoSrc,
+} from '@lib/content';
 
 const title = site.sections.leadership.title;
 const { statement, intro, themes } = profile.leadershipPhilosophy;
@@ -14,6 +22,18 @@ const { statement, intro, themes } = profile.leadershipPhilosophy;
   variant="default"
   class="leadership-section"
 >
+  <p class="leadership__bio reveal">{profile.aboutIntro}</p>
+
+  <div class="leadership__cards reveal">
+    {profile.aboutCards.map((card) => (
+      <LeadershipCard
+        icon={aboutCardIcon(card.title)}
+        title={card.title}
+        subtitle={card.items.join(' · ')}
+      />
+    ))}
+  </div>
+
   <blockquote class="leadership__quote card reveal">
     <p class="leadership__statement">{statement}</p>
   </blockquote>
@@ -35,9 +55,48 @@ const { statement, intro, themes } = profile.leadershipPhilosophy;
       ))}
     </ul>
   )}
+
+  <div class="leadership__collabs reveal">
+    <h3 class="leadership__collabs-heading">{collaborations.title}</h3>
+    <ul class="leadership__collabs-list" role="list">
+      {
+        collaborations.items.map((item) => {
+          const href = getEntityUrl(item.entity);
+          const src = logoSrc(item.logo);
+          if (!href || !src) return null;
+          return (
+            <li>
+              <a
+                href={href}
+                class="leadership__collab-mark"
+                aria-label={item.name}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <img src={src} alt="" loading="lazy" />
+              </a>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
 </Section>
 
 <style>
+  .leadership__bio {
+    font-size: 1.05rem;
+    max-width: var(--maxw-text);
+    margin-bottom: var(--space-10);
+    color: var(--text-muted);
+    line-height: 1.85;
+  }
+  .leadership__cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: var(--stack-sm);
+    margin-bottom: var(--space-10);
+  }
   .leadership__quote {
     padding: var(--space-8) var(--space-10);
     border-left: 4px solid var(--accent);
@@ -100,5 +159,72 @@ const { statement, intro, themes } = profile.leadershipPhilosophy;
     line-height: 1.6;
     margin: 0;
     max-width: none;
+  }
+  .leadership__collabs {
+    margin-top: var(--space-10);
+  }
+  .leadership__collabs-heading {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-4);
+  }
+  .leadership__collabs-list {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--space-4);
+    width: 80%;
+    max-width: 100%;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .leadership__collabs-list li {
+    min-width: 0;
+  }
+  .leadership__collab-mark {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-width: 0;
+    height: clamp(56px, 7vw, 80px);
+    padding: var(--space-3) var(--space-4);
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .leadership__collab-mark:hover {
+    border-color: var(--accent-light);
+    box-shadow: 0 0 0 1px rgba(155, 94, 232, 0.25);
+  }
+  .leadership__collab-mark:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+  .leadership__collab-mark img {
+    display: block;
+    max-width: 100%;
+    max-height: clamp(36px, 5vw, 52px);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+  @media (max-width: 768px) {
+    .leadership__collabs-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      width: 100%;
+    }
+  }
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .leadership__collabs-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      width: 90%;
+    }
   }
 </style>

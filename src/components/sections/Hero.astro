@@ -55,26 +55,28 @@ function isExternal(href: string) {
         ))}
       </div>
 
-      <div class="hero__cta">
-        {profile.ctas.map((cta) => (
-          <a
-            class:list={[
-              'btn',
-              {
-                'btn-primary': cta.variant === 'primary',
-                'btn-secondary': cta.variant === 'secondary',
-              },
-            ]}
-            href={cta.href}
-            {...(isExternal(cta.href)
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
-          >
-            {cta.icon && <Icon name={cta.icon} size={16} />}
-            {cta.label}
-          </a>
-        ))}
-      </div>
+      {profile.ctas.length > 0 && (
+        <div class="hero__cta">
+          {profile.ctas.map((cta) => (
+            <a
+              class:list={[
+                'btn',
+                {
+                  'btn-primary': cta.variant === 'primary',
+                  'btn-secondary': cta.variant === 'secondary',
+                },
+              ]}
+              href={cta.href}
+              {...(isExternal(cta.href)
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {cta.icon && <Icon name={cta.icon} size={16} />}
+              {cta.label}
+            </a>
+          ))}
+        </div>
+      )}
 
     </div>
 
@@ -95,10 +97,10 @@ function isExternal(href: string) {
 <style>
   .hero {
     position: relative;
-    min-height: calc(100vh - var(--header-h));
+    min-height: calc(100vh - var(--header-h) - 11rem);
     display: flex;
     flex-direction: column;
-    padding-block: calc(var(--header-h) + var(--space-8)) var(--section-py-end);
+    padding-block: var(--space-6) var(--space-2);
     overflow: hidden;
     background: var(--hero-gradient);
   }
@@ -143,21 +145,28 @@ function isExternal(href: string) {
     flex: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-12);
+    gap: var(--space-6);
     align-items: center;
     align-content: center;
   }
   @media (min-width: 1024px) {
     .hero__grid {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-      gap: var(--space-12);
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: var(--space-10);
       align-items: center;
     }
   }
   .hero__copy {
     display: flex;
     flex-direction: column;
-    gap: var(--space-8);
+    gap: 0;
+  }
+  .hero__copy > * {
+    margin: 0;
+  }
+  /* Differentiated vertical rhythm (8px scale): base 24, overrides below. */
+  .hero__copy > * + * {
+    margin-top: var(--space-6);
   }
   .hero__greeting {
     font-family: var(--font-mono);
@@ -169,10 +178,10 @@ function isExternal(href: string) {
   }
   .hero__title {
     font-family: var(--font-display);
-    font-size: clamp(3rem, 6.5vw, 5.5rem);
-    line-height: 1.05;
+    font-size: clamp(2.5rem, 5vw, 4.25rem);
+    line-height: 1;
     color: var(--heading);
-    margin: 0;
+    margin: var(--space-8) 0 0;
     font-weight: 400;
   }
   .hero__title em {
@@ -180,22 +189,19 @@ function isExternal(href: string) {
     color: var(--accent-ll);
   }
   .hero__sub {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--text-muted);
-    max-width: 580px;
-    margin: 0;
-    line-height: 1.85;
+    max-width: 520px;
+    margin: var(--space-6) 0 0;
+    line-height: 1.55;
   }
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-6);
-    margin: 0;
-  }
-  @media (min-width: 640px) {
-    .hero-stats {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+    align-items: start;
+    row-gap: var(--space-8);
+    column-gap: var(--space-8);
+    margin-top: var(--space-12);
   }
   .hero-stat {
     border-left: 2px solid var(--accent);
@@ -227,7 +233,7 @@ function isExternal(href: string) {
     align-items: center;
   }
   .hero__portrait :global(.portrait) {
-    width: clamp(280px, 100%, 560px);
+    width: clamp(260px, 38vw, 500px);
   }
   @media (max-width: 1023px) {
     .hero__portrait {

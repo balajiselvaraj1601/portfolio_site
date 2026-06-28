@@ -67,6 +67,7 @@ const DOMAIN_ICONS: Record<string, IconName> = {
 const ABOUT_CARD_ICONS: Record<string, IconName> = {
   Industries: 'layers',
   Leadership: 'team',
+  'Stakeholder alignment': 'handshake',
   Research: 'microscope',
   Recognition: 'trophy',
 };

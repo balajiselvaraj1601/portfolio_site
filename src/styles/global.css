@@ -445,6 +445,10 @@ button {
 }
 
 /* Section rhythm */
+.section,
+.hero {
+  scroll-margin-top: var(--header-h);
+}
 .section {
   padding-block: var(--section-py-start) var(--section-py-end);
   background: var(--section-bg);

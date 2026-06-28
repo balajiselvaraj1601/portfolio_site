@@ -1,32 +1,35 @@
 # Page Brief - Home
 
 **Page:** `home`  
-**Route:** `/` (single-page shell; nav views filter visible sections)
+**Route:** `/` (single-page shell; nav views scroll to section groups)
 
 ## About view (`viewSections`)
 
 | Item (section id) | Source | Question | Weight |
 |---|---|---|---|
 | `hero` | `content/person/profile.json` | What is this? | heavy |
-| `about` | `content/person/profile.json` | What is this? | medium |
-| `featured-case-studies` | `content/work/projects.json` | Why should I care? | medium |
-| `impact` | `content/work/strategic-impact.json` | Why should I care? | heavy |
-| `vision-board` | `content/work/vision-board.json` | How does it work? | light |
-| `leadership` | `content/person/profile.json` | Why should I trust it? | light |
+| `thirukural` | `content/person/profile.json` (`heroQuote`) | What grounds it? | light |
+| `leadership` | `content/person/profile.json`, `content/person/collaborations.json` | Who are they, and why trust their leadership? | heavy |
 | `skills` | `content/work/skills.json` | How does it work? | medium |
-| `timeline` | `content/work/experience.json` | Why should I trust it? | medium |
 
-Publications are **not** in the About view — use the Research view (`/#research`).
+The About group opens the page: hero, then a Thirukural couplet banner (`thirukural`) immediately
+above the merged profile and leadership section (`leadership`: bio, scan cards, philosophy, themes,
+collaboration logos), followed by technical expertise (`skills`). All sections are visible on `/`
+— the page scrolls through every group in nav order, and the **About** button scrolls back to the
+top. Each section still belongs to exactly one nav button (no section appears under two), which
+drives the scroll target and the active-button highlight.
 
 ## Full DOM order on `/`
 
-`hero` → `about` → `featured-case-studies` → `impact` → `vision-board` → `leadership` →
-`skills` → `timeline` → `experience-intro` → `experience` → `mentorship` → `projects-intro` →
-`projects` → `publications` → `conferences` → `speakers` → `awards` → `kaggle` → `education` →
-`contact`
+Sections render once into the DOM, grouped contiguously by view (nav button). All sections remain
+visible; nav buttons scroll to a view's first section.
 
-Other nav views show subsets of this list. See `content/site.json → pages[].viewSections`.
+`hero` → `thirukural` → `leadership` → `skills` *(About)* →
+`experience-intro` → `experience` → `mentorship` *(Experience)* →
+`projects-intro` → `featured-case-studies` → `projects` *(Projects)* →
+`publications` → `conferences` → `speakers` *(Research)* →
+`awards` → `kaggle` → `education` *(Recognition)* →
+`technical-vision` → `vision-board` → `impact` *(Vision)* →
+`contact` *(Contact)*
 
-The About view establishes positioning, concrete systems, measurable impact, and career trust
-signals. Research, projects, experience, recognition, vision, and contact each have dedicated
-views via header nav.
+Each nav button maps to exactly one view; see `content/site.json → pages[].viewSections`.

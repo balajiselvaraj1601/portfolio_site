@@ -37,7 +37,7 @@ token — don't decide per element.
 | Kicker / micro-label (`h4`) | **mono** | 600 | 0.9rem | uppercase, tracked — a label, not prose |
 | Eyebrow / section label (`.eyebrow`, `Eyebrow`) | mono | 400–600 | `--fs-eyebrow` | uppercase, 0.18em |
 | Tag / chip / badge (TechIconRow, ProgramBadge, AvailabilityBadge, HubCircle, gold-badge) | mono | 600 | ~0.7rem | uppercase |
-| Date / venue / metadata (Experience, CareerTimeline, SpeakingCard, Footer, Contact email) | mono | 400–600 | 0.7–0.8rem | — |
+| Date / venue / metadata (Experience, SpeakingCard, Footer, Contact email) | mono | 400–600 | 0.7–0.8rem | — |
 | Metric number (`.metric-card__value`, `.hero-stat__num`, Kaggle rank) | mono | 600 | `--fs-metric` | tabular figures |
 | Metric label (`.metric-label`) | mono | 400 | `--fs-small` | descriptor under a number |
 | Quote attribution / author | mono | 400 | `--fs-eyebrow` | — |
@@ -47,9 +47,9 @@ token — don't decide per element.
 
 ### Deliberate exceptions
 
-- **Hero Tamil quote** (`.hero-quote__tamil`) uses **sans**, not display. DM Serif Display
-  is a Latin-only face and cannot render Tamil glyphs; sans gives a cleaner script
-  fallback. Do not "fix" this to display.
+- **Thirukural Tamil quote** (`.kural__tamil`, in `ThirukuralQuote.astro`) uses **sans**, not
+  display. DM Serif Display is a Latin-only face and cannot render Tamil glyphs; sans gives a
+  cleaner script fallback. Do not "fix" this to display.
 
 ### Possible future tweak (not applied)
 
@@ -77,14 +77,10 @@ each section lists the fonts it actually surfaces.
 
 | Section | Component | Fonts surfaced |
 |---------|-----------|----------------|
-| Hero | `Hero.astro` | title=display · tag / greeting / stat-number / stat-label / quote-author=mono · sub & body=sans · Tamil quote=sans (exception) |
-| About | `About.astro` → LeadershipCard | intro & card text=sans |
-| Flagship Case Studies | `FeaturedCaseStudies.astro` → ProjectCaseStudyCard | h2=display · meta/labels=mono · body=sans |
-| Strategic Impact | `Impact.astro` | h2=display · eyebrow=mono · highlight list=sans |
-| Vision | `VisionBoard.astro` | BoardHeader=display · Hub/Program labels=mono · OrgImpactCard title=sans, body=sans |
-| Leadership | `LeadershipPhilosophy.astro` | statement=display (italic) |
+| Hero | `Hero.astro` | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans |
+| Thirukural | `ThirukuralQuote.astro` | Tamil quote=sans (exception) · translation=display italic · author=mono |
+| Who I am & how I lead | `LeadershipPhilosophy.astro` → LeadershipCard | bio & card text=sans · statement=display (italic) · theme titles=sans |
 | Technology Expertise | `Skills.astro` | h2=display · eyebrow=mono · category `h4`=**mono** · skill tags=sans |
-| Career Timeline | `CareerTimeline.astro` | h2=display · year=mono · role text=sans |
 | Affiliations | `Affiliations.astro` → EntityLink | org names/links=sans |
 | Publications | `Publications.astro` → ResearchCard | h2=display · venue=mono · title=sans |
 | Contact | `Contact.astro` | title=display · email/connect labels=mono · body=sans |

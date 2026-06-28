@@ -1,12 +1,12 @@
 ---
 import Divider from '@components/ui/Divider.astro';
 import Hero from '@components/sections/Hero.astro';
-import About from '@components/sections/About.astro';
 import Impact from '@components/sections/Impact.astro';
+import Vision from '@components/sections/Vision.astro';
 import VisionBoard from '@components/sections/VisionBoard.astro';
+import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
 import LeadershipPhilosophy from '@components/sections/LeadershipPhilosophy.astro';
 import Skills from '@components/sections/Skills.astro';
-import CareerTimeline from '@components/sections/CareerTimeline.astro';
 import Experience from '@components/sections/Experience.astro';
 import ExperienceIntro from '@components/sections/ExperienceIntro.astro';
 import Projects from '@components/sections/Projects.astro';
@@ -25,12 +25,12 @@ import { sectionViewMap } from '@lib/content';
 
 const SECTIONS: Record<string, any> = {
   hero: Hero,
-  about: About,
+  thirukural: ThirukuralQuote,
   impact: Impact,
+  'technical-vision': Vision,
   'vision-board': VisionBoard,
   leadership: LeadershipPhilosophy,
   skills: Skills,
-  timeline: CareerTimeline,
   experience: Experience,
   'experience-intro': ExperienceIntro,
   projects: Projects,
@@ -49,29 +49,20 @@ const SECTIONS: Record<string, any> = {
 
 interface Props {
   sections: string[];
-  /** Page id from site.json — used for section variants (e.g. compact timeline on home). */
-  pageId?: string;
   /** When true, wrap sections with data-nav-views for client-side view filtering. */
   navViews?: boolean;
 }
 
-const { sections, pageId, navViews = false } = Astro.props;
+const { sections, navViews = false } = Astro.props;
 ---
 
 {
   sections.map((id, index) => {
     const Section = SECTIONS[id];
     if (!Section) return null;
-    const showDivider = index > 0 && id !== 'hero';
+    const showDivider = index > 0 && id !== 'hero' && id !== 'thirukural';
 
-    let section = null;
-    if (id === 'timeline' && pageId === 'home') {
-      section = <Section compact />;
-    } else if (id === 'timeline' && pageId === 'experience') {
-      section = <Section showCta={false} />;
-    } else {
-      section = <Section />;
-    }
+    const section = <Section />;
 
     const views = navViews ? sectionViewMap[id]?.join(' ') : undefined;
 

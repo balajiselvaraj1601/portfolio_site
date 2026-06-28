@@ -22,6 +22,7 @@ const ogImage = new URL(site.seo.ogImage, origin).href;
 
 // JSON-LD Person — derived from content/person/profile.json.
 const linkedin = profile.contact.find((c) => c.type === 'linkedin')?.href;
+const github = profile.contact.find((c) => c.type === 'github')?.href;
 const kaggle = profile.contact.find((c) => c.type === 'kaggle')?.href;
 const email = profile.contact.find((c) => c.type === 'email')?.value;
 const jsonLd = {
@@ -36,7 +37,7 @@ const jsonLd = {
     addressCountry: 'SE',
   },
   url: new URL('/', origin).href,
-  sameAs: [linkedin, kaggle].filter(Boolean),
+  sameAs: [linkedin, github, kaggle].filter(Boolean),
   knowsAbout: site.seo.keywords,
   worksFor: { '@type': 'Organization', name: 'AstraZeneca' },
 };

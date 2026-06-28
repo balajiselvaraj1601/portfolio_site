@@ -12,7 +12,7 @@ Traceability from the source resume to the portfolio content layer. Source:
 | `sections[id="funds"]` ("Strategic Impact") | Strategic Impact | `work/strategic-impact.json` | 7 items verbatim, order preserved |
 | `sections[id="experience"]` | Experience | `work/experience.json` | 6 roles, all projects + bullets, `tier` preserved |
 | (derived from experience) | Projects | `work/projects.json` | 8 headline projects flattened into cards with summary/highlights/tags/domain |
-| `sections[id="generative_ai"]` | Generative AI | `research/generative-ai.json` | 3 items verbatim |
+| `sections[id="generative_ai"]` | Generative AI *(shelved)* | `drafts/research/generative-ai.json` | 3 items verbatim; not on live site |
 | `sections[id="tools"]` (hidden in resume) | Skills | `work/skills.json` | 6 categories; surfaced because a portfolio needs a Skills UI |
 | `sections[id="mentorship"]` | Mentorship | `work/mentorship.json` | 2 items verbatim |
 | `sections[id="education"]` | Education | `recognition/education.json` | 1 record verbatim |

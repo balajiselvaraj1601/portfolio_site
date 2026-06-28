@@ -2,7 +2,7 @@
   "name": "Balaji Selvaraj",
   "title": "Technical AI Leader",
   "location": "Gothenburg, Sweden",
-  "headline": "From oncology imaging to drug-safety platforms, I build AI systems that deliver measurable outcomes across AstraZeneca R&D.",
+  "headline": "Hands-on Technical AI Lead with experience spanning product, services, and startup environments.",
   "heroQuote": {
     "tamil": "உள்ளுவதெல்லாம் உயர்வுள்ளல்",
     "translation": "Let all your thoughts be lofty.",
@@ -10,21 +10,19 @@
     "image": "/assets/images/thiruvalluvar.png",
     "imageAlt": "Statue of the Tamil poet-philosopher Thiruvalluvar"
   },
-  "greeting": "Hi, I'm Balaji",
+  "greeting": "Hi, I'm Balaji Selvaraj",
   "heroTitle": {
-    "lead": "Turning",
-    "emphasis": "biological data",
-    "tail": "into clinical impact"
+    "lead": "Transforming data into",
+    "emphasis": "business impact",
+    "tail": "through AI"
   },
   "metrics": [
-    { "value": "$50M", "label": "Projected Annual Savings" },
+    { "value": "12+", "label": "Years in AI & ML" },
     { "value": "Top 0.3%", "label": "Kaggle, among 200K+" },
-    { "value": "12+", "label": "Years in AI & ML" }
+    { "value": "$20–50M", "label": "Projected annual savings — flagship program" },
+    { "value": "5 Countries", "label": "Globally distributed team — India, UK, Sweden, Mexico, China" }
   ],
-  "ctas": [
-    { "label": "Let's talk", "href": "/#contact", "variant": "primary" },
-    { "label": "Download Resume", "href": "/assets/resume/balaji-selvaraj-resume.pdf", "variant": "secondary", "icon": "download" }
-  ],
+  "ctas": [],
   "portrait": {
     "src": "/assets/images/balaji.png",
     "alt": "Portrait of Balaji Selvaraj",
@@ -33,7 +31,7 @@
   },
   "credentialHook": "Kaggle top 0.3% globally · 652 among 200K+ data scientists",
   "photo": "/assets/images/balaji.png",
-  "aboutIntro": "I build AI organizations that ship measurable outcomes — not research prototypes left on the shelf. Over 12+ years across product, services, and startup environments, that principle has shaped how I lead teams and deliver AI programs spanning oncology, drug safety, and biopharma R&D in support of AstraZeneca's R&D priority areas.",
+  "aboutIntro": "Over 12+ years across product, services, and startup environments, I have led AI programs spanning oncology, drug safety, and biopharma R&D in support of AstraZeneca's R&D priority areas — from early-stage research partnerships to executive-sponsored production systems.",
   "aboutCards": [
     {
       "title": "Industries",
@@ -46,7 +44,7 @@
       ]
     },
     {
-      "title": "Leadership",
+      "title": "Stakeholder alignment",
       "items": [
         "Cross-functional stakeholder alignment",
         "SVP- and Chief Scientist-sponsored programs"
@@ -160,6 +158,13 @@
       "value": "balaji-selvaraj-ai",
       "href": "https://www.linkedin.com/in/balaji-selvaraj-a2987572/",
       "icon": "linkedin"
+    },
+    {
+      "type": "github",
+      "label": "GitHub",
+      "value": "balajiselvaraj1601",
+      "href": "https://github.com/balajiselvaraj1601",
+      "icon": "github"
     },
     {
       "type": "kaggle",

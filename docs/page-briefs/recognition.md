@@ -1,7 +1,7 @@
 # Page Brief - Recognition
 
-**Page:** `recognition`  
-**Route:** `/recognition`
+**Page:** `recognition` (nav view on `/#recognition`)  
+**Route:** `/recognition` redirects to `/#recognition`
 
 ## Items
 
@@ -10,10 +10,10 @@
 | `awards` | `content/recognition/awards.json` | Why should I trust it? | medium |
 | `kaggle` | `content/recognition/kaggle.json` | Why should I trust it? | heavy |
 | `education` | `content/recognition/education.json` | Why should I trust it? | light |
-| `contact` | `content/person/profile.json` | What should I do next? | accent |
 
 ## Structure
 
-`awards` -> `kaggle` -> `education` -> `contact`
+`awards` -> `kaggle` -> `education`
 
-The page must make awards and Kaggle rank distinct trust signals, keep education as the grounding reset, and end with the full contact section.
+The view makes awards and Kaggle rank distinct trust signals and keeps education as the grounding
+reset. The contact CTA is the dedicated **Contact** view.

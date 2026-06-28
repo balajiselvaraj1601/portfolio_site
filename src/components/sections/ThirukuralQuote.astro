@@ -1,0 +1,147 @@
+---
+import { profile } from '@lib/content';
+
+const quote = profile.heroQuote;
+---
+
+{quote && (
+  <section id="thirukural" class="kural reveal" aria-label="Thirukural">
+    <div class="container">
+      <figure class="kural__band">
+        <blockquote class="kural__text">
+          {quote.tamil && <p class="kural__tamil">{quote.tamil}</p>}
+          <div class="kural__divider" aria-hidden="true"></div>
+          <p class="kural__translation">“{quote.translation}”</p>
+          <figcaption class="kural__author">— {quote.author}</figcaption>
+        </blockquote>
+
+        {quote.image && (
+          <div class="kural__img-wrap">
+            <img
+              class="kural__img"
+              src={quote.image}
+              alt={quote.imageAlt ?? ''}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
+      </figure>
+    </div>
+  </section>
+)}
+
+<style>
+  .kural {
+    padding-block: var(--space-1) var(--space-4);
+  }
+
+  /* Open layout — no card/box; sits on page background like dummy.png */
+  .kural__band {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: fit-content;
+    max-width: min(42rem, 100%);
+  }
+  @media (min-width: 768px) {
+    .kural__band {
+      flex-direction: row;
+      gap: clamp(1rem, 2.5vw, 1.75rem);
+    }
+  }
+
+  .kural__text {
+    margin: 0;
+    flex: none;
+    text-align: center;
+  }
+
+  .kural__divider {
+    position: relative;
+    width: min(8rem, 55%);
+    height: 0.5rem;
+    margin: 0.4rem auto 0.5rem;
+    background:
+      linear-gradient(to right, var(--accent-light), var(--accent-light)) left center / calc(50% - 0.5rem) 1px no-repeat,
+      linear-gradient(to right, var(--accent-light), var(--accent-light)) right center / calc(50% - 0.5rem) 1px no-repeat;
+    opacity: 0.45;
+  }
+  .kural__divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 4px;
+    height: 4px;
+    border: 1px solid var(--accent-light);
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-sizing: border-box;
+    opacity: 0.45;
+  }
+
+  /* DM Serif Display is Latin-only and cannot render Tamil glyphs — Tamil uses sans. */
+  .kural__tamil {
+    font-family: var(--font-sans);
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--heading);
+    margin: 0 0 var(--space-2);
+  }
+  .kural__translation {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    line-height: 1.4;
+    color: var(--text);
+    margin: 0 0 var(--space-2);
+    max-width: none;
+  }
+  .kural__author {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    color: var(--accent-light);
+  }
+
+  .kural__img-wrap {
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .kural__img-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12% -8%;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--accent-light) 14%, transparent) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .kural__img {
+    position: relative;
+    z-index: 1;
+    width: clamp(72px, 12vw, 120px);
+    height: auto;
+    object-fit: contain;
+    opacity: 0.92;
+    filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.35));
+  }
+  @media (max-width: 767px) {
+    .kural__img-wrap {
+      order: -1;
+    }
+    .kural__img {
+      width: clamp(64px, 22vw, 96px);
+    }
+  }
+</style>

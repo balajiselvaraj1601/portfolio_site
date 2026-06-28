@@ -13,4 +13,4 @@
 
 `contact`
 
-The page must provide only public contact channels: email, LinkedIn, Kaggle, and location. It may include collaboration interests, education context, and a secondary resume CTA, but must not include phone or references.
+The page must provide only public contact channels: email, LinkedIn, GitHub, Kaggle, and location. It may include collaboration interests, education context, and a secondary resume CTA, but must not include phone or references.

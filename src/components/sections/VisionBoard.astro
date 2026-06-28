@@ -5,11 +5,10 @@ import HubCircle from '@components/cards/HubCircle.astro';
 import ProgramBadgeCard from '@components/cards/ProgramBadgeCard.astro';
 import OrgImpactCard from '@components/cards/OrgImpactCard.astro';
 import Icon from '@components/ui/Icon.astro';
-import { visionBoard, profile } from '@lib/content';
+import { visionBoard } from '@lib/content';
 
 const { header, eyebrow, intro, hubs, principles, programs, orgHeader, orgCards } =
   visionBoard;
-const quote = profile.heroQuote;
 ---
 
 <Section id="vision-board" title="" hideTitle variant="full" class="vboard">
@@ -49,24 +48,6 @@ const quote = profile.heroQuote;
         />
       ))}
     </div>
-  )}
-
-  {quote && (
-    <figure class="vboard__quote reveal">
-      {quote.image && (
-        <img
-          class="vboard__quote-img"
-          src={quote.image}
-          alt={quote.imageAlt ?? ''}
-          loading="lazy"
-        />
-      )}
-      <blockquote class="vboard__quote-body">
-        {quote.tamil && <p class="vboard__quote-tamil">{quote.tamil}</p>}
-        <p class="vboard__quote-translation">“{quote.translation}”</p>
-        <figcaption class="vboard__quote-author">— {quote.author}</figcaption>
-      </blockquote>
-    </figure>
   )}
 
   {/* Legacy achievement infographic — retained but guarded; data now lives in
@@ -163,43 +144,6 @@ const quote = profile.heroQuote;
     flex-wrap: wrap;
   }
 
-  /* ── relocated quote ─────────────────────────────────────────────────── */
-  .vboard__quote {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-6);
-    margin-top: var(--space-16);
-    max-width: var(--maxw-text);
-    margin-inline: auto;
-    text-align: center;
-  }
-  .vboard__quote-img {
-    width: 84px;
-    height: 84px;
-    object-fit: contain;
-    flex-shrink: 0;
-  }
-  .vboard__quote-body {
-    margin: 0;
-  }
-  .vboard__quote-tamil {
-    font-size: 1.25rem;
-    color: var(--heading);
-    margin-bottom: var(--space-2);
-  }
-  .vboard__quote-translation {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 1.05rem;
-    color: var(--text);
-    margin-bottom: var(--space-2);
-  }
-  .vboard__quote-author {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-  }
-
   /* ── legacy infographic ──────────────────────────────────────────────── */
   .vboard__programs {
     display: grid;
@@ -227,9 +171,6 @@ const quote = profile.heroQuote;
     }
   }
   @media (max-width: 600px) {
-    .vboard__quote {
-      flex-direction: column;
-    }
     .vboard__org-grid {
       grid-template-columns: repeat(2, 1fr);
     }

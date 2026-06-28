@@ -1,7 +1,7 @@
 # Page Brief - Projects
 
-**Page:** `projects`  
-**Route:** `/projects`
+**Page:** `projects` (nav view on `/#projects`)  
+**Route:** `/projects` redirects to `/#projects`
 
 ## Items
 
@@ -10,10 +10,11 @@
 | `projects-intro` | `content/work/projects.json` | What is this? | medium |
 | `featured-case-studies` | `content/work/projects.json` | Why should I care? | heavy |
 | `projects` | `content/work/projects.json` | How does it work? | heavy |
-| `contact` | `content/person/profile.json` | What should I do next? | accent |
 
 ## Structure
 
-`projects-intro` -> `featured-case-studies` -> `projects` -> `contact`
+`projects-intro` -> `featured-case-studies` -> `projects`
 
-The page must frame the project portfolio with metrics, present flagship systems first, then provide the broader project catalogue with traceable details.
+The view frames the project portfolio with metrics, presents flagship systems first, then provides
+the broader project catalogue with traceable details. `featured-case-studies` is reached only here
+(no longer duplicated in the About view). The contact CTA is the dedicated **Contact** view.

@@ -6,28 +6,30 @@ is the "how it's structured".
 
 ## 1. Information architecture
 
-Primary structure: **multi-page**, grouping the full section set (see `content/site.json →
-sections`) into a few themed routes (keeps the nav short while giving heavy content its own URL).
+Primary structure: **single-page home** with **nav views**. All sections render once on `/` in
+DOM order (`content/site.json → pages[id=home].sections`). Header nav scrolls to a view's first
+section using hash URLs (`/#experience`, `/#research`, …). All sections remain visible on scroll.
+Legacy paths redirect to the matching hash on `/`.
 
 ```
-/              About (Home)  → hero, about, featured-case-studies, impact, vision-board,
-                               leadership, skills, timeline, affiliations, publications, contact
-/experience    Experience    → experience-intro, experience, mentorship, impact, contact
-/projects      Projects      → projects-intro, featured-case-studies, projects, contact
-/research      Research      → generative-ai, publications, conferences, speakers, contact
-/recognition   Recognition   → awards, kaggle, education, contact
-/vision        Vision        → vision-board
-/contact       Contact       → contact
+/              About (default)  → viewSections: hero, thirukural, leadership, skills
+/#experience   Experience       → experience-intro, experience, mentorship
+/#projects     Projects         → projects-intro, featured-case-studies, projects
+/#research     Research         → publications, conferences, speakers
+/#recognition  Recognition      → awards, kaggle, education
+/#vision       Vision           → technical-vision, vision-board, impact
+/#contact      Contact          → contact
+/experience … /contact         → redirect stubs (noindex) → /#{viewAnchor}
 /404           custom not-found page
 ```
 
 Nav also includes **Resume** (external PDF link from `site.json.pages` with `"external": true`).
 
-Routes and their section grouping are defined once in `content/site.json → pages` (each page has
-an `id`, `path`, `label`, `seo`, and an ordered `sections` array). The renderer
-(`SectionRenderer`) iterates each page's `sections` — do not hardcode section order or grouping
-in markup. Section ids and the per-section content contract below are independent of how sections
-are grouped into pages.
+Section ids and grouping are defined in `content/site.json → pages` (each content page has an
+`id`, `path`, `label`, `seo`, `sections`, `viewSections`, and optional `viewAnchor`). The home
+page's `sections` array is the full DOM order; `viewSections` on each page defines which sections
+belong to that nav group for scroll targets and scroll-spy. The renderer (`SectionRenderer`)
+iterates the home section list — do not hardcode section order in markup.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -42,13 +44,9 @@ App / Layout
 │   └── ResumeDownloadButton (site.json.resume)
 ├── Main
 │   ├── HeroSection            ← person/profile.json (headline, metrics[], ctas[])
-│   ├── AboutSection           ← person/profile.json (aboutIntro, aboutCards[])
-│   ├── FeaturedCaseStudies    ← work/projects.json (featured: true)    (ProjectCaseStudyCard)
-│   ├── ImpactSection          ← work/strategic-impact.json (journey/programs/leadershipCards)
-│   ├── VisionBoardSection     ← work/vision-board.json (infographic hubs/programs/orgCards)
-│   ├── LeadershipSection      ← person/profile.json.leadershipPhilosophy
+│   ├── ThirukuralSection      ← person/profile.json (heroQuote)
+│   ├── LeadershipSection      ← person/profile.json (aboutIntro, aboutCards[], leadershipPhilosophy) + collaborations.json
 │   ├── SkillsSection          ← work/skills.json.categories[]           (CategoryGroup → Chip)
-│   ├── CareerTimelineSection  ← work/experience.json.roles[] (compact rail)
 │   ├── AffiliationsSection    ← person/affiliations.json
 │   ├── PublicationsSection    ← research/publications.json.items[]      (ResearchLinkGrid)
 │   ├── ContactSection         ← person/profile.json.contact[]           (full connect layout)
@@ -59,7 +57,6 @@ App / Layout
 │   ├── FeaturedCaseStudies    ← work/projects.json (featured: true)    (ProjectCaseStudyCard)
 │   ├── ProjectsSection        ← work/projects.json.projects[]           (CardGrid)
 │   │   └── ProjectCard → (optional) ProjectDetail
-│   ├── GenerativeAISection    ← research/generative-ai.json.items[]         (inline text list)
 │   ├── MentorshipSection      ← work/mentorship.json.items[]            (inline text list)
 │   ├── EducationSection       ← recognition/education.json.records[]
 │   ├── AwardsSection          ← recognition/awards.json.items[]                (AwardPill)
@@ -80,13 +77,13 @@ Reused primitives (define once, use everywhere): `Section` (heading + anchor + c
 | Section | Source file | Shape consumed | Rendering notes |
 |---------|-------------|----------------|-----------------|
 | Hero | `person/profile.json` | `headline`, `metrics[]`, `ctas[]`, photo | Split layout; metric cards; value-oriented CTAs |
-| About | `person/profile.json` | `aboutIntro`, `aboutCards[]` | Intro paragraph + scan cards |
+| Thirukural | `person/profile.json` | `heroQuote` | Couplet + portrait band between hero and profile |
+| Leadership | `person/profile.json`, `person/collaborations.json` | `aboutIntro`, `aboutCards[]`, `leadershipPhilosophy`, collaboration logos | Bio → scan cards → philosophy quote → theme cards → logo strip |
 | Featured Case Studies | `work/projects.json` | `projects[]` where `featured: true` | Flagship case-study cards (full detail); optional CTA to `/projects` on home |
 | Strategic Impact | `work/strategic-impact.json` | `metrics[]`, `highlights[]`, optional `journey[]`, `programs[]`, `leadershipCards[]` | Metric grid + highlights; optional journey/programs/cards on `/experience` |
 | Vision Board | `work/vision-board.json` | `hubs[]`, `programs[]`, `orgCards[]` | Infographic layout on `/` and `/vision` |
-| Leadership | `person/profile.json` | `leadershipPhilosophy.statement` | Pull-quote block |
+| Technical Vision | `person/profile.json` | `vision.heading`, `vision.paragraphs[]` | Multimodal AI narrative (no collaborations sidebar) |
 | Skills | `work/skills.json` | `categories[] -> skills[]` | Grouped skill chips |
-| Career Timeline | `work/experience.json` | `roles[]` (org, position, period, mission) | Compact vertical rail on home only |
 | Affiliations | `person/affiliations.json` | `items[].name`, optional `items[].logo` | Org list with optional logo SVG in `public/assets/logos/` |
 | Publications | `research/publications.json` | `items[]` (`label`, `title`, `url`, `description`) | Stacked ResearchLinkGrid; optional CTA to `/research` on home |
 | Contact | `person/profile.json` | `contact[]`, `contactPage`, `contactQuote` | Full connect layout on all routes that include `contact` |
@@ -94,7 +91,6 @@ Reused primitives (define once, use everywhere): `Section` (heading + anchor + c
 | Experience | `work/experience.json` | `roles[] -> projects[] -> bullets[]` | Interactive tabbed timeline + role panels; optional `mission` per role |
 | Projects Intro | `work/projects.json` | `title`, `intro`, `snapshot[]` | Section lead-in + metric cards |
 | Projects | `work/projects.json` | case-study fields + `highlights[]`, `tags[]` | Problem/solution/architecture/impact blocks |
-| Generative AI | `research/generative-ai.json` | `items[].text` | Bullet list |
 | Mentorship | `work/mentorship.json` | `items[].text` | Bullet list |
 | Education | `recognition/education.json` | `records[]` | Degree, institution, period, gpa, achievement |
 | Awards | `recognition/awards.json` | `items[]` (`label`, `detail`) | Label + detail rows |
@@ -108,7 +104,7 @@ The renderer should map `site.json.sections[id].source` → file, and `…title`
 
 - **Breakpoints (suggested):** mobile `< 640px`, tablet `640–1024px`, desktop `> 1024px`.
 - **Mobile-first**: single column; Skills chips wrap; Projects grid collapses to 1 column.
-- **Tablet:** Projects 2-column; timeline keeps a single rail.
+- **Tablet:** Projects 2-column; Experience tabbed rail keeps a single column.
 - **Desktop:** Projects 2–3 column; comfortable max content width (~70–80ch for text).
 - Header collapses to a hamburger menu below the tablet breakpoint.
 - No fixed heights that clip content; respect dynamic viewport units on mobile.

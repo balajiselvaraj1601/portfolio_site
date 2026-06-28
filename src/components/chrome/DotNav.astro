@@ -7,13 +7,13 @@ const { sections, singlePageViews = false } = Astro.props;
 
 const labels: Record<string, string> = {
   hero: 'Hero',
-  about: 'About',
+  thirukural: 'Thirukural',
   impact: 'Impact',
   'featured-case-studies': 'Projects',
-  'vision-board': 'Vision',
-  leadership: 'Leadership',
+  'technical-vision': 'Technical Vision',
+  'vision-board': 'Vision Board',
+  leadership: 'About',
   skills: 'Skills',
-  timeline: 'Timeline',
   'experience-intro': 'Experience',
   experience: 'Experience',
   mentorship: 'Mentorship',
@@ -48,7 +48,7 @@ const labels: Record<string, string> = {
 <style>
   .dot-nav {
     position: fixed;
-    right: 1.5rem;
+    right: 2.5rem;
     top: 50%;
     transform: translateY(-50%);
     z-index: 40;
@@ -86,18 +86,10 @@ const labels: Record<string, string> = {
   }
 </style>
 
-<script define:vars={{ sectionIds: sections, singlePageViews }}>
-  const NAV_VIEW_CHANGE = 'nav-view-change';
-
+<script>
   const nav = document.getElementById('dot-nav');
-  if (!nav) {
-    /* no-op */
-  } else {
-    let observer = null;
+  if (nav) {
     const dots = Array.from(nav.querySelectorAll('.dot-nav__dot'));
-
-    const visibleSectionIds = () =>
-      dots.filter((d) => !d.hidden).map((d) => d.dataset.target ?? '');
 
     const setActive = (id) => {
       dots.forEach((d) => {
@@ -105,20 +97,26 @@ const labels: Record<string, string> = {
       });
     };
 
-    const bindObserver = () => {
-      if (observer) observer.disconnect();
-      const ids = visibleSectionIds();
-      const observed = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    // All sections are visible on a single-page scroll — show every dot and
+    // let a scroll-spy track which section is centered.
+    dots.forEach((dot) => {
+      dot.hidden = false;
+      dot.addEventListener('click', () => {
+        const target = document.getElementById(dot.dataset.target ?? '');
+        if (target) {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+        }
+      });
+    });
 
-      nav.hidden = ids.length < 2;
-      if (ids.length < 2) return;
+    const observed = dots
+      .map((d) => document.getElementById(d.dataset.target ?? ''))
+      .filter(Boolean);
 
-      if (!('IntersectionObserver' in window) || !observed.length) {
-        if (observed[0]?.id) setActive(observed[0].id);
-        return;
-      }
-
-      observer = new IntersectionObserver(
+    nav.hidden = observed.length < 2;
+    if (observed.length >= 2 && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver(
         (entries) => {
           const visible = entries
             .filter((e) => e.isIntersecting)
@@ -129,36 +127,8 @@ const labels: Record<string, string> = {
       );
       observed.forEach((el) => observer.observe(el));
       if (observed[0]?.id) setActive(observed[0].id);
-    };
-
-    const applyViewSections = (ids) => {
-      const active = new Set(ids);
-      dots.forEach((dot) => {
-        const show = active.has(dot.dataset.target ?? '');
-        dot.hidden = !show;
-      });
-      bindObserver();
-    };
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const target = document.getElementById(dot.dataset.target ?? '');
-        if (target) {
-          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    if (singlePageViews) {
-      document.addEventListener(NAV_VIEW_CHANGE, (event) => {
-        applyViewSections(event.detail?.sectionIds ?? []);
-      });
-    } else {
-      dots.forEach((dot) => {
-        dot.hidden = false;
-      });
-      bindObserver();
+    } else if (observed[0]?.id) {
+      setActive(observed[0].id);
     }
   }
 </script>

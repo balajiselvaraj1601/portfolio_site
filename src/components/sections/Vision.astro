@@ -1,7 +1,6 @@
 ---
 import Section from '@components/ui/Section.astro';
-import EntityLink from '@components/ui/EntityLink.astro';
-import { profile, collaborations, getEntityUrl, logoSrc } from '@lib/content';
+import { profile } from '@lib/content';
 
 const vision = profile.vision;
 
@@ -20,65 +19,35 @@ function splitHeading(heading: string, emphasis?: string) {
 const headingParts = vision
   ? splitHeading(vision.heading, vision.headingEmphasis)
   : null;
-const collabItems = collaborations.items;
 ---
 
 {vision && (
   <Section
-    id="vision"
+    id="technical-vision"
     title="Technical Vision"
     hideTitle
     eyebrow="Technical Vision"
     variant="alt"
   >
-    <div class="vision-layout">
-      <div class="vision-text reveal">
-        {headingParts && (
-          <h2 class="vision__title">
-            {headingParts.before}
-            {headingParts.emphasis ? <em>{headingParts.emphasis}</em> : null}
-            {headingParts.after}
-          </h2>
-        )}
+    <div class="vision-text reveal">
+      {headingParts && (
+        <h2 class="vision__title">
+          {headingParts.before}
+          {headingParts.emphasis ? <em>{headingParts.emphasis}</em> : null}
+          {headingParts.after}
+        </h2>
+      )}
 
-        <div class="vision__body">
-          {vision.paragraphs.map((para) => (
-            <p class="vision__para">{para}</p>
-          ))}
-        </div>
-
-        {vision.mentorship && (
-          <div class="vision__mentorship-block">
-            <h4>Mentorship</h4>
-            <p class="vision__mentorship">{vision.mentorship}</p>
-          </div>
-        )}
+      <div class="vision__body">
+        {vision.paragraphs.map((para) => (
+          <p class="vision__para">{para}</p>
+        ))}
       </div>
 
-      {collabItems.length > 0 && (
-        <div class="vision__collabs reveal">
-          <h4 class="vision__collabs-heading">External Collaborations</h4>
-          {collabItems.map((c) => (
-            <div class="collab-item">
-              {logoSrc(c.logo ?? c.entity) ? (
-                <div class="collab-logo">
-                  <img
-                    src={logoSrc(c.logo ?? c.entity)}
-                    alt={`${c.name} logo`}
-                    loading="lazy"
-                  />
-                </div>
-              ) : (
-                <div class="collab-dot" aria-hidden="true"></div>
-              )}
-              <div class="collab-text">
-                <strong>
-                  <EntityLink href={getEntityUrl(c.entity)} label={c.name} />
-                </strong>
-                {c.detail ? <> — {c.detail}</> : null}
-              </div>
-            </div>
-          ))}
+      {vision.mentorship && (
+        <div class="vision__mentorship-block">
+          <h4>Mentorship</h4>
+          <p class="vision__mentorship">{vision.mentorship}</p>
         </div>
       )}
     </div>
@@ -86,13 +55,6 @@ const collabItems = collaborations.items;
 )}
 
 <style>
-  .vision-layout {
-    display: grid;
-    grid-template-columns: 1.2fr 1fr;
-    gap: 3rem;
-    align-items: start;
-    margin-top: 1rem;
-  }
   .vision__title {
     font-family: var(--font-display);
     font-size: var(--fs-h2);
@@ -118,43 +80,6 @@ const collabItems = collaborations.items;
   .vision__para:last-child {
     margin-bottom: 0;
   }
-  .vision__collabs-heading {
-    margin-bottom: 1rem;
-  }
-  .collab-item {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.1rem 1.25rem;
-    margin-bottom: 0.75rem;
-    display: flex;
-    gap: 0.75rem;
-    align-items: flex-start;
-  }
-  .collab-item:last-child {
-    margin-bottom: 0;
-  }
-  .collab-logo img {
-    width: 28px;
-    height: 28px;
-    object-fit: contain;
-  }
-  .collab-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    flex-shrink: 0;
-    margin-top: 0.4rem;
-  }
-  .collab-text {
-    font-size: 0.85rem;
-    line-height: 1.6;
-    max-width: none;
-  }
-  .collab-text strong {
-    color: var(--heading);
-  }
   .vision__mentorship-block h4 {
     margin-bottom: 1rem;
   }
@@ -163,11 +88,5 @@ const collabItems = collaborations.items;
     color: var(--text-muted);
     line-height: 1.7;
     max-width: none;
-  }
-  @media (max-width: 900px) {
-    .vision-layout {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
   }
 </style>

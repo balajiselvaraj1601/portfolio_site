@@ -14,12 +14,11 @@
       },
       "sections": [
         "hero",
-        "about",
+        "thirukural",
         "leadership",
         "skills",
         "experience-intro",
         "experience",
-        "timeline",
         "mentorship",
         "projects-intro",
         "featured-case-studies",
@@ -27,17 +26,17 @@
         "publications",
         "conferences",
         "speakers",
-        "generative-ai",
         "awards",
         "kaggle",
         "education",
+        "technical-vision",
         "vision-board",
         "impact",
         "contact"
       ],
       "viewSections": [
         "hero",
-        "about",
+        "thirukural",
         "leadership",
         "skills"
       ],
@@ -49,10 +48,10 @@
       "path": "/experience",
       "seo": {
         "title": "Experience — Balaji Selvaraj",
-        "description": "12+ years building and leading production AI across drug safety, oncology, and clinical imaging — career timeline, role-by-role impact, and mentorship."
+        "description": "12+ years building and leading production AI across drug safety, oncology, and clinical imaging — role-by-role impact and mentorship."
       },
-      "sections": ["experience-intro", "experience", "timeline", "mentorship"],
-      "viewSections": ["experience-intro", "experience", "timeline", "mentorship"]
+      "sections": ["experience-intro", "experience", "mentorship"],
+      "viewSections": ["experience-intro", "experience", "mentorship"]
     },
     {
       "id": "projects",
@@ -73,8 +72,8 @@
         "title": "Research — Balaji Selvaraj",
         "description": "Publications, conference talks, and speaking engagements across medical imaging and drug development."
       },
-      "sections": ["publications", "conferences", "speakers", "generative-ai"],
-      "viewSections": ["publications", "conferences", "speakers", "generative-ai"]
+      "sections": ["publications", "conferences", "speakers"],
+      "viewSections": ["publications", "conferences", "speakers"]
     },
     {
       "id": "recognition",
@@ -95,8 +94,8 @@
         "title": "Vision — Balaji Selvaraj",
         "description": "AI leadership & strategic impact — from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
       },
-      "sections": ["vision-board", "impact"],
-      "viewSections": ["vision-board", "impact"]
+      "sections": ["technical-vision", "vision-board", "impact"],
+      "viewSections": ["technical-vision", "vision-board", "impact"]
     },
     {
       "id": "contact",
@@ -118,18 +117,18 @@
   ],
   "sections": {
     "hero": { "title": "", "source": "person/profile.json", "visible": true },
-    "about": { "title": "About", "source": "person/profile.json", "visible": true },
+    "thirukural": { "title": "", "source": "person/profile.json", "visible": true },
     "impact": { "title": "Strategic Impact", "source": "work/strategic-impact.json", "visible": true },
+    "technical-vision": { "title": "Technical Vision", "source": "person/profile.json", "visible": true },
     "vision-board": { "title": "How I Build AI Organizations", "source": "work/vision-board.json", "visible": true },
-    "leadership": { "title": "Leadership", "source": "person/profile.json", "visible": true },
+    "leadership": { "title": "Who I am & how I lead", "source": "person/profile.json", "visible": true },
     "skills": { "title": "Technology Expertise", "source": "work/skills.json", "visible": true },
-    "timeline": { "title": "Career Timeline", "source": "work/experience.json", "visible": true },
     "experience": { "title": "Experience", "source": "work/experience.json", "visible": true },
     "experience-intro": { "title": "Experience", "source": "work/experience.json", "visible": true },
     "projects-intro": { "title": "Selected Projects", "source": "work/projects.json", "visible": true },
     "featured-case-studies": { "title": "Flagship Case Studies", "source": "work/projects.json", "visible": true },
     "projects": { "title": "Other Work", "source": "work/projects.json", "visible": true },
-    "generative-ai": { "title": "Generative AI", "source": "research/generative-ai.json", "visible": true },
+    "generative-ai": { "title": "Generative AI", "source": "content/drafts/research/generative-ai.json", "visible": false },
     "mentorship": { "title": "Mentorship", "source": "work/mentorship.json", "visible": true },
     "education": { "title": "Education", "source": "recognition/education.json", "visible": true },
     "awards": { "title": "Awards & Recognition", "source": "recognition/awards.json", "visible": true },

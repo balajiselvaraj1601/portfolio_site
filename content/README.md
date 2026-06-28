@@ -32,12 +32,14 @@ re-derive these files rather than editing both independently.
 | `work/projects.json` | Projects showcase (derived view) | derived from `work/experience.json` |
 | `work/skills.json` | Skills, Tools & Technologies | `sections[id="tools"]` |
 | `work/mentorship.json` | Mentorship | `sections[id="mentorship"]` |
-| `research/generative-ai.json` | Generative AI | `sections[id="generative_ai"]` |
 | `research/publications.json` | Publications | `sections[id="publications"]` |
 | `research/conferences.json` | Conferences | `sections[id="conferences"]` |
 | `recognition/education.json` | Education | `sections[id="education"]` |
 | `recognition/awards.json` | Awards & Recognition | `sections[id="awards"]` |
 | `recognition/kaggle.json` | Kaggle Competitions | `sections[id="kaggle_compact"]` |
+
+**Shelved (not live):** `drafts/research/generative-ai.json` — Generative AI section; see
+[docs/content-editing.md](../docs/content-editing.md).
 
 `work/projects.json` is a derived convenience view for a card/detail UI — `work/experience.json`
 stays authoritative for role bullets. Keep them consistent when editing.

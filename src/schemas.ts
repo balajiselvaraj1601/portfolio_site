@@ -74,6 +74,27 @@ export const siteSchema = z.object({
     default: z.string(),
     modes: z.array(z.string()),
   }),
+}).superRefine((data, ctx) => {
+  for (const page of data.pages) {
+    if ('external' in page && page.external) continue;
+
+    if (!page.viewSections?.length) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        message: `site.json: page "${page.id}" must define viewSections`,
+      });
+      continue;
+    }
+
+    for (const sectionId of page.viewSections) {
+      if (!data.sections[sectionId]) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: `site.json: page "${page.id}" viewSections references unknown section "${sectionId}"`,
+        });
+      }
+    }
+  }
 });
 
 /* ── profile.json ──────────────────────────────────────────────────────── */

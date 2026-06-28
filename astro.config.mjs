@@ -11,12 +11,26 @@ import sitemap from '@astrojs/sitemap';
 // ─────────────────────────────────────────────────────────────────────────────
 const SITE_URL = 'https://balajiselvaraj1601.github.io';
 
+const REDIRECT_STUB_PATHS = [
+  '/contact',
+  '/experience',
+  '/projects',
+  '/research',
+  '/recognition',
+  '/vision',
+];
+
 // https://astro.build/config
 export default defineConfig({
   site: SITE_URL,
   base: '/',
   trailingSlash: 'ignore',
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      filter: (page) =>
+        !REDIRECT_STUB_PATHS.some((stub) => page.includes(stub)),
+    }),
+  ],
   build: {
     // Keep clean URLs and a predictable asset folder.
     assets: '_astro',
