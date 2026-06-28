@@ -1,0 +1,158 @@
+{
+  "name": "Balaji Selvaraj",
+  "title": "Technical AI Leader",
+  "location": "Gothenburg, Sweden",
+  "headline": "12+ years leading distributed AI teams across oncology, drug safety, and biopharma R&D at AstraZeneca.",
+  "heroTag": "AI Technical Lead · Biopharma R&D · Gothenburg, Sweden",
+  "greeting": "Hi, I'm Balaji",
+  "availability": {
+    "status": "available",
+    "label": "Open to AI leadership & advisory roles"
+  },
+  "heroTitle": {
+    "lead": "Turning",
+    "emphasis": "biological data",
+    "tail": "into clinical impact"
+  },
+  "metrics": [
+    { "value": "12+", "label": "Years in AI & ML" },
+    { "value": "652", "label": "Kaggle Global Rank / 200K+" },
+    { "value": "$50M", "label": "Projected Annual Savings" },
+    { "value": "5", "label": "Countries, 12-Member Team" }
+  ],
+  "ctas": [
+    { "label": "View Impact →", "href": "/#impact", "variant": "primary" },
+    { "label": "Download Resume", "href": "/assets/resume/balaji-selvaraj-resume.pdf", "variant": "secondary" }
+  ],
+  "techStack": [
+    { "label": "PyTorch" },
+    { "label": "Foundation Models" },
+    { "label": "AWS" },
+    { "label": "LangChain" },
+    { "label": "Docker" },
+    { "label": "RAG" }
+  ],
+  "portrait": {
+    "src": "/assets/images/balaji.png",
+    "alt": "Portrait of Balaji Selvaraj",
+    "width": 480,
+    "height": 480
+  },
+  "credentialHook": "Kaggle top 0.3% globally · 652 among 200K+ data scientists",
+  "photo": "/assets/images/balaji.png",
+  "aboutIntro": "Technical AI Leader with 12+ years of experience spanning product, services, and startup environments, leading a globally distributed AI team across five countries. I deliver AI programs across oncology, drug safety, and biopharma R&D, supporting AstraZeneca's three R&D priority areas over three consecutive years.",
+  "aboutCards": [
+    {
+      "title": "Industries",
+      "items": [
+        "Oncology",
+        "Drug Safety",
+        "Medical Imaging",
+        "Foundation Models",
+        "Computational Pathology"
+      ]
+    },
+    {
+      "title": "Leadership",
+      "items": [
+        "Scaled team from 1 → 12 engineers",
+        "Distributed across 5 countries",
+        "Cross-functional stakeholder alignment",
+        "SVP- and Chief Scientist-sponsored programs"
+      ]
+    },
+    {
+      "title": "Research",
+      "items": [
+        "Broad Institute collaboration",
+        "IIT Madras research partnership",
+        "EU consortium (14 partners)",
+        "Publications in JITC and bioRxiv"
+      ]
+    },
+    {
+      "title": "Recognition",
+      "items": [
+        "Top 0.3% Kaggle globally",
+        "12+ years applied AI",
+        "Conference speaker",
+        "Awards across competitions and research"
+      ]
+    }
+  ],
+  "leadershipPhilosophy": {
+    "statement": "I build AI organizations that deliver measurable business outcomes — not research prototypes left on the shelf."
+  },
+  "vision": {
+    "heading": "Multimodal AI at the edge of biology",
+    "paragraphs": [
+      "Shaped an innovative multimodal AI vision aligned with AstraZeneca's 2030 Gene & Cell Therapy ambitions — a vision independently developed bottom-up and later submitted to Gartner by GITC Chennai.",
+      "The philosophy: integrate heterogeneous biological signals — omics, imaging, molecular, single-cell — into unified learned representations that generalize across compounds, diseases, and data sources.",
+      "Currently architecting AI systems where model-agnostic platforms can adapt to new modalities, cross-assay contexts, and heterogeneous vendor data without re-engineering from scratch."
+    ],
+    "collaborations": [
+      {
+        "org": "Broad Institute",
+        "detail": "Dr. Shantanu Singh (Senior Group Leader): co-developing Cell Painting & omics computational pipelines"
+      },
+      {
+        "org": "IIT Madras",
+        "detail": "Research collaboration to co-develop cutting-edge AI models and computational pipelines"
+      },
+      {
+        "org": "Cold Spring Harbor Laboratory",
+        "detail": "Neuron connectivity toolbox delivery to Dr. Partha Mitra"
+      },
+      {
+        "org": "RIKEN Brain Science Institute",
+        "detail": "Neuroscience imaging and 3D reconstruction algorithms"
+      }
+    ],
+    "mentorship": "Coached a four-student team to top four nationally at the Smart India Hackathon (200K+ participants). Mentored seven AI/ML graduate trainees, four of whom progressed to full-time industry roles."
+  },
+  "contactInterests": [
+    "AI Leadership Opportunities",
+    "Research Collaborations",
+    "Advisory Roles",
+    "Speaking Engagements"
+  ],
+  "contactIntro": "Open to discussing AI leadership opportunities, research collaborations, and advisory roles in biopharma and precision medicine.",
+  "contactPage": {
+    "title": "Let's build something important",
+    "eyebrow": "Contact",
+    "interestsHeading": "Interested in",
+    "resumeEyebrow": "Download CV",
+    "resumeDescription": "Full resume with complete project details, publications, and career history.",
+    "resumeLabel": "Download PDF Resume"
+  },
+  "contact": [
+    {
+      "type": "email",
+      "label": "Email",
+      "value": "balaji.selvaraj.ai@outlook.com",
+      "href": "mailto:balaji.selvaraj.ai@outlook.com",
+      "icon": "email"
+    },
+    {
+      "type": "linkedin",
+      "label": "LinkedIn",
+      "value": "balaji-selvaraj-ai",
+      "href": "https://www.linkedin.com/in/balaji-selvaraj-a2987572/",
+      "icon": "linkedin"
+    },
+    {
+      "type": "kaggle",
+      "label": "Kaggle",
+      "value": "Rank #652 / Top 0.3%",
+      "href": "https://www.kaggle.com/dhakshiin1601",
+      "icon": "kaggle"
+    },
+    {
+      "type": "location",
+      "label": "Location",
+      "value": "Gothenburg, Sweden",
+      "href": null,
+      "icon": "location"
+    }
+  ]
+}
