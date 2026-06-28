@@ -64,7 +64,7 @@ function periodLabel(p: { start: string; end: string | null; endLabel: string })
   .tl-item {
     position: relative;
     padding-left: 44px;
-    padding-bottom: 2rem;
+    padding-bottom: var(--stack-lg);
     color: inherit;
   }
   .tl-dot {
@@ -100,7 +100,7 @@ function periodLabel(p: { start: string; end: string | null; endLabel: string })
     margin-top: 0.15rem;
   }
   .timeline-more {
-    margin-top: var(--space-8);
+    margin-top: var(--section-cta-gap);
     max-width: none;
   }
   @media (max-width: 900px) {

@@ -10,8 +10,7 @@
       "description": "Explored how foundation models and single-cell technologies are reshaping precision medicine and accelerating therapeutic discovery.",
       "url": "https://www.gaia.fish/2025",
       "youtube": "https://www.youtube.com/watch?v=YOtXxiU048M",
-      "logo": "gaia",
-      "tags": ["AI", "Single Cell", "Healthcare", "Foundation Models"]
+      "logo": "gaia"
     },
     {
       "role": "PRESENTER",
@@ -22,8 +21,7 @@
       "description": "Presented a novel AI framework to identify drug-tolerant persister (DTP) cells using single-cell transcriptomics and machine learning, enabling improved detection of treatment-resistant cell populations.",
       "url": "https://aacrjournals.org/cancerres/article/85/8_Supplement_1/6312/759545/Abstract-6312-AI-Driven-Identification-of-Drug",
       "image": "/assets/images/aacr-2025.png",
-      "logo": "aacr",
-      "tags": ["AI", "Oncology", "Single-Cell Transcriptomics", "Machine Learning"]
+      "logo": "aacr"
     }
   ]
 }

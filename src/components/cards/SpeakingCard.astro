@@ -1,5 +1,4 @@
 ---
-import Chip from '@components/ui/Chip.astro';
 import { logoSrc } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
 import type { Speakers } from '@schemas';
@@ -45,9 +44,11 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     <div class="speaking-card__meta">
       <span class="speaking-card__role">{item.role}</span>
       <strong class="speaking-card__event">{item.event}</strong>
-      <span class="speaking-card__location">{item.location}</span>
     </div>
-    <time class="speaking-card__date" datetime={item.date}>{item.date}</time>
+    <div class="speaking-card__when">
+      <span class="speaking-card__location">{item.location}</span>
+      <time class="speaking-card__date" datetime={item.date}>{item.date}</time>
+    </div>
   </header>
 
   <h3 class="speaking-card__title">
@@ -85,18 +86,6 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
       </div>
     )
   }
-
-  {
-    item.tags.length > 0 && (
-      <ul class="speaking-card__tags" aria-label="Topics">
-        {item.tags.map((tag) => (
-          <li>
-            <Chip>{tag}</Chip>
-          </li>
-        ))}
-      </ul>
-    )
-  }
 </article>
 
 <style>
@@ -104,7 +93,7 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1.75rem;
+    padding: var(--card-padding-lg);
     display: flex;
     flex-direction: column;
     gap: 0.85rem;
@@ -137,7 +126,7 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     border: 1px solid var(--border);
     border-radius: 8px;
     box-shadow: var(--shadow-sm);
-    padding: 6px 10px;
+    padding: var(--space-2) var(--space-3);
   }
 
   .speaking-card__logo img {
@@ -169,25 +158,33 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     color: var(--heading);
   }
 
+  .speaking-card__when {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.15rem;
+    flex-shrink: 0;
+    min-width: max-content;
+    text-align: right;
+  }
+
   .speaking-card__location {
     font-size: 0.8rem;
     color: var(--text-muted);
+    white-space: nowrap;
   }
 
   .speaking-card__date {
     font-size: 0.78rem;
     color: var(--text-muted);
     white-space: nowrap;
-    text-align: right;
     line-height: 1.4;
-    flex-shrink: 0;
-    min-width: max-content;
   }
 
   .speaking-card__title {
-    font-family: var(--font-display);
+    font-family: var(--font-sans);
     font-size: 1.15rem;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 1.35;
     margin: 0;
   }
@@ -251,14 +248,5 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
 
   .speaking-card__play-icon {
     fill: #fff;
-  }
-
-  .speaking-card__tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    list-style: none;
-    padding: 0;
-    margin: 0.25rem 0 0;
   }
 </style>

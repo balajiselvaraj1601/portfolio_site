@@ -31,7 +31,7 @@ const { journey } = Astro.props;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: var(--space-12);
-    padding: 2.5rem;
+    padding: var(--space-10);
     background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: var(--radius);
@@ -45,7 +45,7 @@ const { journey } = Astro.props;
   @media (max-width: 900px) {
     .impact-journey {
       grid-template-columns: 1fr;
-      gap: 1rem;
+      gap: var(--stack-sm);
     }
     .journey-arrow {
       transform: rotate(90deg);

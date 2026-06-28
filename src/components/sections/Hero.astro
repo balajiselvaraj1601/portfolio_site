@@ -95,13 +95,28 @@ function isExternal(href: string) {
 
   {profile.heroQuote && (
     <div class="hero-quote-bar container">
-      <blockquote class="hero-quote" cite="Thiruvalluvar">
-        <p class="hero-quote__tamil" lang="ta">{profile.heroQuote.tamil}</p>
-        <p class="hero-quote__translation">
-          <em lang="en">{profile.heroQuote.translation}</em>
-        </p>
-        <cite class="hero-quote__author">— {profile.heroQuote.author}</cite>
-      </blockquote>
+      <div class="hero-quote-banner">
+        <blockquote class="hero-quote" cite="Thiruvalluvar">
+          <p class="hero-quote__tamil" lang="ta">{profile.heroQuote.tamil}</p>
+          <div class="hero-quote__divider" aria-hidden="true"></div>
+          <p class="hero-quote__translation">
+            <em lang="en">{profile.heroQuote.translation}</em>
+          </p>
+          <cite class="hero-quote__author">— {profile.heroQuote.author}</cite>
+        </blockquote>
+        {profile.heroQuote.image && (
+          <div class="hero-quote__statue-wrap">
+            <img
+              class="hero-quote__statue"
+              src={profile.heroQuote.image}
+              alt={profile.heroQuote.imageAlt ?? ''}
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+        )}
+      </div>
     </div>
   )}
 </section>
@@ -112,7 +127,7 @@ function isExternal(href: string) {
     min-height: calc(100vh - var(--header-h));
     display: flex;
     flex-direction: column;
-    padding-block: calc(var(--header-h) + var(--space-8)) var(--space-16);
+    padding-block: calc(var(--header-h) + var(--space-8)) var(--section-py-end);
     overflow: hidden;
     background: var(--hero-gradient);
   }
@@ -209,15 +224,97 @@ function isExternal(href: string) {
     padding-top: var(--space-8);
     padding-bottom: var(--space-6);
   }
+  .hero-quote-banner {
+    position: relative;
+    width: fit-content;
+    max-width: 64rem;
+    margin-inline: auto;
+    padding-top: var(--space-4);
+    border-top: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
   .hero-quote {
     margin: 0;
-    padding: var(--space-4) 0 0;
+    padding: 0;
     border: 0;
-    border-top: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
-    max-width: 36rem;
     text-align: center;
   }
+  .hero-quote__divider {
+    position: relative;
+    width: min(12rem, 70%);
+    height: 0.5rem;
+    margin: 0.65rem auto 0.75rem;
+    background:
+      linear-gradient(
+          to right,
+          color-mix(in srgb, var(--accent) 35%, transparent),
+          color-mix(in srgb, var(--accent) 35%, transparent)
+        )
+        left center / calc(50% - 0.625rem) 1px no-repeat,
+      linear-gradient(
+          to right,
+          color-mix(in srgb, var(--accent) 35%, transparent),
+          color-mix(in srgb, var(--accent) 35%, transparent)
+        )
+        right center / calc(50% - 0.625rem) 1px no-repeat;
+  }
+  .hero-quote__divider::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 5px;
+    height: 5px;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+    transform: translate(-50%, -50%) rotate(45deg);
+    box-sizing: border-box;
+  }
+  .hero-quote__statue-wrap {
+    position: relative;
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-quote__statue-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -15% -10%;
+    background: radial-gradient(
+      ellipse at center,
+      color-mix(in srgb, var(--accent) 12%, transparent) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-quote__statue {
+    position: relative;
+    z-index: 1;
+    flex: none;
+    height: clamp(150px, 22vh, 230px);
+    width: auto;
+    opacity: 0.9;
+    filter: saturate(0.9);
+    /* Feather the figure into the hero gradient: dissolve on the left
+       (toward the text) and along the bottom edge. */
+    -webkit-mask-image: linear-gradient(to left, #000 55%, transparent 100%),
+      linear-gradient(to top, transparent 0%, #000 28%);
+    -webkit-mask-composite: source-in;
+    mask-image: linear-gradient(to left, #000 55%, transparent 100%),
+      linear-gradient(to top, transparent 0%, #000 28%);
+    mask-composite: intersect;
+  }
+  @media (max-width: 640px) {
+    .hero-quote__statue-wrap {
+      display: none;
+    }
+  }
   .hero-quote__tamil {
+    /* Tamil script — display font is Latin-only, so use sans (better fallback) */
     font-family: var(--font-sans);
     font-size: 1.05rem;
     line-height: 1.65;
@@ -232,6 +329,12 @@ function isExternal(href: string) {
   }
   .hero-quote__translation em {
     font-style: italic;
+  }
+  .hero-quote__translation em::before {
+    content: '\201C';
+  }
+  .hero-quote__translation em::after {
+    content: '\201D';
   }
   .hero-quote__author {
     display: block;

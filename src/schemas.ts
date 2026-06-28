@@ -386,7 +386,6 @@ const SpeakingEngagement = z.object({
   image: z.string().optional(),
   logo: z.string().optional(),
   logoBadge: z.boolean().optional(),
-  tags: z.array(z.string()).min(1),
 });
 
 export const speakersSchema = z.object({

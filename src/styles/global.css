@@ -23,11 +23,28 @@
   --space-16: 64px;
   --space-24: 96px;
 
+  --section-py-start: var(--space-24);
+  --section-py-end: var(--space-16);
+  --gutter-inline: clamp(var(--space-6), 4vw, var(--space-16));
+  --stack-sm: var(--space-4);
+  --stack-md: var(--space-6);
+  --stack-lg: var(--space-8);
+  --stack-xl: var(--space-12);
+  --card-padding: var(--space-6);
+  --card-padding-lg: var(--space-8);
+  --section-cta-gap: var(--space-8);
+
   --maxw: 1200px;
   --maxw-text: 70ch;
   --radius: 12px;
   --radius-sm: 6px;
 
+  /* Typography — canonical role → font mapping (keep components consistent):
+       --font-display : headings (h1/h2, section/board titles), brand wordmark,
+                        editorial pull-quotes.
+       --font-sans    : body, descriptions, sub-headings & card titles (h3/h4, 600), UI.
+       --font-mono    : eyebrows, tags, labels, dates, venues, metadata, metric numbers.
+     New components should reuse these tokens by role rather than picking per element. */
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system,
     'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   --font-display: 'DM Serif Display', Georgia, 'Times New Roman', serif;
@@ -255,7 +272,7 @@ button {
 
 .container {
   width: 100%;
-  padding-inline: clamp(1.5rem, 4vw, 5rem);
+  padding-inline: var(--gutter-inline);
 }
 
 .visually-hidden {
@@ -422,8 +439,13 @@ button {
 
 /* Section rhythm */
 .section {
-  padding-block: 100px 80px;
+  padding-block: var(--section-py-start) var(--section-py-end);
   background: var(--section-bg);
+}
+@media (max-width: 768px) {
+  .section {
+    padding-block: var(--space-16) var(--space-12);
+  }
 }
 .section--alt {
   --section-bg: var(--section-bg-alt);
@@ -446,7 +468,7 @@ button {
 .section__subtitle {
   font-size: 0.95rem;
   color: var(--text-muted);
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-8);
   max-width: var(--maxw-text);
   line-height: 1.75;
 }

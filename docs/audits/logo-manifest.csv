@@ -1,16 +1,17 @@
 slug,entity,local_path,origin_file,source,usage,status
 aacr,AACR,public/assets/logos/aacr.png,assets/source/logos/aacr.png,"official website, manually trimmed — https://www.aacr.org","conferences.json, speakers.json, vision-board.json",ok
-astrazeneca,AstraZeneca,public/assets/logos/astrazeneca.png,assets/source/logos/astrazeneca.png,"official website, manually trimmed — https://www.astrazeneca.com",affiliations.json,ok
+astrazeneca,AstraZeneca,public/assets/logos/astrazeneca.png,assets/source/logos/astrazeneca.png,"official website, manually trimmed — https://www.astrazeneca.com","affiliations.json, experience.json, projects.json",ok
 biorxiv,bioRxiv,public/assets/logos/biorxiv.png,assets/source/logos/biorxiv.png,"official website, manually trimmed — https://www.biorxiv.org",publications.json,ok
-broad-institute,Broad Institute,public/assets/logos/broad-institute.png,assets/source/logos/broad-institute.png,"official website, manually trimmed — https://www.broadinstitute.org","affiliations.json, vision-board.json",ok
+broad-institute,Broad Institute,public/assets/logos/broad-institute.png,assets/source/logos/broad-institute.png,"official website, manually trimmed — https://www.broadinstitute.org","affiliations.json, vision-board.json, profile.json (vision collaborations)",ok
 eu-research-consortium,PERSIST-SEQ EU Consortium,public/assets/logos/eu-research-consortium.png,assets/source/logos/eu-research-consortium.png,"official website, manually trimmed — https://persist-seq.org",affiliations.json,ok
 gaia,GAIA Conference,public/assets/logos/gaia.png,assets/source/logos/gaia.png,"official website, manually trimmed — https://www.gaia.fish/2025",speakers.json,ok
-iit-madras,IIT Madras,public/assets/logos/iit-madras.png,assets/source/logos/iit-madras.png,"official website, manually trimmed — https://www.iitm.ac.in",affiliations.json,ok
+iit-madras,IIT Madras,public/assets/logos/iit-madras.png,assets/source/logos/iit-madras.png,"official website, manually trimmed — https://www.iitm.ac.in","affiliations.json, profile.json (vision collaborations)",ok
 jitc,Journal for ImmunoTherapy of Cancer,public/assets/logos/jitc.png,assets/source/logos/jitc.png,"official website, manually trimmed — https://jitc.bmj.com",publications.json,ok
-kaggle,Kaggle,public/assets/logos/kaggle.png,assets/source/logos/kaggle.png,"official website, manually trimmed — https://www.kaggle.com","profile.json, vision-board.json",ok
-cshl,Cold Spring Harbor Laboratory,public/assets/logos/cshl.png,assets/source/logos/cshl.png,"official website, manually trimmed — https://www.cshl.edu",deployed — not yet wired,ok
-hcl,HCLTech,public/assets/logos/hcl.png,assets/source/logos/hcl.png,"official website, manually trimmed — https://www.hcltech.com",deployed — not yet wired,ok
-healthware,Healthware,public/assets/logos/healthware.png,assets/source/logos/healthware.png,"official website, manually trimmed — https://healthwareindia.com",deployed — not yet wired,ok
-htic,"HTIC, IIT Madras",public/assets/logos/htic.png,assets/source/logos/htic.png,"official website, manually trimmed — https://www.hticiitm.org",deployed — not yet wired,ok
-srec,Sri Ramakrishna Engineering College,public/assets/logos/srec.png,assets/source/logos/srec.png,"official website, manually trimmed — https://srec.ac.in",deployed — not yet wired,ok
-brain,"""Multimodal AI"" concept mark",public/assets/logos/brain.png,—,"NO official source — placeholder, regenerate as a proper mark",vision-board.json,to-be-replaced
+kaggle,Kaggle,public/assets/logos/kaggle.png,assets/source/logos/kaggle.png,"official website, manually trimmed — https://www.kaggle.com",vision-board.json,ok
+cshl,Cold Spring Harbor Laboratory,public/assets/logos/cshl.png,assets/source/logos/cshl.png,"official website, manually trimmed — https://www.cshl.edu",profile.json (vision collaborations),ok
+hcl,HCLTech,public/assets/logos/hcl.png,assets/source/logos/hcl.png,"official website, manually trimmed — https://www.hcltech.com",experience.json,ok
+healthware,Healthware,public/assets/logos/healthware.png,assets/source/logos/healthware.png,"official website, manually trimmed — https://healthwareindia.com",experience.json,ok
+htic,"HTIC, IIT Madras",public/assets/logos/htic.png,assets/source/logos/htic.png,"official website, manually trimmed — https://www.hticiitm.org",experience.json,ok
+srec,Sri Ramakrishna Engineering College,public/assets/logos/srec.png,assets/source/logos/srec.png,"official website, manually trimmed — https://srec.ac.in",education.json,ok
+brain,"Multimodal AI concept mark",public/assets/logos/brain.png,assets/source/logos/brain.png,"generated concept mark (image_gen) — brain + modality nodes, accent #6C2FBF",vision-board.json,ok
+riken-bsi,RIKEN Brain Science Institute,public/assets/logos/riken-bsi.png,assets/source/logos/riken-bsi.png,"official website — https://bsi.riken.jp/common/img/site_logo_pageheader.png",profile.json (vision collaborations),ok

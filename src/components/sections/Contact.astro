@@ -146,8 +146,7 @@ const titleParts = contactPage.titleHighlight
   .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
-    margin-top: 1rem;
+    gap: var(--stack-xl);
     align-items: start;
   }
 
@@ -158,11 +157,11 @@ const titleParts = contactPage.titleHighlight
     font-weight: 400;
     line-height: 1.1;
     color: var(--heading);
-    margin-bottom: 1rem;
+    margin-bottom: var(--stack-sm);
   }
   .contact-subtitle {
     color: var(--text-muted);
-    margin-bottom: 2rem;
+    margin-bottom: var(--stack-lg);
     font-size: 0.95rem;
     max-width: 38ch;
   }
@@ -170,7 +169,7 @@ const titleParts = contactPage.titleHighlight
     display: flex;
     flex-wrap: wrap;
     gap: 0.85rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: var(--stack-md);
   }
   .response-time {
     display: flex;
@@ -178,7 +177,7 @@ const titleParts = contactPage.titleHighlight
     gap: 0.5rem;
     font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 2rem;
+    margin-bottom: var(--stack-lg);
   }
   .response-time :global(svg) {
     color: var(--accent-light);
@@ -188,7 +187,7 @@ const titleParts = contactPage.titleHighlight
     border: 1px solid var(--border);
     border-radius: var(--radius);
     background: var(--bg-elev);
-    padding: 1.5rem 1.75rem;
+    padding: var(--card-padding) var(--card-padding-lg);
     margin: 0;
     position: relative;
   }
@@ -223,7 +222,7 @@ const titleParts = contactPage.titleHighlight
   .connect-header {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--stack-sm);
     margin-bottom: 1.25rem;
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
@@ -239,14 +238,14 @@ const titleParts = contactPage.titleHighlight
   .connect-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: var(--stack-sm);
+    margin-bottom: var(--stack-sm);
   }
   .connect-card {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
-    padding: 1.5rem;
+    padding: var(--card-padding);
     text-decoration: none;
   }
   .connect-badge {
@@ -294,7 +293,7 @@ const titleParts = contactPage.titleHighlight
   .connect-banner {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: var(--stack-sm);
     padding: 1.25rem 1.5rem;
     text-decoration: none;
   }
@@ -326,7 +325,7 @@ const titleParts = contactPage.titleHighlight
   @media (max-width: 900px) {
     .contact-grid {
       grid-template-columns: 1fr;
-      gap: 2.5rem;
+      gap: var(--space-10);
     }
     .contact-subtitle {
       max-width: none;

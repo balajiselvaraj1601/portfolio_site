@@ -14,16 +14,15 @@ const { value, label, class: cls } = Astro.props;
 
 <style>
   .metric-card {
-    padding: var(--space-6);
+    padding: var(--card-padding);
     text-align: center;
   }
   .metric-card__value {
-    font-family: var(--font-display);
+    font-family: var(--font-mono);
     font-size: var(--fs-metric);
     font-weight: 600;
     color: var(--accent);
     line-height: var(--lh-tight);
-    letter-spacing: -0.02em;
     max-width: none;
     margin-bottom: var(--space-2);
   }
