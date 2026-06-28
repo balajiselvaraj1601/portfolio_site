@@ -93,6 +93,8 @@ export const profileSchema = z.object({
       tamil: z.string(),
       translation: z.string(),
       author: z.string(),
+      image: z.string().optional(),
+      imageAlt: z.string().optional(),
     })
     .optional(),
   metrics: z.array(MetricItem),
@@ -389,7 +391,6 @@ const SpeakingEngagement = z.object({
 
 export const speakersSchema = z.object({
   title: z.string(),
-  subtitle: z.string(),
   items: z.array(SpeakingEngagement),
 });
 

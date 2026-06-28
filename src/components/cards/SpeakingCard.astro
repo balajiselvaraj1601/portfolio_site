@@ -180,6 +180,8 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     white-space: nowrap;
     text-align: right;
     line-height: 1.4;
+    flex-shrink: 0;
+    min-width: max-content;
   }
 
   .speaking-card__title {
@@ -258,17 +260,5 @@ const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : 
     list-style: none;
     padding: 0;
     margin: 0.25rem 0 0;
-  }
-
-  @media (max-width: 520px) {
-    .speaking-card__head {
-      grid-template-columns: auto 1fr;
-    }
-
-    .speaking-card__date {
-      grid-column: 2;
-      text-align: left;
-      white-space: normal;
-    }
   }
 </style>

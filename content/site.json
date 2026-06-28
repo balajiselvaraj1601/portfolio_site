@@ -34,7 +34,7 @@
         "title": "Experience — Balaji Selvaraj",
         "description": "12+ years building and leading production AI across drug safety, oncology, and clinical imaging — career timeline, role-by-role impact, and mentorship."
       },
-      "sections": ["experience-intro", "timeline", "experience", "mentorship", "impact", "contact"]
+      "sections": ["experience-intro", "experience", "mentorship", "impact", "contact"]
     },
     {
       "id": "projects",

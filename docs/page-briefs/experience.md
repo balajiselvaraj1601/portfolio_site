@@ -8,7 +8,6 @@
 | Item (section id) | Source | Question | Weight |
 |---|---|---|---|
 | `experience-intro` | `content/work/experience.json` | What is this? | medium |
-| `timeline` | `content/work/experience.json` | Why should I trust it? | medium |
 | `experience` | `content/work/experience.json` | How does it work? | heavy |
 | `mentorship` | `content/work/mentorship.json` | Why should I trust it? | light |
 | `impact` | `content/work/strategic-impact.json` | Why should I care? | heavy |
@@ -16,6 +15,6 @@
 
 ## Structure
 
-`experience-intro` -> `timeline` -> `experience` -> `mentorship` -> `impact` -> `contact`
+`experience-intro` -> `experience` -> `mentorship` -> `impact` -> `contact`
 
-The page must orient the visitor with a fast career scan, expand into role-level evidence, preserve bullet tiers, and close with the full contact section.
+The interactive career timeline lives inside the `experience` section (tabbed role rail + detail panels). Home uses the standalone `timeline` section as a compact preview. The page must orient the visitor, expand into role-level evidence, preserve bullet tiers, and close with the full contact section.

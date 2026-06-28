@@ -12,7 +12,7 @@ sections`) into a few themed routes (keeps the nav short while giving heavy cont
 ```
 /              About (Home)  → hero, about, featured-case-studies, impact, vision-board,
                                leadership, skills, timeline, affiliations, publications, contact
-/experience    Experience    → experience-intro, timeline, experience, mentorship, impact, contact
+/experience    Experience    → experience-intro, experience, mentorship, impact, contact
 /projects      Projects      → projects-intro, featured-case-studies, projects, contact
 /research      Research      → generative-ai, publications, conferences, speakers, contact
 /recognition   Recognition   → awards, kaggle, education, contact
@@ -86,12 +86,12 @@ Reused primitives (define once, use everywhere): `Section` (heading + anchor + c
 | Vision Board | `work/vision-board.json` | `hubs[]`, `programs[]`, `orgCards[]` | Infographic layout on `/` and `/vision` |
 | Leadership | `person/profile.json` | `leadershipPhilosophy.statement` | Pull-quote block |
 | Skills | `work/skills.json` | `categories[] -> skills[]` | Grouped skill chips |
-| Career Timeline | `work/experience.json` | `roles[]` (org, position, period, mission) | Compact vertical rail on home; full rail on `/experience` |
+| Career Timeline | `work/experience.json` | `roles[]` (org, position, period, mission) | Compact vertical rail on home only |
 | Affiliations | `person/affiliations.json` | `items[].name`, optional `items[].logo` | Org list with optional logo SVG in `public/assets/logos/` |
 | Publications | `research/publications.json` | `items[]` (`label`, `title`, `url`, `description`) | Stacked ResearchLinkGrid; optional CTA to `/research` on home |
 | Contact | `person/profile.json` | `contact[]`, `contactPage`, `contactQuote` | Full connect layout on all routes that include `contact` |
 | Experience Intro | `work/experience.json` | `title`, `intro`, `snapshot[]` | Section lead-in + metric cards |
-| Experience | `work/experience.json` | `roles[] -> projects[] -> bullets[]` | Full timeline; optional `mission` per role |
+| Experience | `work/experience.json` | `roles[] -> projects[] -> bullets[]` | Interactive tabbed timeline + role panels; optional `mission` per role |
 | Projects Intro | `work/projects.json` | `title`, `intro`, `snapshot[]` | Section lead-in + metric cards |
 | Projects | `work/projects.json` | case-study fields + `highlights[]`, `tags[]` | Problem/solution/architecture/impact blocks |
 | Generative AI | `research/generative-ai.json` | `items[].text` | Bullet list |
