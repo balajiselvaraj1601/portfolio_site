@@ -16,20 +16,20 @@ implement them. The site should read as **credible, senior, and technical** — 
 
 Purple biopharma palette. Dark theme is the primary design target; light theme uses derived tints.
 
-| Token                    | Dark                    | Light                   | Use                             |
-| ------------------------ | ----------------------- | ----------------------- | ------------------------------- |
-| `--bg`                   | `#0D0B1E`               | `#FAF8FF`               | Page background                 |
-| `--bg-alt` / `--bg-elev` | `#13102B` / `#1A1530`   | `#F0EBFA` / `#FFFFFF`   | Alt sections / cards            |
-| `--text`                 | `#E8E0F5`               | `#1A1530`               | Primary text                    |
-| `--text-muted`           | `#9085B8`               | `#5C5470`               | Secondary text                  |
-| `--border`               | `rgba(108,47,191,0.25)` | `rgba(108,47,191,0.18)` | Dividers, card borders          |
-| `--accent`               | `#6C2FBF`               | `#6C2FBF`               | Links, active nav, primary CTA, metric numbers |
+| Token                    | Dark                    | Light                   | Use                                                                                |
+| ------------------------ | ----------------------- | ----------------------- | ---------------------------------------------------------------------------------- |
+| `--bg`                   | `#0D0B1E`               | `#FAF8FF`               | Page background                                                                    |
+| `--bg-alt` / `--bg-elev` | `#13102B` / `#1A1530`   | `#F0EBFA` / `#FFFFFF`   | Alt sections / cards                                                               |
+| `--text`                 | `#E8E0F5`               | `#1A1530`               | Primary text                                                                       |
+| `--text-muted`           | `#9085B8`               | `#5C5470`               | Secondary text                                                                     |
+| `--border`               | `rgba(108,47,191,0.25)` | `rgba(108,47,191,0.18)` | Dividers, card borders                                                             |
+| `--accent`               | `#6C2FBF`               | `#6C2FBF`               | Links, active nav, primary CTA, metric numbers                                     |
 | `--accent-light`         | `#9B5EE8`               | `#8348D6`               | Interactive emphasis (links, hovers, `.accent` spans) — light value is AA-adjusted |
-| `--accent-ll`            | `#C4A0F5`               | `#7B3FD4`               | Static labels (eyebrows, kickers, group headings) |
-| `--accent-red`           | `#C0182A`               | `#C0182A`               | Secondary accent (awards, tags) |
-| `--bg-chip`              | `#211D3A`               | `#E8E0F5`               | Skill/tag pills (`.chip`) |
-| `--logo-surface`         | `#FFFFFF`               | `#FFFFFF`               | Logo badge containers |
-| `--focus-ring`           | `#9B5EE8`               | `#6C2FBF`               | Keyboard focus outline |
+| `--accent-ll`            | `#C4A0F5`               | `#7B3FD4`               | Static labels (eyebrows, kickers, group headings)                                  |
+| `--accent-red`           | `#C0182A`               | `#C0182A`               | Secondary accent (awards, tags)                                                    |
+| `--bg-chip`              | `#211D3A`               | `#E8E0F5`               | Skill/tag pills (`.chip`)                                                          |
+| `--logo-surface`         | `#FFFFFF`               | `#FFFFFF`               | Logo badge containers                                                              |
+| `--focus-ring`           | `#9B5EE8`               | `#6C2FBF`               | Keyboard focus outline                                                             |
 
 > These are sensible defaults, not mandates. Whatever values are chosen must pass **WCAG AA
 > contrast** in both themes (see `accessibility.md`). Verify text/background and accent/background pairs.

@@ -21,4 +21,4 @@ Agent batch queue for the codebase sweep. See `.cursor/skills/task-runner/SKILL.
 - [x] Wave 5: Assets (persist-seq wiring, projects icons, entity cleanup)
       AC: build exits 0
 - [x] Final verification: build, check, lint, format:check, smoke:localhost
-  AC: all commands exit 0
+      AC: all commands exit 0

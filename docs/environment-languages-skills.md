@@ -179,14 +179,14 @@ flowchart TB
 
 ### Cross-stack skill clusters
 
-| Task | Stack skills involved |
-|---|---|
-| Add a content field | Zod → JSON → Astro component → optional CSS |
-| Add a nav view/section | `site.json` wiring + `SectionRenderer` + `content.ts` validation |
-| Change theme/layout tokens | `global.css` + component `<style>` blocks |
-| Touch head/meta/SEO | `BaseHead.astro` + `content/site.json` → `seo` + `SITE_URL` |
-| Fix deploy/CI | GitHub Actions YAML + `astro.config.mjs` + `robots.txt` |
-| Regressions after UI change | Playwright smoke + manual a11y spot-check |
+| Task                        | Stack skills involved                                            |
+| --------------------------- | ---------------------------------------------------------------- |
+| Add a content field         | Zod → JSON → Astro component → optional CSS                      |
+| Add a nav view/section      | `site.json` wiring + `SectionRenderer` + `content.ts` validation |
+| Change theme/layout tokens  | `global.css` + component `<style>` blocks                        |
+| Touch head/meta/SEO         | `BaseHead.astro` + `content/site.json` → `seo` + `SITE_URL`      |
+| Fix deploy/CI               | GitHub Actions YAML + `astro.config.mjs` + `robots.txt`          |
+| Regressions after UI change | Playwright smoke + manual a11y spot-check                        |
 
 ---
 
@@ -254,22 +254,22 @@ Grouped by how much of day-to-day work each skill unlocks.
 
 To **programmatically maintain most of this environment**, a developer (or agent) should be comfortable with:
 
-| Priority     | Skill                             | Why                                                                             |
-| ------------ | --------------------------------- | ------------------------------------------------------------------------------- |
-| Must-have    | TypeScript + Zod                  | Schema, types, and build-time validation are the core contract                  |
-| Must-have    | Astro + JSON content layer        | Almost every feature change touches schema → JSON → component                   |
-| Must-have    | npm / Node ESM                    | Build, dev server, maintenance scripts                                          |
-| Must-have    | CSS (token-based)                 | All styling is manual in one global stylesheet                                  |
+| Priority     | Skill                             | Why                                                                              |
+| ------------ | --------------------------------- | -------------------------------------------------------------------------------- |
+| Must-have    | TypeScript + Zod                  | Schema, types, and build-time validation are the core contract                   |
+| Must-have    | Astro + JSON content layer        | Almost every feature change touches schema → JSON → component                    |
+| Must-have    | npm / Node ESM                    | Build, dev server, maintenance scripts                                           |
+| Must-have    | CSS (token-based)                 | All styling is manual in one global stylesheet                                   |
 | Must-have    | Vanilla TS client scripts         | Scroll-spy, theme toggle, mobile nav — progressive enhancement in `src/scripts/` |
-| Strong plus  | @fontsource / typography tokens   | Self-hosted fonts; role mapping via `--font-*` tokens in `global.css`           |
-| Strong plus  | @astrojs/sitemap pin (3.6.0)      | Do not upgrade on Astro 4; keep redirect stubs aligned with config              |
-| Strong plus  | JSON-LD / SEO metadata            | When touching `BaseHead.astro`, `site.json` seo, or canonical URLs              |
-| Strong plus  | Bash + jq                         | Task-runner hooks and operator scripts                                          |
-| Strong plus  | Playwright                        | Automated localhost smoke checks                                                |
-| Strong plus  | GitHub Actions                    | CI and Pages deploy                                                             |
-| Nice-to-have | Python (Pillow)                   | Logo/asset pipeline only                                                        |
-| Nice-to-have | Cursor hooks/skills + AgentMemory | Agent batch automation, not site runtime                                        |
-| Cross-repo   | Markdown wikis + Python tooling   | When syncing content from `resume_builder` or generating assets via `image_gen` |
+| Strong plus  | @fontsource / typography tokens   | Self-hosted fonts; role mapping via `--font-*` tokens in `global.css`            |
+| Strong plus  | @astrojs/sitemap pin (3.6.0)      | Do not upgrade on Astro 4; keep redirect stubs aligned with config               |
+| Strong plus  | JSON-LD / SEO metadata            | When touching `BaseHead.astro`, `site.json` seo, or canonical URLs               |
+| Strong plus  | Bash + jq                         | Task-runner hooks and operator scripts                                           |
+| Strong plus  | Playwright                        | Automated localhost smoke checks                                                 |
+| Strong plus  | GitHub Actions                    | CI and Pages deploy                                                              |
+| Nice-to-have | Python (Pillow)                   | Logo/asset pipeline only                                                         |
+| Nice-to-have | Cursor hooks/skills + AgentMemory | Agent batch automation, not site runtime                                         |
+| Cross-repo   | Markdown wikis + Python tooling   | When syncing content from `resume_builder` or generating assets via `image_gen`  |
 
 ---
 
