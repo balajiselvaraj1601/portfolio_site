@@ -5,9 +5,9 @@
 
 ## Items
 
-| Item (section id) | Source                           | Question           | Weight |
-| ----------------- | -------------------------------- | ------------------ | ------ |
-| `vision-board`    | `content/work/vision-board.json` | How does it work?  | heavy  |
+| Item (section id) | Source                           | Question          | Weight |
+| ----------------- | -------------------------------- | ----------------- | ------ |
+| `vision-board`    | `content/work/vision-board.json` | How does it work? | heavy  |
 
 ## Structure
 

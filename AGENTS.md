@@ -70,15 +70,15 @@ Section contracts: `docs/specification.md` and `docs/page-briefs/`.
 /experience … /contact         → ViewRedirect stubs → /#{anchor}
 ```
 
-| View            | Page id       | Nav label   | `viewSections`                              |
-| --------------- | ------------- | ----------- | ------------------------------------------- |
-| `/` (default)   | `home`        | About       | hero, thirukural, leadership                |
-| `/#experience`  | `experience`  | Experience  | experience-intro, experience                |
-| `/#projects`    | `projects`    | Projects    | projects-intro, featured-case-studies       |
-| `/#research`    | `research`    | Research    | publications, conferences, speakers         |
-| `/#recognition` | `recognition` | Recognition | awards, kaggle, education                   |
-| `/#vision`      | `vision`      | Vision      | vision-board                                |
-| `/#contact`     | `contact`     | Contact     | contact                                     |
+| View            | Page id       | Nav label   | `viewSections`                        |
+| --------------- | ------------- | ----------- | ------------------------------------- |
+| `/` (default)   | `home`        | About       | hero, thirukural, leadership          |
+| `/#experience`  | `experience`  | Experience  | experience-intro, experience          |
+| `/#projects`    | `projects`    | Projects    | projects-intro, featured-case-studies |
+| `/#research`    | `research`    | Research    | publications, conferences, speakers   |
+| `/#recognition` | `recognition` | Recognition | awards, kaggle, education             |
+| `/#vision`      | `vision`      | Vision      | vision-board                          |
+| `/#contact`     | `contact`     | Contact     | contact                               |
 
 **Full home DOM order** (15 sections): hero → thirukural → leadership →
 experience-intro → experience → projects-intro → featured-case-studies →

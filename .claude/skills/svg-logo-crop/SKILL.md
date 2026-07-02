@@ -50,10 +50,10 @@ Crop Progress:
 
 ### Step 1 — Source and output
 
-| Input | Typical path |
-| --- | --- |
+| Input           | Typical path                               |
+| --------------- | ------------------------------------------ |
 | Workspace draft | `/home/engineer/workspace/logo_{slug}.svg` |
-| Site asset | `public/assets/logos/{slug}.svg` |
+| Site asset      | `public/assets/logos/{slug}.svg`           |
 
 Default output: sibling `{basename}_cropped.svg` in the same directory as the source.
 
@@ -133,12 +133,12 @@ Copy verified crop to `public/assets/logos/{slug}.svg`. Confirm JSON wiring:
 
 Illustrator export `logo_persister_seq.svg` — wordmark + circular Q emblem.
 
-| Approach | viewBox | Problem |
-| --- | --- | --- |
-| Original artboard | `0 0 849.73 288.56` | ~60 px empty left/right/top; bottom clipped |
-| Naive path bbox | `0 0 906.48 284.48` + translate | Misread relative arcs; **~106 px of Q tail clipped** |
-| Path bbox + arc sampling | `0 0 736.96 292.21` | Full Q geometry kept, but **~96 px empty bottom** (hollow arc bbox) |
-| **Visible-ink scan** | `58.98 55.91 731.77 183.72` | Zero margins; full emblem + all letterforms |
+| Approach                 | viewBox                         | Problem                                                             |
+| ------------------------ | ------------------------------- | ------------------------------------------------------------------- |
+| Original artboard        | `0 0 849.73 288.56`             | ~60 px empty left/right/top; bottom clipped                         |
+| Naive path bbox          | `0 0 906.48 284.48` + translate | Misread relative arcs; **~106 px of Q tail clipped**                |
+| Path bbox + arc sampling | `0 0 736.96 292.21`             | Full Q geometry kept, but **~96 px empty bottom** (hollow arc bbox) |
+| **Visible-ink scan**     | `58.98 55.91 731.77 183.72`     | Zero margins; full emblem + all letterforms                         |
 
 Lesson: emblem paths with large elliptical arcs (`a78.44,78.44,0,1,0,…`) need
 visible-ink measurement — mathematical bbox ≠ painted bbox.
@@ -147,19 +147,19 @@ visible-ink measurement — mathematical bbox ≠ painted bbox.
 
 ## When to escalate
 
-| Situation | Action |
-| --- | --- |
-| Redesign / simplify paths | `logo-emblem-author` skill |
-| New logo from scratch | `logo-emblem-author` + `brand-logo-evaluation` |
-| Missing slug / audit | `portfolio-icon-audit` |
-| PNG/favicon derivatives | `docs/assets.md`; rasterize **after** crop |
+| Situation                 | Action                                         |
+| ------------------------- | ---------------------------------------------- |
+| Redesign / simplify paths | `logo-emblem-author` skill                     |
+| New logo from scratch     | `logo-emblem-author` + `brand-logo-evaluation` |
+| Missing slug / audit      | `portfolio-icon-audit`                         |
+| PNG/favicon derivatives   | `docs/assets.md`; rasterize **after** crop     |
 
 ---
 
 ## Progressive disclosure
 
-| Need | Read |
-| --- | --- |
-| Bbox method details & pitfalls | [bbox-methods.md](bbox-methods.md) |
-| Crop automation | [scripts/crop-visible-ink.py](scripts/crop-visible-ink.py) |
-| Site logo paths & rendering | `docs/assets.md`, `src/lib/logo-display.ts` |
+| Need                           | Read                                                       |
+| ------------------------------ | ---------------------------------------------------------- |
+| Bbox method details & pitfalls | [bbox-methods.md](bbox-methods.md)                         |
+| Crop automation                | [scripts/crop-visible-ink.py](scripts/crop-visible-ink.py) |
+| Site logo paths & rendering    | `docs/assets.md`, `src/lib/logo-display.ts`                |

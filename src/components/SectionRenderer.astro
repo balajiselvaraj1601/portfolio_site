@@ -19,7 +19,7 @@ import Conferences from '@components/sections/Conferences.astro';
 import Speakers from '@components/sections/Speakers.astro';
 import Kaggle from '@components/sections/Kaggle.astro';
 import Contact from '@components/sections/Contact.astro';
-import { sectionViewMap, navViews, navHref } from '@lib/content';
+import { sectionViewMap, navViews } from '@lib/content';
 
 /**
  * Every imported `.astro` file's default export shares the same component
@@ -62,10 +62,10 @@ const researchView = navViews.find((v) => v.id === 'research');
 
 function sectionProps(id: string): Record<string, string> {
   if (id === 'featured-case-studies' && projectsView) {
-    return { showMoreHref: navHref(projectsView) };
+    return { showMoreHref: `/#${projectsView.viewAnchor}` };
   }
   if (id === 'publications' && researchView) {
-    return { showMoreHref: navHref(researchView) };
+    return { showMoreHref: `/#${researchView.viewAnchor}` };
   }
   return {};
 }
@@ -79,7 +79,9 @@ function sectionProps(id: string): Record<string, string> {
     if (id === 'thirukural' && sections[index - 1] === 'hero') return null;
 
     if (id === 'hero' && sections[index + 1] === 'thirukural') {
-      const heroViews = navViewsMode ? sectionViewMap.hero?.join(' ') : undefined;
+      const heroViews = navViewsMode
+        ? sectionViewMap.hero?.join(' ')
+        : undefined;
       const kuralViews = navViewsMode
         ? sectionViewMap.thirukural?.join(' ')
         : undefined;
@@ -118,7 +120,9 @@ function sectionProps(id: string): Record<string, string> {
 
     return (
       <>
-        {showDivider && <Divider data-nav-divider={navViewsMode || undefined} />}
+        {showDivider && (
+          <Divider data-nav-divider={navViewsMode || undefined} />
+        )}
         {navViewsMode && views ? (
           <div
             class="section-view-root"

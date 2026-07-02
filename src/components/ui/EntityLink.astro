@@ -14,9 +14,7 @@ const isExternal = !!href && /^https?:\/\//.test(href);
     <a
       href={href}
       class:list={['entity-link', className]}
-      {...(isExternal
-        ? { target: '_blank', rel: 'noopener noreferrer' }
-        : {})}
+      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
     >
       {label}
       {isExternal && (

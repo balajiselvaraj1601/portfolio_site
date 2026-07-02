@@ -39,7 +39,9 @@ const ytEmbed = ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : null;
 const logoUrl = logoSrc(logo);
 ---
 
-<article class:list={['rcard', 'content-card', { 'rcard--stacked': isStacked }]}>
+<article
+  class:list={['rcard', 'content-card', { 'rcard--stacked': isStacked }]}
+>
   {
     logoUrl ? (
       <LogoBadge

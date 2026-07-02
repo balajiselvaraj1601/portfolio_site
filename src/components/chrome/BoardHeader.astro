@@ -13,7 +13,13 @@ interface Props {
   size?: 'md' | 'sm';
 }
 
-const { title, flank = 'in', id, as: Heading = 'h2', size = 'md' } = Astro.props;
+const {
+  title,
+  flank = 'in',
+  id,
+  as: Heading = 'h2',
+  size = 'md',
+} = Astro.props;
 const chevSize = size === 'sm' ? 14 : 16;
 ---
 

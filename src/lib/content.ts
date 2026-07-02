@@ -269,7 +269,9 @@ function assertLogoAsset(slug: string, context: string) {
   for (const ext of LOGO_EXTS) {
     if (logoFiles.has(`${slug}.${ext}`)) return;
   }
-  throw new Error(`${context}: missing logo asset "${slug}" under public/assets/logos/`);
+  throw new Error(
+    `${context}: missing logo asset "${slug}" under public/assets/logos/`
+  );
 }
 
 type VisionMark = { kind: string; asset?: string; name?: string };

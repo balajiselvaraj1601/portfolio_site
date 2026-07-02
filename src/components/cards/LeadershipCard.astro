@@ -12,7 +12,7 @@ type Props = NonNullable<Impact['leadershipCards']>[number];
 const { icon, title, subtitle, entity } = Astro.props;
 const iconName = resolveIcon(icon, 'diamond');
 const logoUrl = logoSrc(entity);
-const showLogoBadge = logoUrl && logoUsesBadge(entity);
+const showLogoBadge = Boolean(logoUrl && logoUsesBadge(entity));
 ---
 
 <article class="lcard">

@@ -33,7 +33,7 @@ Each mode dir holds exactly one source `icon_*.png` and its expected golden SVG.
 
 The goldens are tied to the installed **potrace** and **svgo** versions — a
 version bump can legitimately change byte output. When that happens the byte-diff
-fails *by design*. Adopt the new output deliberately:
+fails _by design_. Adopt the new output deliberately:
 
 ```bash
 python3 tests/run-icon-tests.py --update-goldens

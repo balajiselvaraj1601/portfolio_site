@@ -4,11 +4,11 @@ Use this reference when choosing how to measure artwork bounds for logo crops.
 
 ## Method ranking (best → worst)
 
-| Rank | Method | Accuracy | Use when |
-| --- | --- | --- | --- |
-| 1 | **Visible-ink raster scan** | Matches human perception | All portfolio logo crops (default) |
-| 2 | Relative path walk + arc sampling | Good for solid fills; may over-estimate hollow arcs | Playwright unavailable |
-| 3 | Naive token pairing on path `d` | **Unsafe** — never use for crop | Never |
+| Rank | Method                            | Accuracy                                            | Use when                           |
+| ---- | --------------------------------- | --------------------------------------------------- | ---------------------------------- |
+| 1    | **Visible-ink raster scan**       | Matches human perception                            | All portfolio logo crops (default) |
+| 2    | Relative path walk + arc sampling | Good for solid fills; may over-estimate hollow arcs | Playwright unavailable             |
+| 3    | Naive token pairing on path `d`   | **Unsafe** — never use for crop                     | Never                              |
 
 ## Failure mode: naive arc parsing
 
@@ -47,20 +47,20 @@ Using path bbox alone left **~96 px empty bottom border**.
 
 At minimum when implementing Method 2:
 
-| Command | Relative form |
-| --- | --- |
-| Move/line | `m`, `l`, `h`, `v` |
-| Curves | `c`, `q`, `s`, `t` |
-| Arcs | `a` (7 params; last two are Δx, Δy when relative) |
-| Close | `z` |
+| Command   | Relative form                                     |
+| --------- | ------------------------------------------------- |
+| Move/line | `m`, `l`, `h`, `v`                                |
+| Curves    | `c`, `q`, `s`, `t`                                |
+| Arcs      | `a` (7 params; last two are Δx, Δy when relative) |
+| Close     | `z`                                               |
 
 Absolute commands (`M`, `L`, `H`, `V`, `C`, `Q`, `A`) appear in many Illustrator exports
 after the initial `M`.
 
 ## Post-crop margin targets
 
-| Edge | Target |
-| --- | --- |
+| Edge                     | Target                        |
+| ------------------------ | ----------------------------- |
 | top, bottom, left, right | ≤ 1 px at native render scale |
 
 If margins exceed 1 px after visible-ink crop, check for semi-transparent anti-aliasing

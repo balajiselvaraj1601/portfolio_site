@@ -72,13 +72,13 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ### collaborations.json — optional logo field
 
-| entity_id       | name                   | slug                     | status                              |
-| --------------- | ---------------------- | ------------------------ | ----------------------------------- |
-| coll-broad      | Broad Institute        | `broad-institute`        | wired in `LeadershipPhilosophy.astro` |
-| coll-cshl       | Cold Spring Harbor Lab | `cshl`                   | wired                               |
-| coll-iit        | IIT Madras             | `iit-madras`             | wired                               |
-| coll-uppsala    | Uppsala University     | `uppsala-university`     | wired                               |
-| coll-ai-sweden  | AI Sweden              | `ai-sweden`              | wired                               |
+| entity_id      | name                   | slug                 | status                                |
+| -------------- | ---------------------- | -------------------- | ------------------------------------- |
+| coll-broad     | Broad Institute        | `broad-institute`    | wired in `LeadershipPhilosophy.astro` |
+| coll-cshl      | Cold Spring Harbor Lab | `cshl`               | wired                                 |
+| coll-iit       | IIT Madras             | `iit-madras`         | wired                                 |
+| coll-uppsala   | Uppsala University     | `uppsala-university` | wired                                 |
+| coll-ai-sweden | AI Sweden              | `ai-sweden`          | wired                                 |
 
 ---
 
@@ -150,11 +150,11 @@ Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
 
 ## 5. Content images
 
-| entity_id | path field                  | current path                                | component    |
-| --------- | --------------------------- | ------------------------------------------- | ------------ |
-| portrait  | `profile.portrait.src`      | `/assets/images/balaji.png`                 | `Hero.astro` |
-| photo     | `profile.photo`             | `/assets/images/balaji.png`                 | legacy alias |
-| resume    | `public/assets/resume/balaji-selvaraj-resume.pdf` | asset-only (not in nav) | not an image |
+| entity_id | path field                                        | current path                | component    |
+| --------- | ------------------------------------------------- | --------------------------- | ------------ |
+| portrait  | `profile.portrait.src`                            | `/assets/images/balaji.png` | `Hero.astro` |
+| photo     | `profile.photo`                                   | `/assets/images/balaji.png` | legacy alias |
+| resume    | `public/assets/resume/balaji-selvaraj-resume.pdf` | asset-only (not in nav)     | not an image |
 
 ### content/drafts/competitions/*.md (unwired / not in build)
 

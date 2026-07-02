@@ -104,11 +104,11 @@ Apply [resolution-rules.md](resolution-rules.md):
 
 Mark status:
 
-| Status         | Meaning                                            |
-| -------------- | -------------------------------------------------- |
-| `resolved`     | Asset exists and matches                           |
-| `fallback`     | Renders but uses generic key (`folder`, `diamond`) |
-| `missing`      | No asset — queue for Cursor                        |
+| Status         | Meaning                                                      |
+| -------------- | ------------------------------------------------------------ |
+| `resolved`     | Asset exists and matches                                     |
+| `fallback`     | Renders but uses generic key (`folder`, `diamond`)           |
+| `missing`      | No asset — queue for Cursor                                  |
 | `needs_schema` | Content has no field yet (e.g. optional logo on a list item) |
 
 ### Phase C.5 — Evaluate (site_brand / org_logo)

@@ -42,7 +42,13 @@ const stats: StatCell[] = [
   },
   { icon: 'calendar', label: 'Period', value: record.period },
   ...(record.gpa
-    ? [{ icon: 'chart' as IconName, label: 'GPA', value: formatGpa(record.gpa)! }]
+    ? [
+        {
+          icon: 'chart' as IconName,
+          label: 'GPA',
+          value: formatGpa(record.gpa)!,
+        },
+      ]
     : []),
   ...(achievementLines.length > 0
     ? [
@@ -82,7 +88,7 @@ const stats: StatCell[] = [
         }
         <p class="edu-degree-short">{degreeShort}</p>
         <h3 class="edu-field">{fieldLabel}</h3>
-        <div class="edu-rule" aria-hidden="true" />
+        <div class="edu-rule" aria-hidden="true"></div>
       </div>
 
       <div class="edu-body">
@@ -90,7 +96,10 @@ const stats: StatCell[] = [
           {
             stats.map((s) => (
               <div class="edu-stat">
-                <span class="recog-tile__icon edu-stat__icon" aria-hidden="true">
+                <span
+                  class="recog-tile__icon edu-stat__icon"
+                  aria-hidden="true"
+                >
                   <Icon name={s.icon} size={18} />
                 </span>
                 <div class="edu-stat__copy">
@@ -120,7 +129,10 @@ const stats: StatCell[] = [
         {
           record.summary && (
             <div class="edu-highlight">
-              <span class="recog-tile__icon edu-highlight__icon" aria-hidden="true">
+              <span
+                class="recog-tile__icon edu-highlight__icon"
+                aria-hidden="true"
+              >
                 <Icon name="trophy" size={20} />
               </span>
               <p class="edu-highlight__text">{record.summary}</p>
@@ -154,13 +166,21 @@ const stats: StatCell[] = [
     background:
       radial-gradient(
         circle at 0.4rem 0.4rem,
-        color-mix(in srgb, var(--accent-card, var(--accent-gold)) 12%, transparent)
+        color-mix(
+            in srgb,
+            var(--accent-card, var(--accent-gold)) 12%,
+            transparent
+          )
           0.5px,
         transparent 0.5px
       ),
       radial-gradient(
         120% 80% at 0% 0%,
-        color-mix(in srgb, var(--accent-card, var(--accent-gold)) 10%, transparent),
+        color-mix(
+          in srgb,
+          var(--accent-card, var(--accent-gold)) 10%,
+          transparent
+        ),
         transparent 55%
       );
     background-size:
@@ -292,7 +312,11 @@ const stats: StatCell[] = [
     gap: var(--space-4);
     padding: var(--space-5);
     border: 1px solid
-      color-mix(in srgb, var(--accent-card, var(--accent-gold)) 45%, var(--border));
+      color-mix(
+        in srgb,
+        var(--accent-card, var(--accent-gold)) 45%,
+        var(--border)
+      );
     border-radius: var(--radius-lg);
     background: color-mix(
       in srgb,

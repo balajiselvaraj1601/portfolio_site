@@ -5,6 +5,7 @@ Production-grade raster → vector icon pipeline for the portfolio site. Convert
 ## Quick Start
 
 ### One-time setup
+
 ```bash
 apt-get install -y potrace
 npm install -g svgo
@@ -12,6 +13,7 @@ pip install pillow numpy svgelements
 ```
 
 ### Generate an icon
+
 ```bash
 cd /home/engineer/workspace/portfolio_site
 
@@ -23,6 +25,7 @@ python3 scripts/svg-icon-generator.py \
 ```
 
 This generates:
+
 - `trophy-icon-24.svg` — 24px icon
 - `trophy-icon-512.svg` — 512px icon (base asset)
 - `trophy-badge-24.svg` — 24px with circular badge
@@ -45,6 +48,7 @@ All seven happen automatically in `python3 scripts/svg-icon-generator.py`.
 ## Configuration
 
 ### CLI flags (quick adjustments)
+
 ```bash
 # Output multiple sizes / custom directory
 --sizes 24,32,48,512
@@ -78,6 +82,7 @@ high R channel) — use `--colored-glyph` there. For a **transparent** PNG use
 `scripts/batch-icon-generate.sh [DIR] [flags…]`.
 
 ### Config file (full tuning)
+
 ```bash
 python3 scripts/svg-icon-generator.py \
   --source icon.png \
@@ -86,6 +91,7 @@ python3 scripts/svg-icon-generator.py \
 ```
 
 Edit `icon-generator-example.json` (all keys documented there with `comment_*`):
+
 - `foreground_mode` — `"light"` | `"dark"` | `"nonwhite"` | `"alpha"` (null → use `foreground_is_light`)
 - `light_threshold` / `white_threshold` / `alpha_threshold` / `crop_threshold` — cutoffs (0-255) for the respective modes and auto-crop
 - `opttolerance` — curve fitting precision (lower = more nodes, more accurate)
@@ -105,6 +111,7 @@ Every SVG includes:
 ```
 
 **Guarantees:**
+
 - ✓ `fill="currentColor"` — inherits CSS `color` property
 - ✓ Explicit `width`/`height` — sensible default size
 - ✓ `viewBox` — fully scalable, overridable by CSS
@@ -114,45 +121,57 @@ Every SVG includes:
 ## Common Issues
 
 ### Icon comes out inverted (background filled, glyph hollow)
+
 The mask mode doesn't match the source's polarity.
+
 ```bash
 # Dark glyph on a light background:
 --dark-glyph
 ```
 
 ### Colored/gradient glyph traces as broken speckles
+
 A per-channel dark/light test drops saturated hues (a red pixel has a high R
 channel). Switch to the non-white mask:
+
 ```bash
 --colored-glyph            # tune with --white-threshold if needed
 ```
 
 ### Whole image gets traced, or transparent areas fill in
+
 The source is a transparent PNG but you used a color mode (which sees PIL's
 transparent-as-black), or you used `--alpha-glyph` on a fully opaque source (the
 script now errors on the latter). For a genuinely transparent source:
+
 ```bash
 --alpha-glyph              # masks the opaque region via the alpha channel
 ```
 
 ### Small details vanish (handles, terminals, thin gaps)
+
 The `turdsize` parameter is suppressing intentional detail as noise.
+
 ```bash
 # Lower turdsize (default 4):
 --config myconfig.json  # edit turdsize: 2
 ```
 
 ### Background contamination (corners fused into the glyph)
+
 The mask isn't constrained to the actual shape.
+
 ```bash
 # Verify constrain_to_circle is true in config:
 --config myconfig.json  # constrain_to_circle: true
 ```
 
 ### Icon looks disproportionate (too big/small relative to container)
+
 The output's proportions don't match the source.
 
 **Debug:** Before running the full pipeline, inspect the source:
+
 ```python
 from PIL import Image
 import numpy as np
@@ -166,6 +185,7 @@ Then adjust `glyph_fill_fraction` and `vertical_center_offset` in the config.
 ## Verification (before integration)
 
 Quick automated checks:
+
 ```bash
 python3 scripts/verify-icon.py src/assets/icons/*-icon-512.svg   # margins/flush/centered, exit!=0 on failure
 python3 tests/run-icon-tests.py                                  # golden-regression harness (all modes)
@@ -174,16 +194,19 @@ python3 tests/run-icon-tests.py                                  # golden-regres
 After generation, **always** also:
 
 1. **Render at multiple sizes** — check legibility at 16px
+
    ```bash
    # Use any SVG viewer or browser dev tools to preview
    ```
 
 2. **Test currentColor inheritance** in browser DevTools:
+
    ```html
    <div style="color: #e11d48">
      <svg src="icon.svg">...</svg>
    </div>
    ```
+
    Should render in red if `currentColor` is working.
 
 3. **Compare side-by-side with source** at ~original resolution — check for proportion drift or off-centering.
@@ -191,6 +214,7 @@ After generation, **always** also:
 ## Integration with Portfolio
 
 Icons generated here are meant for:
+
 - Skill badges (circular icon in `ProgramBadgeCard.astro`)
 - Section headers
 - Social links
@@ -203,18 +227,21 @@ Reference: `portfolio-icon-audit` skill manages the inventory.
 ## Troubleshooting Dependencies
 
 **Missing potrace:**
+
 ```bash
 apt-get install -y potrace
 potrace --version  # verify
 ```
 
 **Missing svgo:**
+
 ```bash
 npm install -g svgo
 svgo --version  # verify
 ```
 
 **Missing Python packages:**
+
 ```bash
 pip install pillow numpy svgelements --break-system-packages
 python3 -c "from svgelements import Path; print('OK')"
