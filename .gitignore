@@ -34,6 +34,7 @@ __pycache__/
 
 # Icon-pipeline generated intermediates (final SVGs go to public/assets/logos/)
 src/assets/icons/_work/
+scripts/.icon-stage/
 
 # Task-runner runtime state (local only)
 .cursor/task-runner.state.json
