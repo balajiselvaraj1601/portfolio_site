@@ -26,6 +26,8 @@ const SHOTS = [
   { file: 'awards.png', hash: '#recognition', selector: '#awards' },
   { file: 'kaggle.png', hash: '#recognition', selector: '#kaggle' },
   { file: 'contact_page.png', hash: '#contact', selector: '#contact' },
+  { file: 'vision-board.png', hash: '#vision', selector: '#vision-board' },
+  { file: 'vision-hubs.png', hash: '#vision', selector: '.vboard__flow' },
 ];
 
 async function waitForReveal(page, selector, timeout = 15000) {

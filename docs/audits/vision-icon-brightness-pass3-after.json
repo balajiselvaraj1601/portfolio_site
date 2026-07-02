@@ -1,0 +1,311 @@
+{
+  "label": "after",
+  "targets": {
+    "lum": 72.0,
+    "glyph_ink": 35.0
+  },
+  "png": [
+    {
+      "file": "icon_achievement_award.png",
+      "set_name": "icon_box",
+      "foreground_pct": 46.99457184003545,
+      "mean_lum": 252.40850830078125,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_analytics_dashboard.png",
+      "set_name": "icon_box",
+      "foreground_pct": 55.783759831616266,
+      "mean_lum": 252.42922973632812,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_business_presentation.png",
+      "set_name": "icon_box",
+      "foreground_pct": 46.545917802149106,
+      "mean_lum": 251.58416748046875,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_drug_safety.png",
+      "set_name": "icon_box",
+      "foreground_pct": 52.71191135734072,
+      "mean_lum": 95.65030670166016,
+      "p90_lum": 191.4503936767578
+    },
+    {
+      "file": "icon_financial_growth.png",
+      "set_name": "icon_box",
+      "foreground_pct": 43.742107012296444,
+      "mean_lum": 252.20962524414062,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_global_location.png",
+      "set_name": "icon_box",
+      "foreground_pct": 49.57682508031461,
+      "mean_lum": 250.81558227539062,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_target_goal.png",
+      "set_name": "icon_box",
+      "foreground_pct": 54.11432369557993,
+      "mean_lum": 252.22129821777344,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_team_growth.png",
+      "set_name": "icon_box",
+      "foreground_pct": 48.565414866511574,
+      "mean_lum": 252.39637756347656,
+      "p90_lum": 255.0
+    },
+    {
+      "file": "icon_global_analytics.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 31.145071028842015,
+      "mean_lum": 97.02835083007812,
+      "p90_lum": 134.53509521484375
+    },
+    {
+      "file": "icon_innovation_idea.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 24.796505856660712,
+      "mean_lum": 61.84384536743164,
+      "p90_lum": 95.49079895019531
+    },
+    {
+      "file": "icon_learning_education.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 24.7170935080405,
+      "mean_lum": 90.50377655029297,
+      "p90_lum": 130.7917938232422
+    },
+    {
+      "file": "icon_partnership_handshake.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 27.839984117530275,
+      "mean_lum": 97.11140441894531,
+      "p90_lum": 121.90679931640625
+    },
+    {
+      "file": "icon_performance_growth.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 23.402819138376017,
+      "mean_lum": 59.76877975463867,
+      "p90_lum": 98.63800048828125
+    },
+    {
+      "file": "icon_target_goal.png",
+      "set_name": "icon_kaggle",
+      "foreground_pct": 28.92811020232458,
+      "mean_lum": 84.61036682128906,
+      "p90_lum": 110.53319549560547
+    },
+    {
+      "file": "icon_cube_3d.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 31.31468811868782,
+      "mean_lum": 124.6686782836914,
+      "p90_lum": 208.75
+    },
+    {
+      "file": "icon_document_file.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 35.29550827423168,
+      "mean_lum": 79.52763366699219,
+      "p90_lum": 143.21829223632812
+    },
+    {
+      "file": "icon_grid_table.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 29.66548463356974,
+      "mean_lum": 97.00884246826172,
+      "p90_lum": 187.7454071044922
+    },
+    {
+      "file": "icon_network_nodes.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 25.578014184397162,
+      "mean_lum": 104.35479736328125,
+      "p90_lum": 189.1035919189453
+    },
+    {
+      "file": "icon_photo_image.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 33.10283687943262,
+      "mean_lum": 108.37230682373047,
+      "p90_lum": 174.34320068359375
+    },
+    {
+      "file": "icon_pulse_activity.png",
+      "set_name": "icon_multimodal",
+      "foreground_pct": 23.12884160756501,
+      "mean_lum": 122.38148498535156,
+      "p90_lum": 228.08140563964844
+    }
+  ],
+  "svg": [
+    {
+      "file": "achievement-award-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.474365234375,
+      "ink_glyph_pct": 35.34567901234568,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "analytics-dashboard-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.864990234375,
+      "ink_glyph_pct": 36.135802469135804,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "business-presentation-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 18.670654296875,
+      "ink_glyph_pct": 37.76543209876543,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "drug-safety-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 36.566162109375,
+      "ink_glyph_pct": 28.666666666666668,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "financial-growth-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.547607421875,
+      "ink_glyph_pct": 35.49382716049383,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "global-location-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.364501953125,
+      "ink_glyph_pct": 35.123456790123456,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "target-goal-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.3095703125,
+      "ink_glyph_pct": 35.01234567901235,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "team-growth-icon-512.svg",
+      "set_name": "icon_box",
+      "ink_full_pct": 17.93212890625,
+      "ink_glyph_pct": 35.876543209876544,
+      "measure_mode": "roi",
+      "circle_archetype": true
+    },
+    {
+      "file": "global-analytics-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.260009765625,
+      "ink_glyph_pct": 46.17283950617284,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "innovation-idea-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.552978515625,
+      "ink_glyph_pct": 44.65432098765432,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "learning-education-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.308837890625,
+      "ink_glyph_pct": 50.20987654320987,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "partnership-handshake-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.3271484375,
+      "ink_glyph_pct": 47.97530864197531,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "performance-growth-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.11962890625,
+      "ink_glyph_pct": 42.71604938271605,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "target-goal-icon-512.svg",
+      "set_name": "icon_kaggle",
+      "ink_full_pct": 35.38818359375,
+      "ink_glyph_pct": 46.93827160493827,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "cube-3d-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 35.36376953125,
+      "ink_glyph_pct": 46.111111111111114,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "document-file-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 35.382080078125,
+      "ink_glyph_pct": 43.641975308641975,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "grid-table-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 35.369873046875,
+      "ink_glyph_pct": 42.370370370370374,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "network-nodes-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 37.567138671875,
+      "ink_glyph_pct": 37.17283950617284,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "photo-image-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 35.321044921875,
+      "ink_glyph_pct": 39.629629629629626,
+      "measure_mode": "full",
+      "circle_archetype": false
+    },
+    {
+      "file": "pulse-activity-icon-512.svg",
+      "set_name": "icon_multimodal",
+      "ink_full_pct": 35.3271484375,
+      "ink_glyph_pct": 41.4320987654321,
+      "measure_mode": "full",
+      "circle_archetype": false
+    }
+  ]
+}
