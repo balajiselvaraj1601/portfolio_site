@@ -7,12 +7,32 @@
       "variant": "purple",
       "center": { "kind": "logo", "asset": "kaggle", "alt": "Kaggle" },
       "satellites": [
-        { "kind": "logo", "asset": "logo_innovation_idea", "alt": "Innovation / idea" },
-        { "kind": "logo", "asset": "logo_performance_growth", "alt": "Performance / growth" },
+        {
+          "kind": "logo",
+          "asset": "logo_innovation_idea",
+          "alt": "Innovation / idea"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_performance_growth",
+          "alt": "Performance / growth"
+        },
         { "kind": "icon", "name": "brain" },
-        { "kind": "logo", "asset": "logo_learning_education", "alt": "Learning / education" },
-        { "kind": "logo", "asset": "logo_partnership_handshake", "alt": "Partnership" },
-        { "kind": "logo", "asset": "logo_global_analytics", "alt": "Global analytics" },
+        {
+          "kind": "logo",
+          "asset": "logo_learning_education",
+          "alt": "Learning / education"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_partnership_handshake",
+          "alt": "Partnership"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_global_analytics",
+          "alt": "Global analytics"
+        },
         { "kind": "logo", "asset": "logo_target_goal", "alt": "Target / goal" }
       ]
     },
@@ -22,12 +42,24 @@
       "variant": "purple",
       "center": { "kind": "icon", "name": "brain" },
       "satellites": [
-        { "kind": "logo", "asset": "logo_document_file", "alt": "Document / text" },
+        {
+          "kind": "logo",
+          "asset": "logo_document_file",
+          "alt": "Document / text"
+        },
         { "kind": "logo", "asset": "logo_grid_table", "alt": "Tabular data" },
         { "kind": "logo", "asset": "logo_photo_image", "alt": "Image" },
         { "kind": "logo", "asset": "logo_cube_3d", "alt": "3D / volumetric" },
-        { "kind": "logo", "asset": "logo_pulse_activity", "alt": "Signal / time-series" },
-        { "kind": "logo", "asset": "logo_network_nodes", "alt": "Graph / network" }
+        {
+          "kind": "logo",
+          "asset": "logo_pulse_activity",
+          "alt": "Signal / time-series"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_network_nodes",
+          "alt": "Graph / network"
+        }
       ]
     }
   ],
@@ -91,37 +123,65 @@
   "orgHeader": "Leadership & Organizational Impact",
   "orgCards": [
     {
-      "icon": "trophy-cup",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_achievement_award",
+        "alt": "Achievement award"
+      },
       "title": "EVP Level AWARD",
       "lines": ["For Drug Safety Platform"]
     },
     {
-      "icon": "presentation",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_business_presentation",
+        "alt": "Business presentation"
+      },
       "title": "Gartner Submission",
       "lines": ["GITC Chennai", "Multimodal Vision"]
     },
     {
-      "icon": "funding",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_financial_growth",
+        "alt": "Financial growth"
+      },
       "title": "Secured 0.5M$ Funds",
       "lines": ["Multiple times for Team"]
     },
     {
-      "icon": "dashboard",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_analytics_dashboard",
+        "alt": "Analytics dashboard"
+      },
       "title": "3 Scorecard",
       "lines": ["Aligned Projects"]
     },
     {
-      "icon": "target",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_target_goal_box",
+        "alt": "Strategic target"
+      },
       "title": "Strategic Team Positioning",
       "lines": ["Across 7 Internal Groups", "3 Startups"]
     },
     {
-      "icon": "team",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_team_growth",
+        "alt": "Team growth"
+      },
       "title": "Scaled Team",
       "lines": ["1 to 12 members"]
     },
     {
-      "icon": "globe",
+      "mark": {
+        "kind": "logo",
+        "asset": "logo_global_location",
+        "alt": "Global locations"
+      },
       "title": "Global Team Management",
       "lines": ["UK, Sweden,", "India, Mexico, China"]
     }

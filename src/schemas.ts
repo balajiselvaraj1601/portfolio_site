@@ -213,6 +213,19 @@ export const profileSchema = z.object({
       )
       .optional(),
   }),
+  vision: z
+    .object({
+      heading: z.string(),
+      headingEmphasis: z.string().optional(),
+      paragraphs: z.array(z.string()),
+      collaborations: z
+        .array(
+          z.object({ org: z.string(), detail: z.string(), entity: EntitySlug })
+        )
+        .optional(),
+      mentorship: z.string().optional(),
+    })
+    .optional(),
   contactIntro: z.string().optional(),
   contactPage: z.object({
     title: z.string(),
@@ -455,7 +468,7 @@ export const educationRecordSchema = z.object({
 export const educationSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
-  records: z.array(educationRecordSchema).min(1),
+  records: z.array(educationRecordSchema).min(1).max(1),
 });
 
 /* ── awards.json ───────────────────────────────────────────────────────── */

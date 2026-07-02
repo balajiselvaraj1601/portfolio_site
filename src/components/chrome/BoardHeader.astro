@@ -5,23 +5,28 @@ interface Props {
   title: string;
   /** Chevron direction flanking the title: 'in' points toward it, 'out' away. */
   flank?: 'in' | 'out';
-  /** Optional id on the rendered <h2> so a parent can aria-labelledby it. */
+  /** Optional id on the rendered heading so a parent can aria-labelledby it. */
   id?: string;
+  /** Heading level of the title. */
+  as?: 'h2' | 'h3';
+  /** 'sm' renders a compact sub-board header. */
+  size?: 'md' | 'sm';
 }
 
-const { title, flank = 'in', id } = Astro.props;
+const { title, flank = 'in', id, as: Heading = 'h2', size = 'md' } = Astro.props;
+const chevSize = size === 'sm' ? 14 : 16;
 ---
 
-<div class:list={['bhead', `bhead--${flank}`]}>
+<div class:list={['bhead', `bhead--${flank}`, { 'bhead--sm': size === 'sm' }]}>
   <span class="bhead__rule" aria-hidden="true"></span>
   <span class="bhead__chev bhead__chev--left" aria-hidden="true">
-    <Icon name="chevron-right" size={16} />
-    <Icon name="chevron-right" size={16} />
+    <Icon name="chevron-right" size={chevSize} />
+    <Icon name="chevron-right" size={chevSize} />
   </span>
-  <h2 class="bhead__title" id={id}>{title}</h2>
+  <Heading class="bhead__title" id={id}>{title}</Heading>
   <span class="bhead__chev bhead__chev--right" aria-hidden="true">
-    <Icon name="chevron-right" size={16} />
-    <Icon name="chevron-right" size={16} />
+    <Icon name="chevron-right" size={chevSize} />
+    <Icon name="chevron-right" size={chevSize} />
   </span>
   <span class="bhead__rule" aria-hidden="true"></span>
 </div>
@@ -69,6 +74,9 @@ const { title, flank = 'in', id } = Astro.props;
   /* 'out' → chevrons point away from the title (right group flipped). */
   .bhead--out .bhead__chev--right {
     transform: scaleX(-1);
+  }
+  .bhead--sm .bhead__title {
+    font-size: clamp(1.15rem, 0.85rem + 1.4vw, 1.6rem);
   }
   @media (max-width: 600px) {
     .bhead__title {

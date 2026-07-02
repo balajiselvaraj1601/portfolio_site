@@ -1,18 +1,23 @@
 ---
-import Icon from '@components/ui/Icon.astro';
-import { resolveIcon } from '@lib/icons';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import { logoHasOwnRing } from '@lib/logo-display';
 import type { VisionBoard } from '@schemas';
 
 // SSOT: props derive from the vision-board `orgCards` schema item.
 type Props = NonNullable<VisionBoard['orgCards']>[number];
 
-const { icon, title, lines } = Astro.props;
-const iconName = resolveIcon(icon, 'diamond');
+const { mark, title, lines } = Astro.props;
+
+// Self-ringed logo_* emblems draw their own solid disc — drop the chrome disc.
+const plain = mark.kind === 'logo' && logoHasOwnRing(mark.asset);
 ---
 
 <article class="ocard">
-  <div class="ocard__icon" aria-hidden="true">
-    <Icon name={iconName} size={26} />
+  <div
+    class:list={['ocard__icon', { 'ocard__icon--plain': plain }]}
+    aria-hidden="true"
+  >
+    <MarkEmblem mark={mark} iconSize={26} />
   </div>
   <h3 class="ocard__title">{title}</h3>
   <div class="ocard__rule" aria-hidden="true"></div>
@@ -56,6 +61,12 @@ const iconName = resolveIcon(icon, 'diamond');
     color: var(--accent-ll);
     background: var(--accent-soft);
     border: 1px solid var(--border-strong);
+  }
+  /* Self-ringed emblem draws its own solid disc — no chrome behind it. */
+  .ocard__icon--plain {
+    background: none;
+    border: none;
+    color: var(--accent-light);
   }
   .ocard__title {
     font-size: 0.9rem;

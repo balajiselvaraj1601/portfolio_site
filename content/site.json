@@ -106,6 +106,16 @@
       "source": "person/profile.json",
       "visible": true
     },
+    "impact": {
+      "title": "Strategic Impact",
+      "source": "work/strategic-impact.json",
+      "visible": false
+    },
+    "technical-vision": {
+      "title": "Technical Vision",
+      "source": "person/profile.json",
+      "visible": false
+    },
     "vision-board": {
       "title": "AI Leadership & Strategic Impact",
       "source": "work/vision-board.json",
@@ -138,6 +148,11 @@
       "eyebrow": "Flagship Work",
       "source": "work/projects.json",
       "visible": true
+    },
+    "generative-ai": {
+      "title": "Generative AI",
+      "source": "drafts/research/generative-ai.json",
+      "visible": false
     },
     "education": {
       "title": "Education",
