@@ -54,6 +54,15 @@
   "photo": "/assets/images/balaji.png",
   "leadershipPhilosophy": {
     "intro": "I lead AI the way a CTO does: secure the sponsorship and set the strategy before the first model exists, then build the platform, the team, and the guardrails that turn conviction into shipped, regulated value. My edge is a rare bridge — a biomedical engineer who supported 400+ surgeries across 5 specialties and now architects production AI — so the science, the business case, and the system stay one conversation.",
+    "blockHeadings": {
+      "strategicVision": "Strategy & Sponsorship",
+      "businessImpact": "Business & P&L Impact",
+      "platform": "Platform & Infrastructure",
+      "peopleMentoring": "Team & Org Building",
+      "governanceAI": "AI Governance",
+      "governancePrivacy": "Privacy & Data Protection",
+      "governanceGxP": "GxP Compliance"
+    },
     "strategicVision": [
       {
         "title": "Sell first, build next",

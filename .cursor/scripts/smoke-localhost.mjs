@@ -44,7 +44,8 @@ async function main() {
   });
 
   try {
-    await page.goto(BASE, { waitUntil: 'networkidle', timeout: 30000 });
+    await page.goto(BASE, { waitUntil: 'domcontentloaded', timeout: 30000 });
+    await page.waitForSelector('#hero', { timeout: 15000 });
   } catch (err) {
     fail(
       'dev server reachable',
@@ -138,8 +139,9 @@ async function main() {
 
   try {
     await page.goto(`${BASE.replace(/\/$/, '')}/#experience`, {
-      waitUntil: 'networkidle',
+      waitUntil: 'domcontentloaded',
     });
+    await page.waitForSelector('#hero', { timeout: 15000 });
     await page.waitForFunction(
       () => {
         const el = document.getElementById('experience-intro');

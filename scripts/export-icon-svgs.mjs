@@ -14,9 +14,9 @@
 import {
   mkdirSync,
   readFileSync,
+  readdirSync,
   writeFileSync,
   rmSync,
-  existsSync,
 } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -28,8 +28,11 @@ const paths = JSON.parse(
 );
 const outDir = resolve(here, '.icon-stage');
 
-if (existsSync(outDir)) rmSync(outDir, { recursive: true, force: true });
 mkdirSync(outDir, { recursive: true });
+for (const entry of readdirSync(outDir)) {
+  if (entry === '_originals') continue;
+  rmSync(resolve(outDir, entry), { recursive: true, force: true });
+}
 
 const wrap = (body) =>
   `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ` +

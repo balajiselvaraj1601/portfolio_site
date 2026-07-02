@@ -2,6 +2,7 @@
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
 import CompetitionCard from '@components/cards/CompetitionCard.astro';
+import RecogControls from '@components/ui/RecogControls.astro';
 import { kaggle, site } from '@lib/content';
 import { MEDALS, medalClass } from '@lib/recognition';
 
@@ -55,51 +56,45 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
     </div>
   </div>
 
-  <!-- Controls: live count + search + profile link + medal filters -->
-  <div class="recog-controls reveal">
-    <h3 class="recog-controls__count">
-      Competitions (<span data-kaggle-count>{total}</span>)
-    </h3>
-    <div class="recog-tools">
-      <input
-        type="search"
-        class="recog-search"
-        data-kaggle-search
-        placeholder="Search competitions…"
-        aria-label="Search competitions by name, domain, or tag"
-      />
-      <a
-        class="btn btn-secondary"
-        href={kaggle.profile}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        View Kaggle profile
-      </a>
-    </div>
-    <div class="recog-filters" role="group" aria-label="Filter by medal">
-      <button
-        type="button"
-        class="recog-chip is-active"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All
-      </button>
-      {
-        MEDALS.map((m) => (
-          <button
-            type="button"
-            class:list={['recog-chip', medalClass(m)]}
-            data-filter={m}
-            aria-pressed="false"
-          >
-            {m}
-          </button>
-        ))
-      }
-    </div>
-  </div>
+  <RecogControls
+    countLabel="Competitions"
+    total={total}
+    countDataAttr="data-kaggle-count"
+    searchDataAttr="data-kaggle-search"
+    searchPlaceholder="Search competitions…"
+    searchAriaLabel="Search competitions by name, domain, or tag"
+    filterGroupLabel="Filter by medal"
+  >
+    <a
+      slot="tools"
+      class="btn btn-secondary"
+      href={kaggle.profile}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View Kaggle profile
+    </a>
+    <button
+      type="button"
+      class="recog-chip is-active"
+      data-filter="all"
+      aria-pressed="true"
+    >
+      All
+    </button>
+    {
+      MEDALS.map((m) => (
+        <button
+          type="button"
+          class:list={['recog-chip', medalClass(m)]}
+          data-filter={m}
+          aria-pressed="false"
+        >
+          {m}
+        </button>
+      ))
+    }
+  </RecogControls>
 
   <!-- Competition card grid -->
   <div class="recog-grid reveal" data-kaggle-grid>
@@ -130,58 +125,18 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
 </style>
 
 <script>
+  import { initRecogGrid } from '../../scripts/recog-grid';
+
   const root = document.getElementById('kaggle');
-  const grid = root?.querySelector('[data-kaggle-grid]');
-  if (grid) {
-    const cards = Array.from(grid.querySelectorAll('.recog-card'));
-    const searchEl = root?.querySelector<HTMLInputElement>(
-      '[data-kaggle-search]'
-    );
-    const countEl = root?.querySelector('[data-kaggle-count]');
-    const emptyEl = root?.querySelector('[data-kaggle-empty]');
-    const chips = Array.from(root?.querySelectorAll('.recog-chip') ?? []);
-
-    let activeFilter = 'all';
-    let query = '';
-
-    function apply() {
-      let visible = 0;
-      for (const card of cards) {
-        const medal = card.getAttribute('data-medal') || '';
-        const haystack = [
-          card.getAttribute('data-name'),
-          card.getAttribute('data-domain'),
-          card.getAttribute('data-tags'),
-        ]
-          .join(' ')
-          .toLowerCase();
-        const show =
-          (activeFilter === 'all' || medal === activeFilter) &&
-          (query === '' || haystack.includes(query));
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-      }
-      if (countEl) countEl.textContent = String(visible);
-      if (emptyEl) emptyEl.toggleAttribute('hidden', visible !== 0);
-    }
-
-    searchEl?.addEventListener('input', () => {
-      query = (searchEl.value || '').trim().toLowerCase();
-      apply();
+  if (root) {
+    initRecogGrid({
+      root,
+      gridSelector: '[data-kaggle-grid]',
+      searchSelector: '[data-kaggle-search]',
+      countSelector: '[data-kaggle-count]',
+      emptySelector: '[data-kaggle-empty]',
+      filterAttr: 'data-medal',
+      searchAttrs: ['data-name', 'data-domain', 'data-tags'],
     });
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((c) => {
-          c.classList.remove('is-active');
-          c.setAttribute('aria-pressed', 'false');
-        });
-        chip.classList.add('is-active');
-        chip.setAttribute('aria-pressed', 'true');
-        activeFilter = chip.getAttribute('data-filter') || 'all';
-        apply();
-      });
-    });
-
-    apply();
   }
 </script>

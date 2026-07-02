@@ -255,11 +255,58 @@ for (const item of collaborations.items) {
 for (const record of education.records) {
   assertEntitySlug(record.entity, 'recognition/education.json');
 }
+for (const program of visionBoard.programs ?? []) {
+  assertEntitySlug(program.entity, 'work/vision-board.json programs');
+}
 for (const card of strategicImpact.leadershipCards ?? []) {
   assertEntitySlug(card.entity, 'work/strategic-impact.json');
 }
 for (const collab of profile.vision?.collaborations ?? []) {
   assertEntitySlug(collab.entity, 'person/profile.json vision.collaborations');
+}
+
+function assertLogoAsset(slug: string, context: string) {
+  for (const ext of LOGO_EXTS) {
+    if (logoFiles.has(`${slug}.${ext}`)) return;
+  }
+  throw new Error(
+    `${context}: missing logo asset "${slug}" under public/assets/logos/`
+  );
+}
+
+type VisionMark = { kind: string; asset?: string; name?: string };
+
+function collectVisionMarks(marks: VisionMark[] | undefined, out: Set<string>) {
+  for (const mark of marks ?? []) {
+    if (mark.kind === 'logo' && mark.asset) out.add(mark.asset);
+  }
+}
+
+const referencedLogoSlugs = new Set<string>();
+
+for (const item of collaborations.items) {
+  if (item.logo) referencedLogoSlugs.add(item.logo);
+}
+
+for (const hub of visionBoard.hubs) {
+  collectVisionMarks([hub.center], referencedLogoSlugs);
+  collectVisionMarks(hub.satellites, referencedLogoSlugs);
+}
+for (const program of visionBoard.programs ?? []) {
+  collectVisionMarks([program.badge], referencedLogoSlugs);
+}
+for (const card of visionBoard.orgCards ?? []) {
+  collectVisionMarks([card.mark], referencedLogoSlugs);
+}
+
+for (const list of [publications.items, conferences.items, speakers.items]) {
+  for (const item of list) {
+    if (item.logo) referencedLogoSlugs.add(item.logo);
+  }
+}
+
+for (const slug of referencedLogoSlugs) {
+  assertLogoAsset(slug, 'content logo reference');
 }
 
 const iconPathKeys = new Set(Object.keys(iconPaths));
@@ -270,6 +317,18 @@ for (const iconName of iconNameSchema.options) {
 }
 
 export const defaultTheme = site.theme.default === 'light' ? 'light' : 'dark';
+
+/** Dot-nav tooltips — section title, else owning view label, else id. */
+export const dotNavLabels: Record<string, string> = {};
+for (const sectionId of homeSections) {
+  const title = site.sections[sectionId]?.title?.trim();
+  if (title) {
+    dotNavLabels[sectionId] = title;
+    continue;
+  }
+  const owner = navViews.find((v) => v.viewSections.includes(sectionId));
+  dotNavLabels[sectionId] = owner?.label ?? sectionId;
+}
 
 /** Resolve a nav href for a content page (hash on home for views). */
 export function navHref(page: ContentPageEntry): string {

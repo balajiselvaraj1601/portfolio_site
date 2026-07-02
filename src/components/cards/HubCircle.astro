@@ -1,5 +1,6 @@
 ---
 import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import { logoSrc } from '@lib/content';
 import { logoHasOwnRing } from '@lib/logo-display';
 import type { VisionBoard } from '@schemas';
@@ -25,10 +26,6 @@ const nodes = satellites.map((mark, i) => {
   const angle = ((START + i * (360 / satellites.length)) * Math.PI) / 180;
   return {
     mark,
-    // Resolve the logo URL only when mark.kind === 'logo'. Logos are painted via
-    // a CSS mask so they inherit the satellite's accent color (currentColor),
-    // matching stroke icons in both themes (see .hub__sat-emblem in styles).
-    logo: mark.kind === 'logo' ? logoSrc(mark.asset) : undefined,
     // Self-ringed logo emblems (those with their own ring artwork) drop the chrome
     // disc and border — the mask expands to fill the whole satellite slot.
     plain: mark.kind === 'logo' && logoHasOwnRing(mark.asset),
@@ -76,16 +73,7 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
           }`}
           aria-hidden="true"
         >
-          {
-            n.mark.kind === 'icon' ? (
-              <Icon name={n.mark.name} size={22} />
-            ) : n.logo ? (
-              <span
-                class="hub__sat-emblem"
-                style={`--emblem:url("${n.logo}")`}
-              />
-            ) : null
-          }
+          <MarkEmblem mark={n.mark} iconSize={22} />
         </span>
       ))
     }
@@ -107,7 +95,7 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
   }
   .hub__ring {
     position: relative;
-    width: 320px;
+    width: clamp(240px, 19vw, 280px);
     max-width: 78vw;
     aspect-ratio: 1;
     border-radius: 50%;
@@ -164,41 +152,41 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: var(--bg-elev);
-    border: 1.5px solid var(--sat-accent, var(--hub-accent));
-    color: var(--sat-accent, var(--hub-accent));
+    /* Icon-kind satellites: solid accent disc with a white glyph, matching the
+       filled look of the self-ringed emblems. */
+    background: var(--sat-accent, var(--hub-accent));
+    border: none;
+    color: #fff;
     box-shadow: 0 0 0 4px var(--bg);
   }
-  /* Monochrome logo emblems are painted via a mask so they take the satellite's
-     accent color (currentColor), matching the stroke icons in both themes. */
-  .hub__sat-emblem {
+  /* Non-plain logo emblems sit on the disc at glyph size. */
+  .hub__sat :global(.mark-emblem) {
     width: 22px;
     height: 22px;
-    background: currentColor;
-    -webkit-mask: var(--emblem) center / contain no-repeat;
-    mask: var(--emblem) center / contain no-repeat;
   }
   /* Self-ringed logo_* emblems: the artwork already draws the circle —
-     drop the chrome disc and let the mask fill the whole slot. */
+     drop the chrome disc and let the mask fill the whole slot, painted in
+     the satellite's accent color. */
   .hub__sat--plain {
     background: none;
     border: none;
     box-shadow: none;
+    color: var(--sat-accent, var(--hub-accent));
   }
-  .hub__sat--plain .hub__sat-emblem {
+  .hub__sat--plain :global(.mark-emblem) {
     width: 100%;
     height: 100%;
   }
   .hub__label {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent-ll);
+    color: #fff;
+    background: var(--hub-accent);
+    padding: 0.4rem var(--space-5);
+    border-radius: var(--radius-pill);
     margin: 0;
-  }
-  .hub--red .hub__label {
-    color: var(--accent-red-light);
   }
 </style>

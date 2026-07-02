@@ -1,6 +1,5 @@
 ---
 import Section from '@components/ui/Section.astro';
-import Eyebrow from '@components/ui/Eyebrow.astro';
 import BoardHeader from '@components/chrome/BoardHeader.astro';
 import HubCircle from '@components/cards/HubCircle.astro';
 import ProgramBadgeCard from '@components/cards/ProgramBadgeCard.astro';
@@ -32,8 +31,8 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
             variant={hub.variant}
           />
           <span class="vboard__arrow" aria-hidden="true">
-            <Icon name="chevron-right" size={30} />
-            <Icon name="chevron-right" size={30} />
+            <Icon name="chevron-right" size={24} />
+            <Icon name="chevron-right" size={24} />
           </span>
         </Fragment>
       ))
@@ -61,11 +60,11 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
     orgCards && orgCards.length > 0 && (
       <div class="vboard__org reveal">
         {orgHeader && (
-          <Eyebrow text={orgHeader} variant="red" class="vboard__org-eyebrow" />
+          <BoardHeader title={orgHeader} flank="in" as="h3" size="sm" />
         )}
         <div class="vboard__org-grid">
           {orgCards.map((c) => (
-            <OrgImpactCard icon={c.icon} title={c.title} lines={c.lines} />
+            <OrgImpactCard mark={c.mark} title={c.title} lines={c.lines} />
           ))}
         </div>
       </div>
@@ -79,7 +78,7 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: var(--space-6);
+    gap: var(--space-5) var(--space-4);
     flex-wrap: wrap;
     margin-top: var(--space-10);
   }
@@ -93,8 +92,8 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
     margin-inline: -6px;
   }
   .vboard__programs {
-    flex: 1 1 460px;
-    min-width: min(460px, 100%);
+    flex: 1 1 640px;
+    min-width: min(640px, 100%);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--space-5);
@@ -103,10 +102,6 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   /* ── org section ─────────────────────────────────────────────────────── */
   .vboard__org {
     margin-top: var(--space-16);
-  }
-  .vboard__org-eyebrow {
-    text-align: center;
-    margin-bottom: 0;
   }
   .vboard__org-grid {
     display: grid;

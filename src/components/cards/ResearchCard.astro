@@ -39,7 +39,9 @@ const ytEmbed = ytId ? `https://www.youtube-nocookie.com/embed/${ytId}` : null;
 const logoUrl = logoSrc(logo);
 ---
 
-<article class:list={['rcard', { 'rcard--stacked': isStacked }]}>
+<article
+  class:list={['rcard', 'content-card', { 'rcard--stacked': isStacked }]}
+>
   {
     logoUrl ? (
       <LogoBadge
@@ -102,20 +104,6 @@ const logoUrl = logoSrc(logo);
 </article>
 
 <style>
-  .rcard {
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: var(--card-padding-lg);
-    transition:
-      border-color var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
-    height: 100%;
-  }
-  .rcard:hover {
-    border-color: var(--border-strong);
-    transform: translateY(-2px);
-  }
   .rcard-icon {
     width: 44px;
     height: 44px;

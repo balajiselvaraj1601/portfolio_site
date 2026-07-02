@@ -3,8 +3,9 @@ import Section from '@components/ui/Section.astro';
 import ProjectAccordion from '@components/cards/ProjectAccordion.astro';
 import Chip from '@components/ui/Chip.astro';
 import EntityLink from '@components/ui/EntityLink.astro';
+import LogoBadge from '@components/ui/LogoBadge.astro';
 import SectionHeading from '@components/ui/SectionHeading.astro';
-import { experience, getEntityUrl, logoSrc } from '@lib/content';
+import { experience, getEntityUrl, logoSrc, site } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
 
 function periodLabel(p: {
@@ -17,14 +18,15 @@ function periodLabel(p: {
 }
 
 const headline = experience.headline ?? experience.title;
+const sectionMeta = site.sections.experience;
 ---
 
 <Section
   id="experience"
   title=""
   hideTitle
-  ariaLabel={headline}
-  eyebrow="Experience"
+  labelledBy="experience-heading"
+  eyebrow={sectionMeta.eyebrow}
   variant="default"
 >
   <SectionHeading
@@ -74,20 +76,13 @@ const headline = experience.headline ?? experience.title;
           >
             <div class="role-header">
               {logoSrc(role.entity) && (
-                <div
-                  class:list={[
-                    'logo-badge',
-                    'logo-badge--md',
-                    'role-logo',
-                    { 'logo-badge--plain': !logoUsesBadge(role.entity) },
-                  ]}
-                >
-                  <img
-                    src={logoSrc(role.entity)}
-                    alt={`${role.organization} logo`}
-                    loading="lazy"
-                  />
-                </div>
+                <LogoBadge
+                  logoUrl={logoSrc(role.entity)}
+                  altText={`${role.organization} logo`}
+                  useBadge={logoUsesBadge(role.entity)}
+                  size="md"
+                  class="role-logo"
+                />
               )}
               <h3>{role.position}</h3>
               {role.blurb && <p class="role-blurb">{role.blurb}</p>}

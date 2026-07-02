@@ -19,7 +19,7 @@ const actionLabel = (type: string) =>
   id="contact"
   title=""
   hideTitle
-  ariaLabel={contactPage.title}
+  labelledBy="contact-heading"
   eyebrow={contactPage.eyebrow}
   variant="alt"
 >
@@ -30,6 +30,7 @@ const actionLabel = (type: string) =>
         title={contactPage.title}
         highlight={contactPage.titleHighlight}
         class="contact__title"
+        id="contact-heading"
       />
       <p class="contact-subtitle">{profile.contactIntro}</p>
 

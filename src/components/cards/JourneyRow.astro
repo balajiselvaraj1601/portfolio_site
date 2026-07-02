@@ -1,0 +1,55 @@
+---
+import JourneyNode from './JourneyNode.astro';
+import Icon from '@components/ui/Icon.astro';
+import type { Impact } from '@schemas';
+
+interface Props {
+  journey: NonNullable<Impact['journey']>;
+}
+const { journey } = Astro.props;
+---
+
+<div class="impact-journey reveal">
+  {
+    journey.map((node, i) => (
+      <>
+        {i > 0 && (
+          <div class="journey-arrow" aria-hidden="true">
+            <Icon name="chevron-right" size={20} />
+          </div>
+        )}
+        <JourneyNode {...node} />
+      </>
+    ))
+  }
+</div>
+
+<style>
+  .impact-journey {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: var(--space-12);
+    padding: var(--space-10);
+    background: var(--bg-elev);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+  .journey-arrow {
+    color: var(--accent-light);
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+  }
+  @media (max-width: 900px) {
+    .impact-journey {
+      grid-template-columns: 1fr;
+      gap: var(--stack-sm);
+    }
+    .journey-arrow {
+      transform: rotate(90deg);
+      justify-content: center;
+    }
+  }
+</style>

@@ -22,3 +22,13 @@ Agent batch queue for the codebase sweep. See `.cursor/skills/task-runner/SKILL.
       AC: build exits 0
 - [x] Final verification: build, check, lint, format:check, smoke:localhost
       AC: all commands exit 0
+- [x] Comprehensive audit Wave A: Documentation SSOT (15 sections, shelved registry, résumé asset-only, audit CSVs)
+      AC: build exits 0; docs match live site.json
+- [x] Comprehensive audit Wave B: CI validate workflow, npm run verify, Playwright script fixes, icon pipeline hygiene
+      AC: verify script exists; deploy.yml runs check/lint/format:check
+- [x] Comprehensive audit Wave C: vision-board entity + logo build guards, shelved sections restored, education max(1) record
+      AC: build exits 0; invalid logo slug throws at build
+- [x] Comprehensive audit Wave D: LogoBadge, RecogControls, RecogCardShell, content-driven eyebrows/headings, DotNav labels, a11y
+      AC: build exits 0
+- [x] Comprehensive audit final: npm run verify + PR opened
+      AC: all verify commands exit 0

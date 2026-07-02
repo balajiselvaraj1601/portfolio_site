@@ -4,11 +4,11 @@ Raster → SVG icon pipeline. Three approaches ranked by quality, with full meth
 
 ## 0. Philosophy
 
-| Approach | Result | Use when |
-|---|---|---|
-| Embed PNG in `<img>` or data URI | Not a vector. Doesn't scale, doesn't recolor. | Never — not actually SVG |
-| Hand-draw bezier curves by eye | Real vector, but slow, curves rarely match precisely | Small icon collections (<5), unlimited time |
-| **Auto-trace, then normalize & optimize** | Real vector, pixel-accurate, minutes not hours | Standard badge/glyph icons (this guide) |
+| Approach                                  | Result                                               | Use when                                    |
+| ----------------------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| Embed PNG in `<img>` or data URI          | Not a vector. Doesn't scale, doesn't recolor.        | Never — not actually SVG                    |
+| Hand-draw bezier curves by eye            | Real vector, but slow, curves rarely match precisely | Small icon collections (<5), unlimited time |
+| **Auto-trace, then normalize & optimize** | Real vector, pixel-accurate, minutes not hours       | Standard badge/glyph icons (this guide)     |
 
 The core idea: let **potrace** do the hard geometric work of finding accurate bezier curves along pixel boundaries (this is what it's built for), then spend your effort on what a tracer can't do — cleaning up coordinates, composing multi-color icons into one recolorable shape, verifying results.
 
@@ -23,13 +23,13 @@ npm install -g svgo
 pip install cairosvg --break-system-packages   # optional: for rendering SVG → PNG verification
 ```
 
-| Tool | Job |
-|---|---|
-| **potrace** | Raster → vector tracing (bezier-fitting the pixel boundary) |
-| **Pillow + numpy** | Pixel inspection, color sampling, mask building |
-| **svgelements** | Parse SVG paths, apply transforms, flatten to absolute coords |
-| **svgo** | Minimize path data, clean up coordinates |
-| cairosvg | Render SVG back to PNG to verify each step (optional but recommended) |
+| Tool               | Job                                                                   |
+| ------------------ | --------------------------------------------------------------------- |
+| **potrace**        | Raster → vector tracing (bezier-fitting the pixel boundary)           |
+| **Pillow + numpy** | Pixel inspection, color sampling, mask building                       |
+| **svgelements**    | Parse SVG paths, apply transforms, flatten to absolute coords         |
+| **svgo**           | Minimize path data, clean up coordinates                              |
+| cairosvg           | Render SVG back to PNG to verify each step (optional but recommended) |
 
 ---
 
@@ -114,7 +114,7 @@ color test.
 
 ### Pitfall — Out-of-bounds contamination
 
-If the source is a glyph inside a circle on a square canvas, the square's corners (outside the circle) are background-colored too, and a naive threshold includes them in your "glyph" mask. potrace then traces the glyph *fused with the four corners* as one shape.
+If the source is a glyph inside a circle on a square canvas, the square's corners (outside the circle) are background-colored too, and a naive threshold includes them in your "glyph" mask. potrace then traces the glyph _fused with the four corners_ as one shape.
 
 **Fix:** constrain the mask explicitly to the region that matters:
 
@@ -139,13 +139,13 @@ Image.fromarray(binary).convert("1").save("mask.pbm")
 potrace -s -O 0.1 -a 1.3 -t 4 mask.pbm -o traced.svg
 ```
 
-| Flag | Meaning | Notes |
-|---|---|---|
-| `-s` | Output SVG | |
-| `-O` opttolerance | Curve-fit tolerance | Lower = more accurate/more nodes. 0.1–0.2 is good for detailed icons |
-| `-a` alphamax | Corner-smoothing threshold | ~1–1.3 keeps sharp corners sharp without over-rounding |
-| `-t` turdsize | Suppress specks smaller than N px | Too high erases small intentional details (handles, thin gaps). Start low (2–4) |
-| `-i` | Invert foreground/background | Use if output is backwards |
+| Flag              | Meaning                           | Notes                                                                           |
+| ----------------- | --------------------------------- | ------------------------------------------------------------------------------- |
+| `-s`              | Output SVG                        |                                                                                 |
+| `-O` opttolerance | Curve-fit tolerance               | Lower = more accurate/more nodes. 0.1–0.2 is good for detailed icons            |
+| `-a` alphamax     | Corner-smoothing threshold        | ~1–1.3 keeps sharp corners sharp without over-rounding                          |
+| `-t` turdsize     | Suppress specks smaller than N px | Too high erases small intentional details (handles, thin gaps). Start low (2–4) |
+| `-i`              | Invert foreground/background      | Use if output is backwards                                                      |
 
 **Immediately render and look at it** — this takes 10 seconds and catches the two most common failures:
 
@@ -253,7 +253,7 @@ combined_d = circle_d + " " + glyph_d
 
 **Why this works without manually reversing winding directions:**
 
-`evenodd` fills based on crossing-count parity, not direction. The glyph path (as traced) already alternates correctly: solid glyph, unfilled star-hole, filled dot-inside-the-hole, etc. Wrapping one more enclosing contour (the circle) around that shifts every depth by exactly one level: what was "filled" becomes "hole," what was "hole" becomes "filled" again. That's precisely the transformation needed to turn *"white glyph on a colored circle"* into *"colored circle with a glyph-shaped cutout"*.
+`evenodd` fills based on crossing-count parity, not direction. The glyph path (as traced) already alternates correctly: solid glyph, unfilled star-hole, filled dot-inside-the-hole, etc. Wrapping one more enclosing contour (the circle) around that shifts every depth by exactly one level: what was "filled" becomes "hole," what was "hole" becomes "filled" again. That's precisely the transformation needed to turn _"white glyph on a colored circle"_ into _"colored circle with a glyph-shaped cutout"_.
 
 Concatenation is the whole trick — no boolean path-ops library required.
 
@@ -268,6 +268,7 @@ npx svgo -i raw.svg -o final.svg --pretty --precision=2
 Typically a 70–80% size reduction. Rounds coordinates, merges redundant commands, strips potrace metadata.
 
 **Precision levels:**
+
 - `precision=2` — good default for a 24-unit viewBox
 - `precision=1` — for very large viewBoxes (512+), same relative precision with fewer decimal places
 
@@ -311,6 +312,7 @@ Every icon file this pipeline produces should have:
 ### currentColor caveat
 
 `currentColor` only resolves when the SVG is **inlined**:
+
 - ✓ Inline `<svg>` in HTML
 - ✓ Used as a React/Vue component
 - ✗ `<img src="icon.svg">` reference does **not** inherit page CSS
@@ -336,15 +338,15 @@ An `<img>` will render with `currentColor` as black (or whatever `color` default
 
 ## 11. Troubleshooting
 
-| Symptom | Cause | Fix |
-|---|---|---|
-| Corners/background fused into the glyph shape | Mask not constrained to the container | Add explicit region mask (Phase 2 pitfall) |
-| Whole image inverted | potrace's black/white polarity doesn't match your mask | Add `-i` flag or flip mask's 0/255 mapping |
-| Internal holes missing | Mask wasn't clean at that spot | Re-check threshold at that specific region |
-| Small intentional details vanish | `turdsize` too high | Lower it; only raise if you see actual noise |
-| Second normalized output oddly tiny | Reused a mutated `Path` object | Re-parse a fresh `Path(d_string)` per branch |
-| Badge composite shows glyph as solid instead of cutout | Wrong fill-rule or path order | Use `evenodd`; order doesn't matter but rule does |
-| Icon doesn't scale cleanly at small sizes | Not enough detail in source, or too much optimization | Lower `precision` in svgo, or increase source resolution |
+| Symptom                                                | Cause                                                  | Fix                                                      |
+| ------------------------------------------------------ | ------------------------------------------------------ | -------------------------------------------------------- |
+| Corners/background fused into the glyph shape          | Mask not constrained to the container                  | Add explicit region mask (Phase 2 pitfall)               |
+| Whole image inverted                                   | potrace's black/white polarity doesn't match your mask | Add `-i` flag or flip mask's 0/255 mapping               |
+| Internal holes missing                                 | Mask wasn't clean at that spot                         | Re-check threshold at that specific region               |
+| Small intentional details vanish                       | `turdsize` too high                                    | Lower it; only raise if you see actual noise             |
+| Second normalized output oddly tiny                    | Reused a mutated `Path` object                         | Re-parse a fresh `Path(d_string)` per branch             |
+| Badge composite shows glyph as solid instead of cutout | Wrong fill-rule or path order                          | Use `evenodd`; order doesn't matter but rule does        |
+| Icon doesn't scale cleanly at small sizes              | Not enough detail in source, or too much optimization  | Lower `precision` in svgo, or increase source resolution |
 
 ---
 
@@ -353,6 +355,7 @@ An `<img>` will render with `currentColor` as black (or whatever `color` default
 See `svg-icon-generator.py` for an end-to-end implementation of Phases 1–7.
 
 Key decisions made in code:
+
 - Binary mask stored as PBM for potrace (1-bit, native format)
 - Transform always parsed from potrace's `<g transform>` (never guessed)
 - Fresh `Path()` parse per normalize call (avoids aliasing bug)

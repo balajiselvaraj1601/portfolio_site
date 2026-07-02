@@ -17,7 +17,7 @@ tsconfig.json,config,json,yes,yes,keep,TypeScript strict mode plus path aliases
 content/README.md,content,md,yes,yes,keep,Content layer provenance and curation rules
 content/site.json,content,json,yes,yes,keep,Site meta / nav pages / section visibility / SEO defaults / theme
 content/person/profile.json,content,json,yes,yes,keep,Hero / About / Contact / Vision / Leadership copy
-content/person/affiliations.json,content,json,yes,yes,keep,Organisation affiliations list
+content/person/collaborations.json,content,json,yes,yes,keep,Collaborations strip on About (Leadership section)
 content/work/experience.json,content,json,yes,yes,keep,Full career history (6 roles with projects and bullets)
 content/work/projects.json,content,json,yes,yes,keep,8 headline project cards derived from experience
 content/work/skills.json,content,json,yes,yes,keep,6 skill categories with tools and technologies

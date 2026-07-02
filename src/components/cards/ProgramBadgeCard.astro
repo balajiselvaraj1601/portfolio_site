@@ -44,41 +44,46 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
   ]}
 >
   <header class="pcard__head">
-    <h3 class="pcard__title">
-      <EntityLink
-        href={getEntityUrl(entity)}
-        label={title}
-        class="pcard__title-link"
-      />
-    </h3>
-    <p class="pcard__label">{label}</p>
+    <div class="pcard__text">
+      <h3 class="pcard__title">
+        <EntityLink
+          href={getEntityUrl(entity)}
+          label={title}
+          class="pcard__title-link"
+        />
+      </h3>
+      <p class="pcard__label">{label}</p>
+    </div>
+    <div
+      class:list={[
+        'pcard__badge',
+        { 'pcard__badge--logo': badge.kind === 'logo' },
+      ]}
+      aria-hidden="true"
+    >
+      {
+        badge.kind === 'icon' ? (
+          <Icon name={badge.name} size={32} />
+        ) : badgeLogo ? (
+          <img src={badgeLogo} alt={badge.alt ?? ''} loading="lazy" />
+        ) : null
+      }
+    </div>
   </header>
 
   <ul class="pcard__lines">
     {lines.map((line) => <li>{line}</li>)}
   </ul>
-
-  <div
-    class:list={[
-      'pcard__badge',
-      { 'pcard__badge--logo': badge.kind === 'logo' },
-    ]}
-    aria-hidden="true"
-  >
-    {
-      badge.kind === 'icon' ? (
-        <Icon name={badge.name} size={44} />
-      ) : badgeLogo ? (
-        <img src={badgeLogo} alt={badge.alt ?? ''} loading="lazy" />
-      ) : null
-    }
-  </div>
 </article>
 
 <style>
   .pcard {
     --accent-card: var(--accent);
     position: relative;
+    /* Align head/lines rows across cards sharing a grid row (see .vboard__programs). */
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
     padding-bottom: var(--space-5);
   }
   .pcard--red {
@@ -88,11 +93,11 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
     border-color: var(--accent-card);
   }
   .pcard__head {
-    padding: var(--space-4) 8.75rem var(--space-3) var(--space-5);
-    min-height: 5.5rem;
-  }
-  .pcard--has-logo .pcard__head {
-    padding-right: 11.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    column-gap: var(--space-4);
+    align-items: center;
+    padding: var(--space-4) var(--space-4) var(--space-3) var(--space-5);
   }
   .pcard__title {
     font-size: clamp(0.92rem, 1.6vw, 1.05rem);
@@ -100,8 +105,6 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
     line-height: 1.25;
     margin: 0;
     color: var(--heading);
-    overflow-wrap: normal;
-    word-break: keep-all;
   }
   .pcard__title :global(.pcard__title-link) {
     color: var(--heading);
@@ -134,11 +137,8 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
     line-height: 1.45;
   }
   .pcard__badge {
-    position: absolute;
-    top: var(--space-3);
-    right: var(--space-4);
-    width: 104px;
-    height: 104px;
+    width: 76px;
+    height: 76px;
     border-radius: 50%;
     display: grid;
     place-items: center;
@@ -154,9 +154,8 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
   .pcard__badge--logo {
     background: var(--logo-surface);
     width: auto;
-    min-width: 96px;
-    max-width: 148px;
-    height: 52px;
+    max-width: 112px;
+    height: 44px;
     border-radius: var(--radius-md);
     padding: var(--space-2) var(--space-3);
     border-color: color-mix(in srgb, var(--accent-card) 35%, var(--border));
@@ -169,16 +168,7 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
   .pcard__badge--logo img {
     width: auto;
     height: auto;
-    max-width: 128px;
-    max-height: 32px;
-  }
-  @media (max-width: 520px) {
-    .pcard__head {
-      padding-right: var(--space-5);
-    }
-    .pcard__badge {
-      position: static;
-      margin: var(--space-4) var(--space-5) 0;
-    }
+    max-width: 96px;
+    max-height: 28px;
   }
 </style>

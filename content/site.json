@@ -128,11 +128,13 @@
     },
     "experience": {
       "title": "Experience",
+      "eyebrow": "Experience",
       "source": "work/experience.json",
       "visible": true
     },
     "experience-intro": {
       "title": "Experience",
+      "eyebrow": "Career",
       "source": "work/experience.json",
       "visible": true
     },
@@ -143,6 +145,7 @@
     },
     "featured-case-studies": {
       "title": "Flagship Case Studies",
+      "eyebrow": "Flagship Work",
       "source": "work/projects.json",
       "visible": true
     },

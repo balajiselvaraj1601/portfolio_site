@@ -66,6 +66,7 @@ export const siteSchema = z
         title: z.string(),
         source: z.string(),
         visible: z.boolean(),
+        eyebrow: z.string().optional(),
       })
     ),
     seo: z.object({
@@ -138,7 +139,15 @@ export const profileSchema = z.object({
   ),
   leadershipPhilosophy: z.object({
     intro: z.string().optional(),
-    // Strategy & Sponsorship block (heading set in LeadershipPhilosophy.astro)
+    blockHeadings: z.object({
+      strategicVision: z.string(),
+      businessImpact: z.string(),
+      platform: z.string(),
+      peopleMentoring: z.string(),
+      governanceAI: z.string(),
+      governancePrivacy: z.string(),
+      governanceGxP: z.string(),
+    }),
     strategicVision: z
       .array(
         z.object({
@@ -209,9 +218,11 @@ export const profileSchema = z.object({
       heading: z.string(),
       headingEmphasis: z.string().optional(),
       paragraphs: z.array(z.string()),
-      collaborations: z.array(
-        z.object({ org: z.string(), detail: z.string(), entity: EntitySlug })
-      ),
+      collaborations: z
+        .array(
+          z.object({ org: z.string(), detail: z.string(), entity: EntitySlug })
+        )
+        .optional(),
       mentorship: z.string().optional(),
     })
     .optional(),
@@ -284,9 +295,7 @@ export const impactSchema = z.object({
     .optional(),
 });
 
-/* ── vision-board.json (Impact infographic page) ───────────────────────── */
-// Image-exact copy for the /vision infographic. Intentionally distinct from the
-// longer prose in strategic-impact.json — same facts, condensed visual wording.
+/* ── vision-board.json ─────────────────────────────────────────────────── */
 const VisionMark = z.discriminatedUnion('kind', [
   z.object({ kind: z.literal('icon'), name: iconNameSchema }),
   z.object({
@@ -295,6 +304,7 @@ const VisionMark = z.discriminatedUnion('kind', [
     alt: z.string().optional(),
   }),
 ]);
+export type VisionMark = z.infer<typeof VisionMark>;
 export const visionBoardSchema = z.object({
   header: z.string(),
   eyebrow: z.string().optional(),
@@ -324,7 +334,7 @@ export const visionBoardSchema = z.object({
   orgCards: z
     .array(
       z.object({
-        icon: iconNameSchema,
+        mark: VisionMark,
         title: z.string(),
         lines: z.array(z.string()),
       })
@@ -458,7 +468,7 @@ export const educationRecordSchema = z.object({
 export const educationSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
-  records: z.array(educationRecordSchema).min(1),
+  records: z.array(educationRecordSchema).min(1).max(1),
 });
 
 /* ── awards.json ───────────────────────────────────────────────────────── */

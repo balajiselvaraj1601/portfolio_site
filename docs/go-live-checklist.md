@@ -31,7 +31,7 @@ npm run preview
 - [ ] Configured routes load: `/`, `/experience`, `/projects`, `/research`, `/recognition`, `/contact`
 - [ ] Each route renders the sections listed in `content/site.json`
 - [ ] No phone number on page (`grep -ri phone content/` returns nothing)
-- [ ] Résumé PDF downloads: `/assets/resume/balaji-selvaraj-resume.pdf`
+- [ ] Résumé PDF loads at direct URL (asset-only, not in nav): `/assets/resume/balaji-selvaraj-resume.pdf`
 - [ ] OG image loads: `/assets/og/og-image.png`
 
 ### UX smoke test (preview URL)
@@ -107,7 +107,7 @@ Visit https://balajiselvaraj1601.github.io
 - [ ] Home page loads (not GitHub 404)
 - [ ] CSS/JS load (`/_astro/` paths work)
 - [ ] Favicon appears in browser tab
-- [ ] Résumé download works from header
+- [ ] Résumé PDF direct URL still loads (not linked from header)
 - [ ] `https://balajiselvaraj1601.github.io/robots.txt` accessible
 - [ ] `https://balajiselvaraj1601.github.io/sitemap-index.xml` accessible
 

@@ -1,0 +1,40 @@
+---
+interface Props {
+  countLabel: string;
+  total: number;
+  countDataAttr: string;
+  searchDataAttr: string;
+  searchPlaceholder: string;
+  searchAriaLabel: string;
+  filterGroupLabel: string;
+}
+
+const {
+  countLabel,
+  total,
+  countDataAttr,
+  searchDataAttr,
+  searchPlaceholder,
+  searchAriaLabel,
+  filterGroupLabel,
+} = Astro.props;
+---
+
+<div class="recog-controls reveal">
+  <h3 class="recog-controls__count">
+    {countLabel} (<span {...{ [countDataAttr]: true }}>{total}</span>)
+  </h3>
+  <div class="recog-tools">
+    <input
+      type="search"
+      class="recog-search"
+      {...{ [searchDataAttr]: true }}
+      placeholder={searchPlaceholder}
+      aria-label={searchAriaLabel}
+    />
+    <slot name="tools" />
+  </div>
+  <div class="recog-filters" role="group" aria-label={filterGroupLabel}>
+    <slot />
+  </div>
+</div>

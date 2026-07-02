@@ -17,8 +17,8 @@ scripts/
 ```
 
 > **Single source of truth.** `svg-icon-generator.py` is the one canonical
-> implementation. The `svg-icon-generator.skill` bundle carries a *verbatim,
-> auto-synced* copy (as `icon_pipeline.py`, marked `#SYNC#`) — never hand-edit the
+> implementation. The `svg-icon-generator.skill` bundle carries a _verbatim,
+> auto-synced_ copy (as `icon_pipeline.py`, marked `#SYNC#`) — never hand-edit the
 > bundled copy; edit the canonical script and re-run `check-skill-sync.sh`.
 
 ## One-Time Setup
@@ -37,6 +37,7 @@ npm install -g svgo
 ```
 
 Verify:
+
 ```bash
 potrace --version
 npm list -g svgo
@@ -56,6 +57,7 @@ python3 scripts/svg-icon-generator.py \
 ```
 
 This creates:
+
 - `src/assets/icons/trophy-icon-24.svg` — small icon
 - `src/assets/icons/trophy-icon-512.svg` — base asset
 - `src/assets/icons/trophy-badge-24.svg` — badge variant (small)
@@ -128,7 +130,7 @@ All 7 phases run automatically when you call the script.
 
 **Removing empty borders (image + SVG).** These source badges carry a white
 margin around the purple circle. Auto-crop (on by default) removes it before
-masking — safe because the glyph is white *inside* the circle, so the non-white
+masking — safe because the glyph is white _inside_ the circle, so the non-white
 bounding box equals the circle and no glyph pixels are lost. Pair `--tight` with
 `--save-cropped` to emit both a border-free PNG and a border-free SVG in one pass.
 `scripts/batch-icon-generate.sh [DIR] [flags…]` does this for every
@@ -148,6 +150,7 @@ python3 scripts/svg-icon-generator.py \
 ```
 
 Available config keys:
+
 - `foreground_is_light` — bool, true if glyph is lighter than background (legacy; superseded by `foreground_mode`)
 - `foreground_mode` — `"light"` | `"dark"` | `"nonwhite"` | `"alpha"`; `nonwhite` masks any off-white ink (colored/gradient glyphs), `alpha` masks the opaque region of a transparent-background source. Overrides `foreground_is_light` when set
 - `white_threshold` — 0-255, off-white cutoff for `nonwhite` mode (default 235)
@@ -169,15 +172,16 @@ See `icon-generator-example.json` for detailed comments on each.
 Every generated SVG has this structure:
 
 ```xml
-<svg xmlns="http://www.w3.org/2000/svg" 
-     width="24" height="24" 
-     viewBox="0 0 24 24" 
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="24" height="24"
+     viewBox="0 0 24 24"
      fill="currentColor">
   <path fill-rule="evenodd" d="..."/>
 </svg>
 ```
 
 **Guarantees:**
+
 - ✓ `fill="currentColor"` — inherits CSS `color` property from parent
 - ✓ Explicit `width`/`height` — sensible default size (overridable by CSS)
 - ✓ `viewBox` — fully scalable without quality loss
@@ -190,9 +194,9 @@ Inline in template:
 
 ```astro
 ---
-import { readFileSync } from 'fs'
+import { readFileSync } from 'fs';
 
-const trophySvg = readFileSync('src/assets/icons/trophy-icon-24.svg', 'utf-8')
+const trophySvg = readFileSync('src/assets/icons/trophy-icon-24.svg', 'utf-8');
 ---
 
 <div style="color: #e11d48">
@@ -204,7 +208,7 @@ Or import as component:
 
 ```astro
 ---
-import TrophyIcon from '../assets/icons/trophy-icon-24.svg?raw'
+import TrophyIcon from '../assets/icons/trophy-icon-24.svg?raw';
 ---
 
 <div class="award" set:html={TrophyIcon} />
@@ -286,6 +290,7 @@ print(img.shape)  # (height, width, 3)
 ```
 
 Then adjust in config:
+
 - `glyph_fill_fraction` — size of glyph in its own canvas
 - `badge.glyph_fraction_of_diameter` — size of glyph relative to circle
 - `badge.vertical_center_offset` — nudge glyph up/down (optical centering)
@@ -299,16 +304,16 @@ Then adjust in config:
 
 ## Files Reference
 
-| File | Purpose |
-|---|---|
-| `svg-icon-generator.py` | Main pipeline — 7 phases, full Python implementation (canonical) |
-| `verify-icon.py` | Independent margin/flush/centering check on a finished SVG |
-| `batch-icon-generate.sh` | Batch-convert every `icon_box/icon_*.png` (tight + cropped) in one pass |
-| `check-skill-sync.sh` | Assert the `.skill` bundle's script hasn't drifted from the canonical one |
-| `svg-icon-generation-guide.md` | Deep methodology — every phase explained in detail |
-| `SVG-ICON-GENERATOR.md` | Quick-start — common tasks, CLI flags, troubleshooting |
-| `icon-generator-example.json` | Config template with all tunable parameters |
-| `generate-icon.sh` | Bash wrapper — makes CLI invocation easier |
+| File                           | Purpose                                                                   |
+| ------------------------------ | ------------------------------------------------------------------------- |
+| `svg-icon-generator.py`        | Main pipeline — 7 phases, full Python implementation (canonical)          |
+| `verify-icon.py`               | Independent margin/flush/centering check on a finished SVG                |
+| `batch-icon-generate.sh`       | Batch-convert every `icon_box/icon_*.png` (tight + cropped) in one pass   |
+| `check-skill-sync.sh`          | Assert the `.skill` bundle's script hasn't drifted from the canonical one |
+| `svg-icon-generation-guide.md` | Deep methodology — every phase explained in detail                        |
+| `SVG-ICON-GENERATOR.md`        | Quick-start — common tasks, CLI flags, troubleshooting                    |
+| `icon-generator-example.json`  | Config template with all tunable parameters                               |
+| `generate-icon.sh`             | Bash wrapper — makes CLI invocation easier                                |
 
 ## Architecture Notes
 
@@ -322,6 +327,7 @@ Then adjust in config:
 ## Integration with Portfolio
 
 Generated icons are designed for:
+
 - **Skill badges** — circular icon in `ProgramBadgeCard.astro`
 - **Section headers** — lightweight SVG glyphs
 - **Social links** — recolorable by CSS
@@ -355,6 +361,7 @@ If any fail, installation instructions appear in `SVG-ICON-GENERATOR.md`.
 ---
 
 **References:**
+
 - Phase-by-phase guide: `svg-icon-generation-guide.md`
 - Quick troubleshooting: `SVG-ICON-GENERATOR.md`
 - Config template: `icon-generator-example.json`
