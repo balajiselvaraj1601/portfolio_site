@@ -10,7 +10,7 @@
 #   ./scripts/batch-icon-generate.sh
 #
 #   # icon_multimodal — colored/gradient glyph + ring outline on white:
-#   ./scripts/batch-icon-generate.sh /home/engineer/workspace/icon_multimodal \
+#   ./scripts/batch-icon-generate.sh ~/workspace/icon_multimodal \
 #       --colored-glyph --no-circle
 #
 # The first argument (if it doesn't start with "-") is the target directory;
@@ -19,7 +19,8 @@
 
 set -e
 
-DEFAULT_DIR="/home/engineer/workspace/icon_box"
+# Default icon directory: override with ICON_BOX_DIR, else ~/workspace/icon_box.
+DEFAULT_DIR="${ICON_BOX_DIR:-$HOME/workspace/icon_box}"
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 GENERATOR="$PROJECT_ROOT/scripts/svg-icon-generator.py"
 
@@ -33,6 +34,7 @@ EXTRA_FLAGS=("$@")
 
 if [[ ! -d "$ICONS_DIR" ]]; then
     echo "✗ icons directory not found: $ICONS_DIR"
+    echo "  Pass a directory as the first argument or set ICON_BOX_DIR."
     exit 1
 fi
 if [[ ! -f "$GENERATOR" ]]; then
