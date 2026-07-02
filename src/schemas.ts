@@ -175,7 +175,25 @@ export const profileSchema = z.object({
         })
       )
       .optional(),
-    governance: z
+    governanceAI: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: iconNameSchema.optional(),
+        })
+      )
+      .optional(),
+    governancePrivacy: z
+      .array(
+        z.object({
+          title: z.string(),
+          description: z.string(),
+          icon: iconNameSchema.optional(),
+        })
+      )
+      .optional(),
+    governanceGxP: z
       .array(
         z.object({
           title: z.string(),

@@ -137,21 +137,40 @@
         "icon": "target"
       }
     ],
-    "governance": [
+    "governanceAI": [
       {
-        "title": "Human-in-the-loop guardrails",
-        "description": "Deployed NemoClaw in an isolated VPC to run a sandboxed AI assistant with policy-managed egress, runtime isolation, and strict tool/network controls.",
-        "icon": "hand"
+        "title": "EU AI Act risk mapping",
+        "description": "Mapped AI deployments against EU AI Act risk tiers — classifying clinical decision-support tools as high-risk and defining conformity assessment, logging, and human-oversight obligations before deployment.",
+        "icon": "institution"
       },
+      {
+        "title": "Transparency & audit-readiness",
+        "description": "Designed AI pipelines with model cards, decision logs, and explainability layers to satisfy EU AI Act transparency mandates for high-risk systems in clinical workflows.",
+        "icon": "layers"
+      }
+    ],
+    "governancePrivacy": [
+      {
+        "title": "GDPR & HIPAA in clinical AI",
+        "description": "Partnered with the Data Office to ensure AI pipelines processing patient and clinical data comply with GDPR and HIPAA — data minimisation, purpose limitation, and subject access rights built into the data architecture.",
+        "icon": "clipboard"
+      },
+      {
+        "title": "FAIR data for AI training",
+        "description": "Governed training data under FAIR principles (Findable, Accessible, Interoperable, Reusable) in partnership with the Data Office — ensuring scientific rigour and cross-study reusability across AI models.",
+        "icon": "globe"
+      }
+    ],
+    "governanceGxP": [
       {
         "title": "GxP-compliant AI delivery",
         "description": "Shipped AI inside regulated GxP boundaries, making compliance a build-time property rather than a release-time audit.",
         "icon": "document"
       },
       {
-        "title": "Risk as a design constraint",
-        "description": "Treat AI safety, compliance, and regulatory risk as first-class design constraints — engineered in from the first architecture decision.",
-        "icon": "pulse"
+        "title": "Validation & audit trails",
+        "description": "Enforced change control and maintained end-to-end audit trails for AI systems in GxP settings — keeping documentation inspection-ready and reducing regulatory exposure at deployment.",
+        "icon": "scan"
       }
     ]
   },
