@@ -1,6 +1,7 @@
 ---
 import Icon from '@components/ui/Icon.astro';
 import { logoSrc } from '@lib/content';
+import { logoHasOwnRing } from '@lib/logo-display';
 import type { VisionBoard } from '@schemas';
 
 type Hub = VisionBoard['hubs'][number];
@@ -27,6 +28,8 @@ const nodes = satellites.map((mark, i) => {
     // Resolve the logo URL only on the 'logo' branch; the emblem is painted via
     // a CSS mask so it inherits the satellite's accent color (see styles below).
     logo: mark.kind === 'logo' ? logoSrc(mark.asset) : undefined,
+    // Self-ringed emblems drop the chrome disc (see .hub__sat--plain).
+    plain: mark.kind === 'logo' && logoHasOwnRing(mark.asset),
     x: C + RING * Math.cos(angle),
     y: C + RING * Math.sin(angle),
   };
@@ -59,7 +62,7 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
     {
       nodes.map((n, i) => (
         <span
-          class="hub__sat"
+          class:list={['hub__sat', { 'hub__sat--plain': n.plain }]}
           style={`left:${(n.x / SIZE) * 100}%;top:${(n.y / SIZE) * 100}%;--sat-accent:${
             variant === 'red'
               ? i % 2 === 0
@@ -172,6 +175,17 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
     background: currentColor;
     -webkit-mask: var(--emblem) center / contain no-repeat;
     mask: var(--emblem) center / contain no-repeat;
+  }
+  /* Self-ringed logo_* emblems: the artwork already draws the circle —
+     drop the chrome disc and let the mask fill the whole slot. */
+  .hub__sat--plain {
+    background: none;
+    border: none;
+    box-shadow: none;
+  }
+  .hub__sat--plain .hub__sat-emblem {
+    width: 100%;
+    height: 100%;
   }
   .hub__label {
     font-family: var(--font-mono);

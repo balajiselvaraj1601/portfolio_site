@@ -6,3 +6,8 @@ export function logoUsesBadge(slug?: string, override?: boolean): boolean {
   if (!slug) return true;
   return !PLAIN_LOGO_SLUGS.has(slug);
 }
+
+/** Pipeline-generated logo_* badges already draw their own circular ring. */
+export function logoHasOwnRing(slug?: string): boolean {
+  return !!slug?.startsWith('logo_');
+}
