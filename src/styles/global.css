@@ -206,51 +206,6 @@
   --section-bg-alt: var(--bg-alt);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    color-scheme: dark;
-    --bg: #0d0b1e;
-    --bg-alt: #13102b;
-    --bg-elev: #1a1530;
-    --bg-chip: #211d3a;
-    --text: #e8e0f5;
-    --text-muted: #9085b8;
-    --text-inverse: #ffffff;
-    --heading: #ffffff;
-    --border: rgba(108, 47, 191, 0.25);
-    --border-strong: rgba(108, 47, 191, 0.5);
-    --accent: #6c2fbf;
-    --accent-soft: rgba(108, 47, 191, 0.15);
-    --accent-strong: #9b5ee8;
-    --accent-light: #9b5ee8;
-    --accent-ll: #c4a0f5;
-    --accent-contrast: #ffffff;
-    --accent-red: #c0182a;
-    --accent-red-light: #e8485a;
-    --accent-red-soft: rgba(192, 24, 42, 0.12);
-    --focus-ring: #9b5ee8;
-    --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 22px rgba(0, 0, 0, 0.45);
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
-    --accent-gold: #f5c518;
-    --lvl-evp: var(--accent-gold);
-    --lvl-cio: #a87bf0;
-    --lvl-senior-director: #5b9bf0;
-    --lvl-director: #2dd4bf;
-    --lvl-associate-director: #f3868f;
-    --lvl-national: #f472b6;
-    --medal-silver: #aebfdc;
-    --medal-bronze: #d6a566;
-    --hero-gradient: radial-gradient(
-      60% 70% at 15% 0%,
-      rgba(108, 47, 191, 0.12) 0%,
-      transparent 70%
-    );
-    --section-bg: var(--bg);
-    --section-bg-alt: var(--bg-alt);
-  }
-}
-
 *,
 *::before,
 *::after {

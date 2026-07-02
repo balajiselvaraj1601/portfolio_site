@@ -11,7 +11,7 @@ import { defaultTheme } from '@lib/content';
         stored === 'light' || stored === 'dark' ? stored : defaultTheme;
       document.documentElement.setAttribute('data-theme', theme);
     } catch {
-      /* localStorage unavailable — CSS prefers-color-scheme fallback applies */
+      /* localStorage unavailable — the SSR-rendered data-theme default stays in place */
     }
   })();
 </script>
