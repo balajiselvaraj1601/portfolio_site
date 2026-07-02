@@ -21,14 +21,14 @@ If the change affects page structure, section order, or the overall narrative, u
 
 | File                         | Sections affected                                        | Typical edits                                                                                                                |
 | ---------------------------- | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `site.json`                  | Global meta, nav, pages, SEO, résumé link                | Title, tagline, nav labels, page sections, hide a section                                                                    |
-| `person/profile.json`        | Hero, merged About/Leadership, Technical Vision, Contact | Headline, metrics, CTAs, about cards, leadership philosophy, vision, contact interests, `contactPage` copy                   |
+| `site.json`                  | Global meta, nav, pages, SEO                           | Title, tagline, nav labels, page sections, hide a section                                                                    |
+| `person/profile.json`        | Hero, Leadership, Contact                              | Headline, metrics, CTAs, `leadershipPhilosophy.*`, `contactIntro`, `contactPage`, contact channels                           |
 | `person/collaborations.json` | Collaborations strip on About                            | Organization names; optional `logo` slug → `public/assets/logos/{slug}.png`; optional `entity` slug → URL in `entities.json` |
 | `entities.json`              | Entity links (global registry)                           | Slug → `{ name, url }` for organizations referenced across sections                                                          |
 | `work/strategic-impact.json` | Strategic Impact                                         | `metrics[]`, `highlights[]`; optional `journey[]`, `leadershipCards[]` for rich layout                                       |
 | `work/vision-board.json`     | Vision view (`/#vision`)                                 | Infographic hubs, program cards, org impact cards                                                                            |
 | `work/experience.json`       | Experience intro, tabbed role detail                     | Roles, optional `mission`, `snapshot[]`, bullets, tier                                                                       |
-| `work/projects.json`         | Project cards, Featured projects, Projects intro         | Summaries, case-study fields, `featured`, `snapshot[]`, tags                                                                 |
+| `work/projects.json`         | Projects intro, Featured case studies                  | Summaries, case-study fields, `featured`, `snapshot[]`, tags (full catalogue section shelved)                                |
 | `research/publications.json` | Publications                                             | Title + URL links                                                                                                            |
 | `research/conferences.json`  | Conferences                                              | Title + URL links                                                                                                            |
 | `research/speakers.json`     | Speaking engagements                                     | Title + URL links                                                                                                            |
@@ -42,9 +42,12 @@ Provenance and résumé mapping: [Content map](./content-map.md) · [content/REA
 
 Content under `content/drafts/` is **not wired to the live site**. Currently shelved:
 
-| File                                 | Section                       | Notes                                                                                                                                                                                                                             |
+| File / section id                    | Section                       | Notes                                                                                                                                                                                                                             |
 | ------------------------------------ | ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `drafts/research/generative-ai.json` | Generative AI (Research view) | Bullet items; registry entry in `site.json` with `visible: false`. Validated and exported as `generativeAi` from `src/lib/content.ts`, but its section is not in `home.sections` and `visible` is `false`, so it is not rendered. |
+| `drafts/research/generative-ai.json` | Generative AI (`generative-ai`) | Validated and exported from `src/lib/content.ts`, but not in `home.sections` — not rendered.                                                                                                                                    |
+| `work/strategic-impact.json`         | Strategic Impact (`impact`)   | Component exists; section not in `home.sections`.                                                                                                                                                                               |
+| `person/profile.json` → `vision`     | Technical Vision (`technical-vision`) | Component exists; section not in `home.sections`.                                                                                                                                                                         |
+| `work/projects.json` (non-featured)  | Projects catalogue (`projects`) | Full grid section shelved; live Projects view shows `projects-intro` + `featured-case-studies` only.                                                                                                                              |
 
 **Re-enable Generative AI:**
 
@@ -175,8 +178,8 @@ Schemas live in `src/schemas.ts`. Key constraints:
 
 | Schema                 | Notable rules                                                                                                                             |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`; `resume.path` is a site-root path     |
-| `profileSchema`        | hero/about/contact fields drive the public profile; optional `vision`, `contactPage`, `techStack`; `contact[].href` nullable for location |
+| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`                                          |
+| `profileSchema`        | hero/leadership/contact fields; optional `vision`; `contactIntro`, `contactPage`; `contact[].href` nullable for location                  |
 | `impactSchema`         | `metrics[]` + `highlights[]` required; optional `journey[]`, `leadershipCards[]`                                                          |
 | `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                                                               |
 | `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                                                          |
@@ -220,6 +223,6 @@ Fix the JSON field at that path and rebuild. See [Troubleshooting](./troubleshoo
 
 ## Related docs
 
-- [Assets](./assets.md) — résumé PDF, images (not JSON)
+- [Assets](./assets.md) — résumé PDF (asset-only), images (not JSON)
 - [Specification](./specification.md) — per-section rendering contracts
 - [Architecture](./architecture.md) — how content flows to components

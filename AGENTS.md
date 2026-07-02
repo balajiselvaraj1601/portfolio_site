@@ -62,30 +62,35 @@ Section contracts: `docs/specification.md` and `docs/page-briefs/`.
 ```text
 /              About (home)     → all sections; default view shows About subset
 /#experience   Experience view  → experience-intro, experience
-/#projects     Projects view    → projects-intro, featured-case-studies, projects
+/#projects     Projects view    → projects-intro, featured-case-studies
 /#research     Research view    → publications, conferences, speakers
 /#recognition  Recognition view → awards, kaggle, education
-/#vision       Vision view      → technical-vision, vision-board, impact
+/#vision       Vision view      → vision-board
 /#contact      Contact view     → contact
 /experience … /contact         → ViewRedirect stubs → /#{anchor}
-/assets/...    Resume (PDF)     → external nav link
 ```
 
-| View            | Page id       | Nav label   | `viewSections`                                  |
-| --------------- | ------------- | ----------- | ----------------------------------------------- |
-| `/` (default)   | `home`        | About       | hero, thirukural, leadership                    |
-| `/#experience`  | `experience`  | Experience  | experience-intro, experience                    |
-| `/#projects`    | `projects`    | Projects    | projects-intro, featured-case-studies, projects |
-| `/#research`    | `research`    | Research    | publications, conferences, speakers             |
-| `/#recognition` | `recognition` | Recognition | awards, kaggle, education                       |
-| `/#vision`      | `vision`      | Vision      | technical-vision, vision-board, impact          |
-| `/#contact`     | `contact`     | Contact     | contact                                         |
+| View            | Page id       | Nav label   | `viewSections`                              |
+| --------------- | ------------- | ----------- | ------------------------------------------- |
+| `/` (default)   | `home`        | About       | hero, thirukural, leadership                |
+| `/#experience`  | `experience`  | Experience  | experience-intro, experience                |
+| `/#projects`    | `projects`    | Projects    | projects-intro, featured-case-studies       |
+| `/#research`    | `research`    | Research    | publications, conferences, speakers         |
+| `/#recognition` | `recognition` | Recognition | awards, kaggle, education                   |
+| `/#vision`      | `vision`      | Vision      | vision-board                                |
+| `/#contact`     | `contact`     | Contact     | contact                                     |
 
-**Full home DOM order** (18 sections): hero → thirukural → leadership →
-experience-intro → experience → projects-intro →
-featured-case-studies → projects → publications → conferences → speakers →
-awards → kaggle → education → technical-vision → vision-board →
-impact → contact.
+**Full home DOM order** (15 sections): hero → thirukural → leadership →
+experience-intro → experience → projects-intro → featured-case-studies →
+publications → conferences → speakers → awards → kaggle → education →
+vision-board → contact.
+
+**Shelved (not live):** `technical-vision`, `impact`, `generative-ai`, and the full
+`projects` catalogue section remain in the component registry and content layer but are
+not in `home.sections` (or have `visible: false`). See `docs/content-editing.md`.
+
+**Résumé PDF:** `public/assets/resume/balaji-selvaraj-resume.pdf` ships as a static asset
+(direct-linkable) but is **not** wired in header nav or `content/site.json`.
 
 Each section id appears in exactly one `viewSections` group (no duplication across nav
 buttons). `content.ts` fails the build if a home section is unassigned or a

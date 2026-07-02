@@ -5,17 +5,18 @@
 
 ## Items
 
-| Item (section id)  | Source                                 | Question           | Weight |
-| ------------------ | -------------------------------------- | ------------------ | ------ |
-| `technical-vision` | `content/person/profile.json` (vision) | Why should I care? | heavy  |
-| `vision-board`     | `content/work/vision-board.json`       | How does it work?  | heavy  |
-| `impact`           | `content/work/strategic-impact.json`   | Why should I care? | heavy  |
+| Item (section id) | Source                           | Question           | Weight |
+| ----------------- | -------------------------------- | ------------------ | ------ |
+| `vision-board`    | `content/work/vision-board.json` | How does it work?  | heavy  |
 
 ## Structure
 
-`technical-vision` -> `vision-board` -> `impact`
+`vision-board` only — infographic hubs, program cards, and org impact cards showing how
+Balaji builds AI organizations and delivers executive-sponsored programs. The contact CTA
+is the dedicated **Contact** view.
 
-The view opens with the technical AI vision narrative (`technical-vision`), then
-shows how Balaji builds AI organizations (`vision-board`), and closes with the strategic,
-executive-sponsored impact that resulted (`impact`). The contact CTA is the dedicated **Contact**
-view.
+## Shelved (not in this view)
+
+`technical-vision` (`profile.json` → `vision`), `impact` (`work/strategic-impact.json`),
+and `generative-ai` are intentionally out of `home.sections`. Components and content
+remain for future re-enable — see `docs/content-editing.md`.

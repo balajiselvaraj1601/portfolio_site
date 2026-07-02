@@ -28,7 +28,7 @@ public/
 
 | Asset       | Path                                              | Referenced by                        |
 | ----------- | ------------------------------------------------- | ------------------------------------ |
-| Résumé PDF  | `public/assets/resume/balaji-selvaraj-resume.pdf` | `content/site.json` -> `resume.path` |
+| Résumé PDF  | `public/assets/resume/balaji-selvaraj-resume.pdf` | **Asset only** — not in nav/header   |
 | OG image    | `public/assets/og/og-image.png`                   | `content/site.json` -> `seo.ogImage` |
 | Favicon SVG | `public/favicon.svg`                              | `BaseHead.astro`, manifest           |
 | Favicon ICO | `public/favicon.ico`                              | `BaseHead.astro`                     |
@@ -42,22 +42,18 @@ After replacing any asset, run `npm run build && npm run preview` and verify the
 
 **Current path:** `/assets/resume/balaji-selvaraj-resume.pdf`
 
-To update:
+The PDF is a **static asset only** — it ships from `public/assets/resume/` and is
+direct-linkable (e.g. for email signatures or LinkedIn), but it is **not** linked from
+header nav, contact CTAs, or `content/site.json`. To wire it into the site UI later,
+add a `resume` block to `site.json` and update the header/contact components.
+
+To update the file:
 
 1. Export a new PDF from the résumé builder (no phone number on the public version).
-2. Replace `public/assets/resume/balaji-selvaraj-resume.pdf`.
-3. If the filename changes, update `content/site.json`:
-
-```json
-{
-  "resume": {
-    "label": "Download résumé (PDF)",
-    "path": "/assets/resume/your-new-filename.pdf"
-  }
-}
-```
-
-The header résumé button and contact section both use `site.resume.path`.
+2. Replace `public/assets/resume/balaji-selvaraj-resume.pdf` (or add a new filename and
+   update any external links that point at the old path).
+3. Verify the URL loads after build: `npm run preview` →
+   `http://localhost:4321/assets/resume/balaji-selvaraj-resume.pdf`.
 
 ## OG / social preview image
 

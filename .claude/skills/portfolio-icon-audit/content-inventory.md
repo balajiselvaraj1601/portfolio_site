@@ -20,17 +20,6 @@ Entity map for portfolio icon audits. Extend this table on each run when content
 | contact.kaggle   | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 | contact.location | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 
-**techStack** (optional `icon` per item — component not wired):
-
-| entity_id              | label             | field              | component                  | notes                      |
-| ---------------------- | ----------------- | ------------------ | -------------------------- | -------------------------- |
-| tech-pytorch           | PyTorch           | `techStack[].icon` | `TechIconRow.astro` (dead) | needs `tech_logo` + wiring |
-| tech-foundation-models | Foundation Models | same               | same                       |                            |
-| tech-aws               | AWS               | same               | same                       |                            |
-| tech-langchain         | LangChain         | same               | same                       |                            |
-| tech-docker            | Docker            | same               | same                       |                            |
-| tech-rag               | RAG               | same               | same                       |                            |
-
 ### strategic-impact.json
 
 | entity_id               | field                    | component              | fallback  |
@@ -81,34 +70,19 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 | vb-program.broad.badge | `broad-institute` | Broad Institute | `assets/source/logos/broad-institute.png` | `cards/ProgramBadgeCard.astro` |
 | vb-program.aacr.badge  | `aacr`            | AACR            | `assets/source/logos/aacr.png`            |                                |
 
-### affiliations.json — optional logo field
+### collaborations.json — optional logo field
 
-| entity_id       | name                   | slug                     | status                        |
-| --------------- | ---------------------- | ------------------------ | ----------------------------- |
-| aff-astrazeneca | AstraZeneca            | `astrazeneca`            | wired in `Affiliations.astro` |
-| aff-broad       | Broad Institute        | `broad-institute`        | wired                         |
-| aff-iit         | IIT Madras             | `iit-madras`             | wired                         |
-| aff-eu          | EU Research Consortium | `eu-research-consortium` | wired                         |
-
----
-
-## 3. Tech logos (convention)
-
-**Pattern:** `public/assets/logos/tech/{slug}.svg`  
-**Not yet in schema** — propose slug from `techStack[].label`:
-
-| slug                | label             |
-| ------------------- | ----------------- |
-| `pytorch`           | PyTorch           |
-| `foundation-models` | Foundation Models |
-| `aws`               | AWS               |
-| `langchain`         | LangChain         |
-| `docker`            | Docker            |
-| `rag`               | RAG               |
+| entity_id       | name                   | slug                     | status                              |
+| --------------- | ---------------------- | ------------------------ | ----------------------------------- |
+| coll-broad      | Broad Institute        | `broad-institute`        | wired in `LeadershipPhilosophy.astro` |
+| coll-cshl       | Cold Spring Harbor Lab | `cshl`                   | wired                               |
+| coll-iit        | IIT Madras             | `iit-madras`             | wired                               |
+| coll-uppsala    | Uppsala University     | `uppsala-university`     | wired                               |
+| coll-ai-sweden  | AI Sweden              | `ai-sweden`              | wired                               |
 
 ---
 
-## 4. Heuristic-only (no JSON icon field)
+## 3. Heuristic-only (no JSON icon field)
 
 ### projects.json → projectIcon(domain, id)
 
@@ -123,16 +97,6 @@ Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
 | Enterprise Vision                 | `vision`               |                                   |     |
 | Academic Research                 | `graduation`           |                                   |     |
 | (unknown domain)                  | `folder`               |                                   |
-
-### profile.aboutCards → aboutCardIcon(title)
-
-| title       | icon         |
-| ----------- | ------------ |
-| Industries  | `layers`     |
-| Leadership  | `team`       |
-| Research    | `microscope` |
-| Recognition | `trophy`     |
-| (other)     | `diamond`    |
 
 ### Hardcoded in components
 
@@ -167,7 +131,7 @@ Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
 
 ---
 
-## 5. Site brand assets
+## 4. Site brand assets
 
 | entity_id   | path                                       | spec                      | referenced by               |
 | ----------- | ------------------------------------------ | ------------------------- | --------------------------- |
@@ -184,13 +148,13 @@ Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
 
 ---
 
-## 6. Content images
+## 5. Content images
 
 | entity_id | path field                  | current path                                | component    |
 | --------- | --------------------------- | ------------------------------------------- | ------------ |
 | portrait  | `profile.portrait.src`      | `/assets/images/balaji.png`                 | `Hero.astro` |
 | photo     | `profile.photo`             | `/assets/images/balaji.png`                 | legacy alias |
-| resume    | `site.json` → `resume.path` | `/assets/resume/balaji-selvaraj-resume.pdf` | not an image |
+| resume    | `public/assets/resume/balaji-selvaraj-resume.pdf` | asset-only (not in nav) | not an image |
 
 ### content/drafts/competitions/*.md (unwired / not in build)
 
@@ -206,12 +170,10 @@ Organizer logos (Kaggle, Google, AWS) may reuse `tech_logo` / `org_logo` slugs w
 
 ---
 
-## 7. Orphan / dead code
+## 6. Orphan / dead code
 
 | item                                                                    | issue                                                        |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------ |
-| `TechIconRow.astro`                                                     | accepts `icon?` but never renders it                         |
-| `profile.techStack`                                                     | populated in JSON, not displayed on site                     |
 | Icon keys `sun`, `moon`, `menu`, `close`, `arrow-up`, `external`, `dna` | in registry; Header uses Unicode instead                     |
 | `Impact.jpg` (repo root)                                                | untracked; not wired — flag if user intends as content image |
 

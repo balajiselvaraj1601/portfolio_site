@@ -28,7 +28,6 @@ Orchestrate a full audit of visual assets across the portfolio site. **Claude in
 | ---------------------- | -------------------------------------------- | --------------------------------------------------------------- |
 | **Semantic UI icon**   | `src/lib/icons.ts` + `Icon.astro`            | Inline SVG via `<Icon name="…" />`                              |
 | **Org / program logo** | `VisionMark` `{ kind: "logo", asset: slug }` | `public/assets/logos/{slug}.svg`                                |
-| **Tech brand mark**    | `profile.techStack[].label`                  | `public/assets/logos/tech/{slug}.svg` (convention)              |
 | **Site brand**         | `docs/assets.md`                             | `public/favicon.*`, `public/assets/icons/`, `public/assets/og/` |
 | **Content image**      | `portrait`, competitions frontmatter         | `public/assets/images/`                                         |
 
@@ -65,12 +64,12 @@ Walk every source in [content-inventory.md](content-inventory.md). For each enti
 
 **Scan these sources:**
 
-1. **JSON with icon fields** — `profile.json` (contact, techStack), `strategic-impact.json`, `experience.json` (projects), `vision-board.json`
-2. **Heuristic-only** — `projects.json` → `projectIcon()`, `aboutCards` → `aboutCardIcon()`, `ResearchDomainMap.astro`, `PipelineStrip.astro`
-3. **Logo refs** — `vision-board.json` `VisionMark`; `affiliations.json` names (flag `needs_schema`)
+1. **JSON with icon fields** — `profile.json` (contact), `strategic-impact.json`, `experience.json` (projects), `vision-board.json`, `collaborations.json`
+2. **Heuristic-only** — `projects.json` → `projectIcon()`, `ResearchDomainMap.astro`, `PipelineStrip.astro`
+3. **Logo refs** — `vision-board.json` `VisionMark`; `collaborations.json` `items[].logo`
 4. **Site brand** — `site.json`, `BaseHead.astro`, `site.webmanifest`
 5. **Content images** — `profile.portrait`, `content/drafts/competitions/*.md`
-6. **Orphans** — `TechIconRow.astro` (ignores `icon` field); Header Unicode vs idle `Icon.astro` keys
+6. **Orphans** — Header Unicode vs idle `Icon.astro` keys
 
 Also list files on disk:
 
@@ -90,7 +89,6 @@ Assign each row `asset_class`:
 
 - `semantic` — inline IconName
 - `org_logo` — organization / program mark
-- `tech_logo` — technology brand mark
 - `site_brand` — favicon, PWA, OG, monogram
 - `content_image` — portrait, competition thumbnail, section hero
 
@@ -101,9 +99,8 @@ Apply [resolution-rules.md](resolution-rules.md):
 1. **Semantic:** `iconNameSchema.safeParse(value)` → heuristics (`projectIcon`, `aboutCardIcon`, keyword map)
 2. **Before inventing a new IconName:** load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md` — Lucide → Iconify → keyword map
 3. **Logo:** file exists at `public/assets/logos/{slug}.svg`
-4. **Tech logo:** file exists at `public/assets/logos/tech/{slug}.svg`
-5. **Site brand:** file on disk + dimensions per `docs/assets.md`
-6. **Content image:** path resolves under `public/`
+4. **Site brand:** file on disk + dimensions per `docs/assets.md`
+5. **Content image:** path resolves under `public/`
 
 Mark status:
 
@@ -112,7 +109,7 @@ Mark status:
 | `resolved`     | Asset exists and matches                           |
 | `fallback`     | Renders but uses generic key (`folder`, `diamond`) |
 | `missing`      | No asset — queue for Cursor                        |
-| `needs_schema` | Content has no field yet (e.g. affiliations logos) |
+| `needs_schema` | Content has no field yet (e.g. optional logo on a list item) |
 
 ### Phase C.5 — Evaluate (site_brand / org_logo)
 
@@ -124,7 +121,7 @@ the user requests a brand refresh:
 3. Run theme compatibility checklist (16 px favicon, light/dark, monochrome)
 4. Include evaluation summary in Phase D report — do not auto-regenerate unless user asks
 
-Skip Phase C.5 for `semantic`, `tech_logo`, and `content_image` rows.
+Skip Phase C.5 for `semantic` and `content_image` rows.
 
 ### Phase D — Report
 
@@ -214,8 +211,6 @@ Re-run Phases A–C. All rows should be `resolved` or explicitly deferred.
 
 ## Out of scope (flag in report, do not auto-implement)
 
-- Extend `affiliationsSchema` / wire `Affiliations.astro` for logos
-- Wire `TechIconRow.astro` to render `techStack[].icon`
 - Integrate `content/drafts/competitions/` into site routes
 - Add new `IconName` keys without updating both `icons.ts` and `Icon.astro`
 
@@ -225,14 +220,11 @@ These are follow-up implementation tasks after assets exist.
 
 ## Quick reference — current baseline (re-verify on each run)
 
-**Existing logos** (`public/assets/logos/`): `aacr`, `astrazeneca`, `biorxiv`, `brain`, `broad-institute`, `eu-research-consortium`, `gaia`, `iit-madras`, `jitc`, `kaggle`
-
-**Tech logos** (`public/assets/logos/tech/`): `pytorch`, `aws`, `docker`, `langchain`, `foundation-models`, `rag`
+**Existing logos** (`public/assets/logos/`): `aacr`, `astrazeneca`, `biorxiv`, `brain`, `broad-institute`, `eu-research-consortium`, `gaia`, `iit-madras`, `jitc`, `kaggle`, `cshl`, `hcl`, `uppsala-university`, `ai-sweden`
 
 **Known gaps (typical first audit):**
 
 - Experience projects: all named projects now have explicit `icon` in JSON
-- `techStack` icons: assets exist; `TechIconRow.astro` still not wired to hero
 - Competitions: 16 markdown files without thumbnails (untracked content)
 
 See [content-inventory.md](content-inventory.md) for the full entity map.

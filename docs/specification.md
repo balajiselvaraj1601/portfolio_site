@@ -35,11 +35,10 @@ The renderer (`SectionRenderer`) iterates the home section list — do not hardc
 `publications` → `conferences` → `speakers` → `awards` → `kaggle` → `education` →
 `vision-board` → `contact`.
 
-> **Shelved (not live):** Generative AI (`generative-ai`) is validated but kept out of
-> `home.sections` with `visible: false` — see `content-editing.md` for re-enable steps.
-> Strategic Impact (`impact`) and Technical Vision (`technical-vision`) are likewise
-> intentionally shelved: their section definitions remain in `site.json → sections` (and
-> their components exist), but no page renders them.
+> **Shelved (not live):** These section ids have components and/or content on disk but are
+> **not** in `home.sections` (and may have `visible: false` where a registry entry exists):
+> `technical-vision`, `impact`, `generative-ai`, and the full `projects` catalogue.
+> Re-enable steps: `content-editing.md`.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -81,22 +80,19 @@ Reused primitives (define once, use everywhere): `Section`, `MetricCard`, `Chip`
 | --------------------- | --------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------- |
 | Hero                  | `person/profile.json`                               | `headline`, `metrics[]`, `ctas[]`, photo                                  | Split layout; metric cards; value-oriented CTAs                |
 | Thirukural            | `person/profile.json`                               | `heroQuote`                                                               | Couplet + portrait band; wrapped in AboutLanding with hero     |
-| Leadership            | `person/profile.json`, `person/collaborations.json` | `aboutIntro`, `aboutCards[]`, `leadershipPhilosophy`, collaboration logos | Bio → scan cards → philosophy quote → theme cards → logo strip |
+| Leadership            | `person/profile.json`, `person/collaborations.json` | `leadershipPhilosophy.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro → CTO pillar card rows → collaborations logo strip |
 | Experience Intro      | `work/experience.json`                              | `title`, `intro`, `snapshot[]`                                            | Section lead-in + metric cards                                 |
 | Experience            | `work/experience.json`                              | `roles[] -> projects[] -> bullets[]`                                      | Interactive tabbed timeline + role panels                      |
 | Projects Intro        | `work/projects.json`                                | `title`, `intro`, `snapshot[]`                                            | Section lead-in + metric cards                                 |
-| Featured Case Studies | `work/projects.json`                                | `projects[]` where `featured: true`                                       | Flagship case-study cards                                      |
-| Projects              | `work/projects.json`                                | case-study fields + `highlights[]`, `tags[]`                              | Problem/solution/architecture/impact blocks                    |
+| Featured Case Studies | `work/projects.json`                                | `projects[]` where `featured: true`                                       | Flagship case-study cards (Projects view — no full catalogue)  |
 | Publications          | `research/publications.json`                        | `items[]`                                                                 | Stacked ResearchLinkGrid                                       |
 | Conferences           | `research/conferences.json`                         | `items[]`                                                                 | Stacked ResearchLinkGrid                                       |
 | Speakers              | `research/speakers.json`                            | `items[]`                                                                 | SpeakingCard stack                                             |
 | Awards                | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, …)                            | Search + level filter chips; recog card grid                   |
 | Kaggle                | `recognition/kaggle.json`                           | `rank`, `profile`, `items[]`                                              | Global rank hero; medal filters; CompetitionCard grid          |
 | Education             | `recognition/education.json`                        | `intro`, `records[]`                                                      | Split credential panel — degree hero, 2×2 stat grid, achievement highlight |
-| Technical Vision      | `person/profile.json`                               | `vision.heading`, `vision.paragraphs[]`                                   | Multimodal AI narrative                                        |
-| Vision Board          | `work/vision-board.json`                            | `hubs[]`, `programs[]`, `orgCards[]`                                      | Infographic layout                                             |
-| Strategic Impact      | `work/strategic-impact.json`                        | `metrics[]`, `highlights[]`, optional rich blocks                         | Vision view closing section (`impact` id)                      |
-| Contact               | `person/profile.json`                               | `contact[]`, `contactPage`, `contactQuote`                                | Full connect layout                                            |
+| Vision Board          | `work/vision-board.json`                            | `hubs[]`, `programs[]`, `orgCards[]`                                      | Infographic layout (Vision view — sole live section)           |
+| Contact               | `person/profile.json`                               | `contact[]`, `contactIntro`, `contactPage`                                | Pitch + linked channels + optional booking CTA                 |
 
 The renderer maps `site.json.sections[id].source` → file, and `…title` → heading text.
 
