@@ -60,16 +60,36 @@ matching schema.
 
 ## Local development
 
-### Port already in use
+### Port already in use / localhost:4321 won't load
 
-**Symptom:** `Port 4321 is already in use`
+**Symptoms:**
+
+- Browser shows connection refused or a blank page at http://localhost:4321
+- Terminal logs `Port 4321 is already in use`
+- Terminal shows the dev server on **4322** instead of 4321 (older sessions only)
+
+**Cause:** Multiple `astro dev` processes compete for port 4321 — common when agents,
+terminals, and the local VS Code “Astro: dev preview” task all start the server. Before
+`vite.server.strictPort` was set correctly, a second instance silently moved to 4322 while
+the browser stayed on 4321.
 
 **Fix:**
 
 ```bash
-npm run dev -- --port 4322
-# or
-npm run preview -- --port 4322
+npm run dev:restart
+```
+
+This kills stale listeners on 4321 and 4322, then starts one fresh dev server on 4321.
+
+Do **not** run several `npm run dev` or `npm run preview` sessions at once on the same
+port. If you use the local `.vscode/tasks.json` “Astro: dev preview” task, run it manually
+when needed — it is no longer auto-started on folder open.
+
+For preview of a production build, stop the dev server first:
+
+```bash
+npm run build
+npm run preview
 ```
 
 ### Theme flash on load

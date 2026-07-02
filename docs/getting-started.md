@@ -29,6 +29,12 @@ npm ci    # use npm ci, not npm install — respects package-lock.json pins
 npm run dev
 ```
 
+If the page won't load (connection refused), restart a clean single instance:
+
+```bash
+npm run dev:restart
+```
+
 Opens at http://localhost:4321 with hot module replacement. Edit JSON under `content/` or
 `src/components/**` and the browser refreshes automatically.
 

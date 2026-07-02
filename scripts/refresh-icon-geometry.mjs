@@ -51,8 +51,8 @@ const LUCIDE_MAP = {
   chevron: 'chevron-down',
   'chevron-right': 'chevron-right',
   trophy: 'trophy',
-  // Local custom badge (256×256 trophy, hand-authored in icon-paths.json). No remote
-  // source — null keeps it in the falsy branch so refresh preserves it verbatim.
+  // Local custom badge (512×512 filled evenodd trophy glyph, stored in icon-paths.json).
+  // No remote source — null keeps it in the falsy branch so refresh preserves it verbatim.
   'trophy-cup': null,
   brain: 'brain',
   rocket: 'rocket',

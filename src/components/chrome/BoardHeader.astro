@@ -36,25 +36,28 @@ const { title, flank = 'in', id } = Astro.props;
   }
   .bhead__rule {
     flex: 1;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent));
-  }
-  .bhead__rule:last-child {
-    background: linear-gradient(90deg, var(--accent-red), transparent);
+    height: 1px;
+    background: linear-gradient(
+      to right,
+      transparent,
+      var(--border-strong),
+      transparent
+    );
   }
   .bhead__title {
     font-family: var(--font-display);
     font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
     letter-spacing: 0.02em;
     text-transform: uppercase;
-    color: var(--accent);
+    color: var(--heading);
     margin: 0;
     text-align: center;
     white-space: nowrap;
   }
   .bhead__chev {
     display: inline-flex;
-    color: var(--accent);
+    color: var(--accent-light);
+    opacity: 0.55;
   }
   .bhead__chev :global(svg) {
     margin-inline: -5px;
@@ -63,13 +66,9 @@ const { title, flank = 'in', id } = Astro.props;
   .bhead--in .bhead__chev--left {
     transform: scaleX(-1);
   }
-  .bhead--in .bhead__chev--right {
-    color: var(--accent-red);
-  }
   /* 'out' → chevrons point away from the title (right group flipped). */
   .bhead--out .bhead__chev--right {
     transform: scaleX(-1);
-    color: var(--accent-red);
   }
   @media (max-width: 600px) {
     .bhead__title {

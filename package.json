@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
+    "dev:restart": "node scripts/dev-restart.mjs",
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

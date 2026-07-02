@@ -109,17 +109,6 @@ export function initSectionViews(options: SectionViewsOptions) {
     goToView(anchor);
   });
 
-  // Desktop header CTA lives outside #primary-nav.
-  document
-    .querySelectorAll<HTMLAnchorElement>('.site-header__actions a.nav-cta')
-    .forEach((cta) => {
-      cta.addEventListener('click', (event) => {
-        event.preventDefault();
-        history.pushState(null, '', '#contact');
-        goToView('contact');
-      });
-    });
-
   const applyFromHash = () => {
     const anchor = window.location.hash.replace(/^#/, '');
     if (anchor && applyViewFromHash(anchor)) return;

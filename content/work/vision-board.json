@@ -7,13 +7,13 @@
       "variant": "purple",
       "center": { "kind": "logo", "asset": "kaggle", "alt": "Kaggle" },
       "satellites": [
-        "lightbulb",
-        "chart",
-        "brain",
-        "book",
-        "handshake",
-        "globe",
-        "target"
+        { "kind": "logo", "asset": "logo_innovation_idea", "alt": "Innovation / idea" },
+        { "kind": "logo", "asset": "logo_performance_growth", "alt": "Performance / growth" },
+        { "kind": "icon", "name": "brain" },
+        { "kind": "logo", "asset": "logo_learning_education", "alt": "Learning / education" },
+        { "kind": "logo", "asset": "logo_partnership_handshake", "alt": "Partnership" },
+        { "kind": "logo", "asset": "logo_global_analytics", "alt": "Global analytics" },
+        { "kind": "logo", "asset": "logo_target_goal", "alt": "Target / goal" }
       ]
     },
     {
@@ -21,7 +21,14 @@
       "label": "VISION",
       "variant": "purple",
       "center": { "kind": "icon", "name": "brain" },
-      "satellites": ["document", "table", "image", "blocks", "pulse", "graph"]
+      "satellites": [
+        { "kind": "logo", "asset": "logo_document_file", "alt": "Document / text" },
+        { "kind": "logo", "asset": "logo_grid_table", "alt": "Tabular data" },
+        { "kind": "logo", "asset": "logo_photo_image", "alt": "Image" },
+        { "kind": "logo", "asset": "logo_cube_3d", "alt": "3D / volumetric" },
+        { "kind": "logo", "asset": "logo_pulse_activity", "alt": "Signal / time-series" },
+        { "kind": "logo", "asset": "logo_network_nodes", "alt": "Graph / network" }
+      ]
     }
   ],
   "programs": [

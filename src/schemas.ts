@@ -289,7 +289,7 @@ export const visionBoardSchema = z.object({
       label: z.string(),
       variant: VariantColor,
       center: VisionMark,
-      satellites: z.array(iconNameSchema),
+      satellites: z.array(VisionMark),
     })
   ),
   programs: z
@@ -442,7 +442,7 @@ export const educationRecordSchema = z.object({
 export const educationSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
-  records: z.array(educationRecordSchema),
+  records: z.array(educationRecordSchema).min(1),
 });
 
 /* ── awards.json ───────────────────────────────────────────────────────── */

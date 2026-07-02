@@ -26,60 +26,39 @@ const iconName = resolveIcon(icon, 'diamond');
     position: relative;
     overflow: hidden;
     background: var(--bg-elev);
-    border-radius: var(--radius-xl);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
     min-height: 210px;
     padding: var(--space-6) var(--space-4) var(--space-5);
     text-align: center;
-    box-shadow: 4px 7px 14px rgba(26, 21, 48, 0.14);
+    box-shadow: var(--shadow-sm);
     transition:
+      border-color var(--dur) var(--ease),
       transform var(--dur) var(--ease),
       box-shadow var(--dur) var(--ease);
   }
-  /* Top gradient bar. */
-  .ocard::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto 0;
-    height: 6px;
-    background: linear-gradient(90deg, var(--accent), var(--accent-strong));
-  }
-  /* Left purple→red gradient bar. */
-  .ocard::after {
-    content: '';
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 6px;
-    background: linear-gradient(
-      180deg,
-      var(--accent),
-      var(--accent-strong) 70%,
-      var(--accent-red)
-    );
-  }
   .ocard:hover {
+    border-color: var(--accent);
     transform: translateY(var(--card-lift));
     box-shadow: var(--shadow-md);
   }
   .ocard__icon {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
     margin: var(--space-2) auto var(--space-4);
     display: grid;
     place-items: center;
-    color: var(--accent-contrast);
-    background: radial-gradient(
-      circle at 30% 30%,
-      var(--accent-strong),
-      var(--accent)
-    );
+    color: var(--accent-ll);
+    background: var(--accent-soft);
+    border: 1px solid var(--border-strong);
   }
   .ocard__title {
     font-size: 0.9rem;
     font-weight: 700;
     line-height: 1.35;
     margin: 0;
-    color: var(--accent);
+    color: var(--heading);
   }
   .ocard__rule {
     width: 92%;

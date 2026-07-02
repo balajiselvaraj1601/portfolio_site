@@ -7,8 +7,8 @@ import { profile } from '@lib/content';
 
 const { contactPage } = profile;
 
-// Social/connect cards: every contact entry with a link (location has none).
-const connectCards = profile.contact.filter((c) => c.href);
+// Every contact entry with a link (location has none → stays hidden).
+const linked = profile.contact.filter((c) => c.href);
 
 const isExternal = (href: string) => href.startsWith('http');
 const actionLabel = (type: string) =>
@@ -64,7 +64,7 @@ const actionLabel = (type: string) =>
 
       <div class="connect-grid">
         {
-          connectCards.map((c) => {
+          linked.map((c) => {
             const external = c.href ? isExternal(c.href) : false;
             return (
               <a
@@ -153,7 +153,8 @@ const actionLabel = (type: string) =>
   }
   .connect-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr;
     gap: var(--stack-sm);
     margin-bottom: var(--stack-sm);
   }

@@ -1,0 +1,61 @@
+{
+  "comment": "Example configuration for svg-icon-generator.py. Copy and modify for each icon.",
+
+  "foreground_is_light": true,
+  "comment_foreground": "Legacy switch (true=light glyph). Superseded by foreground_mode when that is set",
+
+  "foreground_mode": null,
+  "comment_foreground_mode": "null uses foreground_is_light. Else one of: 'light' | 'dark' | 'nonwhite' (colored/gradient ink on white) | 'alpha' (opaque region of a transparent PNG)",
+
+  "light_threshold": 180,
+  "comment_threshold": "Brightness cutoff (0-255) for 'light'/'dark' modes",
+
+  "white_threshold": 235,
+  "comment_white_threshold": "Off-white cutoff (0-255) for 'nonwhite' mode — a pixel is ink if min(r,g,b) is below this",
+
+  "alpha_threshold": 128,
+  "comment_alpha_threshold": "Opacity cutoff (0-255) for 'alpha' mode; also excludes transparent pixels in 'nonwhite' mode",
+
+  "crop_threshold": 240,
+  "comment_crop_threshold": "Whiteness cutoff (0-255) for auto-crop margin detection (distinct from light_threshold)",
+
+  "auto_crop_whitespace": true,
+  "comment_auto_crop": "Trim the empty border (white for RGB sources, transparent for alpha) before masking",
+
+  "constrain_to_circle": true,
+  "comment_circle": "Set to true if the icon is a glyph inside a circular badge (auto-detects the container circle)",
+
+  "circle_inset": 0.995,
+  "comment_inset": "Shrink detected circle slightly to avoid anti-aliasing artifacts (0.99-0.999)",
+
+  "opttolerance": 0.1,
+  "comment_opt": "Curve-fitting tolerance. Lower = more accurate/more nodes (0.05-0.2 for detailed icons)",
+
+  "alphamax": 1.3,
+  "comment_alpha": "Corner-smoothing threshold. Keep 1.0-1.5 for sharp corners without over-rounding",
+
+  "turdsize": 4,
+  "comment_turd": "Suppress noise specks smaller than N pixels (2-8; lower preserves small details)",
+
+  "sizes": [24, 512],
+  "comment_sizes": "Output sizes in pixels. Proportions are preserved across all sizes",
+
+  "glyph_fill_fraction": 0.875,
+  "comment_fill": "Glyph's largest dimension as fraction of its own canvas (0.8-0.95). Ignored in tight mode",
+
+  "tight": false,
+  "comment_tight": "Borderless output: non-square viewBox wrapping the glyph exactly (no padding, no badge)",
+
+  "save_cropped_path": null,
+  "comment_save_cropped": "Path to also write the auto-cropped source image (transparency preserved), or null to skip",
+
+  "badge": {
+    "glyph_fraction_of_diameter": 0.65,
+    "comment_diameter": "Glyph size relative to circle diameter (0.5-0.75)",
+
+    "vertical_center_offset": 0.0125,
+    "comment_offset": "Vertical nudge (fraction of canvas). Positive = downward. Use 0 for perfect center"
+  },
+
+  "comment_badge": "Set to null to skip badge variant generation: \"badge\": null"
+}

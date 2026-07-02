@@ -121,6 +121,7 @@ CI builds on Node 20 (`package.json` engines: `>=18`).
 | Area                                    | Read                                                      |
 | --------------------------------------- | --------------------------------------------------------- |
 | Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`            |
+| Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                   |
 | UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`          |
 | Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`        |
 | Logo SVG authoring                      | `../image_gen/.claude/skills/logo-emblem-author/SKILL.md` |

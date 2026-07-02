@@ -40,7 +40,11 @@ const cardBlocks = [
         items.length > 0 && (
           <div class="leadership__card-row reveal">
             <h3 class="leadership__diff-heading">{heading}</h3>
-            <ul class="leadership__themes" role="list">
+            <ul
+              class="leadership__themes"
+              style={`--card-cols: ${items.length}`}
+              role="list"
+            >
               {items.map((item) => (
                 <li class="leadership__theme card">
                   {item.icon && (
@@ -111,7 +115,7 @@ const cardBlocks = [
   }
   .leadership__card-row .leadership__themes {
     margin-top: 0;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(var(--card-cols, 4), minmax(0, 1fr));
   }
   .leadership__themes {
     display: grid;

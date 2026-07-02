@@ -20,10 +20,13 @@ const C = SIZE / 2; // centre
 const RING = 108; // satellite ring radius
 const START = -90; // first satellite at top, then clockwise every 60°
 
-const nodes = satellites.map((icon, i) => {
+const nodes = satellites.map((mark, i) => {
   const angle = ((START + i * (360 / satellites.length)) * Math.PI) / 180;
   return {
-    icon,
+    mark,
+    // Resolve the logo URL only on the 'logo' branch; the emblem is painted via
+    // a CSS mask so it inherits the satellite's accent color (see styles below).
+    logo: mark.kind === 'logo' ? logoSrc(mark.asset) : undefined,
     x: C + RING * Math.cos(angle),
     y: C + RING * Math.sin(angle),
   };
@@ -58,11 +61,26 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
         <span
           class="hub__sat"
           style={`left:${(n.x / SIZE) * 100}%;top:${(n.y / SIZE) * 100}%;--sat-accent:${
-            i % 2 === 0 ? 'var(--accent)' : 'var(--accent-red-light)'
+            variant === 'red'
+              ? i % 2 === 0
+                ? 'var(--accent-red)'
+                : 'var(--accent-red-light)'
+              : i % 2 === 0
+                ? 'var(--accent)'
+                : 'var(--accent-light)'
           }`}
           aria-hidden="true"
         >
-          <Icon name={n.icon} size={22} />
+          {
+            n.mark.kind === 'icon' ? (
+              <Icon name={n.mark.name} size={22} />
+            ) : n.logo ? (
+              <span
+                class="hub__sat-emblem"
+                style={`--emblem:url("${n.logo}")`}
+              />
+            ) : null
+          }
         </span>
       ))
     }
@@ -146,15 +164,25 @@ const centerLogo = center.kind === 'logo' ? logoSrc(center.asset) : undefined;
     color: var(--sat-accent, var(--hub-accent));
     box-shadow: 0 0 0 4px var(--bg);
   }
+  /* Monochrome logo emblems are painted via a mask so they take the satellite's
+     accent color (currentColor), matching the stroke icons in both themes. */
+  .hub__sat-emblem {
+    width: 22px;
+    height: 22px;
+    background: currentColor;
+    -webkit-mask: var(--emblem) center / contain no-repeat;
+    mask: var(--emblem) center / contain no-repeat;
+  }
   .hub__label {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
+    font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.22em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--accent-contrast);
-    background: var(--hub-accent);
-    padding: 0.4rem 2.2rem;
-    border-radius: var(--radius-pill);
+    color: var(--accent-ll);
+    margin: 0;
+  }
+  .hub--red .hub__label {
+    color: var(--accent-red-light);
   }
 </style>

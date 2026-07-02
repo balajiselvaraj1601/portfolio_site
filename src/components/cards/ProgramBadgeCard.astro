@@ -23,7 +23,15 @@ const { title, label, variant, badge, lines, entity } = Astro.props;
 const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
 ---
 
-<article class:list={['pcard', `pcard--${variant}`]}>
+<article
+  class:list={[
+    'pcard',
+    'card',
+    'card--top-accent',
+    `pcard--${variant}`,
+    { 'pcard--has-logo': badge.kind === 'logo' },
+  ]}
+>
   <header class="pcard__head">
     <h3 class="pcard__title">
       <EntityLink
@@ -58,54 +66,49 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
 
 <style>
   .pcard {
-    --pc: var(--accent);
-    --pc-soft: var(--accent-soft);
+    --accent-card: var(--accent);
     position: relative;
-    background: var(--bg-elev);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
     padding-bottom: var(--space-5);
-    overflow: hidden;
-    transition:
-      border-color var(--dur) var(--ease),
-      transform var(--dur) var(--ease);
   }
   .pcard--red {
-    --pc: var(--accent-red);
-    --pc-soft: var(--accent-red-soft);
+    --accent-card: var(--accent-red);
   }
   .pcard:hover {
-    border-color: var(--pc);
-    transform: translateY(var(--card-lift));
-    box-shadow: var(--shadow-md);
+    border-color: var(--accent-card);
   }
   .pcard__head {
-    background: var(--pc);
-    color: var(--accent-contrast);
-    padding: var(--space-4) 7.5rem var(--space-4) var(--space-5);
+    padding: var(--space-4) 8.75rem var(--space-3) var(--space-5);
+    min-height: 5.5rem;
+  }
+  .pcard--has-logo .pcard__head {
+    padding-right: 11.5rem;
   }
   .pcard__title {
-    font-size: 1.1rem;
+    font-size: clamp(0.92rem, 1.6vw, 1.05rem);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
     margin: 0;
-    color: var(--accent-contrast);
+    color: var(--heading);
+    overflow-wrap: normal;
+    word-break: keep-all;
   }
   .pcard__title :global(.pcard__title-link) {
-    color: var(--accent-contrast);
+    color: var(--heading);
   }
   .pcard__title :global(.pcard__title-link:hover) {
-    color: var(--accent-contrast);
-    opacity: 0.92;
+    color: var(--accent-light);
   }
   .pcard__label {
     font-family: var(--font-mono);
-    font-size: 0.66rem;
+    font-size: var(--fs-eyebrow);
     font-weight: 600;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     margin: 0.35rem 0 0;
-    opacity: 0.92;
+    color: var(--accent-ll);
+  }
+  .pcard--red .pcard__label {
+    color: var(--accent-red-light);
   }
   .pcard__lines {
     list-style: none;
@@ -128,19 +131,24 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
     border-radius: 50%;
     display: grid;
     place-items: center;
-    background: var(--bg-elev);
-    border: 4px solid var(--pc);
-    color: var(--pc);
-    box-shadow: 0 18px 32px -8px color-mix(in srgb, var(--pc) 50%, transparent);
+    background: var(--accent-soft);
+    border: 1px solid var(--border-strong);
+    color: var(--accent-ll);
+    box-shadow: var(--shadow-sm);
+  }
+  .pcard--red .pcard__badge {
+    background: var(--accent-red-soft);
+    color: var(--accent-red-light);
   }
   .pcard__badge--logo {
-    background: var(--bg-elev);
+    background: var(--logo-surface);
     width: auto;
-    min-width: 104px;
-    max-width: 152px;
-    height: 56px;
+    min-width: 96px;
+    max-width: 148px;
+    height: 52px;
     border-radius: var(--radius-md);
     padding: var(--space-2) var(--space-3);
+    border-color: color-mix(in srgb, var(--accent-card) 35%, var(--border));
   }
   .pcard__badge img {
     width: var(--logo-emblem-img);
@@ -150,8 +158,8 @@ const badgeLogo = badge.kind === 'logo' ? logoSrc(badge.asset) : undefined;
   .pcard__badge--logo img {
     width: auto;
     height: auto;
-    max-width: 132px;
-    max-height: 36px;
+    max-width: 128px;
+    max-height: 32px;
   }
   @media (max-width: 520px) {
     .pcard__head {

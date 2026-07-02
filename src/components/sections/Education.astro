@@ -5,7 +5,10 @@ import EntityLink from '@components/ui/EntityLink.astro';
 import { education, getEntityUrl, logoSrc, site } from '@lib/content';
 import type { IconName } from '@lib/icons';
 
+// Schema guarantees at least one record (educationSchema.records.min(1)); this guard
+// keeps rendering safe if the data ever degrades rather than throwing at build time.
 const [record] = education.records;
+if (!record) return;
 const logo = logoSrc(record.entity);
 const entityUrl = getEntityUrl(record.entity);
 const degreeShort = record.degree.split(' ')[0];

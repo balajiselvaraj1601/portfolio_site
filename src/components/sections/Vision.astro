@@ -21,7 +21,6 @@ const vision = profile.vision;
             title={vision.heading}
             highlight={vision.headingEmphasis}
             class="vision__title"
-            emphasisAs="em"
           />
         )}
 
@@ -44,16 +43,7 @@ const vision = profile.vision;
 
 <style>
   .vision__title {
-    font-family: var(--font-display);
-    font-size: var(--fs-h2);
-    font-weight: 400;
-    line-height: 1.1;
-    color: var(--heading);
-    margin-bottom: 1rem;
-  }
-  .vision__title em {
-    font-style: italic;
-    color: var(--accent-ll);
+    margin-bottom: var(--space-4);
   }
   .vision__body {
     margin-bottom: var(--space-8);

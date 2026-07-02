@@ -1,5 +1,6 @@
 ---
 import Section from '@components/ui/Section.astro';
+import Eyebrow from '@components/ui/Eyebrow.astro';
 import BoardHeader from '@components/chrome/BoardHeader.astro';
 import HubCircle from '@components/cards/HubCircle.astro';
 import ProgramBadgeCard from '@components/cards/ProgramBadgeCard.astro';
@@ -14,8 +15,8 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   id="vision-board"
   title={header}
   hideTitle
-  variant="full"
-  class="vboard section--alt"
+  variant="default"
+  class="vboard"
 >
   <BoardHeader title={header} flank="in" />
 
@@ -59,7 +60,9 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   {
     orgCards && orgCards.length > 0 && (
       <div class="vboard__org reveal">
-        {orgHeader && <BoardHeader title={orgHeader} flank="out" />}
+        {orgHeader && (
+          <Eyebrow text={orgHeader} variant="red" class="vboard__org-eyebrow" />
+        )}
         <div class="vboard__org-grid">
           {orgCards.map((c) => (
             <OrgImpactCard icon={c.icon} title={c.title} lines={c.lines} />
@@ -83,7 +86,8 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   .vboard__arrow {
     display: inline-flex;
     align-items: center;
-    color: var(--accent);
+    color: var(--accent-light);
+    opacity: 0.7;
   }
   .vboard__arrow :global(svg) {
     margin-inline: -6px;
@@ -99,6 +103,10 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   /* ── org section ─────────────────────────────────────────────────────── */
   .vboard__org {
     margin-top: var(--space-16);
+  }
+  .vboard__org-eyebrow {
+    text-align: center;
+    margin-bottom: 0;
   }
   .vboard__org-grid {
     display: grid;

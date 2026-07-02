@@ -26,11 +26,6 @@ const internalNavItems = navItems.filter(isContentPage).map((item) => ({
   viewAnchor: item.viewAnchor ?? item.id,
 }));
 
-const resumeItem = navItems.find((item) => item.id === 'resume');
-const resumeLabel = resumeItem?.label ?? site.resume.label;
-const resumePath = resumeItem?.path ?? site.resume.path;
-const contactHref = singlePageViews ? '/#contact' : '/contact';
-
 const [firstName, ...rest] = site.name.split(' ');
 const lastName = rest.join(' ');
 ---
@@ -72,41 +67,9 @@ const lastName = rest.join(' ');
           ))
         }
       </ul>
-      <div
-        class="nav__mobile-actions"
-        role="group"
-        aria-label="Primary actions"
-      >
-        <a
-          class="btn btn-secondary nav-resume"
-          href={resumePath}
-          aria-label={site.resume.label}
-        >
-          {resumeLabel}
-        </a>
-        <a
-          class="btn btn-primary nav-cta"
-          href={contactHref}
-          data-view-anchor={singlePageViews ? 'contact' : undefined}
-          >Get in Touch</a
-        >
-      </div>
     </nav>
 
     <div class="site-header__actions">
-      <a
-        class="btn btn-secondary nav-resume"
-        href={resumePath}
-        aria-label={site.resume.label}
-      >
-        {resumeLabel}
-      </a>
-      <a
-        class="btn btn-primary nav-cta"
-        href={contactHref}
-        data-view-anchor={singlePageViews ? 'contact' : undefined}
-        >Get in Touch</a
-      >
       <button
         type="button"
         class="save-btn"
@@ -214,9 +177,6 @@ const lastName = rest.join(' ');
     margin: 0;
     padding: 0;
   }
-  .nav__mobile-actions {
-    display: none;
-  }
   .nav__link {
     position: relative;
     font-size: 0.78rem;
@@ -244,15 +204,6 @@ const lastName = rest.join(' ');
     align-items: center;
     gap: var(--space-2);
     flex-shrink: 0;
-  }
-  .nav-cta,
-  .nav-resume {
-    font-size: 0.75rem;
-    padding: 0.45rem 1.1rem;
-    white-space: nowrap;
-  }
-  .nav-resume {
-    background: color-mix(in srgb, var(--bg-elev) 72%, transparent);
   }
   .save-btn,
   .theme-toggle,
@@ -314,10 +265,6 @@ const lastName = rest.join(' ');
     .nav-toggle {
       display: inline-flex;
     }
-    .site-header__actions .nav-cta,
-    .site-header__actions .nav-resume {
-      display: none;
-    }
     .nav.is-open {
       display: block;
       position: fixed;
@@ -338,17 +285,6 @@ const lastName = rest.join(' ');
     }
     .nav.is-open .nav__link[aria-current='page']::after {
       content: none;
-    }
-    .nav.is-open .nav__mobile-actions {
-      display: grid;
-      gap: var(--space-3);
-      margin-top: var(--space-6);
-      padding-top: var(--space-6);
-      border-top: 1px solid var(--border);
-    }
-    .nav.is-open .nav__mobile-actions .btn {
-      justify-content: center;
-      width: 100%;
     }
   }
   .nav-toggle__close {
