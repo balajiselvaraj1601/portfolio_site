@@ -44,6 +44,8 @@ const ContentPage = z.object({
   viewSections: z.array(z.string()).optional(),
   viewAnchor: z.string().optional(),
 });
+// Nav entry that links straight out of the site (e.g. a hosted document or
+// external profile). Capability kept even when no external entry is configured.
 const ExternalPage = z.object({
   id: z.string(),
   label: z.string(),
@@ -73,7 +75,6 @@ export const siteSchema = z
       ogImage: z.string(),
       twitterCard: z.string(),
     }),
-    resume: z.object({ label: z.string(), path: z.string() }),
     theme: z.object({
       tokensRef: z.string(),
       default: z.string(),
@@ -223,9 +224,6 @@ export const profileSchema = z.object({
     connectHeading: z.string(),
     bookCallLabel: z.string(),
     bookingHref: z.string().nullable().optional(),
-    resumeEyebrow: z.string(),
-    resumeDescription: z.string(),
-    resumeLabel: z.string(),
   }),
   credentialHook: z.string().optional(),
   photo: z.string().optional(),
@@ -520,6 +518,8 @@ export const speakersSchema = z.object({
 });
 
 /* ── kaggle.json ───────────────────────────────────────────────────────── */
+// SSOT for the medal tiers earned — drives the medal field and filter chips.
+export const kaggleMedalSchema = z.enum(['Silver', 'Bronze']);
 const KaggleCompetitionStats = z.object({
   prizePool: z.string(),
   entrants: z.string(),
@@ -535,7 +535,7 @@ export const kaggleCompetitionSchema = z.object({
   year: z.number(),
   period: z.string(),
   role: z.string(),
-  medal: z.enum(['Silver', 'Bronze']),
+  medal: kaggleMedalSchema,
   rank: z.string(),
   percentile: z.string(),
   summary: z.string(),
@@ -597,6 +597,7 @@ export type LinkList = z.infer<typeof linkListSchema>;
 export type Speakers = z.infer<typeof speakersSchema>;
 export type Kaggle = z.infer<typeof kaggleSchema>;
 export type KaggleCompetition = z.infer<typeof kaggleCompetitionSchema>;
+export type KaggleMedal = z.infer<typeof kaggleMedalSchema>;
 export type Collaborations = z.infer<typeof collaborationsSchema>;
 export type Entities = z.infer<typeof entitiesSchema>;
 export type EntityRecord = z.infer<typeof EntityRecord>;

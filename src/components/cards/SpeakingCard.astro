@@ -3,6 +3,7 @@ import { logoSrc } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
 import { youtubeId } from '@lib/youtube';
 import Icon from '@components/ui/Icon.astro';
+import LogoBadge from '@components/ui/LogoBadge.astro';
 import { resolveIcon } from '@lib/icons';
 import type { Speakers } from '@schemas';
 
@@ -26,15 +27,13 @@ const ytThumb = ytId
   <header class="speaking-card__head">
     {
       logoUrl ? (
-        showLogoBadge ? (
-          <div class="logo-badge logo-badge--md speaking-card__mark">
-            <img src={logoUrl} alt={`${item.event} logo`} loading="lazy" />
-          </div>
-        ) : (
-          <div class="logo-badge logo-badge--md logo-badge--plain speaking-card__mark">
-            <img src={logoUrl} alt={`${item.event} logo`} loading="lazy" />
-          </div>
-        )
+        <LogoBadge
+          logoUrl={logoUrl}
+          altText={`${item.event} logo`}
+          useBadge={showLogoBadge}
+          size="md"
+          class="speaking-card__mark"
+        />
       ) : (
         <div class="speaking-card__icon" aria-hidden="true">
           <Icon name={resolveIcon(undefined, 'presentation')} size="lg" />

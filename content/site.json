@@ -97,12 +97,6 @@
       },
       "sections": ["contact"],
       "viewSections": ["contact"]
-    },
-    {
-      "id": "resume",
-      "label": "Resume",
-      "path": "/assets/resume/balaji-selvaraj-resume.pdf",
-      "external": true
     }
   ],
   "sections": {
@@ -115,12 +109,12 @@
     "impact": {
       "title": "Strategic Impact",
       "source": "work/strategic-impact.json",
-      "visible": true
+      "visible": false
     },
     "technical-vision": {
       "title": "Technical Vision",
       "source": "person/profile.json",
-      "visible": true
+      "visible": false
     },
     "vision-board": {
       "title": "AI Leadership & Strategic Impact",
@@ -212,10 +206,6 @@
     ],
     "ogImage": "/assets/og/og-image.png",
     "twitterCard": "summary_large_image"
-  },
-  "resume": {
-    "label": "Download résumé (PDF)",
-    "path": "/assets/resume/balaji-selvaraj-resume.pdf"
   },
   "theme": {
     "tokensRef": "docs/design-direction.md",

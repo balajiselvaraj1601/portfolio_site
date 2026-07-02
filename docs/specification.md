@@ -14,28 +14,32 @@ Legacy paths redirect to the matching hash on `/`.
 ```
 /              About (default)  → viewSections: hero, thirukural, leadership
 /#experience   Experience       → experience-intro, experience
-/#projects     Projects         → projects-intro, featured-case-studies, projects
+/#projects     Projects         → projects-intro, featured-case-studies
 /#research     Research         → publications, conferences, speakers
 /#recognition  Recognition      → awards, kaggle, education
-/#vision       Vision           → technical-vision, vision-board, impact
+/#vision       Vision           → vision-board
 /#contact      Contact          → contact
 /experience … /contact         → redirect stubs (noindex) → /#{viewAnchor}
 /404           custom not-found page
 ```
 
-Nav also includes **Resume** (external PDF link from `site.json.pages` with `"external": true`).
+The resume PDF remains a static asset at `public/assets/resume/balaji-selvaraj-resume.pdf`
+(direct-linkable), but has no nav entry and no site-config wiring.
 
 Each section id appears in exactly one `viewSections` group (exclusive nav grouping — no section
 is duplicated across nav buttons). Section ids and grouping are defined in `content/site.json → pages`.
 The renderer (`SectionRenderer`) iterates the home section list — do not hardcode section order in markup.
 
-**Full home DOM order** (18 section ids): `hero` → `thirukural` → `leadership` →
-`experience-intro` → `experience` → `projects-intro` → `featured-case-studies` → `projects` →
+**Full home DOM order** (15 section ids): `hero` → `thirukural` → `leadership` →
+`experience-intro` → `experience` → `projects-intro` → `featured-case-studies` →
 `publications` → `conferences` → `speakers` → `awards` → `kaggle` → `education` →
-`technical-vision` → `vision-board` → `impact` → `contact`.
+`vision-board` → `contact`.
 
 > **Shelved (not live):** Generative AI (`generative-ai`) is validated but kept out of
 > `home.sections` with `visible: false` — see `content-editing.md` for re-enable steps.
+> Strategic Impact (`impact`) and Technical Vision (`technical-vision`) are likewise
+> intentionally shelved: their section definitions remain in `site.json → sections` (and
+> their components exist), but no page renders them.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -47,8 +51,7 @@ App / Layout
 ├── Header
 │   ├── Brand (name)
 │   ├── Nav (from site.json.pages, active-route indicator)
-│   ├── ThemeToggle
-│   └── ResumeDownloadButton (site.json.resume)
+│   └── ThemeToggle
 ├── Main
 │   ├── AboutLanding (wraps hero + thirukural on home)
 │   │   ├── HeroSection            ← person/profile.json
@@ -58,16 +61,13 @@ App / Layout
 │   ├── ExperienceSection          ← work/experience.json (roles[])
 │   ├── ProjectsIntroSection       ← work/projects.json
 │   ├── FeaturedCaseStudies        ← work/projects.json (featured: true)
-│   ├── ProjectsSection            ← work/projects.json
 │   ├── PublicationsSection        ← research/publications.json
 │   ├── ConferencesSection         ← research/conferences.json
 │   ├── SpeakersSection            ← research/speakers.json
 │   ├── AwardsSection              ← recognition/awards.json (CompetitionCard-style recog layout)
 │   ├── KaggleSection              ← recognition/kaggle.json (CompetitionCard stack)
 │   ├── EducationSection           ← recognition/education.json (EducationCard)
-│   ├── TechnicalVisionSection     ← person/profile.json (vision)
 │   ├── VisionBoardSection         ← work/vision-board.json
-│   ├── ImpactSection              ← work/strategic-impact.json
 │   └── ContactSection             ← person/profile.json (contact[])
 └── Footer (copyright, social links, back-to-top)
 ```

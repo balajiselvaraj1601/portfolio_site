@@ -1,5 +1,6 @@
 ---
 import Icon from '@components/ui/Icon.astro';
+import LogoBadge from '@components/ui/LogoBadge.astro';
 import EntityLink from '@components/ui/EntityLink.astro';
 import { resolveIcon } from '@lib/icons';
 import { getEntityUrl, logoSrc } from '@lib/content';
@@ -18,16 +19,12 @@ const showLogoBadge = logoUrl && logoUsesBadge(entity);
   <div class="lcard-mark" aria-hidden="true">
     {
       logoUrl ? (
-        <div
-          class:list={[
-            'logo-badge',
-            'logo-badge--md',
-            'lcard-logo',
-            { 'logo-badge--plain': !showLogoBadge },
-          ]}
-        >
-          <img src={logoUrl} alt="" loading="lazy" />
-        </div>
+        <LogoBadge
+          logoUrl={logoUrl}
+          useBadge={showLogoBadge}
+          size="md"
+          class="lcard-logo"
+        />
       ) : (
         <div class="lcard-icon">
           <Icon name={iconName} size={22} />

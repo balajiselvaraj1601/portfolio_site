@@ -213,10 +213,7 @@
     "responseTime": "Typically respond within 24–48 hours.",
     "connectHeading": "Connect with me",
     "bookCallLabel": "Book a Call",
-    "bookingHref": null,
-    "resumeEyebrow": "Download CV",
-    "resumeDescription": "Full resume with complete project details, publications, and career history.",
-    "resumeLabel": "Download PDF Resume"
+    "bookingHref": null
   },
   "contact": [
     {

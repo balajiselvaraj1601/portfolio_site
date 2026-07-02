@@ -1,5 +1,6 @@
 ---
 import Icon from '@components/ui/Icon.astro';
+import LogoBadge from '@components/ui/LogoBadge.astro';
 import { resolveIcon } from '@lib/icons';
 import { logoSrc } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
@@ -41,15 +42,13 @@ const logoUrl = logoSrc(logo);
 <article class:list={['rcard', { 'rcard--stacked': isStacked }]}>
   {
     logoUrl ? (
-      showLogoBadge ? (
-        <div class="logo-badge rcard-logo">
-          <img src={logoUrl} alt={venue} loading="lazy" />
-        </div>
-      ) : (
-        <div class="logo-badge logo-badge--plain rcard-logo-plain">
-          <img src={logoUrl} alt={venue} loading="lazy" />
-        </div>
-      )
+      <LogoBadge
+        logoUrl={logoUrl}
+        altText={venue}
+        useBadge={showLogoBadge}
+        size="md"
+        class="rcard-logo"
+      />
     ) : (
       <div class="rcard-icon" aria-hidden="true">
         <Icon name={iconName} size={22} />
@@ -132,11 +131,7 @@ const logoUrl = logoSrc(logo);
   .rcard-logo {
     margin-bottom: 0.85rem;
   }
-  .rcard-logo-plain {
-    margin-bottom: 0.85rem;
-  }
   .rcard--stacked .rcard-logo,
-  .rcard--stacked .rcard-logo-plain,
   .rcard--stacked .rcard-icon {
     align-self: flex-start;
     width: fit-content;

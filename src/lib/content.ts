@@ -131,7 +131,7 @@ export function logoSrc(slug?: string): string | undefined {
   }
   return undefined;
 }
-/** Content-driven pages only — excludes external nav entries (e.g. Resume PDF). */
+/** Content-driven pages only — excludes external nav entries (e.g. a link to an external profile). */
 export const pages = site.pages.flatMap((p) => {
   if (p.external) return [];
 

@@ -1,0 +1,96 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import type { IconName } from '@lib/icons';
+
+interface Props {
+  /**
+   * Logo image URL. If not provided, renders fallback icon instead.
+   */
+  logoUrl?: string;
+
+  /**
+   * Alt text for logo image. Required if logoUrl is provided.
+   */
+  altText?: string;
+
+  /**
+   * Whether to show the badge styling (background, border, shadow).
+   * When false, renders plain logo with no decorative styles.
+   * @default true
+   */
+  useBadge?: boolean;
+
+  /**
+   * Logo badge size variant: 'md' (medium) or 'lg' (large).
+   * Controls max-height and max-width via CSS classes.
+   * @default 'md'
+   */
+  size?: 'md' | 'lg';
+
+  /**
+   * Icon name for fallback when no logo is provided.
+   * Must be a valid IconName from @lib/icons.
+   * @default 'diamond'
+   */
+  fallbackIcon?: IconName;
+
+  /**
+   * Icon size in pixels when rendering fallback icon.
+   * @default 22
+   */
+  iconSize?: number;
+
+  /**
+   * Additional CSS classes to apply to the logo-badge container.
+   */
+  class?: string;
+
+  /**
+   * Aria-hidden attribute for the fallback icon container.
+   * Set to false to expose icon as meaningful content with a label.
+   * @default 'true'
+   */
+  ariaHidden?: boolean;
+}
+
+const {
+  logoUrl,
+  altText = '',
+  useBadge = true,
+  size = 'md',
+  fallbackIcon = 'diamond',
+  iconSize = 22,
+  class: cls,
+  ariaHidden = true,
+} = Astro.props;
+---
+
+{
+  logoUrl ? (
+    <div
+      class:list={[
+        'logo-badge',
+        `logo-badge--${size}`,
+        { 'logo-badge--plain': !useBadge },
+        cls,
+      ]}
+    >
+      <img src={logoUrl} alt={altText} loading="lazy" />
+    </div>
+  ) : (
+    <div class="logo-badge-fallback" aria-hidden={ariaHidden}>
+      <Icon name={fallbackIcon} size={iconSize} />
+    </div>
+  )
+}
+
+<style>
+  .logo-badge-fallback {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-ll);
+  }
+</style>
