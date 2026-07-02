@@ -8,7 +8,6 @@ import { SECTION_COMPONENT_ID_SET } from './section-ids';
 import {
   siteSchema,
   profileSchema,
-  impactSchema,
   visionBoardSchema,
   experienceSchema,
   projectsSchema,
@@ -19,13 +18,11 @@ import {
   kaggleSchema,
   collaborationsSchema,
   entitiesSchema,
-  textListSchema,
 } from '@schemas';
 
 import siteRaw from '@content/site.json';
 import profileRaw from '@content/person/profile.json';
 import collaborationsRaw from '@content/person/collaborations.json';
-import strategicImpactRaw from '@content/work/strategic-impact.json';
 import visionBoardRaw from '@content/work/vision-board.json';
 import experienceRaw from '@content/work/experience.json';
 import projectsRaw from '@content/work/projects.json';
@@ -36,7 +33,6 @@ import educationRaw from '@content/recognition/education.json';
 import awardsRaw from '@content/recognition/awards.json';
 import kaggleRaw from '@content/recognition/kaggle.json';
 import entitiesRaw from '@content/entities.json';
-import generativeAiRaw from '@content/drafts/research/generative-ai.json';
 
 function load<T extends z.ZodTypeAny>(
   name: string,
@@ -55,11 +51,6 @@ function load<T extends z.ZodTypeAny>(
 
 export const site = load('site.json', siteSchema, siteRaw);
 export const profile = load('person/profile.json', profileSchema, profileRaw);
-export const strategicImpact = load(
-  'work/strategic-impact.json',
-  impactSchema,
-  strategicImpactRaw
-);
 export const visionBoard = load(
   'work/vision-board.json',
   visionBoardSchema,
@@ -99,11 +90,6 @@ export const collaborations = load(
   collaborationsRaw
 );
 export const entities = load('entities.json', entitiesSchema, entitiesRaw);
-export const generativeAi = load(
-  'drafts/research/generative-ai.json',
-  textListSchema,
-  generativeAiRaw
-);
 
 /** Resolve a canonical entity URL from a content slug (or logo slug). */
 export function getEntityUrl(slug?: string): string | undefined {
@@ -257,12 +243,6 @@ for (const record of education.records) {
 }
 for (const program of visionBoard.programs ?? []) {
   assertEntitySlug(program.entity, 'work/vision-board.json programs');
-}
-for (const card of strategicImpact.leadershipCards ?? []) {
-  assertEntitySlug(card.entity, 'work/strategic-impact.json');
-}
-for (const collab of profile.vision?.collaborations ?? []) {
-  assertEntitySlug(collab.entity, 'person/profile.json vision.collaborations');
 }
 
 function assertLogoAsset(slug: string, context: string) {

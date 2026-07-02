@@ -38,3 +38,6 @@ scripts/.icon-stage/
 
 # Task-runner runtime state (local only)
 .cursor/task-runner.state.json
+
+# Shelved / unused content and components (not part of the live site)
+/_shelved/

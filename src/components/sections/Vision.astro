@@ -1,0 +1,70 @@
+---
+import Section from '@components/ui/Section.astro';
+import SectionHeading from '@components/ui/SectionHeading.astro';
+import { profile } from '@lib/content';
+
+const vision = profile.vision;
+---
+
+{
+  vision && (
+    <Section
+      id="technical-vision"
+      title="Technical Vision"
+      hideTitle
+      eyebrow="Technical Vision"
+      variant="alt"
+    >
+      <div class="vision-text reveal">
+        {vision && (
+          <SectionHeading
+            title={vision.heading}
+            highlight={vision.headingEmphasis}
+            class="vision__title"
+          />
+        )}
+
+        <div class="vision__body">
+          {vision.paragraphs.map((para) => (
+            <p class="vision__para">{para}</p>
+          ))}
+        </div>
+
+        {vision.mentorship && (
+          <div class="vision__mentorship-block">
+            <h3>Mentorship</h3>
+            <p class="vision__mentorship">{vision.mentorship}</p>
+          </div>
+        )}
+      </div>
+    </Section>
+  )
+}
+
+<style>
+  .vision__title {
+    margin-bottom: var(--space-4);
+  }
+  .vision__body {
+    margin-bottom: var(--space-8);
+  }
+  .vision__para {
+    color: var(--text-muted);
+    line-height: 1.85;
+    margin-bottom: var(--space-4);
+    font-size: 0.92rem;
+    max-width: none;
+  }
+  .vision__para:last-child {
+    margin-bottom: 0;
+  }
+  .vision__mentorship-block h3 {
+    margin-bottom: 1rem;
+  }
+  .vision__mentorship {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    max-width: none;
+  }
+</style>

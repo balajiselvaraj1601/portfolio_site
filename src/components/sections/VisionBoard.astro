@@ -7,17 +7,18 @@ import OrgImpactCard from '@components/cards/OrgImpactCard.astro';
 import Icon from '@components/ui/Icon.astro';
 import { visionBoard } from '@lib/content';
 
-const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
+const { header, intro, hubs, programs, orgHeader, orgCards } = visionBoard;
 ---
 
 <Section
   id="vision-board"
   title={header}
   hideTitle
-  variant="default"
-  class="vboard"
+  variant="full"
+  class="vboard section--alt"
 >
   <BoardHeader title={header} flank="in" />
+  {intro && <p class="vboard__intro reveal">{intro}</p>}
 
   {/* Top flow: IDEA » VISION » 2×2 program cards, all in one row. */}
   <div class="vboard__flow reveal">
@@ -60,7 +61,7 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
     orgCards && orgCards.length > 0 && (
       <div class="vboard__org reveal">
         {orgHeader && (
-          <BoardHeader title={orgHeader} flank="in" as="h3" size="sm" />
+          <BoardHeader title={orgHeader} flank="out" as="h3" size="sm" />
         )}
         <div class="vboard__org-grid">
           {orgCards.map((c) => (
@@ -73,13 +74,21 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
 </Section>
 
 <style>
+  .vboard__intro {
+    max-width: 580px;
+    margin: var(--space-4) auto var(--space-2);
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.75;
+  }
+
   /* ── top flow row (hubs » programs) ──────────────────────────────────── */
   .vboard__flow {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto auto minmax(460px, 1fr);
     align-items: center;
-    justify-content: center;
-    gap: var(--space-5) var(--space-4);
-    flex-wrap: wrap;
+    gap: var(--space-4) var(--space-5);
     margin-top: var(--space-10);
   }
   .vboard__arrow {
@@ -92,11 +101,11 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
     margin-inline: -6px;
   }
   .vboard__programs {
-    flex: 1 1 640px;
-    min-width: min(640px, 100%);
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: repeat(2, auto);
     gap: var(--space-5);
+    min-width: 0;
   }
 
   /* ── org section ─────────────────────────────────────────────────────── */
@@ -106,26 +115,45 @@ const { header, hubs, programs, orgHeader, orgCards } = visionBoard;
   .vboard__org-grid {
     display: grid;
     grid-template-columns: repeat(7, minmax(0, 1fr));
+    grid-template-rows: repeat(4, auto);
     gap: var(--space-4);
     margin-top: var(--space-10);
   }
 
   /* ── responsive ──────────────────────────────────────────────────────── */
-  @media (max-width: 1024px) {
+  @media (max-width: 1279px) {
+    .vboard__flow {
+      grid-template-columns: auto auto auto auto;
+      justify-content: center;
+    }
+    .vboard__programs {
+      grid-column: 1 / -1;
+      min-width: min(640px, 100%);
+      margin-inline: auto;
+    }
     .vboard__org-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
   }
-  @media (max-width: 720px) {
-    /* Hide the inline arrows once the flow stacks vertically. */
+  @media (max-width: 899px) {
+    .vboard__org-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (max-width: 767px) {
+    .vboard__flow {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
     .vboard__arrow {
       display: none;
     }
     .vboard__programs {
       grid-template-columns: 1fr;
+      min-width: 100%;
     }
   }
-  @media (max-width: 600px) {
+  @media (max-width: 599px) {
     .vboard__org-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

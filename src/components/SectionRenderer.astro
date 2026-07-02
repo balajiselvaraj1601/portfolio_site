@@ -1,8 +1,6 @@
 ---
 import Divider from '@components/ui/Divider.astro';
 import Hero from '@components/sections/Hero.astro';
-import Impact from '@components/sections/Impact.astro';
-import Vision from '@components/sections/Vision.astro';
 import VisionBoard from '@components/sections/VisionBoard.astro';
 import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
 import AboutLanding from '@components/sections/AboutLanding.astro';
@@ -11,7 +9,6 @@ import Experience from '@components/sections/Experience.astro';
 import ExperienceIntro from '@components/sections/ExperienceIntro.astro';
 import ProjectsIntro from '@components/sections/ProjectsIntro.astro';
 import FeaturedCaseStudies from '@components/sections/FeaturedCaseStudies.astro';
-import GenerativeAI from '@components/sections/GenerativeAI.astro';
 import Education from '@components/sections/Education.astro';
 import Awards from '@components/sections/Awards.astro';
 import Publications from '@components/sections/Publications.astro';
@@ -31,15 +28,12 @@ type SectionComponent = typeof Hero;
 const SECTIONS: Record<string, SectionComponent> = {
   hero: Hero,
   thirukural: ThirukuralQuote,
-  impact: Impact,
-  'technical-vision': Vision,
   'vision-board': VisionBoard,
   leadership: LeadershipPhilosophy,
   experience: Experience,
   'experience-intro': ExperienceIntro,
   'projects-intro': ProjectsIntro,
   'featured-case-studies': FeaturedCaseStudies,
-  'generative-ai': GenerativeAI,
   education: Education,
   awards: Awards,
   publications: Publications,

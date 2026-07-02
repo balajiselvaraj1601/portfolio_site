@@ -1,0 +1,74 @@
+{
+  "title": "Strategic Impact",
+  "headline": "From Kaggle idea to executive-sponsored programs",
+  "headlineHighlight": "Kaggle idea",
+  "subtitle": "Independently sourced, pitched, and secured two major AI initiatives — one SVP-sponsored saving $20–50M annually, one Chief Scientist-sponsored within a €14M EU consortium.",
+  "metrics": [
+    { "value": "$20–50M", "label": "Projected annual savings" },
+    { "value": "$0.5M+", "label": "Funding secured" },
+    { "value": "14", "label": "European research partners" },
+    { "value": "12", "label": "Engineers built" },
+    { "value": "3", "label": "R&D priority areas" },
+    { "value": "Top 0.3%", "label": "Global Kaggle rank" }
+  ],
+  "journey": [
+    {
+      "icon": "kaggle",
+      "label": "Idea",
+      "description": "Top 0.3% Kaggle signals & patterns",
+      "variant": "purple"
+    },
+    {
+      "icon": "brain",
+      "label": "Vision",
+      "description": "Multimodal AI platform architecture",
+      "variant": "purple"
+    },
+    {
+      "icon": "rocket",
+      "label": "Execution",
+      "description": "SVP + Chief Scientist backed programs",
+      "variant": "red"
+    }
+  ],
+  "leadershipCards": [
+    {
+      "icon": "trophy",
+      "title": "EVP Level Award",
+      "subtitle": "For Drug Safety Platform"
+    },
+    {
+      "icon": "document",
+      "title": "Gartner Submission",
+      "entity": "gartner",
+      "subtitle": "2030 Gene & Cell Therapy multimodal-AI vision"
+    },
+    {
+      "icon": "funding",
+      "title": "$0.5M+ Secured",
+      "subtitle": "Multiple times for team"
+    },
+    {
+      "icon": "target",
+      "title": "3 Scorecard",
+      "subtitle": "Aligned projects"
+    },
+    {
+      "icon": "link",
+      "title": "PERSIST-SEQ",
+      "entity": "persist-seq",
+      "subtitle": "Persister sequencing · €14M · 14 partners"
+    },
+    { "icon": "team", "title": "Scaled Team", "subtitle": "1 → 12 members" },
+    {
+      "icon": "globe",
+      "title": "Global Management",
+      "subtitle": "India · UK · Sweden · Mexico · China"
+    }
+  ],
+  "highlights": [
+    {
+      "text": "Translated bottom-up AI vision into executive-sponsored strategic initiatives — an SVP-sponsored program and a Chief Scientist-sponsored program."
+    }
+  ]
+}

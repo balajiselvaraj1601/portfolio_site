@@ -1,5 +1,6 @@
 {
   "header": "AI Leadership & Strategic Impact",
+  "intro": "Independently sourced, pitched, and secured two major AI initiatives — one SVP-sponsored saving $20–50M annually, one Chief Scientist-sponsored within a €14M EU consortium.",
   "hubs": [
     {
       "id": "idea",
@@ -17,7 +18,6 @@
           "asset": "logo_performance_growth",
           "alt": "Performance / growth"
         },
-        { "kind": "icon", "name": "brain" },
         {
           "kind": "logo",
           "asset": "logo_learning_education",
@@ -65,15 +65,20 @@
   ],
   "programs": [
     {
-      "title": "Drug Safety",
+      "title": "Drug Safety Platform",
       "label": "SVP Backed",
       "variant": "purple",
-      "badge": { "kind": "icon", "name": "clipboard" },
+      "badge": {
+        "kind": "logo",
+        "asset": "logo_drug_safety",
+        "alt": "Drug Safety Platform"
+      },
       "lines": [
-        "$20M-$50M Annual Savings",
-        "Secured Project (for my group)",
-        "Lead Development"
-      ]
+        "$20M–$50M projected annual savings",
+        "Secured project (for my group)",
+        "Lead development"
+      ],
+      "entity": "astrazeneca"
     },
     {
       "title": "Broad Institute",
@@ -85,14 +90,14 @@
         "alt": "Broad Institute"
       },
       "lines": [
-        "Initiated Collaboration",
+        "Initiated collaboration",
         "Dr. Shantanu Singh",
-        "Computational pipelines: Cell Painting & omics"
+        "Multimodal computation pipelines"
       ],
       "entity": "broad-institute"
     },
     {
-      "title": "PERSIST-SEQ",
+      "title": "Persister Analysis",
       "label": "Chief Scientist Backed",
       "variant": "red",
       "badge": {
@@ -101,9 +106,9 @@
         "alt": "PERSIST-SEQ"
       },
       "lines": [
-        "Persister sequencing · €14M EU consortium",
-        "Secured Project (for my group)",
-        "Lead Development"
+        "Persister-Seq · €14M EU consortium",
+        "Secured project (for my group)",
+        "Lead development"
       ],
       "entity": "persist-seq"
     },
@@ -114,7 +119,7 @@
       "badge": { "kind": "logo", "asset": "aacr", "alt": "AACR" },
       "lines": [
         "Presented in 2025",
-        "3 month AI pipeline development",
+        "3-month AI pipeline development",
         "2 AI engineers"
       ],
       "entity": "aacr"
@@ -146,7 +151,7 @@
         "asset": "logo_financial_growth",
         "alt": "Financial growth"
       },
-      "title": "Secured 0.5M$ Funds",
+      "title": "Secured $0.5M+ Funds",
       "lines": ["Multiple times for Team"]
     },
     {
@@ -165,7 +170,7 @@
         "alt": "Strategic target"
       },
       "title": "Strategic Team Positioning",
-      "lines": ["Across 7 Internal Groups", "3 Startups"]
+      "lines": ["Across 7 internal groups", "3 startups"]
     },
     {
       "mark": {
