@@ -175,13 +175,13 @@ The workflow uses `cancel-in-progress: true` so overlapping pushes do not stack 
 
 **Checklist:**
 
-| Check                  | Expected                                      |
-| ---------------------- | --------------------------------------------- |
+| Check                  | Expected                                         |
+| ---------------------- | ------------------------------------------------ |
 | Pages source           | **Branch `gh-pages` / root** (see deployment.md) |
-| Repo name (user site)  | `balajiselvaraj1601.github.io`                |
-| `base` in astro.config | `'/'` for user site                           |
-| `.nojekyll` in dist    | Present at root                               |
-| Workflow deploy job    | Completed successfully                        |
+| Repo name (user site)  | `balajiselvaraj1601.github.io`                   |
+| `base` in astro.config | `'/'` for user site                              |
+| `.nojekyll` in dist    | Present at root                                  |
+| Workflow deploy job    | Completed successfully                           |
 
 ### Assets 404 on live site (`/_astro/`, `/assets/`)
 
