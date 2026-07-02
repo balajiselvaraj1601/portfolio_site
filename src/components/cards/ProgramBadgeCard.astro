@@ -1,4 +1,15 @@
 ---
+/**
+ * ProgramBadgeCard — Strategic Impact Program Showcase
+ *
+ * Renders a program badge card within the Vision page hub structure. Each card
+ * displays the program title, label, key bullet lines, and an icon or logo badge.
+ *
+ * Props are derived from the VisionBoard schema's programs array — a discriminated
+ * union where badge can be either an icon or a logo asset. The component narrows
+ * the union based on badge.kind to cleanly resolve URLs only for the 'logo' branch.
+ */
+
 import Icon from '@components/ui/Icon.astro';
 import EntityLink from '@components/ui/EntityLink.astro';
 import { getEntityUrl, logoSrc } from '@lib/content';

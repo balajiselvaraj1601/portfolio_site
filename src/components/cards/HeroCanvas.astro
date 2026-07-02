@@ -25,6 +25,7 @@
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    // Respect user's motion preferences: animate only if motion is not reduced.
     const reduceMotion = window.matchMedia(
       '(prefers-reduced-motion: reduce)'
     ).matches;

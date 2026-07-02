@@ -520,6 +520,8 @@ export const speakersSchema = z.object({
 /* ── kaggle.json ───────────────────────────────────────────────────────── */
 // SSOT for the medal tiers earned — drives the medal field and filter chips.
 export const kaggleMedalSchema = z.enum(['Silver', 'Bronze']);
+// Export the medal enum values as a tuple for use in filter chips and card logic.
+export const MEDALS = ['Silver', 'Bronze'] as const;
 const KaggleCompetitionStats = z.object({
   prizePool: z.string(),
   entrants: z.string(),

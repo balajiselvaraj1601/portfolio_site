@@ -3,6 +3,7 @@ import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
 import CompetitionCard from '@components/cards/CompetitionCard.astro';
 import { kaggle, site } from '@lib/content';
+import { MEDALS, medalClass } from '@lib/recognition';
 
 // Presentation order = impact: best percentile first. Parse the number out of
 // strings like "Top 1.8%" and sort ascending. Fixed server-side, never hardcoded.
@@ -15,11 +16,6 @@ const items = [...kaggle.items].sort(
 const total = items.length;
 const silver = items.filter((i) => i.medal === 'Silver').length;
 const bronze = items.filter((i) => i.medal === 'Bronze').length;
-
-// Medal filter set — drives the chips and mirrors the card data-medal values.
-const MEDALS = ['Silver', 'Bronze'] as const;
-const medalClass = (m: string) =>
-  m === 'Silver' ? 'blob--silver' : 'blob--bronze';
 ---
 
 <Section id="kaggle" title={site.sections.kaggle.title} variant="alt">

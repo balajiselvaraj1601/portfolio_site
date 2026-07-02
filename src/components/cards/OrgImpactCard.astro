@@ -25,6 +25,10 @@ const iconName = resolveIcon(icon, 'diamond');
   .ocard {
     position: relative;
     overflow: hidden;
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 4;
+    row-gap: 0;
     background: var(--bg-elev);
     border: 1px solid var(--border);
     border-radius: var(--radius-lg);

@@ -25,10 +25,12 @@ const nodes = satellites.map((mark, i) => {
   const angle = ((START + i * (360 / satellites.length)) * Math.PI) / 180;
   return {
     mark,
-    // Resolve the logo URL only on the 'logo' branch; the emblem is painted via
-    // a CSS mask so it inherits the satellite's accent color (see styles below).
+    // Resolve the logo URL only when mark.kind === 'logo'. Logos are painted via
+    // a CSS mask so they inherit the satellite's accent color (currentColor),
+    // matching stroke icons in both themes (see .hub__sat-emblem in styles).
     logo: mark.kind === 'logo' ? logoSrc(mark.asset) : undefined,
-    // Self-ringed emblems drop the chrome disc (see .hub__sat--plain).
+    // Self-ringed logo emblems (those with their own ring artwork) drop the chrome
+    // disc and border — the mask expands to fill the whole satellite slot.
     plain: mark.kind === 'logo' && logoHasOwnRing(mark.asset),
     x: C + RING * Math.cos(angle),
     y: C + RING * Math.sin(angle),

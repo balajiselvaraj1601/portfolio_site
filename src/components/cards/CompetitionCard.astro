@@ -3,6 +3,7 @@ import Icon from '@components/ui/Icon.astro';
 import { competitionIcon, resolveIcon } from '@lib/icons';
 import type { IconName } from '@lib/icons';
 import type { KaggleCompetition } from '@schemas';
+import { medalClass } from '@lib/recognition';
 
 type Props = KaggleCompetition;
 
@@ -29,7 +30,7 @@ const headerIcon = resolveIcon(icon, competitionIcon(id, domain));
 // a separate content field.
 const totalEntrants = stats?.entrants;
 
-const medalClass = medal === 'Silver' ? 'blob--silver' : 'blob--bronze';
+const medalCls = medalClass(medal);
 
 // Fixed stat row mirroring the reference layout. Entries with no value drop out.
 const stats6: { icon: IconName; label: string; value?: string }[] = [
@@ -44,7 +45,7 @@ const visibleStats = stats6.filter((s) => s.value);
 ---
 
 <article
-  class:list={['recog-card', medalClass]}
+  class:list={['recog-card', medalCls]}
   data-medal={medal}
   data-name={name}
   data-domain={domain}
@@ -52,7 +53,7 @@ const visibleStats = stats6.filter((s) => s.value);
 >
   <header class="blob-head">
     <div class="recog-icon" aria-hidden="true">
-      <Icon name={headerIcon} size={24} />
+      <Icon name={headerIcon} size="lg" />
     </div>
     <h3 class="recog-title recog-clamp" style="--clamp: 2">
       <a href={url} target="_blank" rel="noopener noreferrer"
@@ -66,7 +67,7 @@ const visibleStats = stats6.filter((s) => s.value);
       visibleStats.map((s) => (
         <div class="blob-stat">
           <span class="blob-stat__icon" aria-hidden="true">
-            <Icon name={s.icon} size={16} />
+            <Icon name={s.icon} size="sm" />
           </span>
           <dt class="recog-label">{s.label}</dt>
           <dd class="recog-value">{s.value}</dd>
