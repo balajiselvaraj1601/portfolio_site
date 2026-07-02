@@ -1,8 +1,6 @@
 ---
 import Divider from '@components/ui/Divider.astro';
 import Hero from '@components/sections/Hero.astro';
-import Impact from '@components/sections/Impact.astro';
-import Vision from '@components/sections/Vision.astro';
 import VisionBoard from '@components/sections/VisionBoard.astro';
 import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
 import AboutLanding from '@components/sections/AboutLanding.astro';
@@ -11,7 +9,6 @@ import Experience from '@components/sections/Experience.astro';
 import ExperienceIntro from '@components/sections/ExperienceIntro.astro';
 import ProjectsIntro from '@components/sections/ProjectsIntro.astro';
 import FeaturedCaseStudies from '@components/sections/FeaturedCaseStudies.astro';
-import GenerativeAI from '@components/sections/GenerativeAI.astro';
 import Education from '@components/sections/Education.astro';
 import Awards from '@components/sections/Awards.astro';
 import Publications from '@components/sections/Publications.astro';
@@ -19,7 +16,7 @@ import Conferences from '@components/sections/Conferences.astro';
 import Speakers from '@components/sections/Speakers.astro';
 import Kaggle from '@components/sections/Kaggle.astro';
 import Contact from '@components/sections/Contact.astro';
-import { sectionViewMap } from '@lib/content';
+import { sectionViewMap, navViews, navHref } from '@lib/content';
 
 /**
  * Every imported `.astro` file's default export shares the same component
@@ -31,15 +28,12 @@ type SectionComponent = typeof Hero;
 const SECTIONS: Record<string, SectionComponent> = {
   hero: Hero,
   thirukural: ThirukuralQuote,
-  impact: Impact,
-  'technical-vision': Vision,
   'vision-board': VisionBoard,
   leadership: LeadershipPhilosophy,
   experience: Experience,
   'experience-intro': ExperienceIntro,
   'projects-intro': ProjectsIntro,
   'featured-case-studies': FeaturedCaseStudies,
-  'generative-ai': GenerativeAI,
   education: Education,
   awards: Awards,
   publications: Publications,
@@ -55,7 +49,20 @@ interface Props {
   navViews?: boolean;
 }
 
-const { sections, navViews = false } = Astro.props;
+const { sections, navViews: navViewsMode = false } = Astro.props;
+
+const projectsView = navViews.find((v) => v.id === 'projects');
+const researchView = navViews.find((v) => v.id === 'research');
+
+function sectionProps(id: string): Record<string, string> {
+  if (id === 'featured-case-studies' && projectsView) {
+    return { showMoreHref: navHref(projectsView) };
+  }
+  if (id === 'publications' && researchView) {
+    return { showMoreHref: navHref(researchView) };
+  }
+  return {};
+}
 ---
 
 {
@@ -66,14 +73,14 @@ const { sections, navViews = false } = Astro.props;
     if (id === 'thirukural' && sections[index - 1] === 'hero') return null;
 
     if (id === 'hero' && sections[index + 1] === 'thirukural') {
-      const heroViews = navViews ? sectionViewMap.hero?.join(' ') : undefined;
-      const kuralViews = navViews
+      const heroViews = navViewsMode ? sectionViewMap.hero?.join(' ') : undefined;
+      const kuralViews = navViewsMode
         ? sectionViewMap.thirukural?.join(' ')
         : undefined;
 
       return (
         <AboutLanding>
-          {navViews && heroViews ? (
+          {navViewsMode && heroViews ? (
             <div
               class="section-view-root"
               data-nav-views={heroViews}
@@ -84,7 +91,7 @@ const { sections, navViews = false } = Astro.props;
           ) : (
             <Hero />
           )}
-          {navViews && kuralViews ? (
+          {navViewsMode && kuralViews ? (
             <div
               class="section-view-root"
               data-nav-views={kuralViews}
@@ -100,21 +107,22 @@ const { sections, navViews = false } = Astro.props;
     }
 
     const showDivider = index > 0 && id !== 'hero' && id !== 'thirukural';
-    const views = navViews ? sectionViewMap[id]?.join(' ') : undefined;
+    const views = navViewsMode ? sectionViewMap[id]?.join(' ') : undefined;
+    const extra = sectionProps(id);
 
     return (
       <>
-        {showDivider && <Divider data-nav-divider={navViews || undefined} />}
-        {navViews && views ? (
+        {showDivider && <Divider data-nav-divider={navViewsMode || undefined} />}
+        {navViewsMode && views ? (
           <div
             class="section-view-root"
             data-nav-views={views}
             data-section-id={id}
           >
-            <Section />
+            <Section {...extra} />
           </div>
         ) : (
-          <Section />
+          <Section {...extra} />
         )}
       </>
     );

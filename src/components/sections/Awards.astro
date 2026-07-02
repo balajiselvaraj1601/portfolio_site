@@ -2,6 +2,7 @@
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
 import RecogCardShell from '@components/ui/RecogCardShell.astro';
+import RecogControls from '@components/ui/RecogControls.astro';
 import { awards, site } from '@lib/content';
 import { awardLevelSchema } from '@schemas';
 
@@ -46,47 +47,36 @@ const total = items.length;
     }
   </div>
 
-  <!-- Controls: live count + search + sort + level filters -->
-  <div class="recog-controls reveal">
-    <h3 class="recog-controls__count">
-      All Awards (<span data-awards-count>{total}</span>)
-    </h3>
-    <div class="recog-tools">
-      <input
-        type="search"
-        class="recog-search"
-        data-awards-search
-        placeholder="Search awards…"
-        aria-label="Search awards by title, nominator, or reason"
-      />
-    </div>
-    <div
-      class="recog-filters"
-      role="group"
-      aria-label="Filter by nominator level"
+  <RecogControls
+    countLabel="All Awards"
+    total={total}
+    countDataAttr="data-awards-count"
+    searchDataAttr="data-awards-search"
+    searchPlaceholder="Search awards…"
+    searchAriaLabel="Search awards by title, nominator, or reason"
+    filterGroupLabel="Filter by nominator level"
+  >
+    <button
+      type="button"
+      class="recog-chip is-active"
+      data-filter="all"
+      aria-pressed="true"
     >
-      <button
-        type="button"
-        class="recog-chip is-active"
-        data-filter="all"
-        aria-pressed="true"
-      >
-        All
-      </button>
-      {
-        LEVELS.map((level) => (
-          <button
-            type="button"
-            class:list={['recog-chip', `level-${slug(level)}`]}
-            data-filter={level}
-            aria-pressed="false"
-          >
-            {level}
-          </button>
-        ))
-      }
-    </div>
-  </div>
+      All
+    </button>
+    {
+      LEVELS.map((level) => (
+        <button
+          type="button"
+          class:list={['recog-chip', `level-${slug(level)}`]}
+          data-filter={level}
+          aria-pressed="false"
+        >
+          {level}
+        </button>
+      ))
+    }
+  </RecogControls>
 
   <!-- Award card grid -->
   <div class="recog-grid reveal" data-awards-grid>
@@ -179,58 +169,18 @@ const total = items.length;
 </style>
 
 <script>
+  import { initRecogGrid } from '../../scripts/recog-grid';
+
   const root = document.getElementById('awards');
-  const grid = root?.querySelector('[data-awards-grid]');
-  if (grid) {
-    const cards = Array.from(grid.querySelectorAll('.recog-card'));
-    const searchEl = root?.querySelector<HTMLInputElement>(
-      '[data-awards-search]'
-    );
-    const countEl = root?.querySelector('[data-awards-count]');
-    const emptyEl = root?.querySelector('[data-awards-empty]');
-    const chips = Array.from(root?.querySelectorAll('.recog-chip') ?? []);
-
-    let activeFilter = 'all';
-    let query = '';
-
-    function apply() {
-      let visible = 0;
-      for (const card of cards) {
-        const level = card.getAttribute('data-level') || '';
-        const haystack = [
-          card.getAttribute('data-title'),
-          card.getAttribute('data-nominator'),
-          card.getAttribute('data-reason'),
-        ]
-          .join(' ')
-          .toLowerCase();
-        const show =
-          (activeFilter === 'all' || level === activeFilter) &&
-          (query === '' || haystack.includes(query));
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-      }
-      if (countEl) countEl.textContent = String(visible);
-      if (emptyEl) emptyEl.toggleAttribute('hidden', visible !== 0);
-    }
-
-    searchEl?.addEventListener('input', () => {
-      query = (searchEl.value || '').trim().toLowerCase();
-      apply();
+  if (root) {
+    initRecogGrid({
+      root,
+      gridSelector: '[data-awards-grid]',
+      searchSelector: '[data-awards-search]',
+      countSelector: '[data-awards-count]',
+      emptySelector: '[data-awards-empty]',
+      filterAttr: 'data-level',
+      searchAttrs: ['data-title', 'data-nominator', 'data-reason'],
     });
-    chips.forEach((chip) => {
-      chip.addEventListener('click', () => {
-        chips.forEach((c) => {
-          c.classList.remove('is-active');
-          c.setAttribute('aria-pressed', 'false');
-        });
-        chip.classList.add('is-active');
-        chip.setAttribute('aria-pressed', 'true');
-        activeFilter = chip.getAttribute('data-filter') || 'all';
-        apply();
-      });
-    });
-
-    apply();
   }
 </script>

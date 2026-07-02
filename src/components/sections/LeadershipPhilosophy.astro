@@ -1,6 +1,7 @@
 ---
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
+import LogoBadge from '@components/ui/LogoBadge.astro';
 import {
   profile,
   site,
@@ -8,10 +9,12 @@ import {
   getEntityUrl,
   logoSrc,
 } from '@lib/content';
+import { logoUsesBadge } from '@lib/logo-display';
 
 const title = site.sections.leadership.title;
 const {
   intro,
+  blockHeadings,
   strategicVision,
   businessImpact,
   platform,
@@ -21,16 +24,14 @@ const {
   governanceGxP,
 } = profile.leadershipPhilosophy;
 
-// CTO-for-AI pillars, in render order. Each renders as an identical card row;
-// blocks with no cards are skipped.
 const cardBlocks = [
-  { heading: 'Strategy & Sponsorship', items: strategicVision },
-  { heading: 'Business & P&L Impact', items: businessImpact },
-  { heading: 'Platform & Infrastructure', items: platform },
-  { heading: 'Team & Org Building', items: peopleMentoring },
-  { heading: 'AI Governance', items: governanceAI },
-  { heading: 'Privacy & Data Protection', items: governancePrivacy },
-  { heading: 'GxP Compliance', items: governanceGxP },
+  { heading: blockHeadings.strategicVision, items: strategicVision },
+  { heading: blockHeadings.businessImpact, items: businessImpact },
+  { heading: blockHeadings.platform, items: platform },
+  { heading: blockHeadings.peopleMentoring, items: peopleMentoring },
+  { heading: blockHeadings.governanceAI, items: governanceAI },
+  { heading: blockHeadings.governancePrivacy, items: governancePrivacy },
+  { heading: blockHeadings.governanceGxP, items: governanceGxP },
 ];
 ---
 
@@ -83,11 +84,11 @@ const cardBlocks = [
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <img
-                  class="logo-mark logo-mark--lg"
-                  src={src}
-                  alt=""
-                  loading="lazy"
+                <LogoBadge
+                  logoUrl={src}
+                  altText=""
+                  useBadge={logoUsesBadge(item.logo)}
+                  size="lg"
                 />
               </a>
             </li>
@@ -210,7 +211,7 @@ const cardBlocks = [
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-  .leadership__collab-mark .logo-mark {
+  .leadership__collab-mark :global(.logo-badge) {
     max-width: min(var(--logo-w-max-lg), 100%);
   }
   @media (max-width: 768px) {

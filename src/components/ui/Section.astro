@@ -15,6 +15,8 @@ interface Props {
    * is provided, since the emitted <h2> already labels the section.
    */
   ariaLabel?: string;
+  /** Points aria-labelledby at a custom heading (e.g. SectionHeading) when hideTitle. */
+  labelledBy?: string;
   class?: string;
 }
 const {
@@ -26,6 +28,7 @@ const {
   subtitle,
   variant = 'default',
   ariaLabel,
+  labelledBy,
   class: cls,
 } = Astro.props;
 const headingId = `${id}-heading`;
@@ -47,8 +50,8 @@ const hasTitle = title.trim().length > 0;
     },
     cls,
   ]}
-  aria-labelledby={hasTitle ? headingId : undefined}
-  aria-label={!hasTitle ? ariaLabel : undefined}
+  aria-labelledby={labelledBy ?? (hasTitle ? headingId : undefined)}
+  aria-label={!hasTitle && !labelledBy ? ariaLabel : undefined}
 >
   <div class="container">
     {eyebrow && <Eyebrow text={eyebrow} variant={eyebrowVariant} />}

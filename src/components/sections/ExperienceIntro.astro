@@ -1,13 +1,13 @@
 ---
 import Section from '@components/ui/Section.astro';
 import MetricCard from '@components/cards/MetricCard.astro';
-import { experience } from '@lib/content';
+import { experience, site } from '@lib/content';
 ---
 
 <Section
   id="experience-intro"
   title={experience.title}
-  eyebrow="Career"
+  eyebrow={site.sections['experience-intro'].eyebrow}
   subtitle={experience.intro}
   variant="default"
 >

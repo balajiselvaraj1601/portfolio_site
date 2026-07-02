@@ -106,16 +106,6 @@
       "source": "person/profile.json",
       "visible": true
     },
-    "impact": {
-      "title": "Strategic Impact",
-      "source": "work/strategic-impact.json",
-      "visible": false
-    },
-    "technical-vision": {
-      "title": "Technical Vision",
-      "source": "person/profile.json",
-      "visible": false
-    },
     "vision-board": {
       "title": "AI Leadership & Strategic Impact",
       "source": "work/vision-board.json",
@@ -128,11 +118,13 @@
     },
     "experience": {
       "title": "Experience",
+      "eyebrow": "Experience",
       "source": "work/experience.json",
       "visible": true
     },
     "experience-intro": {
       "title": "Experience",
+      "eyebrow": "Career",
       "source": "work/experience.json",
       "visible": true
     },
@@ -143,13 +135,9 @@
     },
     "featured-case-studies": {
       "title": "Flagship Case Studies",
+      "eyebrow": "Flagship Work",
       "source": "work/projects.json",
       "visible": true
-    },
-    "generative-ai": {
-      "title": "Generative AI",
-      "source": "drafts/research/generative-ai.json",
-      "visible": false
     },
     "education": {
       "title": "Education",

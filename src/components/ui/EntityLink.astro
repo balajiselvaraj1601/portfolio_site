@@ -6,6 +6,7 @@ interface Props {
 }
 
 const { href, label, class: className } = Astro.props;
+const isExternal = !!href && /^https?:\/\//.test(href);
 ---
 
 {
@@ -13,11 +14,14 @@ const { href, label, class: className } = Astro.props;
     <a
       href={href}
       class:list={['entity-link', className]}
-      target="_blank"
-      rel="noopener noreferrer"
+      {...(isExternal
+        ? { target: '_blank', rel: 'noopener noreferrer' }
+        : {})}
     >
       {label}
-      <span class="visually-hidden"> (opens in new window)</span>
+      {isExternal && (
+        <span class="visually-hidden"> (opens in new window)</span>
+      )}
     </a>
   ) : (
     <span class={className}>{label}</span>

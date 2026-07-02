@@ -1,28 +1,10 @@
 ---
+import { dotNavLabels } from '@lib/content';
+
 interface Props {
   sections: string[];
 }
 const { sections } = Astro.props;
-
-const labels: Record<string, string> = {
-  hero: 'Hero',
-  thirukural: 'Thirukural',
-  impact: 'Impact',
-  'featured-case-studies': 'Projects',
-  'technical-vision': 'Technical Vision',
-  leadership: 'About',
-  'experience-intro': 'Experience',
-  experience: 'Experience',
-  'projects-intro': 'Projects',
-  publications: 'Publications',
-  'generative-ai': 'Generative AI',
-  conferences: 'Conferences',
-  speakers: 'Speaking Engagements',
-  education: 'Education',
-  awards: 'Awards',
-  kaggle: 'Kaggle',
-  contact: 'Contact',
-};
 ---
 
 <nav
@@ -32,16 +14,19 @@ const labels: Record<string, string> = {
   hidden={sections.length < 2}
 >
   {
-    sections.map((id) => (
-      <button
-        type="button"
-        class="dot-nav__dot"
-        data-target={id}
-        title={labels[id] ?? id}
-        aria-label={labels[id] ?? id}
-        hidden
-      />
-    ))
+    sections.map((id) => {
+      const label = dotNavLabels[id] ?? id;
+      return (
+        <button
+          type="button"
+          class="dot-nav__dot"
+          data-target={id}
+          title={label}
+          aria-label={label}
+          hidden
+        />
+      );
+    })
   }
 </nav>
 

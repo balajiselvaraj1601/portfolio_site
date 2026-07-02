@@ -1,5 +1,6 @@
 ---
 import Icon from '@components/ui/Icon.astro';
+import RecogCardShell from '@components/ui/RecogCardShell.astro';
 import { competitionIcon, resolveIcon } from '@lib/icons';
 import type { IconName } from '@lib/icons';
 import type { KaggleCompetition } from '@schemas';
@@ -44,23 +45,23 @@ const stats6: { icon: IconName; label: string; value?: string }[] = [
 const visibleStats = stats6.filter((s) => s.value);
 ---
 
-<article
-  class:list={['recog-card', medalCls]}
+<RecogCardShell
+  class:list={[medalCls]}
   data-medal={medal}
   data-name={name}
   data-domain={domain}
   data-tags={(tags ?? []).join(' ')}
 >
-  <header class="blob-head">
+  <Fragment slot="headTop">
     <div class="recog-icon" aria-hidden="true">
       <Icon name={headerIcon} size="lg" />
     </div>
-    <h3 class="recog-title recog-clamp" style="--clamp: 2">
-      <a href={url} target="_blank" rel="noopener noreferrer"
-        >{name}<span class="visually-hidden"> (opens in new window)</span></a
-      >
-    </h3>
-  </header>
+  </Fragment>
+  <h4 slot="title" class="recog-title recog-clamp" style="--clamp: 2">
+    <a href={url} target="_blank" rel="noopener noreferrer"
+      >{name}<span class="visually-hidden"> (opens in new window)</span></a
+    >
+  </h4>
 
   <dl class="blob-stats">
     {
@@ -94,18 +95,20 @@ const visibleStats = stats6.filter((s) => s.value);
 
   {
     evaluationMetric && (
-      <div class="blob-block blob-block--eval">
-        <div class="blob-block__head">
-          <span class="blob-block__icon" aria-hidden="true">
-            <Icon name="pulse" size={16} />
-          </span>
-          <span class="blob-block__label recog-label">Evaluation Metric</span>
+      <Fragment slot="footer">
+        <div class="blob-block blob-block--eval">
+          <div class="blob-block__head">
+            <span class="blob-block__icon" aria-hidden="true">
+              <Icon name="pulse" size={16} />
+            </span>
+            <span class="blob-block__label recog-label">Evaluation Metric</span>
+          </div>
+          <p class="blob-block__body recog-body">{evaluationMetric}</p>
         </div>
-        <p class="blob-block__body recog-body">{evaluationMetric}</p>
-      </div>
+      </Fragment>
     )
   }
-</article>
+</RecogCardShell>
 
 <style>
   /* Medal accent — drives border, icon tint, and stat dividers. Maps to the
@@ -119,16 +122,9 @@ const visibleStats = stats6.filter((s) => s.value);
 
   /* Feed the medal accent into the shared .recog-card layer, which drives the
      card shell (bg, border, border-top, hover) and the .recog-icon tint. */
-  .recog-card.blob--silver,
-  .recog-card.blob--bronze {
+  :global(.recog-card.blob--silver),
+  :global(.recog-card.blob--bronze) {
     --accent-card: var(--medal);
-  }
-
-  /* ── Header ─────────────────────────────────────────────────────── */
-  .blob-head {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
   }
 
   /* ── Stat grid ──────────────────────────────────────────────────── */
@@ -184,7 +180,7 @@ const visibleStats = stats6.filter((s) => s.value);
     max-width: none;
   }
   @media (max-width: 600px) {
-    .recog-card {
+    :global(.recog-card) {
       padding: var(--space-5);
     }
   }

@@ -54,6 +54,15 @@
   "photo": "/assets/images/balaji.png",
   "leadershipPhilosophy": {
     "intro": "I lead AI the way a CTO does: secure the sponsorship and set the strategy before the first model exists, then build the platform, the team, and the guardrails that turn conviction into shipped, regulated value. My edge is a rare bridge — a biomedical engineer who supported 400+ surgeries across 5 specialties and now architects production AI — so the science, the business case, and the system stay one conversation.",
+    "blockHeadings": {
+      "strategicVision": "Strategy & Sponsorship",
+      "businessImpact": "Business & P&L Impact",
+      "platform": "Platform & Infrastructure",
+      "peopleMentoring": "Team & Org Building",
+      "governanceAI": "AI Governance",
+      "governancePrivacy": "Privacy & Data Protection",
+      "governanceGxP": "GxP Compliance"
+    },
     "strategicVision": [
       {
         "title": "Sell first, build next",
@@ -171,37 +180,6 @@
         "title": "Validation & audit trails",
         "description": "Enforced change control and maintained end-to-end audit trails for AI systems in GxP settings — keeping documentation inspection-ready and reducing regulatory exposure at deployment.",
         "icon": "scan"
-      }
-    ]
-  },
-  "vision": {
-    "heading": "Multimodal AI at the edge of biology",
-    "headingEmphasis": "edge of biology",
-    "paragraphs": [
-      "Shaped an innovative multimodal AI vision aligned with AstraZeneca's 2030 Gene & Cell Therapy ambitions — a vision independently developed bottom-up and later submitted to Gartner by GITC Chennai.",
-      "The philosophy: integrate heterogeneous biological signals — omics, imaging, molecular, single-cell — into unified learned representations that generalize across compounds, diseases, and data sources.",
-      "Currently architecting AI systems where model-agnostic platforms can adapt to new modalities, cross-assay contexts, and heterogeneous vendor data without re-engineering from scratch."
-    ],
-    "collaborations": [
-      {
-        "org": "Broad Institute",
-        "entity": "broad-institute",
-        "detail": "Dr. Shantanu Singh (Senior Group Leader): co-developing Cell Painting & omics computational pipelines"
-      },
-      {
-        "org": "IIT Madras",
-        "entity": "iit-madras",
-        "detail": "Research collaboration to co-develop cutting-edge AI models and computational pipelines"
-      },
-      {
-        "org": "Cold Spring Harbor Laboratory",
-        "entity": "cshl",
-        "detail": "Neuron connectivity toolbox delivery to Dr. Partha Mitra"
-      },
-      {
-        "org": "RIKEN Brain Science Institute",
-        "entity": "riken-bsi",
-        "detail": "Neuroscience imaging and 3D reconstruction algorithms"
       }
     ]
   },

@@ -514,6 +514,24 @@ button {
   }
 }
 
+/* Shared hover lift for research/speaking cards and similar content tiles */
+.content-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--card-padding-lg);
+  height: 100%;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .content-card:hover {
+    border-color: var(--border-strong);
+    transform: translateY(var(--card-lift));
+  }
+}
+
 /* Logo badge — shared container for org marks on white surface */
 .logo-badge {
   display: inline-flex;
