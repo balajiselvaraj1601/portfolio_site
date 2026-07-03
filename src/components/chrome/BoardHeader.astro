@@ -57,7 +57,7 @@ const chevSize = size === 'sm' ? 14 : 16;
   }
   .bhead__title {
     font-family: var(--font-display);
-    font-size: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+    font-size: var(--fs-board-title);
     letter-spacing: var(--tracking-flat);
     text-transform: uppercase;
     color: var(--heading);
@@ -82,7 +82,7 @@ const chevSize = size === 'sm' ? 14 : 16;
     transform: scaleX(-1);
   }
   .bhead--sm .bhead__title {
-    font-size: clamp(1.15rem, 0.85rem + 1.4vw, 1.6rem);
+    font-size: var(--fs-board-sub);
   }
   @media (max-width: 600px) {
     .bhead__title {

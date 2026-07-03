@@ -105,7 +105,7 @@ const quote = profile.heroQuote;
   /* DM Serif Display is Latin-only and cannot render Tamil glyphs — Tamil uses sans. */
   .kural__tamil {
     font-family: var(--font-sans);
-    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    font-size: var(--fs-kural);
     font-weight: 500;
     line-height: var(--lh-normal);
     color: var(--heading);
@@ -114,7 +114,7 @@ const quote = profile.heroQuote;
   .kural__translation {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    font-size: var(--fs-kural-trans);
     line-height: var(--lh-normal);
     color: var(--text);
     margin: 0;

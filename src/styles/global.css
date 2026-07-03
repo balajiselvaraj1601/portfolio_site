@@ -90,13 +90,16 @@
      step: component styles use --fs-2xs…--fs-2xl directly, and the semantic role
      tokens below alias into these steps. Adding a size means picking a step, not
      inventing a literal. Replaces the former sprawl of ad-hoc rem values. */
+  --fs-3xs: 0.65rem;
   --fs-2xs: 0.7rem;
   --fs-xs: 0.75rem;
   --fs-sm: 0.8rem;
   --fs-md: 0.875rem;
   --fs-base: 0.9rem;
   --fs-lg: 0.95rem;
+  --fs-ml: 1.05rem;
   --fs-xl: 1.15rem;
+  --fs-xxl: 1.35rem;
   --fs-2xl: 1.5rem;
 
   --fs-h1: clamp(2.8rem, 6vw, 5.5rem);
@@ -112,8 +115,18 @@
   --fs-small: var(--fs-md);
   --fs-eyebrow: var(--fs-2xs);
   --fs-metric: clamp(1.75rem, 1.2rem + 2vw, 2rem);
+  --fs-metric-xl: 2.4rem; /* recognition summary count */
   --fs-btn: var(--fs-sm);
   --fs-subtitle: var(--fs-lg);
+  /* Display type — bespoke fluid headings centralized so display scale is tunable. */
+  --fs-hero: clamp(2.5rem, 5vw, 4.25rem);
+  --fs-hero-metric: clamp(2rem, 3vw, 2.75rem);
+  --fs-board-title: clamp(1.4rem, 1rem + 2vw, 2.1rem);
+  --fs-board-sub: clamp(1.15rem, 0.85rem + 1.4vw, 1.6rem);
+  --fs-kural: clamp(1.05rem, 2.2vw, 1.35rem);
+  --fs-kural-trans: clamp(0.9rem, 1.6vw, 1.05rem);
+  --fs-edu-lg: clamp(1.75rem, 3.5vw, 2.5rem);
+  --fs-edu-sm: clamp(1.35rem, 2.8vw, 2.25rem);
   /* Line-height ladder — ONE set of steps; components reference by role. */
   --lh-tight: 1.1; /* headings h1–h4 */
   --lh-snug: 1.25; /* recognition / card titles */
@@ -758,7 +771,7 @@ button {
 }
 .recog-tile__count {
   font-family: var(--font-mono);
-  font-size: 2.4rem;
+  font-size: var(--fs-metric-xl);
   font-weight: 600;
   line-height: 1;
   color: var(--accent);
@@ -779,7 +792,7 @@ button {
   margin-bottom: var(--stack-md);
 }
 .recog-controls__count {
-  font-size: 1.05rem;
+  font-size: var(--fs-ml);
   font-weight: 600;
   color: var(--heading);
   margin-right: auto;
@@ -796,7 +809,7 @@ button {
   min-height: var(--size-recog-search-height);
   color: var(--text);
   font-family: var(--font-sans);
-  font-size: 0.85rem;
+  font-size: var(--fs-md);
   min-width: var(--size-recog-search-width);
 }
 .recog-search:focus-visible {
@@ -923,7 +936,7 @@ button {
   padding: 0.25rem 0.55rem;
   border-radius: var(--radius-pill);
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: var(--fs-3xs);
   font-weight: 600;
   letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
@@ -963,7 +976,7 @@ button {
 
 /* shared type scale — title / label / value / body */
 .recog-title {
-  font-size: 1.2rem;
+  font-size: var(--fs-xl);
   font-weight: 700;
   line-height: var(--lh-snug);
   color: var(--heading);
@@ -978,7 +991,7 @@ button {
 }
 .recog-label {
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: var(--fs-3xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-muted);
@@ -990,7 +1003,7 @@ button {
   max-width: none;
 }
 .recog-body {
-  font-size: 0.85rem;
+  font-size: var(--fs-md);
   line-height: var(--lh-relaxed);
   color: var(--text);
   max-width: none;
@@ -1024,7 +1037,7 @@ button {
   gap: var(--space-2);
 }
 .bullet-list li {
-  font-size: 0.88rem;
+  font-size: var(--fs-md);
   color: var(--text);
   padding-left: 1.1rem;
   position: relative;

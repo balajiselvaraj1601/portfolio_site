@@ -116,6 +116,23 @@ Text sits inside surfaces; the surface hierarchy is fixed by the card tiers in *
 which band variant wraps which card tier wraps which mark slot (§5 logo/mark table) — so the
 box hierarchy is auditable the same way the text hierarchy is.
 
+### 3c. Font-size scale (mandatory)
+
+ONE ladder — never hardcode a `rem`/`clamp` font-size where a token exists.
+
+**Fixed ramp:** `--fs-3xs` 0.65 · `--fs-2xs` 0.7 · `--fs-xs` 0.75 · `--fs-sm` 0.8 ·
+`--fs-md` 0.875 · `--fs-base` 0.9 · `--fs-lg` 0.95 · `--fs-ml` 1.05 · `--fs-xl` 1.15 ·
+`--fs-xxl` 1.35 · `--fs-2xl` 1.5 (rem).
+
+**Display (fluid clamps, tunable from `:root`):** `--fs-h1`, `--fs-h2`, `--fs-metric`,
+`--fs-metric-xl` (recog count), `--fs-hero`, `--fs-hero-metric`, `--fs-board-title`,
+`--fs-board-sub`, `--fs-kural`, `--fs-kural-trans`, `--fs-edu-lg`, `--fs-edu-sm`.
+
+**Semantic aliases:** `--fs-card-title-sm/·/-lg` (EX-008), `--fs-h3`, `--fs-h4`, `--fs-body`,
+`--fs-small`, `--fs-eyebrow`, `--fs-subtitle`, `--fs-btn`.
+
+**Violation:** hardcoded `font-size: 1.2rem` or `font-size: clamp(...)` where a token exists.
+
 ---
 
 ## 4. Eyebrow rules
