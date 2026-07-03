@@ -247,8 +247,11 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
       --vision-hub-max: var(--vision-hub-max-md);
       /* SSOT for the stacked hub width — stage-mid derives from the SAME
          expression, so the chevron stays vertically centred even below
-         ~673px where 38vw undercuts the 256px cap (was 28px low at 480px). */
-      --vision-hub-w: clamp(200px, 38vw, var(--vision-hub-max-md));
+         ~673px where 38vw undercuts the 256px cap (was 28px low at 480px).
+         120px floor (not 200px) lets 38vw govern on small phones, so the
+         two side-by-side hubs fit the container without bleeding into its
+         padding at ≤526px. */
+      --vision-hub-w: clamp(120px, 38vw, var(--vision-hub-max-md));
       --vision-hub-stage-mid: calc(var(--vision-hub-w) / 2);
     }
 
@@ -278,11 +281,11 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
     .vision-flow__cards {
       grid-column: 1 / -1;
       grid-row: 2;
+      /* Stacked layout: the 2×2 grid spans the full container (matching the
+         impact grid below) — drop the desktop ring-inset nudge. */
       width: 100%;
-      max-width: min(100%, var(--vision-cards-max));
-      justify-self: center;
-      /* Stacked layout: cards are centred, so drop the desktop ring-inset nudge. */
-      margin-inline: auto;
+      justify-self: stretch;
+      margin-inline: 0;
     }
   }
 

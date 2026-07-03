@@ -76,7 +76,6 @@
   --vision-flow-gap: var(--space-2); /* 8px gutter hub↔chevron↔cards */
   --vision-hub-max: 288px; /* 360 × 12/15 — smaller hub, ~12 spoke dots (was 360) */
   --vision-hub-max-md: 256px; /* same 0.8 ratio as --vision-hub-max (was 320) */
-  --vision-cards-max: 520px;
   --vision-hub-stage-mid: calc(var(--vision-hub-max) / 2);
   --vision-hub-ring-inset: calc(
     var(--vision-hub-max) * 0.04
