@@ -1,0 +1,53 @@
+---
+import Section from '@components/ui/Section.astro';
+import MetricCard from '@components/cards/MetricCard.astro';
+import { experience, projects, visionBoard, site } from '@lib/content';
+
+interface Props {
+  sectionId: 'experience-intro' | 'projects-intro' | 'vision-intro';
+}
+
+const { sectionId } = Astro.props;
+
+// Per-section content sources; titles come from the content file except
+// projects-intro, whose title lives in the section registry.
+const SOURCES = {
+  'experience-intro': {
+    title: experience.title,
+    subtitle: experience.intro,
+    snapshot: experience.snapshot,
+  },
+  'projects-intro': {
+    title: site.sections['projects-intro'].title,
+    subtitle: projects.intro,
+    snapshot: projects.snapshot,
+  },
+  'vision-intro': {
+    title: visionBoard.header,
+    subtitle: visionBoard.intro,
+    snapshot: visionBoard.snapshot,
+  },
+} as const;
+
+const { title, subtitle, snapshot } = SOURCES[sectionId];
+const eyebrow = site.sections[sectionId].eyebrow;
+---
+
+<Section
+  id={sectionId}
+  title={title}
+  eyebrow={eyebrow}
+  subtitle={subtitle}
+  variant="default"
+  class="section--compact-bottom"
+>
+  {
+    snapshot && snapshot.length > 0 && (
+      <div class="snapshot-grid reveal">
+        {snapshot.map((m) => (
+          <MetricCard value={m.value} label={m.label} />
+        ))}
+      </div>
+    )
+  }
+</Section>

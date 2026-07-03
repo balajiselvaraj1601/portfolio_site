@@ -3,8 +3,9 @@ name: page-projects
 description: >-
   Page representative for the Projects view. Use proactively for design consistency work
   on the projects-intro or featured-case-studies sections, when the orchestrator spawns
-  view_id=projects, or on "projects view audit". Edits only ProjectsIntro.astro and
-  FeaturedCaseStudies.astro — never other views.
+  view_id=projects, or on "projects view audit". Edits only FeaturedCaseStudies.astro
+  and its view's content JSON — never other views (projects-intro renders via the
+  shared guardian-owned IntroSection.astro).
 tools: Read, Edit, Grep, Glob, Bash
 model: haiku
 maxTurns: 25
@@ -33,13 +34,13 @@ Page brief: `docs/page-briefs/projects.md`
 
 ## Appendix A — View binding (owned: may edit)
 
-| Section id            | Component                                           | Content                      |
-| --------------------- | --------------------------------------------------- | ---------------------------- |
-| projects-intro        | `src/components/sections/ProjectsIntro.astro`       | `content/work/projects.json` |
-| featured-case-studies | `src/components/sections/FeaturedCaseStudies.astro` | `content/work/projects.json` |
+| Section id            | Component                                                         | Content                      |
+| --------------------- | ----------------------------------------------------------------- | ---------------------------- |
+| projects-intro        | `src/components/sections/IntroSection.astro` (shared, audit-only) | `content/work/projects.json` |
+| featured-case-studies | `src/components/sections/FeaturedCaseStudies.astro`               | `content/work/projects.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`MetricCard.astro`, `ProjectCaseStudyCard.astro`, `Chip.astro`
+`IntroSection.astro`, `MetricCard.astro`, `ProjectCaseStudyCard.astro`, `Chip.astro`
 
 Shelved (never enable, never audit): full projects catalogue (content-level)
 
@@ -56,7 +57,7 @@ Shelved (never enable, never audit): full projects catalogue (content-level)
 Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
 Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
 
-### projects-intro — `src/components/sections/ProjectsIntro.astro`
+### projects-intro — `src/components/sections/IntroSection.astro` (shared)
 
 - **Object:** §6 `default` band › §5 Tier A `.card` (MetricCard snapshot grid, guardian-owned) › no mark slot
 - **Text (reading order):**

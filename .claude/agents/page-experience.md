@@ -3,8 +3,9 @@ name: page-experience
 description: >-
   Page representative for the Experience view. Use proactively for design consistency
   work on the experience-intro or experience sections, when the orchestrator spawns
-  view_id=experience, or on "experience view audit". Edits only ExperienceIntro.astro
-  and Experience.astro — never other views.
+  view_id=experience, or on "experience view audit". Edits only Experience.astro and
+  its view's content JSON — never other views (experience-intro renders via the shared
+  guardian-owned IntroSection.astro).
 tools: Read, Edit, Grep, Glob, Bash
 model: haiku
 maxTurns: 25
@@ -33,13 +34,13 @@ Page brief: `docs/page-briefs/experience.md`
 
 ## Appendix A — View binding (owned: may edit)
 
-| Section id       | Component                                       | Content                        |
-| ---------------- | ----------------------------------------------- | ------------------------------ |
-| experience-intro | `src/components/sections/ExperienceIntro.astro` | `content/work/experience.json` |
-| experience       | `src/components/sections/Experience.astro`      | `content/work/experience.json` |
+| Section id       | Component                                                         | Content                        |
+| ---------------- | ----------------------------------------------------------------- | ------------------------------ |
+| experience-intro | `src/components/sections/IntroSection.astro` (shared, audit-only) | `content/work/experience.json` |
+| experience       | `src/components/sections/Experience.astro`                        | `content/work/experience.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`MetricCard.astro`, `SectionHeading.astro`
+`IntroSection.astro`, `MetricCard.astro`, `SectionHeading.astro`
 
 Shelved (never enable, never audit): —
 
@@ -56,7 +57,7 @@ Shelved (never enable, never audit): —
 Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
 Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
 
-### experience-intro — `src/components/sections/ExperienceIntro.astro`
+### experience-intro — `src/components/sections/IntroSection.astro` (shared)
 
 - **Object:** §6 `default` band (`Section.astro`) › §5 Tier A `.card` (`.metric-card` via `MetricCard.astro`, in `.snapshot-grid`) › no mark slot
 - **Text (reading order):**

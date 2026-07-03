@@ -3,8 +3,9 @@ name: page-vision
 description: >-
   Page representative for the Vision view. Use proactively for design consistency work
   on the vision-intro, vision-programs, and vision-impact sections, when the orchestrator
-  spawns view_id=vision, or on "vision view audit". Edits only VisionIntro.astro,
-  VisionPrograms.astro, and VisionImpact.astro — never other views.
+  spawns view_id=vision, or on "vision view audit". Edits only VisionPrograms.astro,
+  VisionImpact.astro, and its view's content JSON — never other views (vision-intro
+  renders via the shared guardian-owned IntroSection.astro).
 tools: Read, Edit, Grep, Glob, Bash
 model: haiku
 maxTurns: 25
@@ -34,11 +35,11 @@ Page brief: `docs/page-briefs/vision.md`
 
 ## Appendix A — View binding (owned: may edit)
 
-| Section id      | Component                                      | Content                          |
-| --------------- | ---------------------------------------------- | -------------------------------- |
-| vision-intro    | `src/components/sections/VisionIntro.astro`    | `content/work/vision-board.json` |
-| vision-programs | `src/components/sections/VisionPrograms.astro` | `content/work/vision-board.json` |
-| vision-impact   | `src/components/sections/VisionImpact.astro`   | `content/work/vision-board.json` |
+| Section id      | Component                                                         | Content                          |
+| --------------- | ----------------------------------------------------------------- | -------------------------------- |
+| vision-intro    | `src/components/sections/IntroSection.astro` (shared, audit-only) | `content/work/vision-board.json` |
+| vision-programs | `src/components/sections/VisionPrograms.astro`                    | `content/work/vision-board.json` |
+| vision-impact   | `src/components/sections/VisionImpact.astro`                      | `content/work/vision-board.json` |
 
 Card components (`ProgramBadgeCard.astro`, `OrgSnapshotCard.astro`) may be edited when aligning to cross-view `theme-card` / icon-tile patterns.
 
@@ -60,7 +61,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 Note: the `ProgramBadgeCard` / `OrgSnapshotCard` pair (contract §5 row) was merged into the
 single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not rendered in this view.
 
-### vision-intro — VisionIntro.astro
+### vision-intro — IntroSection.astro (shared)
 
 - **Object:** §6 `default` band › §5 Tier A `.metric-card.card` (MetricCard) › no mark slot
 - **Text (reading order):**

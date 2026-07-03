@@ -1,15 +1,13 @@
 ---
 import Divider from '@components/ui/Divider.astro';
 import Hero from '@components/sections/Hero.astro';
-import VisionIntro from '@components/sections/VisionIntro.astro';
 import VisionPrograms from '@components/sections/VisionPrograms.astro';
 import VisionImpact from '@components/sections/VisionImpact.astro';
 import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
 import AboutLanding from '@components/sections/AboutLanding.astro';
 import LeadershipPhilosophy from '@components/sections/LeadershipPhilosophy.astro';
 import Experience from '@components/sections/Experience.astro';
-import ExperienceIntro from '@components/sections/ExperienceIntro.astro';
-import ProjectsIntro from '@components/sections/ProjectsIntro.astro';
+import IntroSection from '@components/sections/IntroSection.astro';
 import FeaturedCaseStudies from '@components/sections/FeaturedCaseStudies.astro';
 import Education from '@components/sections/Education.astro';
 import Awards from '@components/sections/Awards.astro';
@@ -27,16 +25,22 @@ import { sectionViewMap, navViews } from '@lib/content';
  */
 type SectionComponent = typeof Hero;
 
+/**
+ * IntroSection requires a `sectionId` prop (injected by `sectionProps` below),
+ * which the prop-less SectionComponent signature can't express — cast once here.
+ */
+const Intro = IntroSection as SectionComponent;
+
 const SECTIONS: Record<string, SectionComponent> = {
   hero: Hero,
   thirukural: ThirukuralQuote,
-  'vision-intro': VisionIntro,
+  'vision-intro': Intro,
   'vision-programs': VisionPrograms,
   'vision-impact': VisionImpact,
   leadership: LeadershipPhilosophy,
   experience: Experience,
-  'experience-intro': ExperienceIntro,
-  'projects-intro': ProjectsIntro,
+  'experience-intro': Intro,
+  'projects-intro': Intro,
   'featured-case-studies': FeaturedCaseStudies,
   education: Education,
   awards: Awards,
@@ -60,6 +64,9 @@ const projectsView = navViews.find((v) => v.id === 'projects');
 function sectionProps(id: string): Record<string, string> {
   if (id === 'featured-case-studies' && projectsView) {
     return { showMoreHref: `/#${projectsView.viewAnchor}` };
+  }
+  if (SECTIONS[id] === Intro) {
+    return { sectionId: id };
   }
   return {};
 }
