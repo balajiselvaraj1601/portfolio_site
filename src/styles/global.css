@@ -11,6 +11,7 @@
 @import '@fontsource/jetbrains-mono/600.css';
 
 :root {
+  --space-0-5: 2px; /* hairline stack gaps (line-height compensation) */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -34,6 +35,9 @@
   --card-padding: var(--space-6);
   --card-padding-lg: var(--space-8);
   --section-cta-gap: var(--space-8);
+  /* Pill / nav / tag padding — one shared pair so dense inline chips stay uniform */
+  --pill-padding-y: var(--space-2);
+  --pill-padding-x: var(--space-4);
   /* Grid column minimum widths — two-tier: compact (research) vs full (speakers).
      Documented exception EX-009: intentional width difference. */
   --grid-col-min: min(100%, 320px);
@@ -110,8 +114,22 @@
   --fs-metric: clamp(1.75rem, 1.2rem + 2vw, 2rem);
   --fs-btn: var(--fs-sm);
   --fs-subtitle: var(--fs-lg);
-  --lh-body: 1.75;
-  --lh-tight: 1.1;
+  /* Line-height ladder — ONE set of steps; components reference by role. */
+  --lh-tight: 1.1; /* headings h1–h4 */
+  --lh-snug: 1.25; /* recognition / card titles */
+  --lh-normal: 1.4; /* metrics, metadata, dense labels (absorbs 1.35) */
+  --lh-relaxed: 1.6; /* body blocks, recog-body */
+  --lh-body: 1.75; /* loose body prose */
+
+  /* Letter-spacing (character tracking) — em-based so it scales with font-size.
+     ONE ladder; components reference by role, never hardcode an em value. */
+  --tracking-tight: -0.02em; /* display headings, monogram mark */
+  --tracking-flat: 0.02em; /* brand wordmark, board header */
+  --tracking-snug: 0.05em; /* h4 kickers, stat labels, Tamil couplet */
+  --tracking-caps: 0.08em; /* uppercase UI: buttons, nav, badges, domain labels */
+  --tracking-wide: 0.1em; /* pipeline/footer/hero labels + micro-labels (0.12→0.10) */
+  --tracking-wider: 0.14em; /* emphasized theme / case-study micro-labels */
+  --tracking-eyebrow: 0.18em; /* section eyebrows (max tracking) */
 
   --dur: 200ms;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -135,6 +153,8 @@
   --logo-w-max-md: 180px;
   --logo-h-lg: 40px;
   --logo-w-max-lg: 220px;
+  /* Symmetric white border inside logo pills/tiles — small + consistent site-wide */
+  --logo-pad: var(--space-2);
   /* Circular emblem slots (vision hub center, program badge) */
   --logo-emblem: 64px;
   --logo-emblem-img: 74%;
@@ -320,7 +340,7 @@ h4 {
   font-size: var(--fs-h4);
   font-weight: 600;
   color: var(--accent-ll);
-  letter-spacing: 0.05em;
+  letter-spacing: var(--tracking-snug);
   text-transform: uppercase;
 }
 p {
@@ -388,7 +408,7 @@ button {
 .eyebrow {
   font-family: var(--font-mono);
   font-size: var(--fs-eyebrow);
-  letter-spacing: 0.18em;
+  letter-spacing: var(--tracking-eyebrow);
   text-transform: uppercase;
   color: var(--accent-ll);
   margin-bottom: var(--space-4);
@@ -399,7 +419,7 @@ button {
 .metric-label {
   font-family: var(--font-mono);
   color: var(--text-muted);
-  line-height: 1.4;
+  line-height: var(--lh-normal);
 }
 
 /* Intro snapshot tiles (ExperienceIntro, ProjectsIntro) */
@@ -449,7 +469,7 @@ button {
 .theme-card__desc {
   font-size: var(--fs-base);
   color: var(--text-muted);
-  line-height: 1.6;
+  line-height: var(--lh-relaxed);
   margin: 0;
   max-width: none;
 }
@@ -497,7 +517,7 @@ button {
   text-decoration: none;
   font-size: var(--fs-btn);
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   transition:
     border-color var(--dur) var(--ease),
@@ -664,7 +684,7 @@ button {
   background: var(--logo-surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
-  padding: var(--space-2) var(--space-3);
+  padding: var(--logo-pad);
   box-shadow: var(--shadow-sm);
 }
 .logo-badge img,
@@ -697,7 +717,7 @@ button {
   width: var(--mark-slot);
   height: var(--mark-slot);
   border-radius: 50%;
-  padding: var(--space-2);
+  padding: var(--logo-pad);
 }
 .logo-badge--round img {
   max-height: 100%;
@@ -746,7 +766,7 @@ button {
 .recog-tile__label {
   font-family: var(--font-mono);
   font-size: var(--fs-2xs);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   color: var(--text-muted);
 }
@@ -792,7 +812,7 @@ button {
 .recog-chip {
   font-family: var(--font-mono);
   font-size: var(--fs-eyebrow);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--tracking-snug);
   text-transform: uppercase;
   background: var(--bg-elev);
   border: 1px solid var(--border);
@@ -905,7 +925,7 @@ button {
   font-family: var(--font-mono);
   font-size: 0.62rem;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: var(--tracking-caps);
   text-transform: uppercase;
   white-space: nowrap;
   color: var(--heading);
@@ -945,7 +965,7 @@ button {
 .recog-title {
   font-size: 1.2rem;
   font-weight: 700;
-  line-height: 1.25;
+  line-height: var(--lh-snug);
   color: var(--heading);
   margin: 0;
 }
@@ -959,19 +979,19 @@ button {
 .recog-label {
   font-family: var(--font-mono);
   font-size: 0.66rem;
-  letter-spacing: 0.1em;
+  letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-muted);
 }
 .recog-value {
   font-size: var(--fs-base);
-  line-height: 1.35;
+  line-height: var(--lh-normal);
   color: var(--text);
   max-width: none;
 }
 .recog-body {
   font-size: 0.85rem;
-  line-height: 1.6;
+  line-height: var(--lh-relaxed);
   color: var(--text);
   max-width: none;
 }
@@ -1056,7 +1076,7 @@ button {
   color: var(--text-muted);
   margin-bottom: var(--space-8);
   max-width: var(--maxw-text);
-  line-height: 1.75;
+  line-height: var(--lh-body);
 }
 
 /* Entrance animation */

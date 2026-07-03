@@ -107,7 +107,7 @@ const quote = profile.heroQuote;
     font-family: var(--font-sans);
     font-size: clamp(1.05rem, 2.2vw, 1.35rem);
     font-weight: 500;
-    line-height: 1.35;
+    line-height: var(--lh-normal);
     color: var(--heading);
     margin: 2lh 0 var(--space-2);
   }
@@ -115,7 +115,7 @@ const quote = profile.heroQuote;
     font-family: var(--font-display);
     font-style: italic;
     font-size: clamp(0.9rem, 1.6vw, 1.05rem);
-    line-height: 1.4;
+    line-height: var(--lh-normal);
     color: var(--text);
     margin: 0;
     max-width: none;
@@ -123,7 +123,7 @@ const quote = profile.heroQuote;
   .kural__author {
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
-    letter-spacing: 0.04em;
+    letter-spacing: var(--tracking-snug);
     color: var(--accent-light);
     margin: var(--space-2) 0 0;
   }

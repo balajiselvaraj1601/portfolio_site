@@ -146,7 +146,7 @@ const lastName = rest.join(' ');
     font-family: var(--font-display);
     font-size: 1.1rem;
     color: var(--heading);
-    letter-spacing: 0.02em;
+    letter-spacing: var(--tracking-flat);
     text-decoration: none;
     white-space: nowrap;
     display: inline-flex;
@@ -172,7 +172,7 @@ const lastName = rest.join(' ');
   }
   .nav__list {
     display: flex;
-    gap: 0.25rem;
+    gap: var(--space-1);
     list-style: none;
     margin: 0;
     padding: 0;
@@ -181,11 +181,11 @@ const lastName = rest.join(' ');
     position: relative;
     font-size: var(--fs-xs);
     font-weight: 500;
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
     color: var(--text-muted);
     text-decoration: none;
-    padding: 0.4rem 0.85rem;
+    padding: var(--pill-padding-y) var(--pill-padding-x);
     border-radius: var(--radius-xs);
     transition:
       color var(--dur) var(--ease),

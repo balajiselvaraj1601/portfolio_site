@@ -48,3 +48,24 @@ Shelved (never enable, never audit): —
 3. No phone number in content or component (P5).
 4. Link hover uses `--accent-light`; focus ring via `--focus-ring`.
 5. Icon-only links have accessible labels.
+
+## Appendix C — Text & object hierarchy
+
+Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
+Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
+
+### contact — `src/components/sections/Contact.astro`
+- **Object:** §6 `alt` band (`variant="alt"`) › §5 Tier A `.connect-card.card` (compact, `--card-padding`) › §5 round Lucide mark slot (`CardMark` → `.icon-tile.icon-tile--round`, `iconFallback="link"` — the §5 reference impl for round Lucide marks)
+- **Text (reading order):**
+  - _Left column_
+  - `Section eyebrow` (`contactPage.eyebrow`, via `Section` prop) → **T5** eyebrow
+  - `.contact__title` (`SectionHeading` h2) → **T2** section title
+  - `.contact-subtitle` (`profile.contactIntro`) → **T7** subtitle / lede
+  - `.btn.btn-secondary` (`bookCallLabel`) → **T8** caps label (button)
+  - `.response-time` (`responseTime`) → **T8** meta label
+  - _Right column_
+  - `.connect-header > span` (`connectHeading`) → **T5** eyebrow-styled kicker
+  - `.connect-name` (h3, per connect card) → **T3** card title
+  - `.connect-val` (`c.value`, per card) → **T6** body
+  - `.connect-action` (`actionLabel(c.type)` + arrow, per card) → **T8** action / meta label
+- **Notes:** `.response-time` and `.connect-action` carry the T8 meta/action role but render in sans (`--fs-md` / `--fs-sm`, `--accent-light`) rather than T8's mono-caps chrome — deliberate: they are inline icon-paired reassurance/CTA links kept in the reading font, not badge chrome. `.connect-header` matches T5 by value but hardcodes `letter-spacing: 0.18em` instead of `--tracking-eyebrow` (token bypass, not a ladder override — flag under §2a).

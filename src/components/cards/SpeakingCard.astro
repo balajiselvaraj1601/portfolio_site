@@ -119,14 +119,14 @@ const ytThumb = ytId
   .speaking-card__meta {
     display: flex;
     flex-direction: column;
-    gap: 0.15rem;
+    gap: var(--space-0-5);
     min-width: 0;
   }
 
   .speaking-card__role {
     font-family: var(--font-mono);
     font-size: var(--fs-2xs);
-    letter-spacing: 0.1em;
+    letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
     color: var(--accent-ll);
   }
@@ -141,7 +141,7 @@ const ytThumb = ytId
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    gap: 0.15rem;
+    gap: var(--space-0-5);
     flex-shrink: 0;
     min-width: max-content;
     text-align: right;
@@ -159,14 +159,14 @@ const ytThumb = ytId
     font-size: var(--fs-xs);
     color: var(--text-muted);
     white-space: nowrap;
-    line-height: 1.4;
+    line-height: var(--lh-normal);
   }
 
   .speaking-card__title {
     font-family: var(--font-sans);
     font-size: var(--fs-card-title);
     font-weight: 600;
-    line-height: 1.35;
+    line-height: var(--lh-normal);
     margin: 0;
   }
 

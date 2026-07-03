@@ -50,3 +50,37 @@ Shelved (never enable, never audit): full projects catalogue (content-level)
 3. Eyebrow `"Flagship Work"` on featured-case-studies only (contract §4).
 4. Card hover uses `--card-lift` and `--dur`.
 5. `showMoreHref` prop preserved.
+
+## Appendix C — Text & object hierarchy
+
+Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
+Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
+
+### projects-intro — `src/components/sections/ProjectsIntro.astro`
+- **Object:** §6 `default` band › §5 Tier A `.card` (MetricCard snapshot grid, guardian-owned) › no mark slot
+- **Text (reading order):**
+  - `.section__title` (h2) → **T2** section title
+  - `.section__subtitle` (`projects.intro`) → **T7** subtitle / lede
+  - `.metric-card__value` → **T10** metric number
+  - `.metric-card__label` (`.metric-label`) → **T8** caps / meta label
+- **Notes:** No eyebrow rendered (Section called without `eyebrow` prop; §4 flags this separately — not a ladder override). MetricCard is a guardian-owned Tier A primitive; its `.metric-card__label` role maps to T8 though it renders `--fs-small` sans (shared-primitive styling, not this view's to override).
+
+### featured-case-studies — `src/components/sections/FeaturedCaseStudies.astro`
+- **Object:** §6 `alt` band (`.section--alt`, V2) › §5 Tier D `.card--accent` (ProjectCaseStudyCard; EX-005 3px gradient top stripe) › no card-level mark; nested §5 `.card-tint` callouts (impact strip, PipelineStrip) + `.icon-tile--compact --round --elev` pipeline mark nodes (§5 icon tile)
+- **Text (reading order):**
+  - `.eyebrow` (Eyebrow `"Flagship Work"`) → **T5** eyebrow
+  - `.section__title` (h2) → **T2** section title
+  - ProjectCaseStudyCard (Tier D), per card in reading order:
+    - `.cs-meta` (`.cs-domain` · `.cs-period`) → **T9** emphasis micro-label
+    - `.cs-name` (h3) → **T3** card title
+    - `.cs-role` (role · `EntityLink` org) → **T8** meta byline (see Notes)
+    - `.cs-summary` → **T6** body prose
+    - `.cs-impact__label` (`"Impact"`) → **T9** emphasis micro-label
+    - `.cs-impact__body` → **T6** body prose
+    - `.cs-tags` `Chip` (+ `.cs-tag-more`) → **T8** tag chip
+    - `.cs-disclosure__summary` (`"Read the full case study"`) → **T9** emphasis micro-label
+    - `PipelineStrip .pipeline__label` → **T9** emphasis micro-label
+    - `.cs-blocks dt` (Problem / Solution / Architecture / Outcome / Lessons) → **T9** emphasis micro-label
+    - `.cs-blocks dd` → **T6** body prose
+  - `.case-study-more .btn.btn-secondary` (`"View all projects →"`) → **T8** caps button label
+- **Notes:** `.cs-name` (T3) uses `--fs-card-title-lg` — the flagship tier of the three-tier card-title scale (EX-008), deliberately the largest card title on the site. The T9 elements (`.cs-meta`, `.cs-impact__label`, `.cs-blocks dt`) are the emphasized case-study micro-labels the contract intends at `--tracking-wider` (§2a / §3a T9). `.cs-role` maps to T8 by role (byline / meta) but renders `--fs-small` sans — not the mono/caps T8 default; kept as an inline byline rather than a caps label (see return note).

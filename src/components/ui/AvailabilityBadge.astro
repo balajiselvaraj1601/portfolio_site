@@ -23,13 +23,13 @@ const { status, label, class: cls } = Astro.props;
     display: inline-flex;
     align-items: center;
     gap: 0.55rem;
-    padding: 0.35rem 0.9rem;
+    padding: var(--pill-padding-y) var(--pill-padding-x);
     border-radius: var(--radius-pill);
     border: 1px solid var(--border-strong);
     background: var(--accent-soft);
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
-    letter-spacing: 0.08em;
+    letter-spacing: var(--tracking-caps);
     color: var(--text);
     line-height: 1;
   }

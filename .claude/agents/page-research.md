@@ -51,3 +51,39 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 3. Link rows use `--stack-md` gap.
 4. External link icon size `--icon-sm`.
 5. Metadata in `--font-mono`.
+
+## Appendix C — Text & object hierarchy
+
+Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
+Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
+
+### publications — Publications.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
+- **Object:** §6 `alt` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
+- **Text (reading order):**
+  - `.section__title` (h2) → **T2** section title
+  - `.rcard h3` / `h3 a` → **T3** card title (compact `--fs-card-title-sm`, EX-008)
+  - `.venue--stacked` → **T8** caps/meta label (venue) — see Notes
+  - `.rcard p` (description) → **T6** body prose
+  - `.pub-more .btn` ("All research →", only when `showMoreHref` set) → **T8** caps label (button UI)
+- **Notes:** `.venue--stacked` deliberately drops uppercase + `--tracking-caps`, using `--fs-sm` at normal tracking so the full venue string reads as a name, not a chip — still mono metadata (T8 family per §3). No eyebrow (§4 content section).
+
+### conferences — Conferences.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
+- **Object:** §6 `default` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
+- **Text (reading order):** identical card ladder to publications —
+  - `.section__title` (h2) → **T2** section title
+  - `.rcard h3` / `h3 a` → **T3** card title (compact `--fs-card-title-sm`, EX-008)
+  - `.venue--stacked` → **T8** caps/meta label (venue) — see Notes
+  - `.rcard p` (description) → **T6** body prose
+- **Notes:** Same `.venue--stacked` non-caps override as publications; no CTA button in this section.
+
+### speakers — Speakers.astro (renders SpeakingCard)
+- **Object:** §6 `alt` band › §5 Tier B content (`.speaking-card` + `.content-card`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` `presentation` icon fallback)
+- **Text (reading order):**
+  - `.section__title` (h2) → **T2** section title
+  - `.speaking-card__role` → **T8** caps label (role) — see Notes
+  - `.speaking-card__event` (`<strong>`) → **T7** subtitle / lede (event name) — see Notes
+  - `.speaking-card__location` → **T8** meta label (location) — see Notes
+  - `.speaking-card__date` (`<time>`) → **T8** meta label (date) — see Notes
+  - `.speaking-card__title` (h3) → **T3** card title (standard `--fs-card-title`, EX-008)
+  - `.speaking-card__desc` (p) → **T6** body prose
+- **Notes:** `.speaking-card__event` is rendered `--fs-lg` / 600 / `--heading` colour to lift the event name above the talk title — a deliberate prominence override of the T7 default (normal-weight `--fs-subtitle`). `.speaking-card__role` uses `--tracking-wide` (0.1em) rather than `--tracking-caps`; `.speaking-card__location` / `__date` are mono meta rendered non-caps and readable (`--fs-sm` / `--fs-xs`) — all remain the mono meta (T8) family per §3, deviating only on case/tracking so full strings read cleanly.

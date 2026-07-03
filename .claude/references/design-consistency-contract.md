@@ -30,7 +30,9 @@ Use CSS variables — never raw px for layout rhythm.
 
 | Token                      | Value                  | Use                           |
 | -------------------------- | ---------------------- | ----------------------------- |
+| `--space-0-5`              | 2px                    | Hairline stack gaps (line-height compensation) |
 | `--space-1` … `--space-24` | 4px scale              | All spacing                   |
+| `--pill-padding-y` / `-x`  | 8px / 16px             | Pill / nav / tag chip padding (one shared pair) |
 | `--section-py-start`       | 96px (64px mobile)     | Section top padding           |
 | `--section-py-end`         | 64px (48px mobile)     | Section bottom padding        |
 | `--gutter-inline`          | clamp(24px, 4vw, 64px) | Container horizontal          |
@@ -44,6 +46,31 @@ Use CSS variables — never raw px for layout rhythm.
 
 **Violation:** Hardcoded `padding: 20px`, `gap: 18px`, or `margin: 30px` where a token exists.
 
+### 2a. Tracking & line-height tokens (mandatory)
+
+Character tracking and line-height are tokenized — **never hardcode an `em` or unit-less
+line-height where a token exists.** Tracking stays in `em` so it scales with font-size.
+
+| Tracking token      | Value    | Use                                             |
+| ------------------- | -------- | ----------------------------------------------- |
+| `--tracking-tight`  | -0.02em  | Display headings (h1/h2), monogram mark         |
+| `--tracking-flat`   | 0.02em   | Brand wordmark, board header                    |
+| `--tracking-snug`   | 0.05em   | h4 kickers, stat labels, Tamil couplet          |
+| `--tracking-caps`   | 0.08em   | Uppercase UI: buttons, nav, badges, meta labels |
+| `--tracking-wide`   | 0.10em   | Pipeline/footer/hero labels, standard micro-labels |
+| `--tracking-wider`  | 0.14em   | Emphasized theme / case-study micro-labels      |
+| `--tracking-eyebrow`| 0.18em   | Section eyebrows (max tracking)                 |
+
+| Line-height token | Value | Use                                   |
+| ----------------- | ----- | ------------------------------------- |
+| `--lh-tight`      | 1.1   | Headings h1–h4                        |
+| `--lh-snug`       | 1.25  | Recognition / card titles             |
+| `--lh-normal`     | 1.4   | Metrics, metadata, dense caps labels  |
+| `--lh-relaxed`    | 1.6   | Card descriptions, recog body         |
+| `--lh-body`       | 1.75  | Loose body prose, section subtitle    |
+
+**Violation:** Hardcoded `letter-spacing: 0.12em` or `line-height: 1.5` where a token exists.
+
 ---
 
 ## 3. Typography roles
@@ -55,6 +82,39 @@ Use CSS variables — never raw px for layout rhythm.
 | Body                        | `--font-sans`, `--fs-body`    | Inter 400        |
 | Eyebrows, metadata, metrics | `--font-mono`, `--fs-eyebrow` | JetBrains Mono   |
 | Tamil / non-Latin           | Inter only                    | Never DM Serif   |
+
+### 3a. Type hierarchy ladder (SSOT for text levels)
+
+Every text run on the site belongs to **one** of these levels. The level fixes its font,
+size, tracking, and line-height token — pick the level by the element's role in the reading
+order, then apply the tokens. Page agents map each section's text to these codes in their
+**Appendix C** (they cite the code, never re-list token values). This is what keeps type
+consistent across views: two elements at the same level look identical everywhere.
+
+| Code | Level                     | Font (§3)        | Size token            | Tracking            | Line-height     |
+| ---- | ------------------------- | ---------------- | --------------------- | ------------------- | --------------- |
+| T1   | Display (h1)              | `--font-display` | `--fs-h1`             | `--tracking-tight`  | `--lh-tight`    |
+| T2   | Section title (h2)        | `--font-display` | `--fs-h2`             | `--tracking-tight`  | `--lh-tight`    |
+| T3   | Card title (h3)           | `--font-sans` 600–700 | `--fs-card-title*` (§EX-008) | `normal`     | `--lh-snug`     |
+| T4   | Kicker / sub-head (h4)    | `--font-mono`    | `--fs-h4`             | `--tracking-snug`   | `--lh-tight`    |
+| T5   | Eyebrow                   | `--font-mono`    | `--fs-eyebrow`        | `--tracking-eyebrow`| `--lh-tight`    |
+| T6   | Body prose                | `--font-sans`    | `--fs-body`           | `normal`            | `--lh-body` / `--lh-relaxed` |
+| T7   | Subtitle / lede           | `--font-sans`    | `--fs-subtitle`       | `normal`            | `--lh-body`     |
+| T8   | Caps label (nav/tag/badge/meta) | `--font-mono` | `--fs-2xs` / `--fs-eyebrow` | `--tracking-caps` | `--lh-normal` |
+| T9   | Emphasis micro-label      | `--font-mono`    | `--fs-2xs`            | `--tracking-wide` / `--tracking-wider` | `--lh-normal` |
+| T10  | Metric number             | `--font-mono`    | `--fs-metric`         | `--tracking-snug`   | `--lh-tight`    |
+
+**Rule (T-consistency):** an element's level must be the same across every view. If a label
+reads as T8 in one section it must not be styled as T9 in another. New elements pick a level;
+they never invent a font/size/tracking combination outside the ladder.
+
+### 3b. Object hierarchy (surface levels)
+
+Text sits inside surfaces; the surface hierarchy is fixed by the card tiers in **§5**
+(A compact → B content → C recognition → D special) and the section band variants in **§6**
+(`default` / `alt` rhythm). Page **Appendix C** records the object nesting per section —
+which band variant wraps which card tier wraps which mark slot (§5 logo/mark table) — so the
+box hierarchy is auditable the same way the text hierarchy is.
 
 ---
 
@@ -229,6 +289,8 @@ for approved divergences. Append rows; never delete history.
 | EX-007       | home                                           | §5 `--radius` on logo tiles  | `.leadership__collab-mark` uses `--radius-md` (8px) for compact logo grid cells                                                                                                                                 | 2026-07-02 |
 | EX-008       | home, research, projects, recognition, contact | §3 single card-title token   | Three-tier `--fs-card-title` scale (0.95rem / var(--fs-h3) / 1.5rem) preserves intentional research-compact / standard / flagship title hierarchy                                                               | 2026-07-03 |
 | EX-009       | research                                       | §2 single grid-col-min token | Two-tier `--grid-col-min` scale (320px compact vs 420px full) matches different content grid widths across research and speaking sections                                                                       | 2026-07-03 |
+| EX-010       | recognition                                    | §2 tokenized gap             | `CompetitionCard` stats grid uses a `1px` hairline `gap` as a visual cell divider (grid background shows through) — not a rhythm value; intentionally off the `--space-*` scale                                  | 2026-07-03 |
+| EX-011       | home                                           | §2 tokenized gap             | `ThirukuralQuote` band uses a responsive `clamp(1rem, 2.5vw, 1.75rem)` gap for the fluid couplet layout; endpoints intentionally straddle `--space-4`/`--space-6` and stay a clamp, not a fixed token           | 2026-07-03 |
 
 ---
 

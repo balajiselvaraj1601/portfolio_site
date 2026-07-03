@@ -112,15 +112,15 @@ function isExternal(href: string) {
   .hero-tag {
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: var(--space-2);
     width: fit-content;
     background: var(--accent-soft);
     border: 1px solid var(--border-strong);
     border-radius: var(--radius-pill);
-    padding: 0.35rem 1rem;
+    padding: var(--pill-padding-y) var(--pill-padding-x);
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
-    letter-spacing: 0.1em;
+    letter-spacing: var(--tracking-wide);
     color: var(--accent-ll);
   }
   .hero-tag::before {
@@ -182,7 +182,7 @@ function isExternal(href: string) {
   .hero__greeting {
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
-    letter-spacing: 0.18em;
+    letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
     color: var(--accent-ll);
   }
@@ -202,12 +202,6 @@ function isExternal(href: string) {
   .hero__title em {
     font-style: italic;
     color: var(--accent-ll);
-  }
-  .hero__sub {
-    font-size: 1.05rem;
-    color: var(--text-muted);
-    max-width: 520px;
-    line-height: 1.55;
   }
   .hero-stats {
     display: grid;
@@ -229,16 +223,16 @@ function isExternal(href: string) {
   }
   .hero-stat__label {
     font-size: var(--fs-sm);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-snug);
     margin-top: var(--space-2);
-    line-height: 1.4;
+    line-height: var(--lh-normal);
     max-width: none;
   }
   .hero-stat__detail {
     font-size: var(--fs-sm);
-    letter-spacing: 0.05em;
+    letter-spacing: var(--tracking-snug);
     margin-top: var(--space-1);
-    line-height: 1.4;
+    line-height: var(--lh-normal);
     max-width: none;
   }
   @media (min-width: 640px) {
