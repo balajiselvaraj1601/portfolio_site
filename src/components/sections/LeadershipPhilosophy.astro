@@ -8,7 +8,6 @@ import {
   getEntityUrl,
   logoSrc,
 } from '@lib/content';
-import { logoUsesBadge } from '@lib/logo-display';
 
 const title = site.sections.leadership.title;
 const {
@@ -85,7 +84,7 @@ const cardBlocks = [
                   slug={item.logo}
                   logoUrl={src}
                   altText=""
-                  useBadge={logoUsesBadge(item.logo)}
+                  useBadge={false}
                   logoSize="lg"
                 />
               </a>

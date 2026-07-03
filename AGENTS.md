@@ -122,10 +122,56 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 
 CI builds on Node 20 (`package.json` engines: `>=18`).
 
+## Agents
+
+The repo runs a coordinated multi-agent system for design consistency, full-site review, and token standardization. All agents live in `.claude/agents/`.
+
+### Orchestrators (Sonnet, direct edit capability)
+
+| Agent                           | Purpose                                                                                                                                           | Trigger                                       |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
+| `site-review-fix`               | Full-site audit → fix → verify → commit pipeline. Interactive, user-approved commits.                                                             | `/site-review` or `"site review"`             |
+| `site-review-auto`              | **NEW.** Autonomous headless variant of site-review-fix. Unconditional commit, mandatory audit doc, no user prompts. Designed for scheduled runs. | `"scheduled review"` or via `/schedule` skill |
+| `site-consistency-orchestrator` | Coordinates 7 page-rep agents + design-guardian for cross-view design conflict resolution.                                                        | `/page-team` or `"page team"`                 |
+
+### Specialists (Sonnet, specialized edit scope)
+
+| Agent                 | Purpose                                                                                                                                           | Scope                                                                  | Trigger                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- | ------------------------------------------------------- |
+| `design-standardizer` | **NEW.** Token enforcement — sweeps components for hardcoded design values and replaces with tokens, adding missing tokens to `global.css :root`. | `src/components/`, `src/styles/global.css :root`                       | `"token sweep"`, or spawned by site-review-auto Phase 2 |
+| `design-guardian`     | Binding design authority. Resolves cross-view token/primitive conflicts. Sole editor of `global.css` (below `:root`), `ui/`, `cards/`.            | `src/styles/global.css`, `src/components/ui/`, `src/components/cards/` | Orchestrator Phase 3, or `"design guardian"`            |
+
+### Page Representatives (Haiku, view-scoped edit)
+
+| Agent              | View           | Sections                                     | Trigger                               |
+| ------------------ | -------------- | -------------------------------------------- | ------------------------------------- |
+| `page-about`       | `home` (About) | hero, thirukural, leadership                 | Orchestrator, or `"about view"`       |
+| `page-experience`  | `#experience`  | experience-intro, experience                 | Orchestrator, or `"experience view"`  |
+| `page-projects`    | `#projects`    | projects-intro, featured-case-studies        | Orchestrator, or `"projects view"`    |
+| `page-research`    | `#research`    | publications, conferences, speakers          | Orchestrator, or `"research view"`    |
+| `page-recognition` | `#recognition` | awards, kaggle, education                    | Orchestrator, or `"recognition view"` |
+| `page-vision`      | `#vision`      | vision-intro, vision-programs, vision-impact | Orchestrator, or `"vision view"`      |
+| `page-contact`     | `#contact`     | contact                                      | Orchestrator, or `"contact view"`     |
+
+### Skills (Reusable, invoked by agents)
+
+| Skill                   | Used by                                         | Reference                                       |
+| ----------------------- | ----------------------------------------------- | ----------------------------------------------- |
+| `site-review-fix`       | site-review-fix agent                           | `.claude/skills/site-review-fix/SKILL.md`       |
+| `page-consistency-team` | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md` |
+| `portfolio-icon-audit`  | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`  |
+| `svg-logo-crop`         | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`         |
+
 ## Documentation
 
 | Area                                    | Read                                                                 |
 | --------------------------------------- | -------------------------------------------------------------------- |
+| Agent system (NEW)                      | This AGENTS.md section above                                         |
+| Agents — design standardizer (NEW)      | `.claude/agents/design-standardizer.md`                              |
+| Agents — site-review-auto (NEW)         | `.claude/agents/site-review-auto.md`                                 |
+| Agents — design contracts               | `.claude/references/design-consistency-contract.md`                  |
+| Agents — page-agent playbook            | `.claude/references/page-agent-playbook.md`                          |
+| Agents — authoring standard             | `.claude/references/page-agent-standard.md`                          |
 | Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`                       |
 | Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                              |
 | UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`                     |

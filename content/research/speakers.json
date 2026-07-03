@@ -20,7 +20,7 @@
       "date": "April 25-30, 2025",
       "dateSort": "2025-04-25",
       "title": "AI-driven identification of drug-tolerant persister cells in lung cancer",
-      "description": "Presented a novel AI framework to identify drug-tolerant persister (DTP) cells using single-cell transcriptomics and machine learning, enabling improved detection of treatment-resistant cell populations.",
+      "description": "A novel framework combining single-cell transcriptomics and machine learning to detect treatment-resistant persister cell populations.",
       "url": "https://aacrjournals.org/cancerres/article/85/8_Supplement_1/6312/759545/Abstract-6312-AI-Driven-Identification-of-Drug",
       "image": "/assets/images/aacr-2025.png",
       "logo": "aacr"

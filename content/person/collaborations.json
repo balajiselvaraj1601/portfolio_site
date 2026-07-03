@@ -30,12 +30,6 @@
       "logo": "ai-sweden",
       "entity": "ai-sweden",
       "detail": "Master's thesis pipeline and Digital Twins initiative for drug discovery"
-    },
-    {
-      "name": "RIKEN Brain Science Institute",
-      "logo": "riken-bsi",
-      "entity": "riken-bsi",
-      "detail": "Neuroscience imaging and 3D reconstruction algorithms"
     }
   ]
 }

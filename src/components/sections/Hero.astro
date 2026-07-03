@@ -42,8 +42,6 @@ function isExternal(href: string) {
             )
           }
         </h1>
-
-        <p class="hero__sub">{profile.headline}</p>
       </div>
 
       <div class="hero-stats" role="list" aria-label="Career highlights">
@@ -230,14 +228,14 @@ function isExternal(href: string) {
     line-height: 1;
   }
   .hero-stat__label {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
     letter-spacing: 0.05em;
     margin-top: var(--space-2);
     line-height: 1.4;
     max-width: none;
   }
   .hero-stat__detail {
-    font-size: 0.8rem;
+    font-size: var(--fs-sm);
     letter-spacing: 0.05em;
     margin-top: var(--space-1);
     line-height: 1.4;

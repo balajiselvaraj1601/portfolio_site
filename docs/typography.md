@@ -43,7 +43,7 @@ token — don't decide per element.
 | Quote attribution / author                                                        | mono             | 400     | `--fs-eyebrow`        | —                                                                          |
 | Body / paragraph / intro / list items                                             | sans             | 400     | `--fs-body` / 0.88rem | —                                                                          |
 | Inline links (`a`, EntityLink, ContactLink)                                       | sans (inherited) | inherit | inherit               | —                                                                          |
-| Button (`.btn`)                                                                   | sans             | 600     | 0.82rem               | uppercase 0.08em — a distinct interactive role, intentionally **not** mono |
+| Button (`.btn`)                                                                   | sans             | 600     | `--fs-btn`            | uppercase 0.08em — a distinct interactive role, intentionally **not** mono |
 
 ### Deliberate exceptions
 
