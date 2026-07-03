@@ -33,7 +33,7 @@
           "name": "Drug Safety AI Platform",
           "bullets": [
             {
-              "text": "AI Lead within a $3M+ SVP-sponsored drug safety initiative — building predictive toxicology models projected to save $20M-$50M annually by reducing animal studies, compressing safety timelines from 5 to 3 years, and improving compound prioritization.",
+              "text": "AI Lead on a $3M+ SVP-sponsored drug safety initiative; predictive toxicology models projected to save $20M-$50M annually, reducing animal studies and compressing timelines from 5 to 3 years.",
               "tier": "primary"
             },
             {
@@ -53,7 +53,7 @@
               "tier": "primary"
             },
             {
-              "text": "Initiated a collaboration with Dr. Shantanu Singh (Senior Group Leader, Broad Institute) to co-develop computational pipelines for Cell Painting and omics.",
+              "text": "Initiated collaboration with Dr. Shantanu Singh (Senior Group Leader, Broad Institute) on computational pipelines for Cell Painting and omics.",
               "tier": "primary"
             }
           ],
@@ -95,7 +95,7 @@
           "name": "Foundation Model Framework",
           "bullets": [
             {
-              "text": "Architected a reusable cross-platform framework to accelerate onboarding of new imaging use cases and enable rapid experimentation and deployment.",
+              "text": "Architected a reusable cross-platform framework to accelerate imaging use-case onboarding and enable rapid experimentation and deployment.",
               "tier": "primary"
             },
             {
@@ -103,11 +103,11 @@
               "tier": "primary"
             },
             {
-              "text": "Scaled the foundation model framework across 3 clinical imaging modalities — CT, Endoscopy, and Echocardiography — and 3 internal AZ infrastructures.",
+              "text": "Scaled the framework across 3 clinical imaging modalities — CT, Endoscopy, and Echocardiography — and 3 internal AZ infrastructures.",
               "tier": "primary"
             },
             {
-              "text": "Deployed the endoscopy vision model and inference pipeline from the framework in a clinical study for ranking gastrointestinal tissue damage severity.",
+              "text": "Deployed the endoscopy vision model and inference pipeline in a clinical study for ranking gastrointestinal tissue damage severity.",
               "tier": "secondary"
             }
           ],
@@ -141,7 +141,7 @@
           "icon": "scan",
           "bullets": [
             {
-              "text": "Delivered a next-generation CT tumor segmentation pipeline in 6 months, with Dice scores 46% above SOTA, directly enabling $0.5M in follow-on funding.",
+              "text": "Delivered a CT tumor segmentation pipeline in 6 months; Dice scores 46% above SOTA, securing $0.5M in follow-on funding.",
               "tier": "primary"
             },
             {
@@ -153,7 +153,7 @@
               "tier": "primary"
             },
             {
-              "text": "Validated pipeline generalizability across independent clinical trial datasets and challenging out-of-distribution imaging cohorts, including POSEIDON.",
+              "text": "Validated pipeline generalizability across independent clinical trial datasets and out-of-distribution imaging cohorts, including POSEIDON.",
               "tier": "primary"
             },
             {
@@ -262,7 +262,7 @@
               "tier": "primary"
             },
             {
-              "text": "Automated model optimization, compression, and deployment pipelines specifically targeting resource-constrained edge production environments.",
+              "text": "Automated model optimization, compression, and deployment pipelines for resource-constrained edge environments.",
               "tier": "primary"
             },
             {
@@ -280,7 +280,7 @@
               "tier": "primary"
             },
             {
-              "text": "Developed robust label-based tracking algorithms resilient to lighting variability, camera motion, and multi-scene operational conditions.",
+              "text": "Developed label-based tracking algorithms resilient to lighting variability, camera motion, and multi-scene conditions.",
               "tier": "primary"
             }
           ]
@@ -344,7 +344,7 @@
               "tier": "primary"
             },
             {
-              "text": "Led development and deployment of a clinical-grade real-time endoscopy video processing system with 10+ integrated modules on NVIDIA Jetson TX1.",
+              "text": "Developed and deployed a clinical-grade real-time endoscopy video processing system with 10+ modules on NVIDIA Jetson TX1.",
               "tier": "primary"
             },
             {
