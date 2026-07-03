@@ -1,8 +1,7 @@
 ---
 import Section from '@components/ui/Section.astro';
-import CardMark from '@components/ui/CardMark.astro';
-import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import ThemeCard from '@components/cards/ThemeCard.astro';
+import VisionHub from '@components/ui/VisionHub.astro';
 import { visionBoard, site } from '@lib/content';
 ---
 
@@ -11,63 +10,186 @@ import { visionBoard, site } from '@lib/content';
   title={site.sections['vision-programs'].title}
   variant="alt"
 >
-  <ul class="theme-grid vgroups reveal" style="--theme-cols: 2" role="list">
+  <div class="vision-flow reveal">
     {
-      visionBoard.groups.map((group) => (
-        <li>
-          <article class="theme-card card">
-            <CardMark mark={group.lead} context="theme-card" emblemInCircle />
-            <h3 class="theme-card__title">{group.label}</h3>
-            <div class="vgroup__marks">
-              {group.marks.map((m) => (
-                <span class="icon-tile icon-tile--round icon-tile--compact">
-                  <MarkEmblem mark={m} />
-                </span>
-              ))}
-            </div>
-          </article>
-        </li>
-      ))
-    }
-  </ul>
+      visionBoard.groups && visionBoard.groups.length >= 2 && (
+        <>
+          <VisionHub group={visionBoard.groups[0]} />
 
-  {
-    visionBoard.programs && visionBoard.programs.length > 0 && (
-      <ul
-        class="theme-grid vision-programs__grid reveal"
-        style="--theme-cols: 2"
-        role="list"
-      >
-        {visionBoard.programs.map((p) => (
-          <li>
-            <ThemeCard
-              title={p.title}
-              lines={p.lines}
-              mark={p.badge}
-              slug={p.entity}
-              altText={p.title}
-              label={p.label}
-              entity={p.entity}
-              accent={p.variant === 'red'}
-            />
-          </li>
-        ))}
-      </ul>
-    )
-  }
+          <span class="vision-flow__chevrons" aria-hidden="true">
+            <span class="vision-flow__chevron vision-flow__chevron--1" />
+            <span class="vision-flow__chevron vision-flow__chevron--2" />
+            <span class="vision-flow__chevron vision-flow__chevron--3" />
+          </span>
+
+          <VisionHub group={visionBoard.groups[1]} />
+
+          <span class="vision-flow__chevrons" aria-hidden="true">
+            <span class="vision-flow__chevron vision-flow__chevron--1" />
+            <span class="vision-flow__chevron vision-flow__chevron--2" />
+            <span class="vision-flow__chevron vision-flow__chevron--3" />
+          </span>
+
+          {visionBoard.programs && visionBoard.programs.length > 0 && (
+            <div class="vision-flow__cards">
+              <ul role="list">
+                {visionBoard.programs.map((p) => (
+                  <li data-variant={p.variant}>
+                    <ThemeCard
+                      title={p.title}
+                      lines={p.lines}
+                      mark={p.badge}
+                      slug={p.entity}
+                      altText={p.title}
+                      label={p.label}
+                      entity={p.entity}
+                      accent={false}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </>
+      )
+    }
+  </div>
 </Section>
 
 <style>
-  .vgroups {
-    margin-top: 0;
-  }
-  .vgroup__marks {
+  .vision-flow {
     display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-2);
-    margin-top: var(--space-3);
+    align-items: center;
+    gap: var(--space-5);
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--card-padding);
   }
-  .vision-programs__grid {
-    margin-top: var(--stack-xl);
+
+  /* :global(*) so the no-shrink rule reaches cross-component children too
+     (the VisionHub <figure> carries its own scope attr, not this section's,
+     so a bare `> *` — scoped to this section — would skip it and let the hub
+     shrink/collapse to its label width in the flex row). */
+  .vision-flow > :global(*) {
+    flex: 0 0 auto;
+  }
+
+  /* Give each radial hub a definite width so VisionHub's internal
+     width:100% / max-width:420px resolves inside the flex row
+     (a flex:0 0 auto item has no definite basis, else the hub collapses
+     to its label width). */
+  .vision-flow > :global(.vision-hub) {
+    width: clamp(200px, 20vw, 300px);
+  }
+
+  .vision-flow__cards {
+    width: clamp(340px, 30vw, 460px);
+    /* No extra margin: the flow's --space-5 gap already sets a uniform 20px
+       rhythm between every element (hub · chevrons · hub · chevrons · cards).
+       Below 1024px the media query resets this to margin-inline: auto. */
+  }
+
+  .vision-flow__chevrons {
+    display: flex;
+    align-items: center;
+    gap: 0;
+  }
+  /* Nest the three notched arrows tightly into a compact »» indicator. */
+  .vision-flow__chevron + .vision-flow__chevron {
+    margin-inline-start: calc(-1 * var(--chevron-overlap));
+  }
+
+  /* Bold notched chevrons (clip-path arrows) with a bright→deep purple ramp,
+     echoing the reference »» flow markers. Sized from the --chevron-* SSOT
+     (grid-snapped: 8×8, aspect 1:1; cluster width = 3w − 2·overlap = 20px). */
+  .vision-flow__chevron {
+    width: var(--chevron-w);
+    height: var(--chevron-h);
+    clip-path: polygon(0% 0%, 48% 0%, 100% 50%, 48% 100%, 0% 100%, 52% 50%);
+  }
+
+  .vision-flow__chevron--1 {
+    background: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--accent-strong) 75%, white),
+      var(--accent-strong)
+    );
+  }
+
+  .vision-flow__chevron--2 {
+    background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  }
+
+  .vision-flow__chevron--3 {
+    background: linear-gradient(
+      135deg,
+      var(--accent),
+      color-mix(in srgb, var(--accent) 60%, black)
+    );
+  }
+
+  .vision-flow__cards ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(180px, 1fr));
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--bg-elev);
+    overflow: hidden;
+  }
+
+  /* Blend inner cards into the panel: remove their individual styling. */
+  .vision-flow__cards :global(.card) {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+  }
+
+  /* Neutralize card hover lift so cards stay in the panel grid. */
+  .vision-flow__cards :global(.card:hover) {
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Downsize program logo chips to small tokens for visual balance. */
+  .vision-flow__cards :global(.program-card__logo img) {
+    max-height: var(--logo-h-sm);
+    max-width: var(--logo-w-max-sm);
+  }
+
+  /* Draw internal divider lines: vertical (right border on odd children)
+     and horizontal (bottom border on top two children). */
+  .vision-flow__cards li:nth-child(odd) {
+    border-right: 1px solid var(--border);
+  }
+
+  .vision-flow__cards li:nth-child(-n + 2) {
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Below the width where the wide band fits, collapse instead of scroll-clipping:
+     the two hubs stay side-by-side on the first row and the 2×2 grid wraps beneath,
+     centered. Drops the hub→grid chevron once the grid is no longer inline. */
+  @media (max-width: 1024px) {
+    .vision-flow {
+      flex-wrap: wrap;
+      justify-content: center;
+      overflow-x: visible;
+      row-gap: var(--space-6);
+    }
+
+    .vision-flow__cards {
+      flex: 1 1 100%;
+      width: auto;
+      max-width: 560px;
+      margin-inline: auto;
+    }
+
+    .vision-flow__chevrons:last-of-type {
+      display: none;
+    }
   }
 </style>

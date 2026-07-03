@@ -23,45 +23,94 @@ const {
 } = profile.leadershipPhilosophy;
 
 const cardBlocks = [
-  { heading: blockHeadings.strategicVision, items: strategicVision },
-  { heading: blockHeadings.businessImpact, items: businessImpact },
-  { heading: blockHeadings.platform, items: platform },
-  { heading: blockHeadings.peopleMentoring, items: peopleMentoring },
-  { heading: blockHeadings.governanceAI, items: governanceAI },
-  { heading: blockHeadings.governancePrivacy, items: governancePrivacy },
-  { heading: blockHeadings.governanceGxP, items: governanceGxP },
+  {
+    key: 'strategicVision',
+    heading: blockHeadings.strategicVision,
+    items: strategicVision,
+  },
+  {
+    key: 'businessImpact',
+    heading: blockHeadings.businessImpact,
+    items: businessImpact,
+  },
+  { key: 'platform', heading: blockHeadings.platform, items: platform },
+  {
+    key: 'peopleMentoring',
+    heading: blockHeadings.peopleMentoring,
+    items: peopleMentoring,
+  },
+  {
+    key: 'governanceAI',
+    heading: blockHeadings.governanceAI,
+    items: governanceAI,
+  },
+  {
+    key: 'governancePrivacy',
+    heading: blockHeadings.governancePrivacy,
+    items: governancePrivacy,
+  },
+  {
+    key: 'governanceGxP',
+    heading: blockHeadings.governanceGxP,
+    items: governanceGxP,
+  },
 ];
+const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
 ---
 
 <Section id="leadership" title={title} variant="default">
   {intro && <p class="leadership__intro reveal">{intro}</p>}
 
-  {
-    cardBlocks.map(
-      ({ heading, items }) =>
-        items &&
-        items.length > 0 && (
-          <div class="leadership__card-row reveal">
-            <h3 class="leadership__diff-heading">{heading}</h3>
-            <ul
-              class="theme-grid"
-              style={`--theme-cols: ${items.length}`}
-              role="list"
-            >
-              {items.map((item) => (
-                <li class="theme-card card">
-                  {item.icon && (
-                    <CardMark icon={item.icon} context="theme-card" />
-                  )}
-                  <h3 class="theme-card__title">{item.title}</h3>
-                  <p class="theme-card__desc">{item.description}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )
-    )
-  }
+  <div
+    class="leadership__filters reveal"
+    role="group"
+    aria-label="Filter About focus areas"
+  >
+    <button
+      type="button"
+      class="recog-chip is-active"
+      data-filter="all"
+      aria-pressed="true"
+    >
+      All
+    </button>
+    {
+      visibleBlocks.map((b) => (
+        <button
+          type="button"
+          class:list={['recog-chip', `cat-${b.key}`]}
+          data-filter={b.key}
+          aria-pressed="false"
+        >
+          {b.heading}
+        </button>
+      ))
+    }
+  </div>
+
+  <div class="leadership__blocks" data-about-grid>
+    {
+      visibleBlocks.map(({ key, heading, items }) => (
+        <div
+          class:list={['leadership__card-row', 'reveal', `cat-${key}`]}
+          data-category={key}
+        >
+          <h3 class="leadership__diff-heading">{heading}</h3>
+          <ul class="theme-grid" role="list">
+            {(items ?? []).map((item) => (
+              <li class="theme-card card">
+                {item.icon && (
+                  <CardMark icon={item.icon} context="theme-card" />
+                )}
+                <h3 class="theme-card__title">{item.title}</h3>
+                <p class="theme-card__desc">{item.description}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))
+    }
+  </div>
 
   <div class="leadership__collabs reveal">
     <h3 class="leadership__collabs-heading">{collaborations.title}</h3>
@@ -96,21 +145,105 @@ const cardBlocks = [
   </div>
 </Section>
 
+<script>
+  import { initRecogGrid } from '../../scripts/recog-grid';
+
+  const root = document.getElementById('leadership');
+  if (root) {
+    initRecogGrid({
+      root,
+      gridSelector: '[data-about-grid]',
+      itemSelector: '.leadership__card-row',
+      filterAttr: 'data-category',
+    });
+  }
+</script>
+
 <style>
   .leadership__intro {
     font-size: var(--fs-body);
-    max-width: var(--maxw-text);
+    max-width: none;
     color: var(--text-muted);
     line-height: var(--lh-body);
   }
+  .leadership__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin: var(--space-6) 0 var(--space-2);
+  }
+  .leadership__card-row.hidden {
+    display: none;
+  }
+
+  /* Per-category token mapping — one hue per category key. Mirrors the Awards
+     pattern (level → --lvl → --accent-card); keys match data-category so
+     theming and filtering share one source. */
+  .cat-strategicVision {
+    --cat: var(--cat-strategic);
+  }
+  .cat-businessImpact {
+    --cat: var(--cat-impact);
+  }
+  .cat-platform {
+    --cat: var(--cat-platform);
+  }
+  .cat-peopleMentoring {
+    --cat: var(--cat-people);
+  }
+  .cat-governanceAI {
+    --cat: var(--cat-ai);
+  }
+  .cat-governancePrivacy {
+    --cat: var(--cat-privacy);
+  }
+  .cat-governanceGxP {
+    --cat: var(--cat-gxp);
+  }
+  /* Feed the category hue into the shared accent hook. The All chip has no
+     .cat-* class, so --cat is unset and it falls back to the default accent. */
+  .leadership__card-row,
+  .recog-chip.is-active {
+    --accent-card: var(--cat);
+  }
+
   .leadership__diff-heading {
     font-size: var(--fs-eyebrow);
     font-family: var(--font-mono);
     font-weight: var(--fw-regular);
     letter-spacing: var(--tracking-eyebrow);
     text-transform: uppercase;
-    color: var(--accent-ll);
+    color: var(--accent-card, var(--accent-ll));
     margin-bottom: var(--space-4);
+  }
+
+  /* Recog-card accent treatment on the About theme cards (scoped — Vision's
+     shared .theme-card is untouched). Accent top-border + hover lift. */
+  .theme-card {
+    border-top: 2px solid var(--accent-card, var(--accent));
+    transition:
+      transform var(--dur) var(--ease),
+      box-shadow var(--dur) var(--ease),
+      border-color var(--dur) var(--ease);
+  }
+  .theme-card:hover {
+    transform: translateY(var(--card-lift));
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-card, var(--accent));
+  }
+  /* Tint the CardMark-rendered icon per category (its own scope → :global). */
+  .leadership__card-row :global(.theme-card__icon) {
+    background: color-mix(
+      in srgb,
+      var(--accent-card, var(--accent)) 14%,
+      transparent
+    );
+    border-color: color-mix(
+      in srgb,
+      var(--accent-card, var(--accent)) 35%,
+      transparent
+    );
+    color: var(--accent-card, var(--accent));
   }
   .leadership__card-row {
     margin-top: var(--space-10);

@@ -40,7 +40,7 @@
       "id": "vision",
       "label": "VISION",
       "variant": "purple",
-      "lead": { "kind": "icon", "name": "brain" },
+      "lead": { "kind": "logo", "asset": "logo_brain", "alt": "Multimodal AI" },
       "marks": [
         {
           "kind": "logo",
@@ -90,8 +90,8 @@
         "alt": "Broad Institute"
       },
       "lines": [
-        "Initiated collaboration with Dr. Shantanu Singh at the Broad Institute",
-        "Co-developing computational pipelines for Cell Painting and omics"
+        "Initiated collaboration with Dr. Shantanu Singh",
+        "Co-developing computational pipeline"
       ],
       "entity": "broad-institute"
     },

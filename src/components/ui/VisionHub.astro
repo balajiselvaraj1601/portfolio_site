@@ -1,0 +1,190 @@
+---
+/**
+ * VisionHub — radial hub-and-spoke diagram for a Vision board group.
+ * A faint outer ring frames a central brand mark, six satellite marks orbit it,
+ * and dotted spokes bridge the gap between the centre and each satellite.
+ * All marks are resolved from existing icons/logos via Icon + MarkEmblem.
+ */
+import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import type { VisionBoard } from '@schemas';
+
+type VisionGroup = VisionBoard['groups'][number];
+
+interface Props {
+  group: VisionGroup;
+}
+
+const { group } = Astro.props;
+
+// Radial geometry — all lengths in cqi (1cqi = 1% of the square stage width).
+const ORBIT = 36; // centre → satellite distance
+const NODE = 18; // satellite diameter
+const CENTER = 28; // centre-hub diameter
+const count = group.marks.length;
+
+// Pre-compute each satellite's offset + spoke angle so the CSS stays trig-free.
+const nodes = group.marks.map((mark, i) => {
+  const angle = (2 * Math.PI * i) / count - Math.PI / 2; // start at 12 o'clock
+  return {
+    mark,
+    tx: +(Math.cos(angle) * ORBIT).toFixed(3),
+    ty: +(Math.sin(angle) * ORBIT).toFixed(3),
+    rot: +((360 * i) / count - 90).toFixed(3),
+  };
+});
+
+// Spokes run only across the gap between the two rings.
+const spokeStart = CENTER / 2;
+const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
+---
+
+<figure class="vision-hub">
+  <div
+    class="vision-hub__stage"
+    style={`--orbit:${ORBIT}cqi;--node:${NODE}cqi;--center:${CENTER}cqi;--spoke-start:${spokeStart}cqi;--spoke-len:${spokeLen}cqi`}
+  >
+    <div class="vision-hub__ring" aria-hidden="true"></div>
+
+    {
+      nodes.map((n) => (
+        <span
+          class="vision-hub__spoke"
+          style={`--rot:${n.rot}deg`}
+          aria-hidden="true"
+        />
+      ))
+    }
+
+    <div class="vision-hub__center">
+      {
+        group.lead.kind === 'icon' ? (
+          <Icon name={group.lead.name} size={44} />
+        ) : (
+          <MarkEmblem mark={group.lead} class="vision-hub__lead" />
+        )
+      }
+    </div>
+
+    {
+      nodes.map((n) => (
+        <span
+          class="vision-hub__node"
+          style={`--tx:${n.tx}cqi;--ty:${n.ty}cqi`}
+        >
+          <MarkEmblem mark={n.mark} />
+        </span>
+      ))
+    }
+  </div>
+
+  <figcaption class="vision-hub__label">{group.label}</figcaption>
+</figure>
+
+<style>
+  .vision-hub {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-4);
+    width: 100%;
+  }
+
+  .vision-hub__stage {
+    container-type: inline-size;
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    aspect-ratio: 1;
+  }
+
+  /* Outer circle — bright purple ring, echoing the reference (no glow). */
+  .vision-hub__ring {
+    position: absolute;
+    inset: 4%;
+    border-radius: 50%;
+    border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    background: radial-gradient(
+      circle at center,
+      color-mix(in srgb, var(--accent) 14%, transparent) 0%,
+      transparent 64%
+    );
+    z-index: 1;
+  }
+
+  .vision-hub__center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--center);
+    height: var(--center);
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid color-mix(in srgb, var(--accent) 45%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    color: var(--accent-ll);
+    z-index: 2;
+  }
+  .vision-hub__center :global(.icon) {
+    width: 46%;
+    height: 46%;
+  }
+  /* Contain-masked lead mark: wide wordmarks fit to width, square emblems to height. */
+  .vision-hub__center :global(.vision-hub__lead) {
+    width: 62%;
+    height: 52%;
+  }
+
+  .vision-hub__node {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--node);
+    height: var(--node);
+    transform: translate(-50%, -50%) translate(var(--tx), var(--ty));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid color-mix(in srgb, var(--accent) 42%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 82%, var(--accent));
+    color: var(--accent-ll);
+    z-index: 2;
+  }
+  .vision-hub__node :global(.mark-emblem),
+  .vision-hub__node :global(.icon) {
+    width: 52%;
+    height: 52%;
+  }
+
+  /* Dotted spoke bridging centre-ring edge → satellite-ring edge. */
+  .vision-hub__spoke {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--spoke-len);
+    height: 0;
+    border-top: 2px dotted var(--border-strong);
+    transform-origin: 0 0;
+    transform: rotate(var(--rot)) translateX(var(--spoke-start));
+    z-index: 1;
+  }
+
+  .vision-hub__label {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--accent-ll);
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .vision-hub__stage {
+      max-width: 300px;
+    }
+  }
+</style>

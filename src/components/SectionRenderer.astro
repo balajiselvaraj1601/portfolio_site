@@ -62,9 +62,6 @@ function sectionProps(id: string): Record<string, string> {
   if (id === 'featured-case-studies' && projectsView) {
     return { showMoreHref: `/#${projectsView.viewAnchor}` };
   }
-  if (id === 'publications' && researchView) {
-    return { showMoreHref: `/#${researchView.viewAnchor}` };
-  }
   return {};
 }
 ---

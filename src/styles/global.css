@@ -25,8 +25,8 @@
   --space-20: 80px;
   --space-24: 96px;
 
-  --section-py-start: var(--space-24);
-  --section-py-end: var(--space-16);
+  --section-py-start: var(--space-20);
+  --section-py-end: var(--space-20);
   --gutter-inline: clamp(var(--space-6), 4vw, var(--space-16));
   --stack-sm: var(--space-4);
   --stack-md: var(--space-6);
@@ -58,6 +58,10 @@
   /* Mark slots — change these two values to resize circular icons site-wide */
   --mark-slot: 44px;
   --mark-glyph: 22px;
+  /* Vision flow-marker chevrons (grid-snapped SSOT; height anchors the box) */
+  --chevron-h: var(--space-2); /* 8px */
+  --chevron-w: var(--space-2); /* 8px — = height, aspect 1:1 (square) */
+  --chevron-overlap: var(--space-0-5); /* 2px — ¼ × width, nesting overlap */
   --size-recog-search-height: 38px;
   --size-recog-search-width: 200px;
 
@@ -239,6 +243,20 @@
   /* Medal accents — shared by Kaggle + Competition cards */
   --medal-silver: #8395b4;
   --medal-bronze: #b67e44;
+  /* Leadership category accents (SSOT: About focus-area chips + cards).
+     6 alias existing level and gold hues (auto theme-aware); GxP adds a
+     fresh green. AA ≥3:1 on --bg-elev in both themes. */
+  --cat-strategic: var(
+    --lvl-senior-director
+  ); /* blue   — Strategy & Sponsorship */
+  --cat-impact: var(--accent-gold); /* gold   — Business & P&L Impact */
+  --cat-platform: var(--lvl-director); /* teal   — Platform & Infrastructure */
+  --cat-people: var(--lvl-national); /* pink   — Team & Org Building */
+  --cat-ai: var(--lvl-cio); /* purple — AI Governance */
+  --cat-privacy: var(
+    --lvl-associate-director
+  ); /* red    — Privacy & Data Protection */
+  --cat-gxp: #15803d; /* green  — GxP Compliance (new hue) */
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -283,6 +301,9 @@
   --lvl-national: #f472b6;
   --medal-silver: #aebfdc;
   --medal-bronze: #d6a566;
+  /* Category accents: 6 alias the level and gold hues (already themed above);
+     only the non-alias GxP green needs a brighter dark value. */
+  --cat-gxp: #4ade80; /* brighter green on dark --bg-elev */
   --hero-gradient: radial-gradient(
     60% 70% at 15% 0%,
     rgba(108, 47, 191, 0.12) 0%,
@@ -1072,8 +1093,9 @@ button {
   background: var(--section-bg);
 }
 @media (max-width: 768px) {
-  .section {
-    padding-block: var(--space-16) var(--space-12);
+  :root {
+    --section-py-start: var(--space-12);
+    --section-py-end: var(--space-12);
   }
 }
 .section--alt {

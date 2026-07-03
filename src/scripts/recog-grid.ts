@@ -3,25 +3,34 @@
 export interface RecogGridOptions {
   root: HTMLElement;
   gridSelector: string;
-  searchSelector: string;
-  countSelector: string;
-  emptySelector: string;
+  /** Item element selector within the grid. Defaults to '.recog-card'. */
+  itemSelector?: string;
+  searchSelector?: string;
+  countSelector?: string;
+  emptySelector?: string;
   /** Card attribute compared to active filter chip (e.g. data-level, data-medal). */
   filterAttr: string;
-  /** Card attributes joined for search haystack matching. */
-  searchAttrs: string[];
+  /** Card attributes joined for search haystack matching. Omit when there is no search field. */
+  searchAttrs?: string[];
 }
 
 export function initRecogGrid(options: RecogGridOptions): void {
   const grid = options.root.querySelector(options.gridSelector);
   if (!grid) return;
 
-  const cards = Array.from(grid.querySelectorAll('.recog-card'));
-  const searchEl = options.root.querySelector<HTMLInputElement>(
-    options.searchSelector
+  const cards = Array.from(
+    grid.querySelectorAll(options.itemSelector ?? '.recog-card')
   );
-  const countEl = options.root.querySelector(options.countSelector);
-  const emptyEl = options.root.querySelector(options.emptySelector);
+  const searchEl = options.searchSelector
+    ? options.root.querySelector<HTMLInputElement>(options.searchSelector)
+    : null;
+  const countEl = options.countSelector
+    ? options.root.querySelector(options.countSelector)
+    : null;
+  const emptyEl = options.emptySelector
+    ? options.root.querySelector(options.emptySelector)
+    : null;
+  const searchAttrs = options.searchAttrs ?? [];
   const chips = Array.from(options.root.querySelectorAll('.recog-chip'));
 
   let activeFilter = 'all';
@@ -31,7 +40,7 @@ export function initRecogGrid(options: RecogGridOptions): void {
     let visible = 0;
     for (const card of cards) {
       const filterValue = card.getAttribute(options.filterAttr) || '';
-      const haystack = options.searchAttrs
+      const haystack = searchAttrs
         .map((attr) => card.getAttribute(attr))
         .join(' ')
         .toLowerCase();

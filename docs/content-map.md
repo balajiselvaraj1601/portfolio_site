@@ -45,5 +45,6 @@ Traceability from the source resume to the portfolio content layer. Source:
 ## Related docs
 
 - [Content editing](./content-editing.md) — how to edit derived files
+- [Case study & experience info standard](./case-study-experience-info-standard.md) — ideal field set + format rules for the two flagship sections
 - [content/README.md](../content/README.md) — curation rules
 - [Requirements](./requirements.md) — privacy acceptance criteria

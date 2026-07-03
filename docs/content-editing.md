@@ -38,6 +38,9 @@ If the change affects page structure, section order, or the overall narrative, u
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
 
+Ideal field set + format rules for the Experience and Flagship case study items:
+[Case study & experience info standard](./case-study-experience-info-standard.md).
+
 ### Draft / shelved content
 
 Content under `content/drafts/` is **not wired to the live site**. Currently shelved:
