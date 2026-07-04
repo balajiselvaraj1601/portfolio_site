@@ -1,6 +1,11 @@
 ---
 import type { IconName } from '@lib/icons';
-import { iconBody, iconPixelSize, isFilledIcon } from '@lib/icon-render';
+import {
+  iconBody,
+  iconPixelSize,
+  isFilledIcon,
+  isBrandMonoIcon,
+} from '@lib/icon-render';
 import type { IconSizeToken } from '@lib/icon-render';
 
 // Inline SVG from src/lib/icon-paths.json — inherits currentColor for tinting.
@@ -15,6 +20,7 @@ interface Props {
 const { name, label, size = 'md', class: cls } = Astro.props;
 const px = iconPixelSize(size);
 const filled = isFilledIcon(name);
+const brandMono = isBrandMonoIcon(name);
 const body = iconBody(name);
 ---
 
@@ -28,7 +34,7 @@ const body = iconBody(name);
   stroke-width={filled ? undefined : '1.8'}
   stroke-linecap="round"
   stroke-linejoin="round"
-  class:list={['icon', cls]}
+  class:list={['icon', brandMono && 'icon--brand', cls]}
   aria-hidden={label ? undefined : 'true'}
   role={label ? 'img' : undefined}
   aria-label={label}
@@ -41,5 +47,10 @@ const body = iconBody(name);
     display: inline-block;
     vertical-align: middle;
     flex-shrink: 0;
+  }
+  /* Official monochrome brand marks render in neutral per-background ink,
+     ignoring the surrounding context color. */
+  .icon--brand {
+    color: var(--brand-mark);
   }
 </style>

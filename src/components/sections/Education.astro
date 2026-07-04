@@ -1,6 +1,7 @@
 ---
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import EntityLink from '@components/ui/EntityLink.astro';
 import CardMark from '@components/ui/CardMark.astro';
 import { education, getEntityUrl, logoSrc, site } from '@lib/content';
@@ -26,6 +27,7 @@ const achievementLines = [record.achievement, record.achievementDetail].filter(
 
 type StatCell = {
   icon: IconName;
+  img: string;
   label: string;
   value?: string;
   lines?: string[];
@@ -36,16 +38,23 @@ type StatCell = {
 const stats: StatCell[] = [
   {
     icon: 'institution',
+    img: 'logo_education_institution',
     label: 'Institution',
     value: record.institution,
     href: entityUrl,
     linkLabel: record.institution,
   },
-  { icon: 'calendar', label: 'Period', value: record.period },
+  {
+    icon: 'calendar',
+    img: 'logo_education_calendar',
+    label: 'Period',
+    value: record.period,
+  },
   ...(record.gpa
     ? [
         {
           icon: 'chart' as IconName,
+          img: 'logo_education_cgpa',
           label: 'GPA',
           value: formatGpa(record.gpa)!,
         },
@@ -55,6 +64,7 @@ const stats: StatCell[] = [
     ? [
         {
           icon: 'trophy' as IconName,
+          img: 'logo_education_medal',
           label: 'Achievement',
           lines: achievementLines,
         },
@@ -97,7 +107,11 @@ const stats: StatCell[] = [
                   class="icon-tile icon-tile--recog icon-tile--accented edu-stat__icon"
                   aria-hidden="true"
                 >
-                  <Icon name={s.icon} size={18} />
+                  {logoSrc(s.img) ? (
+                    <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
+                  ) : (
+                    <Icon name={s.icon} size={18} />
+                  )}
                 </span>
                 <div class="edu-stat__copy">
                   <dt class="recog-label">{s.label}</dt>
@@ -130,7 +144,11 @@ const stats: StatCell[] = [
                 class="icon-tile icon-tile--recog icon-tile--accented edu-highlight__icon"
                 aria-hidden="true"
               >
-                <Icon name="trophy" size={20} />
+                {logoSrc('logo_education_medal') ? (
+                  <MarkEmblem mark={{ kind: 'logo', asset: 'logo_education_medal' }} />
+                ) : (
+                  <Icon name="trophy" size={20} />
+                )}
               </span>
               <p class="edu-highlight__text">{record.summary}</p>
             </div>

@@ -5,17 +5,22 @@
 
 ## Items
 
-| Item (section id)  | Source                         | Question          | Weight |
-| ------------------ | ------------------------------ | ----------------- | ------ |
-| `experience-intro` | `content/work/experience.json` | What is this?     | medium |
-| `experience`       | `content/work/experience.json` | How does it work? | heavy  |
+| Item (section id) | Source                         | Question                          | Weight |
+| ----------------- | ------------------------------ | --------------------------------- | ------ |
+| `experience`      | `content/work/experience.json` | What is this? / How does it work? | heavy  |
 
 ## Structure
 
-`experience-intro` → `experience`
-
-The interactive career timeline lives inside the `experience` section (tabbed role rail + detail
-panels). The view orients the visitor, expands into role-level evidence, and preserves bullet tiers.
+Single `experience` section; the section header carries the view intro (eyebrow **Career**,
+title, intro subtitle). The interactive career timeline follows, stacked top to bottom:
+a horizontal timeline bar (one `role="tab"` stop per role — marker on a gradient line, period +
+short org label; current role selected by default, arrow-key navigable), then the focused role's
+company block (`card` shell: logo, position, org link, period/location, blurb, tech chips), then
+a project selector chip row (site-standard `recog-chip` filter buttons with an **All** default,
+skipped for single-project roles, wired through the shared `initRecogGrid` behaviour), then the
+role's projects as flagship-style boxes (`card card-accent` shell) with every bullet visible.
+Bullet tiers are preserved. Without JS the timeline bar is hidden and all role panels render
+stacked and fully expanded.
 Strategic impact lives in the **Vision** view (`impact` section); the contact CTA is the dedicated
 **Contact** view.
 

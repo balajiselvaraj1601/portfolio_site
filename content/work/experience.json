@@ -1,19 +1,11 @@
 {
   "title": "Experience",
   "intro": "12+ years of experience building and leading production AI across drug safety, oncology, and clinical imaging — translating executive-sponsored research into measurable, multimillion-dollar business outcomes.",
-  "headline": "Building AI at the frontier of medicine",
-  "headlineHighlight": "frontier",
-  "snapshot": [
-    { "value": "12+", "label": "Years across AI & medical imaging", "icon": "chart" },
-    { "value": "6", "label": "Roles · 4 organizations", "icon": "team" },
-    { "value": "$20–50M", "label": "Projected annual impact", "icon": "funding" },
-    { "value": "12", "label": "Engineers led at peak", "icon": "team" },
-    { "value": "Top 0.3%", "label": "Kaggle global rank", "icon": "trophy" }
-  ],
   "roles": [
     {
       "position": "Senior Deep Learning Engineer / AI Associate Principal",
       "organization": "AstraZeneca, Sweden",
+      "orgShort": "AstraZeneca · Sweden",
       "blurb": "Leads production AI across drug-safety, oncology, and clinical-imaging programs.",
       "tech": [
         "Multimodal AI",
@@ -122,6 +114,7 @@
     {
       "position": "Senior Consultant Level 2",
       "organization": "AstraZeneca, India",
+      "orgShort": "AstraZeneca · India",
       "blurb": "Delivered a CT tumor-segmentation pipeline that beat state-of-the-art and secured follow-on funding.",
       "tech": [
         "CT Segmentation",
@@ -169,6 +162,7 @@
     {
       "position": "Senior Consultant Level 1",
       "organization": "AstraZeneca, India",
+      "orgShort": "AstraZeneca · India",
       "blurb": "Built AWS foundation-model and graph-neural-network platforms for digital pathology and clinical imaging.",
       "tech": [
         "Contrastive Learning",
@@ -185,6 +179,7 @@
       "projects": [
         {
           "name": "Foundation Models for Digital Pathology",
+          "shortName": "Foundation Models",
           "icon": "microscope",
           "bullets": [
             {
@@ -215,6 +210,7 @@
         },
         {
           "name": "Graph Neural Networks & Clinical Imaging",
+          "shortName": "Graph Neural Networks",
           "icon": "graph",
           "bullets": [
             {
@@ -311,6 +307,7 @@
     {
       "position": "Project Associate",
       "organization": "HTIC & ICSR, IIT Madras, India",
+      "orgShort": "IIT Madras",
       "blurb": "Developed real-time clinical imaging systems spanning endoscopy, retinal imaging, and 3D neuroanatomy.",
       "tech": [
         "Real-time Imaging",
@@ -373,6 +370,7 @@
         },
         {
           "name": "Ultrasound-Guided Robotic Navigation",
+          "shortName": "Robotic Navigation",
           "icon": "target",
           "bullets": [
             {
@@ -397,6 +395,7 @@
     {
       "position": "Clinical Application Engineer",
       "organization": "Healthware Pvt Ltd, India",
+      "orgShort": "Healthware",
       "blurb": "Bridged clinical, engineering, and commercial teams across 50+ hospital sites to drive medical-imaging adoption.",
       "tech": [
         "Clinical Imaging Systems",

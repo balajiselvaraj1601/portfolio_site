@@ -1,16 +1,19 @@
 ---
 import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import RecogCardShell from '@components/ui/RecogCardShell.astro';
 import { competitionIcon, resolveIcon } from '@lib/icons';
 import type { IconName } from '@lib/icons';
 import type { KaggleCompetition } from '@schemas';
 import { medalClass } from '@lib/recognition';
+import { logoSrc } from '@lib/content';
 
 type Props = KaggleCompetition;
 
 const {
   id,
   icon,
+  logo,
   name,
   url,
   role,
@@ -34,15 +37,52 @@ const totalEntrants = stats?.entrants;
 const medalCls = medalClass(medal);
 
 // Fixed stat row mirroring the reference layout. Entries with no value drop out.
-const stats6: { icon: IconName; label: string; value?: string }[] = [
-  { icon: 'target', label: 'Role', value: role },
-  { icon: 'trophy', label: 'Medal', value: medal },
-  { icon: 'chart', label: 'Rank', value: rank },
-  { icon: 'diamond', label: 'Percentile', value: percentile },
-  { icon: 'calendar', label: 'Period', value: period },
-  { icon: 'team', label: 'Total Entrants', value: totalEntrants },
-];
+// img slugs are logo_metric_kaggle_* (pipeline SVGs for MarkEmblem tinting — D5/TC2).
+// Icon fallback covers the gap while SVG assets are generated (BC5).
+const stats6: { icon: IconName; img: string; label: string; value?: string }[] =
+  [
+    {
+      icon: 'target',
+      img: 'logo_metric_kaggle_role',
+      label: 'Role',
+      value: role,
+    },
+    {
+      icon: 'trophy',
+      img: 'logo_metric_kaggle_medal',
+      label: 'Medal',
+      value: medal,
+    },
+    {
+      icon: 'chart',
+      img: 'logo_metric_kaggle_rank',
+      label: 'Rank',
+      value: rank,
+    },
+    {
+      icon: 'diamond',
+      img: 'logo_metric_kaggle_percentile',
+      label: 'Percentile',
+      value: percentile,
+    },
+    {
+      icon: 'calendar',
+      img: 'logo_metric_kaggle_time_period',
+      label: 'Period',
+      value: period,
+    },
+    {
+      icon: 'team',
+      img: 'logo_metric_kaggle_entrants',
+      label: 'Total Entrants',
+      value: totalEntrants,
+    },
+  ];
 const visibleStats = stats6.filter((s) => s.value);
+
+// Slugs for summary/eval block icons (logo_* → MarkEmblem; Icon fallback per BC5).
+const summarySlug = 'logo_metric_kaggle_summary';
+const evalSlug = 'logo_metric_kaggle_evaluation';
 ---
 
 <RecogCardShell
@@ -54,7 +94,18 @@ const visibleStats = stats6.filter((s) => s.value);
 >
   <Fragment slot="headTop">
     <div class="icon-tile icon-tile--accented" aria-hidden="true">
-      <Icon name={headerIcon} size="lg" />
+      {
+        /* logo_* slugs are pipeline SVGs → MarkEmblem (medal-tinted glyph, D5).
+           Non-logo_* slugs are org PNG rasters → .comp-image cover-fill.
+           Neither resolves → Lucide <Icon> fallback (BC5). */
+        logo && logo.startsWith('logo_') && logoSrc(logo) ? (
+          <MarkEmblem mark={{ kind: 'logo', asset: logo }} />
+        ) : logo && logoSrc(logo) ? (
+          <img src={logoSrc(logo)} alt="" class="comp-image" />
+        ) : (
+          <Icon name={headerIcon} size="lg" />
+        )
+      }
     </div>
   </Fragment>
   <h3 slot="title" class="recog-title recog-clamp" style="--clamp: 2">
@@ -68,7 +119,13 @@ const visibleStats = stats6.filter((s) => s.value);
       visibleStats.map((s) => (
         <div class="blob-stat">
           <span class="blob-stat__icon" aria-hidden="true">
-            <Icon name={s.icon} size="sm" />
+            {logoSrc(s.img) ? (
+              <span class="blob-icon--md">
+                <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
+              </span>
+            ) : (
+              <Icon name={s.icon} size="sm" />
+            )}
           </span>
           <dt class="recog-label">{s.label}</dt>
           <dd class="recog-value">{s.value}</dd>
@@ -82,7 +139,13 @@ const visibleStats = stats6.filter((s) => s.value);
       <div class="blob-block">
         <div class="blob-block__head">
           <span class="blob-block__icon" aria-hidden="true">
-            <Icon name="target" size={16} />
+            {logoSrc(summarySlug) ? (
+              <span class="blob-icon--sm">
+                <MarkEmblem mark={{ kind: 'logo', asset: summarySlug }} />
+              </span>
+            ) : (
+              <Icon name="target" size={16} />
+            )}
           </span>
           <span class="blob-block__label recog-label">Summary</span>
         </div>
@@ -99,7 +162,13 @@ const visibleStats = stats6.filter((s) => s.value);
         <div class="blob-block blob-block--eval">
           <div class="blob-block__head">
             <span class="blob-block__icon" aria-hidden="true">
-              <Icon name="pulse" size={16} />
+              {logoSrc(evalSlug) ? (
+                <span class="blob-icon--sm">
+                  <MarkEmblem mark={{ kind: 'logo', asset: evalSlug }} />
+                </span>
+              ) : (
+                <Icon name="pulse" size={16} />
+              )}
             </span>
             <span class="blob-block__label recog-label">Evaluation Metric</span>
           </div>
@@ -111,6 +180,13 @@ const visibleStats = stats6.filter((s) => s.value);
 </RecogCardShell>
 
 <style>
+  .comp-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: inherit;
+  }
+
   /* Medal accent — drives border, icon tint, and stat dividers. Maps to the
      shared --medal-* tokens (theme tuning lives once in global.css). */
   .blob--silver {
@@ -150,6 +226,25 @@ const visibleStats = stats6.filter((s) => s.value);
   .blob-stat__icon {
     color: var(--medal);
     display: flex;
+  }
+  /* Sized wrappers for MarkEmblem in bare-span icon contexts (TC2 binding sizes).
+     MarkEmblem's own width:100%/height:100% fills these fixed containers. */
+  .blob-icon--md {
+    width: var(--icon-md); /* 20px — .blob-stat__icon primary stats (TC2) */
+    height: var(--icon-md);
+    display: flex;
+    flex-shrink: 0;
+  }
+  .blob-icon--sm {
+    width: var(--icon-sm); /* 16px — .blob-block__icon summary/eval (TC2) */
+    height: var(--icon-sm);
+    display: flex;
+    flex-shrink: 0;
+  }
+  /* Size MarkEmblem to --mark-glyph in the card header .icon-tile (D5). */
+  .icon-tile :global(.mark-emblem) {
+    width: var(--mark-glyph);
+    height: var(--mark-glyph);
   }
   .blob-stat dd {
     margin: 0;

@@ -3,6 +3,7 @@ import { z } from 'zod';
 /** Semantic icon keys rendered by `Icon.astro`. */
 export const iconNameSchema = z.enum([
   'email',
+  'gmail',
   'linkedin',
   'kaggle',
   'github',

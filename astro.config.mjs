@@ -14,7 +14,6 @@ const SITE_URL = 'https://balajiselvaraj1601.github.io';
 const REDIRECT_STUB_PATHS = [
   '/contact',
   '/experience',
-  '/projects',
   '/research',
   '/recognition',
   '/vision',

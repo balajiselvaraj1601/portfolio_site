@@ -4,6 +4,7 @@ import CompetitionCard from '@components/cards/CompetitionCard.astro';
 import RecogControls from '@components/ui/RecogControls.astro';
 import RecogTile from '@components/ui/RecogTile.astro';
 import { kaggle, site } from '@lib/content';
+
 import { MEDALS, medalClass } from '@lib/recognition';
 
 // Presentation order = impact: best percentile first. Parse the number out of
@@ -31,12 +32,14 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
     <RecogTile
       class="blob--silver"
       icon="trophy"
+      markSlug="logo_trophy_badge"
       count={silver}
       label="Silver"
     />
     <RecogTile
       class="blob--bronze"
       icon="trophy"
+      markSlug="logo_trophy_badge"
       count={bronze}
       label="Bronze"
     />

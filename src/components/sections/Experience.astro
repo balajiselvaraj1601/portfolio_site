@@ -1,11 +1,10 @@
 ---
 import Section from '@components/ui/Section.astro';
-import ProjectAccordion from '@components/cards/ProjectAccordion.astro';
+import XpProjectCard from '@components/cards/XpProjectCard.astro';
 import CardMark from '@components/ui/CardMark.astro';
 import Chip from '@components/ui/Chip.astro';
 import EntityLink from '@components/ui/EntityLink.astro';
-import SectionHeading from '@components/ui/SectionHeading.astro';
-import { experience, getEntityUrl, logoSrc } from '@lib/content';
+import { experience, getEntityUrl, logoSrc, site } from '@lib/content';
 import { logoUsesBadge } from '@lib/logo-display';
 
 function periodLabel(p: {
@@ -17,141 +16,282 @@ function periodLabel(p: {
   return end ? `${p.start} – ${end}` : p.start;
 }
 
-const headline = experience.headline ?? experience.title;
+/** Fallback stop label when a role has no authored orgShort (full name lives in the company block). */
+function orgShortFallback(organization: string) {
+  return organization.split(',')[0];
+}
 ---
 
 <Section
   id="experience"
-  title=""
-  hideTitle
-  labelledBy="experience-heading"
-  variant="alt"
-  class="section--compact-top"
+  title={experience.title}
+  eyebrow={site.sections.experience.eyebrow}
+  subtitle={experience.intro}
+  variant="default"
 >
-  <div class="section-header">
-    <SectionHeading
-      title={headline}
-      highlight={experience.headlineHighlight}
-      class="section__title"
-      id="experience-heading"
-    />
+  <div class="xp-timebar reveal">
+    <div
+      class="xp-timebar__track"
+      role="tablist"
+      aria-label="Career timeline"
+      data-xp-timebar
+    >
+      {
+        experience.roles.map((role, i) => (
+          <button
+            type="button"
+            role="tab"
+            id={`xp-tab-${role.id}`}
+            class:list={['xp-stop', { 'is-active': i === 0 }]}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            aria-controls={`xp-${role.id}`}
+            tabindex={i === 0 ? 0 : -1}
+            data-xp-tab
+          >
+            <span class="xp-stop__marker" aria-hidden="true" />
+            <span class="xp-stop__period">{periodLabel(role.period)}</span>
+            <span class="xp-stop__org">
+              {role.orgShort ?? orgShortFallback(role.organization)}
+            </span>
+          </button>
+        ))
+      }
+    </div>
   </div>
-  <ol class="xp-stack" aria-label="Career timeline">
+
+  <div class="xp-panels reveal">
     {
       experience.roles.map((role, i) => (
-        <li class:list={['xp-role', 'reveal']}>
-          <div
-            class:list={['xp-marker', { 'is-current': i === 0 }]}
-            aria-hidden="true"
-          />
-          <article>
-            <header class="xp-head">
+        <div
+          class:list={['xp-panel', { 'is-active': i === 0 }]}
+          id={`xp-${role.id}`}
+          role="tabpanel"
+          aria-labelledby={`xp-tab-${role.id}`}
+          data-xp-panel
+        >
+          <article class="xp-company card">
+            <header class="xp-company__head">
               {logoSrc(role.entity) && (
                 <CardMark
                   slug={role.entity}
                   logoUrl={logoSrc(role.entity)}
-                  altText={`${role.organization} logo`}
+                  altText=""
                   useBadge={logoUsesBadge(role.entity)}
+                  logoSize="lg"
                 />
               )}
-              <p class="xp-meta">
-                {periodLabel(role.period)}
-                {role.location && (
-                  <>
-                    <span class="xp-meta__sep" aria-hidden="true">
-                      ·
-                    </span>
-                    {role.location}
-                  </>
-                )}
-              </p>
-              <h3 class="xp-title">{role.position}</h3>
-              <p class="xp-org">
-                <EntityLink
-                  href={getEntityUrl(role.entity)}
-                  label={role.organization}
-                />
-              </p>
-              {role.blurb && <p class="xp-blurb">{role.blurb}</p>}
-              {role.tech && role.tech.length > 0 && (
-                <div class="xp-tech">
-                  {role.tech.map((t) => (
-                    <Chip>{t}</Chip>
-                  ))}
-                </div>
-              )}
+              <div class="xp-company__titles">
+                <p class="xp-meta">
+                  {periodLabel(role.period)}
+                  {role.location && (
+                    <>
+                      <span class="xp-meta__sep" aria-hidden="true">
+                        ·
+                      </span>
+                      {role.location}
+                    </>
+                  )}
+                </p>
+                <h3 class="xp-title">{role.position}</h3>
+                <p class="xp-org">
+                  <EntityLink
+                    href={getEntityUrl(role.entity)}
+                    label={role.organization}
+                  />
+                </p>
+              </div>
             </header>
-            <div class="xp-projects">
-              {role.projects.map((project) => (
-                <ProjectAccordion
-                  name={project.name}
-                  subtitle={project.subtitle}
-                  icon={project.icon}
-                  bullets={project.bullets}
-                />
+            {role.blurb && <p class="xp-blurb">{role.blurb}</p>}
+            {role.tech && role.tech.length > 0 && (
+              <div class="xp-tech">
+                {role.tech.map((t) => (
+                  <Chip>{t}</Chip>
+                ))}
+              </div>
+            )}
+          </article>
+
+          {role.projects.length > 1 && (
+            <div
+              class="recog-filters xp-filters"
+              role="group"
+              aria-label={`Filter projects — ${role.position}`}
+            >
+              <button
+                type="button"
+                class="recog-chip is-active"
+                data-filter="all"
+                aria-pressed="true"
+              >
+                All
+              </button>
+              {role.projects.map((project, j) => (
+                <button
+                  type="button"
+                  class="recog-chip"
+                  data-filter={`p${j + 1}`}
+                  aria-pressed="false"
+                >
+                  {project.shortName ?? project.name}
+                </button>
               ))}
             </div>
-          </article>
-        </li>
+          )}
+
+          <div class="xp-projects" data-xp-projects>
+            {role.projects.map((project, j) => (
+              <XpProjectCard
+                id={`xp-${role.id}-p${j + 1}`}
+                data-project={`p${j + 1}`}
+                name={project.name}
+                subtitle={project.subtitle}
+                icon={project.icon}
+                bullets={project.bullets}
+              />
+            ))}
+          </div>
+        </div>
       ))
     }
-  </ol>
+  </div>
 </Section>
 
 <style>
-  .xp-stack {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  /* ---- Horizontal timeline bar (role selector; JS-only control) ---- */
+  .xp-timebar {
+    overflow-x: auto;
+    margin-bottom: var(--stack-sm);
+  }
+  :global(html:not(.js)) .xp-timebar {
+    display: none;
+  }
+  .xp-timebar__track {
     position: relative;
     display: flex;
-    flex-direction: column;
-    gap: var(--stack-xl);
-    max-width: 760px;
+    min-width: max-content;
+    width: 100%;
   }
-  .xp-stack::before {
+  /* Continuous line through the markers — same gradient language as the
+     old vertical rail (accent = present, fading toward the past). */
+  .xp-timebar__track::before {
     content: '';
     position: absolute;
-    left: var(--space-2);
-    top: var(--space-2);
-    bottom: var(--space-2);
-    width: 2px;
+    top: calc(var(--space-4) / 2);
+    left: 0;
+    right: 0;
+    height: 2px;
     background: linear-gradient(
-      to bottom,
+      to right,
       var(--accent),
       var(--accent-red),
       transparent
     );
   }
-  .xp-role {
+  .xp-stop {
     position: relative;
-    padding-left: var(--space-10);
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+    background: none;
+    border: 0;
+    padding: 0 var(--space-4) var(--space-2);
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    white-space: nowrap;
   }
-  .xp-marker {
-    position: absolute;
-    left: 0;
-    top: var(--space-1);
-    width: var(--space-5);
-    height: var(--space-5);
+  .xp-stop:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+  .xp-stop__marker {
+    width: var(--space-4);
+    height: var(--space-4);
     border-radius: 50%;
     background: var(--bg);
     border: 2px solid var(--accent);
+    transition: background var(--dur) var(--ease);
   }
-  .xp-marker.is-current {
+  .xp-stop.is-active .xp-stop__marker {
     background: var(--accent);
   }
-  .xp-head {
+  .xp-stop__period {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-caps);
+    color: var(--text-muted);
+    transition: color var(--dur) var(--ease);
+  }
+  .xp-stop:hover .xp-stop__period {
+    color: var(--text);
+  }
+  .xp-stop.is-active .xp-stop__period {
+    color: var(--accent-light);
+  }
+  .xp-stop__org {
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+  }
+  .xp-stop.is-active .xp-stop__org {
+    color: var(--heading);
+  }
+
+  /* ---- Role panels: one visible with JS, all stacked without ---- */
+  .xp-panels {
     display: flex;
     flex-direction: column;
-    gap: var(--text-gap-inline);
-    margin-bottom: var(--stack-sm);
+    gap: var(--stack-lg);
+  }
+  .xp-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--stack-sm);
+  }
+  :global(html.js) .xp-panel:not(.is-active) {
+    display: none;
+  }
+  :global(html.js) .xp-panel.is-active {
+    animation: xp-panel-in var(--dur-slow) var(--ease);
+  }
+  @keyframes xp-panel-in {
+    from {
+      opacity: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    :global(html.js) .xp-panel.is-active {
+      animation: none;
+    }
+  }
+
+  /* ---- Company block ---- */
+  .xp-company {
+    padding: var(--card-padding-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+  .xp-company__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-5);
+  }
+  .xp-company__titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
+    min-width: 0;
   }
   .xp-meta {
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
     letter-spacing: var(--tracking-caps);
-    color: var(--accent-light);
+    color: var(--accent-ll);
     display: flex;
+    flex-wrap: wrap;
     gap: var(--space-2);
     margin: 0;
   }
@@ -162,6 +302,7 @@ const headline = experience.headline ?? experience.title;
   .xp-title {
     font-size: var(--fs-xxl);
     font-weight: var(--fw-bold);
+    color: var(--heading);
     margin: 0;
   }
   .xp-org {
@@ -180,16 +321,33 @@ const headline = experience.headline ?? experience.title;
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);
-    margin-top: var(--text-gap-pair);
+  }
+
+  /* ---- Project selector + boxes ---- */
+  .xp-filters {
+    margin-top: var(--space-2);
   }
   .xp-projects {
     display: flex;
     flex-direction: column;
     gap: var(--stack-sm);
   }
-  @media (max-width: 560px) {
-    .xp-role {
-      padding-left: var(--space-8);
+
+  @media (max-width: 600px) {
+    .xp-company {
+      padding: var(--card-padding);
+    }
+    .xp-company__head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-4);
     }
   }
 </style>
+
+<script>
+  import { initXpTimeline } from '../../scripts/xp-timeline';
+
+  const root = document.getElementById('experience');
+  if (root) initXpTimeline({ root });
+</script>

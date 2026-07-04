@@ -30,10 +30,10 @@ content/**/*.json
 ## Page structure
 
 The site is a **single-page home** (`/`) that renders every section once. Header nav
-activates **views** (About, Experience, Projects, Research, Recognition, Vision,
+activates **views** (About, Experience, Research, Recognition, Vision,
 Contact) via scroll targets and scroll-spy — there is no per-route page for content.
 
-Legacy paths (`/experience`, `/projects`, `/research`, `/recognition`, `/vision`,
+Legacy paths (`/experience`, `/research`, `/recognition`, `/vision`,
 `/contact`) are one-line stubs in `src/pages/*.astro` that render
 `<ViewRedirect anchor="…" />` (`src/components/ViewRedirect.astro`), sending the
 browser to `/#{anchor}` on `/`. The anchor is the page **id** (e.g.
@@ -62,33 +62,32 @@ Section contracts: `docs/specification.md` and `docs/page-briefs/`.
 
 ```text
 /              About (home)     → all sections; default view shows About subset
-/#experience   Experience view  → experience-intro, experience
-/#projects     Projects view    → projects-intro, featured-case-studies
+/#experience   Experience view  → experience
 /#research     Research view    → publications, conferences, speakers
 /#recognition  Recognition view → awards, kaggle, education
-/#vision       Vision view      → vision-board
+/#vision       Vision view      → vision-programs, vision-impact
 /#contact      Contact view     → contact
 /experience … /contact         → ViewRedirect stubs → /#{anchor}
 ```
 
-| View            | Page id       | Nav label   | `viewSections`                        |
-| --------------- | ------------- | ----------- | ------------------------------------- |
-| `/` (default)   | `home`        | About       | hero, thirukural, leadership          |
-| `/#experience`  | `experience`  | Experience  | experience-intro, experience          |
-| `/#projects`    | `projects`    | Projects    | projects-intro, featured-case-studies |
-| `/#research`    | `research`    | Research    | publications, conferences, speakers   |
-| `/#recognition` | `recognition` | Recognition | awards, kaggle, education             |
-| `/#vision`      | `vision`      | Vision      | vision-board                          |
-| `/#contact`     | `contact`     | Contact     | contact                               |
+| View            | Page id       | Nav label   | `viewSections`                      |
+| --------------- | ------------- | ----------- | ----------------------------------- |
+| `/` (default)   | `home`        | About       | hero, thirukural, leadership        |
+| `/#experience`  | `experience`  | Experience  | experience                          |
+| `/#research`    | `research`    | Research    | publications, conferences, speakers |
+| `/#recognition` | `recognition` | Recognition | awards, kaggle, education           |
+| `/#vision`      | `vision`      | Vision      | vision-programs, vision-impact      |
+| `/#contact`     | `contact`     | Contact     | contact                             |
 
-**Full home DOM order** (15 sections): hero → thirukural → leadership →
-experience-intro → experience → projects-intro → featured-case-studies →
+**Full home DOM order** (12 sections): hero → thirukural → leadership →
+experience →
 publications → conferences → speakers → awards → kaggle → education →
-vision-board → contact.
+vision-programs → vision-impact → contact.
 
-**Shelved (not live):** `technical-vision`, `impact`, `generative-ai`, and the full
-`projects` catalogue section remain in the component registry and content layer but are
-not in `home.sections` (or have `visible: false`). See `docs/content-editing.md`.
+**Shelved (not live):** `featured-case-studies` (Projects view), `technical-vision`,
+`impact`, `generative-ai`, and the full `projects` catalogue. Archived under `_shelved/`
+(`FeaturedCaseStudies.astro`, `ProjectCaseStudyCard.astro`, `PipelineStrip.astro`,
+`content/work/projects.json`). See `docs/content-editing.md`.
 
 **Résumé PDF:** `public/assets/resume/balaji-selvaraj-resume.pdf` ships as a static asset
 (direct-linkable) but is **not** wired in header nav or `content/site.json`.
@@ -143,15 +142,15 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 
 ### Page Representatives (Haiku, view-scoped edit)
 
-| Agent              | View           | Sections                                     | Trigger                               |
-| ------------------ | -------------- | -------------------------------------------- | ------------------------------------- |
-| `page-about`       | `home` (About) | hero, thirukural, leadership                 | Orchestrator, or `"about view"`       |
-| `page-experience`  | `#experience`  | experience-intro, experience                 | Orchestrator, or `"experience view"`  |
-| `page-projects`    | `#projects`    | projects-intro, featured-case-studies        | Orchestrator, or `"projects view"`    |
-| `page-research`    | `#research`    | publications, conferences, speakers          | Orchestrator, or `"research view"`    |
-| `page-recognition` | `#recognition` | awards, kaggle, education                    | Orchestrator, or `"recognition view"` |
-| `page-vision`      | `#vision`      | vision-intro, vision-programs, vision-impact | Orchestrator, or `"vision view"`      |
-| `page-contact`     | `#contact`     | contact                                      | Orchestrator, or `"contact view"`     |
+| Agent              | View           | Sections                            | Trigger                               |
+| ------------------ | -------------- | ----------------------------------- | ------------------------------------- |
+| `page-about`       | `home` (About) | hero, thirukural, leadership        | Orchestrator, or `"about view"`       |
+| `page-experience`  | `#experience`  | experience                          | Orchestrator, or `"experience view"`  |
+| `page-projects`    | _(shelved)_    | —                                   | Restore from `_shelved/` only         |
+| `page-research`    | `#research`    | publications, conferences, speakers | Orchestrator, or `"research view"`    |
+| `page-recognition` | `#recognition` | awards, kaggle, education           | Orchestrator, or `"recognition view"` |
+| `page-vision`      | `#vision`      | vision-programs, vision-impact      | Orchestrator, or `"vision view"`      |
+| `page-contact`     | `#contact`     | contact                             | Orchestrator, or `"contact view"`     |
 
 ### Skills (Reusable, invoked by agents)
 
@@ -161,6 +160,96 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 | `page-consistency-team` | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md` |
 | `portfolio-icon-audit`  | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`  |
 | `svg-logo-crop`         | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`         |
+
+## Icon / Logo Asset Pipeline
+
+Icons in this site come from two sources. Know which to use before touching any icon:
+
+| Source                       | Format           | Render method                                 | When                                                     |
+| ---------------------------- | ---------------- | --------------------------------------------- | -------------------------------------------------------- |
+| `src/lib/icon-paths.json`    | SVG path data    | `<Icon name="…">` → CSS mask (`currentColor`) | UI icons: trophy, calendar, save, sun, moon…             |
+| `public/assets/logos/<set>/` | PNG / SVG / WebP | `<img>` via `logoSrc(slug)`                   | Brand / decorative images that must keep their own color |
+
+### `logoSrc(slug)` — how it works
+
+Defined in `src/lib/content.ts`. At build time it scans `public/assets/logos/` across every subfolder listed in `LOGO_SUBDIRS`, building a `Map<filename, urlPath>`. At call time it tries `${slug}.png`, `.svg`, `.webp`, `.avif` in that order and returns the first match.
+
+```ts
+const LOGO_SUBDIRS = [
+  'org',
+  'marks',
+  'kaggle',
+  'vision',
+  'education',
+  'general',
+  'awards',
+  '',
+] as const;
+```
+
+**To add a new image set:**
+
+1. Create `public/assets/logos/<set>/` and copy PNGs there.
+2. Add `'<set>'` to `LOGO_SUBDIRS` in `src/lib/content.ts`.
+3. Call `logoSrc('icon_<set>_<name>')` — slug = filename without extension.
+
+### Naming convention
+
+Images sourced from `icon_collections/` follow `icon_<set>_<name>.png`. The `<set>` prefix determines the destination subfolder: `icon_education_*` → `public/assets/logos/education/`, `icon_general_*` → `general/`, `icon_trophy_awards` → `awards/`, etc.
+
+### Image-or-fallback pattern
+
+When replacing a `<Icon>` with a PNG, always keep the SVG fallback so the page degrades gracefully if the asset is missing:
+
+```astro
+const imgSrc = logoSrc('icon_<set>_<name>'
+{
+  imgSrc ? (
+    <img src={imgSrc} alt="" class="my-img" aria-hidden="true" />
+  ) : (
+    <Icon name="<icon-name>" size={22} />
+  )
+}
+```
+
+CSS size the `<img>` to match the Icon pixel size — `size={22}` = `1.375rem`, `size={20}` = `1.25rem`, `size="sm"` = `1rem`.
+
+### CSS mask vs `<img>`
+
+- `<Icon>` renders as an SVG with CSS `mask-image`. It strips color — only `currentColor` shows. **Never use `<Icon>` for a full-color PNG.**
+- `logoSrc` images must render as `<img style="object-fit: contain">`. They are not masked.
+- `logoHasOwnRing(slug)` in `src/lib/logo-display.ts` returns `true` only when slug starts with `logo_` (pipeline SVG marks). Icon-set PNGs (`icon_*`) return `false`.
+
+### Theme-toggle show/hide classes
+
+The header theme toggle hides one icon via CSS `display: none` keyed on `.theme-toggle__sun` / `.theme-toggle__moon`. These classes **must live on the rendered element** — whether `<img>` or `<Icon>`. When replacing with an `<img>`, pass the class explicitly:
+
+```astro
+<img
+  src={sunImgSrc}
+  alt=""
+  class="header-icon theme-toggle__sun"
+  aria-hidden="true"
+/>
+```
+
+### `save-btn` aria-busy rule
+
+When the save button is loading, CSS sets `opacity: 0` on its child icon. After replacing `<Icon>` with `<img>`, the selector must cover both:
+
+```css
+.save-btn[aria-busy='true'] :is(svg, img) {
+  opacity: 0;
+}
+```
+
+### Extending `RecogTile` with an image
+
+`RecogTile.astro` accepts an optional `imgSrc?: string` prop. When provided it renders `<img>` instead of `<Icon name={icon}>`. The `icon` prop is still required (used as fallback). Pass both:
+
+```astro
+<RecogTile icon="trophy" imgSrc={trophyImgSrc} count={n} label="Silver" />
+```
 
 ## Documentation
 

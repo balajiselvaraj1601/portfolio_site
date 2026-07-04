@@ -30,12 +30,6 @@ const SHOTS = [
   { file: 'kaggle.png', hash: '#recognition', selector: '#kaggle' },
   { file: 'contact_page.png', hash: '#contact', selector: '#contact' },
   {
-    file: 'vision-intro.png',
-    hash: '#vision',
-    selector: '#vision-intro',
-    revealAll: true,
-  },
-  {
     file: 'vision-programs.png',
     hash: '#vision',
     selector: '#vision-programs',
@@ -80,7 +74,6 @@ async function forceReveals(page, rootSelector) {
 async function prepareVisionSection(page) {
   await page.locator('#vision-impact').scrollIntoViewIfNeeded();
   await waitForScrollSettle(page);
-  await forceReveals(page, '#vision-intro');
   await forceReveals(page, '#vision-programs');
   await forceReveals(page, '#vision-impact');
   await page.waitForTimeout(200);

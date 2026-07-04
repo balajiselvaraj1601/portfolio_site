@@ -10,7 +10,6 @@ import {
   profileSchema,
   visionBoardSchema,
   experienceSchema,
-  projectsSchema,
   educationSchema,
   awardsSchema,
   linkListSchema,
@@ -25,7 +24,6 @@ import profileRaw from '@content/person/profile.json';
 import collaborationsRaw from '@content/person/collaborations.json';
 import visionBoardRaw from '@content/work/vision-board.json';
 import experienceRaw from '@content/work/experience.json';
-import projectsRaw from '@content/work/projects.json';
 import publicationsRaw from '@content/research/publications.json';
 import conferencesRaw from '@content/research/conferences.json';
 import speakersRaw from '@content/research/speakers.json';
@@ -61,7 +59,6 @@ export const experience = load(
   experienceSchema,
   experienceRaw
 );
-export const projects = load('work/projects.json', projectsSchema, projectsRaw);
 export const education = load(
   'recognition/education.json',
   educationSchema,
@@ -108,7 +105,16 @@ const repoRoot = path.resolve(
 
 // Scan org/, marks/, and the root fallback in priority order.
 // Maps "filename.ext" → the URL path ("/assets/logos/sub/file") for that asset.
-const LOGO_SUBDIRS = ['org', 'marks', ''] as const;
+const LOGO_SUBDIRS = [
+  'org',
+  'marks',
+  'kaggle',
+  'vision',
+  'education',
+  'general',
+  'awards',
+  '',
+] as const;
 const logoBase = path.join(repoRoot, 'public/assets/logos');
 const logoFiles = new Map<string, string>();
 for (const sub of LOGO_SUBDIRS) {
@@ -249,9 +255,6 @@ function assertEntitySlug(slug: string | undefined, context: string) {
 for (const role of experience.roles) {
   assertEntitySlug(role.entity, 'work/experience.json');
 }
-for (const project of projects.projects) {
-  assertEntitySlug(project.entity, 'work/projects.json');
-}
 for (const item of collaborations.items) {
   assertEntitySlug(item.entity, 'person/collaborations.json');
 }
@@ -303,6 +306,10 @@ for (const list of [publications.items, conferences.items, speakers.items]) {
   for (const item of list) {
     if (item.logo) referencedLogoSlugs.add(item.logo);
   }
+}
+
+for (const item of kaggle.items) {
+  if (item.logo) referencedLogoSlugs.add(item.logo);
 }
 
 for (const slug of referencedLogoSlugs) {

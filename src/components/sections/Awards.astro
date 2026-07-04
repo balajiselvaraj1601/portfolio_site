@@ -1,10 +1,12 @@
 ---
 import Section from '@components/ui/Section.astro';
 import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import RecogCardShell from '@components/ui/RecogCardShell.astro';
 import RecogControls from '@components/ui/RecogControls.astro';
 import RecogTile from '@components/ui/RecogTile.astro';
-import { awards, site } from '@lib/content';
+import { awards, site, logoSrc } from '@lib/content';
+
 import { awardLevelSchema } from '@schemas';
 
 /**
@@ -45,6 +47,7 @@ const total = items.length;
         <RecogTile
           class={`level-${slug(level)}`}
           icon="trophy"
+          markSlug="logo_trophy_badge"
           count={counts[level] ?? 0}
           label={level}
         />
@@ -96,7 +99,11 @@ const total = items.length;
         >
           <Fragment slot="headTop">
             <div class="icon-tile icon-tile--accented" aria-hidden="true">
-              <Icon name="trophy" size={22} />
+              {logoSrc('logo_trophy_badge') ? (
+                <MarkEmblem mark={{ kind: 'logo', asset: 'logo_trophy_badge' }} />
+              ) : (
+                <Icon name="trophy" size={22} />
+              )}
             </div>
             <span class="recog-badge">{a.level}</span>
           </Fragment>

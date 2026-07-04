@@ -6,7 +6,21 @@ const FILLED_ICONS = new Set<IconName>([
   'linkedin',
   'kaggle',
   'github',
+  'gmail',
   'trophy-cup',
+]);
+
+/**
+ * Official monochrome brand marks. Rendered in neutral per-background ink
+ * (--brand-mark) instead of the surrounding context color, so the logo stays
+ * near-black on light backgrounds and near-white on dark. `trophy-cup` is
+ * filled but not a brand, so it is intentionally excluded.
+ */
+const BRAND_MONO_ICONS = new Set<IconName>([
+  'linkedin',
+  'github',
+  'kaggle',
+  'gmail',
 ]);
 
 /**
@@ -25,6 +39,10 @@ export type IconSizeToken = keyof typeof ICON_SIZE_TOKENS;
 
 export function isFilledIcon(name: IconName): boolean {
   return FILLED_ICONS.has(name);
+}
+
+export function isBrandMonoIcon(name: IconName): boolean {
+  return BRAND_MONO_ICONS.has(name);
 }
 
 export function iconPixelSize(size: number | IconSizeToken): number {

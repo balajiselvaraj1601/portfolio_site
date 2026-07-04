@@ -1,18 +1,12 @@
 {
   "header": "AI Leadership & Strategic Impact",
   "intro": "Independently sourced, pitched, and secured two major AI initiatives — one SVP-sponsored saving $20–50M annually, one Chief Scientist-sponsored within a €14M EU consortium.",
-  "snapshot": [
-    { "value": "$20–50M", "label": "Annual savings — Drug Safety Platform", "icon": "funding" },
-    { "value": "€14M", "label": "EU consortium — PERSIST-SEQ", "icon": "globe" },
-    { "value": "1→12", "label": "Team members scaled", "icon": "team" },
-    { "value": "$0.5M+", "label": "Funds secured for the team", "icon": "funding" }
-  ],
   "groups": [
     {
       "id": "idea",
       "label": "IDEA",
       "variant": "purple",
-      "lead": { "kind": "logo", "asset": "kaggle", "alt": "Kaggle" },
+      "lead": { "kind": "icon", "name": "kaggle" },
       "marks": [
         {
           "kind": "logo",
@@ -21,8 +15,8 @@
         },
         {
           "kind": "logo",
-          "asset": "logo_performance_growth",
-          "alt": "Performance / growth"
+          "asset": "logo_global_location",
+          "alt": "Global reach"
         },
         {
           "kind": "logo",
@@ -36,26 +30,46 @@
         },
         {
           "kind": "logo",
-          "asset": "logo_global_analytics",
-          "alt": "Global analytics"
+          "asset": "logo_analytics_dashboard",
+          "alt": "Analytics"
         },
-        { "kind": "logo", "asset": "logo_target_goal", "alt": "Target / goal" }
+        {
+          "kind": "logo",
+          "asset": "logo_target_goal",
+          "alt": "Target / goal"
+        }
       ]
     },
     {
       "id": "vision",
       "label": "VISION",
       "variant": "purple",
-      "lead": { "kind": "logo", "asset": "logo_brain", "alt": "Multimodal AI" },
+      "lead": {
+        "kind": "logo",
+        "asset": "logo_brain",
+        "alt": "Multimodal AI"
+      },
       "marks": [
         {
           "kind": "logo",
           "asset": "logo_document_file",
           "alt": "Document / text"
         },
-        { "kind": "logo", "asset": "logo_grid_table", "alt": "Tabular data" },
-        { "kind": "logo", "asset": "logo_photo_image", "alt": "Image" },
-        { "kind": "logo", "asset": "logo_cube_3d", "alt": "3D / volumetric" },
+        {
+          "kind": "logo",
+          "asset": "logo_grid_table",
+          "alt": "Tabular data"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_photo_image",
+          "alt": "Image"
+        },
+        {
+          "kind": "logo",
+          "asset": "logo_cube_3d",
+          "alt": "3D / volumetric"
+        },
         {
           "kind": "logo",
           "asset": "logo_pulse_activity",
@@ -166,7 +180,7 @@
     {
       "mark": {
         "kind": "logo",
-        "asset": "logo_target_goal_box",
+        "asset": "logo_vision_positioning",
         "alt": "Strategic target"
       },
       "title": "Strategic Team Positioning",

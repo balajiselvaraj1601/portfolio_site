@@ -239,7 +239,6 @@ export type VisionMark = z.infer<typeof VisionMark>;
 export const visionBoardSchema = z.object({
   header: z.string(),
   intro: z.string(),
-  snapshot: z.array(MetricItem).optional(),
   groups: z.array(
     z.object({
       id: z.string(),
@@ -272,14 +271,12 @@ export const visionBoardSchema = z.object({
 export const experienceSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
-  headline: z.string().optional(),
-  headlineHighlight: z.string().optional(),
-  snapshot: z.array(MetricItem).optional(),
   roles: z.array(
     z.object({
       id: z.string(),
       position: z.string(),
       organization: z.string(),
+      orgShort: z.string().optional(),
       entity: EntitySlug,
       location: z.string().optional(),
       blurb: z.string().optional(),
@@ -292,6 +289,7 @@ export const experienceSchema = z.object({
       projects: z.array(
         z.object({
           name: z.string(),
+          shortName: z.string().optional(),
           subtitle: z.string().optional(),
           icon: iconNameSchema.optional(),
           bullets: z.array(
@@ -308,7 +306,7 @@ export const experienceSchema = z.object({
 
 /* ── projects.json ─────────────────────────────────────────────────────── */
 export const projectsSchema = z.object({
-  title: z.string(),
+  title: z.string().optional(),
   note: z.string().optional(),
   intro: z.string().optional(),
   snapshot: z.array(MetricItem).optional(),
@@ -433,6 +431,7 @@ export const kaggleCompetitionSchema = z.object({
   name: z.string(),
   url: z.string().url(),
   icon: iconNameSchema,
+  logo: z.string().optional(),
   year: z.number(),
   period: z.string(),
   role: z.string(),

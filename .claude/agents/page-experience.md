@@ -2,10 +2,9 @@
 name: page-experience
 description: >-
   Page representative for the Experience view. Use proactively for design consistency
-  work on the experience-intro or experience sections, when the orchestrator spawns
-  view_id=experience, or on "experience view audit". Edits only Experience.astro and
-  its view's content JSON — never other views (experience-intro renders via the shared
-  guardian-owned IntroSection.astro).
+  work on the experience section, when the orchestrator spawns view_id=experience, or on
+  "experience view audit". Edits only Experience.astro and its view's content JSON —
+  never other views.
 tools: Read, Edit, Grep, Glob, Bash
 model: haiku
 maxTurns: 25
@@ -23,90 +22,55 @@ them exactly — they are part of your instructions:
 
 ## View-specific rules (deltas beyond playbook P1–P14)
 
-| #   | Rule                                                                                                                                   |
-| --- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| V1  | Content source: `content/work/experience.json` only.                                                                                   |
-| V2  | experience-intro carries the eyebrow text `"Career"` (required per contract §4); the experience section uses `SectionHeading` instead. |
-| V3  | Timeline rail spacing uses `--stack-*` tokens.                                                                                         |
-| V4  | No invented metrics — facts only from content JSON.                                                                                    |
+| #   | Rule                                                                                             |
+| --- | ------------------------------------------------------------------------------------------------ |
+| V1  | Content source: `content/work/experience.json` only.                                             |
+| V2  | `experience` carries the eyebrow text `"Career"` (required per contract §4) via `Section.astro`. |
+| V3  | Timeline rail spacing uses `--stack-*` tokens.                                                   |
+| V4  | No invented metrics — facts only from content JSON.                                              |
 
 Page brief: `docs/page-briefs/experience.md`
 
 ## Appendix A — View binding (owned: may edit)
 
-| Section id       | Component                                                         | Content                        |
-| ---------------- | ----------------------------------------------------------------- | ------------------------------ |
-| experience-intro | `src/components/sections/IntroSection.astro` (shared, audit-only) | `content/work/experience.json` |
-| experience       | `src/components/sections/Experience.astro`                        | `content/work/experience.json` |
+| Section id | Component                                  | Content                        |
+| ---------- | ------------------------------------------ | ------------------------------ |
+| experience | `src/components/sections/Experience.astro` | `content/work/experience.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`IntroSection.astro`, `MetricCard.astro`, `SectionHeading.astro`
+`Chip.astro`, `CardMark.astro`, `XpProjectCard.astro`
 
 Shelved (never enable, never audit): —
 
 ## Appendix B — Audit checklist (view-specific)
 
-1. experience-intro: eyebrow `"Career"` via Section prop.
-2. experience: `SectionHeading`, no duplicate eyebrow.
-3. MetricCard grid uses `--stack-lg` gap (finding only — guardian owns the fix).
-4. Timeline rail spacing uses tokens; no hardcoded tab/rail px values.
-5. Secondary bullets use the muted text token.
+1. experience: eyebrow `"Career"` via Section prop; title + intro lede in section header.
+2. Timeline rail spacing uses tokens; no hardcoded tab/rail px values.
+3. Secondary bullets use the muted text token.
 
 ## Appendix C — Text & object hierarchy
 
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
-
-### experience-intro — `src/components/sections/IntroSection.astro` (shared)
-
-- **Object:** §6 `default` band (`Section.astro`) › §5 Tier A `.card` (`.metric-card` via `MetricCard.astro`, in `.snapshot-grid`) › no mark slot
-- **Text (reading order):**
-  - `.eyebrow` ("Career", via `Eyebrow.astro`) → **T5** eyebrow
-  - `.section__title` (h2, `experience.title`) → **T2** section title
-  - `.section__subtitle` (`experience.intro`) → **T7** subtitle / lede
-  - `.metric-card__value` (snapshot value, ×5) → **T10** metric number
-  - `.metric-card__label.metric-label` (snapshot label, ×5) → **T8** caps/metric label
-- **Notes:** — (snapshot data carries no `detail`, so `.metric-card__detail` is unrendered here)
-
 ### experience — `src/components/sections/Experience.astro`
 
-- **Object:** §6 `alt` band (`.section--alt`) › timeline `<ol.xp-stack>` (accent rail, not a card shell) › §5 Tier A `.proj-card` accordion (`ProjectAccordion.astro`, one per project) › §5 mark slots: role logo → **rect** `.logo-badge` (`CardMark` `useBadge`); accordion glyph → **icon** `.icon-tile` (`--compact --round --elev`)
+- **Object:** §6 `alt` band (`.section--alt`) › timeline tab rail + role panels › §5 Tier D `.xp-proj.card.card-accent` (`XpProjectCard.astro`)
 - **Text (reading order):**
-  - `.section__title.experience__title` (h2 via `SectionHeading`, `.accent` highlight span) → **T2** section title
-  - per role `<article>`:
-    - `.xp-meta` (period `–` end `·` location, `.xp-meta__sep`) → **T8** date / meta caps label
-    - `.xp-title` (h3, `role.position`) → **T3** card title
-    - `.xp-org` (`EntityLink`, `role.organization`) → **T8** company meta
-    - `.xp-blurb` (`role.blurb`) → **T6** body prose
-    - `.xp-tech` › `.chip` (`role.tech[]`, via `Chip`) → **T8** tag label
-    - `ProjectAccordion` (`.proj-card`, per `role.projects[]`):
-      - `.proj-name` (`project.name`) → **T4** sub-head
-      - `.proj-sub` (`project.subtitle`) → **T6** body (micro caption)
-      - `.bullet-list li` (`project.bullets[]`; `.is-secondary` → `--text-muted`) → **T6** body prose
-- **Notes:** Three T8 elements render off the mono-caps default deliberately — `.xp-meta` is mono caps (uses raw `letter-spacing: 0.08em`, i.e. the `--tracking-caps` value; token-swap candidate), while `.xp-org` and `.chip` render quiet on `--font-sans`/`--fs-small` (inline org link + pill tag, not caps chrome). `.proj-name` (T4) renders on `--font-sans` 600 / `--fs-base`, not the mono T4 default — nested accordion title. `.xp-title` (T3) uses a raw `1.35rem` size rather than a `--fs-card-title*` token (§EX-008) — hardcoded, audit-flag.
+  - `.eyebrow` ("Career") → **T5** eyebrow
+  - `.section__title` (h2, `experience.title`) → **T2** section title
+  - `.section__subtitle` (`experience.intro`) → **T7** subtitle / lede
+  - per role panel: `.xp-meta`, `.xp-title`, `.xp-org`, `.xp-blurb`, `.chip`, project cards
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2, T3, T4, T5, T6, T7, T8, T10 (per §3a, token values bind in contract SSOT).
+**T-levels present:** T2, T3, T5, T6, T7, T8.
 
 **Element theming (colour tokens, per §3e):**
 
-| Element                               | Text colour      | Surface                              | Accent/hover                |
-| ------------------------------------- | ---------------- | ------------------------------------ | --------------------------- |
-| Eyebrow (experience-intro)            | `--accent-ll`    | —                                    | —                           |
-| Section title (h2, SectionHeading)    | `--heading`      | —                                    | —                           |
-| Section subtitle (experience-intro)   | `--text`         | —                                    | —                           |
-| Metric card (Tier A)                  | —                | `--bg-elev`                          | —                           |
-| Metric value (T10)                    | `--accent`       | —                                    | —                           |
-| Metric label (T8)                     | `--accent-ll`    | —                                    | —                           |
-| Role title (h3, `.xp-title`)          | `--heading`      | —                                    | —                           |
-| Role meta/date (`.xp-meta`, T8)       | `--accent-light` | —                                    | —                           |
-| Role organization (`.xp-org`, T8)     | `--text-muted`   | —                                    | —                           |
-| Role blurb (T6)                       | `--text-muted`   | —                                    | —                           |
-| Tech chip (`.chip`, T8)               | `--text-muted`   | `--bg-chip`                          | —                           |
-| Timeline rail (`.xp-stack::before`)   | —                | —                                    | `--accent` → `--accent-red` |
-| Timeline marker (`.xp-marker`)        | —                | `--bg` (empty) / `--accent` (filled) | `--accent` (border)         |
-| Project accordion card (Tier A)       | —                | `--bg-elev`                          | —                           |
-| Project name (`.proj-name`, T4)       | `--heading`      | —                                    | —                           |
-| Project subtitle (`.proj-sub`, T6)    | `--text-muted`   | —                                    | —                           |
-| Project bullets (`.is-secondary`, T6) | `--text-muted`   | —                                    | —                           |
+| Element                 | Text colour    | Surface     |
+| ----------------------- | -------------- | ----------- |
+| Eyebrow (T5)            | `--accent-ll`  | —           |
+| Section title (h2)      | `--heading`    | —           |
+| Section subtitle (T7)   | `--text`       | —           |
+| Role title (h3)         | `--heading`    | —           |
+| Role meta / org / blurb | `--text-muted` | —           |
+| Tech chip               | `--text-muted` | `--bg-chip` |
+| Project card (Tier D)   | —              | `--bg-elev` |

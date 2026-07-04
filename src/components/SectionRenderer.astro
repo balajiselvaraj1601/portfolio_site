@@ -7,8 +7,6 @@ import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
 import AboutLanding from '@components/sections/AboutLanding.astro';
 import LeadershipPhilosophy from '@components/sections/LeadershipPhilosophy.astro';
 import Experience from '@components/sections/Experience.astro';
-import IntroSection from '@components/sections/IntroSection.astro';
-import FeaturedCaseStudies from '@components/sections/FeaturedCaseStudies.astro';
 import Education from '@components/sections/Education.astro';
 import Awards from '@components/sections/Awards.astro';
 import Publications from '@components/sections/Publications.astro';
@@ -16,7 +14,7 @@ import Conferences from '@components/sections/Conferences.astro';
 import Speakers from '@components/sections/Speakers.astro';
 import Kaggle from '@components/sections/Kaggle.astro';
 import Contact from '@components/sections/Contact.astro';
-import { sectionViewMap, navViews } from '@lib/content';
+import { sectionViewMap } from '@lib/content';
 
 /**
  * Every imported `.astro` file's default export shares the same component
@@ -25,23 +23,13 @@ import { sectionViewMap, navViews } from '@lib/content';
  */
 type SectionComponent = typeof Hero;
 
-/**
- * IntroSection requires a `sectionId` prop (injected by `sectionProps` below),
- * which the prop-less SectionComponent signature can't express — cast once here.
- */
-const Intro = IntroSection as SectionComponent;
-
 const SECTIONS: Record<string, SectionComponent> = {
   hero: Hero,
   thirukural: ThirukuralQuote,
-  'vision-intro': Intro,
   'vision-programs': VisionPrograms,
   'vision-impact': VisionImpact,
   leadership: LeadershipPhilosophy,
   experience: Experience,
-  'experience-intro': Intro,
-  'projects-intro': Intro,
-  'featured-case-studies': FeaturedCaseStudies,
   education: Education,
   awards: Awards,
   publications: Publications,
@@ -58,18 +46,6 @@ interface Props {
 }
 
 const { sections, navViews: navViewsMode = false } = Astro.props;
-
-const projectsView = navViews.find((v) => v.id === 'projects');
-
-function sectionProps(id: string): Record<string, string> {
-  if (id === 'featured-case-studies' && projectsView) {
-    return { showMoreHref: `/#${projectsView.viewAnchor}` };
-  }
-  if (SECTIONS[id] === Intro) {
-    return { sectionId: id };
-  }
-  return {};
-}
 ---
 
 {
@@ -117,7 +93,6 @@ function sectionProps(id: string): Record<string, string> {
 
     const showDivider = index > 0 && id !== 'hero' && id !== 'thirukural';
     const views = navViewsMode ? sectionViewMap[id]?.join(' ') : undefined;
-    const extra = sectionProps(id);
 
     return (
       <>
@@ -130,10 +105,10 @@ function sectionProps(id: string): Record<string, string> {
             data-nav-views={views}
             data-section-id={id}
           >
-            <Section {...extra} />
+            <Section />
           </div>
         ) : (
-          <Section {...extra} />
+          <Section />
         )}
       </>
     );

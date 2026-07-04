@@ -1,8 +1,16 @@
 {
-  "install_order": ["icon_kaggle", "icon_multimodal", "icon_box"],
+  "install_order": [
+    "icon_kaggle",
+    "icon_multimodal",
+    "icon_box",
+    "icon_collections"
+  ],
   "install_overrides": {
     "icon_box": {
       "target-goal": "logo_target_goal_box"
+    },
+    "icon_collections": {
+      "trophy-awards": "logo_trophy_badge"
     }
   },
   "icon_sets": {
@@ -29,6 +37,14 @@
       "scale_luminance": true,
       "output_alpha": true,
       "generator_flags": ["--colored-glyph"]
+    },
+    "icon_collections": {
+      "dir": "icon_collections",
+      "mask_mode": "light",
+      "circle_archetype": false,
+      "scale_luminance": false,
+      "output_alpha": false,
+      "generator_flags": ["--no-circle"]
     }
   }
 }

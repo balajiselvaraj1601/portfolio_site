@@ -18,7 +18,9 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
 
 <Section
   id="vision-programs"
-  title={site.sections['vision-programs'].title}
+  eyebrow={site.sections['vision-programs'].eyebrow}
+  title={visionBoard.header}
+  subtitle={visionBoard.intro}
   variant="alt"
   class="section--compact-top section--compact-bottom"
 >
@@ -81,7 +83,7 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
        --vision-flow-gap exactly. Hub tracks follow the fluid --vision-hub-w SSOT
        (20vw, capped at --vision-hub-max) so hubs and cards shrink together across
        the desktop range; the cards track is 1fr, so the row spans the full
-       container — flush with the snapshot/impact grids above and below. */
+       container — flush with the impact grid below. */
     grid-template-columns:
       var(--vision-hub-w)
       auto

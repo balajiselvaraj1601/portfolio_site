@@ -144,7 +144,7 @@ async function main() {
     await page.waitForSelector('#hero', { timeout: 15000 });
     await page.waitForFunction(
       () => {
-        const el = document.getElementById('experience-intro');
+        const el = document.getElementById('experience');
         if (!el) return false;
         const header =
           parseFloat(

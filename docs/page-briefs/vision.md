@@ -5,18 +5,16 @@
 
 ## Items
 
-| Item (section id) | Source                           | Question              | Weight   |
-| ----------------- | -------------------------------- | --------------------- | -------- |
-| `vision-intro`    | `content/work/vision-board.json` | Context & vision stmt | required |
-| `vision-programs` | `content/work/vision-board.json` | Executive programs?   | heavy    |
-| `vision-impact`   | `content/work/vision-board.json` | Org impact snapshot?  | heavy    |
+| Item (section id) | Source                           | Question             | Weight |
+| ----------------- | -------------------------------- | -------------------- | ------ |
+| `vision-programs` | `content/work/vision-board.json` | Context, programs    | heavy  |
+| `vision-impact`   | `content/work/vision-board.json` | Org impact snapshot? | heavy  |
 
 ## Structure
 
-Three sections:
+Two sections:
 
-- **`vision-intro`** (default variant): Eyebrow "Vision", title "AI Leadership & Strategic Impact", subtitle from content.
-- **`vision-programs`** (alt variant): Title "Strategic Programs"; two IDEA/VISION group theme-cards with CardMark/MarkEmblem, plus 4 program cards (ThemeCard) in a 2-column grid.
+- **`vision-programs`** (alt variant): Eyebrow "Vision", title and subtitle from `vision-board.json`, then two IDEA/VISION group theme-cards with CardMark/MarkEmblem, plus 4 program cards (ThemeCard) in a 2-column grid.
 - **`vision-impact`** (default variant): Title "Leadership & Organizational Impact"; 7 OrgSnapshotCards in a 4-column grid.
 
 The contact CTA is the dedicated **Contact** view.

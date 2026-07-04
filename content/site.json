@@ -16,17 +16,13 @@
         "hero",
         "thirukural",
         "leadership",
-        "experience-intro",
         "experience",
-        "projects-intro",
-        "featured-case-studies",
         "publications",
         "conferences",
         "speakers",
         "awards",
         "kaggle",
         "education",
-        "vision-intro",
         "vision-programs",
         "vision-impact",
         "contact"
@@ -42,19 +38,8 @@
         "title": "Experience — Balaji Selvaraj",
         "description": "Delivering AI programs across Oncology, Biopharma R&D, and CPSS — supporting AstraZeneca's 3 R&D priority areas over three consecutive years, with role-by-role impact across drug safety, oncology, and clinical imaging."
       },
-      "sections": ["experience-intro", "experience"],
-      "viewSections": ["experience-intro", "experience"]
-    },
-    {
-      "id": "projects",
-      "label": "Projects",
-      "path": "/projects",
-      "seo": {
-        "title": "Projects — Balaji Selvaraj",
-        "description": "Selected enterprise AI systems across oncology, drug safety, and biopharma R&D."
-      },
-      "sections": ["projects-intro", "featured-case-studies"],
-      "viewSections": ["projects-intro", "featured-case-studies"]
+      "sections": ["experience"],
+      "viewSections": ["experience"]
     },
     {
       "id": "research",
@@ -86,8 +71,8 @@
         "title": "Vision — Balaji Selvaraj",
         "description": "AI leadership & strategic impact — from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
       },
-      "sections": ["vision-intro", "vision-programs", "vision-impact"],
-      "viewSections": ["vision-intro", "vision-programs", "vision-impact"]
+      "sections": ["vision-programs", "vision-impact"],
+      "viewSections": ["vision-programs", "vision-impact"]
     },
     {
       "id": "contact",
@@ -108,14 +93,9 @@
       "source": "person/profile.json",
       "visible": true
     },
-    "vision-intro": {
-      "title": "AI Leadership & Strategic Impact",
-      "eyebrow": "Vision",
-      "source": "work/vision-board.json",
-      "visible": true
-    },
     "vision-programs": {
-      "title": "Strategic Programs",
+      "title": "",
+      "eyebrow": "Vision",
       "source": "work/vision-board.json",
       "visible": true
     },
@@ -131,24 +111,8 @@
     },
     "experience": {
       "title": "Experience",
-      "source": "work/experience.json",
-      "visible": true
-    },
-    "experience-intro": {
-      "title": "Experience",
       "eyebrow": "Career",
       "source": "work/experience.json",
-      "visible": true
-    },
-    "projects-intro": {
-      "title": "Selected Projects",
-      "source": "work/projects.json",
-      "visible": true
-    },
-    "featured-case-studies": {
-      "title": "Flagship Case Studies",
-      "eyebrow": "Flagship Work",
-      "source": "work/projects.json",
       "visible": true
     },
     "education": {

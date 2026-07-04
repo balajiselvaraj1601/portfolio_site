@@ -60,6 +60,10 @@
   --icon-md: 20px;
   --icon-lg: 24px;
   --icon-xl: 32px;
+  /* Official monochrome brand marks (github/linkedin/kaggle): neutral
+     per-background ink. Derives from --heading, so it flips near-black on
+     light themes and near-white on dark automatically. */
+  --brand-mark: var(--heading);
   /* Icon/dot component-specific sizes */
   --size-dot: 8px;
   /* Mark slots — change these two values to resize circular icons site-wide */
@@ -191,6 +195,7 @@
   --tracking-eyebrow: 0.18em; /* section eyebrows (max tracking) */
 
   --dur: 200ms;
+  --dur-slow: 320ms; /* larger surface transitions: panel expand/collapse */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-spin: 0.7s;
   --header-h: 60px;
@@ -693,8 +698,10 @@ button {
 .icon-tile--recog {
   --mark-slot: 40px;
 }
-/* Inner glyph sizing — driven by --mark-glyph on :root or contextual overrides */
-.icon-tile :is(svg, .mark-emblem),
+/* Inner glyph sizing — driven by --mark-glyph on :root or contextual overrides.
+   img:not(.comp-image) catches any residual raster inside .icon-tile (transition guard;
+   stays permanently as a regression-prevention rule — TC1, icon-blend-strategy). */
+.icon-tile :is(svg, .mark-emblem, img:not(.comp-image)),
 .theme-card__icon :is(svg, .mark-emblem) {
   width: var(--mark-glyph);
   height: var(--mark-glyph);

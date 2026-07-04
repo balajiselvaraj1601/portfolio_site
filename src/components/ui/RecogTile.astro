@@ -3,16 +3,23 @@
 // the root so the parent's scoped-style attribute (and any accent class passed
 // via `class`) keeps matching — same pattern as RecogCardShell.
 import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import { logoSrc } from '@lib/content';
 import type { IconName } from '@lib/icons';
+import type { HTMLAttributes } from 'astro/types';
 
 interface Props {
   icon: IconName;
+  /** logo_* slug for MarkEmblem rendering (e.g. 'logo_trophy_badge').
+   *  Falls back to <Icon name={icon}> when the SVG asset is not yet available (BC5). */
+  markSlug?: string;
   count: string | number;
   label: string;
   class?: string;
+  role?: HTMLAttributes<'div'>['role'];
 }
 
-const { icon, count, label, class: cls, ...rest } = Astro.props;
+const { icon, markSlug, count, label, class: cls, ...rest } = Astro.props;
 ---
 
 <div class:list={['recog-tile', cls]} {...rest}>
@@ -20,8 +27,24 @@ const { icon, count, label, class: cls, ...rest } = Astro.props;
     class="icon-tile icon-tile--recog icon-tile--accented"
     aria-hidden="true"
   >
-    <Icon name={icon} size={22} />
+    {
+      markSlug && logoSrc(markSlug) ? (
+        <MarkEmblem mark={{ kind: 'logo', asset: markSlug }} />
+      ) : (
+        <Icon name={icon} size={22} />
+      )
+    }
   </div>
   <div class="recog-tile__count">{count}</div>
   <div class="recog-tile__label">{label}<slot name="label-extra" /></div>
 </div>
+
+<style>
+  /* Size MarkEmblem to --mark-glyph within the tile (beats MarkEmblem's own
+     width:100%/height:100% scoped rule via higher specificity — same pattern
+     as VisionHub node sizing). */
+  .recog-tile :global(.mark-emblem) {
+    width: var(--mark-glyph);
+    height: var(--mark-glyph);
+  }
+</style>

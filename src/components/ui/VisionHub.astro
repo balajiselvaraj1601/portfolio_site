@@ -11,6 +11,13 @@ import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import { logoSrc } from '@lib/content';
 import { logoHasOwnRing } from '@lib/logo-display';
 import type { VisionBoard } from '@schemas';
+import type { VisionMark } from '@schemas';
+
+function nodeRasterLogo(mark: VisionMark): string | undefined {
+  if (mark.kind !== 'logo') return undefined;
+  if (logoHasOwnRing(mark.asset)) return undefined;
+  return logoSrc(mark.asset);
+}
 
 type VisionGroup = VisionBoard['groups'][number];
 
@@ -40,6 +47,7 @@ const nodes = group.marks.map((mark, i) => {
     tx: +(Math.cos(angle) * ORBIT).toFixed(3),
     ty: +(Math.sin(angle) * ORBIT).toFixed(3),
     rot: +((360 * i) / count - 90).toFixed(3),
+    rasterLogo: nodeRasterLogo(mark),
   };
 });
 
@@ -89,7 +97,17 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
           class="vision-hub__node"
           style={`--tx:${n.tx}cqi;--ty:${n.ty}cqi`}
         >
-          <MarkEmblem mark={n.mark} />
+          {n.rasterLogo ? (
+            <img
+              src={n.rasterLogo}
+              alt={n.mark.kind === 'logo' ? (n.mark.alt ?? '') : ''}
+              class="vision-hub__node-img"
+              loading="lazy"
+              aria-hidden="true"
+            />
+          ) : (
+            <MarkEmblem mark={n.mark} />
+          )}
         </span>
       ))
     }
@@ -194,6 +212,11 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
   .vision-hub__node :global(.icon) {
     width: 52%;
     height: 52%;
+  }
+  .vision-hub__node-img {
+    width: 72%;
+    height: 72%;
+    object-fit: contain;
   }
 
   /* Dotted spoke bridging centre-ring edge → satellite-ring edge. */

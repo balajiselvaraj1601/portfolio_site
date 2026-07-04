@@ -183,9 +183,9 @@ Per `docs/design-direction.md § Section eyebrows`:
 | Content sections inside a view                | **Omit** — nav provides context                              |
 | Ad-hoc kickers (Vision lede, Leadership diff) | Match `.eyebrow` typography (`--accent-ll`, mono, uppercase) |
 
-**View intros with eyebrows:** `experience-intro`, `featured-case-studies`, `vision-intro`, Contact (if eyebrow used).
+**View intros with eyebrows:** `experience-intro`, `featured-case-studies`, `vision-programs`, Contact (if eyebrow used).
 
-**Content sections without eyebrows:** `leadership`, `publications`, `conferences`, `speakers`, `awards`, `kaggle`, `education`, `experience` (uses SectionHeading instead), `vision-programs`, `vision-impact`.
+**Content sections without eyebrows:** `leadership`, `publications`, `conferences`, `speakers`, `awards`, `kaggle`, `education`, `experience` (uses SectionHeading instead), `vision-impact`.
 
 ---
 
@@ -196,12 +196,12 @@ Four tiers govern box/card surfaces. **Default shell (2026-07-03):** `.card`, `.
 (`--accent-card`), `--radius-xl`, gradient background, hover lift. Set `--accent-card` on a
 wrapper (`.card-accent`, level/medal/category class) for contextual colour.
 
-| Tier                | Shell class                                | Padding token              | Used by                                                          |
-| ------------------- | ------------------------------------------ | -------------------------- | ---------------------------------------------------------------- |
-| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | MetricCard, theme-card, connect-card, proj-card accordion        |
-| **B — content**     | `.content-card`                            | `--card-padding-lg` (32px) | ResearchCard, SpeakingCard                                       |
+| Tier                | Shell class                                | Padding token              | Used by                                                              |
+| ------------------- | ------------------------------------------ | -------------------------- | -------------------------------------------------------------------- |
+| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | MetricCard, theme-card, connect-card, proj-card accordion            |
+| **B — content**     | `.content-card`                            | `--card-padding-lg` (32px) | ResearchCard, SpeakingCard                                           |
 | **C — recognition** | `.recog-card`, `.recog-tile`, `.edu-panel` | `--card-padding` (24px)    | Awards, Kaggle, Education — **aliases of the default `.card` shell** |
-| **D — special**     | `.card--accent`, `.hub__ring`              | varies                     | ProjectCaseStudyCard gradient stripe; Vision hub circle          |
+| **D — special**     | `.card--accent`, `.hub__ring`              | varies                     | ProjectCaseStudyCard gradient stripe; Vision hub circle              |
 
 Shared primitives:
 
@@ -262,6 +262,22 @@ Use shared callout primitives for nested emphasis — do not reimplement `color-
 
 **Contextual `--accent-card` sources:** Awards (`--lvl` per level), Kaggle (`--medal`), Education
 (`--accent-gold`), CompetitionCard (`--medal` per card).
+
+### Raster icon rule (TC3, 2026-07-04)
+
+Ratified from `docs/icon-blend-strategy.md`. The permission criterion is asset *type*, not color count. Org brand marks stay raster regardless of whether they happen to be monochrome.
+
+> **Raster `<img>` is permitted only for org/collaboration brand marks (wordmarks, logotypes, brand identities) in `.logo-badge` / `.logo-badge--round` / `.logo-badge--plain` containers.** All monochrome semantic icons — regardless of whether an existing SVG is available — must be delivered as vector via `Icon.astro` (Lucide) or `MarkEmblem` + `logo_*.svg`. Header chrome action buttons are `Icon.astro`-only. `object-fit: cover` is exclusively `.comp-image` for the org-logo header tile in `CompetitionCard`; all other raster uses apply `object-fit: contain`.
+
+| Context | Delivery | Notes |
+| ------- | -------- | ----- |
+| Header chrome (`save-btn`, `theme-toggle`, `nav-toggle`) | `Icon.astro` only | No raster ever |
+| `.icon-tile` stat/metric glyphs | `MarkEmblem` + `logo_*.svg` (currentColor tinting) | `Icon.astro` fallback while SVG pending (BC5) |
+| Org/collaboration logos | `.logo-badge` raster PNG | Brand-fidelity; never vectorize regardless of color count |
+| Competition entity marks | `MarkEmblem` via `logo_kaggle_*.svg` in `.icon-tile--accented` | Medal tint via `currentColor` |
+| `object-fit: cover` | Exclusively `.comp-image` in `CompetitionCard` | All other raster: `object-fit: contain` |
+
+**`logo_*` slug detection:** Any slug starting with `logo_` is a pipeline SVG (`marks/` directory) and must route to `MarkEmblem`, not `<img src>`. The `logoHasOwnRing()` helper in `src/lib/logo-display.ts` encodes this rule. `ThemeCard` with `markDisplay='auto'` routes `logo_*` marks to emblem-in-circle automatically.
 
 ---
 
@@ -354,6 +370,27 @@ for approved divergences. Append rows; never delete history.
 | EX-012       | all (BoardHeader)                              | §2 tokenized margin          | `.bhead__chev :global(svg)` uses `margin-inline: -5px` as an optical overlap nudge to tuck chevrons toward the title — negative icon kerning, not layout rhythm; off the positive `--space-*` grid by design    | 2026-07-03 |
 | EX-013       | home                                           | §1 S5 section py             | `AboutLanding.astro` uses `padding-block: var(--stack-xl)` (48px) instead of full `--section-py-*` — landing band is wrapped outside `Section.astro` and vertically centers hero + thirukural in the viewport   | 2026-07-03 |
 | EX-014       | all multi-section views                        | §1 S5 section py             | `.section--compact-top` / `.section--compact-bottom` halve stacked section padding at same-view boundaries (intro→content, content→content within a nav view)                                                   | 2026-07-03 |
+| EX-015       | all (org/collab logos)                         | §5 raster rule color-count   | Org/collaboration brand marks (`.logo-badge` containers) remain as raster PNG regardless of chromatic properties. Brand-fidelity requirement overrides the monochrome-→-vector general rule. Research view's recommendation to vectorize org logos was rejected on these grounds. | 2026-07-04 |
+| EX-016       | vision (VisionHub)                             | §5 uniform node fill ratio   | `.vision-hub__node-img` raster nodes use 72% fill vs 52% for MarkEmblem/SVG nodes — raster PNGs require proportionally more area to read legibly against tinted circles. Rule dies with the raster branch (TC5 cleanup gate). | 2026-07-04 |
+
+---
+
+## 12. Page agent constraints — icon and raster surfaces
+
+Binding on all page agents from 2026-07-04 (ratified TC6, `docs/icon-blend-strategy.md`).
+Design Guardian is the sole editor of all `.icon-tile` CSS and shared icon primitives.
+
+| Code | Constraint |
+| ---- | ---------- |
+| IC1  | **No per-component raster img sizing classes.** Any `<img>` inside `.icon-tile` inherits `--mark-glyph` via the global TC1 rule (see `global.css`). Page agents must not add new scoped rem-literal sizing classes for icon images. New size needs go to the guardian for a token decision. |
+| IC2  | **No raster in Header chrome.** `Header.astro` action buttons (`save-btn`, `theme-toggle`, `nav-toggle`) use `Icon.astro` exclusively. No `<img>` or `logoSrc()` icon calls in that context. |
+| IC3  | **`object-fit: cover` is exclusively `.comp-image`.** Only the org-logo header tile in `CompetitionCard` uses `cover`. All other raster contexts use `contain`. |
+| IC4  | **`.icon-tile--accented` tinting does not propagate to `<img>`.** The `color: var(--accent-card)` tint applies only to SVG/MarkEmblem children. Page agents must not rely on raster PNGs inside accented tiles receiving the contextual hue. |
+| IC5  | **Do not add raster to `XpProjectCard`.** Its icon slot resolves via `resolveIcon()` → `IconName` → `Icon.astro`. No `logoSrc()` call should be added; the card is intentionally SVG-only. |
+| IC6  | **Do not bypass `CardMark.astro` in `ResearchCard`.** All logo/icon/emblem rendering in `ResearchCard` flows through `CardMark` → `resolveLogoSlot()`. Direct `<img>` outside `CardMark` in that card is a §5 violation. |
+| IC7  | **VisionHub node sizing is proportional (`cqi`).** Do not convert hub node or center dimensions to `px` or `rem`. The hub is a container-query layout; all sizing stays as percentage-of-node. The `.vision-hub__node-img` 72% rule is retained until TC5's screenshot gate passes (see EX-016 + cleanup step in `docs/icon-blend-strategy.md`). |
+| IC8  | **Preserve `logoSrc() → <Icon/MarkEmblem>` fallback pattern (BC5).** While the 46 `icon_*.png` files remain on disk, every component must retain the conditional fallback so the Icon branch activates when the SVG asset is not yet available. Remove conditionals only after PNG deletion and a clean build confirm zero raster icon references. |
+| IC9  | **Stat cell background surface is guardian-owned.** The `color-mix(in srgb, var(--bg) 55%, var(--bg-elev))` in `Education.astro` `.edu-stat` is a documented §5 gap. Page agents must not copy this pattern into new components; new stat-cell surface tokens require a guardian token decision. |
 
 ---
 

@@ -1,0 +1,100 @@
+---
+// Spreads ...rest onto the root so the parent can attach the data-project
+// filter attribute the shared recog-grid behaviour matches against.
+import Icon from '@components/ui/Icon.astro';
+import { resolveIcon } from '@lib/icons';
+
+interface Bullet {
+  text: string;
+  tier?: 'primary' | 'secondary';
+}
+interface Props {
+  id: string;
+  name: string;
+  subtitle?: string;
+  icon?: string;
+  bullets: Bullet[];
+  'data-project'?: string;
+}
+const { id, name, subtitle, icon, bullets, ...rest } = Astro.props;
+const iconName = resolveIcon(icon, 'folder');
+---
+
+<article class="xp-proj card card-accent" id={id} data-xp-proj {...rest}>
+  <header class="xp-proj__head">
+    <div
+      class="icon-tile icon-tile--compact icon-tile--round icon-tile--elev"
+      aria-hidden="true"
+    >
+      <Icon name={iconName} size={18} />
+    </div>
+    <div class="xp-proj__titles">
+      {subtitle && <p class="xp-proj__meta">{subtitle}</p>}
+      <h4 class="xp-proj__name">{name}</h4>
+    </div>
+  </header>
+  <ul class="bullet-list">
+    {
+      bullets.map((b) => (
+        <li class:list={[{ 'is-secondary': b.tier === 'secondary' }]}>
+          {b.text}
+        </li>
+      ))
+    }
+  </ul>
+</article>
+
+<style>
+  .xp-proj {
+    padding: var(--card-padding-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+    scroll-margin-top: calc(var(--header-h) + var(--space-4));
+  }
+  /* Toggled by the shared recog-grid filter behaviour (chip selector). */
+  .xp-proj.hidden {
+    display: none;
+  }
+  .xp-proj__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+  }
+  .xp-proj__titles {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
+  }
+  .xp-proj__meta {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    letter-spacing: var(--tracking-caps);
+    text-transform: uppercase;
+    color: var(--accent-ll);
+    margin: 0;
+  }
+  .xp-proj__name {
+    /* h4 is a mono kicker globally; this one is a flagship card title (.cs-name anatomy) */
+    font-family: var(--font-sans);
+    font-size: var(--fs-card-title-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--heading);
+    line-height: var(--lh-tight);
+    letter-spacing: normal;
+    text-transform: none;
+    margin: 0;
+  }
+  .is-secondary {
+    color: var(--text-muted);
+  }
+
+  @media (max-width: 600px) {
+    .xp-proj {
+      padding: var(--card-padding);
+    }
+    .xp-proj__name {
+      font-size: var(--fs-xxl);
+    }
+  }
+</style>
