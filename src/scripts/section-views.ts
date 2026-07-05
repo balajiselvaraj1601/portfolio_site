@@ -5,7 +5,7 @@
  * to a view's first section; a scroll-spy keeps the active nav button in sync
  * with whichever section is currently in view. Nothing is ever hidden. */
 
-export type NavViewConfig = {
+type NavViewConfig = {
   viewAnchor: string;
   viewSections: string[];
 };

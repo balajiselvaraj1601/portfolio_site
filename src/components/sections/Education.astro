@@ -203,13 +203,6 @@ const stats: StatCell[] = [
     opacity: 0.55;
   }
 
-  .edu-panel__badge {
-    position: absolute;
-    top: var(--space-5);
-    right: var(--space-5);
-    z-index: 1;
-  }
-
   .edu-layout {
     position: relative;
     z-index: 1;
@@ -337,11 +330,6 @@ const stats: StatCell[] = [
   }
 
   @media (max-width: 767px) /* --bp-md - 1px */ {
-    .edu-panel__badge {
-      position: static;
-      align-self: flex-start;
-      margin-bottom: var(--text-gap-inline);
-    }
     .edu-panel {
       display: flex;
       flex-direction: column;

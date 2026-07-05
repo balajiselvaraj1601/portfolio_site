@@ -194,7 +194,6 @@ export const profileSchema = z.object({
     bookCallLabel: z.string(),
     bookingHref: z.string().nullable().optional(),
   }),
-  credentialHook: z.string().optional(),
   photo: z.string().optional(),
   greeting: z.string().optional(),
   availability: z

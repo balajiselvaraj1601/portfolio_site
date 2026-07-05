@@ -4,7 +4,7 @@ description: >-
   Enforce portfolio site icon size, circular chrome, and color-blending SSOTs
   when adding marks, auditing consistency, or fixing icon drift. Covers
   MarkEmblem/Icon delivery tiers, --mark-slot/--mark-glyph/--mark-fg tokens,
-  .mark-circle--accented chrome, --accent-card inheritance, CardMark routing,
+  circular mark chrome, --accent-card inheritance, CardMark routing,
   and per-view accent hooks. Trigger on "icon standardization", "standardize
   icons", "icon size consistency", "icon chrome", "icon color blending",
   "mark tokens", "accent-card icons", or before shipping new card/header marks.
@@ -85,7 +85,7 @@ Do not collapse to one size.
 
 ### Chrome (phase 2)
 
-Shared primitive: `.mark-circle` + `.mark-circle--accented`, composed onto:
+Shared primitive: the circular mark chrome rule in global.css, whose selectors are:
 
 - `.theme-card__icon`
 - `.icon-tile.icon-tile--round.icon-tile--accented`
@@ -109,7 +109,7 @@ and `icon-tile--accented`. Never hand-roll accent washes on new slots.
 | `--mark-fg`     | `var(--accent-card, var(--accent))`       | Glyph + circle wash + border              |
 | `.card-accent`  | sets both `--accent-card` and `--mark-fg` | Default purple card shells                |
 
-**Color flow:** wrapper sets `--accent-card` → `.mark-circle--accented` reads
+**Color flow:** wrapper sets `--accent-card` → the circular mark chrome rule reads
 `--mark-fg` → `MarkEmblem` mask fills with `currentColor`.
 
 Section overrides (Research): `#publications .card-accent` (teal),
@@ -203,7 +203,7 @@ batch-icon-generate on this set — destroys line art).
 2. For each slot, verify:
    - **Delivery tier** correct (vector vs logo badge)
    - **Size** uses token (not hardcoded px on component)
-   - **Chrome** uses `.mark-circle--accented` recipe if accented
+   - **Chrome** uses the circular mark chrome recipe if accented
    - **Color** glyph + wash match card `--accent-card` (check `.recog-tile__count` too)
 3. Flag drift using [references/accent-matrix-and-anti-patterns.md § Anti-patterns](references/accent-matrix-and-anti-patterns.md#anti-patterns)
 4. Fix guardian-owned tokens in `global.css` first; then page-owned markup
@@ -222,12 +222,12 @@ fallback icons), Vision (hub ring + nodes), Contact (brand neutral marks).
 
 ## Guardian vs page-agent ownership
 
-| Change                                                                  | Owner                 |
-| ----------------------------------------------------------------------- | --------------------- |
-| New/changed tokens in `:root`, `.mark-circle--accented`, `.card-accent` | design-guardian       |
-| `CardMark`, `MarkEmblem`, `VisionHub`, `global.css` mark primitives     | design-guardian       |
-| Content JSON slug re-pointing, section markup, per-view wrappers        | page-* agents         |
-| `docs/icon-blend-strategy.md`, design contract §5                       | either (keep in sync) |
+| Change                                                              | Owner                 |
+| ------------------------------------------------------------------- | --------------------- |
+| New/changed tokens in `:root`, circular mark chrome, `.card-accent` | design-guardian       |
+| `CardMark`, `MarkEmblem`, `VisionHub`, `global.css` mark primitives | design-guardian       |
+| Content JSON slug re-pointing, section markup, per-view wrappers    | page-* agents         |
+| `docs/icon-blend-strategy.md`, design contract §5                   | either (keep in sync) |
 
 **Order:** guardian primitives land before page agents edit dependent markup (BC2).
 

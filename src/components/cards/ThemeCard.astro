@@ -14,7 +14,6 @@
  *   altText  — alt text for logo image (falls back to title)
  *   label    — mono kicker above the lines list (program cards only)
  *   entity   — entity slug for EntityLink wrapping the title (program cards only)
- *   accent   — deprecated; cards use the global accent-top shell
  *   logoSlug — optional override for logo file lookup (entity slug fallback)
  *   markDisplay — 'rect' forces uniform white logo-badge box (vision program cards)
  */
@@ -32,7 +31,6 @@ interface Props {
   altText?: string;
   label?: string;
   entity?: string;
-  accent?: boolean;
   logoSlug?: string;
   markDisplay?: 'auto' | 'rect';
 }

@@ -196,9 +196,6 @@ const lastName = rest.join(' ');
     color: var(--heading);
     background: var(--accent-soft);
   }
-  .nav__link[aria-current='page']::after {
-    content: none;
-  }
   .site-header__actions {
     display: flex;
     align-items: center;
@@ -284,9 +281,6 @@ const lastName = rest.join(' ');
       display: block;
       padding: var(--space-3) var(--space-4);
       font-size: var(--fs-ml);
-    }
-    .nav.is-open .nav__link[aria-current='page']::after {
-      content: none;
     }
   }
   .nav-toggle__close {

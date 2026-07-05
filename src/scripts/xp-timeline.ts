@@ -9,7 +9,7 @@
  */
 import { initRecogGrid } from './recog-grid';
 
-export interface XpTimelineOptions {
+interface XpTimelineOptions {
   root: HTMLElement;
 }
 

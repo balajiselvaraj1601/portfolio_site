@@ -131,8 +131,7 @@ ONE ladder — never hardcode a `rem`/`clamp` font-size where a token exists.
 `--fs-xxl` 1.35 · `--fs-2xl` 1.5 (rem).
 
 **Display (fluid clamps, tunable from `:root`):** `--fs-h1`, `--fs-h2`, `--fs-metric`,
-`--fs-metric-xl` (recog count), `--fs-hero`, `--fs-hero-metric`, `--fs-board-title`,
-`--fs-board-sub`, `--fs-kural`, `--fs-kural-trans`, `--fs-edu-lg`, `--fs-edu-sm`.
+`--fs-metric-xl` (recog count), `--fs-hero`, `--fs-hero-metric`, `--fs-kural`, `--fs-kural-trans`, `--fs-edu-lg`, `--fs-edu-sm`.
 
 **Semantic aliases:** `--fs-card-title-sm/·/-lg` (EX-008), `--fs-h3`, `--fs-h4`, `--fs-body`,
 `--fs-small`, `--fs-eyebrow`, `--fs-subtitle`, `--fs-btn`.
@@ -229,11 +228,10 @@ the same names: `.icon-tile--compact { --mark-slot: 36px; --mark-glyph: 18px; }`
 VisionHub emblems bind to `--mark-glyph` (alias `--vision-hub-glyph`); hub node/center
 diameters track `--mark-slot` via cqi on `.vision-hub__stage`.
 
-**Chrome SSOT:** `.mark-circle` + `.mark-circle--accented` in `global.css` — composed
-onto `.theme-card__icon`, `.icon-tile.icon-tile--round.icon-tile--accented`,
-`.vision-hub__node`, and `.vision-hub__center`. Tokens: `--mark-border-width` (1px),
-`--mark-bg-mix` (14%), `--mark-border-mix` (35%). Do not hand-roll accent washes on
-new mark slots.
+**Chrome SSOT:** the "circular mark chrome" rule in `global.css` (selectors
+`.theme-card__icon`, `.icon-tile--round.icon-tile--accented`, `.vision-hub__node/center`) — composed.
+Tokens: `--mark-border-width` (1px), `--mark-bg-mix` (14%), `--mark-border-mix` (35%).
+Do not hand-roll accent washes on new mark slots.
 
 **Color SSOT (phase 3):** Set `--accent-card` on the owning wrapper; circular marks
 resolve glyph + wash + border through **`--mark-fg`** (`var(--accent-card, var(--accent))`).
@@ -249,20 +247,20 @@ resolve glyph + wash + border through **`--mark-fg`** (`var(--accent-card, var(-
 **Component SSOT:** `CardMark.astro` — all new card marks go through this component; it calls
 `resolveLogoSlot()` in `src/lib/logo-display.ts`. Do not hand-roll logo/badge branching in cards.
 
-| Shape                | CSS / component                                                            | When                                                                    |
-| -------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| **rect**             | `CardMark` → `.logo-badge` (rounded rect, white surface)                   | Horizontal wordmarks (most org logos)                                   |
-| **round**            | `CardMark` → `.logo-badge--round` or `.icon-tile.icon-tile--round`         | Square emblem logos in circular chrome                                  |
-| **plain**            | `CardMark` → `.logo-badge--plain`                                          | Dark/light marks on card bg (`jitc`, `hcl`)                             |
-| **emblem-in-circle** | `CardMark` → `.theme-card__icon` + `MarkEmblem` (`.mark-circle--accented`) | Vision org/program theme cards (pipeline `logo_*` in accent circle)     |
-| **emblem bare**      | `MarkEmblem` without chrome                                                | Self-ringed assets off-card (not hub nodes — hub uses accented circles) |
-| **icon**             | `CardMark` → `.icon-tile` (+ modifiers)                                    | Lucide fallback when no logo asset                                      |
+| Shape                | CSS / component                                                        | When                                                                    |
+| -------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| **rect**             | `CardMark` → `.logo-badge` (rounded rect, white surface)               | Horizontal wordmarks (most org logos)                                   |
+| **round**            | `CardMark` → `.logo-badge--round` or `.icon-tile.icon-tile--round`     | Square emblem logos in circular chrome                                  |
+| **plain**            | `CardMark` → `.logo-badge--plain`                                      | Dark/light marks on card bg (`jitc`, `hcl`)                             |
+| **emblem-in-circle** | `CardMark` → `.theme-card__icon` + `MarkEmblem` (circular mark chrome) | Vision org/program theme cards (pipeline `logo_*` in accent circle)     |
+| **emblem bare**      | `MarkEmblem` without chrome                                            | Self-ringed assets off-card (not hub nodes — hub uses accented circles) |
+| **icon**             | `CardMark` → `.icon-tile` (+ modifiers)                                | Lucide fallback when no logo asset                                      |
 
 **Reference implementations (do not redesign):** Contact connect cards (round Lucide via
 `CardMark`), Recognition summary tiles (`.icon-tile.icon-tile--round.icon-tile--accented`).
 
 Icon tile modifiers: `--round` (circle; required with `--accented` for pipeline marks),
-`--compact` (36px slot / 18px glyph), `--accented` (composed via `.mark-circle--accented`
+`--compact` (36px slot / 18px glyph), `--accented` (composed via the circular mark chrome rule
 when paired with `--round`), `--elev` (white node on tinted callout).
 
 ### Card colour highlights

@@ -182,15 +182,15 @@ step reintroduces the uneven-icon regression.
 All `icon_collections` marks render as `MarkEmblem` SVG masks. Effective pixel
 size is set by CSS tokens in `src/styles/global.css`, not PNG dimensions.
 
-| Context                              | Token / rule                          | Px      |
-| ------------------------------------ | ------------------------------------- | ------- |
-| Card / summary tile chrome           | `--mark-slot`                         | 44      |
-| Card / summary tile glyph            | `--mark-glyph`                        | 22      |
-| Competition card stat row            | `--icon-md` (`.blob-icon--md`)        | 20      |
-| Competition summary / eval block     | `--icon-sm` (`.blob-icon--sm`)        | 16      |
-| Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph` | 22      |
-| Vision impact theme card             | `--mark-slot` / `--mark-glyph-compact`| 44 / 18 |
-| Compact tile override                | `.icon-tile--compact`                 | 36 / 18 |
+| Context                              | Token / rule                           | Px      |
+| ------------------------------------ | -------------------------------------- | ------- |
+| Card / summary tile chrome           | `--mark-slot`                          | 44      |
+| Card / summary tile glyph            | `--mark-glyph`                         | 22      |
+| Competition card stat row            | `--icon-md` (`.blob-icon--md`)         | 20      |
+| Competition summary / eval block     | `--icon-sm` (`.blob-icon--sm`)         | 16      |
+| Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph`  | 22      |
+| Vision impact theme card             | `--mark-slot` / `--mark-glyph-compact` | 44 / 18 |
+| Compact tile override                | `.icon-tile--compact`                  | 36 / 18 |
 
 Both the compact tile override and the Vision impact emblems share
 `--mark-glyph-compact` (18px) as the single source for the smaller in-circle
@@ -200,10 +200,9 @@ circle — see `.vision-impact__grid :global(.theme-card__icon)` in `VisionImpac
 
 ### Circular mark chrome (SSOT, 2026-07-05 phase 2)
 
-Accented pipeline marks share `.mark-circle` / `.mark-circle--accented` in
-`global.css` (composed onto `.theme-card__icon`,
-`.icon-tile.icon-tile--round.icon-tile--accented`, `.vision-hub__node`, and
-`.vision-hub__center`):
+Accented pipeline marks share the "circular mark chrome" rule in `global.css`,
+composed via `.icon-tile--round.icon-tile--accented` and `.theme-card__icon`
+(also applied to `.vision-hub__node` and `.vision-hub__center`):
 
 | Aspect          | Token / rule                 | Value                                         |
 | --------------- | ---------------------------- | --------------------------------------------- |

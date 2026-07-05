@@ -45,7 +45,7 @@ All in `src/styles/global.css` `:root` unless noted.
 | Kaggle competition header      | 44            | 22           | same                                        |
 | Kaggle stat grid               | —             | 20           | `.blob-icon--md`, color via `--accent-card` |
 | Kaggle summary/eval            | —             | 16           | `.blob-icon--sm`, color via `--accent-card` |
-| Vision hub node/center         | cqi-scaled 44 | 22           | inherits `.mark-circle--accented`           |
+| Vision hub node/center         | cqi-scaled 44 | 22           | inherits circular mark chrome               |
 | Vision theme-card emblem       | 44            | 22           | `.theme-card__icon`                         |
 | Experience project             | 36            | 18           | `.icon-tile--compact.icon-tile--elev`       |
 | Contact connect                | 44            | 22           | `CardMark variant="accented"`               |
@@ -112,7 +112,6 @@ Need a visual mark in a card?
 These are the **only** accented circular chrome definitions:
 
 ```css
-.mark-circle--accented,
 .theme-card__icon,
 .icon-tile.icon-tile--round.icon-tile--accented,
 .vision-hub__node,
@@ -141,7 +140,7 @@ Glyph sizing inside tiles:
 | `logo_*` slug in `.comp-image`                               | Cover-fill org-style tile | Third branch: MarkEmblem in accented tile |
 | Hardcoded `width: 22px` on mark                              | Breaks token SSOT         | Use `--mark-glyph` or `--icon-md/sm`      |
 | `.icon-tile--accented` without `--round`                     | Square accented tile      | Add `icon-tile--round`                    |
-| Hand-rolled `color-mix` on new slot                          | Drift from 14%/35% recipe | Use `.mark-circle--accented`              |
+| Hand-rolled `color-mix` on new slot                          | Drift from 14%/35% recipe | Use the circular mark chrome rule         |
 | `.recog-tile__count { color: var(--accent) }`                | Purple count on gold tile | `--accent-card`                           |
 | Fallback icon without `variant="accented"` on `.card-accent` | Purple icon, teal border  | `CardMark variant="accented"`             |
 | `.blob-block__icon { color: var(--accent-light) }`           | Wrong hue in medal card   | `--accent-card`                           |

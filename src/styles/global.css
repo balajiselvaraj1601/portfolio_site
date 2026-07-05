@@ -81,10 +81,6 @@
   ); /* glyph / MarkEmblem currentColor */
   --mark-bg-mix: 14%;
   --mark-border-mix: 35%;
-  /* Vision flow-marker chevrons (grid-snapped SSOT; height anchors the box) */
-  --chevron-h: var(--space-2); /* 8px */
-  --chevron-w: var(--space-2); /* 8px — = height, aspect 1:1 (square) */
-  --chevron-overlap: var(--space-0-5); /* 2px — ¼ × width, nesting overlap */
   /* Vision programs flow markers — larger than section-heading chevrons.
      Fluid: track the viewport, snapping to the token value at full site width. */
   --chevron-flow-h: clamp(
@@ -173,8 +169,6 @@
   /* Display type — bespoke fluid headings centralized so display scale is tunable. */
   --fs-hero: clamp(2.5rem, 5vw, 4.25rem);
   --fs-hero-metric: clamp(2rem, 3vw, 2.75rem);
-  --fs-board-title: clamp(1.4rem, 1rem + 2vw, 2.1rem);
-  --fs-board-sub: clamp(1.15rem, 0.85rem + 1.4vw, 1.6rem);
   --fs-kural: clamp(1.05rem, 2.2vw, 1.35rem);
   --fs-kural-trans: clamp(0.9rem, 1.6vw, 1.05rem);
   --fs-edu-lg: clamp(1.75rem, 3.5vw, 2.5rem);
@@ -258,7 +252,6 @@
   --bg-chip: #e8e0f5;
   --text: #1a1530;
   --text-muted: #5c5470;
-  --text-inverse: #ffffff;
   --heading: #1a1530;
   --border: rgba(108, 47, 191, 0.18);
   --border-strong: rgba(108, 47, 191, 0.35);
@@ -274,7 +267,6 @@
   --accent-contrast: #ffffff;
   --accent-red: #c0182a;
   --accent-red-light: #e8485a;
-  --accent-red-soft: rgba(192, 24, 42, 0.1);
   --focus-ring: #6c2fbf;
   --shadow: 0 1px 2px rgba(26, 21, 48, 0.06), 0 4px 16px rgba(26, 21, 48, 0.06);
   --shadow-sm: 0 1px 2px rgba(26, 21, 48, 0.05);
@@ -356,7 +348,6 @@
   --bg-chip: #211d3a;
   --text: #e8e0f5;
   --text-muted: #9085b8;
-  --text-inverse: #ffffff;
   --heading: #ffffff;
   --border: rgba(108, 47, 191, 0.25);
   --border-strong: rgba(108, 47, 191, 0.5);
@@ -368,7 +359,6 @@
   --accent-contrast: #ffffff;
   --accent-red: #c0182a;
   --accent-red-light: #e8485a;
-  --accent-red-soft: rgba(192, 24, 42, 0.12);
   --focus-ring: #9b5ee8;
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 22px rgba(0, 0, 0, 0.45);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
@@ -548,14 +538,6 @@ button {
   line-height: var(--lh-normal);
 }
 
-/* Intro snapshot tiles (IntroSection) */
-.snapshot-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: var(--stack-lg);
-  margin-top: 0;
-}
-
 /* Theme cards (LeadershipPhilosophy, Vision program + org snapshots) */
 .theme-grid {
   display: grid;
@@ -705,7 +687,6 @@ button {
 }
 
 /* Circular mark chrome — SSOT for accented pipeline marks (Recognition, Vision) */
-.mark-circle,
 .theme-card__icon,
 .icon-tile.icon-tile--round.icon-tile--accented {
   width: var(--mark-slot);
@@ -716,7 +697,6 @@ button {
   justify-content: center;
   flex-shrink: 0;
 }
-.mark-circle--accented,
 .theme-card__icon,
 .icon-tile.icon-tile--round.icon-tile--accented,
 .vision-hub__node,
@@ -769,9 +749,6 @@ button {
   width: var(--mark-glyph);
   height: var(--mark-glyph);
   flex-shrink: 0;
-}
-.icon-tile--elev {
-  background: var(--bg-elev);
 }
 
 /* Nested callout / highlight surfaces inside card shells */
@@ -1240,13 +1217,6 @@ button {
 }
 .section-header--inline {
   margin-bottom: 0;
-}
-.section-header--center {
-  text-align: center;
-  align-items: center;
-}
-.section-header--center .section__subtitle {
-  margin-inline: auto;
 }
 
 /* Entrance animation */
