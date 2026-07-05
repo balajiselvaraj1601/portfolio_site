@@ -6,18 +6,11 @@
  * All marks are resolved from existing icons/logos via Icon + MarkEmblem.
  */
 import Icon from '@components/ui/Icon.astro';
-import LogoBadge from '@components/ui/LogoBadge.astro';
 import MarkEmblem from '@components/ui/MarkEmblem.astro';
-import { logoSrc } from '@lib/content';
-import { logoHasOwnRing } from '@lib/logo-display';
 import type { VisionBoard } from '@schemas';
-import type { VisionMark } from '@schemas';
 
-function nodeRasterLogo(mark: VisionMark): string | undefined {
-  if (mark.kind !== 'logo') return undefined;
-  if (logoHasOwnRing(mark.asset)) return undefined;
-  return logoSrc(mark.asset);
-}
+// All vision-board marks are now logo_* SVGs rendered via MarkEmblem (TC5 gate met
+// 2026-07-04: icon_*.png deleted, screenshots confirmed zero raster nodes).
 
 type VisionGroup = VisionBoard['groups'][number];
 
@@ -27,16 +20,9 @@ interface Props {
 
 const { group } = Astro.props;
 
-const leadAsset = group.lead.kind === 'logo' ? group.lead.asset : undefined;
-const leadLogo = leadAsset ? logoSrc(leadAsset) : undefined;
-const leadUsesRasterLogo = Boolean(
-  leadLogo && leadAsset && !logoHasOwnRing(leadAsset)
-);
-
-// Radial geometry — all lengths in cqi (1cqi = 1% of the square stage width).
+// Radial geometry — orbit in cqi (1cqi = 1% of the square stage width).
+// Node/center diameters derive from --mark-slot on .vision-hub__stage (global.css).
 const ORBIT = 36; // centre → satellite distance
-const NODE = 18; // satellite diameter
-const CENTER = 28; // centre-hub diameter
 const count = group.marks.length;
 
 // Pre-compute each satellite's offset + spoke angle so the CSS stays trig-free.
@@ -47,20 +33,12 @@ const nodes = group.marks.map((mark, i) => {
     tx: +(Math.cos(angle) * ORBIT).toFixed(3),
     ty: +(Math.sin(angle) * ORBIT).toFixed(3),
     rot: +((360 * i) / count - 90).toFixed(3),
-    rasterLogo: nodeRasterLogo(mark),
   };
 });
-
-// Spokes run only across the gap between the two rings.
-const spokeStart = CENTER / 2;
-const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
 ---
 
 <figure class="vision-hub">
-  <div
-    class="vision-hub__stage"
-    style={`--orbit:${ORBIT}cqi;--node:${NODE}cqi;--center:${CENTER}cqi;--spoke-start:${spokeStart}cqi;--spoke-len:${spokeLen}cqi`}
-  >
+  <div class="vision-hub__stage" style={`--orbit:${ORBIT}cqi`}>
     <div class="vision-hub__ring" aria-hidden="true"></div>
 
     {
@@ -76,15 +54,7 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     <div class="vision-hub__center">
       {
         group.lead.kind === 'icon' ? (
-          <Icon name={group.lead.name} size={44} />
-        ) : leadUsesRasterLogo && leadLogo ? (
-          <LogoBadge
-            logoUrl={leadLogo}
-            altText={group.lead.alt ?? group.label}
-            useBadge={false}
-            size="md"
-            class="vision-hub__lead-logo"
-          />
+          <Icon name={group.lead.name} size="md" />
         ) : (
           <MarkEmblem mark={group.lead} class="vision-hub__lead" />
         )
@@ -97,17 +67,7 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
           class="vision-hub__node"
           style={`--tx:${n.tx}cqi;--ty:${n.ty}cqi`}
         >
-          {n.rasterLogo ? (
-            <img
-              src={n.rasterLogo}
-              alt={n.mark.kind === 'logo' ? (n.mark.alt ?? '') : ''}
-              class="vision-hub__node-img"
-              loading="lazy"
-              aria-hidden="true"
-            />
-          ) : (
-            <MarkEmblem mark={n.mark} />
-          )}
+          <MarkEmblem mark={n.mark} />
         </span>
       ))
     }
@@ -141,6 +101,15 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     width: 100%;
     max-width: var(--vision-hub-max);
     aspect-ratio: 1;
+    /* Hub node/center circles track --mark-slot at reference hub width */
+    --vision-hub-node: calc(100cqi * var(--mark-slot) / var(--vision-hub-max));
+    --vision-hub-center: var(--vision-hub-node);
+    /* Glyph scales with node so 50% fill ratio holds at every hub width */
+    --vision-hub-glyph: calc(
+      var(--vision-hub-node) * var(--mark-glyph) / var(--mark-slot)
+    );
+    --spoke-start: calc(var(--vision-hub-center) / 2);
+    --spoke-len: calc(var(--orbit) - var(--vision-hub-node));
   }
 
   /* Outer circle — bright purple ring, echoing the reference (no glow). */
@@ -148,10 +117,10 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     position: absolute;
     inset: 4%;
     border-radius: 50%;
-    border: 2px solid color-mix(in srgb, var(--accent) 55%, transparent);
+    border: 2px solid color-mix(in srgb, var(--accent-card, var(--accent)) 55%, transparent);
     background: radial-gradient(
       circle at center,
-      color-mix(in srgb, var(--accent) 14%, transparent) 0%,
+      color-mix(in srgb, var(--accent-card, var(--accent)) 14%, transparent) 0%,
       transparent 64%
     );
     z-index: 1;
@@ -161,62 +130,44 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     position: absolute;
     left: 50%;
     top: 50%;
-    width: var(--center);
-    height: var(--center);
+    width: var(--vision-hub-center);
+    height: var(--vision-hub-center);
     transform: translate(-50%, -50%);
+    z-index: 2;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid color-mix(in srgb, var(--accent) 45%, transparent);
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--accent) 10%, transparent);
-    color: var(--accent-ll);
-    z-index: 2;
+    flex-shrink: 0;
   }
-  .vision-hub__center :global(.icon) {
-    width: 46%;
-    height: 46%;
-  }
-  /* Contain-masked lead mark: wide wordmarks fit to width, square emblems to height. */
+  .vision-hub__center :global(.icon),
   .vision-hub__center :global(.vision-hub__lead) {
-    width: 62%;
-    height: 52%;
+    width: var(--vision-hub-glyph);
+    height: var(--vision-hub-glyph);
   }
-  .vision-hub__center :global(.vision-hub__lead-logo) {
-    width: 72%;
-    max-height: 46%;
-  }
-  .vision-hub__center :global(.vision-hub__lead-logo img) {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
+  /* Hub center uses accent tint, not neutral brand ink (Contact tiles unchanged). */
+  .vision-hub__center :global(.icon.icon--brand) {
+    color: var(--mark-fg);
   }
 
   .vision-hub__node {
     position: absolute;
     left: 50%;
     top: 50%;
-    width: var(--node);
-    height: var(--node);
+    width: var(--vision-hub-node);
+    height: var(--vision-hub-node);
     transform: translate(-50%, -50%) translate(var(--tx), var(--ty));
+    z-index: 2;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1.5px solid color-mix(in srgb, var(--accent) 42%, transparent);
-    border-radius: 50%;
-    background: color-mix(in srgb, var(--bg) 82%, var(--accent));
-    color: var(--accent-ll);
-    z-index: 2;
+    flex-shrink: 0;
   }
   .vision-hub__node :global(.mark-emblem),
   .vision-hub__node :global(.icon) {
-    width: 52%;
-    height: 52%;
-  }
-  .vision-hub__node-img {
-    width: 72%;
-    height: 72%;
-    object-fit: contain;
+    width: var(--vision-hub-glyph);
+    height: var(--vision-hub-glyph);
   }
 
   /* Dotted spoke bridging centre-ring edge → satellite-ring edge. */
@@ -226,7 +177,7 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     top: 50%;
     width: var(--spoke-len);
     height: 0;
-    border-top: 2px dotted color-mix(in srgb, var(--accent) 45%, transparent);
+    border-top: 2px dotted color-mix(in srgb, var(--accent-card, var(--accent)) 45%, transparent);
     transform-origin: 0 0;
     transform: rotate(var(--rot)) translateX(var(--spoke-start));
     z-index: 1;
@@ -256,14 +207,14 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
   .vision-hub__rule-line {
     flex: 1;
     height: 1px;
-    background: color-mix(in srgb, var(--accent) 40%, transparent);
+    background: color-mix(in srgb, var(--accent-card, var(--accent)) 40%, transparent);
   }
 
   .vision-hub__rule-dot {
     width: calc(var(--space-1) + var(--space-0-5));
     height: calc(var(--space-1) + var(--space-0-5));
     border-radius: 50%;
-    background: var(--accent-ll);
+    background: var(--mark-fg);
     flex-shrink: 0;
   }
 
@@ -272,7 +223,7 @@ const spokeLen = ORBIT - CENTER / 2 - NODE / 2;
     font-size: var(--fs-eyebrow);
     letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
-    color: var(--accent-ll);
+    color: var(--mark-fg);
     margin: 0;
   }
 

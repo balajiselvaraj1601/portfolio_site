@@ -18,7 +18,7 @@ import { visionBoard, site } from '@lib/content';
         role="list"
       >
         {visionBoard.orgCards.map((c) => (
-          <li class="card-accent">
+          <li class:list={['vision-accent-hook', `vision-accent-${c.accent}`]}>
             <ThemeCard mark={c.mark} title={c.title} lines={c.lines} />
           </li>
         ))}

@@ -32,6 +32,17 @@ const LabeledLink = z.object({
   ...MediaLinkFields,
 });
 const VariantColor = z.enum(['purple', 'red']);
+/** Categorical accent keys — map to --cat-* tokens in global.css (shared with About leadership). */
+export const visionAccentSchema = z.enum([
+  'impact', // gold  — Business & P&L, EVP, Education, Speakers
+  'strategic', // blue  — Strategy & sponsorship, Conferences
+  'platform', // teal  — Platform & infrastructure, Publications
+  'people', // pink  — Team & org building
+  'ai', // purple — AI governance (site default)
+  'privacy', // red   — Privacy / high-stakes initiatives
+  'gxp', // green — GxP compliance
+]);
+export type VisionAccent = z.infer<typeof visionAccentSchema>;
 /** Titled content block with an optional Lucide icon (leadership & vision lists). */
 const TitledIconItem = z.object({
   title: z.string(),
@@ -243,7 +254,7 @@ export const visionBoardSchema = z.object({
     z.object({
       id: z.string(),
       label: z.string(),
-      variant: VariantColor,
+      accent: visionAccentSchema,
       lead: VisionMark,
       marks: z.array(VisionMark),
     })
@@ -252,7 +263,7 @@ export const visionBoardSchema = z.object({
     z.object({
       title: z.string(),
       label: z.string(),
-      variant: VariantColor,
+      accent: visionAccentSchema,
       badge: VisionMark,
       lines: z.array(z.string()),
       entity: EntitySlug,
@@ -260,6 +271,7 @@ export const visionBoardSchema = z.object({
   ),
   orgCards: z.array(
     z.object({
+      accent: visionAccentSchema,
       mark: VisionMark,
       title: z.string(),
       lines: z.array(z.string()),

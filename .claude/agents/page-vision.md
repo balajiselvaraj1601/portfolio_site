@@ -26,7 +26,7 @@ them exactly — they are part of your instructions:
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | V1  | Content source: `content/work/vision-board.json` only.                                                                                                                        |
 | V2  | Two sections: `vision-programs` variant=alt with required eyebrow "Vision" (contract §4); `vision-impact` variant=default. No `section--full` or `section--impact` layering.  |
-| V3  | Group-card marks in `vision-programs` use `CardMark.astro` + `MarkEmblem.astro` with `.icon-tile--round.icon-tile--compact` mark rows (contract §5). No one-off logo filters. |
+| V3  | Group hubs use `VisionHub.astro` with fluid cqi node sizing and `--mark-fg` chrome; hub accent from `group.accent` in JSON → `.vision-accent-*` + `.vision-accent-hook` (site `--cat-*` palette). Program/impact marks use `CardMark` + `MarkEmblem` (contract §5). |
 | V4  | Ad-hoc kickers match `.eyebrow` typography (contract §4).                                                                                                                     |
 | V5  | Section titles via `Section.astro` props. Grids use `.theme-grid` with `--theme-cols` CSS variable (2 for programs, 4 for impact).                                            |
 
@@ -98,8 +98,11 @@ single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not r
 | Card h3 title                                    | `--heading`    | —                           | —            |
 | Metric value                                     | `--accent`     | —                           | —            |
 | Stat label                                       | `--text-muted` | —                           | —            |
-| Program/group label                              | `--accent-ll`  | —                           | —            |
+| Program/group label                              | `--accent-card` | —                           | —            |
 | Body prose                                       | `--text-muted` | —                           | —            |
-| Mark icon circle (.theme-card__icon, .icon-tile) | `--accent-ll`  | `--accent-soft`             | —            |
-| Vision hub ring                                  | —              | `--accent-soft`, `--accent` | —            |
-| Vision hub center/nodes                          | `--accent-ll`  | —                           | —            |
+| Mark icon circle (`.theme-card__icon`)           | `--mark-fg`    | color-mix w/ `--mark-fg`    | —            |
+| Vision hub ring/spokes/rule                      | —              | color-mix w/ `--accent-card` | —            |
+| Vision hub center/nodes/label                    | `--mark-fg`    | color-mix w/ `--mark-fg`    | —            |
+| Vision hub accent source                         | —              | —                           | `group.accent` → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` tokens) |
+| Vision program cards                             | `--accent-card` | logo pill tint             | `programs[].accent` per card |
+| Vision impact cards                              | `--accent-card` | emblem circle wash         | `orgCards[].accent` per card |

@@ -20,7 +20,7 @@ const { id, name, subtitle, icon, bullets, ...rest } = Astro.props;
 const iconName = resolveIcon(icon, 'folder');
 ---
 
-<article class="xp-proj card card-accent" id={id} data-xp-proj {...rest}>
+<article class="xp-proj card" id={id} data-xp-proj {...rest}>
   <header class="xp-proj__head">
     <div
       class="icon-tile icon-tile--compact icon-tile--round icon-tile--elev"
@@ -46,7 +46,11 @@ const iconName = resolveIcon(icon, 'folder');
 
 <style>
   .xp-proj {
-    padding: var(--card-padding-lg);
+    /* Subordinate to the role/company anchor above: quieter than the parent
+       .card — standard padding (vs the company block's --card-padding-lg) and a
+       neutral top border instead of the inherited 2px accent stripe. */
+    padding: var(--card-padding);
+    border-top: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     gap: var(--space-5);
@@ -90,9 +94,6 @@ const iconName = resolveIcon(icon, 'folder');
   }
 
   @media (max-width: 600px) {
-    .xp-proj {
-      padding: var(--card-padding);
-    }
     .xp-proj__name {
       font-size: var(--fs-xxl);
     }

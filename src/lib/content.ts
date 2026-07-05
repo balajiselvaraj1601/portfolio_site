@@ -105,16 +105,7 @@ const repoRoot = path.resolve(
 
 // Scan org/, marks/, and the root fallback in priority order.
 // Maps "filename.ext" → the URL path ("/assets/logos/sub/file") for that asset.
-const LOGO_SUBDIRS = [
-  'org',
-  'marks',
-  'kaggle',
-  'vision',
-  'education',
-  'general',
-  'awards',
-  '',
-] as const;
+const LOGO_SUBDIRS = ['org', 'marks', ''] as const;
 const logoBase = path.join(repoRoot, 'public/assets/logos');
 const logoFiles = new Map<string, string>();
 for (const sub of LOGO_SUBDIRS) {

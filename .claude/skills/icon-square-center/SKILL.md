@@ -20,17 +20,22 @@ or recoloring/normalizing ink luminance (`scripts/normalize-icon-ink.py`).
 
 ## How it works (no resizing)
 
-1. Detect the content bbox: foreground = `max(R,G,B) > THR` (default 20). The bbox is the min/max
-   of **all** foreground pixels, so no foreground pixel can lie outside it — this is what makes the
-   crop lossless.
-2. Crop **exactly** to that bbox (never inside it), then paste it **centered** on a square black
-   canvas of side `max(cw,ch) + 2·round(MARGIN·max(cw,ch))` (default MARGIN 0.08 ≈ 8% each side).
-3. Result: square + exactly centered + minimal symmetric black margin; every content pixel copied
+1. **Inclusive crop bbox** (`crop_bbox`): union of main ink (`max(R,G,B) > THR`, default 20) and
+   dim anti-aliasing tail (`> PROBE_THR`, default 6). Crops all non-black ink down to the noise
+   floor — no faint halos left in the source black field.
+2. **Full-bleed guard**: if the union bbox covers **>92%** of the source canvas, stair-step to
+   higher ink thresholds (200 → 240). If still >92%, **fail fast** (`FullBleedSourceError`) —
+   re-render the source with more black margin (glyph too large for the artboard).
+3. Crop **exactly** to `crop_bbox` (never inside it), then paste **centered** on a square black
+   canvas of side `max(cw,ch) + 2·max(1, round(MARGIN·max(cw,ch)))` (default MARGIN 0.08 ≈ 8%
+   each side; per-icon proportional, not a constant batch size).
+4. Result: square + exactly centered + symmetric black margin; every content pixel copied
    verbatim. Non-square inputs are absorbed as symmetric padding, never stretched.
 
-Constants live once in `scripts/icon_common.py` (`THR`, `PROBE_THR`, `MARGIN`, `content_bbox`,
-`square_side`, `paste_offset`). The cropper, validator, and verifier all import them so the
-"make the crop" rule and the "check the crop" rule can never drift.
+Constants live once in `scripts/icon_common.py` (`THR`, `PROBE_THR`, `MARGIN`, `MIN_PAD`,
+`FULL_BLEED_FILL`, `content_bbox`, `crop_bbox`, `square_side`, `paste_offset`). The cropper,
+validator, and verifier all import them so the "make the crop" rule and the "check the crop"
+rule can never drift.
 
 ## Usage
 
@@ -39,20 +44,25 @@ Run in batches (Haiku sub-agents are fine for parallel execution; see discipline
 `dangerouslyDisableSandbox` — the sandbox write-allowlist does not cover arbitrary workspace dirs.
 
 ```bash
-FILES="a.png b.png c.png d.png"
 S=.claude/skills/icon-square-center/scripts
+SRC=~/workspace/icon_collections
+OUT=~/workspace/icon_collections_fixed
 
-# 1. produce
-python3 $S/square-and-center-icon.py --src <SRC_DIR> --out <OUT_DIR> --files $FILES
+# Batch: every *.png in --src
+python3 $S/square-and-center-icon.py --src $SRC --out $OUT --all
+
+# Or explicit file list
+python3 $S/square-and-center-icon.py --src $SRC --out $OUT --files a.png b.png
 
 # 2. validate (independent 2nd measurement; exit 0 = all PASS)
-python3 $S/validate-square-center.py --src <SRC_DIR> --out <OUT_DIR> --files $FILES
+python3 $S/validate-square-center.py --src $SRC --out $OUT --all
 
-# 3. prove nothing was cropped + build falsifiable side-by-side composites into <OUT_DIR>/_verify/
-python3 $S/verify-crop-visual.py --src <SRC_DIR> --out <OUT_DIR> --files $FILES
+# 3. prove nothing was cropped + build falsifiable side-by-side composites into <OUT>/_verify/
+python3 $S/verify-crop-visual.py --src $SRC --out $OUT --all
 ```
 
-Flags: `--margin` (default 0.08), `--thr` (default 20). All scripts take arbitrary `--src/--out`.
+Flags: `--margin` (default 0.08; use `0` for flush square with no breathing room). All scripts
+take arbitrary `--src/--out` and accept either `--files NAME ...` or `--all`.
 
 ## Verification (two independent measurements + a falsifiable eye check)
 
@@ -61,11 +71,13 @@ This follows the repo's existing convention — see `scripts/verify-icon.py`: _"
 independent measurements agreeing is far stronger evidence than one."_
 
 - **`validate-square-center.py`** re-derives geometry from the finished OUTPUT and byte-compares
-  `source[bbox]` against `output[paste-region]` (`content_identical`) — the authoritative no-loss
-  gate. It also checks square, centered, no-edge-clip, and a dim-tail probe.
-- **`verify-crop-visual.py`** additionally counts foreground pixels lying **outside** the kept
-  bbox (`fg_pixels_outside_crop`, must be 0) and renders composites where any such pixel is painted
-  magenta. Clean crop → no magenta, and the green frame has a visible black gap around the object.
+  `source[crop_bbox]` against `output[paste-region]` (`content_identical`) — the authoritative
+  no-loss gate. Also checks square, centered, no-edge-clip, and `probe_sanity` (zero ink pixels
+  above `PROBE_THR` outside `crop_bbox` on the source).
+- **`verify-crop-visual.py`** additionally counts ink pixels (`PROBE_THR`) lying **outside** the
+  kept `crop_bbox` (`fg_pixels_outside_crop`, must be 0) and renders composites where any such
+  pixel is painted magenta. Clean crop → no magenta, and the green frame has a visible black gap
+  around the object.
 
 ## Verification discipline (lessons — read before trusting a check)
 
@@ -90,7 +102,7 @@ independent measurements agreeing is far stronger evidence than one."_
 
 ## Files
 
-- `scripts/icon_common.py` — SSOT detection rule + geometry constants
+- `scripts/icon_common.py` — SSOT detection rule + geometry constants (`crop_bbox`, full-bleed guard)
 - `scripts/square-and-center-icon.py` — the crop-and-center producer (no resize)
 - `scripts/validate-square-center.py` — independent validator (byte-identity no-loss gate)
 - `scripts/verify-crop-visual.py` — deterministic proof + falsifiable comparison composites

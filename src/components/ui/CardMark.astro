@@ -56,9 +56,8 @@ const useThemeCircle = context === 'theme-card' || emblemInCircle;
 const tileClassList = [
   'icon-tile',
   'icon-tile--round',
-  variant === 'recog' && 'icon-tile--recog',
   variant === 'compact' && 'icon-tile--compact',
-  variant === 'accented' && 'icon-tile--accented',
+  (variant === 'accented' || variant === 'recog') && 'icon-tile--accented',
   cls,
 ];
 

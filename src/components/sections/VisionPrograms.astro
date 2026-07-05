@@ -28,17 +28,47 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
     {
       visionBoard.groups && visionBoard.groups.length >= 2 && (
         <>
-          <VisionHub group={visionBoard.groups[0]} />
+          <div
+            class:list={[
+              'vision-hub-accent',
+              'vision-accent-hook',
+              `vision-accent-${visionBoard.groups[0].accent}`,
+            ]}
+          >
+            <VisionHub group={visionBoard.groups[0]} />
+          </div>
 
-          <span class="vision-flow__chevrons" aria-hidden="true">
+          <span
+            class:list={[
+              'vision-flow__chevrons',
+              'vision-accent-hook',
+              `vision-accent-${visionBoard.groups[0].accent}`,
+            ]}
+            aria-hidden="true"
+          >
             <span class="vision-flow__chevron vision-flow__chevron--1" />
             <span class="vision-flow__chevron vision-flow__chevron--2" />
             <span class="vision-flow__chevron vision-flow__chevron--3" />
           </span>
 
-          <VisionHub group={visionBoard.groups[1]} />
+          <div
+            class:list={[
+              'vision-hub-accent',
+              'vision-accent-hook',
+              `vision-accent-${visionBoard.groups[1].accent}`,
+            ]}
+          >
+            <VisionHub group={visionBoard.groups[1]} />
+          </div>
 
-          <span class="vision-flow__chevrons" aria-hidden="true">
+          <span
+            class:list={[
+              'vision-flow__chevrons',
+              'vision-accent-hook',
+              `vision-accent-${visionBoard.groups[1].accent}`,
+            ]}
+            aria-hidden="true"
+          >
             <span class="vision-flow__chevron vision-flow__chevron--1" />
             <span class="vision-flow__chevron vision-flow__chevron--2" />
             <span class="vision-flow__chevron vision-flow__chevron--3" />
@@ -52,7 +82,9 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
                 role="list"
               >
                 {visionBoard.programs.map((p) => (
-                  <li data-variant={p.variant}>
+                  <li
+                    class:list={['vision-accent-hook', `vision-accent-${p.accent}`]}
+                  >
                     <ThemeCard
                       title={p.title}
                       lines={p.lines}
@@ -143,20 +175,24 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
   .vision-flow__chevron--1 {
     background: linear-gradient(
       135deg,
-      color-mix(in srgb, var(--accent-strong) 75%, var(--bg-elev)),
-      var(--accent-strong)
+      color-mix(in srgb, var(--accent-card, var(--accent)) 75%, var(--bg-elev)),
+      var(--accent-card, var(--accent))
     );
   }
 
   .vision-flow__chevron--2 {
-    background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+    background: linear-gradient(
+      135deg,
+      var(--accent-card, var(--accent)),
+      color-mix(in srgb, var(--accent-card, var(--accent)) 70%, var(--accent-strong))
+    );
   }
 
   .vision-flow__chevron--3 {
     background: linear-gradient(
       135deg,
-      var(--accent),
-      color-mix(in srgb, var(--accent) 60%, var(--bg))
+      color-mix(in srgb, var(--accent-card, var(--accent)) 70%, var(--accent-strong)),
+      color-mix(in srgb, var(--accent-card, var(--accent)) 45%, var(--bg))
     );
   }
 
@@ -173,16 +209,9 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
     min-width: 0;
   }
 
-  /* Row-based accent: purple top row, red bottom row (mirrors About --accent-card). */
-  .vision-flow__grid li[data-variant='purple'] {
-    --accent-card: var(--accent);
-  }
+  /* Hub wrappers inherit categorical accent from vision-accent-* + vision-accent-hook. */
 
-  .vision-flow__grid li[data-variant='red'] {
-    --accent-card: var(--accent-red-light);
-  }
-
-  /* About-style standalone theme cards (scoped — LeadershipPhilosophy pattern). */
+  /* Program cards — per-item accent from content JSON (Leadership row pattern). */
   .vision-flow__grid :global(.theme-card.card) {
     flex: 1;
     height: 100%;

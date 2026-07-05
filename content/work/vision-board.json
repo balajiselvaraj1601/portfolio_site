@@ -5,37 +5,37 @@
     {
       "id": "idea",
       "label": "IDEA",
-      "variant": "purple",
+      "accent": "ai",
       "lead": { "kind": "icon", "name": "kaggle" },
       "marks": [
         {
           "kind": "logo",
-          "asset": "logo_innovation_idea",
+          "asset": "logo_hub_kaggle_idea",
           "alt": "Innovation / idea"
         },
         {
           "kind": "logo",
-          "asset": "logo_global_location",
+          "asset": "logo_hub_kaggle_globe",
           "alt": "Global reach"
         },
         {
           "kind": "logo",
-          "asset": "logo_learning_education",
+          "asset": "logo_hub_kaggle_knowledge",
           "alt": "Learning / education"
         },
         {
           "kind": "logo",
-          "asset": "logo_partnership_handshake",
+          "asset": "logo_hub_kaggle_partnership",
           "alt": "Partnership"
         },
         {
           "kind": "logo",
-          "asset": "logo_analytics_dashboard",
+          "asset": "logo_hub_kaggle_analytics",
           "alt": "Analytics"
         },
         {
           "kind": "logo",
-          "asset": "logo_target_goal",
+          "asset": "logo_hub_kaggle_bullseye",
           "alt": "Target / goal"
         }
       ]
@@ -43,41 +43,41 @@
     {
       "id": "vision",
       "label": "VISION",
-      "variant": "purple",
+      "accent": "platform",
       "lead": {
         "kind": "logo",
-        "asset": "logo_brain",
+        "asset": "logo_hub_multimodal_center_brain",
         "alt": "Multimodal AI"
       },
       "marks": [
         {
           "kind": "logo",
-          "asset": "logo_document_file",
+          "asset": "logo_hub_multimodal_document",
           "alt": "Document / text"
         },
         {
           "kind": "logo",
-          "asset": "logo_grid_table",
+          "asset": "logo_hub_multimodal_table",
           "alt": "Tabular data"
         },
         {
           "kind": "logo",
-          "asset": "logo_photo_image",
+          "asset": "logo_hub_multimodal_image",
           "alt": "Image"
         },
         {
           "kind": "logo",
-          "asset": "logo_cube_3d",
+          "asset": "logo_hub_multimodal_cube",
           "alt": "3D / volumetric"
         },
         {
           "kind": "logo",
-          "asset": "logo_pulse_activity",
+          "asset": "logo_hub_multimodal_signal",
           "alt": "Signal / time-series"
         },
         {
           "kind": "logo",
-          "asset": "logo_network_nodes",
+          "asset": "logo_hub_multimodal_graph",
           "alt": "Graph / network"
         }
       ]
@@ -87,7 +87,7 @@
     {
       "title": "Drug Safety Platform",
       "label": "SVP Backed",
-      "variant": "purple",
+      "accent": "impact",
       "badge": {
         "kind": "logo",
         "asset": "logo_drug_safety",
@@ -103,7 +103,7 @@
     {
       "title": "Broad Institute",
       "label": "Senior Group Leader",
-      "variant": "purple",
+      "accent": "strategic",
       "badge": {
         "kind": "logo",
         "asset": "logo_broad_institute",
@@ -118,7 +118,7 @@
     {
       "title": "Persister Analysis",
       "label": "Chief Scientist Backed",
-      "variant": "red",
+      "accent": "privacy",
       "badge": {
         "kind": "logo",
         "asset": "persist-seq",
@@ -134,7 +134,7 @@
     {
       "title": "AACR Conference 2025",
       "label": "Conference Presentation",
-      "variant": "red",
+      "accent": "platform",
       "badge": { "kind": "logo", "asset": "logo_aacr", "alt": "AACR" },
       "lines": ["3-month AI pipeline development", "2 AI engineers"],
       "entity": "aacr"
@@ -142,42 +142,47 @@
   ],
   "orgCards": [
     {
+      "accent": "impact",
       "mark": {
         "kind": "logo",
-        "asset": "logo_achievement_award",
+        "asset": "logo_vision_award",
         "alt": "Achievement award"
       },
       "title": "EVP-Level Award",
       "lines": ["Awarded for", "Drug Safety Platform"]
     },
     {
+      "accent": "strategic",
       "mark": {
         "kind": "logo",
-        "asset": "logo_business_presentation",
+        "asset": "logo_vision_gaia",
         "alt": "Business presentation"
       },
       "title": "Gartner Submission",
       "lines": ["Multimodal Vision — GITC Chennai"]
     },
     {
+      "accent": "impact",
       "mark": {
         "kind": "logo",
-        "asset": "logo_financial_growth",
+        "asset": "logo_vision_secure_funds",
         "alt": "Financial growth"
       },
       "title": "Secured $0.5M+ Funds",
       "lines": ["Secured multiple times", "for the team"]
     },
     {
+      "accent": "platform",
       "mark": {
         "kind": "logo",
-        "asset": "logo_analytics_dashboard",
+        "asset": "logo_vision_scorecard",
         "alt": "Analytics dashboard"
       },
       "title": "3 Scorecards",
       "lines": ["Projects aligned", "to 3 scorecards"]
     },
     {
+      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_positioning",
@@ -187,18 +192,20 @@
       "lines": ["7 internal groups · 3 startups"]
     },
     {
+      "accent": "people",
       "mark": {
         "kind": "logo",
-        "asset": "logo_team_growth",
+        "asset": "logo_vision_scaling_team",
         "alt": "Team growth"
       },
       "title": "Scaled Team",
       "lines": ["From 1 to 12", "team members"]
     },
     {
+      "accent": "people",
       "mark": {
         "kind": "logo",
-        "asset": "logo_global_location",
+        "asset": "logo_vision_global_team",
         "alt": "Global locations"
       },
       "title": "Global Team Management",

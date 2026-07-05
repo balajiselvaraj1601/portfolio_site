@@ -1,15 +1,12 @@
 {
   "install_order": [
-    "icon_kaggle",
-    "icon_multimodal",
-    "icon_box",
     "icon_collections"
   ],
   "install_overrides": {
     "icon_box": {
       "target-goal": "logo_target_goal_box"
     },
-    "icon_collections": {
+    "icon_collections_resized": {
       "trophy-awards": "logo_trophy_badge"
     }
   },
@@ -39,7 +36,7 @@
       "generator_flags": ["--colored-glyph"]
     },
     "icon_collections": {
-      "dir": "icon_collections",
+      "dir": "icon_collections_resized",
       "mask_mode": "light",
       "circle_archetype": false,
       "scale_luminance": false,

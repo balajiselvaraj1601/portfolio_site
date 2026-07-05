@@ -159,7 +159,9 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 | `site-review-fix`       | site-review-fix agent                           | `.claude/skills/site-review-fix/SKILL.md`       |
 | `page-consistency-team` | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md` |
 | `portfolio-icon-audit`  | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`  |
+| `portfolio-icon-standardization` | Manual invocation; design-guardian, page agents | `.claude/skills/portfolio-icon-standardization/SKILL.md` |
 | `svg-logo-crop`         | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`         |
+| `icon-square-center`    | Manual invocation (raster prep)                 | `.claude/skills/icon-square-center/SKILL.md`    |
 
 ## Icon / Logo Asset Pipeline
 
@@ -262,6 +264,7 @@ When the save button is loading, CSS sets `opacity: 0` on its child icon. After 
 | Agents — page-agent playbook            | `.claude/references/page-agent-playbook.md`                          |
 | Agents — authoring standard             | `.claude/references/page-agent-standard.md`                          |
 | Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`                       |
+| Icon size / chrome / color SSOT (skill) | `.claude/skills/portfolio-icon-standardization/SKILL.md`             |
 | Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                              |
 | UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`                     |
 | Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`                   |

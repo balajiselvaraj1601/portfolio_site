@@ -24,7 +24,7 @@ const { icon, markSlug, count, label, class: cls, ...rest } = Astro.props;
 
 <div class:list={['recog-tile', cls]} {...rest}>
   <div
-    class="icon-tile icon-tile--recog icon-tile--accented"
+    class="icon-tile icon-tile--round icon-tile--accented"
     aria-hidden="true"
   >
     {
@@ -38,13 +38,3 @@ const { icon, markSlug, count, label, class: cls, ...rest } = Astro.props;
   <div class="recog-tile__count">{count}</div>
   <div class="recog-tile__label">{label}<slot name="label-extra" /></div>
 </div>
-
-<style>
-  /* Size MarkEmblem to --mark-glyph within the tile (beats MarkEmblem's own
-     width:100%/height:100% scoped rule via higher specificity — same pattern
-     as VisionHub node sizing). */
-  .recog-tile :global(.mark-emblem) {
-    width: var(--mark-glyph);
-    height: var(--mark-glyph);
-  }
-</style>

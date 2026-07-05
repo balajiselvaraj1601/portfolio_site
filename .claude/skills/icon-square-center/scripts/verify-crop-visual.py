@@ -3,7 +3,7 @@
 
 Two independent, FALSIFIABLE checks per source/output pair:
 
-  A. DETERMINISTIC preservation proof: source[content-bbox] must be byte-identical
+  A. DETERMINISTIC preservation proof: source[crop_bbox] must be byte-identical
      to output[paste-region]. If identical, every detected content pixel is present
      verbatim -> nothing within the object was cropped.
 
@@ -12,24 +12,26 @@ Two independent, FALSIFIABLE checks per source/output pair:
      "touches" is uninformative). Instead:
        - the kept-region rectangle is drawn with a small OUTWARD gap, so when nothing
          is clipped there is visible black between the object and the line;
-       - any foreground pixel lying OUTSIDE the kept bbox is painted MAGENTA. With a
-         correct crop this set is empty, so a clean composite shows NO magenta. Any
-         magenta = real excluded content.
+       - any ink pixel (PROBE_THR) lying OUTSIDE the kept crop_bbox is painted MAGENTA.
+         With a correct crop this set is empty, so a clean composite shows NO magenta.
      LEFT = source with gap-rectangle + magenta overlay; RIGHT = output.
 
 Emits verify_report.json; exit 0 iff all pairs are byte-identical AND magenta-free.
 """
-import argparse, json, os, sys
+import argparse
+import json
+import os
+import sys
 from PIL import Image, ImageDraw
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from icon_common import content_bbox, paste_offset, THR, PROBE_THR
+from icon_common import crop_bbox, paste_offset, list_png_files, PROBE_THR
 
 VIEW = 320  # per-panel view size (downscale for the composite ONLY; deliverable untouched)
 
 
-def verify_one(src_path, out_path, thr, probe_thr, out_verify_dir):
+def verify_one(src_path, out_path, out_verify_dir):
     src = Image.open(src_path).convert("RGB")
     out = Image.open(out_path).convert("RGB")
     s = np.asarray(src)
@@ -37,37 +39,39 @@ def verify_one(src_path, out_path, thr, probe_thr, out_verify_dir):
     name = os.path.basename(src_path)
     sh, sw = s.shape[:2]
 
-    sbb = content_bbox(s, thr)
+    sbb = crop_bbox(s)
     x0, y0, x1, y1 = sbb
     cw, ch = x1 - x0, y1 - y0
 
-    # --- A. byte-identity proof (reconstruct centered paste offset independently) ---
     px, py = paste_offset(o.shape[0], cw, ch)
     src_region = s[y0:y1, x0:x1]
     out_region = o[py:py + ch, px:px + cw]
     identical = src_region.shape == out_region.shape and bool(np.array_equal(src_region, out_region))
 
-    # foreground strictly OUTSIDE the kept bbox -> would be genuinely-clipped content
     lum = s[:, :, :3].max(axis=2)
-    fg = lum > thr
+    fg = lum > PROBE_THR
     outside = fg.copy()
     outside[y0:y1, x0:x1] = False
     n_outside = int(outside.sum())
 
-    # dim tail beyond crop (threshold-too-tight probe)
-    pbb = content_bbox(s, probe_thr)
-    grow_px = max(x0 - pbb[0], y0 - pbb[1], pbb[2] - x1, pbb[3] - y1) if pbb else 0
     src_touches_edge = x0 <= 1 or y0 <= 1 or x1 >= sw - 1 or y1 >= sh - 1
 
-    # --- B. falsifiable composite ---
     marked = src.copy()
     mk = np.asarray(marked).copy()
-    mk[outside] = (255, 0, 255)          # magenta = clipped content (empty when clean)
+    mk[outside] = (255, 0, 255)
     marked = Image.fromarray(mk)
     d = ImageDraw.Draw(marked)
-    gap = max(3, sw // 100)              # outward gap so "touch" != "clipped"
-    d.rectangle([max(0, x0 - gap), max(0, y0 - gap), min(sw - 1, x1 - 1 + gap), min(sh - 1, y1 - 1 + gap)],
-                outline=(80, 200, 80), width=max(2, sw // 300))
+    gap = max(3, sw // 100)
+    d.rectangle(
+        [
+            max(0, x0 - gap),
+            max(0, y0 - gap),
+            min(sw - 1, x1 - 1 + gap),
+            min(sh - 1, y1 - 1 + gap),
+        ],
+        outline=(80, 200, 80),
+        width=max(2, sw // 300),
+    )
     left = marked.resize((VIEW, VIEW))
     right = out.resize((VIEW, VIEW))
     comp = Image.new("RGB", (VIEW * 2 + 12, VIEW), (25, 25, 25))
@@ -79,26 +83,37 @@ def verify_one(src_path, out_path, thr, probe_thr, out_verify_dir):
     return {
         "file": name,
         "content_identical": identical,
-        "fg_pixels_outside_crop": n_outside,   # 0 == nothing clipped
+        "fg_pixels_outside_crop": n_outside,
         "content_wh": [int(cw), int(ch)],
-        "dim_growth_px": int(grow_px),
         "src_touches_edge": bool(src_touches_edge),
         "clean": bool(identical and n_outside == 0),
     }
+
+
+def resolve_files(src_dir, files, use_all):
+    if use_all:
+        if files:
+            raise SystemExit("error: use --files or --all, not both")
+        return list_png_files(src_dir)
+    if not files:
+        raise SystemExit("error: specify --files NAME ... or --all")
+    return files
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--files", nargs="+", required=True)
-    ap.add_argument("--thr", type=int, default=THR)
-    ap.add_argument("--probe-thr", type=int, default=PROBE_THR)
+    ap.add_argument("--files", nargs="*", default=[])
+    ap.add_argument("--all", action="store_true")
     ap.add_argument("--verify-dir", default=None)
     ap.add_argument("--json-out", default=None)
     a = ap.parse_args()
     vdir = a.verify_dir or os.path.join(a.out, "_verify")
-    results = [verify_one(os.path.join(a.src, n), os.path.join(a.out, n), a.thr, a.probe_thr, vdir) for n in a.files]
+    names = resolve_files(a.src, a.files, a.all)
+    results = [
+        verify_one(os.path.join(a.src, n), os.path.join(a.out, n), vdir) for n in names
+    ]
     payload = json.dumps(results, indent=2)
     if a.json_out:
         open(a.json_out, "w").write(payload)

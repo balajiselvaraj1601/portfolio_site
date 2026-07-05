@@ -59,7 +59,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### awards — `src/components/sections/Awards.astro` (interior: `RecogCardShell.astro`)
 
-- **Object:** §6 `default` band › §5 Tier C `.recog-tile` (summary) + `.recog-card` (grid, via `RecogCardShell`) › §5 mark: `.icon-tile--recog.icon-tile--accented` (tiles), `.icon-tile--accented` icon fallback (card headTop)
+- **Object:** §6 `default` band › §5 Tier C `.recog-tile` (summary) + `.recog-card` (grid, via `RecogCardShell`) › §5 mark: `.icon-tile.icon-tile--round.icon-tile--accented` (tiles), same on card headTop
 - **Text (reading order):**
   - `h2.section__title` (Section `title`) → **T2** section title
   - _Summary tiles ×6 (`.recog-tile`):_
@@ -78,7 +78,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### kaggle — `src/components/sections/Kaggle.astro` (cards: `CompetitionCard.astro` → `RecogCardShell.astro`)
 
-- **Object:** §6 `alt` band › §5 Tier C `.recog-tile` (summary) + `.recog-card` (grid, via `CompetitionCard`) › §5 mark: `.icon-tile--recog.icon-tile--accented` (tiles), `.icon-tile--accented` icon fallback (card headTop)
+- **Object:** §6 `alt` band › §5 Tier C `.recog-tile` (summary) + `.recog-card` (grid, via `CompetitionCard`) › §5 mark: `.icon-tile.icon-tile--round.icon-tile--accented` (tiles), same on card headTop
 - **Text (reading order):**
   - `h2.section__title` (Section `title`) → **T2** section title
   - _Summary tiles ×4 (`.recog-tile`):_
@@ -92,11 +92,11 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
     - `.blob-block__label.recog-label` (Summary / Evaluation Metric) → **T9** emphasis micro-label
     - `p.blob-block__body.recog-body` → **T6** body prose
   - `.recog-empty` → **T6** body prose (muted)
-- **Notes:** §4 — content section, eyebrow omitted. Shell inherits EX-001/EX-002/EX-003; EX-010 — `.blob-stats` grid uses a 1px hairline `gap` as a cell divider (object-tier, off `--space-*`). Text ladder unaffected.
+- **Notes:** §4 — content section, eyebrow omitted. Shell inherits EX-001/EX-002/EX-003; EX-010 — `.blob-stats` grid uses a 1px hairline `gap` as a cell divider (object-tier, off `--space-*`). Text ladder unaffected. **Mark color (phase 3):** header tile, stat icons (`.blob-stat__icon`), and block icons (`.blob-block__icon`) all tint via `--accent-card` / `--medal`; size hierarchy 22→20→16 unchanged.
 
 ### education — `src/components/sections/Education.astro`
 
-- **Object:** §6 `default` band › §5 Tier C `.edu-panel` › §5 mark: `CardMark variant="recog"` (rect `.logo-badge` or `.icon-tile--accented` fallback); stat/highlight icons via `.icon-tile--recog.icon-tile--accented`
+- **Object:** §6 `default` band › §5 Tier C `.edu-panel` › §5 mark: `CardMark variant="recog"` (rect `.logo-badge` or `.icon-tile--accented` fallback); stat/highlight icons via `.icon-tile.icon-tile--round.icon-tile--accented`
 - **Text (reading order):**
   - `h2.section__title` (Section `title`) → **T2** section title
   - `p.section__subtitle` (`education.intro`) → **T7** subtitle / lede
@@ -119,7 +119,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 | `h2.section__title`                  | `--heading`     | —                            | —               |
 | `p.section__subtitle` (education)    | `--text-muted`  | —                            | —               |
 | `.recog-tile` summary                | —               | `--bg-elev`                  | `--accent-card` |
-| `.recog-tile__count`                 | `--accent`      | —                            | —               |
+| `.recog-tile__count`                 | `--accent-card` | —                            | —               |
 | `.recog-tile__label`                 | `--text-muted`  | —                            | —               |
 | `.icon-tile--accented` (tiles/cards) | `--accent-card` | color-mix w/ `--accent-card` | —               |
 | `.recog-card` (awards/kaggle)        | —               | `--bg-elev` (gradient)       | `--accent-card` |

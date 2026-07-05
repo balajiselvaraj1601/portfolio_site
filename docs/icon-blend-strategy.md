@@ -1,5 +1,8 @@
 # Icon Blend Strategy — icon_collections raster set
 
+> **Agent skill:** operational SSOT for size, chrome, and color standardization —
+> [`.claude/skills/portfolio-icon-standardization/SKILL.md`](../.claude/skills/portfolio-icon-standardization/SKILL.md)
+
 Status: RATIFIED by design-guardian with amendments (2026-07-04). Amendments
 are folded into the text below; binding constraints BC1–BC5 at the end.
 Scope: the 46 `icon_*.png` assets sourced from `~/workspace/icon_collections`,
@@ -49,7 +52,7 @@ per-page question is only _which vector route_ and _which container_.
 | --- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
 | 1   | Header chrome `icon_general_{save,sun,moon}` (3) | Drop `logoSrc()` branches; the existing `<Icon>` Lucide fallbacks become primary                                                                                                                                                                                                                                                                                                    | 36px header buttons; currentColor                                                                                                  | design-guardian                              |
 | 2   | Kaggle metric stats `icon_metric_kaggle_*` (8)   | Pipeline → `logo_metric_<stem>.svg`; render via MarkEmblem in `.blob-stat__icon`/`.blob-block__icon`                                                                                                                                                                                                                                                                                | inherits `color: var(--medal)`; sizes BINDING: `--icon-md` (20px) in `.blob-stat__icon`, `--icon-sm` (16px) in `.blob-block__icon` | guardian + page-recognition                  |
-| 3   | Education stats `icon_education_*` (4)           | Pipeline → `logo_education_<stem>.svg`; MarkEmblem inside existing `.icon-tile--recog--accented`                                                                                                                                                                                                                                                                                    | inherits `--accent-card` gold; size via `--mark-glyph`                                                                             | guardian + page-recognition                  |
+| 3   | Education stats `icon_education_*` (4)           | Pipeline → `logo_education_<stem>.svg`; MarkEmblem inside `.icon-tile.icon-tile--accented`                                                                                                                                                                                                                                                                                           | inherits `--accent-card` gold; size via `--mark-glyph` (22px)                                                                      | guardian + page-recognition                  |
 | 4   | Trophies `icon_trophy_*` (2 files, 1 unique)     | Pipeline → single `logo_trophy_badge.svg`, referenced by both Awards and Kaggle tiles (dedup). AMENDED: RecogTile.astro must first replace its `imgSrc` `<img>` path with a MarkEmblem path (guardian-owned; blocks page-recognition)                                                                                                                                               | RecogTile slot; `--accent-card` per level/medal                                                                                    | guardian + page-recognition                  |
 | 5   | Competition entity marks `icon_kaggle_*` (9)     | Pipeline → `logo_kaggle_<stem>.svg`; MarkEmblem in card header tile replaces `object-fit: cover` black square. AMENDED: CompetitionCard needs a third routing branch — resolved slugs matching `logo_*` go to MarkEmblem inside `.icon-tile--accented`, NOT `.comp-image` cover-fill (guardian-owned; blocks page-recognition). `.comp-image` stays intact for genuine org logos | `.icon-tile--accented` medal tint                                                                                                  | guardian + page-recognition                  |
 | 6   | Vision hub nodes `icon_hub_*` (13)               | **Reuse existing `marks/logo_*.svg`** (name-map below); pipeline only for unmatched stems; kills raster/vector orbit mixing                                                                                                                                                                                                                                                         | MarkEmblem at the vector node ratio (52%); `--accent-ll`                                                                           | page-vision (+ guardian for VisionHub.astro) |
@@ -132,6 +135,23 @@ the `logo_target_goal` collision rule). Run `python3 tests/run-icon-tests.py`
 after any config/generator change; visually spot-check every output before
 install (noise-path shatter gate).
 
+### ViewBox normalization — MANDATORY after any marks/ (re)generation
+
+The generator's `--tight` mode emits non-square viewBoxes (aspects 0.58–1.83),
+which makes elongated glyphs render visually smaller than square ones inside
+MarkEmblem's `mask: contain` slots. After generating or batch-regenerating ANY
+file in `public/assets/logos/marks/`, run:
+
+```bash
+python3 scripts/normalize-mark-viewbox.py apply   # idempotent
+python3 scripts/normalize-mark-viewbox.py check   # gate: must exit 0
+```
+
+This gives every glyph in a section group (groups derive from slug prefixes,
+e.g. `logo_hub_multimodal_*`) a square viewBox sized for equal ink-footprint
+area — the "same size per section" rule ratified 2026-07-04. Skipping this
+step reintroduces the uneven-icon regression.
+
 ## Token & contract changes (guardian-owned)
 
 1. **Extend the tile glyph rule** in `global.css`:
@@ -151,11 +171,93 @@ install (noise-path shatter gate).
    `.comp-image` for the org-logo header tile in CompetitionCard."
 4. Document `object-fit` split: `cover` is exclusively `.comp-image`;
    everything else `contain`.
-5. VisionHub node fill converges to the MarkEmblem ratio once raster nodes are
-   gone (the 72% raster rule dies with the raster branch).
+5. VisionHub center and satellite emblems bind to `--mark-glyph` (alias
+   `--vision-hub-glyph`); hub orbit geometry stays cqi-based.
 6. Adopt guardian constraints C1–C9 (no per-component raster sizing classes,
    no raster in Header, preserve `logoSrc() → <Icon>` fallback, CardMark SSOT,
    cqi sizing in VisionHub, no copying the Education `color-mix` one-off).
+
+## Rendered icon sizes (SSOT, 2026-07-05)
+
+All `icon_collections` marks render as `MarkEmblem` SVG masks. Effective pixel
+size is set by CSS tokens in `src/styles/global.css`, not PNG dimensions.
+
+| Context | Token / rule | Px |
+| --- | --- | --- |
+| Card / summary tile chrome | `--mark-slot` | 44 |
+| Card / summary tile glyph | `--mark-glyph` | 22 |
+| Competition card stat row | `--icon-md` (`.blob-icon--md`) | 20 |
+| Competition summary / eval block | `--icon-sm` (`.blob-icon--sm`) | 16 |
+| Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph` | 22 |
+| Vision impact theme card | `--mark-slot` / `--mark-glyph` | 44 / 22 |
+| Compact tile override | `.icon-tile--compact` | 36 / 18 |
+
+### Circular mark chrome (SSOT, 2026-07-05 phase 2)
+
+Accented pipeline marks share `.mark-circle` / `.mark-circle--accented` in
+`global.css` (composed onto `.theme-card__icon`,
+`.icon-tile.icon-tile--round.icon-tile--accented`, `.vision-hub__node`, and
+`.vision-hub__center`):
+
+| Aspect | Token / rule | Value |
+| --- | --- | --- |
+| Shape | `border-radius: 50%` | circle |
+| Slot | `--mark-slot` | 44px (hub scales via cqi at live stage width) |
+| Glyph fill | `--mark-glyph / --mark-slot` | 50% |
+| Border | `--mark-border-width` | 1px |
+| Background wash | `--mark-bg-mix` | 14% `--accent-card` |
+| Border tint | `--mark-border-mix` | 35% `--accent-card` |
+
+Hub node/center diameters: `--vision-hub-node: calc(100cqi * var(--mark-slot) / var(--vision-hub-max))`
+(center equals node).
+
+**Recognition view:** summary tiles, award/Kaggle card headers, and Education
+stat tiles all use circular accented chrome (44px slot + 22px glyph). Kaggle
+competition cards keep an intentional in-card hierarchy (22 → 20 → 16) for
+header vs stats vs blocks.
+
+**Vision view:** hub node/center circles and theme-card icons share the same
+chrome recipe; glyphs match `--mark-glyph`.
+
+### Color blending (SSOT, 2026-07-05 phase 3)
+
+Foreground and background tints for pipeline marks flow through one hook:
+**`--accent-card`** on the owning wrapper (card shell, tile, hub accent div,
+level/medal class). Circular chrome reads it via **`--mark-fg`**
+(`var(--accent-card, var(--accent))`).
+
+| Layer | Token / mechanism | Resolves to |
+| --- | --- | --- |
+| Glyph (MarkEmblem / Lucide) | parent `color` → `--mark-fg` | `--accent-card` on wrapper |
+| Circle background wash | `--mark-bg-mix` (14%) | `color-mix(--mark-fg …)` |
+| Circle border tint | `--mark-border-mix` (35%) | `color-mix(--mark-fg …)` |
+| Card shell border/top | `--accent-card` | level / medal / section hue |
+
+**Three delivery tiers:**
+
+| Tier | Delivery | Color behavior |
+| --- | --- | --- |
+| 1 — Vector tinted | `MarkEmblem` mask + `Icon` `currentColor` | Inherits `--mark-fg` from accented circle or bare span |
+| 2 — Soft tile | `.icon-tile` without `--accented` | Site purple (`--accent-soft` / `--accent-ll`) |
+| 3 — Full-color | `LogoBadge` `<img>` on `--logo-surface` | Brand pixels unchanged; optional accent-tinted pill bg |
+
+**Intentional exceptions (do not “fix”):**
+
+- **Contact brand icons** — `.icon--brand` forces `--brand-mark` (neutral heading
+  ink) inside accented circles for official logo fidelity.
+- **Experience project icons** — `.icon-tile--elev` (neutral slot, no accent wash).
+- **Org wordmarks** — Tier 3 raster; never masked or recolored.
+
+**Research fallback icons:** `CardMark variant="accented"` on cards inside
+`.card-accent` so icon circles match section-hued top borders (teal / blue / gold).
+
+**Kaggle competition cards:** all MarkEmblem contexts (header, stats, summary/eval
+blocks) use `--accent-card` / medal tint — size hierarchy (22 → 20 → 16) unchanged.
+
+**Vision board:** hubs, program cards, and impact cards use categorical
+`accent` keys in `vision-board.json` (`impact`, `strategic`, `platform`,
+`people`, `ai`, `privacy`, `gxp`) mapped to site `--cat-*` tokens via
+`.vision-accent-{key}` + `.vision-accent-hook` in `global.css`.
 
 ## Cleanup
 

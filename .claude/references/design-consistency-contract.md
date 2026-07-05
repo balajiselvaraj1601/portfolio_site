@@ -227,8 +227,26 @@ radius, top accent, and gradient background only when documented in §11.
 
 **Sizing SSOT:** `:root { --mark-slot: 44px; --mark-glyph: 22px; }` in `src/styles/global.css`.
 Change these two tokens to resize standard circular marks site-wide. Contextual overrides reuse
-the same names: `.icon-tile--recog { --mark-slot: 40px; }`, `.icon-tile--compact {
---mark-slot: 36px; --mark-glyph: 18px; }`, `#hub-circle .hub__center` for Tier D hub center.
+the same names: `.icon-tile--compact { --mark-slot: 36px; --mark-glyph: 18px; }`.
+VisionHub emblems bind to `--mark-glyph` (alias `--vision-hub-glyph`); hub node/center
+diameters track `--mark-slot` via cqi on `.vision-hub__stage`.
+
+**Chrome SSOT:** `.mark-circle` + `.mark-circle--accented` in `global.css` — composed
+onto `.theme-card__icon`, `.icon-tile.icon-tile--round.icon-tile--accented`,
+`.vision-hub__node`, and `.vision-hub__center`. Tokens: `--mark-border-width` (1px),
+`--mark-bg-mix` (14%), `--mark-border-mix` (35%). Do not hand-roll accent washes on
+new mark slots.
+
+**Color SSOT (phase 3):** Set `--accent-card` on the owning wrapper; circular marks
+resolve glyph + wash + border through **`--mark-fg`** (`var(--accent-card, var(--accent))`).
+`.card-accent` also sets `--mark-fg` for card shells. Bare-span marks (e.g.
+`.blob-stat__icon`) set `color: var(--accent-card, …)` directly. Never hand-roll
+`color-mix` on new mark slots — use `--mark-bg-mix` / `--mark-border-mix`.
+
+**In-card hierarchy (Kaggle competition cards only):** card header glyph
+`--mark-glyph` (22px); stat grid `--icon-md` (20px); summary/eval blocks
+`--icon-sm` (16px). All three tiers share the same **medal tint**
+(`--accent-card` / `--mark-fg`). Do not collapse sizes to a single value.
 
 **Component SSOT:** `CardMark.astro` — all new card marks go through this component; it calls
 `resolveLogoSlot()` in `src/lib/logo-display.ts`. Do not hand-roll logo/badge branching in cards.
@@ -238,15 +256,16 @@ the same names: `.icon-tile--recog { --mark-slot: 40px; }`, `.icon-tile--compact
 | **rect**             | `CardMark` → `.logo-badge` (rounded rect, white surface)           | Horizontal wordmarks (most org logos)                               |
 | **round**            | `CardMark` → `.logo-badge--round` or `.icon-tile.icon-tile--round` | Square emblem logos in circular chrome                              |
 | **plain**            | `CardMark` → `.logo-badge--plain`                                  | Dark/light marks on card bg (`jitc`, `hcl`)                         |
-| **emblem-in-circle** | `CardMark` → `.theme-card__icon` + `MarkEmblem`                    | Vision org/program theme cards (pipeline `logo_*` in accent circle) |
-| **emblem bare**      | `MarkEmblem` without chrome                                        | Hub satellite plain nodes, self-ringed assets off-card              |
+| **emblem-in-circle** | `CardMark` → `.theme-card__icon` + `MarkEmblem` (`.mark-circle--accented`) | Vision org/program theme cards (pipeline `logo_*` in accent circle) |
+| **emblem bare**      | `MarkEmblem` without chrome                                                | Self-ringed assets off-card (not hub nodes — hub uses accented circles) |
 | **icon**             | `CardMark` → `.icon-tile` (+ modifiers)                            | Lucide fallback when no logo asset                                  |
 
 **Reference implementations (do not redesign):** Contact connect cards (round Lucide via
-`CardMark`), Recognition summary tiles (`.icon-tile--recog.icon-tile--accented`).
+`CardMark`), Recognition summary tiles (`.icon-tile.icon-tile--round.icon-tile--accented`).
 
-Icon tile modifiers: `--round` (circle), `--compact` (36px slot), `--recog` (40px slot summary),
-`--accented` (tints from contextual `--accent-card`), `--elev` (white node on tinted callout).
+Icon tile modifiers: `--round` (circle; required with `--accented` for pipeline marks),
+`--compact` (36px slot / 18px glyph), `--accented` (composed via `.mark-circle--accented`
+when paired with `--round`), `--elev` (white node on tinted callout).
 
 ### Card colour highlights
 

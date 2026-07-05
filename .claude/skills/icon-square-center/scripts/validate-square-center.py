@@ -10,20 +10,26 @@ Checks per file:
   1 square            : out w == h
   2 centered          : out content centroid offset <= ctr_tol each axis
   3 no_clipping       : out content does NOT touch the canvas edge (margin >= edge_min)
-  4 content_identical : AUTHORITATIVE no-loss gate. source[bbox] is byte-identical to
-                        output[paste-region]. Closes the false-PASS gap that a
-                        count/dims-only check leaves open (equal count+dims but
-                        altered pixels would wrongly pass). Count+dims kept as a
-                        cheaper secondary signal (no_loss_counts).
-  5 thr_sanity        : dim content does not extend beyond the crop -- bbox at a low
-                        probe threshold grows <= growth_tol beyond the bbox at thr.
+  4 content_identical : AUTHORITATIVE no-loss gate. source[crop_bbox] is byte-identical to
+                        output[paste-region].
+  5 probe_sanity      : no ink pixels (PROBE_THR) lie outside crop_bbox on source.
 """
-import argparse, json, os, sys
+import argparse
+import json
+import os
+import sys
 from PIL import Image
 import numpy as np
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from icon_common import content_bbox, paste_offset, THR, PROBE_THR
+from icon_common import (
+    content_bbox,
+    crop_bbox,
+    paste_offset,
+    list_png_files,
+    THR,
+    PROBE_THR,
+)
 
 
 def fg_count(arr, thr):
@@ -31,18 +37,29 @@ def fg_count(arr, thr):
     return int((rgb.max(axis=2) > thr).sum())
 
 
-def check(src_path, out_path, thr, probe_thr, edge_min=0.02, ctr_tol=0.01, growth_tol=0.015):
+def ink_outside_crop(arr, bb, thr):
+    """Count foreground pixels strictly outside crop bbox."""
+    if bb is None:
+        return 0
+    x0, y0, x1, y1 = bb
+    lum = arr[:, :, :3].max(axis=2)
+    fg = lum > thr
+    outside = fg.copy()
+    outside[y0:y1, x0:x1] = False
+    return int(outside.sum())
+
+
+def check(src_path, out_path, edge_min=0.02, ctr_tol=0.01):
     s = np.asarray(Image.open(src_path).convert("RGB"))
     o = np.asarray(Image.open(out_path).convert("RGB"))
     sh, sw = s.shape[:2]
     oh, ow = o.shape[:2]
-    sbb = content_bbox(s, thr)
-    obb = content_bbox(o, thr)
+    sbb = crop_bbox(s)
+    obb = content_bbox(o, THR)
     r = {"file": os.path.basename(src_path)}
 
-    r["square"] = (ow == oh)
+    r["square"] = ow == oh
 
-    # 2 centered (measured on the OUTPUT)
     if obb:
         ox0, oy0, ox1, oy1 = obb
         cx, cy = (ox0 + ox1) / 2 / ow, (oy0 + oy1) / 2 / oh
@@ -58,8 +75,6 @@ def check(src_path, out_path, thr, probe_thr, edge_min=0.02, ctr_tol=0.01, growt
     ocw, och = (obb[2] - obb[0], obb[3] - obb[1]) if obb else (0, 0)
     r["src_content"], r["out_content"] = [scw, sch], [ocw, och]
 
-    # 4 content_identical — AUTHORITATIVE. Byte-compare source content vs where the
-    # producer must have pasted it (centered), independently reconstructed here.
     identical = False
     if sbb and r["square"]:
         px, py = paste_offset(ow, scw, sch)
@@ -67,33 +82,44 @@ def check(src_path, out_path, thr, probe_thr, edge_min=0.02, ctr_tol=0.01, growt
         out_region = o[py:py + sch, px:px + scw]
         identical = src_region.shape == out_region.shape and bool(np.array_equal(src_region, out_region))
     r["content_identical"] = identical
-    r["no_loss_counts"] = (fg_count(s, thr) == fg_count(o, thr)) and (scw == ocw) and (sch == och)
+    r["no_loss_counts"] = (fg_count(s, PROBE_THR) == fg_count(o, PROBE_THR)) and (scw == ocw) and (sch == och)
 
-    # 5 thr_sanity — did we chop a dim region? probe bbox growth beyond thr bbox.
-    pbb = content_bbox(s, probe_thr)
-    if sbb and pbb:
-        grow = max(sbb[0] - pbb[0], sbb[1] - pbb[1], pbb[2] - sbb[2], pbb[3] - sbb[3])
-        base = max(scw, sch)
-        r["dim_growth_px"] = int(grow)
-        r["thr_sanity"] = (grow / base if base else 0.0) <= growth_tol
-    else:
-        r["dim_growth_px"], r["thr_sanity"] = 0, True
+    outside = ink_outside_crop(s, sbb, PROBE_THR)
+    r["ink_outside_crop"] = outside
+    r["probe_sanity"] = outside == 0
 
-    r["src_touches_edge"] = bool(sbb and (sbb[0] <= 1 or sbb[1] <= 1 or sbb[2] >= sw - 1 or sbb[3] >= sh - 1))
-    r["PASS"] = bool(r["square"] and r["centered"] and r["no_clipping"]
-                     and r["content_identical"] and r["thr_sanity"])
+    r["src_touches_edge"] = bool(
+        sbb and (sbb[0] <= 1 or sbb[1] <= 1 or sbb[2] >= sw - 1 or sbb[3] >= sh - 1)
+    )
+    r["PASS"] = bool(
+        r["square"]
+        and r["centered"]
+        and r["no_clipping"]
+        and r["content_identical"]
+        and r["probe_sanity"]
+    )
     return r
+
+
+def resolve_files(src_dir, files, use_all):
+    if use_all:
+        if files:
+            raise SystemExit("error: use --files or --all, not both")
+        return list_png_files(src_dir)
+    if not files:
+        raise SystemExit("error: specify --files NAME ... or --all")
+    return files
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
     ap.add_argument("--out", required=True)
-    ap.add_argument("--files", nargs="+", required=True)
-    ap.add_argument("--thr", type=int, default=THR)
-    ap.add_argument("--probe-thr", type=int, default=PROBE_THR)
+    ap.add_argument("--files", nargs="*", default=[])
+    ap.add_argument("--all", action="store_true")
     a = ap.parse_args()
-    results = [check(os.path.join(a.src, n), os.path.join(a.out, n), a.thr, a.probe_thr) for n in a.files]
+    names = resolve_files(a.src, a.files, a.all)
+    results = [check(os.path.join(a.src, n), os.path.join(a.out, n)) for n in names]
     print(json.dumps(results, indent=2))
     sys.exit(0 if all(x["PASS"] for x in results) else 2)
 

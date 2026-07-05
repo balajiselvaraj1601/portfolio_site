@@ -179,8 +179,25 @@ domain changes.
 - Large unoptimized originals in `public/` or the repo root
 - Private documents, references, or phone-containing résumé variants
 
+## icon_collections refresh pipeline
+
+Square-centered `icon_*.png` assets live in `icon_collections_resized/` and install
+into `public/assets/logos/{education,general,kaggle,vision,awards}/`. The live
+site renders matching `logo_*.svg` marks from `public/assets/logos/marks/` via
+`MarkEmblem`. Full repeatable steps:
+
+→ [`docs/icon-collections-install.md`](./icon-collections-install.md)
+
+Rendered sizes for `MarkEmblem` slots (tokens, per-view rules): see
+[Icon blend strategy — Rendered icon sizes](./icon-blend-strategy.md#rendered-icon-sizes-ssot-2026-07-05).
+
+Color blending (`--accent-card`, `--mark-fg`, three delivery tiers): see
+[Icon blend strategy — Color blending](./icon-blend-strategy.md#color-blending-ssot-2026-07-05-phase-3).
+
 ## Related docs
 
+- [Icon blend strategy](./icon-blend-strategy.md) — vector delivery, rendered sizes, color blending
+- [Icon collections install](./icon-collections-install.md) — square-center → PNG → SVG marks
 - [SEO](./seo.md) — how assets appear in meta tags
 - [Deployment](./deployment.md) — artifact checklist
 - [Content editing](./content-editing.md) — JSON paths for résumé and OG references

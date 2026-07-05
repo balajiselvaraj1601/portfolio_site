@@ -69,6 +69,12 @@
   /* Mark slots — change these two values to resize circular icons site-wide */
   --mark-slot: 44px;
   --mark-glyph: 22px;
+  --vision-hub-glyph: var(--mark-glyph); /* VisionHub center + satellite emblems */
+  --mark-border-width: 1px;
+  /* Mark chrome color mixes — paired with --accent-card on the owning wrapper */
+  --mark-fg: var(--accent-card, var(--accent)); /* glyph / MarkEmblem currentColor */
+  --mark-bg-mix: 14%;
+  --mark-border-mix: 35%;
   /* Vision flow-marker chevrons (grid-snapped SSOT; height anchors the box) */
   --chevron-h: var(--space-2); /* 8px */
   --chevron-w: var(--space-2); /* 8px — = height, aspect 1:1 (square) */
@@ -221,9 +227,6 @@
   --logo-box-h: var(--space-12);
   /* Symmetric white border inside logo pills/tiles — small + consistent site-wide */
   --logo-pad: var(--space-2);
-  /* Circular emblem slots (vision hub center, program badge) */
-  --logo-emblem: 64px;
-  --logo-emblem-img: 74%;
   --overlay-scrim: #000000;
   --overlay-scrim-soft: rgba(0, 0, 0, 0.75);
   --overlay-play: #ffffff;
@@ -296,6 +299,15 @@
     --lvl-associate-director
   ); /* red    — Privacy & Data Protection */
   --cat-gxp: #15803d; /* green  — GxP Compliance (new hue) */
+
+  /* Categorical accent class hooks — Vision board (mirrors About leadership --cat-* mapping) */
+  --vision-accent-impact: var(--cat-impact);
+  --vision-accent-strategic: var(--cat-strategic);
+  --vision-accent-platform: var(--cat-platform);
+  --vision-accent-people: var(--cat-people);
+  --vision-accent-ai: var(--cat-ai);
+  --vision-accent-privacy: var(--cat-privacy);
+  --vision-accent-gxp: var(--cat-gxp);
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -529,21 +541,7 @@ button {
   padding: var(--card-padding);
 }
 .theme-card__icon {
-  width: var(--mark-slot);
-  height: var(--mark-slot);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: var(--text-gap-inline);
-  color: var(--accent-card, var(--accent));
-  background: color-mix(
-    in srgb,
-    var(--accent-card, var(--accent)) 14%,
-    transparent
-  );
-  border: 1px solid
-    color-mix(in srgb, var(--accent-card, var(--accent)) 35%, transparent);
 }
 .theme-card__title {
   font-family: var(--font-sans);
@@ -675,6 +673,29 @@ button {
   }
 }
 
+/* Circular mark chrome — SSOT for accented pipeline marks (Recognition, Vision) */
+.mark-circle,
+.theme-card__icon,
+.icon-tile.icon-tile--round.icon-tile--accented {
+  width: var(--mark-slot);
+  height: var(--mark-slot);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.mark-circle--accented,
+.theme-card__icon,
+.icon-tile.icon-tile--round.icon-tile--accented,
+.vision-hub__node,
+.vision-hub__center {
+  color: var(--mark-fg);
+  background: color-mix(in srgb, var(--mark-fg) var(--mark-bg-mix), transparent);
+  border: var(--mark-border-width) solid
+    color-mix(in srgb, var(--mark-fg) var(--mark-border-mix), transparent);
+}
+
 /* Shared icon tile — accent-soft slot for Lucide / fallback icons inside cards */
 .icon-tile {
   width: var(--mark-slot);
@@ -695,9 +716,6 @@ button {
   --mark-slot: 36px;
   --mark-glyph: 18px;
 }
-.icon-tile--recog {
-  --mark-slot: 40px;
-}
 /* Inner glyph sizing — driven by --mark-glyph on :root or contextual overrides.
    img:not(.comp-image) catches any residual raster inside .icon-tile (transition guard;
    stays permanently as a regression-prevention rule — TC1, icon-blend-strategy). */
@@ -709,20 +727,6 @@ button {
 }
 .icon-tile--elev {
   background: var(--bg-elev);
-}
-/* Icon tile tinted by contextual --accent-card (awards level, medal, gold band) */
-.icon-tile--accented {
-  color: var(--accent-card, var(--accent));
-  background: color-mix(
-    in srgb,
-    var(--accent-card, var(--accent)) 14%,
-    transparent
-  );
-  border-color: color-mix(
-    in srgb,
-    var(--accent-card, var(--accent)) 35%,
-    transparent
-  );
 }
 
 /* Nested callout / highlight surfaces inside card shells */
@@ -749,6 +753,26 @@ button {
 /* Accent hook — set --accent-card on wrapper; card shells and marks inherit */
 .card-accent {
   --accent-card: var(--accent);
+  --mark-fg: var(--accent-card, var(--accent));
+}
+
+/* Research section card accents — per-section hue overrides.
+   ID+class specificity (1,1,0) beats base .card-accent (0,1,0). */
+#publications .card-accent { --accent-card: var(--lvl-director); }        /* teal  */
+#conferences  .card-accent { --accent-card: var(--lvl-senior-director); } /* blue  */
+#speakers     .card-accent { --accent-card: var(--accent-gold); }         /* gold  */
+
+/* Vision board categorical accents — content `accent` key → --cat hook (Leadership pattern) */
+.vision-accent-impact { --cat: var(--vision-accent-impact); }
+.vision-accent-strategic { --cat: var(--vision-accent-strategic); }
+.vision-accent-platform { --cat: var(--vision-accent-platform); }
+.vision-accent-people { --cat: var(--vision-accent-people); }
+.vision-accent-ai { --cat: var(--vision-accent-ai); }
+.vision-accent-privacy { --cat: var(--vision-accent-privacy); }
+.vision-accent-gxp { --cat: var(--vision-accent-gxp); }
+.vision-accent-hook {
+  --accent-card: var(--cat, var(--accent));
+  --mark-fg: var(--accent-card, var(--accent));
 }
 
 /* Logo badge — shared container for org marks on white surface */
@@ -827,7 +851,7 @@ button {
   font-size: var(--fs-metric-xl);
   font-weight: var(--fw-semibold);
   line-height: var(--lh-none);
-  color: var(--accent);
+  color: var(--accent-card, var(--accent));
 }
 .recog-tile__label {
   font-family: var(--font-mono);

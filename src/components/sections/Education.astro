@@ -104,13 +104,13 @@ const stats: StatCell[] = [
             stats.map((s) => (
               <div class="edu-stat">
                 <span
-                  class="icon-tile icon-tile--recog icon-tile--accented edu-stat__icon"
+                  class="icon-tile icon-tile--round icon-tile--accented edu-stat__icon"
                   aria-hidden="true"
                 >
                   {logoSrc(s.img) ? (
                     <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
                   ) : (
-                    <Icon name={s.icon} size={18} />
+                    <Icon name={s.icon} size={22} />
                   )}
                 </span>
                 <div class="edu-stat__copy">
@@ -141,13 +141,13 @@ const stats: StatCell[] = [
           record.summary && (
             <div class="card-tint card-tint--accent edu-highlight">
               <span
-                class="icon-tile icon-tile--recog icon-tile--accented edu-highlight__icon"
+                class="icon-tile icon-tile--round icon-tile--accented edu-highlight__icon"
                 aria-hidden="true"
               >
                 {logoSrc('logo_education_medal') ? (
                   <MarkEmblem mark={{ kind: 'logo', asset: 'logo_education_medal' }} />
                 ) : (
-                  <Icon name="trophy" size={20} />
+                  <Icon name="trophy" size={22} />
                 )}
               </span>
               <p class="edu-highlight__text">{record.summary}</p>

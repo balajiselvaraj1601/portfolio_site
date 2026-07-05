@@ -93,7 +93,7 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
   data-tags={(tags ?? []).join(' ')}
 >
   <Fragment slot="headTop">
-    <div class="icon-tile icon-tile--accented" aria-hidden="true">
+    <div class="icon-tile icon-tile--round icon-tile--accented" aria-hidden="true">
       {
         /* logo_* slugs are pipeline SVGs → MarkEmblem (medal-tinted glyph, D5).
            Non-logo_* slugs are org PNG rasters → .comp-image cover-fill.
@@ -241,11 +241,6 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     display: flex;
     flex-shrink: 0;
   }
-  /* Size MarkEmblem to --mark-glyph in the card header .icon-tile (D5). */
-  .icon-tile :global(.mark-emblem) {
-    width: var(--mark-glyph);
-    height: var(--mark-glyph);
-  }
   .blob-stat dd {
     margin: 0;
   }
@@ -267,7 +262,7 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     gap: var(--space-2);
   }
   .blob-block__icon {
-    color: var(--accent-light);
+    color: var(--accent-card, var(--medal));
     display: flex;
   }
   .blob-block__body {

@@ -254,8 +254,10 @@ const lastName = rest.join(' ');
       transform: rotate(360deg);
     }
   }
-  :global(html[data-theme='dark']) .theme-toggle__moon,
-  :global(html:not([data-theme='dark'])) .theme-toggle__sun {
+  /* :global() on the icon class too — the SVG is rendered inside Icon.astro,
+     so it never receives this component's scope attribute. */
+  :global(html[data-theme='dark'] .theme-toggle__moon),
+  :global(html:not([data-theme='dark']) .theme-toggle__sun) {
     display: none;
   }
   @media (max-width: 1024px) {
