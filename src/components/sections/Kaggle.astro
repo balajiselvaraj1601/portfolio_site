@@ -111,12 +111,14 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
   .blob--bronze {
     --medal: var(--medal-bronze);
   }
-  /* Feed the medal accent into the shared .recog-* layer for tiles and chips. */
+  /* One-accent-per-view: Recognition uses a single hue (gold). Override the
+     per-medal --medal so tiles and chips match the rest of the view. */
   .recog-tile.blob--silver,
   .recog-tile.blob--bronze,
   .recog-chip.blob--silver,
   .recog-chip.blob--bronze {
-    --accent-card: var(--medal);
+    --accent-card: var(--view-accent-recognition);
+    --mark-fg: var(--accent-card);
   }
 </style>
 

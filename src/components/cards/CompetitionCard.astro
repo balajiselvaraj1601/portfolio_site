@@ -93,7 +93,10 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
   data-tags={(tags ?? []).join(' ')}
 >
   <Fragment slot="headTop">
-    <div class="icon-tile icon-tile--round icon-tile--accented" aria-hidden="true">
+    <div
+      class="icon-tile icon-tile--round icon-tile--accented"
+      aria-hidden="true"
+    >
       {
         /* logo_* slugs are pipeline SVGs → MarkEmblem (medal-tinted glyph, D5).
            Non-logo_* slugs are org PNG rasters → .comp-image cover-fill.
@@ -196,11 +199,12 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     --medal: var(--medal-bronze);
   }
 
-  /* Feed the medal accent into the shared .recog-card layer, which drives the
-     card shell (bg, border, border-top, hover) and the .recog-icon tint. */
+  /* One-accent-per-view: Recognition uses a single hue (gold). Override the
+     per-medal --medal so competition cards match the rest of the view. */
   :global(.recog-card.blob--silver),
   :global(.recog-card.blob--bronze) {
-    --accent-card: var(--medal);
+    --accent-card: var(--view-accent-recognition);
+    --mark-fg: var(--accent-card);
   }
 
   /* ── Stat grid ──────────────────────────────────────────────────── */

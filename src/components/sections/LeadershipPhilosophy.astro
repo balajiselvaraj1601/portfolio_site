@@ -207,11 +207,12 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
   .cat-governanceGxP {
     --cat: var(--cat-gxp);
   }
-  /* Feed the category hue into the shared accent hook. The All chip has no
-     .cat-* class, so --cat is unset and it falls back to the default accent. */
+  /* One-accent-per-view: About uses the single brand hue (purple). Override the
+     per-category --cat so leadership cards and the active chip share one colour. */
   .leadership__card-row,
   .recog-chip.is-active {
-    --accent-card: var(--cat);
+    --accent-card: var(--view-accent-about);
+    --mark-fg: var(--accent-card);
   }
 
   .leadership__diff-heading {

@@ -40,7 +40,7 @@ Page brief: `docs/page-briefs/recognition.md`
 | education  | `src/components/sections/Education.astro` | `content/recognition/education.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`RecogCardShell.astro`, `RecogControls.astro`, `CompetitionCard.astro`
+`RecogCardShell.astro`, `RecogControls.astro`, `CompetitionCard.astro`, `RecogTile.astro`
 
 Shelved (never enable, never audit): —
 

@@ -28,10 +28,14 @@ import { visionBoard, site } from '@lib/content';
 </Section>
 
 <style>
-  /* 7 cards in a 4-col grid leave a hole bottom-right — the last card
-     (Global Team Management, 5 countries) spans 2 tracks to fill the row. */
-  .vision-impact__grid li:last-child {
-    grid-column: span 2;
+  /* 7 equal tiles in a 4-col grid → 4 on row 1, then 3 on row 2 left-aligned
+     with a natural empty trailing cell (no span). Each <li> flexes so its card
+     fills the track, giving tiles in a row a shared height. */
+  .vision-impact__grid > li {
+    display: flex;
+  }
+  .vision-impact__grid > li > :global(.theme-card) {
+    width: 100%;
   }
 
   /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).
@@ -45,14 +49,10 @@ import { visionBoard, site } from '@lib/content';
   }
 
   /* Single-column phones — restate the base .theme-grid collapse (this scoped
-     rule out-specifies it) and drop the span so no implicit track appears. */
+     rule out-specifies it). */
   @media (max-width: 480px) {
     .vision-impact__grid {
       grid-template-columns: 1fr;
-    }
-
-    .vision-impact__grid li:last-child {
-      grid-column: auto;
     }
   }
 </style>

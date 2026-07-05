@@ -98,9 +98,14 @@ const total = items.length;
           data-reason={a.reason}
         >
           <Fragment slot="headTop">
-            <div class="icon-tile icon-tile--round icon-tile--accented" aria-hidden="true">
+            <div
+              class="icon-tile icon-tile--round icon-tile--accented"
+              aria-hidden="true"
+            >
               {logoSrc('logo_trophy_badge') ? (
-                <MarkEmblem mark={{ kind: 'logo', asset: 'logo_trophy_badge' }} />
+                <MarkEmblem
+                  mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
+                />
               ) : (
                 <Icon name="trophy" size={22} />
               )}
@@ -172,11 +177,13 @@ const total = items.length;
     --lvl: var(--lvl-national);
   }
 
-  /* Shared accent hook — the shared .recog-* layer reads --accent-card; feed it
-     this component's per-level --lvl so cards/tiles auto-color by award level. */
+  /* One-accent-per-view: Recognition uses a single hue (gold). Cards/tiles read
+     the shared --accent-card; feed it the view accent instead of per-level --lvl
+     so the whole Recognition view reads as one colour. */
   .recog-tile,
   .recog-card {
-    --accent-card: var(--lvl);
+    --accent-card: var(--view-accent-recognition);
+    --mark-fg: var(--accent-card);
   }
 </style>
 

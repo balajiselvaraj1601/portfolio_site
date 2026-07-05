@@ -40,17 +40,17 @@ Page brief: `docs/page-briefs/home.md`
 | leadership | `src/components/sections/LeadershipPhilosophy.astro`                               | `content/person/profile.json`, `content/person/collaborations.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`MetricCard.astro`, `LeadershipCard.astro`, `Portrait.astro`, `HeroCanvas.astro`
+`Portrait.astro`, `CardMark.astro`, `HeroCanvas.astro` (site-wide hero backdrop —
+rendered in `src/layouts/Layout.astro`, not imported by a section; chrome-owned)
 
-Shelved (never enable, never audit): —
+Shelved (never enable, never audit): `LeadershipCard.astro`
 
 ## Appendix B — Audit checklist (view-specific)
 
 1. Leadership uses `Section.astro` with `variant="default"`; no eyebrow (contract §4).
 2. Hero spacing uses tokens — no hardcoded px gaps in scoped CSS.
 3. Thirukural band typography: Tamil in Inter, not DM Serif.
-4. MetricCard instances use `--card-padding` and `--fs-metric` (finding only if violated — guardian owns the fix).
-5. AboutLanding audited together with hero/thirukural pair.
+4. AboutLanding audited together with hero/thirukural pair.
 
 ## Appendix C — Text & object hierarchy
 

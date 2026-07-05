@@ -42,6 +42,10 @@ Guardian-owned shared components used here (audit-only, never edit):
 
 Shelved (never enable, never audit): —
 
+Note: the former standalone Projects view was removed (2026-07-04); those project case
+studies now render inline in this timeline as `XpProjectCard` (§5 Tier D). Content is
+still `content/work/experience.json` only.
+
 ## Appendix B — Audit checklist (view-specific)
 
 1. experience: eyebrow `"Career"` via Section prop; title + intro lede in section header.

@@ -223,30 +223,36 @@ chrome recipe; glyphs match `--mark-glyph`.
 
 Foreground and background tints for pipeline marks flow through one hook:
 **`--accent-card`** on the owning wrapper (card shell, tile, hub accent div,
-level/medal class). Circular chrome reads it via **`--mark-fg`**
-(`var(--accent-card, var(--accent))`).
+level/medal class). Circular chrome reads it via **`--mark-chrome`**
+(`var(--accent-card, var(--mark-fg, var(--accent))`) — preferring contextual
+`--accent-card` over inherited `--mark-fg` (which otherwise resolves to site
+purple from `:root`).
 
 | Layer | Token / mechanism | Resolves to |
 | --- | --- | --- |
-| Glyph (MarkEmblem / Lucide) | parent `color` → `--mark-fg` | `--accent-card` on wrapper |
-| Circle background wash | `--mark-bg-mix` (14%) | `color-mix(--mark-fg …)` |
-| Circle border tint | `--mark-border-mix` (35%) | `color-mix(--mark-fg …)` |
+| Glyph (MarkEmblem / Lucide / brand) | parent `color` → `--mark-chrome` | `--accent-card` on wrapper |
+| Circle background wash | `--mark-bg-mix` (14%) | `color-mix(--mark-chrome …)` |
+| Circle border tint | `--mark-border-mix` (35%) | `color-mix(--mark-chrome …)` |
 | Card shell border/top | `--accent-card` | level / medal / section hue |
 
 **Three delivery tiers:**
 
 | Tier | Delivery | Color behavior |
 | --- | --- | --- |
-| 1 — Vector tinted | `MarkEmblem` mask + `Icon` `currentColor` | Inherits `--mark-fg` from accented circle or bare span |
+| 1 — Vector tinted | `MarkEmblem` mask + `Icon` `currentColor` | Inherits `--mark-chrome` from accented circle or bare span |
 | 2 — Soft tile | `.icon-tile` without `--accented` | Site purple (`--accent-soft` / `--accent-ll`) |
 | 3 — Full-color | `LogoBadge` `<img>` on `--logo-surface` | Brand pixels unchanged; optional accent-tinted pill bg |
 
 **Intentional exceptions (do not “fix”):**
 
-- **Contact brand icons** — `.icon--brand` forces `--brand-mark` (neutral heading
-  ink) inside accented circles for official logo fidelity.
 - **Experience project icons** — `.icon-tile--elev` (neutral slot, no accent wash).
 - **Org wordmarks** — Tier 3 raster; never masked or recolored.
+
+**Brand icons in accented circles:** `.icon--brand` (GitHub, LinkedIn, Kaggle,
+Gmail) inherits the tile hue via `color: inherit` inside `.icon-tile--accented`,
+`.theme-card__icon`, and Vision hub nodes — matching the bounding-box accent
+like Lucide and `MarkEmblem` glyphs. Neutral `--brand-mark` applies only outside
+accented circular chrome.
 
 **Research fallback icons:** `CardMark variant="accented"` on cards inside
 `.card-accent` so icon circles match section-hued top borders (teal / blue / gold).

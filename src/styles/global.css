@@ -69,10 +69,15 @@
   /* Mark slots — change these two values to resize circular icons site-wide */
   --mark-slot: 44px;
   --mark-glyph: 22px;
-  --vision-hub-glyph: var(--mark-glyph); /* VisionHub center + satellite emblems */
+  --vision-hub-glyph: var(
+    --mark-glyph
+  ); /* VisionHub center + satellite emblems */
   --mark-border-width: 1px;
   /* Mark chrome color mixes — paired with --accent-card on the owning wrapper */
-  --mark-fg: var(--accent-card, var(--accent)); /* glyph / MarkEmblem currentColor */
+  --mark-fg: var(
+    --accent-card,
+    var(--accent)
+  ); /* glyph / MarkEmblem currentColor */
   --mark-bg-mix: 14%;
   --mark-border-mix: 35%;
   /* Vision flow-marker chevrons (grid-snapped SSOT; height anchors the box) */
@@ -308,6 +313,17 @@
   --vision-accent-ai: var(--cat-ai);
   --vision-accent-privacy: var(--cat-privacy);
   --vision-accent-gxp: var(--cat-gxp);
+
+  /* Per-view accent SSOT — one accent per nav view (design-direction: unified
+     per-view hue). Each references a theme-aware token, so light/dark track
+     automatically. Sections point their --accent-card hook at these instead of
+     per-item (--lvl / --medal / --cat) tokens. */
+  --view-accent-about: var(--accent); /* purple — brand */
+  --view-accent-experience: var(--accent); /* purple */
+  --view-accent-research: var(--lvl-senior-director); /* blue  */
+  --view-accent-recognition: var(--accent-gold); /* gold  */
+  --view-accent-vision: var(--lvl-director); /* teal  */
+  --view-accent-contact: var(--accent); /* purple */
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -690,10 +706,24 @@ button {
 .icon-tile.icon-tile--round.icon-tile--accented,
 .vision-hub__node,
 .vision-hub__center {
-  color: var(--mark-fg);
-  background: color-mix(in srgb, var(--mark-fg) var(--mark-bg-mix), transparent);
+  /* Prefer contextual --accent-card; inherited --mark-fg from :root is a computed purple. */
+  --mark-chrome: var(--accent-card, var(--mark-fg, var(--accent)));
+  color: var(--mark-chrome);
+  background: color-mix(
+    in srgb,
+    var(--mark-chrome) var(--mark-bg-mix),
+    transparent
+  );
   border: var(--mark-border-width) solid
-    color-mix(in srgb, var(--mark-fg) var(--mark-border-mix), transparent);
+    color-mix(in srgb, var(--mark-chrome) var(--mark-border-mix), transparent);
+}
+
+/* Brand marks inside accented circles inherit the tile hue, not neutral ink. */
+.icon-tile--accented :is(.icon--brand),
+.theme-card__icon :is(.icon--brand),
+.vision-hub__node :is(.icon--brand),
+.vision-hub__center :is(.icon--brand) {
+  color: inherit;
 }
 
 /* Shared icon tile — accent-soft slot for Lucide / fallback icons inside cards */
@@ -756,22 +786,45 @@ button {
   --mark-fg: var(--accent-card, var(--accent));
 }
 
-/* Research section card accents — per-section hue overrides.
+/* Research view — one accent (blue) for all three sections (one-accent-per-view).
    ID+class specificity (1,1,0) beats base .card-accent (0,1,0). */
-#publications .card-accent { --accent-card: var(--lvl-director); }        /* teal  */
-#conferences  .card-accent { --accent-card: var(--lvl-senior-director); } /* blue  */
-#speakers     .card-accent { --accent-card: var(--accent-gold); }         /* gold  */
+#publications .card-accent,
+#conferences .card-accent,
+#speakers .card-accent {
+  --accent-card: var(--view-accent-research);
+} /* blue */
+
+/* Contact view — one accent (purple). ID+class (1,1,0) beats base .card-accent. */
+#contact .card-accent {
+  --accent-card: var(--view-accent-contact);
+} /* purple */
 
 /* Vision board categorical accents — content `accent` key → --cat hook (Leadership pattern) */
-.vision-accent-impact { --cat: var(--vision-accent-impact); }
-.vision-accent-strategic { --cat: var(--vision-accent-strategic); }
-.vision-accent-platform { --cat: var(--vision-accent-platform); }
-.vision-accent-people { --cat: var(--vision-accent-people); }
-.vision-accent-ai { --cat: var(--vision-accent-ai); }
-.vision-accent-privacy { --cat: var(--vision-accent-privacy); }
-.vision-accent-gxp { --cat: var(--vision-accent-gxp); }
+.vision-accent-impact {
+  --cat: var(--vision-accent-impact);
+}
+.vision-accent-strategic {
+  --cat: var(--vision-accent-strategic);
+}
+.vision-accent-platform {
+  --cat: var(--vision-accent-platform);
+}
+.vision-accent-people {
+  --cat: var(--vision-accent-people);
+}
+.vision-accent-ai {
+  --cat: var(--vision-accent-ai);
+}
+.vision-accent-privacy {
+  --cat: var(--vision-accent-privacy);
+}
+.vision-accent-gxp {
+  --cat: var(--vision-accent-gxp);
+}
 .vision-accent-hook {
-  --accent-card: var(--cat, var(--accent));
+  /* One-accent-per-view: all vision hubs/cards use the single vision hue (teal),
+     overriding the per-group --cat set by the .vision-accent-* classes above. */
+  --accent-card: var(--view-accent-vision);
   --mark-fg: var(--accent-card, var(--accent));
 }
 

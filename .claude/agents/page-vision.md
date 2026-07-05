@@ -39,7 +39,8 @@ Page brief: `docs/page-briefs/vision.md`
 | vision-programs | `src/components/sections/VisionPrograms.astro` | `content/work/vision-board.json` |
 | vision-impact   | `src/components/sections/VisionImpact.astro`   | `content/work/vision-board.json` |
 
-Card components (`ProgramBadgeCard.astro`, `OrgSnapshotCard.astro`) may be edited when aligning to cross-view `theme-card` / icon-tile patterns.
+Guardian-owned shared components used here (audit-only, never edit):
+`ThemeCard.astro` (`src/components/cards/`, renders program & impact cards), `VisionHub.astro` (`src/components/ui/`, renders group hubs) — shared primitives; findings only, guardian owns the fix.
 
 Shelved (never enable, never audit): the strategic-impact feature, archived under `_shelved/` (`_shelved/src/components/sections/Impact.astro` + `_shelved/content/work/strategic-impact.json`; removed from `src/` and `content/`)
 

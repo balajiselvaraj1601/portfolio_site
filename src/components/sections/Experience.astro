@@ -348,10 +348,32 @@ function orgShortFallback(organization: string) {
   .xp-filters {
     margin: 0;
   }
+  /* Key Projects as an equal 2-up grid (mirrors the Vision impact tiles):
+     uniform tiles, left-aligned, cards in a row share height via grid stretch. */
   .xp-projects {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--stack-sm);
+  }
+  /* A lone visible project — a single-project role, or the grid filtered down to
+     one card — spans the full row instead of sitting half-width. The whole
+     selector is wrapped in :global() so the child-component .xp-proj is reachable
+     and Astro's scoper doesn't rewrite the :has() argument (it won't strip a
+     :global() nested inside :has). :has() matches only when there are NO two
+     visible sibling cards. */
+  :global(
+    .xp-projects:not(:has(> .xp-proj:not(.hidden) ~ .xp-proj:not(.hidden)))
+      > .xp-proj:not(.hidden)
+  ) {
+    grid-column: 1 / -1;
+  }
+
+  /* Dense bullet text needs width — collapse to a single column before the
+     two tiles get too narrow to read. */
+  @media (max-width: 768px) {
+    .xp-projects {
+      grid-template-columns: 1fr;
+    }
   }
 
   @media (max-width: 600px) {

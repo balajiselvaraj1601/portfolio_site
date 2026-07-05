@@ -85,7 +85,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
             const external = c.href ? isExternal(c.href) : false;
             return (
               <a
-                class="connect-card card card-accent"
+                class:list={['connect-card', 'card', 'card-accent', `connect-card--${c.type}`]}
                 href={c.href!}
                 {...(external
                   ? { target: '_blank', rel: 'noopener noreferrer' }

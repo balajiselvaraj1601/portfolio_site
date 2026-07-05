@@ -27,6 +27,7 @@ them exactly — they are part of your instructions:
 | V2  | Playbook P5 (no phone numbers, no References section) is the highest-priority rule for this view — verify build output contains no phone number in Phase 4. |
 | V3  | Contact uses `variant="alt"` (contract §6).                                                                                                                 |
 | V4  | CTA buttons use `.btn` tokens and `--section-cta-gap`; social/contact links go through `EntityLink`.                                                        |
+| V5  | Each connect card carries a per-type accent via `.connect-card--{type}` → `--accent-card` (email→`--accent-gold`, linkedin→`--lvl-senior-director`, github→`--lvl-cio`, kaggle→`--lvl-director`), defined in `global.css` (guardian-owned). Do not hardcode these colors. |
 
 Page brief: `docs/page-briefs/contact.md`
 
@@ -56,7 +57,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### contact — `src/components/sections/Contact.astro`
 
-- **Object:** §6 `alt` band (`variant="alt"`) › §5 Tier A `.connect-card.card` (compact, `--card-padding`) › §5 round Lucide mark slot (`CardMark` → `.icon-tile.icon-tile--round`, `iconFallback="link"` — the §5 reference impl for round Lucide marks)
+- **Object:** §6 `alt` band (`variant="alt"`) › §5 Tier A `.connect-card.card` (compact, `--card-padding`) › §5 round Lucide mark slot (`CardMark` → `.icon-tile.icon-tile--round`, `iconFallback="link"` — the §5 reference impl for round Lucide marks). Each `.connect-card` accent colour is set **per contact type** (not a fixed accent) via the `.connect-card--{type}` class → `--accent-card` cascade in `global.css`.
 - **Text (reading order):**
   - _Left column_
   - `Section eyebrow` (`contactPage.eyebrow`, via `Section` prop) → **T5** eyebrow
@@ -85,7 +86,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 | `.response-time` (T8)         | `--text-muted`   | `--bg-alt`        | `--accent-light` |
 | `.connect-header > span` (T5) | `--text-muted`   | `--bg-alt`        | —                |
 | `.connect-rule`               | —                | `--border-strong` | —                |
-| `.connect-card` (Tier A)      | —                | `--bg-elev`       | —                |
+| `.connect-card` (Tier A)      | —                | `--bg-elev`       | `--accent-card` (per type) |
 | `.connect-name` (T3)          | `--heading`      | `--bg-elev`       | —                |
 | `.connect-val` (T6)           | `--text-muted`   | `--bg-elev`       | —                |
 | `.connect-action` (T8)        | `--accent-light` | `--bg-elev`       | —                |
