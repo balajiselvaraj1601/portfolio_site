@@ -7,7 +7,7 @@ source "$SCRIPT_DIR/page-team-lib.sh"
 
 page_team_init_paths
 
-GOAL="${*:-Baseline design consistency audit across all 7 views; fix P0/P1 issues where consensus is clear.}"
+GOAL="${*:-Baseline design consistency audit across all 6 views; fix P0/P1 issues where consensus is clear.}"
 MODE="${PAGE_TEAM_MODE:-full}"
 
 mkdir -p "$ROOT/.cursor"

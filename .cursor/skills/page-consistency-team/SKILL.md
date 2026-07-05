@@ -1,7 +1,7 @@
 ---
 name: page-consistency-team
 description: >-
-  Multi-agent Page Consistency Team for portfolio nav views. Seven page representatives
+  Multi-agent Page Consistency Team for portfolio nav views. Six page representatives
   plus design guardian collaborate on design, structure, padding, and token consistency.
   Trigger on "page team", "consistency audit", "run page agents", "design consistency".
   Uses Task tool for parallel page subagents. State: .cursor/page-team.state.json.

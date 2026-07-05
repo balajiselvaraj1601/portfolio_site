@@ -37,7 +37,7 @@ Logo rendering pattern (already wired):
 <img src={`/assets/logos/${asset}.svg`} alt={alt} loading="lazy" />
 ```
 
-Components: `HubCircle.astro`, `ProgramBadgeCard.astro`.
+Components: `ThemeCard.astro` (org/program cards), `VisionHub.astro` (hub center/nodes).
 
 ---
 

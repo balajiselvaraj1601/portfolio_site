@@ -58,7 +58,7 @@ page_team_init_state() {
       goal: $goal,
       phase: "init",
       enabled: true,
-      active_views: ["home","experience","projects","research","recognition","vision","contact"],
+      active_views: ["home","experience","research","recognition","vision","contact"],
       findings: [],
       conflicts: [],
       decisions: [],

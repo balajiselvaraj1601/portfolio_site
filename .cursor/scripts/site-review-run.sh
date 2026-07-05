@@ -39,7 +39,7 @@ Goal: ${SITE_REVIEW_GOAL}
 State file: .cursor/site-review.state.json (update after each phase).
 Allow commit: ${SITE_REVIEW_ALLOW_COMMIT} (commit only after npm run verify passes; never push).
 Fix all verified issues across CI, content SSOT, dead code, a11y/SEO, design (delegate design to page-consistency-team full mode).
-Baseline checklist: docs/audits/codebase-review-2026-07-02.md — re-verify every theme."
+Baseline checklist: docs/audits/simplification-refactor-2026-07-03.md — re-verify every theme."
 
 args=(-p --output-format text --model "$SITE_REVIEW_MODEL")
 # shellcheck disable=SC2206

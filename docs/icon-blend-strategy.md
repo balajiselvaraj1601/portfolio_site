@@ -250,7 +250,7 @@ purple from `:root`).
 
 **Intentional exceptions (do not “fix”):**
 
-- **Experience project icons** — `.icon-tile--elev` (neutral slot, no accent wash).
+- **Experience project icons** — `.icon-tile--compact.icon-tile--accented` (seniority-hued accent slot).
 - **Org wordmarks** — Tier 3 raster; never masked or recolored.
 
 **Brand icons in accented circles:** `.icon--brand` (GitHub, LinkedIn, Kaggle,

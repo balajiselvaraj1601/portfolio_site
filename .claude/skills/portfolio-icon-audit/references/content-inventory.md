@@ -22,7 +22,7 @@ Entity map for portfolio icon audits. Extend this table on each run when content
 
 ### experience.json — projects
 
-Only projects with explicit `"icon"` in JSON; all others fall back to `folder` via `ProjectAccordion.astro`.
+Only projects with explicit `"icon"` in JSON; all others fall back to `folder` via `XpProjectCard.astro`.
 
 | entity_id                | project name                | icon in JSON | heuristic if missing                       |
 | ------------------------ | --------------------------- | ------------ | ------------------------------------------ |

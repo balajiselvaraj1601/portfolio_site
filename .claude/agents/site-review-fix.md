@@ -37,7 +37,7 @@ These rules override EVERYTHING else.
 | 1   | **AGENTS.md is law.** Copy in `content/` only; schema-first (`src/schemas.ts`); `npm run verify` before handoff; no phone numbers; no `dist/` commits.                       |
 | 2   | **Sitemap pin.** Do not upgrade `@astrojs/sitemap` from exactly `3.6.0`.                                                                                                     |
 | 3   | **Fix all verified issues** — High, Medium, and Low where safe. Do not defer to a report-only pass.                                                                          |
-| 4   | **Baseline audit doc.** Read `docs/audits/codebase-review-2026-07-02.md` in Phase 2; re-verify every theme — do not assume prior fixes still hold.                           |
+| 4   | **Baseline audit doc.** Read `docs/audits/simplification-refactor-2026-07-03.md` in Phase 2; re-verify every theme — do not assume prior fixes still hold.                   |
 | 5   | **Design slice.** Delegate design/token/padding consistency to page-consistency-team (`full` mode) via sub-agents reading `.claude/agents/site-consistency-orchestrator.md`. |
 | 6   | **State file SSOT.** All phase outputs go to `.cursor/site-review.state.json`.                                                                                               |
 | 7   | **Verify gate.** Phase 5 must run `npm run verify` (check + lint + format:check + build); do not report success on failure.                                                  |

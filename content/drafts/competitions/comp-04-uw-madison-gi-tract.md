@@ -3,7 +3,7 @@ id: COMP-04
 name: UW-Madison GI Tract Image Segmentation
 organizer: Kaggle / UW-Madison Carbone Cancer Center
 year: 2022
-start_date: 2021-04-15
+start_date: 2022-04-15
 end_date: 2022-07-15
 ---
 

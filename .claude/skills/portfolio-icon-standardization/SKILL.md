@@ -59,7 +59,7 @@ Raster `<img>` is **Tier 3 only** — org wordmarks in `.logo-badge` /
 **Intentional exceptions (do not “fix”):**
 
 - Contact connect tiles: brand icons use `.icon--brand` → `--brand-mark` inside accented circles
-- Experience nested projects: `.icon-tile--elev` (neutral, subordinate to company block)
+- Experience nested projects: `.icon-tile--compact.icon-tile--accented` (seniority-hued, subordinate to company block)
 - Org logos: never mask or recolor
 
 ---

@@ -47,7 +47,7 @@ All in `src/styles/global.css` `:root` unless noted.
 | Kaggle summary/eval            | —             | 16           | `.blob-icon--sm`, color via `--accent-card` |
 | Vision hub node/center         | cqi-scaled 44 | 22           | inherits circular mark chrome               |
 | Vision theme-card emblem       | 44            | 22           | `.theme-card__icon`                         |
-| Experience project             | 36            | 18           | `.icon-tile--compact.icon-tile--elev`       |
+| Experience project             | 36            | 18           | `.icon-tile--compact.icon-tile--accented`   |
 | Contact connect                | 44            | 22           | `CardMark variant="accented"`               |
 | Header chrome                  | —             | Lucide md/lg | `Icon.astro` only, no raster                |
 
@@ -101,7 +101,7 @@ Need a visual mark in a card?
 │
 └─ No asset / Lucide fallback?
     ├─ Card has section/level accent? → CardMark variant="accented"
-    ├─ Subordinate nested card (Experience project)? → .icon-tile--elev
+    ├─ Subordinate nested card (Experience project)? → .icon-tile--compact.icon-tile--accented
     └─ Generic soft slot? → .icon-tile (Tier 2)
 ```
 

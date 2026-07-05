@@ -63,7 +63,7 @@ App / Layout
 ```
 
 Reused primitives (define once, use everywhere): `Section`, `Chip`, `ResearchCard`,
-`CompetitionCard`, `EducationCard`, `ThemeCard`, `XpProjectCard`.
+`CompetitionCard`, `ThemeCard`, `XpProjectCard`.
 
 ## 3. Per-section content contract
 

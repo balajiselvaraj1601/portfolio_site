@@ -16,7 +16,7 @@ Orchestrate a comprehensive site health review and automated fix pass.
 1. For the full review protocol, read `.claude/skills/site-review-fix/references/review-protocol.md`
 2. Read `.claude/agents/site-review-fix.md`
 3. Confirm state file at `.cursor/site-review.state.json` (or init in Phase 0)
-4. Load baseline checklist: `docs/audits/codebase-review-2026-07-02.md`
+4. Load baseline checklist: `docs/audits/simplification-refactor-2026-07-03.md`
 
 ## Quick invoke
 
@@ -69,12 +69,12 @@ Parallel: launch independent audit sweeps in one message
 
 ## Quick reference: where to go deeper
 
-| Topic                                                                               | Reference file      |
-| ----------------------------------------------------------------------------------- | ------------------- |
-| [review-protocol.md](references/review-protocol.md)                                 | Phase details       |
-| [site-review-fix agent](../../agents/site-review-fix.md)                            | Hard rules          |
-| [codebase-review-2026-07-02.md](../../../docs/audits/codebase-review-2026-07-02.md) | Baseline checklist  |
-| [page-consistency-team](../page-consistency-team/SKILL.md)                          | Design sub-workflow |
+| Topic                                                                                               | Reference file      |
+| --------------------------------------------------------------------------------------------------- | ------------------- |
+| [review-protocol.md](references/review-protocol.md)                                                 | Phase details       |
+| [site-review-fix agent](../../agents/site-review-fix.md)                                            | Hard rules          |
+| [simplification-refactor-2026-07-03.md](../../../docs/audits/simplification-refactor-2026-07-03.md) | Baseline checklist  |
+| [page-consistency-team](../page-consistency-team/SKILL.md)                                          | Design sub-workflow |
 
 ## Hard rules (all runs)
 

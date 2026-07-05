@@ -309,4 +309,4 @@ When design-standardizer runs, it will add these missing tokens to `src/styles/g
 - **Design contracts:** `.claude/references/design-consistency-contract.md` (binding design rules)
 - **Page agent playbook:** `.claude/references/page-agent-playbook.md` (14 Hard Rules for all page agents)
 - **Site review protocol:** `.claude/skills/site-review-fix/references/review-protocol.md` (full 7-phase mechanics inherited by site-review-auto)
-- **Codebase review baseline:** `docs/audits/codebase-review-2026-07-02.md` (baseline findings; re-verified by every site-review run)
+- **Codebase review baseline:** `docs/audits/simplification-refactor-2026-07-03.md` (baseline findings; re-verified by every site-review run)

@@ -15,8 +15,6 @@ pip install pillow numpy svgelements cairosvg
 ### Generate an icon
 
 ```bash
-cd /home/engineer/workspace/portfolio_site
-
 # From source PNG, outputs to src/assets/icons/{name}-icon-*.svg
 python3 scripts/svg-icon-generator.py \
   --source path/to/source.png \

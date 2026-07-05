@@ -89,7 +89,7 @@ Launch independent audits. Merge all into `findings[]`.
 | Dead code         | generalPurpose                       | Unreferenced sections/cards; imports never used                          |
 | A11y / SEO        | generalPurpose                       | alt, h1, focus, meta, JSON-LD, external link rel                         |
 | Design            | site-consistency-orchestrator (full) | All 6 nav views via page-consistency-team                                |
-| Baseline re-check | self                                 | Each theme in `docs/audits/codebase-review-2026-07-02.md`                |
+| Baseline re-check | self                                 | Each theme in `docs/audits/simplification-refactor-2026-07-03.md`        |
 
 Set `phase: "audit_complete"`.
 
