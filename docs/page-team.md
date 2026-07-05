@@ -1,7 +1,7 @@
 # Page Consistency Team
 
 Multi-agent workflow for design, structure, padding, and token consistency across all
-seven nav views. Seven page representatives collaborate with a design guardian under an
+six nav views. Six page representatives collaborate with a design guardian under an
 orchestrator that runs ultimatum consensus rounds before implementing fixes.
 
 Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team skill).
@@ -48,16 +48,15 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 | Agent                           | View           | Sections                              |
 | ------------------------------- | -------------- | ------------------------------------- |
 | `page-about`                    | About (`home`) | hero, thirukural, leadership          |
-| `page-experience`               | Experience     | experience-intro, experience          |
-| `page-projects`                 | Projects       | projects-intro, featured-case-studies |
+| `page-experience`               | Experience     | experience                            |
 | `page-research`                 | Research       | publications, conferences, speakers   |
 | `page-recognition`              | Recognition    | awards, kaggle, education             |
-| `page-vision`                   | Vision         | vision-board                          |
+| `page-vision`                   | Vision         | vision-programs, vision-impact        |
 | `page-contact`                  | Contact        | contact                               |
 | `design-guardian`               | Cross-cutting  | global.css, ui/, cards/               |
 | `site-consistency-orchestrator` | All            | Spawns agents, owns state             |
 
-Routing table: `.claude/skills/page-consistency-team/assets/page_routing.csv`
+Routing table: `.claude/skills/page-consistency-team/assets/page-routing.csv`
 
 Shared runtime rules for page agents: `.claude/references/page-agent-playbook.md`
 (each agent Reads it first). Authoring standard: `.claude/references/page-agent-standard.md`.

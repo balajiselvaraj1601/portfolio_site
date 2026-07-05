@@ -25,10 +25,8 @@ re-derive these files rather than editing both independently.
 | `site.json`                  | Site meta, nav, SEO defaults, theme | derived                             |
 | `person/profile.json`        | Hero, About, Contact                | `personal` (no phone)               |
 | `person/collaborations.json` | Collaborations strip                | derived                             |
-| `work/strategic-impact.json` | Strategic Impact                    | `sections[id="funds"]`              |
-| `work/vision-board.json`     | Vision board (infographic)          | derived                             |
+| `work/vision-board.json`     | Vision (programs + org impact)      | derived                             |
 | `work/experience.json`       | Experience timeline                 | `sections[id="experience"]`         |
-| `work/projects.json`         | Projects showcase (derived view)    | derived from `work/experience.json` |
 | `research/publications.json` | Publications                        | `sections[id="publications"]`       |
 | `research/conferences.json`  | Conferences                         | `sections[id="conferences"]`        |
 | `research/speakers.json`     | Speaking Engagements                | derived                             |
@@ -37,12 +35,7 @@ re-derive these files rather than editing both independently.
 | `recognition/kaggle.json`    | Kaggle Competitions                 | `sections[id="kaggle_compact"]`     |
 | `entities.json`              | Entity URL/name registry            | derived                             |
 
-**Shelved (not live):**
-
-- `drafts/research/generative-ai.json` — Generative AI section; see [docs/content-editing.md](../docs/content-editing.md).
-
-`work/projects.json` is a derived convenience view for a card/detail UI — `work/experience.json`
-stays authoritative for role bullets. Keep them consistent when editing.
+Project narratives are nested inside `work/experience.json` → `roles[].projects[]`.
 
 ## Editing guide
 

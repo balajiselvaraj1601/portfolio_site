@@ -29,13 +29,23 @@ import { visionBoard, site } from '@lib/content';
 
 <style>
   /* 7 equal tiles in a 4-col grid → 4 on row 1, then 3 on row 2 left-aligned
-     with a natural empty trailing cell (no span). Each <li> flexes so its card
-     fills the track, giving tiles in a row a shared height. */
+     with a natural empty trailing cell (no span). grid-auto-rows: 1fr equalises
+     both rows to the tallest row's height, so all 7 tiles are identical in width
+     AND height. Each <li> flexes so its card fills the track. */
+  .vision-impact__grid {
+    grid-auto-rows: 1fr;
+  }
+  /* Single unifying colour for all 7 impact boxes (rose). Feeds --cat, which
+     .vision-accent-hook maps to --accent-card; overrides the per-item
+     .vision-accent-* classes so the whole block reads as one hue.
+     --cat-people is the palette's rose family (aliases --lvl-national). */
   .vision-impact__grid > li {
     display: flex;
+    --cat: var(--cat-people);
   }
   .vision-impact__grid > li > :global(.theme-card) {
     width: 100%;
+    height: 100%;
   }
 
   /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).
@@ -53,6 +63,8 @@ import { visionBoard, site } from '@lib/content';
   @media (max-width: 480px) {
     .vision-impact__grid {
       grid-template-columns: 1fr;
+      /* Single column: content-sized cards (don't force tallest height × 7). */
+      grid-auto-rows: auto;
     }
   }
 </style>

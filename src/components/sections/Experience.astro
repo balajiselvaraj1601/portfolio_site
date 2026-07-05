@@ -42,7 +42,11 @@ function orgShortFallback(organization: string) {
             type="button"
             role="tab"
             id={`xp-tab-${role.id}`}
-            class:list={['xp-stop', { 'is-active': i === 0 }]}
+            class:list={[
+              'xp-stop',
+              role.level && `xp-level-${role.level}`,
+              { 'is-active': i === 0 },
+            ]}
             aria-selected={i === 0 ? 'true' : 'false'}
             aria-controls={`xp-${role.id}`}
             tabindex={i === 0 ? 0 : -1}
@@ -63,7 +67,11 @@ function orgShortFallback(organization: string) {
     {
       experience.roles.map((role, i) => (
         <div
-          class:list={['xp-panel', { 'is-active': i === 0 }]}
+          class:list={[
+            'xp-panel',
+            role.level && `xp-level-${role.level}`,
+            { 'is-active': i === 0 },
+          ]}
           id={`xp-${role.id}`}
           role="tabpanel"
           aria-labelledby={`xp-tab-${role.id}`}
@@ -161,6 +169,33 @@ function orgShortFallback(organization: string) {
 </Section>
 
 <style>
+  /* Per-role seniority accent — maps each career level onto a shared --lvl-* hue
+     (present → past spectrum). Both the timeline stop and its panel feed
+     --accent-card, so the marker, active label, company logo badge, and project
+     marks all inherit the role's hue. */
+  .xp-level-principal {
+    --lvl: var(--lvl-cio);
+  } /* purple */
+  .xp-level-staff {
+    --lvl: var(--lvl-senior-director);
+  } /* blue */
+  .xp-level-senior {
+    --lvl: var(--lvl-director);
+  } /* teal */
+  .xp-level-lead {
+    --lvl: var(--lvl-evp);
+  } /* gold */
+  .xp-level-associate {
+    --lvl: var(--lvl-national);
+  } /* pink */
+  .xp-level-engineer {
+    --lvl: var(--lvl-associate-director);
+  } /* red */
+  .xp-stop,
+  .xp-panel {
+    --accent-card: var(--lvl, var(--accent));
+  }
+
   /* ---- Horizontal timeline bar (role selector; JS-only control) ---- */
   .xp-timebar {
     overflow-x: auto;
@@ -218,11 +253,11 @@ function orgShortFallback(organization: string) {
     height: var(--space-4);
     border-radius: 50%;
     background: var(--bg);
-    border: 2px solid var(--accent);
+    border: 2px solid var(--accent-card, var(--accent));
     transition: background var(--dur) var(--ease);
   }
   .xp-stop.is-active .xp-stop__marker {
-    background: var(--accent);
+    background: var(--accent-card, var(--accent));
   }
   .xp-stop__period {
     font-family: var(--font-mono);
@@ -235,7 +270,7 @@ function orgShortFallback(organization: string) {
     color: var(--text);
   }
   .xp-stop.is-active .xp-stop__period {
-    color: var(--accent-light);
+    color: var(--accent-card, var(--accent-light));
   }
   .xp-stop__org {
     font-size: var(--fs-small);
@@ -295,7 +330,7 @@ function orgShortFallback(organization: string) {
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
     letter-spacing: var(--tracking-caps);
-    color: var(--accent-ll);
+    color: var(--accent-card, var(--accent-ll));
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-2);

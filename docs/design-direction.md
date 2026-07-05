@@ -34,6 +34,25 @@ Purple biopharma palette. Dark theme is the primary design target; light theme u
 > These are sensible defaults, not mandates. Whatever values are chosen must pass **WCAG AA
 > contrast** in both themes (see `accessibility.md`). Verify text/background and accent/background pairs.
 
+### Per-view accent family
+
+One harmonized accent family — matched perceived lightness/chroma, even hue spacing, AA ≥3:1
+on `--bg-elev` in both themes. Violet is the dominant brand; the rest are supporting accents.
+Per-view accents (`--view-accent-*`), the categorical palette (`--cat-*`, and About's
+`--about-cat-*` which now alias `--cat-*`), and award-level tokens (`--lvl-*`) all derive from
+these. Changing a level token intentionally moves both its badge and the views/categories that
+reference it.
+
+| Family role     | Light (on `#FFF`) | Dark (on `#1A1530`) | Drives                                                   |
+| --------------- | ----------------- | ------------------- | -------------------------------------------------------- |
+| Violet (anchor) | `#6C2FBF`         | `#9B5EE8`           | brand, about/experience/contact, `--cat-ai`              |
+| Indigo          | `#4B46CC`         | `#7F86F2`           | research, `--lvl-senior-director`, `--cat-strategic`     |
+| Teal            | `#10897F`         | `#2FD4C0`           | vision, `--lvl-director`, `--cat-platform`               |
+| Amber (gold)    | `#B8790A`         | `#F0B429`           | recognition, `--accent-gold`/`--lvl-evp`, `--cat-impact` |
+| Rose            | `#CF3168`         | `#F778A8`           | `--lvl-national`, `--cat-people`                         |
+| Green           | `#2C8A45`         | `#46CF72`           | `--cat-gxp`                                              |
+| Red (semantic)  | `#C0182A`         | `#C0182A`           | errors, `--lvl-associate-director`/`--cat-privacy`       |
+
 ## Typography
 
 Three font roles — map by **semantic role**, not per-component preference. Tokens live in
@@ -88,7 +107,7 @@ Three font roles — map by **semantic role**, not per-component preference. Tok
 
 ## Components — visual notes
 
-- **Hero:** name + title + one-line tagline + 2–3 CTAs (Projects, Contact, Résumé). Calm, lots of space.
+- **Hero:** name + title + one-line tagline + 2–3 CTAs (Experience, Contact, Résumé). Calm, lots of space.
 - **Timeline (Experience):** single rail with role markers; project sub-groups; primary
   bullets full-weight, `secondary` bullets muted.
 - **Project cards:** title, domain, one-line summary, tag chips; hover elevation; optional detail.

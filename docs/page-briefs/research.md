@@ -17,8 +17,3 @@
 
 The view separates publication and conference proof from speaking engagements. The contact CTA is
 the dedicated **Contact** view.
-
-## Shelved
-
-**Generative AI** (`generative-ai`) is temporarily removed from the Research view. Content lives
-at `content/drafts/research/generative-ai.json`. Re-enable steps: [content-editing.md](../content-editing.md).

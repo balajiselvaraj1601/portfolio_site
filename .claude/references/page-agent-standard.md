@@ -1,8 +1,15 @@
 # Page Agent Standard — Portfolio Site
 
-Authoring standard for `.claude/agents/page-*.md`, `design-guardian.md`, and
-`site-consistency-orchestrator.md`. Load when **creating, auditing, or updating**
-page-team agent files.
+Authoring standard for **every** agent in `.claude/agents/` — the page representatives
+(`page-*.md`), the design agents (`design-guardian.md`, `design-standardizer.md`), the
+orchestrator (`site-consistency-orchestrator.md`), and the review agents
+(`site-review-fix.md`, `site-review-auto.md`). Load when **creating, auditing, or
+updating** any of these agent files.
+
+Agents come in **two families** that share the same frontmatter / title / Load-first /
+Appendix conventions: the **page family** (Template A — `## Required page-agent
+structure`) and the **workflow family** (Template B — `## Required workflow-agent
+structure`: guardian, standardizer, orchestrator, review-fix, review-auto).
 
 Runtime rules, modes, and phases live in **one** place:
 [`page-agent-playbook.md`](page-agent-playbook.md) — page agents Read it first via
@@ -34,6 +41,14 @@ their "Load first" block. Do not restate playbook content in agent files.
 | `model`       | `haiku` (bump one agent to `sonnet` only if its Implement edits repeatedly fail review) | `sonnet` | `sonnet`                                                     |
 | `maxTurns`    | `25`                                                                                    | `40`     | `80`                                                         |
 | `skills`      | —                                                                                       | —        | `page-consistency-team` (preloaded)                          |
+
+**Canonical key order (all agents):** `name, description, tools, model, skills, maxTurns`.
+Include `skills` only when the agent preloads one; `maxTurns` is always last.
+
+**Spawn token.** An agent that spawns sub-agents declares `Agent` in `tools:` — bare to
+allow any subagent type, or `Agent(<allow-list>)` to restrict which types (e.g. the
+orchestrator's `Agent(page-about, …, design-guardian)`). `Task` is a **deprecated alias**
+(pre-v2.1.63) — do not use it.
 
 Do not add `memory`, `hooks`, `mcpServers`, `permissionMode`, or `isolation` without a
 driving problem. Guardian knowledge persists in contract §11 (documented exceptions),
@@ -68,6 +83,33 @@ playbook or the contract, not in agent files.
 
 ---
 
+## Required workflow-agent structure
+
+For `design-guardian`, `design-standardizer`, `site-consistency-orchestrator`,
+`site-review-fix`, and `site-review-auto`:
+
+```
+1. YAML frontmatter (canonical key order; Agent / Agent(<list>) when spawn-capable)
+2. Title (H1) `# <Name> Agent` + a one-line role statement
+3. "Load first (mandatory)" block (inline bold): Read the reference file(s) the agent
+   depends on — or, for skill-preloaded agents, name the preloaded skill and the
+   protocol path to Read in Phase 0.
+4. ## Hard Rules — numbered rules that override everything else
+5. Phases — EITHER `## Phase N — Name` sub-sections (inline-specified agents:
+   guardian, orchestrator) OR a single `## Phase Table` (skill-backed agents:
+   standardizer, review-fix, review-auto)
+6. ## Appendix A — Owned files / scope boundaries
+7. ## Appendix B — Checklist / audit
+8. Agent-specific extra `##` sections may follow Appendix B (e.g. review-auto's
+   Scheduling / Failure Recovery / Integration; guardian's Common conflicts)
+```
+
+Exactly one H1 per file (the title); every other section is H2 (H3 for nested detail),
+with `---` rules between top-level sections. An agent that carries `Operating Modes`
+places that table between Hard Rules and the phases.
+
+---
+
 ## Finding output
 
 All audit output matches
@@ -77,6 +119,10 @@ JSON shapes in agent files — cite the schema path.
 ---
 
 ## Compliance checklist
+
+This checklist covers **page agents**; workflow-family agents are checked against the
+`## Required workflow-agent structure` block above (title + Load-first + Hard Rules +
+phases + Appendix A/B, canonical frontmatter, `Agent` spawn token).
 
 | #   | Check                        | Pass criteria                                                     |
 | --- | ---------------------------- | ----------------------------------------------------------------- |
@@ -90,4 +136,4 @@ JSON shapes in agent files — cite the schema path.
 | 8   | Ownership labels             | guardian-owned components marked audit-only; shelved list present |
 | 9   | Checklist scoped             | Appendix B contains only view-specific checks                     |
 | 10  | No placeholders              | no TODO/FIXME in production agents                                |
-| 11  | Routing sync                 | agent_id/agent_file/shelved_components match `page_routing.csv`   |
+| 11  | Routing sync                 | agent_id/agent_file/shelved_components match `page-routing.csv`   |

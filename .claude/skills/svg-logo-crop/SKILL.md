@@ -8,7 +8,7 @@ description: >-
   or clips emblem geometry.
 ---
 
-# SVG Logo Crop Skill
+# SVG logo crop Skill
 
 Crop **org/program logo SVGs** to empty borders only. Preserve all path data, colors,
 and CSS classes — change the canvas (`viewBox` / optional `width`/`height`) only.
@@ -81,7 +81,7 @@ The script:
 
 Only when Playwright is unavailable. Walk all path commands with correct relative
 semantics; sample elliptical arcs per SVG spec center-parameterization (64 steps).
-See [bbox-methods.md](bbox-methods.md). Still may over-estimate vs visible ink on
+See [references/bbox-methods.md](references/bbox-methods.md). Still may over-estimate vs visible ink on
 hollow arcs — re-check visually.
 
 **Never use Method C:** parsing arc delta values (`-126.1, 62.35`) as absolute `(x,y)`.
@@ -166,6 +166,6 @@ visible-ink measurement — mathematical bbox ≠ painted bbox.
 
 | Topic                          | Reference file                                                                               |
 | ------------------------------ | -------------------------------------------------------------------------------------------- |
-| Bbox method details & pitfalls | [bbox-methods.md](bbox-methods.md)                                                           |
+| Bbox method details & pitfalls | [references/bbox-methods.md](references/bbox-methods.md)                                     |
 | Crop automation                | run [scripts/crop-visible-ink.py](scripts/crop-visible-ink.py) to crop to visible-ink bounds |
 | Site logo paths & rendering    | `docs/assets.md`, `src/lib/logo-display.ts`                                                  |

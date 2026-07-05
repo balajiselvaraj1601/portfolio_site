@@ -42,8 +42,6 @@ Page brief: `docs/page-briefs/vision.md`
 Guardian-owned shared components used here (audit-only, never edit):
 `ThemeCard.astro` (`src/components/cards/`, renders program & impact cards), `VisionHub.astro` (`src/components/ui/`, renders group hubs) — shared primitives; findings only, guardian owns the fix.
 
-Shelved (never enable, never audit): the strategic-impact feature, archived under `_shelved/` (`_shelved/src/components/sections/Impact.astro` + `_shelved/content/work/strategic-impact.json`; removed from `src/` and `content/`)
-
 ## Appendix B — Audit checklist (view-specific)
 
 1. Both sections use `Section.astro` with correct variants (V2).

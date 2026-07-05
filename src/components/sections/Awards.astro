@@ -177,12 +177,12 @@ const total = items.length;
     --lvl: var(--lvl-national);
   }
 
-  /* One-accent-per-view: Recognition uses a single hue (gold). Cards/tiles read
-     the shared --accent-card; feed it the view accent instead of per-level --lvl
-     so the whole Recognition view reads as one colour. */
+  /* Multi-color per view: cards/tiles read the shared --accent-card; feed it each
+     item's per-level --lvl so every award level shows its own hue, falling back to
+     the Recognition accent (gold) when an element has no level class. */
   .recog-tile,
   .recog-card {
-    --accent-card: var(--view-accent-recognition);
+    --accent-card: var(--lvl, var(--view-accent-recognition));
     --mark-fg: var(--accent-card);
   }
 </style>

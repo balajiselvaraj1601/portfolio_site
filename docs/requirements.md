@@ -29,12 +29,10 @@
 ### Content sections (curated public set)
 
 - **M6** Render these sections, driven by `content/`:
-  Hero, Thirukural quote, About / Leadership philosophy, Strategic Impact, Experience (timeline),
-  Projects (showcase + detail), Education, Awards, Kaggle, Publications, Conferences,
-  Speaking Engagements, Vision, Contact.
-  (Generative AI is content-complete but shelved — `visible:false`, kept out of `home.sections`.)
-- **M7** **Projects** support a card/grid overview plus an expanded detail view per project
-  (`content/work/projects.json`), with tags and highlights.
+  Hero, Thirukural quote, About / Leadership philosophy, Experience (timeline),
+  Publications, Conferences, Speaking Engagements, Awards, Kaggle, Education,
+  Vision (programs + org impact), Contact.
+- **M7** _(removed)_ — standalone Projects showcase was dropped; project narratives live in Experience roles.
 - **M8** **Experience** renders as a chronological timeline of roles → projects → bullets,
   preserving bullet `tier` (primary/secondary) for emphasis.
 

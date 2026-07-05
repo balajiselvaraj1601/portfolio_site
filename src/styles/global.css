@@ -280,19 +280,21 @@
   --shadow-md: 0 10px 30px rgba(26, 21, 48, 0.1);
   --shadow-raised: 0 6px 20px rgba(0, 0, 0, 0.25);
   /* Award-level accents (SSOT: Awards summary tiles + cards). AA ≥3:1 on --bg-elev. */
-  --accent-gold: #b8860b; /* shared by EVP award level + education */
+  --accent-gold: #b8790a; /* amber — harmonized family; shared by EVP award level + education */
   --lvl-evp: var(--accent-gold);
   --lvl-cio: #6c2fbf;
-  --lvl-senior-director: #2563eb;
-  --lvl-director: #0f9488;
+  --lvl-senior-director: #4b46cc; /* indigo — harmonized family */
+  --lvl-director: #10897f; /* teal — harmonized family */
   --lvl-associate-director: #c0182a;
-  --lvl-national: #db2777;
+  --lvl-national: #cf3168; /* rose — harmonized family */
   /* Medal accents — shared by Kaggle + Competition cards */
   --medal-silver: #8395b4;
   --medal-bronze: #b67e44;
-  /* Leadership category accents (SSOT: About focus-area chips + cards).
-     6 alias existing level and gold hues (auto theme-aware); GxP adds a
-     fresh green. AA ≥3:1 on --bg-elev in both themes. */
+  /* Categorical accent palette (SSOT: Vision board + About leadership + shared
+     categorical hooks). 6 alias existing level and gold hues (auto theme-aware);
+     GxP adds a fresh green. All hues belong to the harmonized accent family
+     (violet/indigo/teal/amber/rose/green + semantic red). AA ≥3:1 on --bg-elev
+     in both themes. About's --about-cat-* now alias these (see below). */
   --cat-strategic: var(
     --lvl-senior-director
   ); /* blue   — Strategy & Sponsorship */
@@ -303,7 +305,18 @@
   --cat-privacy: var(
     --lvl-associate-director
   ); /* red    — Privacy & Data Protection */
-  --cat-gxp: #15803d; /* green  — GxP Compliance (new hue) */
+  --cat-gxp: #2c8a45; /* green  — GxP Compliance (harmonized family) */
+
+  /* About leadership category rows — now alias the shared harmonized --cat-*
+     family (previously a separate curated palette). One accent family across
+     About + Vision; theme tracking comes for free from the --cat-* tokens. */
+  --about-cat-strategic: var(--cat-strategic); /* indigo */
+  --about-cat-impact: var(--cat-impact); /* amber  */
+  --about-cat-platform: var(--cat-platform); /* teal   */
+  --about-cat-people: var(--cat-people); /* rose   */
+  --about-cat-ai: var(--cat-ai); /* violet */
+  --about-cat-privacy: var(--cat-privacy); /* red    */
+  --about-cat-gxp: var(--cat-gxp); /* green  */
 
   /* Categorical accent class hooks — Vision board (mirrors About leadership --cat-* mapping) */
   --vision-accent-impact: var(--cat-impact);
@@ -359,18 +372,19 @@
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 22px rgba(0, 0, 0, 0.45);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
-  --accent-gold: #f5c518;
+  --accent-gold: #f0b429; /* amber — harmonized family */
   --lvl-evp: var(--accent-gold);
   --lvl-cio: #a87bf0;
-  --lvl-senior-director: #5b9bf0;
-  --lvl-director: #2dd4bf;
+  --lvl-senior-director: #7f86f2; /* indigo — harmonized family */
+  --lvl-director: #2fd4c0; /* teal — harmonized family */
   --lvl-associate-director: #f3868f;
-  --lvl-national: #f472b6;
+  --lvl-national: #f778a8; /* rose — harmonized family */
   --medal-silver: #aebfdc;
   --medal-bronze: #d6a566;
   /* Category accents: 6 alias the level and gold hues (already themed above);
-     only the non-alias GxP green needs a brighter dark value. */
-  --cat-gxp: #4ade80; /* brighter green on dark --bg-elev */
+     only the non-alias GxP green needs a brighter dark value. About's
+     --about-cat-* alias --cat-* (light block) and inherit these dark values. */
+  --cat-gxp: #46cf72; /* brighter green on dark --bg-elev */
   --hero-gradient: radial-gradient(
     60% 70% at 15% 0%,
     rgba(108, 47, 191, 0.12) 0%,
@@ -786,15 +800,19 @@ button {
   --mark-fg: var(--accent-card, var(--accent));
 }
 
-/* Research view — one accent (blue) for all three sections (one-accent-per-view).
+/* Research view — multi-color: one distinct hue per section.
    ID+class specificity (1,1,0) beats base .card-accent (0,1,0). */
-#publications .card-accent,
-#conferences .card-accent,
-#speakers .card-accent {
-  --accent-card: var(--view-accent-research);
+#publications .card-accent {
+  --accent-card: var(--cat-strategic);
 } /* blue */
+#conferences .card-accent {
+  --accent-card: var(--cat-platform);
+} /* teal */
+#speakers .card-accent {
+  --accent-card: var(--cat-ai);
+} /* purple */
 
-/* Contact view — one accent (purple). ID+class (1,1,0) beats base .card-accent. */
+/* Contact view — single accent: all cards inherit the brand purple. */
 #contact .card-accent {
   --accent-card: var(--view-accent-contact);
 } /* purple */
@@ -822,9 +840,10 @@ button {
   --cat: var(--vision-accent-gxp);
 }
 .vision-accent-hook {
-  /* One-accent-per-view: all vision hubs/cards use the single vision hue (teal),
-     overriding the per-group --cat set by the .vision-accent-* classes above. */
-  --accent-card: var(--view-accent-vision);
+  /* Multi-color per view: each hub/card uses its own per-group --cat (set by the
+     .vision-accent-* classes above), falling back to the vision hue (teal) when an
+     element has no category class. */
+  --accent-card: var(--cat, var(--view-accent-vision));
   --mark-fg: var(--accent-card, var(--accent));
 }
 

@@ -185,19 +185,6 @@ export const profileSchema = z.object({
     governancePrivacy: z.array(TitledIconItem).optional(),
     governanceGxP: z.array(TitledIconItem).optional(),
   }),
-  vision: z
-    .object({
-      heading: z.string(),
-      headingEmphasis: z.string().optional(),
-      paragraphs: z.array(z.string()),
-      collaborations: z
-        .array(
-          z.object({ org: z.string(), detail: z.string(), entity: EntitySlug })
-        )
-        .optional(),
-      mentorship: z.string().optional(),
-    })
-    .optional(),
   contactIntro: z.string().optional(),
   contactPage: z.object({
     title: z.string(),
@@ -280,6 +267,17 @@ export const visionBoardSchema = z.object({
 });
 
 /* ── experience.json ───────────────────────────────────────────────────── */
+// Career seniority ladder (present → past). Drives per-role accent colour via
+// the .xp-level-* class map in Experience.astro (reuses the --lvl-* hue tokens).
+export const xpLevelSchema = z.enum([
+  'principal', // AI Associate Principal
+  'staff', // Senior Consultant L2
+  'senior', // Senior Consultant L1
+  'lead', // Lead Engineer
+  'associate', // Project Associate
+  'engineer', // Clinical Application Engineer
+]);
+
 export const experienceSchema = z.object({
   title: z.string(),
   intro: z.string().optional(),
@@ -289,6 +287,7 @@ export const experienceSchema = z.object({
       position: z.string(),
       organization: z.string(),
       orgShort: z.string().optional(),
+      level: xpLevelSchema.optional(),
       entity: EntitySlug,
       location: z.string().optional(),
       blurb: z.string().optional(),
@@ -312,45 +311,6 @@ export const experienceSchema = z.object({
           ),
         })
       ),
-    })
-  ),
-});
-
-/* ── projects.json ─────────────────────────────────────────────────────── */
-export const projectsSchema = z.object({
-  title: z.string().optional(),
-  note: z.string().optional(),
-  intro: z.string().optional(),
-  snapshot: z.array(MetricItem).optional(),
-  groups: z
-    .array(
-      z.object({
-        id: z.string(),
-        heading: z.string(),
-      })
-    )
-    .optional(),
-  projects: z.array(
-    z.object({
-      id: z.string(),
-      name: z.string(),
-      org: z.string(),
-      entity: EntitySlug,
-      period: z.string(),
-      role: z.string(),
-      summary: z.string(),
-      highlights: z.array(z.string()),
-      tags: z.array(z.string()),
-      domain: z.string(),
-      group: z.string().optional(),
-      icon: iconNameSchema.optional(),
-      featured: z.boolean().optional(),
-      problem: z.string().optional(),
-      solution: z.string().optional(),
-      architecture: z.string().optional(),
-      businessImpact: z.string().optional(),
-      outcome: z.string().optional(),
-      lessons: z.string().optional(),
     })
   ),
 });
@@ -499,7 +459,6 @@ export type Site = z.infer<typeof siteSchema>;
 export type Profile = z.infer<typeof profileSchema>;
 export type VisionBoard = z.infer<typeof visionBoardSchema>;
 export type Experience = z.infer<typeof experienceSchema>;
-export type Projects = z.infer<typeof projectsSchema>;
 export type Education = z.infer<typeof educationSchema>;
 export type EducationRecord = z.infer<typeof educationRecordSchema>;
 export type Awards = z.infer<typeof awardsSchema>;
@@ -516,4 +475,3 @@ export type EntityRecord = z.infer<typeof EntityRecord>;
 export type Page = Site['pages'][number];
 export type ContactItem = Profile['contact'][number];
 export type Role = Experience['roles'][number];
-export type Project = Projects['projects'][number];

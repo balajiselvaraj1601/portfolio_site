@@ -83,22 +83,13 @@ each section lists the fonts it actually surfaces.
 | --------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
 | Hero                  | `Hero.astro`                                  | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans |
 | Thirukural            | `ThirukuralQuote.astro`                       | Tamil quote=sans (exception) · translation=display italic · author=mono          |
-| Who I am & how I lead | `LeadershipPhilosophy.astro` → LeadershipCard | bio & card text=sans · statement=display (italic) · theme titles=sans            |
+| Who I am & how I lead | `LeadershipPhilosophy.astro` | bio & card text=sans · statement=display (italic) · theme titles=sans            |
 
 ### Experience — `/#experience`
 
-| Section            | Component                            | Fonts surfaced                                         |
-| ------------------ | ------------------------------------ | ------------------------------------------------------ |
-| Experience (intro) | `ExperienceIntro.astro` → MetricCard | h2=display · eyebrow=mono · metric number & label=mono |
-| Experience         | `Experience.astro`                   | year & role-meta=mono · role titles/body=sans          |
-
-### Projects — `/projects`
-
-| Section                   | Component                          | Fonts surfaced                             |
-| ------------------------- | ---------------------------------- | ------------------------------------------ |
-| Selected Projects (intro) | `ProjectsIntro.astro` → MetricCard | h2=display · eyebrow=mono · metric=mono    |
-| Flagship Case Studies     | `FeaturedCaseStudies.astro`        | h2=display · meta=mono · body=sans         |
-| Other Work                | `Projects.astro`                   | h2=display · project meta=mono · body=sans |
+| Section    | Component          | Fonts surfaced                                         |
+| ---------- | ------------------ | ------------------------------------------------------ |
+| Experience | `Experience.astro` | h2=display · eyebrow=mono · year & role-meta=mono · role titles/body=sans |
 
 ### Research — `/research`
 
@@ -118,11 +109,10 @@ each section lists the fonts it actually surfaces.
 
 ### Vision — `/vision`
 
-| Section          | Component           | Fonts surfaced                                                                        |
-| ---------------- | ------------------- | ------------------------------------------------------------------------------------- |
-| Technical Vision | `Vision.astro`      | h2=display · body=sans                                                                |
-| Vision Board     | `VisionBoard.astro` | Section h2=display · hub/program kickers=mono · OrgSnapshotCard title=sans, body=sans |
-| Strategic Impact | `Impact.astro`      | h2=display · metric=mono · body=sans                                                  |
+| Section         | Component              | Fonts surfaced                                                                        |
+| --------------- | ---------------------- | ------------------------------------------------------------------------------------- |
+| Vision Programs | `VisionPrograms.astro` | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans   |
+| Vision Impact   | `VisionImpact.astro`   | h2=display · ThemeCard title=sans, body=sans                                          |
 
 ### Contact — `/contact`
 

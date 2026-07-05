@@ -1,5 +1,8 @@
 # Simplification Refactor — 2026-07-03
 
+> **Historical** — site is now final at 6 nav views / 13 sections. Shelved restore infrastructure
+> and `_shelved/` archive were removed in the 2026-07-05 cleanup.
+
 Zero-impact codebase simplification on branch `refactor/simplify` (baseline:
 `5a3cdd8`). Every phase was gated on `npm run verify` plus a normalized
 `dist/` diff against the baseline build (data-astro-cid stripped, hashed

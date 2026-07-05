@@ -17,7 +17,7 @@ Before any action, read these files:
 1. `.claude/skills/page-consistency-team/SKILL.md`
 2. `.claude/agents/site-consistency-orchestrator.md`
 3. `.claude/skills/page-consistency-team/references/interaction-protocol.md`
-4. `.claude/skills/page-consistency-team/assets/page_routing.csv`
+4. `.claude/skills/page-consistency-team/assets/page-routing.csv`
 
 ## Run
 

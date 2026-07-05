@@ -4,6 +4,7 @@
   "roles": [
     {
       "position": "Senior Deep Learning Engineer / AI Associate Principal",
+      "level": "principal",
       "organization": "AstraZeneca, Sweden",
       "orgShort": "AstraZeneca · Sweden",
       "blurb": "Leads production AI across drug-safety, oncology, and clinical-imaging programs.",
@@ -113,6 +114,7 @@
     },
     {
       "position": "Senior Consultant Level 2",
+      "level": "staff",
       "organization": "AstraZeneca, India",
       "orgShort": "AstraZeneca · India",
       "blurb": "Delivered a CT tumor-segmentation pipeline that beat state-of-the-art and secured follow-on funding.",
@@ -161,6 +163,7 @@
     },
     {
       "position": "Senior Consultant Level 1",
+      "level": "senior",
       "organization": "AstraZeneca, India",
       "orgShort": "AstraZeneca · India",
       "blurb": "Built AWS foundation-model and graph-neural-network platforms for digital pathology and clinical imaging.",
@@ -233,6 +236,7 @@
     },
     {
       "position": "Lead Engineer",
+      "level": "lead",
       "organization": "HCLTech, India",
       "blurb": "Shipped production computer-vision systems for face, video, and pose analytics across enterprise deployments.",
       "tech": [
@@ -306,6 +310,7 @@
     },
     {
       "position": "Project Associate",
+      "level": "associate",
       "organization": "HTIC & ICSR, IIT Madras, India",
       "orgShort": "IIT Madras",
       "blurb": "Developed real-time clinical imaging systems spanning endoscopy, retinal imaging, and 3D neuroanatomy.",
@@ -394,6 +399,7 @@
     },
     {
       "position": "Clinical Application Engineer",
+      "level": "engineer",
       "organization": "Healthware Pvt Ltd, India",
       "orgShort": "Healthware",
       "blurb": "Bridged clinical, engineering, and commercial teams across 50+ hospital sites to drive medical-imaging adoption.",

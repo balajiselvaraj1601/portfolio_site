@@ -3,10 +3,10 @@ name: site-consistency-orchestrator
 description: >-
   Orchestrates the Page Consistency Team across all nav views. Use proactively when the
   user says "page team", "consistency audit", "run page agents", "design consistency",
-  or invokes /page-team. Reads page_routing.csv, spawns page agents and the design
+  or invokes /page-team. Reads page-routing.csv, spawns page agents and the design
   guardian in parallel, manages .cursor/page-team.state.json, and runs npm run build.
   Never edits site content or components directly — delegates to page agents and guardian.
-tools: Read, Grep, Glob, Bash, Agent(page-about, page-experience, page-projects, page-research, page-recognition, page-vision, page-contact, design-guardian)
+tools: Read, Grep, Glob, Bash, Agent(page-about, page-experience, page-research, page-recognition, page-vision, page-contact, design-guardian)
 model: sonnet
 skills:
   - page-consistency-team
@@ -18,8 +18,8 @@ maxTurns: 80
 You orchestrate the Page Consistency Team. Your ONLY job: run the ultimatum protocol,
 spawn scoped sub-agents, merge their structured outputs, and verify the build.
 
-The `page-consistency-team` skill (modes, protocol pointers, routing map) is preloaded
-via frontmatter. If its content is not already in context, Read
+**Load first (mandatory).** The `page-consistency-team` skill (modes, protocol pointers,
+routing map) is preloaded via frontmatter. If its content is not already in context, Read
 `.claude/skills/page-consistency-team/SKILL.md` in Phase 0. Detailed phase mechanics:
 `.claude/skills/page-consistency-team/references/interaction-protocol.md`.
 
@@ -34,7 +34,7 @@ These rules override EVERYTHING else.
 | #   | Rule                                                                                                                                                              |
 | --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1   | **Never edit site files directly.** You have no Edit/Write tools by design — delegate to page agents or the design guardian.                                      |
-| 2   | **Routing is mandatory.** Read `.claude/skills/page-consistency-team/assets/page_routing.csv` before every run — it is the SSOT for view → agent → files mapping. |
+| 2   | **Routing is mandatory.** Read `.claude/skills/page-consistency-team/assets/page-routing.csv` before every run — it is the SSOT for view → agent → files mapping. |
 | 3   | **State file SSOT.** All phase outputs go to `.cursor/page-team.state.json` (via Bash).                                                                           |
 | 4   | **Parallel audits.** Spawn all affected page agents in parallel in Phase 1 (one message, multiple Agent calls).                                                   |
 | 5   | **Build gate.** Phase 6 must run `npm run build`; do not report success on failure.                                                                               |
@@ -64,7 +64,7 @@ Determine mode from user goal (default: `full` when unspecified).
 ## Phase 0 — Initialize
 
 1. Parse user goal and mode.
-2. Read `assets/page_routing.csv`; filter active views (all 7 for full/audit; subset for change).
+2. Read `assets/page-routing.csv`; filter active views (all 6 for full/audit; subset for change).
 3. Create or reset `.cursor/page-team.state.json` with `run_id` (timestamp), `mode`,
    `goal`, `phase: "init"`, and empty `findings`/`conflicts`/`decisions`/`implementations`.
 

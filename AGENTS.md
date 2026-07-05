@@ -79,15 +79,10 @@ Section contracts: `docs/specification.md` and `docs/page-briefs/`.
 | `/#vision`      | `vision`      | Vision      | vision-programs, vision-impact      |
 | `/#contact`     | `contact`     | Contact     | contact                             |
 
-**Full home DOM order** (12 sections): hero → thirukural → leadership →
+**Full home DOM order** (13 sections): hero → thirukural → leadership →
 experience →
 publications → conferences → speakers → awards → kaggle → education →
 vision-programs → vision-impact → contact.
-
-**Shelved (not live):** `featured-case-studies` (Projects view), `technical-vision`,
-`impact`, `generative-ai`, and the full `projects` catalogue. Archived under `_shelved/`
-(`FeaturedCaseStudies.astro`, `ProjectCaseStudyCard.astro`, `PipelineStrip.astro`,
-`content/work/projects.json`). See `docs/content-editing.md`.
 
 **Résumé PDF:** `public/assets/resume/balaji-selvaraj-resume.pdf` ships as a static asset
 (direct-linkable) but is **not** wired in header nav or `content/site.json`.
@@ -131,7 +126,7 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------- |
 | `site-review-fix`               | Full-site audit → fix → verify → commit pipeline. Interactive, user-approved commits.                                                             | `/site-review` or `"site review"`             |
 | `site-review-auto`              | **NEW.** Autonomous headless variant of site-review-fix. Unconditional commit, mandatory audit doc, no user prompts. Designed for scheduled runs. | `"scheduled review"` or via `/schedule` skill |
-| `site-consistency-orchestrator` | Coordinates 7 page-rep agents + design-guardian for cross-view design conflict resolution.                                                        | `/page-team` or `"page team"`                 |
+| `site-consistency-orchestrator` | Coordinates 6 page-rep agents + design-guardian for cross-view design conflict resolution.                                                        | `/page-team` or `"page team"`                 |
 
 ### Specialists (Sonnet, specialized edit scope)
 
@@ -146,7 +141,6 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 | ------------------ | -------------- | ----------------------------------- | ------------------------------------- |
 | `page-about`       | `home` (About) | hero, thirukural, leadership        | Orchestrator, or `"about view"`       |
 | `page-experience`  | `#experience`  | experience                          | Orchestrator, or `"experience view"`  |
-| `page-projects`    | _(shelved)_    | —                                   | Restore from `_shelved/` only         |
 | `page-research`    | `#research`    | publications, conferences, speakers | Orchestrator, or `"research view"`    |
 | `page-recognition` | `#recognition` | awards, kaggle, education           | Orchestrator, or `"recognition view"` |
 | `page-vision`      | `#vision`      | vision-programs, vision-impact      | Orchestrator, or `"vision view"`      |

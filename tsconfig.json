@@ -13,5 +13,5 @@
     "allowJs": true
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist", "node_modules", "eslint.config.mjs", "_shelved"]
+  "exclude": ["dist", "node_modules", "eslint.config.mjs"]
 }

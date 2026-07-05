@@ -9,7 +9,7 @@ Load with `.claude/skills/page-consistency-team/SKILL.md`.
 ## Prerequisites
 
 1. Repo root: `/home/engineer/workspace/portfolio_site`
-2. Routing SSOT: `assets/page_routing.csv`
+2. Routing SSOT: `assets/page-routing.csv`
 3. State file: `.cursor/page-team.state.json` (create via `page-team-start.sh`)
 4. Design contract: `.claude/references/design-consistency-contract.md`
 
@@ -26,12 +26,12 @@ Load with `.claude/skills/page-consistency-team/SKILL.md`.
 
 ## Phase 1 — Parallel audit
 
-**Claude Code:** Use Agent tool × 7, one per active view row in CSV, spawned **by
+**Claude Code:** Use Agent tool × 6, one per active view row in CSV, spawned **by
 subagent type** (`agent_id` column, e.g. `page-experience`). The agent file is the
 sub-agent's system prompt — do not tell it to read its own file. Templates:
 orchestrator agent file, Appendix A.
 
-**Cursor:** Use Task tool × 7 (`subagent_type: generalPurpose`), parallel in one message.
+**Cursor:** Use Task tool × 6 (`subagent_type: generalPurpose`), parallel in one message.
 
 **Cursor prompt template:**
 
@@ -154,7 +154,6 @@ For targeted changes, filter `active_views` to affected pages only:
 | Goal mentions                   | Active views          |
 | ------------------------------- | --------------------- |
 | experience, career, timeline    | experience            |
-| projects, case studies          | projects              |
 | recognition, awards, kaggle     | recognition           |
 | vision, hub                     | vision                |
 | padding, cards, tokens (global) | all + design-guardian |

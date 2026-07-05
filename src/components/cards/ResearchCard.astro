@@ -54,7 +54,12 @@ const logoUrl = logoSrc(logo);
         class="rcard-logo"
       />
     ) : (
-      <CardMark icon={icon} iconFallback="document" variant="accented" class="rcard-logo" />
+      <CardMark
+        icon={icon}
+        iconFallback="document"
+        variant="accented"
+        class="rcard-logo"
+      />
     )
   }
   {isStacked && <hr class="rcard-divider" aria-hidden="true" />}
@@ -131,7 +136,10 @@ const logoUrl = logoSrc(logo);
   .venue {
     font-family: var(--font-mono);
     font-size: var(--fs-2xs);
-    color: var(--accent-ll);
+    /* Follow the per-section accent (publications=blue, conferences=teal) so the
+       Research view's multi-color reads on its most prominent label; falls back
+       to the static label hue when no section accent is set. */
+    color: var(--accent-card, var(--accent-ll));
     letter-spacing: var(--tracking-caps);
     text-transform: uppercase;
     margin-bottom: var(--text-gap-inline);

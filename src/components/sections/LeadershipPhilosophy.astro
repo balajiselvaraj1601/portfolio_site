@@ -187,32 +187,49 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
      pattern (level → --lvl → --accent-card); keys match data-category so
      theming and filtering share one source. */
   .cat-strategicVision {
-    --cat: var(--cat-strategic);
+    --cat: var(--about-cat-strategic);
   }
   .cat-businessImpact {
-    --cat: var(--cat-impact);
+    --cat: var(--about-cat-impact);
   }
   .cat-platform {
-    --cat: var(--cat-platform);
+    --cat: var(--about-cat-platform);
   }
   .cat-peopleMentoring {
-    --cat: var(--cat-people);
+    --cat: var(--about-cat-people);
   }
   .cat-governanceAI {
-    --cat: var(--cat-ai);
+    --cat: var(--about-cat-ai);
   }
   .cat-governancePrivacy {
-    --cat: var(--cat-privacy);
+    --cat: var(--about-cat-privacy);
   }
   .cat-governanceGxP {
-    --cat: var(--cat-gxp);
+    --cat: var(--about-cat-gxp);
   }
-  /* One-accent-per-view: About uses the single brand hue (purple). Override the
-     per-category --cat so leadership cards and the active chip share one colour. */
-  .leadership__card-row,
-  .recog-chip.is-active {
-    --accent-card: var(--view-accent-about);
+  /* Per-group colour: each leadership row carries its own curated hue via --cat
+     (set by its .cat-* class); cards, borders, and icon marks inherit it. */
+  .leadership__card-row {
+    --accent-card: var(--cat);
     --mark-fg: var(--accent-card);
+  }
+  /* Active category chip takes its hue; the "All" chip has no .cat-* class, so
+     it falls back to the brand purple. */
+  .recog-chip.is-active {
+    --accent-card: var(--cat, var(--view-accent-about));
+    --mark-fg: var(--accent-card);
+  }
+  /* Dark mode: the 2px top edge + icon tint read faintly on the dark bg, so
+     boost per-row prominence with a subtle colour wash and a thicker top edge.
+     Light mode already reads vividly, so scope this to the dark theme only. */
+  :global(:root[data-theme='dark']) .leadership__card-row .theme-card {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--cat) 12%, var(--bg-elev)),
+      color-mix(in srgb, var(--cat) 4%, var(--bg-elev))
+    );
+    border-color: color-mix(in srgb, var(--cat) 45%, var(--border));
+    border-top-width: 3px;
   }
 
   .leadership__diff-heading {

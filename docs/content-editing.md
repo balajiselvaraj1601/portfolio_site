@@ -25,10 +25,8 @@ If the change affects page structure, section order, or the overall narrative, u
 | `person/profile.json`        | Hero, Leadership, Contact             | Headline, metrics, CTAs, `leadershipPhilosophy.*`, `contactIntro`, `contactPage`, contact channels                           |
 | `person/collaborations.json` | Collaborations strip on About         | Organization names; optional `logo` slug → `public/assets/logos/{slug}.png`; optional `entity` slug → URL in `entities.json` |
 | `entities.json`              | Entity links (global registry)        | Slug → `{ name, url }` for organizations referenced across sections                                                          |
-| `work/strategic-impact.json` | Strategic Impact                      | `metrics[]`, `highlights[]`; optional `journey[]`, `leadershipCards[]` for rich layout                                       |
 | `work/vision-board.json`     | Vision view (`/#vision`)              | Infographic hubs, program cards, org impact cards                                                                            |
-| `work/experience.json`       | Experience intro, tabbed role detail  | Roles, optional `mission`, `snapshot[]`, bullets, tier                                                                       |
-| `work/projects.json`         | Projects intro, Featured case studies | Summaries, case-study fields, `featured`, `snapshot[]`, tags (full catalogue section shelved)                                |
+| `work/experience.json`       | Experience                            | Roles, optional `mission`, `intro`, `headline`, nested `projects[]`, bullets, tier                                           |
 | `research/publications.json` | Publications                          | Title + URL links                                                                                                            |
 | `research/conferences.json`  | Conferences                           | Title + URL links                                                                                                            |
 | `research/speakers.json`     | Speaking engagements                  | Title + URL links                                                                                                            |
@@ -38,26 +36,8 @@ If the change affects page structure, section order, or the overall narrative, u
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
 
-Ideal field set + format rules for the Experience and Flagship case study items:
+Ideal field set + format rules for Experience roles:
 [Case study & experience info standard](./case-study-experience-info-standard.md).
-
-### Draft / shelved content
-
-Content under `content/drafts/` is **not wired to the live site**. Currently shelved:
-
-| File / section id                    | Section                               | Notes                                                                                                |
-| ------------------------------------ | ------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `drafts/research/generative-ai.json` | Generative AI (`generative-ai`)       | Validated and exported from `src/lib/content.ts`, but not in `home.sections` — not rendered.         |
-| `work/strategic-impact.json`         | Strategic Impact (`impact`)           | Component exists; section not in `home.sections`.                                                    |
-| `person/profile.json` → `vision`     | Technical Vision (`technical-vision`) | Component exists; section not in `home.sections`.                                                    |
-| `work/projects.json` (non-featured)  | Projects catalogue (`projects`)       | Full grid section shelved; live Projects view shows `projects-intro` + `featured-case-studies` only. |
-
-**Re-enable Generative AI:**
-
-1. Move `content/drafts/research/generative-ai.json` → `content/research/generative-ai.json`
-2. Update the import path in `src/lib/content.ts` (`generativeAiRaw` from `@content/research/generative-ai.json`)
-3. Update `sections["generative-ai"].source` to `research/generative-ai.json` and set `visible` to `true` in `site.json`
-4. Re-add `generative-ai` to `home.sections` and research `sections` / `viewSections` in `site.json`
 
 ## Common tasks
 
@@ -117,25 +97,8 @@ Edit `content/work/experience.json` → find the role → project → `bullets` 
 
 Use `"tier": "secondary"` for supporting bullets (rendered with muted styling).
 
-### Add a project card
-
-Edit `content/work/projects.json` → `projects` array. Required fields:
-
-```json
-{
-  "id": "unique-slug",
-  "name": "Project Name",
-  "org": "Organization",
-  "period": "2023–Present",
-  "role": "AI Lead",
-  "summary": "One-line summary.",
-  "highlights": ["Highlight 1", "Highlight 2"],
-  "tags": ["Tag1", "Tag2"],
-  "domain": "Domain label"
-}
-```
-
-Keep summaries consistent with `work/experience.json` — `work/projects.json` is a derived card view.
+Project narratives live inside each role's `projects[]` array in `work/experience.json` — see
+[Case study & experience info standard](./case-study-experience-info-standard.md).
 
 ### Update contact links
 
@@ -182,12 +145,11 @@ Schemas live in `src/schemas.ts`. Key constraints:
 | Schema                 | Notable rules                                                                                                            |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`                       |
-| `profileSchema`        | hero/leadership/contact fields; optional `vision`; `contactIntro`, `contactPage`; `contact[].href` nullable for location |
-| `impactSchema`         | `metrics[]` + `highlights[]` required; optional `journey[]`, `leadershipCards[]`                                         |
-| `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                                              |
-| `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                                         |
-| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`                            |
-| `projectsSchema`       | `id` must be unique slug; optional `projects[].entity`                                                                   |
+| `profileSchema`        | hero/leadership/contact fields; `contactIntro`, `contactPage`; `contact[].href` nullable for location |
+| `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                           |
+| `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                      |
+| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`           |
+| `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                    |
 | `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                                        |
 | `kaggleSchema`         | `profile` URL required; `items[]` validated via `kaggleCompetitionSchema`                                                |
 

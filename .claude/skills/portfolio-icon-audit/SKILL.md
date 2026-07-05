@@ -9,7 +9,7 @@ description: >-
   portfolio visual assets, or before adding new content sections.
 ---
 
-# Portfolio icon & logo audit Skill
+# Portfolio icon audit Skill
 
 Orchestrate a full audit of visual assets across the portfolio site. **Claude inventories and resolves; Cursor generates missing assets.**
 
@@ -18,9 +18,9 @@ Orchestrate a full audit of visual assets across the portfolio site. **Claude in
 - **Repo:** `/home/engineer/workspace/portfolio_site` (AgentMemory slug: `portfolio_site`)
 - **Read on demand:** `AGENTS.md`, `docs/design-direction.md`, `docs/assets.md`
 - **Reference files (load when executing):**
-  - [content-inventory.md](content-inventory.md) — entity → field → component map
-  - [resolution-rules.md](resolution-rules.md) — matching logic, slugs, trademark policy
-  - [cursor-delegation.md](cursor-delegation.md) — Cursor handoff templates
+  - [references/content-inventory.md](references/content-inventory.md) — entity → field → component map
+  - [references/resolution-rules.md](references/resolution-rules.md) — matching logic, slugs, trademark policy
+  - [references/cursor-delegation.md](references/cursor-delegation.md) — Cursor handoff templates
 
 ## Two asset systems — never conflate
 
@@ -58,14 +58,14 @@ Audit Progress:
 
 ### Phase A — Inventory
 
-Walk every source in [content-inventory.md](content-inventory.md). For each entity needing a visual, add a row:
+Walk every source in [references/content-inventory.md](references/content-inventory.md). For each entity needing a visual, add a row:
 
 | entity_id | content_file | field | current_value | asset_class | render_component | status |
 
 **Scan these sources:**
 
-1. **JSON with icon fields** — `profile.json` (contact), `strategic-impact.json`, `experience.json` (projects), `vision-board.json`, `collaborations.json`
-2. **Heuristic-only** — `projects.json` → `projectIcon()`, `ResearchDomainMap.astro`, `PipelineStrip.astro`
+1. **JSON with icon fields** — `profile.json` (contact), `experience.json` (projects), `vision-board.json`, `collaborations.json`
+2. **Heuristic-only** — `experience.json` nested projects via `XpProjectCard.astro` / `projectIcon()`
 3. **Logo refs** — `vision-board.json` `VisionMark`; `collaborations.json` `items[].logo`
 4. **Site brand** — `site.json`, `BaseHead.astro`, `site.webmanifest`
 5. **Content images** — `profile.portrait`, `content/drafts/competitions/*.md`
@@ -94,7 +94,7 @@ Assign each row `asset_class`:
 
 ### Phase C — Resolve
 
-Apply [resolution-rules.md](resolution-rules.md):
+Apply [references/resolution-rules.md](references/resolution-rules.md):
 
 1. **Semantic:** `iconNameSchema.safeParse(value)` → heuristics (`projectIcon`, `aboutCardIcon`, keyword map)
 2. **Before inventing a new IconName:** load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md` — Lucide → Iconify → keyword map
@@ -141,7 +141,7 @@ Do not edit content JSON or components unless the user explicitly asks — this 
 **Claude does NOT generate production assets.** For every `missing` row:
 
 1. Read `~/.claude/skills/delegation/SKILL.md`
-2. Build a delegation package from [cursor-delegation.md](cursor-delegation.md)
+2. Build a delegation package from [references/cursor-delegation.md](references/cursor-delegation.md)
 3. Set `DELEGATE_TO: Cursor Agent` (not Haiku/Sonnet)
 4. Hand off via the user's Cursor session **or**:
 
@@ -226,11 +226,11 @@ These are follow-up implementation tasks after assets exist.
 
 ## Quick reference: where to go deeper
 
-| Topic                                   | Reference file                               |
-| --------------------------------------- | -------------------------------------------- |
-| Entity → field → component map          | [content-inventory.md](content-inventory.md) |
-| Matching logic, slugs, trademark policy | [resolution-rules.md](resolution-rules.md)   |
-| Cursor handoff templates                | [cursor-delegation.md](cursor-delegation.md) |
+| Topic                                   | Reference file                                                     |
+| --------------------------------------- | ------------------------------------------------------------------ |
+| Entity → field → component map          | [references/content-inventory.md](references/content-inventory.md) |
+| Matching logic, slugs, trademark policy | [references/resolution-rules.md](references/resolution-rules.md)   |
+| Cursor handoff templates                | [references/cursor-delegation.md](references/cursor-delegation.md) |
 
 ## Current baseline (re-verify on each run)
 
@@ -241,4 +241,4 @@ These are follow-up implementation tasks after assets exist.
 - Experience projects: all named projects now have explicit `icon` in JSON
 - Competitions: 16 markdown files without thumbnails (untracked content)
 
-See [content-inventory.md](content-inventory.md) for the full entity map.
+See [references/content-inventory.md](references/content-inventory.md) for the full entity map.

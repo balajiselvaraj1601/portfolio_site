@@ -122,7 +122,7 @@ Return JSON: `{ "decisions": [...], "files_changed": [...], "build": "pass|fail"
 | ------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
 | `src/styles/global.css`                                 | Tokens, `.section`, `.card`, utilities                                                                |
 | `src/components/ui/` (all)                              | Shared UI primitives (Section, Eyebrow, SectionHeading, RecogCardShell, RecogControls, EntityLink, …) |
-| `src/components/cards/` (all)                           | Shared card components (MetricCard, CompetitionCard, ResearchCard, CardMark, MarkEmblem, …)           |
+| `src/components/cards/` (all)                           | Shared card components (CompetitionCard, ResearchCard, CardMark, MarkEmblem, …)           |
 | `.claude/references/design-consistency-contract.md` §11 | Documented exceptions table (append-only)                                                             |
 
 ---

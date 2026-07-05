@@ -13,11 +13,10 @@ Legacy paths redirect to the matching hash on `/`.
 
 ```
 /              About (default)  → viewSections: hero, thirukural, leadership
-/#experience   Experience       → experience-intro, experience
-/#projects     Projects         → projects-intro, featured-case-studies
+/#experience   Experience       → experience
 /#research     Research         → publications, conferences, speakers
 /#recognition  Recognition      → awards, kaggle, education
-/#vision       Vision           → vision-board
+/#vision       Vision           → vision-programs, vision-impact
 /#contact      Contact          → contact
 /experience … /contact         → redirect stubs (noindex) → /#{viewAnchor}
 /404           custom not-found page
@@ -30,15 +29,9 @@ Each section id appears in exactly one `viewSections` group (exclusive nav group
 is duplicated across nav buttons). Section ids and grouping are defined in `content/site.json → pages`.
 The renderer (`SectionRenderer`) iterates the home section list — do not hardcode section order in markup.
 
-**Full home DOM order** (15 section ids): `hero` → `thirukural` → `leadership` →
-`experience-intro` → `experience` → `projects-intro` → `featured-case-studies` →
-`publications` → `conferences` → `speakers` → `awards` → `kaggle` → `education` →
-`vision-board` → `contact`.
-
-> **Shelved (not live):** These section ids have components and/or content on disk but are
-> **not** in `home.sections` (and may have `visible: false` where a registry entry exists):
-> `technical-vision`, `impact`, `generative-ai`, and the full `projects` catalogue.
-> Re-enable steps: `content-editing.md`.
+**Full home DOM order** (13 section ids): `hero` → `thirukural` → `leadership` →
+`experience` → `publications` → `conferences` → `speakers` → `awards` → `kaggle` →
+`education` → `vision-programs` → `vision-impact` → `contact`.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -56,23 +49,21 @@ App / Layout
 │   │   ├── HeroSection            ← person/profile.json
 │   │   └── ThirukuralSection      ← person/profile.json (heroQuote)
 │   ├── LeadershipSection          ← person/profile.json + collaborations.json
-│   ├── ExperienceIntroSection     ← work/experience.json (snapshot[])
 │   ├── ExperienceSection          ← work/experience.json (roles[])
-│   ├── ProjectsIntroSection       ← work/projects.json
-│   ├── FeaturedCaseStudies        ← work/projects.json (featured: true)
 │   ├── PublicationsSection        ← research/publications.json
 │   ├── ConferencesSection         ← research/conferences.json
 │   ├── SpeakersSection            ← research/speakers.json
 │   ├── AwardsSection              ← recognition/awards.json (CompetitionCard-style recog layout)
 │   ├── KaggleSection              ← recognition/kaggle.json (CompetitionCard stack)
 │   ├── EducationSection           ← recognition/education.json (EducationCard)
-│   ├── VisionBoardSection         ← work/vision-board.json
+│   ├── VisionProgramsSection      ← work/vision-board.json
+│   ├── VisionImpactSection        ← work/vision-board.json
 │   └── ContactSection             ← person/profile.json (contact[])
 └── Footer (copyright, social links, back-to-top)
 ```
 
-Reused primitives (define once, use everywhere): `Section`, `MetricCard`, `Chip`, `ResearchCard`,
-`CompetitionCard`, `EducationCard`, `ProjectCaseStudyCard`.
+Reused primitives (define once, use everywhere): `Section`, `Chip`, `ResearchCard`,
+`CompetitionCard`, `EducationCard`, `ThemeCard`, `XpProjectCard`.
 
 ## 3. Per-section content contract
 
@@ -81,17 +72,15 @@ Reused primitives (define once, use everywhere): `Section`, `MetricCard`, `Chip`
 | Hero                  | `person/profile.json`                               | `headline`, `metrics[]`, `ctas[]`, photo                                                                                                    | Split layout; metric cards; value-oriented CTAs                            |
 | Thirukural            | `person/profile.json`                               | `heroQuote`                                                                                                                                 | Couplet + portrait band; wrapped in AboutLanding with hero                 |
 | Leadership            | `person/profile.json`, `person/collaborations.json` | `leadershipPhilosophy.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro → CTO pillar card rows → collaborations logo strip                   |
-| Experience Intro      | `work/experience.json`                              | `title`, `intro`, `snapshot[]`                                                                                                              | Section lead-in + metric cards                                             |
-| Experience            | `work/experience.json`                              | `roles[] -> projects[] -> bullets[]`                                                                                                        | Interactive tabbed timeline + role panels                                  |
-| Projects Intro        | `work/projects.json`                                | `title`, `intro`, `snapshot[]`                                                                                                              | Section lead-in + metric cards                                             |
-| Featured Case Studies | `work/projects.json`                                | `projects[]` where `featured: true`                                                                                                         | Flagship case-study cards (Projects view — no full catalogue)              |
+| Experience            | `work/experience.json`                              | `title`, `intro`, `headline`, `roles[] -> projects[] -> bullets[]`                                                                          | Section header + interactive tabbed timeline + role panels                 |
 | Publications          | `research/publications.json`                        | `items[]`                                                                                                                                   | Stacked ResearchLinkGrid                                                   |
 | Conferences           | `research/conferences.json`                         | `items[]`                                                                                                                                   | Stacked ResearchLinkGrid                                                   |
 | Speakers              | `research/speakers.json`                            | `items[]`                                                                                                                                   | SpeakingCard stack                                                         |
 | Awards                | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, …)                                                                                              | Search + level filter chips; recog card grid                               |
 | Kaggle                | `recognition/kaggle.json`                           | `rank`, `profile`, `items[]`                                                                                                                | Global rank hero; medal filters; CompetitionCard grid                      |
 | Education             | `recognition/education.json`                        | `intro`, `records[]`                                                                                                                        | Split credential panel — degree hero, 2×2 stat grid, achievement highlight |
-| Vision Board          | `work/vision-board.json`                            | `hubs[]`, `programs[]`, `orgCards[]`                                                                                                        | Infographic layout (Vision view — sole live section)                       |
+| Vision Programs       | `work/vision-board.json`                            | `hubs[]`, `programs[]`                                                                                                                      | Infographic hub + program cards (Vision view)                              |
+| Vision Impact         | `work/vision-board.json`                            | `orgCards[]`                                                                                                                                | Organizational impact cards (Vision view)                                  |
 | Contact               | `person/profile.json`                               | `contact[]`, `contactIntro`, `contactPage`                                                                                                  | Pitch + linked channels + optional booking CTA                             |
 
 The renderer maps `site.json.sections[id].source` → file, and `…title` → heading text.
@@ -99,9 +88,9 @@ The renderer maps `site.json.sections[id].source` → file, and `…title` → h
 ## 4. Responsive behavior
 
 - **Breakpoints (suggested):** mobile `< 640px`, tablet `640–1024px`, desktop `> 1024px`.
-- **Mobile-first**: single column; project grids collapse to 1 column on narrow viewports.
-- **Tablet:** Projects 2-column; Experience tabbed rail keeps a single column.
-- **Desktop:** Projects 2–3 column; comfortable max content width (~70–80ch for text).
+- **Mobile-first**: single column; card grids collapse to 1 column on narrow viewports.
+- **Tablet:** Experience tabbed rail keeps a single column.
+- **Desktop:** comfortable max content width (~70–80ch for text).
 - Header collapses to a hamburger menu below the tablet breakpoint.
 - No fixed heights that clip content; respect dynamic viewport units on mobile.
 

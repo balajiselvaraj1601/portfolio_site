@@ -255,10 +255,6 @@ for (const record of education.records) {
 for (const program of visionBoard.programs ?? []) {
   assertEntitySlug(program.entity, 'work/vision-board.json programs');
 }
-for (const collab of profile.vision?.collaborations ?? []) {
-  assertEntitySlug(collab.entity, 'person/profile.json vision.collaborations');
-}
-
 function assertLogoAsset(slug: string, context: string) {
   for (const ext of LOGO_EXTS) {
     if (logoFiles.has(`${slug}.${ext}`)) return;

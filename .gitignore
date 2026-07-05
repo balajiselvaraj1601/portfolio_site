@@ -50,6 +50,3 @@ scripts/.icon-stage/
 .cursor/site-review.env
 .cursor/site-review.state.json
 .cursor/logs/site-review/
-
-# Shelved / unused content and components (not part of the live site)
-/_shelved/

@@ -1,22 +1,22 @@
 ---
 name: page-consistency-team
 description: >-
-  Multi-agent Page Consistency Team for portfolio nav views. Seven page representatives
+  Multi-agent Page Consistency Team for portfolio nav views. Six page representatives
   plus design guardian collaborate on design, structure, padding, and token consistency.
   Trigger on "page team", "consistency audit", "run page agents", "design consistency",
   or /page-team. Modes: audit, change, implement, full. Works in Claude Code (subagents)
   and Cursor (Task subagents). State: .cursor/page-team.state.json.
 ---
 
-# Page Consistency Team Skill
+# Page consistency team Skill
 
-Orchestrate seven page-representative agents and a design guardian to audit and implement
+Orchestrate six page-representative agents and a design guardian to audit and implement
 consistent design across all nav views.
 
 ## Before starting
 
-1. Read `.claude/references/design-consistency-contract.md`
-2. Read `assets/page_routing.csv`
+1. For the shared design rules, read `.claude/references/design-consistency-contract.md`
+2. Read `assets/page-routing.csv`
 3. Run `./.cursor/scripts/page-team-start.sh` (or confirm state file exists)
 4. Operator guide: `docs/page-team.md`
 
@@ -52,7 +52,7 @@ When this skill is invoked, adopt **site-consistency-orchestrator** behavior:
 ### Claude Code
 
 ```
-Agent tool, subagent_type from page_routing.csv agent_id column
+Agent tool, subagent_type from page-routing.csv agent_id column
 (e.g. page-experience, design-guardian). The agent file is the sub-agent's
 system prompt — pass run context only (mode, goal, run_id, decision subsets).
 ```
@@ -62,7 +62,7 @@ system prompt — pass run context only (mode, goal, run_id, decision subsets).
 ```
 Task tool, subagent_type: generalPurpose
 Parallel: launch all page audits in one message
-Prompt: include agent file path (page_routing.csv agent_file column) + "return JSON only"
+Prompt: include agent file path (page-routing.csv agent_file column) + "return JSON only"
 ```
 
 ## Efficiency: batch edits and parallel calls
@@ -78,7 +78,7 @@ Prompt: include agent file path (page_routing.csv agent_file column) + "return J
 | [interaction-protocol.md](references/interaction-protocol.md)     | Phase details     |
 | [finding-schema.md](references/finding-schema.md)                 | JSON shapes       |
 | [cursor-delegation.md](references/cursor-delegation.md)           | External dispatch |
-| [page_routing.csv](assets/page_routing.csv)                       | View → agent map  |
+| [page-routing.csv](assets/page-routing.csv)                       | View → agent map  |
 | [page-agent-standard.md](../../references/page-agent-standard.md) | Agent compliance  |
 
 ## Hard rules (all agents)

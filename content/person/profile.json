@@ -192,47 +192,6 @@
       }
     ]
   },
-  "vision": {
-    "heading": "Multimodal AI at the edge of biology",
-    "headingEmphasis": "edge of biology",
-    "paragraphs": [
-      "Shaped an innovative multimodal AI vision aligned with AstraZeneca's 2030 Gene & Cell Therapy ambitions — a vision independently developed bottom-up and later submitted to Gartner by GITC Chennai.",
-      "The philosophy: integrate heterogeneous biological signals — omics, imaging, molecular, single-cell — into unified learned representations that generalize across compounds, diseases, and data sources.",
-      "Currently architecting AI systems where model-agnostic platforms can adapt to new modalities, cross-assay contexts, and heterogeneous vendor data without re-engineering from scratch."
-    ],
-    "collaborations": [
-      {
-        "org": "Broad Institute",
-        "entity": "broad-institute",
-        "detail": "Co-developing computational pipelines for Cell Painting and omics with Dr. Shantanu Singh (Senior Group Leader)"
-      },
-      {
-        "org": "IIT Madras",
-        "entity": "iit-madras",
-        "detail": "Research collaboration to co-develop cutting-edge AI models and computational pipelines"
-      },
-      {
-        "org": "Cold Spring Harbor Laboratory",
-        "entity": "cshl",
-        "detail": "Neuron connectivity toolbox delivery to Dr. Partha Mitra"
-      },
-      {
-        "org": "RIKEN Brain Science Institute",
-        "entity": "riken-bsi",
-        "detail": "Neuroscience imaging and 3D reconstruction algorithms"
-      },
-      {
-        "org": "Uppsala University",
-        "entity": "uppsala-university",
-        "detail": "Research collaboration on AI models and computational pipelines"
-      },
-      {
-        "org": "AI Sweden",
-        "entity": "ai-sweden",
-        "detail": "Master's thesis pipeline and Digital Twins initiative for drug discovery"
-      }
-    ]
-  },
   "contactIntro": "Open to discussing AI leadership opportunities, research collaborations, and advisory roles.",
   "contactPage": {
     "title": "Let's build something important",

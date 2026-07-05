@@ -19,7 +19,7 @@ portfolio_site/
 ├── tsconfig.json          TS strict + JSON module resolution
 ├── src/
 │   ├── pages/             index.astro, 404.astro
-│   │                       experience, projects, research, recognition, vision, contact routes
+│   │                       experience, research, recognition, vision, contact redirect stubs
 │   ├── layouts/           Layout.astro
 │   ├── components/        Header, Footer, BaseHead, shared primitives + sections/
 │   ├── lib/content.ts     Loads content/**/*.json and validates against schemas.ts
@@ -29,7 +29,7 @@ portfolio_site/
 │   ├── README.md            Provenance + curation rules
 │   ├── site.json            Site meta, pages/routes, section visibility, SEO defaults, theme
 │   ├── person/              Profile and affiliations
-│   ├── work/                Strategic impact, experience, projects, vision-board
+│   ├── work/                experience, vision-board
 │   ├── research/            Publications, conferences, speakers
 │   └── recognition/         Education, awards, Kaggle
 ├── public/                Static assets served as-is

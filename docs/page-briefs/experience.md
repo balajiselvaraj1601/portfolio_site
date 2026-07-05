@@ -21,8 +21,5 @@ skipped for single-project roles, wired through the shared `initRecogGrid` behav
 role's projects as flagship-style boxes (`card card-accent` shell) with every bullet visible.
 Bullet tiers are preserved. Without JS the timeline bar is hidden and all role panels render
 stacked and fully expanded.
-Strategic impact lives in the **Vision** view (`impact` section); the contact CTA is the dedicated
+Strategic impact lives in the **Vision** view (`vision-impact` section); the contact CTA is the dedicated
 **Contact** view.
-
-> **Shelved:** Mentorship (`mentorship`) — archived in `content/temp/`; not in live
-> `viewSections`.

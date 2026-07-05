@@ -7,7 +7,7 @@ description: >-
   Uses Task tool for parallel page subagents. State: .cursor/page-team.state.json.
 ---
 
-# Page Consistency Team Skill
+# Page consistency team Skill
 
 Cursor variant of the Page Consistency Team. **Canonical skill:** [`.claude/skills/page-consistency-team/SKILL.md`](../../.claude/skills/page-consistency-team/SKILL.md)
 
@@ -18,7 +18,7 @@ Read and follow that file completely. Cursor-specific notes:
 Use the **Task tool** with `subagent_type: generalPurpose` to spawn page agents in parallel.
 Each Task prompt must include:
 
-1. Path to the page agent file (from `assets/page_routing.csv`)
+1. Path to the page agent file (from `assets/page-routing.csv`)
 2. Instruction to read `design-consistency-contract.md`
 3. Mode: Audit / Accept / Implement
 4. Requirement to return **JSON only**
@@ -58,5 +58,5 @@ See [`docs/page-team.md`](../../docs/page-team.md).
 | Topic                        | Reference file                                                                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Full workflow, modes, phases | [`.claude/skills/page-consistency-team/SKILL.md`](../../.claude/skills/page-consistency-team/SKILL.md)                               |
-| View → agent map             | [`.claude/skills/page-consistency-team/assets/page_routing.csv`](../../.claude/skills/page-consistency-team/assets/page_routing.csv) |
+| View → agent map             | [`.claude/skills/page-consistency-team/assets/page-routing.csv`](../../.claude/skills/page-consistency-team/assets/page-routing.csv) |
 | Operator guide               | [`docs/page-team.md`](../../docs/page-team.md)                                                                                       |

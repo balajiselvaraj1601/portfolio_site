@@ -8,7 +8,7 @@ page_team_init_paths() {
   ROOT="$(page_team_root)"
   STATE_FILE="$ROOT/.cursor/page-team.state.json"
   STATE_EXAMPLE="$ROOT/.cursor/page-team.state.json.example"
-  ROUTING_CSV="$ROOT/.claude/skills/page-consistency-team/assets/page_routing.csv"
+  ROUTING_CSV="$ROOT/.claude/skills/page-consistency-team/assets/page-routing.csv"
 }
 
 page_team_state_enabled() {

@@ -7,13 +7,13 @@ description: >-
   "site review", "fix all issues", "full audit", scheduled site review, or /site-review.
 ---
 
-# Site Review Fix Skill
+# Site review fix Skill
 
 Orchestrate a comprehensive site health review and automated fix pass.
 
 ## Before starting
 
-1. Read `.claude/skills/site-review-fix/references/review-protocol.md`
+1. For the full review protocol, read `.claude/skills/site-review-fix/references/review-protocol.md`
 2. Read `.claude/agents/site-review-fix.md`
 3. Confirm state file at `.cursor/site-review.state.json` (or init in Phase 0)
 4. Load baseline checklist: `docs/audits/codebase-review-2026-07-02.md`

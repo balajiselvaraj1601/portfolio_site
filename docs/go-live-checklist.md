@@ -28,7 +28,7 @@ npm run preview
 ### Build & content
 
 - [ ] `npm run build` completes with no errors
-- [ ] Configured routes load: `/`, `/experience`, `/projects`, `/research`, `/recognition`, `/contact`
+- [ ] Configured routes load: `/`, `/experience`, `/research`, `/recognition`, `/vision`, `/contact`
 - [ ] Each route renders the sections listed in `content/site.json`
 - [ ] No phone number on page (`grep -ri phone content/` returns nothing)
 - [ ] Résumé PDF loads at direct URL (asset-only, not in nav): `/assets/resume/balaji-selvaraj-resume.pdf`

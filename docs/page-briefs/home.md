@@ -16,20 +16,16 @@ then the merged profile and leadership section (`leadership`: bio, scan cards, p
 collaboration logos). All sections are visible on `/` — the page scrolls through every group in
 nav order, and the **About** button scrolls back to the top.
 
-> **Shelved:** Technology Expertise (`skills`) — archived in `content/temp/`; not in live
-> `viewSections`.
-
 ## Full DOM order on `/`
 
 Sections render once into the DOM, grouped contiguously by view (nav button). All sections remain
 visible; nav buttons scroll to a view's first section.
 
 `hero` → `thirukural` → `leadership` _(About)_ →
-`experience-intro` → `experience` _(Experience)_ →
-`projects-intro` → `featured-case-studies` → `projects` _(Projects)_ →
+`experience` _(Experience)_ →
 `publications` → `conferences` → `speakers` _(Research)_ →
 `awards` → `kaggle` → `education` _(Recognition)_ →
-`technical-vision` → `vision-board` → `impact` _(Vision)_ →
+`vision-programs` → `vision-impact` _(Vision)_ →
 `contact` _(Contact)_
 
 Each nav button maps to exactly one view; see `content/site.json → pages[].viewSections`.

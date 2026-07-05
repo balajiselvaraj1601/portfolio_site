@@ -1,9 +1,14 @@
 ---
 name: icon-square-center
-description: Square-and-center black-background raster icons (PNG) WITHOUT resizing — crop to content, center on a square canvas, trim excess black margin. Trigger on "square the icons", "center the icons", "trim black margins", "icons aren't square", "icon not centered", or when a batch of raster icons has uneven/large black borders. NOT for SVG logos (use svg-logo-crop) or icon acquisition (use ui-icon-acquisition).
+description: >-
+  Square-and-center black-background raster icons (PNG) WITHOUT resizing — crop to
+  content, center on a square canvas, trim excess black margin. Trigger on "square the
+  icons", "center the icons", "trim black margins", "icons aren't square", "icon not
+  centered", or when a batch of raster icons has uneven/large black borders. NOT for SVG
+  logos (use svg-logo-crop) or icon acquisition (use ui-icon-acquisition).
 ---
 
-# icon-square-center
+# Icon square center Skill
 
 Fixes a folder of raster icons that sit on a near-black background but are **non-square**,
 **off-center**, or have **large uneven black margins** — producing square, centered icons with
@@ -100,9 +105,27 @@ independent measurements agreeing is far stronger evidence than one."_
    vision pass), and treat their subjective flags as candidates to reconcile against the deterministic
    proof, not as ground truth.
 
-## Files
+## When to load references
 
-- `scripts/icon_common.py` — SSOT detection rule + geometry constants (`crop_bbox`, full-bleed guard)
-- `scripts/square-and-center-icon.py` — the crop-and-center producer (no resize)
-- `scripts/validate-square-center.py` — independent validator (byte-identity no-loss gate)
-- `scripts/verify-crop-visual.py` — deterministic proof + falsifiable comparison composites
+| If the task involves…                     | Load                                           |
+| ----------------------------------------- | ---------------------------------------------- |
+| The exact detection thresholds / geometry | Read `scripts/icon_common.py` (SSOT constants) |
+| Running the crop / validate / verify pass | Run the scripts below — no doc load needed     |
+| Simple square-and-center (default)        | Inline guidance above — no reference needed    |
+
+## Efficiency: batch edits and parallel calls
+
+- **Batch the folder:** run one `--all` pass over the source dir instead of per-file invocations.
+- **Parallel calls:** run `validate-square-center.py` and `verify-crop-visual.py` in one message
+  once the crop finishes.
+- **Measure, don't tweak:** run the producer, then the two independent checks; never hand-edit
+  output pixels.
+
+## Quick reference: where to go deeper
+
+| Topic                                       | File                                                                                           |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| SSOT detection rule + geometry constants    | read [scripts/icon_common.py](scripts/icon_common.py) for `THR`/`crop_bbox`/full-bleed guard   |
+| Crop-and-center producer (no resize)        | run [scripts/square-and-center-icon.py](scripts/square-and-center-icon.py) to square icons     |
+| Independent byte-identity no-loss validator | run [scripts/validate-square-center.py](scripts/validate-square-center.py) to verify output    |
+| Falsifiable visual proof composites         | run [scripts/verify-crop-visual.py](scripts/verify-crop-visual.py) to build side-by-side proof |

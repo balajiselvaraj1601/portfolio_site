@@ -88,7 +88,7 @@ Launch independent audits. Merge all into `findings[]`.
 | Content SSOT      | generalPurpose                       | Cross-file name/drift in `content/`; hardcoded copy in `src/components/` |
 | Dead code         | generalPurpose                       | Unreferenced sections/cards; imports never used                          |
 | A11y / SEO        | generalPurpose                       | alt, h1, focus, meta, JSON-LD, external link rel                         |
-| Design            | site-consistency-orchestrator (full) | All 7 nav views via page-consistency-team                                |
+| Design            | site-consistency-orchestrator (full) | All 6 nav views via page-consistency-team                                |
 | Baseline re-check | self                                 | Each theme in `docs/audits/codebase-review-2026-07-02.md`                |
 
 Set `phase: "audit_complete"`.

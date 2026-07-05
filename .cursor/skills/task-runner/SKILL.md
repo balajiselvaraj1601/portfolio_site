@@ -5,7 +5,7 @@ description: >-
   Use when the user says "run tasks", "work through TASKS.md", or starts a task batch.
 ---
 
-# Task Runner Skill
+# Task runner Skill
 
 Process the repo-root `TASKS.md` checklist until every item is checked or a BLOCKED item stops the run.
 

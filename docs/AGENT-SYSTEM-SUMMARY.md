@@ -12,7 +12,7 @@ The Astro portfolio site runs a **mature, well-scoped multi-agent system** (9 ag
 
 **Deep dive findings:**
 
-1. **Agent ecosystem is healthy**: Orchestrators (site-consistency-orchestrator, site-review-fix) correctly delegate to specialists (design-guardian) and page representatives (7 haiku agents). Scope isolation is enforced via Hard Rules and state files.
+1. **Agent ecosystem is healthy**: Orchestrators (site-consistency-orchestrator, site-review-fix) correctly delegate to specialists (design-guardian) and page representatives (6 haiku agents). Scope isolation is enforced via Hard Rules and state files.
 
 2. **Design token enforcement gap identified**: 10+ card components use hardcoded font-size values (0.68–0.92rem) with no token coverage. Also: missing `--radius-full` for `border-radius: 50%` circles, raw transition durations, raw shadows, inconsistent reduced-motion guards.
 
@@ -31,7 +31,7 @@ The Astro portfolio site runs a **mature, well-scoped multi-agent system** (9 ag
 ### Orchestrators (7–8 turns each, sonnet, direct edit)
 
 1. **site-consistency-orchestrator** (80 turns)
-   - Coordinates 7 page-rep agents + design-guardian
+   - Coordinates 6 page-rep agents + design-guardian
    - Spawns audits in parallel → synthesizes cross-view conflicts → design-guardian ultimatum → implement phase
    - State file: `.cursor/page-team.state.json`
    - Trigger: `/page-team` or `"page team"`
@@ -52,7 +52,7 @@ The Astro portfolio site runs a **mature, well-scoped multi-agent system** (9 ag
    - Phases: Initialize → Review → Ultimatum → Implement → Report
    - Trigger: Orchestrator Phase 3, or `"design guardian"`
 
-2. **page-{about,experience,projects,research,recognition,vision,contact}** (7 agents, 25 turns each, haiku)
+2. **page-{about,experience,research,recognition,vision,contact}** (6 agents, 25 turns each, haiku)
    - Each owns its view sections (e.g., page-about owns hero + thirukural + leadership)
    - Can edit own component markup + `<style>` blocks
    - Audit-only on global primitives (`ui/`, `cards/`) — escalate to design-guardian
@@ -74,7 +74,7 @@ The Astro portfolio site runs a **mature, well-scoped multi-agent system** (9 ag
 ### Key Reference Documents
 
 - **`design-consistency-contract.md`** (19 KB) — Binding design rules (section spacing tokens, card shell tiers, eyebrow rules, typography roles, etc.). §11 documents intentional exceptions.
-- **`page-agent-playbook.md`** — 14 Hard Rules (P1–P14) shared by all 7 page reps. Covers content-in-JSON, schema-first, view scope, guardian ownership, no phone numbers, build gate, sitemap pin, no dist commits, structured findings, state file, one-objection-max, eyebrow rules, shelved sections.
+- **`page-agent-playbook.md`** — 14 Hard Rules (P1–P14) shared by all 6 page reps. Covers content-in-JSON, schema-first, view scope, guardian ownership, no phone numbers, build gate, sitemap pin, no dist commits, structured findings, state file, one-objection-max, eyebrow rules.
 - **`page-agent-standard.md`** — Authoring template for new page agents (frontmatter, Hard Rules, 6 phases, Appendices A/B, compliance checklist).
 
 ---

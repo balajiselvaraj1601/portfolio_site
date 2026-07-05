@@ -183,7 +183,7 @@ Per `docs/design-direction.md § Section eyebrows`:
 | Content sections inside a view                | **Omit** — nav provides context                              |
 | Ad-hoc kickers (Vision lede, Leadership diff) | Match `.eyebrow` typography (`--accent-ll`, mono, uppercase) |
 
-**View intros with eyebrows:** `experience-intro`, `featured-case-studies`, `vision-programs`, Contact (if eyebrow used).
+**View intros with eyebrows:** `vision-programs`, Contact (if eyebrow used).
 
 **Content sections without eyebrows:** `leadership`, `publications`, `conferences`, `speakers`, `awards`, `kaggle`, `education`, `experience` (uses SectionHeading instead), `vision-impact`.
 
@@ -198,10 +198,10 @@ wrapper (`.card-accent`, level/medal/category class) for contextual colour.
 
 | Tier                | Shell class                                | Padding token              | Used by                                                              |
 | ------------------- | ------------------------------------------ | -------------------------- | -------------------------------------------------------------------- |
-| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | MetricCard, theme-card, connect-card, proj-card accordion            |
+| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | theme-card, connect-card, proj-card accordion                        |
 | **B — content**     | `.content-card`                            | `--card-padding-lg` (32px) | ResearchCard, SpeakingCard                                           |
 | **C — recognition** | `.recog-card`, `.recog-tile`, `.edu-panel` | `--card-padding` (24px)    | Awards, Kaggle, Education — **aliases of the default `.card` shell** |
-| **D — special**     | `.card--accent`, `.hub__ring`              | varies                     | ProjectCaseStudyCard gradient stripe; Vision hub circle              |
+| **D — special**     | `.card--accent`, `.hub__ring`              | varies                     | Vision hub circle                                                    |
 
 Shared primitives:
 
@@ -211,10 +211,8 @@ Shared primitives:
 | Logo rect              | `.logo-badge` via `LogoBadge.astro`                                                                                            | Horizontal wordmarks                                            |
 | Logo round             | `.logo-badge--round`                                                                                                           | Square emblems in circular pill                                 |
 | Card tint              | `.card-tint`, `.card-tint--accent`                                                                                             | Nested highlight callouts inside cards                          |
-| Metric snapshot        | `MetricCard.astro`                                                                                                             | Tier A                                                          |
 | Recognition stack      | `RecogCardShell.astro` + `CompetitionCard.astro`                                                                               | Tier C                                                          |
 | Research links         | `ResearchCard.astro` / `ResearchLinkGrid.astro`                                                                                | Tier B — **cross-view reference** for hover lift                |
-| Case study             | `ProjectCaseStudyCard.astro`                                                                                                   | Tier D                                                          |
 | Education              | `Education.astro`                                                                                                              | Tier C                                                          |
 | Vision groups & impact | `ProgramBadgeCard.astro`, `OrgSnapshotCard.astro` (with `CardMark.astro` + `MarkEmblem.astro` for vision-programs group cards) | Tier A                                                          |
 | Card mark              | `CardMark.astro`                                                                                                               | All card logo/icon/emblem slots                                 |
@@ -309,7 +307,7 @@ its `class` prop.
 | `variant` prop | Emitted class    | When                                                                                                                           |
 | -------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `default`      | (none)           | Standard band                                                                                                                  |
-| `alt`          | `.section--alt`  | Alternate background (`--bg-alt`); Kaggle, Publications, Speakers, Contact, featured-case-studies, vision-programs, experience |
+| `alt`          | `.section--alt`  | Alternate background (`--bg-alt`); Kaggle, Publications, Speakers, Contact, vision-programs, experience |
 | `full`         | `.section--full` | Full-bleed layout (deprecated as of Vision rewrite)                                                                            |
 
 Adjacent sections should alternate `default` / `alt` where possible for visual rhythm.

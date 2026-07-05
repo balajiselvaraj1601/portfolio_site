@@ -94,7 +94,6 @@ If `accepted: false`, `objection` must cite evidence. Only one objection per vie
   "active_views": [
     "home",
     "experience",
-    "projects",
     "research",
     "recognition",
     "vision",

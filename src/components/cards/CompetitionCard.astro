@@ -199,11 +199,12 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     --medal: var(--medal-bronze);
   }
 
-  /* One-accent-per-view: Recognition uses a single hue (gold). Override the
-     per-medal --medal so competition cards match the rest of the view. */
+  /* Multi-color per view: competition cards read each item's per-medal --medal so
+     silver and bronze show their own hue, falling back to the Recognition accent
+     (gold) when a card has no medal class. */
   :global(.recog-card.blob--silver),
   :global(.recog-card.blob--bronze) {
-    --accent-card: var(--view-accent-recognition);
+    --accent-card: var(--medal, var(--view-accent-recognition));
     --mark-fg: var(--accent-card);
   }
 

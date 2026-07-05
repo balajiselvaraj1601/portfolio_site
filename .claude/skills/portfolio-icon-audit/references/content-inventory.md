@@ -20,19 +20,6 @@ Entity map for portfolio icon audits. Extend this table on each run when content
 | contact.kaggle   | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 | contact.location | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 
-### strategic-impact.json
-
-| entity_id               | field                    | component              | fallback  |
-| ----------------------- | ------------------------ | ---------------------- | --------- |
-| journey.idea            | `journey[].icon`         | `JourneyNode.astro`    | `rocket`  |
-| journey.vision          | `journey[].icon`         | `JourneyNode.astro`    |           |
-| journey.execution       | `journey[].icon`         | `JourneyNode.astro`    |           |
-| program.drug-safety     | `programs[].icon`        | `ImpactCard.astro`     | `target`  |
-| program.broad-institute | `programs[].icon`        | `ImpactCard.astro`     |           |
-| program.persister       | `programs[].icon`        | `ImpactCard.astro`     |           |
-| program.aacr            | `programs[].icon`        | `ImpactCard.astro`     |           |
-| leadership.* (7 cards)  | `leadershipCards[].icon` | `LeadershipCard.astro` | `diamond` |
-
 ### experience.json — projects
 
 Only projects with explicit `"icon"` in JSON; all others fall back to `folder` via `ProjectAccordion.astro`.
@@ -48,10 +35,10 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 | entity_id                    | field               | kind   | value                                            | component                |
 | ---------------------------- | ------------------- | ------ | ------------------------------------------------ | ------------------------ |
-| vb-program.drug-safety.badge | `programs[].badge`  | icon   | `pill`                                           | `ProgramBadgeCard.astro` |
+| vb-program.drug-safety.badge | `programs[].badge`  | icon   | `pill`                                           | `ThemeCard.astro`        |
 | vb-program.persister.badge   | `programs[].badge`  | icon   | `microscope`                                     |                          |
-| vb-org.* (7 cards)           | `orgCards[].icon`   | icon   | various                                          | `OrgSnapshotCard.astro`  |
-| vb-hub.idea.satellites       | `hubs[].satellites` | icon[] | target, lightbulb, chart, book, handshake, globe | `HubCircle.astro`        |
+| vb-org.* (7 cards)           | `orgCards[].icon`   | icon   | various                                          | `ThemeCard.astro`        |
+| vb-hub.idea.satellites       | `hubs[].satellites` | icon[] | target, lightbulb, chart, book, handshake, globe | `VisionHub.astro`        |
 | vb-hub.vision.satellites     | `hubs[].satellites` | icon[] | graph, document, table, pulse, image, blocks     |                          |
 
 ---
@@ -65,9 +52,9 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 | entity_id              | slug              | alt             | file expected                             | component                      |
 | ---------------------- | ----------------- | --------------- | ----------------------------------------- | ------------------------------ |
-| vb-hub.idea.center     | `kaggle`          | Kaggle          | `assets/source/logos/kaggle.png`          | `cards/HubCircle.astro`        |
+| vb-hub.idea.center     | `kaggle`          | Kaggle          | `assets/source/logos/kaggle.png`          | `VisionHub.astro`        |
 | vb-hub.vision.center   | `brain`           | Multimodal AI   | `public/assets/logos/brain.png`           |                                |
-| vb-program.broad.badge | `broad-institute` | Broad Institute | `assets/source/logos/broad-institute.png` | `cards/ProgramBadgeCard.astro` |
+| vb-program.broad.badge | `broad-institute` | Broad Institute | `assets/source/logos/broad-institute.png` | `ThemeCard.astro` |
 | vb-program.aacr.badge  | `aacr`            | AACR            | `assets/source/logos/aacr.png`            |                                |
 
 ### collaborations.json — optional logo field
@@ -84,9 +71,9 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ## 3. Heuristic-only (no JSON icon field)
 
-### projects.json → projectIcon(domain, id)
+### experience.json → projectIcon(domain, id)
 
-Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
+Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 
 | domain                            | default icon           | id keyword overrides              |
 | --------------------------------- | ---------------------- | --------------------------------- |
@@ -94,24 +81,19 @@ Used by `FeaturedProjects.astro` and `ProjectAccordion.astro` on `/projects`.
 | Translational Oncology            | `microscope`           | tumor, oncology → microscope      |
 | Clinical / Oncology Imaging       | `scan`                 | imaging, segmentation → scan      |
 | Digital / Computational Pathology | `microscope` / `graph` | pathology, gnn → microscope/graph |
-| Enterprise Vision                 | `vision`               |                                   |     |
-| Academic Research                 | `graduation`           |                                   |     |
+| Enterprise Vision                 | `vision`               |                                   |
+| Academic Research                 | `graduation`           |                                   |
 | (unknown domain)                  | `folder`               |                                   |
 
 ### Hardcoded in components
 
 | component                   | icons used                      | source                                        |
 | --------------------------- | ------------------------------- | --------------------------------------------- |
-| `ResearchDomainMap.astro`   | scan, microscope, pill, brain   | hardcoded array                               |
-| `PipelineStrip.astro`       | target, layers, blocks, chart   | hardcoded steps                               |
 | `Hero.astro`                | download                        | CTA button                                    |
 | `Education.astro`           | graduation                      | section header                                |
 | `Contact.astro`             | graduation                      | education block                               |
 | `Conferences.astro`         | presentation (via ResearchCard) | prop default                                  |
 | `Publications.astro`        | document (via ResearchCard)     | prop default                                  |
-| `FeaturedCaseStudies.astro` | via PipelineStrip               |                                               |
-| `VisionBoard.astro`         | chevron-right                   | decorative                                    |
-| `BoardHeader.astro`         | chevron-right                   | decorative                                    |
 | `Header.astro`              | Unicode ☀/☾/☰/✕                | **not** Icon.astro (sun/moon/menu/close idle) |
 | `Kaggle.astro`              | emoji 🏆                        | **not** Icon.astro                            |
 

@@ -10,7 +10,7 @@ description: >-
   "mark tokens", "accent-card icons", or before shipping new card/header marks.
 ---
 
-# Portfolio icon standardization
+# Portfolio icon standardization Skill
 
 Binding SSOT for **size** (phase 1), **circular chrome** (phase 2), and **color
 blending** (phase 3) across the Astro portfolio. Ratified in
@@ -27,12 +27,12 @@ blending** (phase 3) across the Astro portfolio. Ratified in
 
 **Related skills (load when needed, do not duplicate):**
 
-| Task | Skill |
-| --- | --- |
-| Square-center source PNGs | `icon-square-center` |
-| Crop SVG viewBox / visible ink | `svg-logo-crop` |
-| Full asset inventory / missing logos | `portfolio-icon-audit` |
-| Cross-view design conflicts | `page-consistency-team` |
+| Task                                 | Skill                   |
+| ------------------------------------ | ----------------------- |
+| Square-center source PNGs            | `icon-square-center`    |
+| Crop SVG viewBox / visible ink       | `svg-logo-crop`         |
+| Full asset inventory / missing logos | `portfolio-icon-audit`  |
+| Cross-view design conflicts          | `page-consistency-team` |
 
 ---
 
@@ -50,11 +50,11 @@ Raster `<img>` is **Tier 3 only** — org wordmarks in `.logo-badge` /
 
 ## Three delivery tiers
 
-| Tier | Mechanism | Color | When |
-| --- | --- | --- | --- |
-| **1 — Vector tinted** | `MarkEmblem` (CSS mask) or `Icon` (`currentColor`) | `--mark-fg` / parent `color` | Pipeline `logo_*`, Lucide fallbacks, hub nodes |
-| **2 — Soft tile** | `.icon-tile` without `--accented` | `--accent-soft` bg, `--accent-ll` glyph | Generic fallback when no section accent needed |
-| **3 — Full-color** | `LogoBadge` `<img>` | Brand pixels unchanged | Org wordmarks, collaboration logos |
+| Tier                  | Mechanism                                          | Color                                   | When                                           |
+| --------------------- | -------------------------------------------------- | --------------------------------------- | ---------------------------------------------- |
+| **1 — Vector tinted** | `MarkEmblem` (CSS mask) or `Icon` (`currentColor`) | `--mark-fg` / parent `color`            | Pipeline `logo_*`, Lucide fallbacks, hub nodes |
+| **2 — Soft tile**     | `.icon-tile` without `--accented`                  | `--accent-soft` bg, `--accent-ll` glyph | Generic fallback when no section accent needed |
+| **3 — Full-color**    | `LogoBadge` `<img>`                                | Brand pixels unchanged                  | Org wordmarks, collaboration logos             |
 
 **Intentional exceptions (do not “fix”):**
 
@@ -71,14 +71,14 @@ on mark slots.
 
 ### Size (phase 1)
 
-| Token | Default | Use |
-| --- | --- | --- |
-| `--mark-slot` | 44px | Circular chrome diameter |
-| `--mark-glyph` | 22px | Inner glyph (50% of slot) |
-| `--vision-hub-glyph` | alias of `--mark-glyph` | VisionHub center + satellites |
-| `--icon-md` | 20px | Kaggle stat row (`.blob-icon--md`) |
-| `--icon-sm` | 16px | Kaggle summary/eval (`.blob-icon--sm`) |
-| `.icon-tile--compact` | 36 / 18 | Compact tiles (Experience projects) |
+| Token                 | Default                 | Use                                    |
+| --------------------- | ----------------------- | -------------------------------------- |
+| `--mark-slot`         | 44px                    | Circular chrome diameter               |
+| `--mark-glyph`        | 22px                    | Inner glyph (50% of slot)              |
+| `--vision-hub-glyph`  | alias of `--mark-glyph` | VisionHub center + satellites          |
+| `--icon-md`           | 20px                    | Kaggle stat row (`.blob-icon--md`)     |
+| `--icon-sm`           | 16px                    | Kaggle summary/eval (`.blob-icon--sm`) |
+| `.icon-tile--compact` | 36 / 18                 | Compact tiles (Experience projects)    |
 
 **Kaggle in-card size hierarchy (binding):** header 22px → stats 20px → blocks 16px.
 Do not collapse to one size.
@@ -91,23 +91,23 @@ Shared primitive: `.mark-circle` + `.mark-circle--accented`, composed onto:
 - `.icon-tile.icon-tile--round.icon-tile--accented`
 - `.vision-hub__node`, `.vision-hub__center`
 
-| Aspect | Token | Value |
-| --- | --- | --- |
-| Shape | `border-radius: 50%` | circle |
-| Border | `--mark-border-width` | 1px |
-| Background wash | `--mark-bg-mix` | 14% |
-| Border tint | `--mark-border-mix` | 35% |
+| Aspect          | Token                 | Value  |
+| --------------- | --------------------- | ------ |
+| Shape           | `border-radius: 50%`  | circle |
+| Border          | `--mark-border-width` | 1px    |
+| Background wash | `--mark-bg-mix`       | 14%    |
+| Border tint     | `--mark-border-mix`   | 35%    |
 
 **Required class pairing:** pipeline marks in cards use **both** `icon-tile--round`
 and `icon-tile--accented`. Never hand-roll accent washes on new slots.
 
 ### Color (phase 3)
 
-| Token | Resolves to | Use |
-| --- | --- | --- |
-| `--accent-card` | set on wrapper | Card border, tile accent, level/medal hue |
-| `--mark-fg` | `var(--accent-card, var(--accent))` | Glyph + circle wash + border |
-| `.card-accent` | sets both `--accent-card` and `--mark-fg` | Default purple card shells |
+| Token           | Resolves to                               | Use                                       |
+| --------------- | ----------------------------------------- | ----------------------------------------- |
+| `--accent-card` | set on wrapper                            | Card border, tile accent, level/medal hue |
+| `--mark-fg`     | `var(--accent-card, var(--accent))`       | Glyph + circle wash + border              |
+| `.card-accent`  | sets both `--accent-card` and `--mark-fg` | Default purple card shells                |
 
 **Color flow:** wrapper sets `--accent-card` → `.mark-circle--accented` reads
 `--mark-fg` → `MarkEmblem` mask fills with `currentColor`.
@@ -121,12 +121,12 @@ Section overrides (Research): `#publications .card-accent` (teal),
 
 ### `CardMark.astro` — SSOT for card marks
 
-| Input | Renders as |
-| --- | --- |
-| `logoUrl` | `LogoBadge` (Tier 3) |
+| Input                                               | Renders as                            |
+| --------------------------------------------------- | ------------------------------------- |
+| `logoUrl`                                           | `LogoBadge` (Tier 3)                  |
 | `mark` + `context="theme-card"` or `emblemInCircle` | `.theme-card__icon` + MarkEmblem/Icon |
-| `logo_*` slug, bare | `MarkEmblem` only |
-| `icon` fallback | `.icon-tile` (+ modifiers) |
+| `logo_*` slug, bare                                 | `MarkEmblem` only                     |
+| `icon` fallback                                     | `.icon-tile` (+ modifiers)            |
 
 **Variants:**
 
@@ -163,17 +163,17 @@ Section overrides (Research): `#publications .card-accent` (teal),
 
 Set `--accent-card` on the **owning wrapper**; marks inherit automatically.
 
-| View / section | `--accent-card` source |
-| --- | --- |
-| Awards | `--lvl` per award level |
-| Kaggle tiles/cards | `--medal` (silver/bronze classes) |
-| Education | `.edu-accent { --accent-card: var(--accent-gold) }` |
-| Leadership | `--cat` per category row |
-| Research cards | `.card-accent` + section ID override |
+| View / section     | `--accent-card` source                                                                    |
+| ------------------ | ----------------------------------------------------------------------------------------- |
+| Awards             | `--lvl` per award level                                                                   |
+| Kaggle tiles/cards | `--medal` (silver/bronze classes)                                                         |
+| Education          | `.edu-accent { --accent-card: var(--accent-gold) }`                                       |
+| Leadership         | `--cat` per category row                                                                  |
+| Research cards     | `.card-accent` + section ID override                                                      |
 | Vision (all slots) | `accent` key in JSON → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` palette) |
-| Contact | default `.card-accent` (purple) |
+| Contact            | default `.card-accent` (purple)                                                           |
 
-Full matrix: [reference.md](reference.md).
+Full matrix: [references/accent-matrix-and-anti-patterns.md](references/accent-matrix-and-anti-patterns.md).
 
 ---
 
@@ -205,7 +205,7 @@ batch-icon-generate on this set — destroys line art).
    - **Size** uses token (not hardcoded px on component)
    - **Chrome** uses `.mark-circle--accented` recipe if accented
    - **Color** glyph + wash match card `--accent-card` (check `.recog-tile__count` too)
-3. Flag drift using [reference.md § Anti-patterns](reference.md#anti-patterns)
+3. Flag drift using [references/accent-matrix-and-anti-patterns.md § Anti-patterns](references/accent-matrix-and-anti-patterns.md#anti-patterns)
 4. Fix guardian-owned tokens in `global.css` first; then page-owned markup
 
 ### C — Verify before handoff
@@ -222,12 +222,12 @@ fallback icons), Vision (hub ring + nodes), Contact (brand neutral marks).
 
 ## Guardian vs page-agent ownership
 
-| Change | Owner |
-| --- | --- |
-| New/changed tokens in `:root`, `.mark-circle--accented`, `.card-accent` | design-guardian |
-| `CardMark`, `MarkEmblem`, `VisionHub`, `global.css` mark primitives | design-guardian |
-| Content JSON slug re-pointing, section markup, per-view wrappers | page-* agents |
-| `docs/icon-blend-strategy.md`, design contract §5 | either (keep in sync) |
+| Change                                                                  | Owner                 |
+| ----------------------------------------------------------------------- | --------------------- |
+| New/changed tokens in `:root`, `.mark-circle--accented`, `.card-accent` | design-guardian       |
+| `CardMark`, `MarkEmblem`, `VisionHub`, `global.css` mark primitives     | design-guardian       |
+| Content JSON slug re-pointing, section markup, per-view wrappers        | page-* agents         |
+| `docs/icon-blend-strategy.md`, design contract §5                       | either (keep in sync) |
 
 **Order:** guardian primitives land before page agents edit dependent markup (BC2).
 
@@ -252,16 +252,38 @@ fallback icons), Vision (hub ring + nodes), Contact (brand neutral marks).
 **Vision hub accent wrapper:**
 
 ```astro
-<div class:list={['vision-hub-accent', 'vision-accent-hook', `vision-accent-${group.accent}`]}>
+<div
+  class:list={[
+    'vision-hub-accent',
+    'vision-accent-hook',
+    `vision-accent-${group.accent}`,
+  ]}
+>
   <VisionHub group={group} />
 </div>
 ```
 
 ---
 
-## Additional resources
+## When to load references
 
-- Per-view matrix, accent map, anti-patterns: [reference.md](reference.md)
-- Blend strategy (ratified decisions): `docs/icon-blend-strategy.md`
-- Design contract §5 (card/mark shells): `.claude/references/design-consistency-contract.md`
-- Asset pipeline: `docs/assets.md`
+| If the task involves…                                     | Load                                              |
+| --------------------------------------------------------- | ------------------------------------------------- |
+| The full per-view accent matrix or an anti-pattern check  | `references/accent-matrix-and-anti-patterns.md`   |
+| Ratified blend decisions / design-contract wording        | `docs/icon-blend-strategy.md`, design contract §5 |
+| Adding or auditing a mark with the tokens above (default) | Inline guidance — no reference needed             |
+
+## Efficiency: batch edits and parallel calls
+
+- **Guardian tokens first:** edit `global.css` tokens in one pass, then page markup — never interleave.
+- **Batch edits:** combine multiple token or markup changes to one file into a single Edit call.
+- **Parallel checks:** run `normalize-mark-viewbox.py check` and the `npm run build` verification together.
+
+## Quick reference: where to go deeper
+
+| Topic                                             | Reference file                                                                                 |
+| ------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Per-view accent matrix, accent map, anti-patterns | [references/accent-matrix-and-anti-patterns.md](references/accent-matrix-and-anti-patterns.md) |
+| Blend strategy (ratified decisions)               | `docs/icon-blend-strategy.md`                                                                  |
+| Design contract §5 (card/mark shells)             | `.claude/references/design-consistency-contract.md`                                            |
+| Asset pipeline                                    | `docs/assets.md`                                                                               |
