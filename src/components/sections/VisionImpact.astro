@@ -45,6 +45,15 @@ import { visionBoard, site } from '@lib/content';
     height: 100%;
   }
 
+  /* Impact-tile emblems fill their glyph box edge-to-edge (mask contain) and bake in
+     their own ring, so at the default 22px they crowd the 44px chrome circle. Trim the
+     glyph to the compact size for breathing room; the circle (--mark-slot 44px) is
+     unchanged. Scoped here so the Vision hub, program cards, and Recognition marks keep
+     the site-default 22px. */
+  .vision-impact__grid :global(.theme-card__icon) {
+    --mark-glyph: var(--mark-glyph-compact);
+  }
+
   /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).
      Base .theme-grid keeps 4 cols down to 769px, which cramps the cards and
      collides with the fixed dot rail in the 950–1180px band — drop to 2 cols

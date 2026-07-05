@@ -189,8 +189,14 @@ size is set by CSS tokens in `src/styles/global.css`, not PNG dimensions.
 | Competition card stat row            | `--icon-md` (`.blob-icon--md`)        | 20      |
 | Competition summary / eval block     | `--icon-sm` (`.blob-icon--sm`)        | 16      |
 | Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph` | 22      |
-| Vision impact theme card             | `--mark-slot` / `--mark-glyph`        | 44 / 22 |
+| Vision impact theme card             | `--mark-slot` / `--mark-glyph-compact`| 44 / 18 |
 | Compact tile override                | `.icon-tile--compact`                 | 36 / 18 |
+
+Both the compact tile override and the Vision impact emblems share
+`--mark-glyph-compact` (18px) as the single source for the smaller in-circle
+glyph; the Vision impact tiles keep the full 44px `--mark-slot` and only shrink
+the glyph (impact emblems bake in their own ring, so 22px crowds the chrome
+circle — see `.vision-impact__grid :global(.theme-card__icon)` in `VisionImpact.astro`).
 
 ### Circular mark chrome (SSOT, 2026-07-05 phase 2)
 

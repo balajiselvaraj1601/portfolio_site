@@ -223,6 +223,15 @@ function isExternal(href: string) {
     color: var(--accent);
     line-height: var(--lh-none);
   }
+  /* Dark theme: brighten the stat accent for AA contrast on --bg. The brand
+     --accent (#6c2fbf) is only ~2.3:1 on the dark background; --accent-light
+     (#9b5ee8) is ~4.8:1. Light mode keeps the deeper --accent (already 5.16:1). */
+  :root[data-theme='dark'] .hero-stat {
+    border-left-color: var(--accent-light);
+  }
+  :root[data-theme='dark'] .hero-stat__num {
+    color: var(--accent-light);
+  }
   .hero-stat__label {
     font-size: var(--fs-sm);
     letter-spacing: var(--tracking-snug);

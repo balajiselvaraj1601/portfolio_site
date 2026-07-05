@@ -135,15 +135,14 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     margin-top: var(--text-gap-section);
     margin-bottom: var(--stack-md);
   }
-  /* Booking CTA — solid purple box, white label + icon (matches connect cards). */
+  /* Booking CTA — purple outline; icon inherits button color. */
   .contact-actions .btn-secondary {
-    background: var(--accent);
-    color: var(--text-inverse);
     border-color: var(--accent);
+    color: var(--accent-ll);
   }
   .contact-actions .btn-secondary:hover {
-    background: var(--accent-strong);
-    border-color: var(--accent-strong);
+    border-color: var(--accent-light);
+    color: var(--heading);
   }
   .response-time {
     display: flex;
@@ -182,10 +181,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     gap: var(--stack-sm);
     margin-bottom: var(--stack-sm);
   }
-  /* Single accent per view: every connect card is a solid brand-purple box with
-     white foreground (text + icons). Scoped rules here outrank the global .card /
-     .icon-tile--accented defaults via Astro's component cid. #fff inside color-mix
-     matches the codebase idiom; var(--text-inverse) is #ffffff in both themes. */
+  /* Connect cards inherit global .card.card-accent shell (purple border + icon tile). */
   .connect-card {
     display: flex;
     flex-direction: column;
@@ -193,30 +189,18 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     padding: var(--card-padding);
     text-decoration: none;
     height: 100%;
-    background: var(--accent);
-    border: 1px solid color-mix(in srgb, #fff 22%, transparent);
-    color: var(--text-inverse);
-  }
-  .connect-card:hover {
-    border-color: color-mix(in srgb, #fff 40%, transparent);
   }
   .connect-card :global(.icon-tile) {
     margin-bottom: var(--space-3);
-    color: var(--text-inverse);
-    /* Brand-mono glyphs (gmail/linkedin/github/kaggle) read --brand-mark, not the
-       tile color — whiten it so they stay legible on purple in both themes. */
-    --brand-mark: var(--text-inverse);
-    background: color-mix(in srgb, #fff 16%, transparent);
-    border-color: color-mix(in srgb, #fff 30%, transparent);
   }
   .connect-name {
     font-size: var(--fs-card-title);
     font-weight: var(--fw-semibold);
-    color: var(--text-inverse);
+    color: var(--heading);
   }
   .connect-val {
     font-size: var(--fs-sm);
-    color: color-mix(in srgb, var(--text-inverse) 82%, transparent);
+    color: var(--text-muted);
     margin: 0;
     max-width: none;
     flex: 1;
@@ -227,10 +211,10 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     gap: var(--space-1);
     margin-top: var(--space-3);
     padding-top: var(--space-3);
-    border-top: 1px solid color-mix(in srgb, #fff 25%, transparent);
+    border-top: 1px solid var(--border);
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
-    color: var(--text-inverse);
+    color: var(--accent-light);
   }
   .connect-action :global(svg) {
     transition: transform var(--dur) var(--ease);

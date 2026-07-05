@@ -69,6 +69,7 @@
   /* Mark slots — change these two values to resize circular icons site-wide */
   --mark-slot: 44px;
   --mark-glyph: 22px;
+  --mark-glyph-compact: 18px; /* smaller in-circle glyph — compact tiles + Vision impact */
   --vision-hub-glyph: var(
     --mark-glyph
   ); /* VisionHub center + satellite emblems */
@@ -758,7 +759,7 @@ button {
 }
 .icon-tile--compact {
   --mark-slot: 36px;
-  --mark-glyph: 18px;
+  --mark-glyph: var(--mark-glyph-compact);
 }
 /* Inner glyph sizing — driven by --mark-glyph on :root or contextual overrides.
    img:not(.comp-image) catches any residual raster inside .icon-tile (transition guard;
