@@ -53,6 +53,19 @@ reference it.
 | Green           | `#2C8A45`         | `#46CF72`           | `--cat-gxp`                                              |
 | Red (semantic)  | `#C0182A`         | `#C0182A`           | errors, `--lvl-associate-director`/`--cat-privacy`       |
 
+## Per-page color assignment
+
+Every nav view gets a primary accent (via `--view-accent-*`) and contextual sub-accents via categorical or level tokens — all drawn from the fixed 7-hue family above. Each accent flows through the cascade: `--view-accent-*` (view fallback) → `--cat-*`/`--lvl-*`/`--medal-*` (per-item) → `--accent-card` (applied on card shells), with no new hues or hardcoded hex literals. This ensures theme coherence: light/dark are locked together by token inheritance.
+
+| View             | Primary (fallback)               | Per-item accents                                                                                                                                                                                         | Notes                                                                                                         |
+| ---------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| **About** (home) | Violet (`--accent`, brand)       | Leadership categories via `--cat-*`: Strategy=indigo, Business Impact=amber, Platform=teal, People=rose, AI Governance=violet, Privacy=red, GxP=green. Education=amber (recognition-owned).              | Hero, Thirukural band, About headline use primary violet. Leadership rows use categorical color per role.     |
+| **Experience**   | Violet (`--accent`)              | Per career level via `--lvl-*`: principal=violet, staff=indigo, senior=teal, lead=amber, associate=rose, engineer=red. Timeline rail uses violet→red gradient (temporal axis, past→present, see EX-017). | Role badges colored by level; timeline spine is intentional unified gradient, not per-role.                   |
+| **Research**     | Indigo (`--lvl-senior-director`) | Publications=indigo, Conferences=teal, Speakers=violet.                                                                                                                                                  | Section-specific accent per content type; view fallback is indigo.                                            |
+| **Recognition**  | Amber/gold (`--accent-gold`)     | Awards per level (evp=amber, cio=violet, senior-director=indigo, director=teal, associate-director=red, national=rose); Kaggle medals (gold default, silver, bronze); Education=amber.                   | Card shells tinted by award level or medal. View fallback is amber/gold.                                      |
+| **Vision**       | Teal (`--lvl-director`)          | Programs & impact per JSON `accent` field: impact=amber, strategic=indigo, platform=teal, people=rose, privacy=red, ai=violet, gxp=green. Hub nodes IDEA=violet, VISION=teal.                            | Each program/impact card colored by its accent attribute. Hub nodes tinted by hub hue. View fallback is teal. |
+| **Contact**      | Violet (`--accent`, brand)       | Social links per platform: LinkedIn=indigo, GitHub=violet, Kaggle=teal, Email=amber, Location=green.                                                                                                     | Each connect card tinted by platform hue via `--cat-*` mappings.                                              |
+
 ## Typography
 
 Three font roles — map by **semantic role**, not per-component preference. Tokens live in

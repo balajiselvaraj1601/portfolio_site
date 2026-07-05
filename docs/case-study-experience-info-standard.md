@@ -79,15 +79,15 @@ rest are optional but part of the _ideal_ item (see the checklist).
       "bullets": [
         {
           "text": "…predictive toxicology projected to save $20M–$50M annually.",
-          "tier": "primary"
+          "tier": "primary",
         },
         {
           "text": "Productionized ML pipelines with online learning and joint embedding.",
-          "tier": "secondary"
-        }
-      ]
-    }
-  ]
+          "tier": "secondary",
+        },
+      ],
+    },
+  ],
 }
 ```
 

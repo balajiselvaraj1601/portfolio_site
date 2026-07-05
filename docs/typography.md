@@ -79,16 +79,16 @@ each section lists the fonts it actually surfaces.
 
 ### Home — `/` (About view + full scroll)
 
-| Section               | Component                                     | Fonts surfaced                                                                   |
-| --------------------- | --------------------------------------------- | -------------------------------------------------------------------------------- |
-| Hero                  | `Hero.astro`                                  | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans |
-| Thirukural            | `ThirukuralQuote.astro`                       | Tamil quote=sans (exception) · translation=display italic · author=mono          |
+| Section               | Component                    | Fonts surfaced                                                                   |
+| --------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
+| Hero                  | `Hero.astro`                 | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans |
+| Thirukural            | `ThirukuralQuote.astro`      | Tamil quote=sans (exception) · translation=display italic · author=mono          |
 | Who I am & how I lead | `LeadershipPhilosophy.astro` | bio & card text=sans · statement=display (italic) · theme titles=sans            |
 
 ### Experience — `/#experience`
 
-| Section    | Component          | Fonts surfaced                                         |
-| ---------- | ------------------ | ------------------------------------------------------ |
+| Section    | Component          | Fonts surfaced                                                            |
+| ---------- | ------------------ | ------------------------------------------------------------------------- |
 | Experience | `Experience.astro` | h2=display · eyebrow=mono · year & role-meta=mono · role titles/body=sans |
 
 ### Research — `/research`
@@ -109,10 +109,10 @@ each section lists the fonts it actually surfaces.
 
 ### Vision — `/vision`
 
-| Section         | Component              | Fonts surfaced                                                                        |
-| --------------- | ---------------------- | ------------------------------------------------------------------------------------- |
-| Vision Programs | `VisionPrograms.astro` | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans   |
-| Vision Impact   | `VisionImpact.astro`   | h2=display · ThemeCard title=sans, body=sans                                          |
+| Section         | Component              | Fonts surfaced                                                                      |
+| --------------- | ---------------------- | ----------------------------------------------------------------------------------- |
+| Vision Programs | `VisionPrograms.astro` | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans |
+| Vision Impact   | `VisionImpact.astro`   | h2=display · ThemeCard title=sans, body=sans                                        |
 
 ### Contact — `/contact`
 

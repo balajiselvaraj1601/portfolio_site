@@ -117,7 +117,8 @@ const nodes = group.marks.map((mark, i) => {
     position: absolute;
     inset: 4%;
     border-radius: 50%;
-    border: 2px solid color-mix(in srgb, var(--accent-card, var(--accent)) 55%, transparent);
+    border: 2px solid
+      color-mix(in srgb, var(--accent-card, var(--accent)) 55%, transparent);
     background: radial-gradient(
       circle at center,
       color-mix(in srgb, var(--accent-card, var(--accent)) 14%, transparent) 0%,
@@ -172,7 +173,8 @@ const nodes = group.marks.map((mark, i) => {
     top: 50%;
     width: var(--spoke-len);
     height: 0;
-    border-top: 2px dotted color-mix(in srgb, var(--accent-card, var(--accent)) 45%, transparent);
+    border-top: 2px dotted
+      color-mix(in srgb, var(--accent-card, var(--accent)) 45%, transparent);
     transform-origin: 0 0;
     transform: rotate(var(--rot)) translateX(var(--spoke-start));
     z-index: 1;
@@ -202,7 +204,11 @@ const nodes = group.marks.map((mark, i) => {
   .vision-hub__rule-line {
     flex: 1;
     height: 1px;
-    background: color-mix(in srgb, var(--accent-card, var(--accent)) 40%, transparent);
+    background: color-mix(
+      in srgb,
+      var(--accent-card, var(--accent)) 40%,
+      transparent
+    );
   }
 
   .vision-hub__rule-dot {

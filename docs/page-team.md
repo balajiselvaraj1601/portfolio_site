@@ -45,16 +45,16 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 
 ## Team roster
 
-| Agent                           | View           | Sections                              |
-| ------------------------------- | -------------- | ------------------------------------- |
-| `page-about`                    | About (`home`) | hero, thirukural, leadership          |
-| `page-experience`               | Experience     | experience                            |
-| `page-research`                 | Research       | publications, conferences, speakers   |
-| `page-recognition`              | Recognition    | awards, kaggle, education             |
-| `page-vision`                   | Vision         | vision-programs, vision-impact        |
-| `page-contact`                  | Contact        | contact                               |
-| `design-guardian`               | Cross-cutting  | global.css, ui/, cards/               |
-| `site-consistency-orchestrator` | All            | Spawns agents, owns state             |
+| Agent                           | View           | Sections                            |
+| ------------------------------- | -------------- | ----------------------------------- |
+| `page-about`                    | About (`home`) | hero, thirukural, leadership        |
+| `page-experience`               | Experience     | experience                          |
+| `page-research`                 | Research       | publications, conferences, speakers |
+| `page-recognition`              | Recognition    | awards, kaggle, education           |
+| `page-vision`                   | Vision         | vision-programs, vision-impact      |
+| `page-contact`                  | Contact        | contact                             |
+| `design-guardian`               | Cross-cutting  | global.css, ui/, cards/             |
+| `site-consistency-orchestrator` | All            | Spawns agents, owns state           |
 
 Routing table: `.claude/skills/page-consistency-team/assets/page-routing.csv`
 

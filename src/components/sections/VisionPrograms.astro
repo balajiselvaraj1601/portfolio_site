@@ -220,21 +220,13 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
     min-width: 0;
   }
 
-  /* Multi-color 2×2 grid (row-major fill): row 1 (cards 1–2) reads blue, row 2
-     (cards 3–4) reads pink. Feeds --cat, which .vision-accent-hook maps to
-     --accent-card; the scoped + nth-child specificity beats the per-item
-     .vision-accent-* classes so the whole row shares one hue. */
-  .vision-flow__grid > li:nth-child(-n + 2) {
-    --cat: var(--cat-strategic);
-  }
-  .vision-flow__grid > li:nth-child(n + 3) {
-    --cat: var(--cat-people);
-  }
+  /* Program cards color per-item by their JSON accent via .vision-accent-*
+     + .vision-accent-hook cascade. */
 
   /* Hub wrappers inherit categorical accent from vision-accent-* + vision-accent-hook
      (IDEA hub = purple, VISION hub = teal, from each group's content accent). */
 
-  /* Program cards — accent now driven by the row rules above. */
+  /* Program cards. */
   .vision-flow__grid :global(.theme-card.card) {
     flex: 1;
     height: 100%;

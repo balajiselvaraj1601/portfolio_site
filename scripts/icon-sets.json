@@ -1,7 +1,5 @@
 {
-  "install_order": [
-    "icon_collections"
-  ],
+  "install_order": ["icon_collections"],
   "install_overrides": {
     "icon_box": {
       "target-goal": "logo_target_goal_box"

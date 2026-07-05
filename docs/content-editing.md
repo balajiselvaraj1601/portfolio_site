@@ -19,20 +19,20 @@ If the change affects page structure, section order, or the overall narrative, u
 
 ## File reference
 
-| File                         | Sections affected                     | Typical edits                                                                                                                |
-| ---------------------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| `site.json`                  | Global meta, nav, pages, SEO          | Title, tagline, nav labels, page sections, hide a section                                                                    |
-| `person/profile.json`        | Hero, Leadership, Contact             | Headline, metrics, CTAs, `leadershipPhilosophy.*`, `contactIntro`, `contactPage`, contact channels                           |
-| `person/collaborations.json` | Collaborations strip on About         | Organization names; optional `logo` slug → `public/assets/logos/{slug}.png`; optional `entity` slug → URL in `entities.json` |
-| `entities.json`              | Entity links (global registry)        | Slug → `{ name, url }` for organizations referenced across sections                                                          |
-| `work/vision-board.json`     | Vision view (`/#vision`)              | Infographic hubs, program cards, org impact cards                                                                            |
-| `work/experience.json`       | Experience                            | Roles, optional `mission`, `intro`, `headline`, nested `projects[]`, bullets, tier                                           |
-| `research/publications.json` | Publications                          | Title + URL links                                                                                                            |
-| `research/conferences.json`  | Conferences                           | Title + URL links                                                                                                            |
-| `research/speakers.json`     | Speaking engagements                  | Title + URL links                                                                                                            |
-| `recognition/education.json` | Education                             | Degree records (`intro`, `records[]` with `id`, `field`, `achievementDetail`, `summary`)                                     |
-| `recognition/awards.json`    | Awards                                | Label + detail rows                                                                                                          |
-| `recognition/kaggle.json`    | Kaggle (Recognition view)             | Global rank + 9 competition case-study cards (rank-ordered)                                                                  |
+| File                         | Sections affected              | Typical edits                                                                                                                |
+| ---------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `site.json`                  | Global meta, nav, pages, SEO   | Title, tagline, nav labels, page sections, hide a section                                                                    |
+| `person/profile.json`        | Hero, Leadership, Contact      | Headline, metrics, CTAs, `leadershipPhilosophy.*`, `contactIntro`, `contactPage`, contact channels                           |
+| `person/collaborations.json` | Collaborations strip on About  | Organization names; optional `logo` slug → `public/assets/logos/{slug}.png`; optional `entity` slug → URL in `entities.json` |
+| `entities.json`              | Entity links (global registry) | Slug → `{ name, url }` for organizations referenced across sections                                                          |
+| `work/vision-board.json`     | Vision view (`/#vision`)       | Infographic hubs, program cards, org impact cards                                                                            |
+| `work/experience.json`       | Experience                     | Roles, optional `mission`, `intro`, `headline`, nested `projects[]`, bullets, tier                                           |
+| `research/publications.json` | Publications                   | Title + URL links                                                                                                            |
+| `research/conferences.json`  | Conferences                    | Title + URL links                                                                                                            |
+| `research/speakers.json`     | Speaking engagements           | Title + URL links                                                                                                            |
+| `recognition/education.json` | Education                      | Degree records (`intro`, `records[]` with `id`, `field`, `achievementDetail`, `summary`)                                     |
+| `recognition/awards.json`    | Awards                         | Label + detail rows                                                                                                          |
+| `recognition/kaggle.json`    | Kaggle (Recognition view)      | Global rank + 9 competition case-study cards (rank-ordered)                                                                  |
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
 
@@ -142,16 +142,16 @@ Edit `content/person/profile.json` → `contact` array. Allowed public types: `e
 
 Schemas live in `src/schemas.ts`. Key constraints:
 
-| Schema                 | Notable rules                                                                                                            |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`                       |
+| Schema                 | Notable rules                                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`    |
 | `profileSchema`        | hero/leadership/contact fields; `contactIntro`, `contactPage`; `contact[].href` nullable for location |
 | `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                           |
 | `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                      |
-| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`           |
-| `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                    |
-| `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                                        |
-| `kaggleSchema`         | `profile` URL required; `items[]` validated via `kaggleCompetitionSchema`                                                |
+| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`         |
+| `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                   |
+| `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                     |
+| `kaggleSchema`         | `profile` URL required; `items[]` validated via `kaggleCompetitionSchema`                             |
 
 Adding a new field:
 

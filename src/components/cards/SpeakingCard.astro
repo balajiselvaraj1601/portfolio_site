@@ -33,7 +33,11 @@ const ytThumb = ytId
           class="speaking-card__mark"
         />
       ) : (
-        <CardMark iconFallback="presentation" variant="accented" class="speaking-card__mark" />
+        <CardMark
+          iconFallback="presentation"
+          variant="accented"
+          class="speaking-card__mark"
+        />
       )
     }
     <div class="speaking-card__meta">
@@ -128,7 +132,7 @@ const ytThumb = ytId
     font-size: var(--fs-2xs);
     letter-spacing: var(--tracking-wide);
     text-transform: uppercase;
-    color: var(--accent-ll);
+    color: var(--accent-card, var(--accent-ll));
   }
 
   .speaking-card__event {

@@ -21,12 +21,12 @@ them exactly — they are part of your instructions:
 
 ## View-specific rules (deltas beyond playbook P1–P14)
 
-| #   | Rule                                                                                                                                                        |
-| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| V1  | Content source: contact fields in `content/person/profile.json` only.                                                                                       |
-| V2  | Playbook P5 (no phone numbers, no References section) is the highest-priority rule for this view — verify build output contains no phone number in Phase 4. |
-| V3  | Contact uses `variant="alt"` (contract §6).                                                                                                                 |
-| V4  | CTA buttons use `.btn` tokens and `--section-cta-gap`; social/contact links go through `EntityLink`.                                                        |
+| #   | Rule                                                                                                                                                                                                                                                                      |
+| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| V1  | Content source: contact fields in `content/person/profile.json` only.                                                                                                                                                                                                     |
+| V2  | Playbook P5 (no phone numbers, no References section) is the highest-priority rule for this view — verify build output contains no phone number in Phase 4.                                                                                                               |
+| V3  | Contact uses `variant="alt"` (contract §6).                                                                                                                                                                                                                               |
+| V4  | CTA buttons use `.btn` tokens and `--section-cta-gap`; social/contact links go through `EntityLink`.                                                                                                                                                                      |
 | V5  | Each connect card carries a per-type accent via `.connect-card--{type}` → `--accent-card` (email→`--accent-gold`, linkedin→`--lvl-senior-director`, github→`--lvl-cio`, kaggle→`--lvl-director`), defined in `global.css` (guardian-owned). Do not hardcode these colors. |
 
 Page brief: `docs/page-briefs/contact.md`
@@ -78,15 +78,15 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 **Element theming (colour tokens, per §3e):**
 
-| Element                       | Text colour      | Surface           | Accent/hover     |
-| ----------------------------- | ---------------- | ----------------- | ---------------- |
-| `.contact__title` (T2)        | `--heading`      | `--bg-alt`        | —                |
-| `.contact-subtitle` (T7)      | `--text-muted`   | `--bg-alt`        | —                |
-| `.btn.btn-secondary` (T8)     | —                | —                 | `--accent-light` |
-| `.response-time` (T8)         | `--text-muted`   | `--bg-alt`        | `--accent-light` |
-| `.connect-header > span` (T5) | `--text-muted`   | `--bg-alt`        | —                |
-| `.connect-rule`               | —                | `--border-strong` | —                |
+| Element                       | Text colour      | Surface           | Accent/hover               |
+| ----------------------------- | ---------------- | ----------------- | -------------------------- |
+| `.contact__title` (T2)        | `--heading`      | `--bg-alt`        | —                          |
+| `.contact-subtitle` (T7)      | `--text-muted`   | `--bg-alt`        | —                          |
+| `.btn.btn-secondary` (T8)     | —                | —                 | `--accent-light`           |
+| `.response-time` (T8)         | `--text-muted`   | `--bg-alt`        | `--accent-light`           |
+| `.connect-header > span` (T5) | `--text-muted`   | `--bg-alt`        | —                          |
+| `.connect-rule`               | —                | `--border-strong` | —                          |
 | `.connect-card` (Tier A)      | —                | `--bg-elev`       | `--accent-card` (per type) |
-| `.connect-name` (T3)          | `--heading`      | `--bg-elev`       | —                |
-| `.connect-val` (T6)           | `--text-muted`   | `--bg-elev`       | —                |
-| `.connect-action` (T8)        | `--accent-light` | `--bg-elev`       | —                |
+| `.connect-name` (T3)          | `--heading`      | `--bg-elev`       | —                          |
+| `.connect-val` (T6)           | `--text-muted`   | `--bg-elev`       | —                          |
+| `.connect-action` (T8)        | `--accent-light` | `--bg-elev`       | —                          |

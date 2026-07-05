@@ -12,13 +12,13 @@ square-and-center processing. Naming follows `icon_<set>_<name>.png` (see
 
 ## Subfolder routing (PNG install)
 
-| Prefix / exact name | Destination |
-| --- | --- |
-| `icon_education_` | `public/assets/logos/education/` |
-| `icon_general_` | `public/assets/logos/general/` |
-| `icon_trophy_awards` | `public/assets/logos/awards/` |
-| `icon_hub_kaggle_`, `icon_kaggle_`, `icon_metric_kaggle_`, `icon_trophy_kaggle` | `public/assets/logos/kaggle/` |
-| `icon_hub_multimodal_`, `icon_vision_` | `public/assets/logos/vision/` |
+| Prefix / exact name                                                             | Destination                      |
+| ------------------------------------------------------------------------------- | -------------------------------- |
+| `icon_education_`                                                               | `public/assets/logos/education/` |
+| `icon_general_`                                                                 | `public/assets/logos/general/`   |
+| `icon_trophy_awards`                                                            | `public/assets/logos/awards/`    |
+| `icon_hub_kaggle_`, `icon_kaggle_`, `icon_metric_kaggle_`, `icon_trophy_kaggle` | `public/assets/logos/kaggle/`    |
+| `icon_hub_multimodal_`, `icon_vision_`                                          | `public/assets/logos/vision/`    |
 
 Slug map for SVG marks: `icon_<stem>` → `logo_<stem>` (e.g.
 `icon_education_calendar` → `logo_education_calendar`). Override:

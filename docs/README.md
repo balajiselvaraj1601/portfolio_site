@@ -25,13 +25,13 @@ deployed to GitHub Pages at https://balajiselvaraj1601.github.io.
 
 ## Quality & platform
 
-| Doc                                     | Purpose                                         |
-| --------------------------------------- | ----------------------------------------------- |
-| [SEO](./seo.md)                         | Meta tags, OG/Twitter, JSON-LD, sitemap, robots |
-| [Accessibility](./accessibility.md)     | WCAG 2.1 AA checklist                           |
-| [Deployment](./deployment.md)           | GitHub Pages target, CI/CD, artifact checklist  |
-| [Troubleshooting](./troubleshooting.md) | Common build, deploy, and content errors        |
-| Audits | [simplification-refactor-2026-07-03.md](./audits/simplification-refactor-2026-07-03.md), [logo-manifest.csv](./audits/logo-manifest.csv) | Changelog and logo inventory |
+| Doc                                     | Purpose                                                                                                                                  |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| [SEO](./seo.md)                         | Meta tags, OG/Twitter, JSON-LD, sitemap, robots                                                                                          |
+| [Accessibility](./accessibility.md)     | WCAG 2.1 AA checklist                                                                                                                    |
+| [Deployment](./deployment.md)           | GitHub Pages target, CI/CD, artifact checklist                                                                                           |
+| [Troubleshooting](./troubleshooting.md) | Common build, deploy, and content errors                                                                                                 |
+| Audits                                  | [simplification-refactor-2026-07-03.md](./audits/simplification-refactor-2026-07-03.md), [logo-manifest.csv](./audits/logo-manifest.csv) | Changelog and logo inventory |
 
 ## Related files outside `docs/`
 

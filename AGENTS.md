@@ -148,14 +148,14 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 
 ### Skills (Reusable, invoked by agents)
 
-| Skill                   | Used by                                         | Reference                                       |
-| ----------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| `site-review-fix`       | site-review-fix agent                           | `.claude/skills/site-review-fix/SKILL.md`       |
-| `page-consistency-team` | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md` |
-| `portfolio-icon-audit`  | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`  |
+| Skill                            | Used by                                         | Reference                                                |
+| -------------------------------- | ----------------------------------------------- | -------------------------------------------------------- |
+| `site-review-fix`                | site-review-fix agent                           | `.claude/skills/site-review-fix/SKILL.md`                |
+| `page-consistency-team`          | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md`          |
+| `portfolio-icon-audit`           | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`           |
 | `portfolio-icon-standardization` | Manual invocation; design-guardian, page agents | `.claude/skills/portfolio-icon-standardization/SKILL.md` |
-| `svg-logo-crop`         | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`         |
-| `icon-square-center`    | Manual invocation (raster prep)                 | `.claude/skills/icon-square-center/SKILL.md`    |
+| `svg-logo-crop`                  | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`                  |
+| `icon-square-center`             | Manual invocation (raster prep)                 | `.claude/skills/icon-square-center/SKILL.md`             |
 
 ## Icon / Logo Asset Pipeline
 

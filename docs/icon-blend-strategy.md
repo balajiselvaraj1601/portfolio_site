@@ -48,15 +48,15 @@ per-page question is only _which vector route_ and _which container_.
 
 ## Decision matrix
 
-| #   | Icon group (count)                               | Route                                                                                                                                                                                                                                                                                                                                                                               | Container / tint                                                                                                                   | Owner                                        |
-| --- | ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| 1   | Header chrome `icon_general_{save,sun,moon}` (3) | Drop `logoSrc()` branches; the existing `<Icon>` Lucide fallbacks become primary                                                                                                                                                                                                                                                                                                    | 36px header buttons; currentColor                                                                                                  | design-guardian                              |
-| 2   | Kaggle metric stats `icon_metric_kaggle_*` (8)   | Pipeline → `logo_metric_<stem>.svg`; render via MarkEmblem in `.blob-stat__icon`/`.blob-block__icon`                                                                                                                                                                                                                                                                                | inherits `color: var(--medal)`; sizes BINDING: `--icon-md` (20px) in `.blob-stat__icon`, `--icon-sm` (16px) in `.blob-block__icon` | guardian + page-recognition                  |
-| 3   | Education stats `icon_education_*` (4)           | Pipeline → `logo_education_<stem>.svg`; MarkEmblem inside `.icon-tile.icon-tile--accented`                                                                                                                                                                                                                                                                                           | inherits `--accent-card` gold; size via `--mark-glyph` (22px)                                                                      | guardian + page-recognition                  |
-| 4   | Trophies `icon_trophy_*` (2 files, 1 unique)     | Pipeline → single `logo_trophy_badge.svg`, referenced by both Awards and Kaggle tiles (dedup). AMENDED: RecogTile.astro must first replace its `imgSrc` `<img>` path with a MarkEmblem path (guardian-owned; blocks page-recognition)                                                                                                                                               | RecogTile slot; `--accent-card` per level/medal                                                                                    | guardian + page-recognition                  |
+| #   | Icon group (count)                               | Route                                                                                                                                                                                                                                                                                                                                                                            | Container / tint                                                                                                                   | Owner                                        |
+| --- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| 1   | Header chrome `icon_general_{save,sun,moon}` (3) | Drop `logoSrc()` branches; the existing `<Icon>` Lucide fallbacks become primary                                                                                                                                                                                                                                                                                                 | 36px header buttons; currentColor                                                                                                  | design-guardian                              |
+| 2   | Kaggle metric stats `icon_metric_kaggle_*` (8)   | Pipeline → `logo_metric_<stem>.svg`; render via MarkEmblem in `.blob-stat__icon`/`.blob-block__icon`                                                                                                                                                                                                                                                                             | inherits `color: var(--medal)`; sizes BINDING: `--icon-md` (20px) in `.blob-stat__icon`, `--icon-sm` (16px) in `.blob-block__icon` | guardian + page-recognition                  |
+| 3   | Education stats `icon_education_*` (4)           | Pipeline → `logo_education_<stem>.svg`; MarkEmblem inside `.icon-tile.icon-tile--accented`                                                                                                                                                                                                                                                                                       | inherits `--accent-card` gold; size via `--mark-glyph` (22px)                                                                      | guardian + page-recognition                  |
+| 4   | Trophies `icon_trophy_*` (2 files, 1 unique)     | Pipeline → single `logo_trophy_badge.svg`, referenced by both Awards and Kaggle tiles (dedup). AMENDED: RecogTile.astro must first replace its `imgSrc` `<img>` path with a MarkEmblem path (guardian-owned; blocks page-recognition)                                                                                                                                            | RecogTile slot; `--accent-card` per level/medal                                                                                    | guardian + page-recognition                  |
 | 5   | Competition entity marks `icon_kaggle_*` (9)     | Pipeline → `logo_kaggle_<stem>.svg`; MarkEmblem in card header tile replaces `object-fit: cover` black square. AMENDED: CompetitionCard needs a third routing branch — resolved slugs matching `logo_*` go to MarkEmblem inside `.icon-tile--accented`, NOT `.comp-image` cover-fill (guardian-owned; blocks page-recognition). `.comp-image` stays intact for genuine org logos | `.icon-tile--accented` medal tint                                                                                                  | guardian + page-recognition                  |
-| 6   | Vision hub nodes `icon_hub_*` (13)               | **Reuse existing `marks/logo_*.svg`** (name-map below); pipeline only for unmatched stems; kills raster/vector orbit mixing                                                                                                                                                                                                                                                         | MarkEmblem at the vector node ratio (52%); `--accent-ll`                                                                           | page-vision (+ guardian for VisionHub.astro) |
-| 7   | Vision impact marks `icon_vision_*` (7)          | **Reuse existing `marks/logo_*.svg`**; pipeline for unmatched; emblem-in-circle per contract §5 instead of rect pill                                                                                                                                                                                                                                                                | ThemeCard emblem; `--accent-card`                                                                                                  | page-vision (+ guardian for ThemeCard)       |
+| 6   | Vision hub nodes `icon_hub_*` (13)               | **Reuse existing `marks/logo_*.svg`** (name-map below); pipeline only for unmatched stems; kills raster/vector orbit mixing                                                                                                                                                                                                                                                      | MarkEmblem at the vector node ratio (52%); `--accent-ll`                                                                           | page-vision (+ guardian for VisionHub.astro) |
+| 7   | Vision impact marks `icon_vision_*` (7)          | **Reuse existing `marks/logo_*.svg`**; pipeline for unmatched; emblem-in-circle per contract §5 instead of rect pill                                                                                                                                                                                                                                                             | ThemeCard emblem; `--accent-card`                                                                                                  | page-vision (+ guardian for ThemeCard)       |
 
 Out of scope (explicitly NOT this set, stays raster): org/collaboration brand
 logos (`org/*.png` — astrazeneca, broad-institute, aacr, biorxiv, gaia, jitc,
@@ -182,15 +182,15 @@ step reintroduces the uneven-icon regression.
 All `icon_collections` marks render as `MarkEmblem` SVG masks. Effective pixel
 size is set by CSS tokens in `src/styles/global.css`, not PNG dimensions.
 
-| Context | Token / rule | Px |
-| --- | --- | --- |
-| Card / summary tile chrome | `--mark-slot` | 44 |
-| Card / summary tile glyph | `--mark-glyph` | 22 |
-| Competition card stat row | `--icon-md` (`.blob-icon--md`) | 20 |
-| Competition summary / eval block | `--icon-sm` (`.blob-icon--sm`) | 16 |
-| Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph` | 22 |
-| Vision impact theme card | `--mark-slot` / `--mark-glyph` | 44 / 22 |
-| Compact tile override | `.icon-tile--compact` | 36 / 18 |
+| Context                              | Token / rule                          | Px      |
+| ------------------------------------ | ------------------------------------- | ------- |
+| Card / summary tile chrome           | `--mark-slot`                         | 44      |
+| Card / summary tile glyph            | `--mark-glyph`                        | 22      |
+| Competition card stat row            | `--icon-md` (`.blob-icon--md`)        | 20      |
+| Competition summary / eval block     | `--icon-sm` (`.blob-icon--sm`)        | 16      |
+| Vision hub center + satellite emblem | `--mark-glyph` / `--vision-hub-glyph` | 22      |
+| Vision impact theme card             | `--mark-slot` / `--mark-glyph`        | 44 / 22 |
+| Compact tile override                | `.icon-tile--compact`                 | 36 / 18 |
 
 ### Circular mark chrome (SSOT, 2026-07-05 phase 2)
 
@@ -199,14 +199,14 @@ Accented pipeline marks share `.mark-circle` / `.mark-circle--accented` in
 `.icon-tile.icon-tile--round.icon-tile--accented`, `.vision-hub__node`, and
 `.vision-hub__center`):
 
-| Aspect | Token / rule | Value |
-| --- | --- | --- |
-| Shape | `border-radius: 50%` | circle |
-| Slot | `--mark-slot` | 44px (hub scales via cqi at live stage width) |
-| Glyph fill | `--mark-glyph / --mark-slot` | 50% |
-| Border | `--mark-border-width` | 1px |
-| Background wash | `--mark-bg-mix` | 14% `--accent-card` |
-| Border tint | `--mark-border-mix` | 35% `--accent-card` |
+| Aspect          | Token / rule                 | Value                                         |
+| --------------- | ---------------------------- | --------------------------------------------- |
+| Shape           | `border-radius: 50%`         | circle                                        |
+| Slot            | `--mark-slot`                | 44px (hub scales via cqi at live stage width) |
+| Glyph fill      | `--mark-glyph / --mark-slot` | 50%                                           |
+| Border          | `--mark-border-width`        | 1px                                           |
+| Background wash | `--mark-bg-mix`              | 14% `--accent-card`                           |
+| Border tint     | `--mark-border-mix`          | 35% `--accent-card`                           |
 
 Hub node/center diameters: `--vision-hub-node: calc(100cqi * var(--mark-slot) / var(--vision-hub-max))`
 (center equals node).
@@ -228,20 +228,20 @@ level/medal class). Circular chrome reads it via **`--mark-chrome`**
 `--accent-card` over inherited `--mark-fg` (which otherwise resolves to site
 purple from `:root`).
 
-| Layer | Token / mechanism | Resolves to |
-| --- | --- | --- |
-| Glyph (MarkEmblem / Lucide / brand) | parent `color` → `--mark-chrome` | `--accent-card` on wrapper |
-| Circle background wash | `--mark-bg-mix` (14%) | `color-mix(--mark-chrome …)` |
-| Circle border tint | `--mark-border-mix` (35%) | `color-mix(--mark-chrome …)` |
-| Card shell border/top | `--accent-card` | level / medal / section hue |
+| Layer                               | Token / mechanism                | Resolves to                  |
+| ----------------------------------- | -------------------------------- | ---------------------------- |
+| Glyph (MarkEmblem / Lucide / brand) | parent `color` → `--mark-chrome` | `--accent-card` on wrapper   |
+| Circle background wash              | `--mark-bg-mix` (14%)            | `color-mix(--mark-chrome …)` |
+| Circle border tint                  | `--mark-border-mix` (35%)        | `color-mix(--mark-chrome …)` |
+| Card shell border/top               | `--accent-card`                  | level / medal / section hue  |
 
 **Three delivery tiers:**
 
-| Tier | Delivery | Color behavior |
-| --- | --- | --- |
+| Tier              | Delivery                                  | Color behavior                                             |
+| ----------------- | ----------------------------------------- | ---------------------------------------------------------- |
 | 1 — Vector tinted | `MarkEmblem` mask + `Icon` `currentColor` | Inherits `--mark-chrome` from accented circle or bare span |
-| 2 — Soft tile | `.icon-tile` without `--accented` | Site purple (`--accent-soft` / `--accent-ll`) |
-| 3 — Full-color | `LogoBadge` `<img>` on `--logo-surface` | Brand pixels unchanged; optional accent-tinted pill bg |
+| 2 — Soft tile     | `.icon-tile` without `--accented`         | Site purple (`--accent-soft` / `--accent-ll`)              |
+| 3 — Full-color    | `LogoBadge` `<img>` on `--logo-surface`   | Brand pixels unchanged; optional accent-tinted pill bg     |
 
 **Intentional exceptions (do not “fix”):**
 

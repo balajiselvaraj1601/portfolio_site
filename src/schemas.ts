@@ -31,7 +31,6 @@ const LabeledLink = z.object({
   label: z.string(),
   ...MediaLinkFields,
 });
-const VariantColor = z.enum(['purple', 'red']);
 /** Categorical accent keys — map to --cat-* tokens in global.css (shared with About leadership). */
 export const visionAccentSchema = z.enum([
   'impact', // gold  — Business & P&L, EVP, Education, Speakers

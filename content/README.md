@@ -20,20 +20,20 @@ re-derive these files rather than editing both independently.
 
 ## Files
 
-| File                         | Drives                              | Source in resume                    |
-| ---------------------------- | ----------------------------------- | ----------------------------------- |
-| `site.json`                  | Site meta, nav, SEO defaults, theme | derived                             |
-| `person/profile.json`        | Hero, About, Contact                | `personal` (no phone)               |
-| `person/collaborations.json` | Collaborations strip                | derived                             |
-| `work/vision-board.json`     | Vision (programs + org impact)      | derived                             |
-| `work/experience.json`       | Experience timeline                 | `sections[id="experience"]`         |
-| `research/publications.json` | Publications                        | `sections[id="publications"]`       |
-| `research/conferences.json`  | Conferences                         | `sections[id="conferences"]`        |
-| `research/speakers.json`     | Speaking Engagements                | derived                             |
-| `recognition/education.json` | Education                           | `sections[id="education"]`          |
-| `recognition/awards.json`    | Awards & Recognition                | `sections[id="awards"]`             |
-| `recognition/kaggle.json`    | Kaggle Competitions                 | `sections[id="kaggle_compact"]`     |
-| `entities.json`              | Entity URL/name registry            | derived                             |
+| File                         | Drives                              | Source in resume                |
+| ---------------------------- | ----------------------------------- | ------------------------------- |
+| `site.json`                  | Site meta, nav, SEO defaults, theme | derived                         |
+| `person/profile.json`        | Hero, About, Contact                | `personal` (no phone)           |
+| `person/collaborations.json` | Collaborations strip                | derived                         |
+| `work/vision-board.json`     | Vision (programs + org impact)      | derived                         |
+| `work/experience.json`       | Experience timeline                 | `sections[id="experience"]`     |
+| `research/publications.json` | Publications                        | `sections[id="publications"]`   |
+| `research/conferences.json`  | Conferences                         | `sections[id="conferences"]`    |
+| `research/speakers.json`     | Speaking Engagements                | derived                         |
+| `recognition/education.json` | Education                           | `sections[id="education"]`      |
+| `recognition/awards.json`    | Awards & Recognition                | `sections[id="awards"]`         |
+| `recognition/kaggle.json`    | Kaggle Competitions                 | `sections[id="kaggle_compact"]` |
+| `entities.json`              | Entity URL/name registry            | derived                         |
 
 Project narratives are nested inside `work/experience.json` → `roles[].projects[]`.
 

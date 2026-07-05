@@ -35,13 +35,10 @@ import { visionBoard, site } from '@lib/content';
   .vision-impact__grid {
     grid-auto-rows: 1fr;
   }
-  /* Single unifying colour for all 7 impact boxes (rose). Feeds --cat, which
-     .vision-accent-hook maps to --accent-card; overrides the per-item
-     .vision-accent-* classes so the whole block reads as one hue.
-     --cat-people is the palette's rose family (aliases --lvl-national). */
+  /* Impact tiles color per-item by their JSON accent via .vision-accent-*
+     + .vision-accent-hook cascade. */
   .vision-impact__grid > li {
     display: flex;
-    --cat: var(--cat-people);
   }
   .vision-impact__grid > li > :global(.theme-card) {
     width: 100%;

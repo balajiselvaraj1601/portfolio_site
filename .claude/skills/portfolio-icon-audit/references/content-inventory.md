@@ -33,13 +33,13 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ### vision-board.json — semantic marks
 
-| entity_id                    | field               | kind   | value                                            | component                |
-| ---------------------------- | ------------------- | ------ | ------------------------------------------------ | ------------------------ |
-| vb-program.drug-safety.badge | `programs[].badge`  | icon   | `pill`                                           | `ThemeCard.astro`        |
-| vb-program.persister.badge   | `programs[].badge`  | icon   | `microscope`                                     |                          |
-| vb-org.* (7 cards)           | `orgCards[].icon`   | icon   | various                                          | `ThemeCard.astro`        |
-| vb-hub.idea.satellites       | `hubs[].satellites` | icon[] | target, lightbulb, chart, book, handshake, globe | `VisionHub.astro`        |
-| vb-hub.vision.satellites     | `hubs[].satellites` | icon[] | graph, document, table, pulse, image, blocks     |                          |
+| entity_id                    | field               | kind   | value                                            | component         |
+| ---------------------------- | ------------------- | ------ | ------------------------------------------------ | ----------------- |
+| vb-program.drug-safety.badge | `programs[].badge`  | icon   | `pill`                                           | `ThemeCard.astro` |
+| vb-program.persister.badge   | `programs[].badge`  | icon   | `microscope`                                     |                   |
+| vb-org.* (7 cards)           | `orgCards[].icon`   | icon   | various                                          | `ThemeCard.astro` |
+| vb-hub.idea.satellites       | `hubs[].satellites` | icon[] | target, lightbulb, chart, book, handshake, globe | `VisionHub.astro` |
+| vb-hub.vision.satellites     | `hubs[].satellites` | icon[] | graph, document, table, pulse, image, blocks     |                   |
 
 ---
 
@@ -50,12 +50,12 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ### vision-board.json — logo marks
 
-| entity_id              | slug              | alt             | file expected                             | component                      |
-| ---------------------- | ----------------- | --------------- | ----------------------------------------- | ------------------------------ |
-| vb-hub.idea.center     | `kaggle`          | Kaggle          | `assets/source/logos/kaggle.png`          | `VisionHub.astro`        |
-| vb-hub.vision.center   | `brain`           | Multimodal AI   | `public/assets/logos/brain.png`           |                                |
+| entity_id              | slug              | alt             | file expected                             | component         |
+| ---------------------- | ----------------- | --------------- | ----------------------------------------- | ----------------- |
+| vb-hub.idea.center     | `kaggle`          | Kaggle          | `assets/source/logos/kaggle.png`          | `VisionHub.astro` |
+| vb-hub.vision.center   | `brain`           | Multimodal AI   | `public/assets/logos/brain.png`           |                   |
 | vb-program.broad.badge | `broad-institute` | Broad Institute | `assets/source/logos/broad-institute.png` | `ThemeCard.astro` |
-| vb-program.aacr.badge  | `aacr`            | AACR            | `assets/source/logos/aacr.png`            |                                |
+| vb-program.aacr.badge  | `aacr`            | AACR            | `assets/source/logos/aacr.png`            |                   |
 
 ### collaborations.json — optional logo field
 
@@ -87,15 +87,15 @@ Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 
 ### Hardcoded in components
 
-| component                   | icons used                      | source                                        |
-| --------------------------- | ------------------------------- | --------------------------------------------- |
-| `Hero.astro`                | download                        | CTA button                                    |
-| `Education.astro`           | graduation                      | section header                                |
-| `Contact.astro`             | graduation                      | education block                               |
-| `Conferences.astro`         | presentation (via ResearchCard) | prop default                                  |
-| `Publications.astro`        | document (via ResearchCard)     | prop default                                  |
-| `Header.astro`              | Unicode ☀/☾/☰/✕                | **not** Icon.astro (sun/moon/menu/close idle) |
-| `Kaggle.astro`              | emoji 🏆                        | **not** Icon.astro                            |
+| component            | icons used                      | source                                        |
+| -------------------- | ------------------------------- | --------------------------------------------- |
+| `Hero.astro`         | download                        | CTA button                                    |
+| `Education.astro`    | graduation                      | section header                                |
+| `Contact.astro`      | graduation                      | education block                               |
+| `Conferences.astro`  | presentation (via ResearchCard) | prop default                                  |
+| `Publications.astro` | document (via ResearchCard)     | prop default                                  |
+| `Header.astro`       | Unicode ☀/☾/☰/✕                | **not** Icon.astro (sun/moon/menu/close idle) |
+| `Kaggle.astro`       | emoji 🏆                        | **not** Icon.astro                            |
 
 ### link lists with logo field (LabeledLink.logo)
 
