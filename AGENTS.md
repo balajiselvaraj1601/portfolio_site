@@ -120,7 +120,7 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 | Verify dev + preview        | `ss` + `curl` (see [Local servers and ports](#local-servers-and-ports)) |
 | Dev smoke (Playwright)      | `npm run smoke:localhost`                                               |
 | Full verify (release gate)  | `npm run verify`                                                        |
-| Bump version                | `npm run release:bump -- --bump patch`                                   |
+| Bump version                | `npm run release:bump -- --bump patch`                                  |
 | Cut release                 | `/release` or `.claude/commands/release.md`                             |
 
 CI builds on Node 20 (`package.json` engines: `>=18`).

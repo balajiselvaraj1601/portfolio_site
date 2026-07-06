@@ -19,15 +19,19 @@ This command automates the release workflow for the portfolio site.
 ## Steps
 
 1. **Verify the working tree is clean**
+
    ```bash
    git status
    ```
+
    If there are uncommitted changes, commit or stash them before proceeding.
 
 2. **Run the full verify pipeline**
+
    ```bash
    npm run verify
    ```
+
    Runs: astro check → icon token sync → eslint → prettier → build.
    If any step fails, fix the issue and re-run. Do not proceed until all steps pass.
 
@@ -40,6 +44,7 @@ This command automates the release workflow for the portfolio site.
    For the **first release** when `package.json` is already at the target version, skip the bump and tag directly.
 
 4. **Bump the version** (skip if tagging current version unchanged)
+
    ```bash
    npm run release:bump -- --bump patch
    # or
@@ -49,23 +54,27 @@ This command automates the release workflow for the portfolio site.
 5. **Update CHANGELOG.md** — move `[Unreleased]` items into a dated section for the new version.
 
 6. **Create a commit** for the version bump and changelog
+
    ```bash
    git add package.json package-lock.json CHANGELOG.md
    git commit -m "chore(release): vX.Y.Z"
    ```
 
 7. **Create an annotated git tag**
+
    ```bash
    git tag -a vX.Y.Z -m "vX.Y.Z"
    ```
 
 8. **Push the commit and tag** to origin
+
    ```bash
    git push origin main
    git push origin vX.Y.Z
    ```
 
 9. **GitHub Release** — the tag push triggers `.github/workflows/release.yml`, which runs verify and creates the release with generated notes. Alternatively:
+
    ```bash
    gh release create vX.Y.Z --title "vX.Y.Z" --notes-file CHANGELOG.md
    ```

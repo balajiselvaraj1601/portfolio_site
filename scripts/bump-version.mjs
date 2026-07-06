@@ -50,7 +50,9 @@ function parseArgs(argv) {
   }
   if (newVersion) return { newVersion: parseVersion(newVersion) };
   if (bump === 'patch' || bump === 'minor' || bump === 'major') return { bump };
-  console.error('Usage: bump-version.mjs --bump patch|minor|major | --new-version X.Y.Z');
+  console.error(
+    'Usage: bump-version.mjs --bump patch|minor|major | --new-version X.Y.Z'
+  );
   process.exit(1);
 }
 
@@ -61,7 +63,9 @@ const args = parseArgs(process.argv.slice(2));
 const next = args.newVersion ?? bumped(current, args.bump);
 
 if (formatVersion(next) === formatVersion(current)) {
-  console.error(`bump-version: new version equals current (${formatVersion(current)}); nothing to do`);
+  console.error(
+    `bump-version: new version equals current (${formatVersion(current)}); nothing to do`
+  );
   process.exit(1);
 }
 
