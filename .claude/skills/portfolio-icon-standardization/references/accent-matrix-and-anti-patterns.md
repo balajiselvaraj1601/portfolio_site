@@ -55,31 +55,33 @@ All in `src/styles/global.css` `:root` unless noted.
 
 ## Per-view consistency matrix
 
-| View        | Section IDs                         | Accent source                              | Tier-1 mark color                             | Tier-3 logos                          |
-| ----------- | ----------------------------------- | ------------------------------------------ | --------------------------------------------- | ------------------------------------- |
-| About       | hero, thirukural, leadership        | `--cat` on focus rows                      | `--accent-card`                               | Collab org logos on white pill        |
-| Experience  | experience                          | `--lvl` per role seniority (`.xp-level-*`) | Projects: compact accented tile (`--lvl` hue) | Company `LogoBadge`                   |
-| Research    | publications, conferences, speakers | section ID + `.card-accent`                | `--accent-card` on fallback icons             | Org logos on white pill               |
-| Recognition | awards, kaggle, education           | `--lvl`, `--medal`, gold                   | `--accent-card` everywhere in card            | None for pipeline marks               |
-| Vision      | vision-programs, vision-impact      | `accent` key per group/program/orgCard     | `--accent-card` via `.vision-accent-*`        | Program org logos, accent-tinted pill |
-| Contact     | contact                             | `.card-accent`                             | `--brand-mark` exception in circle            | N/A                                   |
+| View              | Section IDs                         | Accent source                                 | Tier-1 mark color                             | Tier-3 logos                          |
+| ----------------- | ----------------------------------- | --------------------------------------------- | --------------------------------------------- | ------------------------------------- |
+| About             | hero, thirukural, leadership        | `--cat` on focus rows                         | `--accent-card`                               | Collab org logos on white pill        |
+| Experience        | experience                          | `--lvl` per role seniority (`.xp-level-*`)    | Projects: compact accented tile (`--lvl` hue) | Company `LogoBadge`                   |
+| Research          | publications, conferences, speakers | section ID + `.card-accent`                   | `--accent-card` on fallback icons             | Org logos on white pill               |
+| Recognition       | awards, kaggle, education           | `--lvl`, `--medal`, gold                      | `--accent-card` everywhere in card            | None for pipeline marks               |
+| Vision (programs) | vision-programs                     | `accent` key per group/program                | `--accent-card` via `.vision-accent-*`        | Program org logos, accent-tinted pill |
+| Vision (impact)   | vision-impact                       | `#vision-impact .vision-accent-hook` (VI-001) | `--vision-impact-accent` (blue)               | Emblem circle marks                   |
+| Contact           | contact                             | `.card-accent`                                | `--brand-mark` exception in circle            | N/A                                   |
 
 ---
 
 ## `--accent-card` sources (exhaustive)
 
-| Wrapper class / selector                       | Sets `--accent-card` to             |
-| ---------------------------------------------- | ----------------------------------- |
-| `.card-accent`                                 | `var(--accent)`                     |
-| `#publications .card-accent`                   | `var(--lvl-director)` (teal)        |
-| `#conferences .card-accent`                    | `var(--lvl-senior-director)` (blue) |
-| `#speakers .card-accent`                       | `var(--accent-gold)`                |
-| `.recog-tile.blob--*` / level classes          | `var(--lvl)` per level              |
-| `.recog-card.blob--silver/bronze`              | `var(--medal)`                      |
-| `.edu-accent`                                  | `var(--accent-gold)`                |
-| `.xp-stop` / `.xp-panel` (via `.xp-level-*`)   | `var(--lvl)` per role seniority     |
-| `.leadership__card-row.cat-*`                  | `var(--cat)`                        |
-| `.vision-accent-{key}` + `.vision-accent-hook` | `var(--cat)` from content `accent`  |
+| Wrapper class / selector                       | Sets `--accent-card` to                                   |
+| ---------------------------------------------- | --------------------------------------------------------- |
+| `.card-accent`                                 | `var(--accent)`                                           |
+| `#publications .card-accent`                   | `var(--lvl-director)` (teal)                              |
+| `#conferences .card-accent`                    | `var(--lvl-senior-director)` (blue)                       |
+| `#speakers .card-accent`                       | `var(--accent-gold)`                                      |
+| `.recog-tile.blob--*` / level classes          | `var(--lvl)` per level                                    |
+| `.recog-card.blob--silver/bronze`              | `var(--medal)`                                            |
+| `.edu-accent`                                  | `var(--accent-gold)`                                      |
+| `.xp-stop` / `.xp-panel` (via `.xp-level-*`)   | `var(--lvl)` per role seniority                           |
+| `.leadership__card-row.cat-*`                  | `var(--cat)`                                              |
+| `.vision-accent-{key}` + `.vision-accent-hook` | `var(--cat)` from content `accent` (vision-programs only) |
+| `#vision-impact .vision-accent-hook`           | `var(--vision-impact-accent)` (single blue; VI-001)       |
 
 When wrapper sets `--accent-card`, circular marks pick it up via `--mark-fg`
 without extra props.

@@ -63,10 +63,10 @@ Content JSON key (accent / level / medal)
 | **Research**             | Section          | Publications→`--cat-strategic` (blue/indigo), Conferences→`--cat-platform` (teal), Speakers→`--cat-ai` (purple). `global.css` ~L804–812. `.venue` label fixed to read `--accent-card`.               |
 | **Recognition / Awards** | Award level      | `.level-*` → `--lvl-*` (6 seniority hues). `awardLevelSchema`.                                                                                                                                       |
 | **Recognition / Kaggle** | Medal            | `--medal-silver` / `--medal-bronze`. `kaggleMedalSchema`.                                                                                                                                            |
-| **Vision / programs**    | Per-item content | `.vision-accent-*` classes → `--cat` on `#vision-programs` only. IDEA hub pink, VISION hub teal; program cards multi-color. `global.css` ~L819–847. |
-| **Vision / impact**      | Single accent    | All 7 orgCards share blue via `#vision-impact .vision-accent-hook` → `--vision-impact-accent` (exception **VI-001**, 2026-07-06). `orgCards[].accent` optional / unused. |
+| **Vision / programs**    | Per-item content | `.vision-accent-*` classes → `--cat` on `#vision-programs` only. IDEA hub pink, VISION hub teal; program cards multi-color. `global.css` ~L819–847.                                                  |
+| **Vision / impact**      | Single accent    | All 7 orgCards share blue via `#vision-impact .vision-accent-hook` → `--vision-impact-accent` (exception **VI-001**, 2026-07-06). `orgCards[].accent` optional / unused.                             |
 | **Contact**              | Single accent    | All cards inherit brand purple via `--view-accent-contact`. `global.css` ~L814–817.                                                                                                                  |
-| **Education**            | — none —         | Single hue (one record, no dimension to color by).                                                                                                                                                   |
+| **Education**            | Single accent    | Gold via `.edu-accent` + `.edu-stats { --accent-card }`; stat cells use 6% gold wash (Kaggle `.blob-stat` pattern). [`Education.astro`](../src/components/sections/Education.astro).                 |
 
 ### Content schemas (SSOT for allowed color keys)
 

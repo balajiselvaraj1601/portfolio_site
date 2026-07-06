@@ -74,10 +74,10 @@ independently, or when ad-hoc `--port` flags drift from the pinned values.
 
 **Fixed ports** (see `scripts/ports.mjs`):
 
-| Mode    | Port | URL                         |
-| ------- | ---- | --------------------------- |
-| Dev     | 4321 | http://localhost:4321/      |
-| Preview | 4331 | http://localhost:4331/      |
+| Mode    | Port | URL                    |
+| ------- | ---- | ---------------------- |
+| Dev     | 4321 | http://localhost:4321/ |
+| Preview | 4331 | http://localhost:4331/ |
 
 Dev and preview can run at the same time (different ports). Never use ad-hoc
 `astro dev --port NNNN` or `astro preview --port NNNN` — use the npm scripts below.
