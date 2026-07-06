@@ -1,6 +1,7 @@
 {
-  "header": "AI Leadership & Strategic Impact",
-  "intro": "Independently sourced, pitched, and secured two major AI initiatives — one SVP-sponsored saving $20–50M annually, one Chief Scientist-sponsored within a €14M EU consortium.",
+  "header": "AI Vision & Strategic Leadership",
+  "intro": "Translated ideas and knowledge from a Kaggle competition into an AI vision that became executive-sponsored strategic initiatives, including an SVP-sponsored program and a Chief Scientist-sponsored program.",
+  "orgHeader": "Enterprise Leadership & Organizational Impact",
   "groups": [
     {
       "id": "idea",
@@ -96,7 +97,7 @@
       "lines": [
         "$20M–$50M annual savings",
         "Secured project (for my group)",
-        "Lead development"
+        "Led & Delivered"
       ],
       "entity": "astrazeneca"
     },
@@ -110,8 +111,9 @@
         "alt": "Broad Institute"
       },
       "lines": [
-        "Initiated collaboration with Dr. Shantanu Singh",
-        "Co-developing computational pipeline"
+        "Initiated collaboration with",
+        "Dr. Shantanu Singh",
+        "Co-developing AI pipelines"
       ],
       "entity": "broad-institute"
     },
@@ -127,7 +129,7 @@
       "lines": [
         "€14M EU consortium",
         "Secured project (for my group)",
-        "Lead development"
+        "Led & Delivered"
       ],
       "entity": "persist-seq"
     },
@@ -142,6 +144,7 @@
   ],
   "orgCards": [
     {
+      "accent": "ai",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_award",
@@ -151,6 +154,7 @@
       "lines": ["Awarded for", "Drug Safety Platform"]
     },
     {
+      "accent": "ai",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_gaia",
@@ -160,24 +164,27 @@
       "lines": ["Multimodal Vision — GITC Chennai"]
     },
     {
+      "accent": "gxp",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_secure_funds",
         "alt": "Financial growth"
       },
-      "title": "Secured $0.5M+ Funds",
-      "lines": ["Secured multiple times", "for the team"]
+      "title": "Twice Secured $0.5M+ Funds",
+      "lines": ["Secured internal funds", "for the team"]
     },
     {
+      "accent": "gxp",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_scorecard",
         "alt": "Analytics dashboard"
       },
       "title": "3 Scorecards",
-      "lines": ["Projects aligned", "to 3 scorecards"]
+      "lines": ["Delivered scorecard-aligned projects"]
     },
     {
+      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_positioning",
@@ -187,6 +194,7 @@
       "lines": ["7 internal groups · 3 startups"]
     },
     {
+      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_scaling_team",
@@ -196,6 +204,7 @@
       "lines": ["From 1 to 12", "team members"]
     },
     {
+      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_global_team",

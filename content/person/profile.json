@@ -231,13 +231,6 @@
       "value": "@dhakshiin1601",
       "href": "https://www.kaggle.com/dhakshiin1601",
       "icon": "kaggle"
-    },
-    {
-      "type": "location",
-      "label": "Location",
-      "value": "Gothenburg, Sweden",
-      "href": null,
-      "icon": "location"
     }
   ]
 }

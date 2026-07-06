@@ -114,8 +114,8 @@ Three font roles — map by **semantic role**, not per-component preference. Tok
 
 ## Section eyebrows
 
-- **View intros** use a section-level eyebrow (`Section`'s `eyebrow` prop, or `Eyebrow.astro` for custom headers) on sections that open a nav view: Experience, Vision, Contact. The former standalone intro blocks are gone — each view-opening section carries its own eyebrow + intro subtitle directly.
-- **Content sections** inside a view (Publications, Awards, Leadership, etc.) omit eyebrows — the view label in header nav provides context.
+- **View intros** use a section-level eyebrow (`Section`'s `eyebrow` prop, or `Eyebrow.astro` for custom headers) on sections that open a nav view: About (`leadership`), Experience, Research (`publications`), Recognition (`awards`), Vision, Contact. The former standalone intro blocks are gone — each view-opening section carries its own eyebrow + intro subtitle directly.
+- **Content sections** inside a multi-section view (`conferences`, `speakers`, `kaggle`, `education`) omit eyebrows — the view label on the opening section provides context.
 - Ad-hoc kickers (Vision Board lede, Leadership diff heading) should match `.eyebrow` typography (`--accent-ll`, mono, uppercase).
 
 ## Components — visual notes

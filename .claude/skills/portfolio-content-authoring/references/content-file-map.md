@@ -8,21 +8,20 @@ files remain the SSOT — this table is a pointer, not a copy.
 
 ## Section → source JSON → component
 
-| Section id        | Source JSON (`sections[].source`) | Component (`src/components/sections/`) |
-| ----------------- | --------------------------------- | -------------------------------------- |
-| `hero`            | `person/profile.json`             | `Hero.astro` (in `AboutLanding`)       |
-| `thirukural`      | `person/profile.json`             | `ThirukuralQuote.astro`                |
-| `leadership`      | `person/profile.json`             | `LeadershipPhilosophy.astro`           |
-| `experience`      | `work/experience.json`            | `Experience.astro`                     |
-| `publications`    | `research/publications.json`      | `Publications.astro`                   |
-| `conferences`     | `research/conferences.json`       | `Conferences.astro`                    |
-| `speakers`        | `research/speakers.json`          | `Speakers.astro`                       |
-| `awards`          | `recognition/awards.json`         | `Awards.astro`                         |
-| `kaggle`          | `recognition/kaggle.json`         | `Kaggle.astro`                         |
-| `education`       | `recognition/education.json`      | `Education.astro`                      |
-| `vision-programs` | `work/vision-board.json`          | `VisionPrograms.astro`                 |
-| `vision-impact`   | `work/vision-board.json`          | `VisionImpact.astro`                   |
-| `contact`         | `person/profile.json`             | `Contact.astro`                        |
+| Section id        | Source JSON (`sections[].source`) | Component (`src/components/sections/`)                     |
+| ----------------- | --------------------------------- | ---------------------------------------------------------- |
+| `hero`            | `person/profile.json`             | `Hero.astro` (in `AboutLanding`)                           |
+| `thirukural`      | `person/profile.json`             | `ThirukuralQuote.astro`                                    |
+| `leadership`      | `person/profile.json`             | `LeadershipPhilosophy.astro`                               |
+| `experience`      | `work/experience.json`            | `Experience.astro`                                         |
+| `publications`    | `research/publications.json`      | `Publications.astro`                                       |
+| `conferences`     | `research/conferences.json`       | `Conferences.astro`                                        |
+| `speakers`        | `research/speakers.json`          | `Speakers.astro`                                           |
+| `awards`          | `recognition/awards.json`         | `Awards.astro`                                             |
+| `kaggle`          | `recognition/kaggle.json`         | `Kaggle.astro`                                             |
+| `education`       | `recognition/education.json`      | `Education.astro`                                          |
+| `vision-programs` | `work/vision-board.json`          | `VisionPrograms.astro` (+ `vision/VisionImpactGrid.astro`) |
+| `contact`         | `person/profile.json`             | `Contact.astro`                                            |
 
 `Contact.astro` also reads `person/collaborations.json` indirectly via the
 About/Collaborations strip; `entities.json` is a global registry consumed by
@@ -54,7 +53,7 @@ Nav view → sections (from `content/site.json → pages`):
 | `/#experience`  | `experience`  | `experience`                              |
 | `/#research`    | `research`    | `publications`, `conferences`, `speakers` |
 | `/#recognition` | `recognition` | `awards`, `kaggle`, `education`           |
-| `/#vision`      | `vision`      | `vision-programs`, `vision-impact`        |
+| `/#vision`      | `vision`      | `vision-programs`                         |
 | `/#contact`     | `contact`     | `contact`                                 |
 
 The authoritative order and grouping live in `content/site.json`; if this table

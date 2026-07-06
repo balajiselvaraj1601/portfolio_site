@@ -22,23 +22,22 @@ them exactly — they are part of your instructions:
 
 ## View-specific rules (deltas beyond playbook P1–P14)
 
-| #   | Rule                                                                                                                                                                                                                                                                                                                                                                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| V1  | Content source: `content/work/vision-board.json` only.                                                                                                                                                                                                                                                                                                                          |
-| V2  | Two sections: `vision-programs` variant=alt with required eyebrow "Vision" (contract §4); `vision-impact` variant=default. No `section--full` or `section--impact` layering.                                                                                                                                                                                                    |
-| V3  | Group hubs use `VisionHub.astro` with fluid cqi node sizing and `--mark-fg` chrome; hub accent from `group.accent` in JSON → `.vision-accent-*` + `.vision-accent-hook` (site `--cat-*` palette). Program/impact marks use `CardMark` + `MarkEmblem` (contract §5).                                                                                                             |
-| V4  | Ad-hoc kickers match `.eyebrow` typography (contract §4).                                                                                                                                                                                                                                                                                                                       |
-| V5  | Section titles via `Section.astro` props. Grids use `.theme-grid` with `--theme-cols` CSS variable (2 for programs, 4 for impact).                                                                                                                                                                                                                                              |
-| V6  | **Impact tiles only:** all 7 `#vision-impact` orgCards use a single blue accent via `#vision-impact .vision-accent-hook` → `--vision-impact-accent` (exception **VI-001**). Do **not** restore per-item `orgCards[].accent` coloring or `.vision-accent-*` classes on impact `<li>` elements. `#vision-programs` stays multi-color per `groups[].accent` / `programs[].accent`. |
+| #   | Rule                                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| --- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| V1  | Content source: `content/work/vision-board.json` only.                                                                                                                                                                                                                                                                                                                                                                                    |
+| V2  | Single section (2026-07-06): `vision-programs` variant=alt with required eyebrow "Vision" (contract §4); the impact grid renders inside it below an `h3.vision-impact__heading` sub-heading (`visionBoard.orgHeader`). No separate `vision-impact` section; no `section--full` or `section--impact` layering.                                                                                                                             |
+| V3  | Group hubs use `VisionHub.astro` with fluid cqi node sizing and `--mark-fg` chrome; hub accent from `group.accent` in JSON → `.vision-accent-*` + `.vision-accent-hook` (site `--cat-*` palette). Program/impact marks use `CardMark` + `MarkEmblem` (contract §5).                                                                                                                                                                       |
+| V4  | Ad-hoc kickers match `.eyebrow` typography (contract §4).                                                                                                                                                                                                                                                                                                                                                                                 |
+| V5  | Section titles via `Section.astro` props. Programs grid uses `.theme-grid` with `--theme-cols: 2`; the impact grid (`vision/VisionImpactGrid.astro`) uses an 8-half-track scoped grid (each tile spans 2) so the 3-tile bottom row centres while tile widths match a plain 4-col layout.                                                                                                                                                  |
+| V6  | **Impact tiles (supersedes VI-001, 2026-07-06):** the 7 orgCards use 3 accent groups from `orgCards[].accent` → `.vision-accent-*` + `.vision-accent-hook` on each `<li>`: awards=`ai` purple, funding=`gxp` green, team=`strategic` blue. Do **not** reintroduce a single shared accent or reuse the flow's hues (silver/platform/impact/people). `#vision-programs` flow stays multi-color per `groups[].accent` / `programs[].accent`. |
 
 Page brief: `docs/page-briefs/vision.md`
 
 ## Appendix A — View binding (owned: may edit)
 
-| Section id      | Component                                      | Content                          |
-| --------------- | ---------------------------------------------- | -------------------------------- |
-| vision-programs | `src/components/sections/VisionPrograms.astro` | `content/work/vision-board.json` |
-| vision-impact   | `src/components/sections/VisionImpact.astro`   | `content/work/vision-board.json` |
+| Section id      | Component                                                                                                           | Content                          |
+| --------------- | ------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
+| vision-programs | `src/components/sections/VisionPrograms.astro` (+ `sections/vision/` sub-components incl. `VisionImpactGrid.astro`) | `content/work/vision-board.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
 `ThemeCard.astro` (`src/components/cards/`, renders program & impact cards), `VisionHub.astro` (`src/components/ui/`, renders group hubs)
@@ -47,10 +46,10 @@ Shelved (never enable, never audit): —
 
 ## Appendix B — Audit checklist (view-specific)
 
-1. Both sections use `Section.astro` with correct variants (V2).
+1. Single `vision-programs` section uses `Section.astro` variant=alt (V2).
 2. `vision-programs` has eyebrow prop set to "Vision" (contract §4).
 3. `vision-programs` grid uses `.theme-grid` with `--theme-cols: 2` (V5).
-4. `vision-impact` grid uses `.theme-grid` with `--theme-cols: 4` (V5).
+4. Impact grid (`vision/VisionImpactGrid.astro`) uses the 8-half-track centred layout with 3 accent groups (V5, V6), below the `h3` sub-heading.
 5. Program badge and impact cards use `CardMark.astro` with proper icon-tile modifiers (V3).
 
 ## Appendix C — Text & object hierarchy
@@ -73,11 +72,11 @@ single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not r
   - Program card `ul.program-card__lines li` → **T6** body prose
 - **Notes:** `.program-card__label` uses mono uppercase `letter-spacing: 0.14em` = `--tracking-wider` + `--accent-ll`, so it maps to **T9** (emphasized theme micro-label) rather than the T4 kicker level (`--tracking-snug`); this is the emphasized-micro-label variant per §2a/§3a, not a plain h4 kicker.
 
-### vision-impact — VisionImpact.astro
+### impact grid — vision/VisionImpactGrid.astro (inside vision-programs)
 
-- **Object:** §6 `default` band › §5 Tier A `.theme-card.card` (ThemeCard, prose mode) › §5 emblem-in-circle mark slot (`.theme-card__icon` + MarkEmblem; rect `.logo-badge` if an entity logo file exists)
+- **Object:** same §6 `alt` band › §5 Tier A `.theme-card.card` (ThemeCard, prose mode) › §5 emblem-in-circle mark slot (`.theme-card__icon` + MarkEmblem; rect `.logo-badge` if an entity logo file exists)
 - **Text (reading order):**
-  - `h2.section__title` → **T2** section title (no eyebrow — content section, §4)
+  - `h3.vision-impact__heading` (`visionBoard.orgHeader`) → sub-heading (fs-2xl, below T2)
   - `h3.theme-card__title` → **T3** card title
   - `p.theme-card__desc` (`lines` joined) → **T6** body prose
 - **Notes:** —
@@ -88,20 +87,20 @@ single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not r
 
 **Element theming (colour tokens, per §3e):**
 
-| Element                                | Text colour     | Surface                      | Accent/hover                                                                                |
-| -------------------------------------- | --------------- | ---------------------------- | ------------------------------------------------------------------------------------------- |
-| Eyebrow                                | `--accent-ll`   | —                            | —                                                                                           |
-| Section h2 title                       | `--heading`     | —                            | —                                                                                           |
-| Section subtitle                       | `--text-muted`  | —                            | —                                                                                           |
-| Card shell (Tier A)                    | —               | `--bg-elev`                  | —                                                                                           |
-| Card h3 title                          | `--heading`     | —                            | —                                                                                           |
-| Metric value                           | `--accent`      | —                            | —                                                                                           |
-| Stat label                             | `--text-muted`  | —                            | —                                                                                           |
-| Program/group label                    | `--accent-card` | —                            | —                                                                                           |
-| Body prose                             | `--text-muted`  | —                            | —                                                                                           |
-| Mark icon circle (`.theme-card__icon`) | `--mark-fg`     | color-mix w/ `--mark-fg`     | —                                                                                           |
-| Vision hub ring/spokes/rule            | —               | color-mix w/ `--accent-card` | —                                                                                           |
-| Vision hub center/nodes/label          | `--mark-fg`     | color-mix w/ `--mark-fg`     | —                                                                                           |
-| Vision hub accent source               | —               | —                            | `group.accent` → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` tokens)          |
-| Vision program cards                   | `--accent-card` | logo pill tint               | `programs[].accent` per card                                                                |
-| Vision impact cards                    | `--accent-card` | emblem circle wash           | `#vision-impact .vision-accent-hook` → `--vision-impact-accent` (VI-001; not per-card JSON) |
+| Element                                | Text colour     | Surface                      | Accent/hover                                                                                      |
+| -------------------------------------- | --------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| Eyebrow                                | `--accent-ll`   | —                            | —                                                                                                 |
+| Section h2 title                       | `--heading`     | —                            | —                                                                                                 |
+| Section subtitle                       | `--text-muted`  | —                            | —                                                                                                 |
+| Card shell (Tier A)                    | —               | `--bg-elev`                  | —                                                                                                 |
+| Card h3 title                          | `--heading`     | —                            | —                                                                                                 |
+| Metric value                           | `--accent`      | —                            | —                                                                                                 |
+| Stat label                             | `--text-muted`  | —                            | —                                                                                                 |
+| Program/group label                    | `--accent-card` | —                            | —                                                                                                 |
+| Body prose                             | `--text-muted`  | —                            | —                                                                                                 |
+| Mark icon circle (`.theme-card__icon`) | `--mark-fg`     | color-mix w/ `--mark-fg`     | —                                                                                                 |
+| Vision hub ring/spokes/rule            | —               | color-mix w/ `--accent-card` | —                                                                                                 |
+| Vision hub center/nodes/label          | `--mark-fg`     | color-mix w/ `--mark-fg`     | —                                                                                                 |
+| Vision hub accent source               | —               | —                            | `group.accent` → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` tokens)                |
+| Vision program cards                   | `--accent-card` | logo pill tint               | `programs[].accent` per card                                                                      |
+| Vision impact cards                    | `--accent-card` | emblem circle wash           | `orgCards[].accent` → `.vision-accent-{key}` + `.vision-accent-hook` (3 groups: ai/gxp/strategic) |

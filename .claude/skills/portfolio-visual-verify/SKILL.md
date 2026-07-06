@@ -70,9 +70,10 @@ the script is authoritative.
   `is-visible` to every `.reveal` under a root) or waits the scroll-settle interval
   (`waitForScrollSettle`, mirroring `PROGRAMMATIC_SCROLL_SETTLE_MS` from
   `src/scripts/section-views.ts`). Skip this and you screenshot invisible content.
-- **The Vision sections need a double force.** `#vision-programs` and
-  `#vision-impact` both carry `revealAll` in `SHOTS`; `prepareVisionSection` scrolls
-  `#vision-impact` into view and calls `forceReveals` on **both** roots. Full
+- **The Vision section needs a full force.** `#vision-programs` (which since
+  2026-07-06 also contains the impact grid — there is no separate `#vision-impact`
+  section) carries `revealAll` in `SHOTS`; `prepareVisionSection` scrolls it into
+  view and calls `forceReveals` on the whole root. Full
   explanation: [references/reveal-and-scroll-gotchas.md](references/reveal-and-scroll-gotchas.md).
 - **`screenshots:baseline` is the one capture entry point.** It writes to
   `docs/reference/screenshots/`. Don't hand-roll a Playwright script — extend

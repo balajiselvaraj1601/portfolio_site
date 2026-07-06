@@ -44,7 +44,8 @@ Step-by-step procedures for defining and changing boxes. Each: goal → files �
 2. Remove any per-item hook classes if switching multi-color → single.
    **Verify:** every card in the section matches; other views unaffected;
    `npm run verify`. Re-read `docs/box-color-history.md` first — view strategy has
-   been reversed before (VI-001 pins `#vision-impact` to single blue).
+   been reversed before (e.g. VI-001 pinned the Vision impact tiles to single blue
+   before the 2026-07-06 move to 3 accent groups via `orgCards[].accent`).
 
 ## D — Add a new card tier or shell variant
 

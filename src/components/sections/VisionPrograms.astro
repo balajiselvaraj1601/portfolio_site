@@ -1,6 +1,7 @@
 ---
 import Section from '@components/ui/Section.astro';
 import VisionFlowChevrons from '@components/sections/vision/VisionFlowChevrons.astro';
+import VisionImpactGrid from '@components/sections/vision/VisionImpactGrid.astro';
 import VisionProgramGrid from '@components/sections/vision/VisionProgramGrid.astro';
 import VisionHub from '@components/ui/VisionHub.astro';
 import { visionBoard, site } from '@lib/content';
@@ -47,11 +48,33 @@ import { visionBoard, site } from '@lib/content';
       )
     }
   </div>
+
+  {
+    visionBoard.orgCards && visionBoard.orgCards.length > 0 && (
+      <>
+        <h3 class="vision-impact__heading reveal">{visionBoard.orgHeader}</h3>
+        <VisionImpactGrid cards={visionBoard.orgCards} />
+      </>
+    )
+  }
 </Section>
 
 <style>
   /* Chevron styles → vision/VisionFlowChevrons.astro;
-     program-card grid styles → vision/VisionProgramGrid.astro. */
+     program-card grid styles → vision/VisionProgramGrid.astro;
+     impact-grid styles → vision/VisionImpactGrid.astro. */
+
+  /* Sub-heading above the org-impact grid — deliberately below the section h2
+     (--fs-h2) in the type scale: this is a sub-part of the single Vision
+     section, not a section title. */
+  .vision-impact__heading {
+    font-size: var(--fs-2xl);
+    font-weight: var(--fw-regular);
+    color: var(--heading);
+    /* Bottom gap one step above the header→content default (--text-gap-section):
+       the heading must read as introducing the grid, with clear air before it. */
+    margin: var(--space-12) 0 var(--stack-xl);
+  }
 
   .vision-flow {
     display: grid;

@@ -35,19 +35,19 @@ falls back to the view's teal.
 
 ## What sets `--accent-card` (exhaustive)
 
-| Wrapper class / selector                       | Sets `--accent-card` to                             |
-| ---------------------------------------------- | --------------------------------------------------- |
-| `.card-accent`                                 | `var(--accent)` (brand purple)                      |
-| `#publications .card-accent`                   | `var(--cat-strategic)` (blue)                       |
-| `#conferences .card-accent`                    | `var(--cat-platform)` (teal)                        |
-| `#speakers .card-accent`                       | `var(--cat-ai)` (purple)                            |
-| `.recog-tile` / `.recog-card` level classes    | `var(--lvl-*)` per award level                      |
-| `.recog-card.blob--silver / --bronze`          | `var(--medal-*)`                                    |
-| `.edu-accent`                                  | `var(--accent-gold)`                                |
-| `.xp-stop` / `.xp-panel` via `.xp-level-*`     | `var(--lvl-*)` per role seniority                   |
-| `.leadership__card-row.cat-*`                  | `var(--about-cat-*)` per category                   |
-| `.vision-accent-{key}` + `.vision-accent-hook` | `var(--cat, --view-accent-vision)` (programs)       |
-| `#vision-impact .vision-accent-hook`           | `var(--vision-impact-accent)` (single blue; VI-001) |
+| Wrapper class / selector                                                        | Sets `--accent-card` to                                                                                                                      |
+| ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.card-accent`                                                                  | `var(--accent)` (brand purple)                                                                                                               |
+| `#publications .card-accent`                                                    | `var(--cat-strategic)` (blue)                                                                                                                |
+| `#conferences .card-accent`                                                     | `var(--cat-platform)` (teal)                                                                                                                 |
+| `#speakers .card-accent`                                                        | `var(--cat-ai)` (purple)                                                                                                                     |
+| `#awards .recog-summary .theme-card.card` + `#awards .recog-card` level classes | `var(--lvl-*)` per award level (stat tiles + grid cards)                                                                                     |
+| `#awards .recog-chip.is-active` (with `.level-*`)                               | `var(--lvl-*)` per award level (active filter chip)                                                                                          |
+| `.recog-card.blob--silver / --bronze`                                           | `var(--medal-*)`                                                                                                                             |
+| `.edu-accent`                                                                   | `var(--accent-gold)`                                                                                                                         |
+| `.xp-stop` / `.xp-panel` via `.xp-level-*`                                      | `var(--lvl-*)` per role seniority                                                                                                            |
+| `.leadership__card-row.cat-*`                                                   | `var(--about-cat-*)` per category                                                                                                            |
+| `.vision-accent-{key}` + `.vision-accent-hook`                                  | `var(--cat, --view-accent-vision)` (flow + impact grid; impact orgCards use 3 accent groups ai/gxp/strategic — VI-001 superseded 2026-07-06) |
 
 ## Per-view fallback tokens
 

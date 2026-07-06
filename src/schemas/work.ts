@@ -28,6 +28,8 @@ export type VisionMark = z.infer<typeof VisionMark>;
 export const visionBoardSchema = z.object({
   header: z.string(),
   intro: z.string(),
+  /** Sub-heading above the org-impact card grid (rendered inside vision-programs). */
+  orgHeader: z.string(),
   groups: z.array(
     z.object({
       id: z.string(),

@@ -47,7 +47,7 @@ Shelved (never enable, never audit): `LeadershipCard.astro`
 
 ## Appendix B — Audit checklist (view-specific)
 
-1. Leadership uses `Section.astro` with `variant="default"`; no eyebrow (contract §4).
+1. Leadership uses `Section.astro` with `variant="alt"`; eyebrow `"About"` via Section prop (contract §4).
 2. Hero spacing uses tokens — no hardcoded px gaps in scoped CSS.
 3. Thirukural band typography: Tamil in Inter, not DM Serif.
 4. AboutLanding audited together with hero/thirukural pair.
@@ -80,13 +80,14 @@ Shelved (never enable, never audit): `LeadershipCard.astro`
 
 - **Object:** §6 `default` `Section` band › §5 Tier A `.card` (`.theme-card`) with §5 emblem-in-circle mark (`.theme-card__icon` via `CardMark` + `MarkEmblem`); collaborations render `.leadership__collab-mark` logo cells (§5 rect/plain logo slot via `CardMark`)
 - **Text (reading order):**
+  - `.eyebrow` ("About") → **T5** eyebrow
   - Section title (h2 via `Section.astro` `title` prop) → **T2** section title
   - `.leadership__intro` → **T6** body prose (lede)
   - `.leadership__diff-heading` (h3) → **T5** eyebrow
   - `.theme-card__title` (h3) → **T3** card title
   - `.theme-card__desc` → **T6** body prose
   - `.leadership__collabs-heading` (h3) → **T5** eyebrow
-- **Notes:** No section eyebrow (content section, §4). `.leadership__diff-heading` and `.leadership__collabs-heading` are ad-hoc kickers rendered with full eyebrow typography (T5, `--fs-eyebrow`) per §4, not T4 h4-kicker tokens; `.leadership__collabs-heading` is the muted variant (`--tracking-wide` ~0.12em, `--text-muted`) vs the diff heading's `--tracking-eyebrow` / `--accent-ll`. `.theme-card__title` uses `--fs-card-title` (three-tier scale, EX-008). `.leadership__collab-mark` cells use `--radius-md` (8px) per EX-007.
+- **Notes:** Eyebrow `"About"` matches nav label (contract §4). `.leadership__diff-heading` and `.leadership__collabs-heading` are ad-hoc kickers rendered with full eyebrow typography (T5, `--fs-eyebrow`) per §4, not T4 h4-kicker tokens; `.leadership__collabs-heading` is the muted variant (`--tracking-wide` ~0.12em, `--text-muted`) vs the diff heading's `--tracking-eyebrow` / `--accent-ll`. `.theme-card__title` uses `--fs-card-title` (three-tier scale, EX-008). `.leadership__collab-mark` cells use `--radius-md` (8px) per EX-007.
 
 ### Typography & theming summary (this view)
 

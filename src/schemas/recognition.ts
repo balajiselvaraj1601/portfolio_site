@@ -29,9 +29,9 @@ export const awardLevelSchema = z.enum([
   'EVP',
   'CIO',
   'Senior Director',
+  'National Level',
   'Director',
   'Associate Director',
-  'National Level',
 ]);
 export const awardsSchema = z.object({
   title: z.string(),

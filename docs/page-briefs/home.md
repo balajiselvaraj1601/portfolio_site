@@ -13,10 +13,10 @@
 
 The About group opens the page: hero and Thirukural couplet share an `AboutLanding` wrapper
 (`#about-landing`) that forms the **hero band** — it ends flush above the leadership section.
-The merged profile and leadership section (`leadership`: bio, scan cards, philosophy, themes,
+The merged profile and leadership section (`leadership`: eyebrow **About**, title About, bio, scan cards, philosophy, themes,
 collaboration logos) is the start of the About view. All sections are visible on `/` — the page
 scrolls through every group in nav order, and the **About** button scrolls to `#leadership`
-(title: About), with the full hero band scrolled out of view above it.
+(eyebrow: About, title: About), with the full hero band scrolled out of view above it.
 
 ## Full DOM order on `/`
 
@@ -27,7 +27,7 @@ visible; nav buttons scroll to a view's first section.
 `experience` _(Experience)_ →
 `publications` → `conferences` → `speakers` _(Research)_ →
 `awards` → `kaggle` → `education` _(Recognition)_ →
-`vision-programs` → `vision-impact` _(Vision)_ →
+`vision-programs` _(Vision)_ →
 `contact` _(Contact)_
 
 Each nav button maps to exactly one view; see `content/site.json → pages[].viewSections`.

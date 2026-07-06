@@ -13,7 +13,7 @@
 
 ## Structure
 
-`awards` -> `kaggle` -> `education`
+`awards` (eyebrow **Recognition**) -> `kaggle` -> `education`
 
 The view makes awards and Kaggle rank distinct trust signals and keeps education as the grounding
 reset. The contact CTA is the dedicated **Contact** view.

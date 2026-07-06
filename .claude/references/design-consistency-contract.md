@@ -182,9 +182,9 @@ Per `docs/design-direction.md § Section eyebrows`:
 | Content sections inside a view                | **Omit** — nav provides context                              |
 | Ad-hoc kickers (Vision lede, Leadership diff) | Match `.eyebrow` typography (`--accent-ll`, mono, uppercase) |
 
-**View intros/sections with eyebrows:** `vision-programs`, `experience`, Contact (if eyebrow used).
+**View intros/sections with eyebrows:** `leadership`, `experience`, `publications`, `awards`, `vision-programs`, Contact (if eyebrow used).
 
-**Content sections without eyebrows:** `leadership`, `publications`, `conferences`, `speakers`, `awards`, `kaggle`, `education`, `vision-impact`.
+**Content sections without eyebrows:** `conferences`, `speakers`, `kaggle`, `education`.
 
 ---
 
@@ -306,7 +306,7 @@ its `class` prop.
 
 | `variant` prop | Emitted class    | When                                                                                                    |
 | -------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
-| `default`      | (none)           | Standard band (experience, conferences, awards, education, vision-impact)                               |
+| `default`      | (none)           | Standard band (experience, conferences, awards, education)                                              |
 | `alt`          | `.section--alt`  | Alternate background (`--bg-alt`); leadership, publications, speakers, kaggle, vision-programs, contact |
 | `full`         | `.section--full` | Full-bleed layout (deprecated as of Vision rewrite)                                                     |
 

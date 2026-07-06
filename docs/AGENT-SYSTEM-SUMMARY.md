@@ -39,14 +39,14 @@ All six use tools `Read, Edit, Grep, Glob, Bash` and share runtime rules from
 `.claude/references/page-agent-playbook.md`. Each edits only its own view's
 components — never other views.
 
-| Agent            | Model | Role                                                                                    | File                                 |
-| ---------------- | ----- | --------------------------------------------------------------------------------------- | ------------------------------------ |
-| page-about       | haiku | About view (`view_id=home`): hero, thirukural, and leadership sections.                 | `.claude/agents/page-about.md`       |
-| page-contact     | haiku | Contact view: `Contact.astro` only.                                                     | `.claude/agents/page-contact.md`     |
-| page-experience  | haiku | Experience view: `Experience.astro` and its view's content JSON.                        | `.claude/agents/page-experience.md`  |
-| page-recognition | haiku | Recognition view: Awards, Kaggle, and Education components.                             | `.claude/agents/page-recognition.md` |
-| page-research    | haiku | Research view: Publications, Conferences, and Speakers components.                      | `.claude/agents/page-research.md`    |
-| page-vision      | haiku | Vision view: `VisionPrograms.astro`, `VisionImpact.astro`, and its view's content JSON. | `.claude/agents/page-vision.md`      |
+| Agent            | Model | Role                                                                                            | File                                 |
+| ---------------- | ----- | ----------------------------------------------------------------------------------------------- | ------------------------------------ |
+| page-about       | haiku | About view (`view_id=home`): hero, thirukural, and leadership sections.                         | `.claude/agents/page-about.md`       |
+| page-contact     | haiku | Contact view: `Contact.astro` only.                                                             | `.claude/agents/page-contact.md`     |
+| page-experience  | haiku | Experience view: `Experience.astro` and its view's content JSON.                                | `.claude/agents/page-experience.md`  |
+| page-recognition | haiku | Recognition view: Awards, Kaggle, and Education components.                                     | `.claude/agents/page-recognition.md` |
+| page-research    | haiku | Research view: Publications, Conferences, and Speakers components.                              | `.claude/agents/page-research.md`    |
+| page-vision      | haiku | Vision view: `VisionPrograms.astro`, its `vision/` sub-components, and its view's content JSON. | `.claude/agents/page-vision.md`      |
 
 ### Frontmatter wiring
 

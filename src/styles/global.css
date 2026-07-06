@@ -326,9 +326,6 @@
   --view-accent-about: var(--accent); /* purple — brand */
   --view-accent-recognition: var(--accent-gold); /* gold  */
   --view-accent-vision: var(--lvl-director); /* teal  */
-  --vision-impact-accent: var(
-    --cat-strategic
-  ); /* blue — #vision-impact only (VI-001) */
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -840,13 +837,6 @@ button {
      .vision-accent-* classes above), falling back to the vision hue (teal) when an
      element has no category class. */
   --accent-card: var(--cat, var(--view-accent-vision));
-  --mark-fg: var(--accent-card, var(--accent));
-}
-
-/* Vision impact — single blue accent, isolated from vision-programs multi-color
-   and from other --cat-* consumers (About, Research). Exception VI-001. */
-#vision-impact .vision-accent-hook {
-  --accent-card: var(--vision-impact-accent);
   --mark-fg: var(--accent-card, var(--accent));
 }
 

@@ -8,7 +8,6 @@ export const SECTION_COMPONENT_IDS = [
   'hero',
   'thirukural',
   'vision-programs',
-  'vision-impact',
   'leadership',
   'experience',
   'education',

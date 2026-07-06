@@ -82,16 +82,16 @@ Where masked logos and card marks render (all sized by `--mark-glyph` inside the
 
 ## Table D — Circular mark glyph & chrome tokens (CSS)
 
-| Token                   | Value                | Defined at              | Applies to                                      |
-| ----------------------- | -------------------- | ----------------------- | ----------------------------------------------- |
-| `--mark-slot`           | `44px`               | `global.css:70`         | chrome **container** diameter (default)         |
-| `--mark-slot`           | `36px`               | `global.css:766`        | container in `.icon-tile--compact`              |
-| `--mark-glyph`          | `22px`               | `global.css:71`         | default glyph inside a mark slot                |
-| `--mark-glyph-compact`  | `18px`               | `global.css:72`         | glyph in `.icon-tile--compact`                  |
-| `--vision-mark-glyph`   | `28px`               | `global.css:73`         | Vision hub + impact reference glyph             |
-| `--mark-glyph` (scoped) | `32px`               | `VisionImpact.astro:53` | Vision-impact tile override ⚠️ comment cites 28 |
-| `--vision-hub-glyph`    | `var(--mark-glyph)`  | `global.css:74`         | `:root` fallback for hub glyph                  |
-| `--vision-hub-glyph`    | `calc(node × 28/44)` | `VisionHub.astro:109`   | fluid hub glyph (scales with hub width)         |
+| Token                   | Value                             | Defined at                      | Applies to                              |
+| ----------------------- | --------------------------------- | ------------------------------- | --------------------------------------- |
+| `--mark-slot`           | `44px`                            | `global.css:70`                 | chrome **container** diameter (default) |
+| `--mark-slot`           | `36px`                            | `global.css:766`                | container in `.icon-tile--compact`      |
+| `--mark-glyph`          | `22px`                            | `global.css:71`                 | default glyph inside a mark slot        |
+| `--mark-glyph-compact`  | `18px`                            | `global.css:72`                 | glyph in `.icon-tile--compact`          |
+| `--vision-mark-glyph`   | `28px`                            | `global.css:73`                 | Vision hub + impact reference glyph     |
+| `--mark-glyph` (scoped) | `var(--vision-mark-glyph)` (28px) | `vision/VisionImpactGrid.astro` | Vision-impact tile override             |
+| `--vision-hub-glyph`    | `var(--mark-glyph)`               | `global.css:74`                 | `:root` fallback for hub glyph          |
+| `--vision-hub-glyph`    | `calc(node × 28/44)`              | `VisionHub.astro:109`           | fluid hub glyph (scales with hub width) |
 
 ## Table E — Icon size-scale token SSOT
 

@@ -196,7 +196,8 @@ Both the compact tile override and the Vision impact emblems share
 `--mark-glyph-compact` (18px) as the single source for the smaller in-circle
 glyph; the Vision impact tiles keep the full 44px `--mark-slot` and only shrink
 the glyph (impact emblems bake in their own ring, so 22px crowds the chrome
-circle — see `.vision-impact__grid :global(.theme-card__icon)` in `VisionImpact.astro`).
+circle — see `.vision-impact__grid :global(.theme-card__icon)` in
+`vision/VisionImpactGrid.astro`).
 
 ### Circular mark chrome (SSOT, 2026-07-05 phase 2)
 

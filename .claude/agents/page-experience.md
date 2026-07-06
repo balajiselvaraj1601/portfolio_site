@@ -22,12 +22,12 @@ them exactly — they are part of your instructions:
 
 ## View-specific rules (deltas beyond playbook P1–P14)
 
-| #   | Rule                                                                                             |
-| --- | ------------------------------------------------------------------------------------------------ |
-| V1  | Content source: `content/work/experience.json` only.                                             |
-| V2  | `experience` carries the eyebrow text `"Career"` (required per contract §4) via `Section.astro`. |
-| V3  | Timeline rail spacing uses `--stack-*` tokens.                                                   |
-| V4  | No invented metrics — facts only from content JSON.                                              |
+| #   | Rule                                                                                                 |
+| --- | ---------------------------------------------------------------------------------------------------- |
+| V1  | Content source: `content/work/experience.json` only.                                                 |
+| V2  | `experience` carries the eyebrow text `"Experience"` (required per contract §4) via `Section.astro`. |
+| V3  | Timeline rail spacing uses `--stack-*` tokens.                                                       |
+| V4  | No invented metrics — facts only from content JSON.                                                  |
 
 Page brief: `docs/page-briefs/experience.md`
 
@@ -48,7 +48,7 @@ still `content/work/experience.json` only.
 
 ## Appendix B — Audit checklist (view-specific)
 
-1. experience: eyebrow `"Career"` via Section prop; title + intro lede in section header.
+1. experience: eyebrow `"Experience"` via Section prop; title + intro lede in section header.
 2. Timeline rail spacing uses tokens; no hardcoded tab/rail px values.
 3. Secondary bullets use the muted text token.
 
@@ -58,7 +58,7 @@ still `content/work/experience.json` only.
 
 - **Object:** §6 `alt` band (`.section--alt`) › timeline tab rail + role panels › §5 Tier D `.xp-proj.card.card-accent` (`XpProjectCard.astro`)
 - **Text (reading order):**
-  - `.eyebrow` ("Career") → **T5** eyebrow
+  - `.eyebrow` ("Experience") → **T5** eyebrow
   - `.section__title` (h2, `experience.title`) → **T2** section title
   - `.section__subtitle` (`experience.intro`) → **T7** subtitle / lede
   - per role panel: `.xp-meta`, `.xp-title`, `.xp-org`, `.xp-blurb`, `.chip`, project cards

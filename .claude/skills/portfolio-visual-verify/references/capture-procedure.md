@@ -53,7 +53,7 @@ To point at a non-default server, set `PREVIEW_URL` rather than editing the scri
 `docs/reference/screenshots/` (the script's `OUT_DIR`) for the dark theme and
 `docs/reference/screenshots/light/` for the light theme. Filenames come from each
 `SHOTS[].file` — e.g. `hero.png`, `experience.png`, `thirukural.png`,
-`publications.png`, `awards.png`, `vision-programs.png`, `vision-impact.png`.
+`publications.png`, `awards.png`, `vision-programs.png`.
 These are the same committed baselines.
 
 ## 4. Diff against the committed baselines

@@ -5,16 +5,15 @@
 
 ## Items
 
-| Item (section id) | Source                           | Question             | Weight |
-| ----------------- | -------------------------------- | -------------------- | ------ |
-| `vision-programs` | `content/work/vision-board.json` | Context, programs    | heavy  |
-| `vision-impact`   | `content/work/vision-board.json` | Org impact snapshot? | heavy  |
+| Item (section id) | Source                           | Question                        | Weight |
+| ----------------- | -------------------------------- | ------------------------------- | ------ |
+| `vision-programs` | `content/work/vision-board.json` | Context, programs, org snapshot | heavy  |
 
 ## Structure
 
-Two sections:
+Single section (2026-07-06 merge):
 
 - **`vision-programs`** (alt variant): Eyebrow "Vision", title and subtitle from `vision-board.json`, then two IDEA/VISION group theme-cards with CardMark/MarkEmblem, plus 4 program cards (ThemeCard) in a 2-column grid.
-- **`vision-impact`** (default variant): Title "Leadership & Organizational Impact"; org impact cards (`ThemeCard`) in a 4-column grid.
+- Below the flow, an `h3` sub-heading ("Enterprise Leadership & Organizational Impact", `orgHeader`) introduces the 7 org impact cards (`ThemeCard` via `vision/VisionImpactGrid.astro`) — 4-up top row, centred 3-up bottom row, 3 accent groups from `orgCards[].accent`.
 
 The contact CTA is the dedicated **Contact** view.

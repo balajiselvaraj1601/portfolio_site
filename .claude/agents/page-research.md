@@ -47,7 +47,7 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 ## Appendix B — Audit checklist (view-specific)
 
 1. Section variants per contract §6: publications `alt`, conferences `default`, speakers `alt`.
-2. No eyebrows on any research section (contract §4).
+2. View-opening section `publications` has eyebrow `"Research"` (contract §4); `conferences` and `speakers` omit eyebrows.
 3. Link rows use `--stack-md` gap.
 4. External link icon size `--icon-sm`.
 5. Metadata in `--font-mono`.
@@ -58,12 +58,13 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 
 - **Object:** §6 `alt` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
 - **Text (reading order):**
+  - `.eyebrow` ("Research") → **T5** eyebrow
   - `.section__title` (h2) → **T2** section title
   - `.rcard h3` / `h3 a` → **T3** card title (compact `--fs-card-title-sm`, EX-008)
   - `.venue--stacked` → **T8** caps/meta label (venue) — see Notes
   - `.rcard p` (description) → **T6** body prose
   - `.pub-more .btn` ("All research →", only when `showMoreHref` set) → **T8** caps label (button UI)
-- **Notes:** `.venue--stacked` deliberately drops uppercase + `--tracking-caps`, using `--fs-sm` at normal tracking so the full venue string reads as a name, not a chip — still mono metadata (T8 family per §3). No eyebrow (§4 content section).
+- **Notes:** `.venue--stacked` deliberately drops uppercase + `--tracking-caps`, using `--fs-sm` at normal tracking so the full venue string reads as a name, not a chip — still mono metadata (T8 family per §3). Eyebrow on view-opening section only (§4).
 
 ### conferences — Conferences.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
 

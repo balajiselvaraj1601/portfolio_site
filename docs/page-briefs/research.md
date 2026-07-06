@@ -13,7 +13,7 @@
 
 ## Structure
 
-`publications` -> `conferences` -> `speakers`
+`publications` (eyebrow **Research**) -> `conferences` -> `speakers`
 
 The view separates publication and conference proof from speaking engagements. The contact CTA is
 the dedicated **Contact** view.

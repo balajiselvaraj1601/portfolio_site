@@ -11,7 +11,8 @@ import { awardLevelSchema } from '@schemas';
 /**
  * Nominator levels in seniority order — drives summary tiles + filters.
  * Derived from the awardLevelSchema enum (the SSOT) so the list never drifts
- * from the validated content; the enum is declared EVP → National Level.
+ * from the validated content; National Level follows Senior Director, then
+ * Director and Associate Director.
  */
 const LEVELS = awardLevelSchema.options;
 
@@ -35,6 +36,7 @@ const total = items.length;
 
 <Section
   id="awards"
+  eyebrow={site.sections.awards.eyebrow}
   title={site.sections.awards.title}
   variant="default"
   class="section--compact-bottom"
@@ -89,14 +91,13 @@ const total = items.length;
   <ul class="theme-grid awards-grid reveal" data-awards-grid role="list">
     {
       items.map((a) => (
-        <li>
-          <RecogCardShell
-            class:list={[`level-${slug(a.level)}`]}
-            data-level={a.level}
-            data-title={a.title}
-            data-nominator={a.nominator}
-            data-reason={a.reason}
-          >
+        <li
+          data-level={a.level}
+          data-title={a.title}
+          data-nominator={a.nominator}
+          data-reason={a.reason}
+        >
+          <RecogCardShell class:list={[`level-${slug(a.level)}`]}>
             <Fragment slot="headTop">
               <CardMark
                 mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
@@ -169,11 +170,15 @@ const total = items.length;
     --lvl: var(--lvl-national);
   }
 
-  /* Multi-color per view: cards/tiles read the shared --accent-card; feed it each
-     item's per-level --lvl so every award level shows its own hue, falling back to
-     the Recognition accent (gold) when an element has no level class.
-     Scoped to #awards so the rule doesn't bleed into About/Vision theme-cards. */
-  :global(#awards .recog-card) {
+  /* Multi-color per view: cards, stat tiles (RecogTile → .theme-card.card), and
+     active filter chips read --accent-card; feed each item's per-level --lvl so
+     every award level shows its own hue, falling back to the Recognition accent
+     (gold) when an element has no level class. Scoped to #awards so the rule
+     doesn't bleed into About/Vision theme-cards. */
+  :global(
+    #awards
+      :is(.recog-card, .recog-summary .theme-card.card, .recog-chip.is-active)
+  ) {
     --accent-card: var(--lvl, var(--view-accent-recognition));
     --mark-fg: var(--accent-card);
   }
@@ -264,7 +269,7 @@ const total = items.length;
     max-width: none;
   }
 
-  :global(#awards .recog-card.hidden) {
+  :global(#awards .awards-grid > li.hidden) {
     display: none;
   }
 </style>

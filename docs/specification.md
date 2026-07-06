@@ -16,7 +16,7 @@ Legacy paths redirect to the matching hash on `/`.
 /#experience   Experience       → experience
 /#research     Research         → publications, conferences, speakers
 /#recognition  Recognition      → awards, kaggle, education
-/#vision       Vision           → vision-programs, vision-impact
+/#vision       Vision           → vision-programs
 /#contact      Contact          → contact
 /experience … /contact         → redirect stubs (noindex) → /#{viewAnchor}
 /404           custom not-found page
@@ -29,9 +29,9 @@ Each section id appears in exactly one `viewSections` group (exclusive nav group
 is duplicated across nav buttons). Section ids and grouping are defined in `content/site.json → pages`.
 The renderer (`SectionRenderer`) iterates the home section list — do not hardcode section order in markup.
 
-**Full home DOM order** (13 section ids): `hero` → `thirukural` → `leadership` →
+**Full home DOM order** (12 section ids): `hero` → `thirukural` → `leadership` →
 `experience` → `publications` → `conferences` → `speakers` → `awards` → `kaggle` →
-`education` → `vision-programs` → `vision-impact` → `contact`.
+`education` → `vision-programs` → `contact`.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -56,8 +56,7 @@ App / Layout
 │   ├── AwardsSection              ← recognition/awards.json (CompetitionCard-style recog layout)
 │   ├── KaggleSection              ← recognition/kaggle.json (CompetitionCard stack)
 │   ├── EducationSection           ← recognition/education.json (EducationCard)
-│   ├── VisionProgramsSection      ← work/vision-board.json
-│   ├── VisionImpactSection        ← work/vision-board.json
+│   ├── VisionProgramsSection      ← work/vision-board.json (flow + impact grid)
 │   └── ContactSection             ← person/profile.json (contact[])
 └── Footer (copyright, social links, back-to-top)
 ```

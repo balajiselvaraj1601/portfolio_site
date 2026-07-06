@@ -145,7 +145,7 @@ function initRecognitionGrids(): void {
     initRecogGrid({
       root: awards,
       gridSelector: '[data-awards-grid]',
-      itemSelector: '.theme-card.card[data-level]',
+      itemSelector: '[data-awards-grid] > li[data-level]',
       searchSelector: '[data-awards-search]',
       countSelector: '[data-awards-count]',
       emptySelector: '[data-awards-empty]',

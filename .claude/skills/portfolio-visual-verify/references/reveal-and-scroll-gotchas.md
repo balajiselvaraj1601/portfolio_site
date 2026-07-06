@@ -38,21 +38,19 @@ long as the app suppresses scroll-spy. If the app constant changes, the capture
 buffer should be revisited — but the app file is the SSOT; do not treat the
 capture's number as the source.
 
-## Trap 3 — the Vision sections need a DOUBLE reveal force
+## Trap 3 — the Vision section needs a full reveal force
 
-`#vision-programs` and `#vision-impact` are the two `SHOTS` entries marked
-`revealAll: true`. They are handled by `prepareVisionSection(page)`, which:
+`#vision-programs` (since the 2026-07-06 merge it also contains the impact grid;
+there is no separate `#vision-impact` section) is the `SHOTS` entry handled by
+`prepareVisionSection(page)`, which:
 
-1. scrolls `#vision-impact` into view (`scrollIntoViewIfNeeded`);
+1. scrolls `#vision-programs` into view (`scrollIntoViewIfNeeded`);
 2. waits the scroll-settle interval (`waitForScrollSettle`);
-3. calls `forceReveals` on **`#vision-programs`** and then on **`#vision-impact`** —
-   both roots, not just the one being shot;
+3. calls `forceReveals` on the whole `#vision-programs` root — the section is
+   tall (flow + sub-heading + impact grid) and holds multiple `.reveal` blocks,
+   so forcing only the block in the viewport still leaves later blocks
+   un-revealed and bleeds a blank region into the frame;
 4. waits a final 200 ms.
-
-Both must be forced because the two Vision sections' reveals are coupled in the
-viewport — forcing only the shot's own root can still leave the other's content
-un-revealed and bleed a blank region into the frame. This is why both shots pass
-`revealAll` and both roots are forced.
 
 ## The order the script uses per shot
 

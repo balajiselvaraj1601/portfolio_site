@@ -1,0 +1,108 @@
+---
+/**
+ * VisionImpactGrid — the 7 org-impact tiles, rendered inside the
+ * vision-programs section below the flow (formerly its own vision-impact
+ * section). Cards carry per-group categorical accents via orgCards[].accent
+ * (supersedes the single-blue exception VI-001).
+ */
+import ThemeCard from '@components/cards/ThemeCard.astro';
+import type { VisionBoard } from '@schemas';
+
+interface Props {
+  cards: VisionBoard['orgCards'];
+}
+
+const { cards } = Astro.props;
+---
+
+<ul class="theme-grid vision-impact__grid reveal" role="list">
+  {
+    cards.map((c) => (
+      <li
+        class:list={[
+          'vision-accent-hook',
+          c.accent && `vision-accent-${c.accent}`,
+        ]}
+      >
+        <ThemeCard mark={c.mark} title={c.title} lines={c.lines} />
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  /* 7 equal tiles: 4 on row 1, 3 on row 2 CENTERED. The grid uses 8 half-width
+     tracks with every card spanning 2, so a card is (W - 3·gap)/4 — identical
+     to the plain 4-col layout — while row 2 can start on an odd track and sit
+     half a track in from each edge. grid-auto-rows: 1fr equalises both rows to
+     the tallest row's height, so all 7 tiles are identical in width AND height.
+     Each <li> flexes so its card fills the track. */
+  .vision-impact__grid {
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+  }
+  .vision-impact__grid > li {
+    grid-column: span 2;
+    display: flex;
+  }
+  /* Row 2 (the three team tiles): cols 2-3, 4-5, 6-7 — half-track margin each side. */
+  .vision-impact__grid > li:nth-child(5) {
+    grid-column: 2 / span 2;
+  }
+  .vision-impact__grid > li:nth-child(6) {
+    grid-column: 4 / span 2;
+  }
+  .vision-impact__grid > li:nth-child(7) {
+    grid-column: 6 / span 2;
+  }
+  .vision-impact__grid > li > :global(.theme-card) {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* Unify Impact-tile glyphs with the Vision hub marks (--vision-mark-glyph 28px).
+     The logo_vision_* emblems bake in their own ring and fill their glyph box
+     edge-to-edge (mask contain); 28px keeps an ~8px gap inside the 44px chrome
+     circle (--mark-slot unchanged). Scoped here so Recognition/About marks keep
+     the site-default 22px. */
+  .vision-impact__grid :global(.theme-card__icon) {
+    --mark-glyph: var(--vision-mark-glyph);
+  }
+
+  /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).
+     Base .theme-grid keeps 4 cols down to 769px, which cramps the cards and
+     collides with the fixed dot rail in the 950–1180px band — drop to 2 cols
+     at the same breakpoint where the vision flow stacks. Same half-track trick:
+     4 tracks, span 2, and the lone 7th tile centres on cols 2-3. */
+  @media (max-width: 1180px) {
+    .vision-impact__grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .vision-impact__grid > li:nth-child(5),
+    .vision-impact__grid > li:nth-child(6) {
+      grid-column: span 2;
+    }
+    .vision-impact__grid > li:nth-child(7) {
+      grid-column: 2 / span 2;
+    }
+  }
+
+  /* Single-column phones — restate the base .theme-grid collapse (this scoped
+     rule out-specifies it). */
+  @media (max-width: 480px) {
+    .vision-impact__grid {
+      grid-template-columns: 1fr;
+      /* Single column: content-sized cards (don't force tallest height × 7). */
+      grid-auto-rows: auto;
+    }
+    /* Reset both the base span-2 rule and the higher-specificity nth-child
+       placements from the 1180px block (this later block wins at equal
+       specificity; the nth-child selectors cover the rest). */
+    .vision-impact__grid > li,
+    .vision-impact__grid > li:nth-child(5),
+    .vision-impact__grid > li:nth-child(6),
+    .vision-impact__grid > li:nth-child(7) {
+      grid-column: auto;
+    }
+  }
+</style>

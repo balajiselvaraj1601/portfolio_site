@@ -50,12 +50,6 @@ const SHOTS = [
     selector: '#vision-programs',
     revealAll: true,
   },
-  {
-    file: 'vision-impact.png',
-    hash: '#vision',
-    selector: '#vision-impact',
-    revealAll: true,
-  },
 ];
 
 async function waitForReveal(page, selector, timeout = 15000) {
@@ -113,10 +107,11 @@ async function forceReveals(page, rootSelector) {
 }
 
 async function prepareVisionSection(page) {
-  await page.locator('#vision-impact').scrollIntoViewIfNeeded();
+  // The section is tall (flow + impact grid); scroll to its end so
+  // content-visibility resolves before revealing everything at once.
+  await page.locator('#vision-programs').scrollIntoViewIfNeeded();
   await waitForScrollSettle(page);
   await forceReveals(page, '#vision-programs');
-  await forceReveals(page, '#vision-impact');
   await page.waitForTimeout(200);
 }
 
@@ -148,10 +143,7 @@ async function main() {
         await scrollUntilStable(page, shot.selector);
         await waitForReveal(page, shot.selector);
         if (shot.revealAll) {
-          if (
-            shot.selector === '#vision-programs' ||
-            shot.selector === '#vision-impact'
-          ) {
+          if (shot.selector === '#vision-programs') {
             await prepareVisionSection(page);
           } else {
             await forceReveals(page, shot.selector);

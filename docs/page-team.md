@@ -51,7 +51,7 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 | `page-experience`               | Experience     | experience                          |
 | `page-research`                 | Research       | publications, conferences, speakers |
 | `page-recognition`              | Recognition    | awards, kaggle, education           |
-| `page-vision`                   | Vision         | vision-programs, vision-impact      |
+| `page-vision`                   | Vision         | vision-programs                     |
 | `page-contact`                  | Contact        | contact                             |
 | `design-guardian`               | Cross-cutting  | global.css, ui/, cards/             |
 | `site-consistency-orchestrator` | All            | Spawns agents, owns state           |

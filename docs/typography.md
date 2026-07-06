@@ -79,11 +79,11 @@ each section lists the fonts it actually surfaces.
 
 ### Home — `/` (About view + full scroll)
 
-| Section               | Component                    | Fonts surfaced                                                                   |
-| --------------------- | ---------------------------- | -------------------------------------------------------------------------------- |
-| Hero                  | `Hero.astro`                 | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans |
-| Thirukural            | `ThirukuralQuote.astro`      | Tamil quote=sans (exception) · translation=display italic · author=mono          |
-| Who I am & how I lead | `LeadershipPhilosophy.astro` | bio & card text=sans · statement=display (italic) · theme titles=sans            |
+| Section               | Component                    | Fonts surfaced                                                                                    |
+| --------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
+| Hero                  | `Hero.astro`                 | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans                  |
+| Thirukural            | `ThirukuralQuote.astro`      | Tamil quote=sans (exception) · translation=display italic · author=mono                           |
+| Who I am & how I lead | `LeadershipPhilosophy.astro` | h2=display · eyebrow=mono · bio & card text=sans · statement=display (italic) · theme titles=sans |
 
 ### Experience — `/#experience`
 
@@ -95,24 +95,24 @@ each section lists the fonts it actually surfaces.
 
 | Section              | Component                                             | Fonts surfaced                                                          |
 | -------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------- |
-| Publications         | `Publications.astro` → ResearchCard                   | h2=display · venue=mono · title=sans                                    |
+| Publications         | `Publications.astro` → ResearchCard                   | h2=display · eyebrow=mono · venue=mono · title=sans                     |
 | Conferences          | `Conferences.astro` → ResearchLinkGrid → ResearchCard | venue=mono · title=sans · body=sans                                     |
 | Speaking Engagements | `Speakers.astro` → SpeakingCard                       | h2=display · role/date/venue=mono · title=sans (600) · description=sans |
 
 ### Recognition — `/recognition`
 
-| Section              | Component                        | Fonts surfaced                                                          |
-| -------------------- | -------------------------------- | ----------------------------------------------------------------------- |
-| Awards & Recognition | `Awards.astro` → recog card grid | h2=display · level kicker=**mono** · award title & detail=sans          |
-| Kaggle Competitions  | `Kaggle.astro`                   | h2=display · rank number=mono · rank detail=mono                        |
-| Education            | `Education.astro`                | `h4` label=**mono** · degree `h3`=sans · details=sans · gold-badge=mono |
+| Section              | Component                        | Fonts surfaced                                                                |
+| -------------------- | -------------------------------- | ----------------------------------------------------------------------------- |
+| Awards & Recognition | `Awards.astro` → recog card grid | h2=display · eyebrow=mono · level kicker=**mono** · award title & detail=sans |
+| Kaggle Competitions  | `Kaggle.astro`                   | h2=display · rank number=mono · rank detail=mono                              |
+| Education            | `Education.astro`                | `h4` label=**mono** · degree `h3`=sans · details=sans · gold-badge=mono       |
 
 ### Vision — `/vision`
 
-| Section         | Component              | Fonts surfaced                                                                      |
-| --------------- | ---------------------- | ----------------------------------------------------------------------------------- |
-| Vision Programs | `VisionPrograms.astro` | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans |
-| Vision Impact   | `VisionImpact.astro`   | h2=display · ThemeCard title=sans, body=sans                                        |
+| Section            | Component                                                | Fonts surfaced                                                                      |
+| ------------------ | -------------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Vision Programs    | `VisionPrograms.astro`                                   | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans |
+| Vision Impact grid | `vision/VisionImpactGrid.astro` (inside vision-programs) | h3 sub-heading=display · ThemeCard title=sans, body=sans                            |
 
 ### Contact — `/contact`
 

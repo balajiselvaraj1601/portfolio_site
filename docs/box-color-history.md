@@ -56,17 +56,17 @@ Content JSON key (accent / level / medal)
 
 ## Per-view color assignment (as shipped 2026-07-05)
 
-| View                     | Dimension        | Mechanism                                                                                                                                                                                            |
-| ------------------------ | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **About / Leadership**   | Category         | `.cat-*` classes → `--about-cat-*` (7 hues). See [`LeadershipPhilosophy.astro`](../src/components/sections/LeadershipPhilosophy.astro).                                                              |
-| **Experience**           | Career seniority | `xpLevelSchema`: principal→purple, staff→blue/indigo, senior→teal, lead→gold, associate→pink, engineer→red. Timeline rail keeps its intentional violet→red temporal gradient (exception **EX-017**). |
-| **Research**             | Section          | Publications→`--cat-strategic` (blue/indigo), Conferences→`--cat-platform` (teal), Speakers→`--cat-ai` (purple). `global.css` ~L804–812. `.venue` label fixed to read `--accent-card`.               |
-| **Recognition / Awards** | Award level      | `.level-*` → `--lvl-*` (6 seniority hues). `awardLevelSchema`.                                                                                                                                       |
-| **Recognition / Kaggle** | Medal            | `--medal-silver` / `--medal-bronze`. `kaggleMedalSchema`.                                                                                                                                            |
-| **Vision / programs**    | Per-item content | `.vision-accent-*` classes → `--cat` on `#vision-programs` only. IDEA hub pink, VISION hub teal; program cards multi-color. `global.css` ~L819–847.                                                  |
-| **Vision / impact**      | Single accent    | All 7 orgCards share blue via `#vision-impact .vision-accent-hook` → `--vision-impact-accent` (exception **VI-001**, 2026-07-06). `orgCards[].accent` optional / unused.                             |
-| **Contact**              | Single accent    | All cards inherit brand purple via `--view-accent-contact`. `global.css` ~L814–817.                                                                                                                  |
-| **Education**            | Single accent    | Gold via `.edu-accent` + `.edu-stats { --accent-card }`; stat cells use 6% gold wash (Kaggle `.blob-stat` pattern). [`Education.astro`](../src/components/sections/Education.astro).                 |
+| View                     | Dimension        | Mechanism                                                                                                                                                                                                                                                                                                                                               |
+| ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **About / Leadership**   | Category         | `.cat-*` classes → `--about-cat-*` (7 hues). See [`LeadershipPhilosophy.astro`](../src/components/sections/LeadershipPhilosophy.astro).                                                                                                                                                                                                                 |
+| **Experience**           | Career seniority | `xpLevelSchema`: principal→purple, staff→blue/indigo, senior→teal, lead→gold, associate→pink, engineer→red. Timeline rail keeps its intentional violet→red temporal gradient (exception **EX-017**).                                                                                                                                                    |
+| **Research**             | Section          | Publications→`--cat-strategic` (blue/indigo), Conferences→`--cat-platform` (teal), Speakers→`--cat-ai` (purple). `global.css` ~L804–812. `.venue` label fixed to read `--accent-card`.                                                                                                                                                                  |
+| **Recognition / Awards** | Award level      | `.level-*` → `--lvl-*` (6 seniority hues). `awardLevelSchema`.                                                                                                                                                                                                                                                                                          |
+| **Recognition / Kaggle** | Medal            | `--medal-silver` / `--medal-bronze`. `kaggleMedalSchema`.                                                                                                                                                                                                                                                                                               |
+| **Vision / programs**    | Per-item content | `.vision-accent-*` classes → `--cat` on `#vision-programs` only. IDEA hub pink, VISION hub teal; program cards multi-color. `global.css` ~L819–847.                                                                                                                                                                                                     |
+| **Vision / impact**      | Grouped content  | 3 accent groups via `orgCards[].accent` (2026-07-06, supersedes **VI-001**): awards→`ai` purple, funding→`gxp` green, team→`strategic` blue — distinct from the flow's silver/teal/gold/pink. Grid now lives inside `#vision-programs` (`vision/VisionImpactGrid.astro`); the `#vision-impact` section and `--vision-impact-accent` token were removed. |
+| **Contact**              | Single accent    | All cards inherit brand purple via `--view-accent-contact`. `global.css` ~L814–817.                                                                                                                                                                                                                                                                     |
+| **Education**            | Single accent    | Gold via `.edu-accent` + `.edu-stats { --accent-card }`; stat cells use 6% gold wash (Kaggle `.blob-stat` pattern). [`Education.astro`](../src/components/sections/Education.astro).                                                                                                                                                                    |
 
 ### Content schemas (SSOT for allowed color keys)
 
@@ -79,6 +79,12 @@ Defined in [`src/schemas/`](../src/schemas/); invalid keys fail the build:
 
 ## Known gaps & notes
 
+- **RecogTile accent bridge (fixed 2026-07-06)**: summary stat tiles render as
+  `.theme-card.card` via `RecogTile.astro` (the `.recog-tile` block class was deleted
+  in `94269ae`). An accent bridge scoped to `#awards .recog-card` only misses stat
+  tiles and active filter chips — they keep brand purple despite `.level-*` setting
+  `--lvl`. Bridge must include `#awards .recog-summary .theme-card.card` and
+  `#awards .recog-chip.is-active`. See [`Awards.astro`](../src/components/sections/Awards.astro).
 - **Dark hero-stat contrast**: `--accent` `#6c2fbf` on `#1a1530` measures 2.34:1
   (pre-existing, decorative; unfixed — candidate fix is `--accent-light`). All
   `--cat-*` / `--lvl-*` / medal hues pass WCAG AA ≥ 3:1.

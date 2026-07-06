@@ -24,7 +24,6 @@
         "kaggle",
         "education",
         "vision-programs",
-        "vision-impact",
         "contact"
       ],
       "viewSections": ["leadership", "hero", "thirukural"],
@@ -71,8 +70,8 @@
         "title": "Vision — Balaji Selvaraj",
         "description": "AI leadership & strategic impact — from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
       },
-      "sections": ["vision-programs", "vision-impact"],
-      "viewSections": ["vision-programs", "vision-impact"]
+      "sections": ["vision-programs"],
+      "viewSections": ["vision-programs"]
     },
     {
       "id": "contact",
@@ -99,19 +98,15 @@
       "source": "work/vision-board.json",
       "visible": true
     },
-    "vision-impact": {
-      "title": "Leadership & Organizational Impact",
-      "source": "work/vision-board.json",
-      "visible": true
-    },
     "leadership": {
       "title": "About",
+      "eyebrow": "About",
       "source": "person/profile.json",
       "visible": true
     },
     "experience": {
       "title": "Experience",
-      "eyebrow": "Career",
+      "eyebrow": "Experience",
       "source": "work/experience.json",
       "visible": true
     },
@@ -122,11 +117,13 @@
     },
     "awards": {
       "title": "Awards & Recognition",
+      "eyebrow": "Recognition",
       "source": "recognition/awards.json",
       "visible": true
     },
     "publications": {
       "title": "Publications",
+      "eyebrow": "Research",
       "source": "research/publications.json",
       "visible": true
     },
