@@ -33,8 +33,8 @@ Traceability from the source resume to the portfolio content layer. Source:
 ## Notes / decisions
 
 - **Title:** the resume's `personal.title` is blank; "Technical AI Leader" is taken from the
-  positioning contract (`ai-tech-lead-positioning.md`) and summary line 1. Adjust in
-  `person/profile.json` if a different headline is preferred.
+  positioning contract (`ai-tech-lead-positioning.md`) and summary line 1. Adjust the `title`
+  field in `person/profile.json` if a different title is preferred.
 - **Canonical facts** (team scale 1→12 across 5 countries; "$3M+ initiative = AI Lead *within*";
   $20M–$50M is a program-level projection) are preserved verbatim — do not rephrase in a way
   that overstates personal scope.

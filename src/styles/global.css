@@ -324,11 +324,8 @@
      automatically. Sections point their --accent-card hook at these instead of
      per-item (--lvl / --medal / --cat) tokens. */
   --view-accent-about: var(--accent); /* purple — brand */
-  --view-accent-experience: var(--accent); /* purple */
-  --view-accent-research: var(--lvl-senior-director); /* blue  */
   --view-accent-recognition: var(--accent-gold); /* gold  */
   --view-accent-vision: var(--lvl-director); /* teal  */
-  --view-accent-contact: var(--accent); /* purple */
   --vision-impact-accent: var(
     --cat-strategic
   ); /* blue — #vision-impact only (VI-001) */
@@ -591,9 +588,6 @@ button {
 .accent {
   color: var(--accent-light);
 }
-.accent-red {
-  color: var(--accent-red-light);
-}
 
 .divider {
   width: 100%;
@@ -658,7 +652,6 @@ button {
 /* Cards — default shell matches recognition band (accent top, radius-xl, gradient) */
 .card,
 .recog-card,
-.recog-tile,
 .content-card {
   position: relative;
   overflow: hidden;
@@ -683,7 +676,6 @@ button {
 @media (prefers-reduced-motion: no-preference) {
   .card:hover,
   .recog-card:hover,
-  .recog-tile:hover,
   .content-card:hover {
     transform: translateY(var(--card-lift));
     box-shadow: var(--shadow-md);
@@ -694,7 +686,6 @@ button {
 /* Dark-mode accent wash — stronger 12→4% tint + thicker top edge for all card shells. */
 :root[data-theme='dark'] .card,
 :root[data-theme='dark'] .recog-card,
-:root[data-theme='dark'] .recog-tile,
 :root[data-theme='dark'] .content-card {
   background: linear-gradient(
     180deg,
@@ -912,24 +903,6 @@ button {
   margin-bottom: var(--text-gap-section);
 }
 
-.recog-tile {
-  padding: var(--space-5);
-  display: flex;
-  flex-direction: column;
-  gap: var(--text-gap-inline);
-  align-items: flex-start;
-}
-.recog-tile::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-    120% 80% at 0% 0%,
-    color-mix(in srgb, var(--accent-card, var(--accent)) 14%, transparent),
-    transparent 60%
-  );
-}
 .recog-tile__count {
   font-family: var(--font-mono);
   font-size: var(--fs-metric-xl);
@@ -1051,57 +1024,6 @@ button {
   height: 1px;
   background: var(--border);
 }
-.recog-card-fields {
-  display: flex;
-  flex-direction: column;
-  gap: var(--text-gap-inline);
-  margin: 0;
-}
-.recog-card-field {
-  display: flex;
-  flex-direction: column;
-  gap: var(--text-gap-pair);
-}
-.recog-card-field dd {
-  margin: 0;
-}
-.recog-card-message {
-  display: flex;
-  flex-direction: column;
-  gap: var(--text-gap-inline);
-}
-
-.recog-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-shrink: 0;
-  padding: 0.25rem 0.55rem;
-  border-radius: var(--radius-pill);
-  font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
-  font-weight: var(--fw-semibold);
-  letter-spacing: var(--tracking-caps);
-  text-transform: uppercase;
-  white-space: nowrap;
-  color: var(--heading);
-  background: color-mix(
-    in srgb,
-    var(--accent-card, var(--accent)) 14%,
-    transparent
-  );
-  border: 1px solid
-    color-mix(in srgb, var(--accent-card, var(--accent)) 40%, transparent);
-}
-.recog-badge::before {
-  content: '';
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  flex-shrink: 0;
-  background: var(--accent-card, var(--accent));
-}
-
 .recog-clamp {
   display: -webkit-box;
   -webkit-line-clamp: var(--clamp, 4);
@@ -1281,7 +1203,6 @@ button {
   .site-footer,
   .dot-nav,
   .skip-link,
-  .theme-toggle,
   .nav-toggle {
     display: none !important;
   }

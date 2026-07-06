@@ -2,7 +2,6 @@
   "name": "Balaji Selvaraj",
   "title": "Technical AI Leader",
   "location": "Gothenburg, Sweden",
-  "headline": "Hands-on Technical AI Lead with 12+ years spanning product, services, and startup environments, leading a globally distributed AI team across 5 countries.",
   "heroQuote": {
     "tamil": "உள்ளுவதெல்லாம் உயர்வுள்ளல்",
     "translation": "Let all your thoughts be lofty.",
@@ -59,7 +58,6 @@
     "width": 480,
     "height": 480
   },
-  "photo": "/assets/images/balaji.png",
   "leadershipPhilosophy": {
     "intro": [
       "I lead AI the way a CTO does — securing the sponsorship and setting the strategy before the first model exists.",

@@ -27,7 +27,6 @@ export const profileSchema = z.object({
   name: z.string(),
   title: z.string(),
   location: z.string(),
-  headline: z.string(),
   heroTag: z.string().optional(),
   heroTitle: z
     .object({
@@ -86,7 +85,6 @@ export const profileSchema = z.object({
     bookCallLabel: z.string(),
     bookingHref: z.string().nullable().optional(),
   }),
-  photo: z.string().optional(),
   greeting: z.string().optional(),
   availability: z
     .object({
