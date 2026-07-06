@@ -4,7 +4,9 @@ import { initXpTimeline } from './xp-timeline';
 import { getScrollOffset, scrollToSectionId } from './scroll-to-section';
 
 /** Window (ms) after programmatic scroll during which dot-nav spy is suppressed. */
-const PROGRAMMATIC_SCROLL_SETTLE_MS = 1200;
+// Byte-frozen bundle: local literal, `satisfies`-checked against the SSOT.
+const PROGRAMMATIC_SCROLL_SETTLE_MS =
+  1200 satisfies typeof import('../lib/views').PROGRAMMATIC_SCROLL_SETTLE_MS;
 
 type DotNavConfig = {
   orderedSections: string[];

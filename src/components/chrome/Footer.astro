@@ -4,6 +4,7 @@ import Icon from '@components/ui/Icon.astro';
 import { resolveIcon } from '@lib/icons';
 
 const year = new Date().getFullYear();
+// Deliberately narrower than Contact.astro's `filter((c) => c.href)`: the footer also excludes 'location' explicitly — do not merge into a shared predicate.
 const socialLinks = profile.contact.filter(
   (c) => c.href && c.type !== 'location'
 );

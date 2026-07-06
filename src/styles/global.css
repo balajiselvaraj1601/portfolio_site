@@ -244,7 +244,7 @@
 :root,
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg: #faf8ff; /* keep in sync with THEME_BG in src/lib/theme-colors.ts */
+  --bg: #faf8ff; /* keep in sync with THEME_BG in src/lib/theme-colors.ts (gated by scripts/check-theme-token-sync.mjs) */
   --bg-alt: #f0ebfa;
   --bg-elev: #ffffff;
   --bg-chip: #e8e0f5;
@@ -344,7 +344,7 @@
 /* Dark theme (primary design target) */
 :root[data-theme='dark'] {
   color-scheme: dark;
-  --bg: #0d0b1e; /* keep in sync with THEME_BG in src/lib/theme-colors.ts */
+  --bg: #0d0b1e; /* keep in sync with THEME_BG in src/lib/theme-colors.ts (gated by scripts/check-theme-token-sync.mjs) */
   --bg-alt: #13102b;
   --bg-elev: #1a1530;
   --bg-chip: #211d3a;

@@ -1,4 +1,9 @@
-/** Section component registry keys — must match `SectionRenderer.astro` SECTIONS map. */
+/**
+ * Section component registry keys (SSOT). `SectionRenderer.astro` type-checks
+ * its SECTIONS map against this list via
+ * `satisfies Record<SectionComponentId, SectionComponent>` — drift between
+ * the two fails `astro check`.
+ */
 export const SECTION_COMPONENT_IDS = [
   'hero',
   'thirukural',

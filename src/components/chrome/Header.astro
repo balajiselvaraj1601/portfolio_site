@@ -1,5 +1,12 @@
 ---
-import { site, navItems, navHref } from '@lib/content';
+import {
+  site,
+  navItems,
+  navHref,
+  homeViewAnchor,
+  isContentPage,
+} from '@lib/content';
+import { VIEW_ANCHOR_ATTR } from '@lib/views';
 import Monogram from '@components/chrome/Monogram.astro';
 import Icon from '@components/ui/Icon.astro';
 
@@ -11,14 +18,6 @@ const { singlePageViews = false } = Astro.props;
 
 const current = Astro.url.pathname.replace(/\/$/, '') || '/';
 const isHome = current === '/';
-
-type ContentNavItem = Extract<(typeof navItems)[number], { external?: false }>;
-
-function isContentPage(
-  item: (typeof navItems)[number]
-): item is ContentNavItem {
-  return !('external' in item && item.external);
-}
 
 const internalNavItems = navItems.filter(isContentPage).map((item) => ({
   label: item.label,
@@ -50,10 +49,14 @@ const lastName = rest.join(' ');
               <a
                 class="nav__link"
                 href={item.href}
-                data-view-anchor={singlePageViews ? item.viewAnchor : undefined}
+                {...{
+                  [VIEW_ANCHOR_ATTR]: singlePageViews
+                    ? item.viewAnchor
+                    : undefined,
+                }}
                 aria-current={
                   singlePageViews
-                    ? item.viewAnchor === 'about' && isHome
+                    ? item.viewAnchor === homeViewAnchor && isHome
                       ? 'page'
                       : undefined
                     : (item.href.replace(/\/$/, '') || '/') === current

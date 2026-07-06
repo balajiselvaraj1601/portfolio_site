@@ -11,6 +11,7 @@ import HeroCanvas from '@components/cards/HeroCanvas.astro';
 import {
   navViews,
   defaultTheme,
+  homeViewAnchor,
   profile,
   sectionToDotNav,
   homeSections,
@@ -34,14 +35,13 @@ const {
   singlePageViews = false,
 } = Astro.props;
 
-const homeView = navViews.find((v) => v.id === 'home');
 const navViewsConfig = singlePageViews
   ? {
       views: navViews.map((v) => ({
         viewAnchor: v.viewAnchor,
         viewSections: v.viewSections,
       })),
-      defaultView: homeView?.viewAnchor ?? 'about',
+      defaultView: homeViewAnchor,
     }
   : undefined;
 const hashCollisionAnchors =

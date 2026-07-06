@@ -13,6 +13,7 @@ type ContactType = z.infer<typeof contactTypeSchema>;
 const { contactPage } = profile;
 
 // Every contact entry with a link (location has none → stays hidden).
+// Deliberately broader than Footer.astro's filter, which also excludes type 'location' explicitly — do not merge into a shared predicate.
 const linked = profile.contact.filter((c) => c.href);
 
 const isExternal = (href: string) => href.startsWith('http');

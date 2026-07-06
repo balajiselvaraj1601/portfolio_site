@@ -5,7 +5,7 @@ import RecogControls from '@components/ui/RecogControls.astro';
 import RecogTile from '@components/ui/RecogTile.astro';
 import { kaggle, site } from '@lib/content';
 
-import { MEDALS, medalClass } from '@lib/recognition';
+import { MEDALS, medalClass, medalCount } from '@lib/recognition';
 
 // Presentation order = impact: best percentile first. Parse the number out of
 // strings like "Top 1.8%" and sort ascending. Fixed server-side, never hardcoded.
@@ -16,8 +16,8 @@ const items = [...kaggle.items].sort(
 
 // Counts are DERIVED from the items — single source of truth, never hardcoded.
 const total = items.length;
-const silver = items.filter((i) => i.medal === 'Silver').length;
-const bronze = items.filter((i) => i.medal === 'Bronze').length;
+const silver = medalCount(items, 'Silver');
+const bronze = medalCount(items, 'Bronze');
 ---
 
 <Section

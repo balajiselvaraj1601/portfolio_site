@@ -17,11 +17,17 @@ export type SectionViewsOptions = {
   defaultView: string;
 };
 
+// The shipped bundle is byte-frozen (dist-diff gate), so this client script
+// keeps local literals instead of value-importing them — `satisfies` checks
+// them against the SSOT in ../lib/views and drift fails `astro check`.
+
 /** Window (ms) after a programmatic scroll during which scroll-spy is suppressed. */
-const PROGRAMMATIC_SCROLL_SETTLE_MS = 1200;
+const PROGRAMMATIC_SCROLL_SETTLE_MS =
+  1200 satisfies typeof import('../lib/views').PROGRAMMATIC_SCROLL_SETTLE_MS;
 
 /** Selector for nav links with view anchors. */
-const VIEW_ANCHOR_SELECTOR = 'a[data-view-anchor]';
+const VIEW_ANCHOR_SELECTOR =
+  'a[data-view-anchor]' satisfies typeof import('../lib/views').VIEW_ANCHOR_LINK_SELECTOR;
 
 function normalizePath(pathname: string): string {
   return pathname.replace(/\/$/, '') || '/';
@@ -169,7 +175,7 @@ export function initSectionViews(options: SectionViewsOptions) {
   // Scroll-spy — highlight the nav button for whichever section is centered.
   const roots = Array.from(
     document.querySelectorAll<HTMLElement>(
-      '.section-view-root[data-section-id]'
+      '.section-view-root[data-section-id]' satisfies typeof import('../lib/views').SECTION_VIEW_ROOT_SELECTOR
     )
   );
   if ('IntersectionObserver' in window && roots.length) {

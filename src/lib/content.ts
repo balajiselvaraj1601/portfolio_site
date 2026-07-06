@@ -5,6 +5,7 @@ import type { z } from 'zod';
 import iconPaths from './icon-paths.json';
 import { iconNameSchema } from './icons';
 import { SECTION_COMPONENT_ID_SET } from './section-ids';
+import { HERO_DOT_ID, HOME_PAGE_ID, viewHash } from './views';
 import {
   siteSchema,
   profileSchema,
@@ -18,6 +19,7 @@ import {
   collaborationsSchema,
   entitiesSchema,
 } from '@schemas';
+import type { VisionMark } from '@schemas';
 
 import siteRaw from '@content/site.json';
 import profileRaw from '@content/person/profile.json';
@@ -151,14 +153,20 @@ type ContentPageEntry = Extract<
   { external?: false }
 >;
 
-function isContentPage(p: (typeof site.pages)[number]): p is ContentPageEntry {
+/** Type guard: internal content-driven page (excludes external nav entries). */
+export function isContentPage(
+  p: (typeof site.pages)[number]
+): p is ContentPageEntry {
   return !('external' in p && p.external);
 }
 
 export const homePage = site.pages.find(
-  (p): p is ContentPageEntry => isContentPage(p) && p.id === 'home'
+  (p): p is ContentPageEntry => isContentPage(p) && p.id === HOME_PAGE_ID
 );
 if (!homePage) throw new Error('site.json: missing home page');
+
+/** Anchor of the home (About) view — sourced from site.json `viewAnchor`. */
+export const homeViewAnchor = homePage.viewAnchor ?? homePage.id;
 
 /** Full ordered section list rendered on `/`. */
 export const homeSections = homePage.sections.filter(
@@ -243,10 +251,10 @@ export type DotNavView = {
 
 /** Right-side dot nav — Hero plus each header nav view (7 dots on home). */
 export const dotNavViews: DotNavView[] = [
-  { id: 'hero', label: 'Hero', scrollSection: 'hero' },
-  { id: 'about', label: 'About', scrollSection: 'leadership' },
+  { id: HERO_DOT_ID, label: 'Hero', scrollSection: 'hero' },
+  { id: homeViewAnchor, label: 'About', scrollSection: 'leadership' },
   ...navViews
-    .filter((v) => v.id !== 'home')
+    .filter((v) => v.id !== HOME_PAGE_ID)
     .map((v) => ({
       id: v.viewAnchor,
       label: v.label,
@@ -258,12 +266,12 @@ export const dotNavViews: DotNavView[] = [
 export const sectionToDotNav: Record<string, string> = {};
 for (const sectionId of homeSections) {
   if (sectionId === 'hero' || sectionId === 'thirukural') {
-    sectionToDotNav[sectionId] = 'hero';
+    sectionToDotNav[sectionId] = HERO_DOT_ID;
   } else if (sectionId === 'leadership') {
-    sectionToDotNav[sectionId] = 'about';
+    sectionToDotNav[sectionId] = homeViewAnchor;
   } else {
     const owner = navViews.find(
-      (v) => v.id !== 'home' && v.viewSections.includes(sectionId)
+      (v) => v.id !== HOME_PAGE_ID && v.viewSections.includes(sectionId)
     );
     if (owner) sectionToDotNav[sectionId] = owner.viewAnchor;
   }
@@ -277,18 +285,6 @@ function assertEntitySlug(slug: string | undefined, context: string) {
   }
 }
 
-for (const role of experience.roles) {
-  assertEntitySlug(role.entity, 'work/experience.json');
-}
-for (const item of collaborations.items) {
-  assertEntitySlug(item.entity, 'person/collaborations.json');
-}
-for (const record of education.records) {
-  assertEntitySlug(record.entity, 'recognition/education.json');
-}
-for (const program of visionBoard.programs ?? []) {
-  assertEntitySlug(program.entity, 'work/vision-board.json programs');
-}
 function assertLogoAsset(slug: string, context: string) {
   for (const ext of LOGO_EXTS) {
     if (logoFiles.has(`${slug}.${ext}`)) return;
@@ -298,43 +294,96 @@ function assertLogoAsset(slug: string, context: string) {
   );
 }
 
-type VisionMark = { kind: string; asset?: string; name?: string };
+/** Logo slug referenced by a vision mark (icon-kind marks reference none). */
+function logoMarkAsset(mark: VisionMark): string | undefined {
+  return mark.kind === 'logo' ? mark.asset : undefined;
+}
 
-function collectVisionMarks(marks: VisionMark[] | undefined, out: Set<string>) {
-  for (const mark of marks ?? []) {
-    if (mark.kind === 'logo' && mark.asset) out.add(mark.asset);
+/**
+ * One cross-reference check per content collection: every linked entity slug
+ * must exist in entities.json, and every referenced logo slug must resolve to
+ * an asset under public/assets/logos/. `context` names the source content
+ * file in the thrown build diagnostics.
+ */
+type ContentRefCheck<T> = {
+  /** Source label used in thrown diagnostics. */
+  context: string;
+  items: readonly T[];
+  /** Entity slug an item links to (validated against entities.json). */
+  getEntity?: (item: T) => string | undefined;
+  /** Logo slugs an item references (validated against public/assets/logos/). */
+  getLogos?: (item: T) => readonly (string | undefined)[];
+};
+
+// Erases the per-collection item type so heterogeneous checks share one
+// manifest array; each entry's getters are only ever called with its own
+// `items`, so the widening is safe.
+function refCheck<T>(check: ContentRefCheck<T>): ContentRefCheck<unknown> {
+  return check as ContentRefCheck<unknown>;
+}
+
+const contentRefChecks = [
+  refCheck({
+    context: 'work/experience.json',
+    items: experience.roles,
+    getEntity: (role) => role.entity,
+  }),
+  refCheck({
+    context: 'person/collaborations.json',
+    items: collaborations.items,
+    getEntity: (item) => item.entity,
+    getLogos: (item) => [item.logo],
+  }),
+  refCheck({
+    context: 'recognition/education.json',
+    items: education.records,
+    getEntity: (record) => record.entity,
+  }),
+  refCheck({
+    context: 'work/vision-board.json programs',
+    items: visionBoard.programs ?? [],
+    getEntity: (program) => program.entity,
+    getLogos: (program) => [logoMarkAsset(program.badge)],
+  }),
+  refCheck({
+    context: 'work/vision-board.json groups',
+    items: visionBoard.groups,
+    getLogos: (group) => [group.lead, ...group.marks].map(logoMarkAsset),
+  }),
+  refCheck({
+    context: 'work/vision-board.json orgCards',
+    items: visionBoard.orgCards ?? [],
+    getLogos: (card) => [logoMarkAsset(card.mark)],
+  }),
+  refCheck({
+    context: 'research/publications.json',
+    items: publications.items,
+    getLogos: (item) => [item.logo],
+  }),
+  refCheck({
+    context: 'research/conferences.json',
+    items: conferences.items,
+    getLogos: (item) => [item.logo],
+  }),
+  refCheck({
+    context: 'research/speakers.json',
+    items: speakers.items,
+    getLogos: (item) => [item.logo],
+  }),
+  refCheck({
+    context: 'recognition/kaggle.json',
+    items: kaggle.items,
+    getLogos: (item) => [item.logo],
+  }),
+];
+
+for (const { context, items, getEntity, getLogos } of contentRefChecks) {
+  for (const item of items) {
+    if (getEntity) assertEntitySlug(getEntity(item), context);
+    for (const slug of getLogos?.(item) ?? []) {
+      if (slug) assertLogoAsset(slug, context);
+    }
   }
-}
-
-const referencedLogoSlugs = new Set<string>();
-
-for (const item of collaborations.items) {
-  if (item.logo) referencedLogoSlugs.add(item.logo);
-}
-
-for (const group of visionBoard.groups) {
-  collectVisionMarks([group.lead], referencedLogoSlugs);
-  collectVisionMarks(group.marks, referencedLogoSlugs);
-}
-for (const program of visionBoard.programs ?? []) {
-  collectVisionMarks([program.badge], referencedLogoSlugs);
-}
-for (const card of visionBoard.orgCards ?? []) {
-  collectVisionMarks([card.mark], referencedLogoSlugs);
-}
-
-for (const list of [publications.items, conferences.items, speakers.items]) {
-  for (const item of list) {
-    if (item.logo) referencedLogoSlugs.add(item.logo);
-  }
-}
-
-for (const item of kaggle.items) {
-  if (item.logo) referencedLogoSlugs.add(item.logo);
-}
-
-for (const slug of referencedLogoSlugs) {
-  assertLogoAsset(slug, 'content logo reference');
 }
 
 const iconPathKeys = new Set(Object.keys(iconPaths));
@@ -348,7 +397,7 @@ export const defaultTheme = site.theme.default === 'light' ? 'light' : 'dark';
 
 /** Resolve a nav href for a content page (hash on home for views). */
 export function navHref(page: ContentPageEntry): string {
-  if (page.id === 'home') return '/';
+  if (page.id === HOME_PAGE_ID) return '/';
   const anchor = page.viewAnchor ?? page.id;
-  return `/#${anchor}`;
+  return `/${viewHash(anchor)}`;
 }

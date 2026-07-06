@@ -20,7 +20,7 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check:tokens": "node scripts/check-icon-token-sync.mjs",
+    "check:tokens": "node scripts/check-icon-token-sync.mjs && node scripts/check-theme-token-sync.mjs",
     "verify:dist:baseline": "node scripts/dist-diff.mjs --baseline",
     "verify:dist": "node scripts/dist-diff.mjs --compare",
     "verify": "npm run check && npm run check:tokens && npm run lint && npm run format:check && npm run build",

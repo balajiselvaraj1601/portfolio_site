@@ -15,6 +15,8 @@ import Speakers from '@components/sections/Speakers.astro';
 import Kaggle from '@components/sections/Kaggle.astro';
 import Contact from '@components/sections/Contact.astro';
 import { sectionViewMap } from '@lib/content';
+import type { SectionComponentId } from '@lib/section-ids';
+import { SECTION_ID_ATTR, SECTION_VIEW_ROOT_CLASS } from '@lib/views';
 
 /**
  * Every imported `.astro` file's default export shares the same component
@@ -23,7 +25,9 @@ import { sectionViewMap } from '@lib/content';
  */
 type SectionComponent = typeof Hero;
 
-const SECTIONS: Record<string, SectionComponent> = {
+// `satisfies` keeps this map in lockstep with SECTION_COMPONENT_IDS —
+// a missing or extra key here fails `astro check`.
+const SECTIONS = {
   hero: Hero,
   thirukural: ThirukuralQuote,
   'vision-programs': VisionPrograms,
@@ -37,7 +41,14 @@ const SECTIONS: Record<string, SectionComponent> = {
   speakers: Speakers,
   kaggle: Kaggle,
   contact: Contact,
-};
+} satisfies Record<SectionComponentId, SectionComponent>;
+
+// `sections` arrives as plain strings from content data; widen the registry
+// for lookups so unknown ids keep the skip path in the template.
+const sectionsById: Record<string, SectionComponent | undefined> = SECTIONS;
+
+/** Spread helper so the wrapper attribute name derives from SECTION_ID_ATTR. */
+const sectionIdAttr = (id: string) => ({ [SECTION_ID_ATTR]: id });
 
 interface Props {
   sections: string[];
@@ -50,7 +61,7 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
 
 {
   sections.map((id, index) => {
-    const Section = SECTIONS[id];
+    const Section = sectionsById[id];
     if (!Section) return null;
 
     if (id === 'thirukural' && sections[index - 1] === 'hero') return null;
@@ -67,9 +78,9 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
         <AboutLanding>
           {navViewsMode && heroViews ? (
             <div
-              class="section-view-root"
+              class={SECTION_VIEW_ROOT_CLASS}
               data-nav-views={heroViews}
-              data-section-id="hero"
+              {...sectionIdAttr('hero')}
             >
               <Hero />
             </div>
@@ -78,9 +89,9 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
           )}
           {navViewsMode && kuralViews ? (
             <div
-              class="section-view-root"
+              class={SECTION_VIEW_ROOT_CLASS}
               data-nav-views={kuralViews}
-              data-section-id="thirukural"
+              {...sectionIdAttr('thirukural')}
             >
               <ThirukuralQuote />
             </div>
@@ -101,9 +112,9 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
         )}
         {navViewsMode && views ? (
           <div
-            class="section-view-root"
+            class={SECTION_VIEW_ROOT_CLASS}
             data-nav-views={views}
-            data-section-id={id}
+            {...sectionIdAttr(id)}
           >
             <Section />
           </div>

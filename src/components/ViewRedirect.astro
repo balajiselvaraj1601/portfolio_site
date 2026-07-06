@@ -1,9 +1,12 @@
 ---
+import { homeViewAnchor } from '@lib/content';
+import { viewHash } from '@lib/views';
+
 interface Props {
   anchor: string;
 }
 const { anchor } = Astro.props;
-const target = anchor === 'about' ? '/' : `/#${anchor}`;
+const target = anchor === homeViewAnchor ? '/' : `/${viewHash(anchor)}`;
 ---
 
 <!doctype html>
