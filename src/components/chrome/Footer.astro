@@ -140,12 +140,3 @@ const SOCIAL_ICON_SIZE = 18;
   }
 </style>
 
-<script>
-  document.getElementById('back-to-top')?.addEventListener('click', (e) => {
-    e.preventDefault();
-    const reduce = window.matchMedia(
-      '(prefers-reduced-motion: reduce)'
-    ).matches;
-    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
-  });
-</script>

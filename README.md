@@ -11,7 +11,7 @@ via GitHub Actions.
 
 ## Layout
 
-```
+```text
 portfolio_site/
 ├── README.md              ← you are here
 ├── astro.config.mjs       Astro config; SITE_URL (single source of truth) lives here

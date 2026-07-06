@@ -106,7 +106,7 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
         ) : logo && logoSrc(logo) ? (
           <img src={logoSrc(logo)} alt="" class="comp-image" />
         ) : (
-          <Icon name={headerIcon} size="lg" />
+          <Icon name={headerIcon} />
         )
       }
     </div>
@@ -175,7 +175,9 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
             </span>
             <span class="blob-block__label recog-label">Evaluation Metric</span>
           </div>
-          <p class="blob-block__body recog-body">{evaluationMetric}</p>
+          <p class="blob-block__body recog-body recog-clamp" style="--clamp: 2">
+            {evaluationMetric}
+          </p>
         </div>
       </Fragment>
     )
@@ -206,6 +208,18 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
   :global(.recog-card.blob--bronze) {
     --accent-card: var(--medal, var(--view-accent-recognition));
     --mark-fg: var(--accent-card);
+  }
+
+  /* ── Standardized region heights ────────────────────────────────────
+     Reserve a fixed line-height per region so every element lands at the
+     same Y across all cards — titles, stat rows, summaries and eval metrics
+     align box-to-box regardless of copy length. Uses the shared --lh-* tokens
+     as the single source of truth (no magic px). Scoped to this component, so
+     Awards/Education (same RecogCardShell + .recog-* classes) are untouched. */
+
+  /* Title: always occupy 2 lines (recog-clamp caps the max at 2). */
+  .recog-title {
+    min-height: calc(2 * var(--lh-snug) * 1em);
   }
 
   /* ── Stat grid ──────────────────────────────────────────────────── */
@@ -258,6 +272,11 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
   .blob-stat dd {
     margin: 0;
   }
+  /* Reserve 2 lines per value so rank/period/role wrapping never changes a
+     grid row's height between cards. */
+  .blob-stat .recog-value {
+    min-height: calc(2 * var(--lh-normal) * 1em);
+  }
 
   /* ── Summary / Evaluation blocks ────────────────────────────────── */
   .blob-block {
@@ -265,10 +284,19 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     flex-direction: column;
     gap: var(--text-gap-inline);
   }
+  /* Summary body: always occupy its full 3-line clamp box. */
+  .blob-block:not(.blob-block--eval) .blob-block__body {
+    min-height: calc(3 * var(--lh-relaxed) * 1em);
+  }
   /* Pin the Evaluation Metric block to the bottom so every card's footer aligns
      regardless of summary length — the engine of equal-height blob cards. */
   .blob-block--eval {
     margin-top: auto;
+  }
+  /* Eval body: reserve 2 lines (markup clamps to 2) so the metric starts at the
+     same spot in every card. */
+  .blob-block--eval .blob-block__body {
+    min-height: calc(2 * var(--lh-relaxed) * 1em);
   }
   .blob-block__head {
     display: flex;

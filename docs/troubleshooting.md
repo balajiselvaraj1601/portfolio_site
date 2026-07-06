@@ -8,7 +8,7 @@ Common issues when developing, building, or deploying the portfolio site.
 
 **Symptom:**
 
-```
+```text
 Invalid content in profile.json:
   • contact.1.href: Invalid url
 ```
@@ -27,7 +27,7 @@ See [Content editing](./content-editing.md).
 
 **Symptom:**
 
-```
+```text
 Cannot read properties of undefined (reading 'reduce')
 ```
 
@@ -148,7 +148,7 @@ if: github.repository == 'balajiselvaraj1601/balajiselvaraj1601.github.io'
 **Symptom:** `actions/deploy-pages` sits in `deployment_queued` for many minutes, then
 times out. Later runs fail with:
 
-```
+```text
 Deployment request failed … due to in progress deployment. Please cancel <sha> first
 ```
 

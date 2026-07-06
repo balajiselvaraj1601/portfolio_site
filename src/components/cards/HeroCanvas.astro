@@ -24,6 +24,7 @@
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
+    const context = ctx;
 
     // Respect user's motion preferences: animate only if motion is not reduced.
     const reduceMotion = window.matchMedia(
@@ -32,9 +33,13 @@
 
     let W = 0,
       H = 0;
-    const N = 80;
+    const N = 50;
+    const EDGE_DIST = 120;
     type Particle = { x: number; y: number; vx: number; vy: number; r: number };
     let particles: Particle[] = [];
+    let animating = false;
+    let rafId = 0;
+    let frame = 0;
 
     function resize(c: HTMLCanvasElement) {
       W = c.width = c.offsetWidth;
@@ -83,40 +88,73 @@
     function draw(context: CanvasRenderingContext2D, animate: boolean) {
       const accentLight = cssHex('--accent-light', '#9b5ee8');
       const accent = cssHex('--accent', '#6c2fbf');
+      const drawEdges = frame % 2 === 0;
 
       context.clearRect(0, 0, W, H);
       for (let i = 0; i < N; i++) {
         const p = particles[i];
-        p.x += p.vx;
-        p.y += p.vy;
-        if (p.x < 0 || p.x > W) p.vx *= -1;
-        if (p.y < 0 || p.y > H) p.vy *= -1;
+        if (animate) {
+          p.x += p.vx;
+          p.y += p.vy;
+          if (p.x < 0 || p.x > W) p.vx *= -1;
+          if (p.y < 0 || p.y > H) p.vy *= -1;
+        }
         context.beginPath();
         context.arc(p.x, p.y, p.r, 0, Math.PI * 2);
         context.fillStyle = hexToRgba(accentLight, 0.7);
         context.fill();
-        for (let j = i + 1; j < N; j++) {
-          const q = particles[j];
-          const dx = p.x - q.x;
-          const dy = p.y - q.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
-            const alpha = (1 - dist / 130) * 0.35;
-            context.beginPath();
-            context.moveTo(p.x, p.y);
-            context.lineTo(q.x, q.y);
-            context.strokeStyle = hexToRgba(accent, alpha);
-            context.lineWidth = 1;
-            context.stroke();
+        if (drawEdges) {
+          for (let j = i + 1; j < N; j++) {
+            const q = particles[j];
+            const dx = p.x - q.x;
+            const dy = p.y - q.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < EDGE_DIST) {
+              const alpha = (1 - dist / EDGE_DIST) * 0.35;
+              context.beginPath();
+              context.moveTo(p.x, p.y);
+              context.lineTo(q.x, q.y);
+              context.strokeStyle = hexToRgba(accent, alpha);
+              context.lineWidth = 1;
+              context.stroke();
+            }
           }
         }
       }
-      if (animate) requestAnimationFrame(() => draw(context, true));
+      frame += 1;
+      if (animate && animating) {
+        rafId = requestAnimationFrame(() => draw(context, true));
+      }
+    }
+
+    function startAnimation() {
+      if (reduceMotion || animating) return;
+      animating = true;
+      draw(context, true);
+    }
+
+    function stopAnimation() {
+      animating = false;
+      if (rafId) cancelAnimationFrame(rafId);
+      rafId = 0;
     }
 
     resize(canvas);
     init();
-    draw(ctx, !reduceMotion);
+    draw(context, false);
+
+    if (!reduceMotion) {
+      const scheduleStart = () => startAnimation();
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(scheduleStart, { timeout: 2500 });
+      } else {
+        setTimeout(scheduleStart, 500);
+      }
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) stopAnimation();
+        else startAnimation();
+      });
+    }
 
     let resizeTimer: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => {
@@ -124,9 +162,7 @@
       resizeTimer = setTimeout(() => {
         resize(canvas);
         init();
-        // The animation loop already redraws every frame; only the static
-        // (reduced-motion) path needs an explicit repaint after a resize.
-        if (reduceMotion) draw(ctx, false);
+        if (reduceMotion || !animating) draw(context, false);
       }, 150);
     });
   })();

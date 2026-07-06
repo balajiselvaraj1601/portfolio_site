@@ -1,0 +1,4 @@
+/* Below-fold / accent faces — loaded after first paint. */
+@import '@fontsource/dm-serif-display/400-italic.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/600.css';

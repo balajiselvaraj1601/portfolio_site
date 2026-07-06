@@ -105,7 +105,7 @@ Do not hand-maintain sitemap XML.
 
 Static file at `public/robots.txt`:
 
-```
+```text
 User-agent: *
 Allow: /
 

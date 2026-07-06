@@ -33,7 +33,7 @@ token inheritance.
 
 ## Token architecture (the cascade)
 
-```
+```text
 Content JSON key (accent / level / medal)
   → component class      (.vision-accent-impact, .level-evp, .xp-level-senior, .cat-*)
   → CSS var map          (--cat / --lvl / --medal)

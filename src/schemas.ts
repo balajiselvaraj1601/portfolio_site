@@ -24,6 +24,8 @@ const MediaLinkFields = {
   description: z.string().optional(),
   youtube: z.string().url().optional(),
   image: z.string().optional(),
+  imageWebp: z.string().optional(),
+  imageAvif: z.string().optional(),
   logo: z.string().optional(),
   logoBadge: z.boolean().optional(),
 };
@@ -95,6 +97,10 @@ export const siteSchema = z
         source: z.string(),
         visible: z.boolean(),
         eyebrow: z.string().optional(),
+        /** When false, section is omitted from right-side dot nav. */
+        dotNav: z.boolean().optional(),
+        /** Tooltip / aria-label override for dot nav (section-specific, not page name). */
+        dotNavLabel: z.string().optional(),
       })
     ),
     seo: z.object({
@@ -153,6 +159,8 @@ export const profileSchema = z.object({
       translation: z.string(),
       author: z.string(),
       image: z.string().optional(),
+      imageWebp: z.string().optional(),
+      imageAvif: z.string().optional(),
       imageAlt: z.string(),
     })
     .optional(),
@@ -208,6 +216,7 @@ export const profileSchema = z.object({
       src: z.string(),
       alt: z.string(),
       webp: z.string().optional(),
+      avif: z.string().optional(),
       width: z.number().optional(),
       height: z.number().optional(),
     })

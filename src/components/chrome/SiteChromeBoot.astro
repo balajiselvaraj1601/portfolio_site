@@ -4,8 +4,11 @@
 
 <script>
   import { initSiteChrome } from '../../scripts/site-chrome';
+  import { initDotNav, scheduleInitSections } from '../../scripts/init-sections';
 
   const el = document.getElementById('nav-views-config');
   const cfg = el?.textContent ? JSON.parse(el.textContent) : undefined;
   initSiteChrome(cfg);
+  initDotNav();
+  scheduleInitSections();
 </script>

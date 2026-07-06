@@ -8,9 +8,11 @@ interface Props {
   description?: string;
   /** Path of the current page relative to the site root, e.g. "/" or "/404". */
   path?: string;
+  /** Preload LCP portrait image (home hero). */
+  preloadPortrait?: { webp?: string; avif?: string };
 }
 
-const { title, description, path = '/' } = Astro.props;
+const { title, description, path = '/', preloadPortrait } = Astro.props;
 
 const pageTitle = title ?? site.seo.title;
 const pageDesc = description ?? site.seo.description;
@@ -52,7 +54,43 @@ const jsonLd = {
 <title>{pageTitle}</title>
 <meta name="description" content={pageDesc} />
 <meta name="keywords" content={site.seo.keywords.join(', ')} />
+<!-- Page stays indexable; its images are excluded from image search (deters scraping). -->
+<meta name="robots" content="index, follow, noimageindex" />
 <link rel="canonical" href={canonical} />
+<link
+  rel="preload"
+  href="/fonts/inter-latin.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+<link
+  rel="preload"
+  href="/fonts/dm-serif-display-latin-400.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
+{
+  preloadPortrait?.avif && (
+    <link
+      rel="preload"
+      as="image"
+      href={preloadPortrait.avif}
+      type="image/avif"
+    />
+  )
+}
+{
+  preloadPortrait?.webp && (
+    <link
+      rel="preload"
+      as="image"
+      href={preloadPortrait.webp}
+      type="image/webp"
+    />
+  )
+}
 <meta name="generator" content={Astro.generator} />
 
 <!-- Theme color per scheme -->

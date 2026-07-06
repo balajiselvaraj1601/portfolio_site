@@ -165,6 +165,40 @@ export const homeSections = homePage.sections.filter(
   (id) => site.sections[id]?.visible !== false
 );
 
+/** Sections included in right-side dot navigation. */
+export const dotNavSections = homeSections.filter(
+  (id) => site.sections[id]?.dotNav !== false
+);
+
+function humanizeSectionId(sectionId: string): string {
+  return sectionId
+    .split('-')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
+
+/** Dot-nav tooltips — section-specific labels only (never page/view names). */
+export const dotNavLabels: Record<string, string> = {};
+for (const sectionId of dotNavSections) {
+  const meta = site.sections[sectionId];
+  const dotNavLabel = meta?.dotNavLabel?.trim();
+  if (dotNavLabel) {
+    dotNavLabels[sectionId] = dotNavLabel;
+    continue;
+  }
+  const title = meta?.title?.trim();
+  if (title) {
+    dotNavLabels[sectionId] = title;
+    continue;
+  }
+  const eyebrow = meta?.eyebrow?.trim();
+  if (eyebrow) {
+    dotNavLabels[sectionId] = eyebrow;
+    continue;
+  }
+  dotNavLabels[sectionId] = humanizeSectionId(sectionId);
+}
+
 /** Nav views — content pages with view metadata for section filtering. */
 export const navViews = site.pages.flatMap((p) => {
   if (!isContentPage(p) || !p.viewSections?.length) return [];
@@ -311,18 +345,6 @@ for (const iconName of iconNameSchema.options) {
 }
 
 export const defaultTheme = site.theme.default === 'light' ? 'light' : 'dark';
-
-/** Dot-nav tooltips — section title, else owning view label, else id. */
-export const dotNavLabels: Record<string, string> = {};
-for (const sectionId of homeSections) {
-  const title = site.sections[sectionId]?.title?.trim();
-  if (title) {
-    dotNavLabels[sectionId] = title;
-    continue;
-  }
-  const owner = navViews.find((v) => v.viewSections.includes(sectionId));
-  dotNavLabels[sectionId] = owner?.label ?? sectionId;
-}
 
 /** Resolve a nav href for a content page (hash on home for views). */
 export function navHref(page: ContentPageEntry): string {

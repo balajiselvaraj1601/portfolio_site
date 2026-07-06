@@ -87,15 +87,22 @@
     }
   ],
   "sections": {
-    "hero": { "title": "", "source": "person/profile.json", "visible": true },
+    "hero": {
+      "title": "",
+      "source": "person/profile.json",
+      "visible": true,
+      "dotNav": false
+    },
     "thirukural": {
       "title": "",
       "source": "person/profile.json",
-      "visible": true
+      "visible": true,
+      "dotNav": false
     },
     "vision-programs": {
       "title": "",
       "eyebrow": "Vision",
+      "dotNavLabel": "Programs",
       "source": "work/vision-board.json",
       "visible": true
     },
@@ -106,6 +113,7 @@
     },
     "leadership": {
       "title": "About",
+      "dotNavLabel": "Leadership",
       "source": "person/profile.json",
       "visible": true
     },

@@ -1,5 +1,5 @@
 /** Scroll offsets for fixed header + breathing room below it. */
-function getScrollOffset(): { headerH: number; gap: number } {
+export function getScrollOffset(): { headerH: number; gap: number } {
   const root = document.documentElement;
   const gap =
     parseFloat(getComputedStyle(root).getPropertyValue('--space-4')) || 16;
@@ -22,7 +22,7 @@ function findPreviousSection(target: HTMLElement): HTMLElement | null {
   return idx > 0 ? sections[idx - 1] : null;
 }
 
-function getDocumentTop(el: HTMLElement): number {
+export function getDocumentTop(el: HTMLElement): number {
   let y = 0;
   let node: HTMLElement | null = el;
   while (node) {

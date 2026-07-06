@@ -276,6 +276,8 @@ const lastName = rest.join(' ');
 </style>
 
 <script>
-  import { savePage } from '../../scripts/save-page';
-  document.getElementById('save-btn')?.addEventListener('click', savePage);
+  document.getElementById('save-btn')?.addEventListener('click', async () => {
+    const { savePage } = await import('../../scripts/save-page');
+    await savePage();
+  });
 </script>

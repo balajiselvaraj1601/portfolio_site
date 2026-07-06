@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import deferredFontsUrl from '../styles/fonts-deferred.css?url';
 import BaseHead from '@components/chrome/BaseHead.astro';
 import ThemeScript from '@components/chrome/ThemeScript.astro';
 import Header from '@components/chrome/Header.astro';
@@ -7,7 +8,7 @@ import Footer from '@components/chrome/Footer.astro';
 import DotNav from '@components/chrome/DotNav.astro';
 import SiteChromeBoot from '@components/chrome/SiteChromeBoot.astro';
 import HeroCanvas from '@components/cards/HeroCanvas.astro';
-import { navViews, defaultTheme } from '@lib/content';
+import { navViews, defaultTheme, profile } from '@lib/content';
 
 interface Props {
   title?: string;
@@ -40,6 +41,10 @@ const hashCollisionAnchors =
   navViewsConfig?.views
     .filter((v) => v.viewSections[0] && v.viewSections[0] !== v.viewAnchor)
     .map((v) => v.viewAnchor) ?? [];
+const preloadPortrait =
+  path === '/' && profile.portrait
+    ? { webp: profile.portrait.webp, avif: profile.portrait.avif }
+    : undefined;
 ---
 
 <!doctype html>
@@ -54,7 +59,31 @@ const hashCollisionAnchors =
         />
       )
     }
-    <BaseHead title={title} description={description} path={path} />
+    <BaseHead
+      title={title}
+      description={description}
+      path={path}
+      preloadPortrait={preloadPortrait}
+    />
+    <link
+      id="fonts-deferred"
+      rel="stylesheet"
+      href={deferredFontsUrl}
+      media="print"
+    />
+    <script is:inline>
+      (function () {
+        var link = document.getElementById('fonts-deferred');
+        if (!link) return;
+        link.addEventListener('load', function () {
+          link.media = 'all';
+        });
+        if (link.sheet) link.media = 'all';
+      })();
+    </script>
+    <noscript>
+      <link rel="stylesheet" href={deferredFontsUrl} />
+    </noscript>
     <noscript>
       <style>
         .reveal {
@@ -88,6 +117,10 @@ const hashCollisionAnchors =
       )
     }
     {chrome && <SiteChromeBoot />}
+    <script>
+      import { initAssetGuard } from '../scripts/asset-guard';
+      initAssetGuard();
+    </script>
 
 
   </body>

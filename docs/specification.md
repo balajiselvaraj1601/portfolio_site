@@ -11,7 +11,7 @@ DOM order (`content/site.json → pages[id=home].sections`). Header nav scrolls 
 section using hash URLs (`/#experience`, `/#research`, …). All sections remain visible on scroll.
 Legacy paths redirect to the matching hash on `/`.
 
-```
+```text
 /              About (default)  → viewSections: hero, thirukural, leadership
 /#experience   Experience       → experience
 /#research     Research         → publications, conferences, speakers
@@ -35,7 +35,7 @@ The renderer (`SectionRenderer`) iterates the home section list — do not hardc
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
-```
+```text
 App / Layout
 ├── Head (SEO meta, OG/Twitter, JSON-LD, favicon, manifest)  ← seo.md
 ├── ThemeProvider (light/dark, system default, persisted)
@@ -97,7 +97,7 @@ The renderer maps `site.json.sections[id].source` → file, and `…title` → h
 ## 5. Navigation behavior
 
 - Sticky header; condense/elevate on scroll (subtle).
-- Active-route indicator in the header; dot navigation highlights the active section within the current view.
+- Active-route indicator in the header; dot navigation spans configured home sections (excluding decorative blocks) and highlights the section currently in view.
 - Anchor clicks smooth-scroll with offset for the sticky header; honor `prefers-reduced-motion`.
 - Mobile menu: focus-trapped while open, `Esc` closes, returns focus to the toggle.
 - "Back to top" affordance in the footer.

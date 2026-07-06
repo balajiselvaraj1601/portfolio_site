@@ -179,7 +179,7 @@ Both should return nothing.
 
 Example build failure:
 
-```
+```text
 Invalid content in profile.json:
   • contact.2.href: Invalid url
 ```

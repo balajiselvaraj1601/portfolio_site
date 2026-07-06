@@ -4,7 +4,7 @@ Guide to files in `public/` that ship unchanged to the site root.
 
 ## Directory layout
 
-```
+```text
 public/
 ├── .nojekyll                          Required for GitHub Pages (_astro/ bypass)
 ├── favicon.svg                        Primary vector favicon
@@ -131,16 +131,46 @@ is tracked as `unwired-future` in [`docs/audits/logo-manifest.csv`](./audits/log
 ### Hero portrait
 
 The home-page hero (`src/components/sections/Hero.astro`) renders a square portrait via
-`<Portrait>`. The current production asset is a single optimized PNG:
+`<Portrait>`. Production assets ship as PNG fallback plus WebP/AVIF siblings:
 
-| File                              | Format | Size    | Used as        |
-| --------------------------------- | ------ | ------- | -------------- |
-| `public/assets/images/balaji.png` | PNG    | 480×480 | Portrait image |
+| File                               | Format | Role              |
+| ---------------------------------- | ------ | ----------------- |
+| `public/assets/images/balaji.png`  | PNG    | Fallback portrait |
+| `public/assets/images/balaji.webp` | WebP   | LCP (preloaded)   |
+| `public/assets/images/balaji.avif` | AVIF   | Modern browsers   |
 
-References from content: `content/person/profile.json` -> `portrait.src`, `portrait.alt`,
-`portrait.width`, and `portrait.height`.
+References from content: `content/person/profile.json` → `portrait.src`, `portrait.webp`,
+`portrait.avif`, `portrait.alt`, `portrait.width`, `portrait.height`.
 
-Example regeneration command, run from a local source image outside the repo:
+### Image optimization pipeline
+
+Regenerate modern formats after replacing any `public/assets/images/*.png`:
+
+```bash
+npm run optimize:images
+```
+
+CI guard (fails if WebP/AVIF siblings are missing):
+
+```bash
+npm run optimize:images:check
+```
+
+The script lives at `scripts/optimize-images.mjs` (sharp). It also re-compresses PNG
+sources when a smaller palette-optimized copy is possible.
+
+### Performance verification
+
+With preview running on port 4331:
+
+```bash
+npm run preview:restart   # separate step
+npm run perf:lighthouse   # mobile Performance + LCP budgets
+```
+
+Targets: Lighthouse Performance ≥ 95, LCP < 2.5s (see `docs/requirements.md` M2/S1).
+
+Manual portrait regeneration from an external source (one-off):
 
 ```bash
 node -e "
@@ -156,6 +186,7 @@ const src = '/path/to/profile-original.jpg';
     .resize(480, 480)
     .png({ compressionLevel: 9 })
     .toFile('public/assets/images/balaji.png');
+  require('child_process').execSync('npm run optimize:images', { stdio: 'inherit' });
 })();"
 ```
 
@@ -163,7 +194,7 @@ const src = '/path/to/profile-original.jpg';
 
 Static file at `public/robots.txt`:
 
-```
+```text
 User-agent: *
 Allow: /
 

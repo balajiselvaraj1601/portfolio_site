@@ -23,6 +23,8 @@
       "description": "A novel framework combining single-cell transcriptomics and machine learning to detect treatment-resistant persister cell populations.",
       "url": "https://aacrjournals.org/cancerres/article/85/8_Supplement_1/6312/759545/Abstract-6312-AI-Driven-Identification-of-Drug",
       "image": "/assets/images/aacr-2025.png",
+      "imageWebp": "/assets/images/aacr-2025.webp",
+      "imageAvif": "/assets/images/aacr-2025.avif",
       "logo": "aacr"
     }
   ]

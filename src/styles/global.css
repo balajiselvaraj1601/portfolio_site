@@ -4,11 +4,7 @@
    Theme via [data-theme] on <html> (ThemeScript). WCAG AA: accessibility.md.
    =========================================================================== */
 
-@import '@fontsource-variable/inter';
-@import '@fontsource/dm-serif-display/400.css';
-@import '@fontsource/dm-serif-display/400-italic.css';
-@import '@fontsource/jetbrains-mono/400.css';
-@import '@fontsource/jetbrains-mono/600.css';
+@import './fonts-critical.css';
 
 :root {
   --space-0-5: 2px; /* hairline stack gaps (line-height compensation) */
@@ -432,6 +428,9 @@ picture,
 svg {
   display: block;
   max-width: 100%;
+  -webkit-user-drag: none; /* Safari/Chrome: no drag-to-desktop */
+  user-select: none; /* no marquee-select of the image */
+  -webkit-touch-callout: none; /* iOS: no long-press "Save Image" sheet */
 }
 h1,
 h2 {
@@ -1252,6 +1251,14 @@ button {
 }
 .section-header--inline {
   margin-bottom: 0;
+}
+
+/* Defer layout/paint for below-fold single-page sections (content stays in DOM). */
+.section-view-root:not([data-section-id='hero']):not(
+    [data-section-id='thirukural']
+  ) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 800px;
 }
 
 /* Entrance animation */

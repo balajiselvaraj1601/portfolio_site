@@ -1,7 +1,7 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import SectionRenderer from '@components/SectionRenderer.astro';
-import { homeSections, homePage } from '@lib/content';
+import { homeSections, homePage, dotNavSections } from '@lib/content';
 
 if (!homePage) throw new Error('site.json: missing home page');
 ---
@@ -10,7 +10,7 @@ if (!homePage) throw new Error('site.json: missing home page');
   path={homePage.path}
   title={homePage.seo.title}
   description={homePage.seo.description}
-  dotNavSections={homeSections}
+  dotNavSections={dotNavSections}
   singlePageViews={true}
 >
   <SectionRenderer sections={homeSections} navViews={true} />

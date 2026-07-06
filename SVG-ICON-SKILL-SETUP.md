@@ -4,7 +4,7 @@ Professional-grade raster → vector icon pipeline for the portfolio site.
 
 ## What You Now Have
 
-```
+```text
 scripts/
 ├── svg-icon-generator.py          # Main pipeline — CANONICAL source of truth
 ├── verify-icon.py                 # Independent margin/flush/centering check on a finished SVG

@@ -85,7 +85,13 @@ const logoUrl = logoSrc(logo);
   {
     image && (
       <div class="rcard-media">
-        <img src={image} alt={`${venue} — ${title}`} loading="lazy" />
+        <img
+          src={image}
+          alt={`${venue} — ${title}`}
+          width={640}
+          height={360}
+          loading="lazy"
+        />
       </div>
     )
   }

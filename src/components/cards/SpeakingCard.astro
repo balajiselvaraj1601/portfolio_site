@@ -15,8 +15,9 @@ const logoUrl = logoSrc(item.logo);
 
 const ytId = youtubeId(item.youtube);
 const ytThumb = ytId
-  ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg`
+  ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`
   : null;
+const hasModernImage = Boolean(item.imageWebp || item.imageAvif);
 ---
 
 <article class="speaking-card content-card card-accent">
@@ -72,6 +73,8 @@ const ytThumb = ytId
         <img
           src={ytThumb}
           alt={`Video thumbnail: ${item.title}`}
+          width={480}
+          height={360}
           loading="lazy"
         />
         <span class="speaking-card__play" aria-hidden="true">
@@ -90,11 +93,31 @@ const ytThumb = ytId
   {
     item.image && (
       <div class="speaking-card__media">
-        <img
-          src={item.image}
-          alt={`${item.event} — ${item.title}`}
-          loading="lazy"
-        />
+        {hasModernImage ? (
+          <picture>
+            {item.imageAvif && (
+              <source srcset={item.imageAvif} type="image/avif" />
+            )}
+            {item.imageWebp && (
+              <source srcset={item.imageWebp} type="image/webp" />
+            )}
+            <img
+              src={item.image}
+              alt={`${item.event} — ${item.title}`}
+              width={640}
+              height={360}
+              loading="lazy"
+            />
+          </picture>
+        ) : (
+          <img
+            src={item.image}
+            alt={`${item.event} — ${item.title}`}
+            width={640}
+            height={360}
+            loading="lazy"
+          />
+        )}
       </div>
     )
   }

@@ -110,7 +110,7 @@ const stats: StatCell[] = [
                   {logoSrc(s.img) ? (
                     <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
                   ) : (
-                    <Icon name={s.icon} size={22} />
+                    <Icon name={s.icon} />
                   )}
                 </span>
                 <div class="edu-stat__copy">
@@ -149,7 +149,7 @@ const stats: StatCell[] = [
                     mark={{ kind: 'logo', asset: 'logo_education_medal' }}
                   />
                 ) : (
-                  <Icon name="trophy" size={22} />
+                  <Icon name="trophy" />
                 )}
               </span>
               <p class="edu-highlight__text">{record.summary}</p>

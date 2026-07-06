@@ -3,24 +3,41 @@ import type { Profile } from '@schemas';
 
 interface Props extends NonNullable<Profile['portrait']> {
   class?: string;
+  /** LCP candidate on home — prioritize browser fetch when true. */
+  priority?: boolean;
 }
 
-const { src, alt, webp, width = 480, height = 480, class: cls } = Astro.props;
+const {
+  src,
+  alt,
+  webp,
+  avif,
+  width = 480,
+  height = 480,
+  class: cls,
+  priority = false,
+} = Astro.props;
+
+const sizes = '(max-width: 768px) 220px, 360px';
+const hasModern = Boolean(webp || avif);
 ---
 
 <figure class:list={['portrait', cls]}>
   <div class="portrait__frame">
     {
-      webp ? (
+      hasModern ? (
         <picture>
-          <source srcset={webp} type="image/webp" />
+          {avif && <source srcset={avif} type="image/avif" sizes={sizes} />}
+          {webp && <source srcset={webp} type="image/webp" sizes={sizes} />}
           <img
             src={src}
             alt={alt}
             width={width}
             height={height}
+            sizes={sizes}
             loading="eager"
             decoding="async"
+            fetchpriority={priority ? 'high' : undefined}
           />
         </picture>
       ) : (
@@ -31,6 +48,7 @@ const { src, alt, webp, width = 480, height = 480, class: cls } = Astro.props;
           height={height}
           loading="eager"
           decoding="async"
+          fetchpriority={priority ? 'high' : undefined}
         />
       )
     }

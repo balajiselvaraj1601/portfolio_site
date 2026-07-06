@@ -98,20 +98,24 @@ const total = items.length;
             data-nominator={a.nominator}
             data-reason={a.reason}
           >
-            <CardMark
-              mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
-              icon="trophy"
-              context="theme-card"
-              emblemInCircle
-            />
-            <p class="awards-card__kicker">{a.level}</p>
+            <div class="awards-card__top">
+              <CardMark
+                mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
+                icon="trophy"
+                context="theme-card"
+                emblemInCircle
+              />
+              <p class="awards-card__kicker">{a.level}</p>
+            </div>
             <h3 class="theme-card__title">{a.title}</h3>
             <div class="recog-card-divider" aria-hidden="true" />
-            <p class="theme-card__desc">
-              {a.nominator} · {a.designation}
-            </p>
-            <p class="theme-card__desc">{a.reason}</p>
-            {a.date && <p class="theme-card__desc">{a.date}</p>}
+            <div class="awards-card__meta">
+              <p class="theme-card__desc">
+                {a.nominator} · {a.designation}
+              </p>
+              <p class="theme-card__desc">{a.reason}</p>
+              {a.date && <p class="theme-card__desc">{a.date}</p>}
+            </div>
             <div class="recog-card-divider" aria-hidden="true" />
             <p
               class="theme-card__desc recog-clamp awards-card__message"
@@ -175,21 +179,37 @@ const total = items.length;
 
   .awards-grid {
     --theme-cols: 3;
-    grid-auto-rows: 1fr;
+    grid-auto-rows: auto;
   }
 
   .awards-grid > li {
-    display: flex;
+    display: grid;
+    grid-row: span 6;
+    grid-template-rows: subgrid;
   }
 
   :global(#awards .awards-grid > li > .theme-card.card) {
-    flex: 1;
-    width: 100%;
-    height: 100%;
+    display: grid;
+    grid-row: span 6;
+    grid-template-rows: subgrid;
+    grid-template-columns: 1fr;
+    align-items: start;
   }
 
-  :global(#awards .awards-grid .awards-card__message) {
-    margin-top: auto;
+  .awards-card__top {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
+  }
+
+  :global(.awards-card__top .theme-card__icon) {
+    margin-bottom: 0;
+  }
+
+  .awards-card__meta {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
   }
 
   @media (max-width: 980px) {
@@ -229,7 +249,7 @@ const total = items.length;
     letter-spacing: var(--tracking-wider);
     text-transform: uppercase;
     color: var(--accent-card, var(--accent-ll));
-    margin: var(--text-gap-pair) 0 0;
+    margin: 0;
     max-width: none;
   }
 
@@ -238,20 +258,3 @@ const total = items.length;
   }
 </style>
 
-<script>
-  import { initRecogGrid } from '../../scripts/recog-grid';
-
-  const root = document.getElementById('awards');
-  if (root) {
-    initRecogGrid({
-      root,
-      gridSelector: '[data-awards-grid]',
-      itemSelector: '.theme-card.card[data-level]',
-      searchSelector: '[data-awards-search]',
-      countSelector: '[data-awards-count]',
-      emptySelector: '[data-awards-empty]',
-      filterAttr: 'data-level',
-      searchAttrs: ['data-title', 'data-nominator', 'data-reason'],
-    });
-  }
-</script>

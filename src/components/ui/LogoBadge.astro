@@ -72,6 +72,9 @@ const {
   class: cls,
   ariaHidden = true,
 } = Astro.props;
+
+const imgHeight = size === 'lg' ? 40 : size === 'md' ? 32 : 28;
+const imgWidth = size === 'lg' ? 120 : 96;
 ---
 
 {
@@ -85,7 +88,13 @@ const {
         cls,
       ]}
     >
-      <img src={logoUrl} alt={altText} loading="lazy" />
+      <img
+        src={logoUrl}
+        alt={altText}
+        width={imgWidth}
+        height={imgHeight}
+        loading="lazy"
+      />
     </div>
   ) : (
     <div class="logo-badge-fallback" aria-hidden={ariaHidden}>

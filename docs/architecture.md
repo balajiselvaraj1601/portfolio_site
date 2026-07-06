@@ -4,7 +4,7 @@ Technical overview of the Astro 4 portfolio site.
 
 ## High-level data flow
 
-```
+```text
 content/**/*.json
     │
     ▼
@@ -39,7 +39,7 @@ GitHub Pages  (via .github/workflows/deploy.yml)
 
 ## Repo layout
 
-```
+```text
 portfolio_site/
 ├── assets/source/logos/     Logo pipeline input (+ _originals/ backups)
 ├── content/                 Zod-validated JSON (SSOT for public copy)
@@ -123,7 +123,7 @@ JS provides progressive enhancement on `/`:
   scroll position. Without JS, all sections remain visible and hash anchors still jump natively.
 - Theme toggle + `localStorage` persistence
 - Mobile menu (focus trap, Esc to close)
-- Active nav state in header; dot nav spans all sections and highlights the one in view
+- Active nav state in header; dot nav lists configured home sections (excluding decorative blocks such as hero/thirukural) and highlights the section heading currently at the read line
 - Entrance reveal animations (skipped when `prefers-reduced-motion`)
 
 Core content is fully readable without JavaScript.
@@ -135,7 +135,7 @@ must match files on disk. See [Assets](./assets.md).
 
 ## Build output
 
-```
+```text
 dist/
 ├── index.html
 ├── 404.html

@@ -163,11 +163,13 @@ The Astro portfolio site runs a **mature, well-scoped multi-agent system** (9 ag
   - No local infrastructure needed; state/docs auto-committed
 
 - **Secondary (optional):** Local systemd timer via `.cursor/agent-schedule.env`:
+
   ```bash
   AGENT_SCHEDULE_ONCALENDAR="Mon *-*-* 09:00:00"
   AGENT_SCHEDULE_PROMPT="Run site-review-auto agent. Mode: full. Autonomous headless review."
   AGENT_SCHEDULE_EXTRA_FLAGS="--force"
   ```
+
   Then: `./.cursor/scripts/agent-schedule-install.sh`
 
 **Failure Recovery:**
@@ -222,20 +224,21 @@ When design-standardizer runs, it will add these missing tokens to `src/styles/g
 
 1. **Manual invocation test:**
 
-   ```
+   ```text
    User: "Run design-standardizer agent on src/components/cards/ scope only"
    Expected: 5–10 violations scanned, 3–5 tokens added, 8+ files modified, build passes
    ```
 
 2. **Full-scope test:**
 
-   ```
+   ```text
    User: "Run design-standardizer agent on full src/components/**/*.astro"
    Expected: 25+ violations scanned, 6–8 tokens added, 15+ files modified, build passes
    ```
 
 3. **Autonomous test:**
-   ```
+
+   ```text
    User: "Run site-review-auto agent. Mode: full."
    Expected: Phases 0–8 complete, dated audit doc in docs/audits/, commit in git log, no prompts
    ```

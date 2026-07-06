@@ -8,6 +8,8 @@
     "translation": "Let all your thoughts be lofty.",
     "author": "திருவள்ளுவர் • Thiruvalluvar",
     "image": "/assets/images/thiruvalluvar.png",
+    "imageWebp": "/assets/images/thiruvalluvar.webp",
+    "imageAvif": "/assets/images/thiruvalluvar.avif",
     "imageAlt": "Statue of the Tamil poet-philosopher Thiruvalluvar"
   },
   "greeting": "Hi, I'm Balaji Selvaraj",
@@ -51,6 +53,8 @@
   "ctas": [],
   "portrait": {
     "src": "/assets/images/balaji.png",
+    "webp": "/assets/images/balaji.webp",
+    "avif": "/assets/images/balaji.avif",
     "alt": "Portrait of Balaji Selvaraj",
     "width": 480,
     "height": 480

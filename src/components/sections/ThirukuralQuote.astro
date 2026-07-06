@@ -20,13 +20,31 @@ const quote = profile.heroQuote;
 
           {quote.image && (
             <div class="kural__img-wrap">
-              <img
-                class="kural__img"
-                src={quote.image}
-                alt={quote.imageAlt}
-                loading="lazy"
-                decoding="async"
-              />
+              {quote.imageWebp || quote.imageAvif ? (
+                <picture>
+                  {quote.imageAvif && (
+                    <source srcset={quote.imageAvif} type="image/avif" />
+                  )}
+                  {quote.imageWebp && (
+                    <source srcset={quote.imageWebp} type="image/webp" />
+                  )}
+                  <img
+                    class="kural__img"
+                    src={quote.image}
+                    alt={quote.imageAlt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </picture>
+              ) : (
+                <img
+                  class="kural__img"
+                  src={quote.image}
+                  alt={quote.imageAlt}
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
             </div>
           )}
         </figure>

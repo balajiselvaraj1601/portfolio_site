@@ -121,19 +121,3 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
   }
 </style>
 
-<script>
-  import { initRecogGrid } from '../../scripts/recog-grid';
-
-  const root = document.getElementById('kaggle');
-  if (root) {
-    initRecogGrid({
-      root,
-      gridSelector: '[data-kaggle-grid]',
-      searchSelector: '[data-kaggle-search]',
-      countSelector: '[data-kaggle-count]',
-      emptySelector: '[data-kaggle-empty]',
-      filterAttr: 'data-medal',
-      searchAttrs: ['data-name', 'data-domain', 'data-tags'],
-    });
-  }
-</script>

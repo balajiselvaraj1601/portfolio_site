@@ -72,7 +72,7 @@ See [Content editing](./content-editing.md) and [Assets](./assets.md) for detail
 
 ## Project layout (abbreviated)
 
-```
+```text
 portfolio_site/
 ├── content/           Site copy (SSOT) — JSON validated by Zod
 ├── public/            Static files copied verbatim to dist/

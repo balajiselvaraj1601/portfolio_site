@@ -158,20 +158,6 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
   </div>
 </Section>
 
-<script>
-  import { initRecogGrid } from '../../scripts/recog-grid';
-
-  const root = document.getElementById('leadership');
-  if (root) {
-    initRecogGrid({
-      root,
-      gridSelector: '[data-about-grid]',
-      itemSelector: '.leadership__card-row',
-      filterAttr: 'data-category',
-    });
-  }
-</script>
-
 <style>
   .leadership__filters {
     display: flex;

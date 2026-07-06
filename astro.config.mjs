@@ -43,5 +43,7 @@ export default defineConfig({
   build: {
     // Keep clean URLs and a predictable asset folder.
     assets: '_astro',
+    inlineStylesheets: 'auto',
   },
+  compressHTML: true,
 });
