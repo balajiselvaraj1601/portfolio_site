@@ -6,6 +6,9 @@ dist/
 .astro/
 *.tsbuildinfo
 
+# dist-diff verification baseline (scripts/dist-diff.mjs)
+.dist-baseline/
+
 # OS / editor noise
 .DS_Store
 Thumbs.db
