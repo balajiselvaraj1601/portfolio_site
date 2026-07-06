@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-07-06
+
+### Added
+
+- Shared `scroll-to-section` helper with compact-header offset and About landing scroll boundary
+- Portfolio agent skills: content authoring, visual verify, SEO meta, a11y contrast, icon patterns
+- `--header-h-compact` design token for scrolled header height
+
+### Changed
+
+- About landing layout: `#about-landing` hero band ends flush above leadership; About nav scroll hides hero band
+- Section `scroll-margin-top` includes header breathing room (`--space-4`)
+- Inline `Icon` sizes standardized to `size="sm"` in Hero, Contact, and CompetitionCard
+- Header compact state uses `--header-h-compact` token instead of hardcoded `52px`
+
 ## [1.0.0] - 2026-07-06
 
 First production release of the Balaji Selvaraj portfolio site.
