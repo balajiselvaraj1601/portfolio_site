@@ -65,21 +65,30 @@ not agent memory.
    page-agent-playbook.md (rules/modes/phases) and design-consistency-contract.md
    before any phase. (@-imports do NOT expand in subagent system prompts —
    verified 2026-07 — so an explicit Read instruction is required.)
-4. ## View-specific rules   — only deltas beyond playbook P1–P14 (2–5 rows)
-5. ## Appendix A — View binding — owned sections/components/content;
+4. ## View-specific rules (deltas beyond playbook P1–P14) — only genuine deltas
+   (2–6 rows, numbered V1, V2, …). Never renumber existing V-rules: external
+   artifacts (e.g. `.cursor/page-team.state.json` contract_refs) cite them.
+5. "Page brief: `docs/page-briefs/{view_id}.md`" — one line, explicit path
+   (playbook Phase 0 reads it from here)
+6. ## Appendix A — View binding (owned: may edit) — owned sections/components/content;
    plus "Guardian-owned shared components used here (audit-only, never edit): …"
-   plus "Shelved (never enable, never audit): …"
-6. ## Appendix B — Audit checklist — view-specific checks only
-7. ## Appendix C — Text & object hierarchy — maps every element (reading order) to
-   its contract §3a T-code and §3b/§5 object tier. Ends with a
-   "### Typography & theming summary (this view)": the **T-levels present** (comma
-   list, cite §3a — never re-list font/weight/size values) plus an **element theming**
-   table (`| Element | Text colour | Surface | Accent/hover |`) mapping each element to
+   plus "Shelved (never enable, never audit): …" ("—" when empty; both lines always
+   present)
+7. ## Appendix B — Audit checklist (view-specific) — view-specific checks only
+8. ## Appendix C — Text & object hierarchy — one H3 per owned section mapping every
+   element (reading order) to its contract §3a T-code and §3b/§5 object tier. No
+   preamble prose — the usage convention lives in playbook Phase 1 (SSOT). Ends with a
+   "### Typography & theming summary (this view)": the **T-levels present** line in the
+   canonical form "**T-levels present:** T2, T3, … (contract §3a)." — never re-list
+   font/weight/size values — plus an **element theming** table
+   (`| Element | Text colour | Surface | Accent/hover |`) mapping each element to
    its semantic colour token per §3e. Cite tokens; never hardcode hex/rem.
 ```
 
-Target length: ~55–80 lines. If a rule applies to two or more views, it belongs in the
-playbook or the contract, not in agent files.
+Target length: ~75–130 lines — the total scales with owned-section count because
+Appendix C carries one H3 block per section (single-section views land near the low
+end). If a rule applies to two or more views, it belongs in the playbook or the
+contract, not in agent files.
 
 ---
 
@@ -124,16 +133,17 @@ This checklist covers **page agents**; workflow-family agents are checked agains
 `## Required workflow-agent structure` block above (title + Load-first + Hard Rules +
 phases + Appendix A/B, canonical frontmatter, `Agent` spawn token).
 
-| #   | Check                        | Pass criteria                                                     |
-| --- | ---------------------------- | ----------------------------------------------------------------- |
-| 1   | Frontmatter                  | name, description, tools, model, maxTurns present                 |
-| 2   | Name matches file            | `name` == filename stem, lowercase + hyphens                      |
-| 3   | Triggers in description      | ≥3 trigger phrases + "Use proactively"                            |
-| 4   | Load-first block present     | mandatory Read of playbook + contract before any phase            |
-| 5   | No restated playbook content | no Hard Rules P1–P14, modes, or phase prose in agent body         |
-| 6   | View-specific rules only     | every rule row is a genuine delta                                 |
-| 7   | View binding                 | Appendix A lists owned section ids + components + content paths   |
-| 8   | Ownership labels             | guardian-owned components marked audit-only; shelved list present |
-| 9   | Checklist scoped             | Appendix B contains only view-specific checks                     |
-| 10  | No placeholders              | no TODO/FIXME in production agents                                |
-| 11  | Routing sync                 | agent_id/agent_file/shelved_components match `page-routing.csv`   |
+| #   | Check                        | Pass criteria                                                               |
+| --- | ---------------------------- | --------------------------------------------------------------------------- |
+| 1   | Frontmatter                  | name, description, tools, model, maxTurns present                           |
+| 2   | Name matches file            | `name` == filename stem, lowercase + hyphens                                |
+| 3   | Triggers in description      | ≥3 trigger phrases + "Use proactively"                                      |
+| 4   | Load-first block present     | mandatory Read of playbook + contract before any phase                      |
+| 5   | No restated playbook content | no Hard Rules P1–P14, modes, or phase prose in agent body                   |
+| 6   | View-specific rules only     | every rule row is a genuine delta                                           |
+| 7   | View binding                 | Appendix A lists owned section ids + components + content paths             |
+| 8   | Ownership labels             | guardian-owned components marked audit-only; shelved list present           |
+| 9   | Checklist scoped             | Appendix B contains only view-specific checks                               |
+| 10  | No placeholders              | no TODO/FIXME in production agents                                          |
+| 11  | Routing sync                 | agent_id/agent_file/shelved_components match `page-routing.csv`             |
+| 12  | Appendix C convention        | no preamble prose; T-levels cite `(contract §3a)` without re-listing values |

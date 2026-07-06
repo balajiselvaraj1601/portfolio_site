@@ -58,7 +58,11 @@ Follow phases sequentially; do not reorder operations.
 
 1. Read each owned file in Appendix A.
 2. Run the contract "Audit procedure (mechanical)" plus your Appendix B checklist.
-3. Emit `findings[]` per `finding-schema.md`. Do NOT edit files in audit mode.
+3. For type/style checks, use your Appendix C text & object hierarchy: it maps the
+   view's elements (reading order) to the contract §3a text ladder (T1–T10) and
+   §3b/§5 object tiers. Cite level codes — token values live in the contract (SSOT);
+   never re-list or hardcode font/weight/size values.
+4. Emit `findings[]` per `finding-schema.md`. Do NOT edit files in audit mode.
 
 **Gate:** JSON findings returned.
 

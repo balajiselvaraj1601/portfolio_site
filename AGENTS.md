@@ -108,20 +108,20 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 
 ## Commands
 
-| Task                        | Command                                                                 |
-| --------------------------- | ----------------------------------------------------------------------- |
-| Install pinned dependencies | `npm ci`                                                                |
-| Dev server (4321)           | `npm run dev`                                                           |
-| Stop all Astro 43xx servers | `npm run dev:stop`                                                      |
-| Restart dev (4321)          | `npm run dev:restart`                                                   |
-| Production build            | `npm run build`                                                         |
-| Preview build (4331)        | `npm run preview`                                                       |
-| Rebuild + preview (4331)    | `npm run preview:restart`                                               |
-| Verify dev + preview        | `ss` + `curl` (see [Local servers and ports](#local-servers-and-ports)) |
-| Dev smoke (Playwright)      | `npm run smoke:localhost`                                               |
-| Full verify (release gate)  | `npm run verify`                                                        |
-| Bump version                | `npm run release:bump -- --bump patch`                                  |
-| Cut release                 | `/release` or `.claude/commands/release.md`                             |
+| Task                        | Command                                                                                               |
+| --------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Install pinned dependencies | `npm ci`                                                                                              |
+| Dev server (4321)           | `npm run dev`                                                                                         |
+| Stop all Astro 43xx servers | `npm run dev:stop`                                                                                    |
+| Restart dev (4321)          | `npm run dev:restart`                                                                                 |
+| Production build            | `npm run build`                                                                                       |
+| Preview build (4331)        | `npm run preview`                                                                                     |
+| Rebuild + preview (4331)    | `npm run preview:restart`                                                                             |
+| Verify dev + preview        | `ss` + `curl` (see [docs/troubleshooting.md §Verify servers](docs/troubleshooting.md#verify-servers)) |
+| Dev smoke (Playwright)      | `npm run smoke:localhost`                                                                             |
+| Full verify (release gate)  | `npm run verify`                                                                                      |
+| Bump version                | `npm run release:bump -- --bump patch`                                                                |
+| Cut release                 | `/release` or `.claude/commands/release.md`                                                           |
 
 CI builds on Node 20 (`package.json` engines: `>=18`).
 
@@ -136,84 +136,15 @@ This package is `"private": true` — releases are git tags and [GitHub Releases
 
 ## Local servers and ports
 
-### Port map
-
 | Mode                    | Port | URL                    | npm script        |
 | ----------------------- | ---- | ---------------------- | ----------------- |
 | Dev (HMR)               | 4321 | http://localhost:4321/ | `npm run dev`     |
 | Preview (built `dist/`) | 4331 | http://localhost:4331/ | `npm run preview` |
 
-SSOT: [`scripts/ports.mjs`](scripts/ports.mjs) → imported by [`astro.config.mjs`](astro.config.mjs)
-with `strictPort: true` (no silent port drift). Legacy port **4322** is cleared on stop but never
-used for serving.
-
-```mermaid
-flowchart LR
-  ports["scripts/ports.mjs"]
-  config["astro.config.mjs"]
-  devCmd["npm run dev"]
-  previewCmd["npm run preview"]
-  ports --> config
-  config --> devCmd
-  config --> previewCmd
-```
-
-### Stop/restart semantics
-
-Defined in [`scripts/dev-stop.mjs`](scripts/dev-stop.mjs):
-
-| Function / script                                 | Scope                                | Use when                                      |
-| ------------------------------------------------- | ------------------------------------ | --------------------------------------------- |
-| `npm run dev:stop` → `stopAstroServers()`         | All 4300–4399 + both astro processes | Nuclear cleanup; stale/orphan listeners       |
-| `npm run dev:restart` → `stopDevServer()`         | 4321 + `astro dev` only              | Restart dev without killing preview           |
-| `npm run preview:restart` → `stopPreviewServer()` | 4331 + `astro preview` only          | Rebuild + restart preview without killing dev |
-
-### Startup workflows
-
-- **Dev only:** `npm run dev:restart` (or `dev:stop` then `npm run dev`)
-- **Preview only:** `npm run preview:restart` (stop preview → build → preview on 4331)
-- **Both concurrently:**
-
-  ```bash
-  npm run dev:stop    # once, clear orphans
-  npm run build       # preview needs dist/
-  npm run dev         # background → 4321
-  npm run preview     # background → 4331
-  ```
-
-  When server state is unknown, run `dev:stop` first. With selective-stop scripts, `dev:restart`
-  and `preview:restart` are safe individually and do not kill the other server.
-
-### Hard rules (anti-patterns)
-
-- **Never** pass `--port` / `--host` to `astro dev` or `astro preview` — use npm scripts only.
-- **Never** run `astro preview --port 4321` — it occupies the dev port and leaves 4331 empty;
-  symptoms look like "preview not running."
-- **Never** start multiple `npm run dev` or `npm run preview` sessions without stopping first.
-- Preview requires a prior `npm run build`; dev does not.
-
-### Verify servers
-
-Agents run these before reporting port status:
-
-```bash
-ss -tlnp | grep -E ':(4321|4331)\s'
-curl -sf -o /dev/null -w 'dev:%{http_code}\n'  http://127.0.0.1:4321/
-curl -sf -o /dev/null -w 'preview:%{http_code}\n' http://127.0.0.1:4331/
-```
-
-Expected: both ports LISTEN, both return `200`. Optional deeper dev check: `npm run smoke:localhost`.
-
-### Remote / Cursor environments
-
-- Servers bind `host: true` on the remote machine; `localhost:PORT` in the **user's browser**
-  only works if the port is forwarded.
-- Local `.vscode/settings.json` (gitignored) configures `remote.autoForwardPorts` for 4321 and
-  4331 — preview started in a background terminal may not auto-forward; manually add **4331**
-  in the Cursor **Ports** panel if remote `curl` passes but the browser fails.
-- If `curl` on the remote host fails, fix the server first (don't assume a forwarding issue).
-
-Symptom deep-dive: [`docs/troubleshooting.md`](docs/troubleshooting.md#port-already-in-use--localhost4321-wont-load).
+Port **values** SSOT: [`scripts/ports.mjs`](scripts/ports.mjs) (imported by
+`astro.config.mjs` with `strictPort: true`). Workflows, stop/restart semantics,
+anti-patterns, and verify commands:
+[docs/troubleshooting.md §Local servers and ports](docs/troubleshooting.md#local-servers-and-ports).
 
 ## Agents
 
@@ -350,35 +281,35 @@ When the save button is loading, CSS sets `opacity: 0` on its child icon. After 
 
 ## Documentation
 
-| Area                                    | Read                                                                   |
-| --------------------------------------- | ---------------------------------------------------------------------- |
-| Agent system (NEW)                      | This AGENTS.md section above                                           |
-| Agents — design standardizer (NEW)      | `.claude/agents/design-standardizer.md`                                |
-| Agents — site-review-auto (NEW)         | `.claude/agents/site-review-auto.md`                                   |
-| Agents — design contracts               | `.claude/references/design-consistency-contract.md`                    |
-| Agents — page-agent playbook            | `.claude/references/page-agent-playbook.md`                            |
-| Agents — authoring standard             | `.claude/references/page-agent-standard.md`                            |
-| Content authoring (schema-first JSON)   | `.claude/skills/portfolio-content-authoring/SKILL.md`                  |
-| Visual verify (screenshot / reveal)     | `.claude/skills/portfolio-visual-verify/SKILL.md`                      |
-| SEO / metadata sync (URL, OG, JSON-LD)  | `.claude/skills/portfolio-seo-meta/SKILL.md`                           |
-| Accessibility / contrast (WCAG AA)      | `.claude/skills/portfolio-a11y-contrast/SKILL.md`                      |
-| Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`                         |
-| Icon size / chrome / color SSOT (skill) | `.claude/skills/portfolio-icon-standardization/SKILL.md`               |
-| Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                                |
-| UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`                       |
-| Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`                     |
-| Logo SVG authoring                      | `../image_gen/.claude/skills/logo-emblem-author/SKILL.md`              |
-| Setup and commands                      | `docs/getting-started.md`                                              |
-| Local server ports (symptoms)           | `docs/troubleshooting.md#port-already-in-use--localhost4321-wont-load` |
-| Long-running agent batches              | `docs/task-runner.md`                                                  |
-| Multi-view design consistency           | `docs/page-team.md`, `.claude/skills/page-consistency-team/SKILL.md`   |
-| Architecture and data flow              | `docs/architecture.md`                                                 |
-| Languages, tooling, programmatic skills | `docs/environment-languages-skills.md`                                 |
-| Content editing                         | `docs/content-editing.md`, `content/README.md`                         |
-| Section contracts                       | `docs/specification.md`                                                |
-| Per-route section intent                | `docs/page-briefs/` (incl. `vision.md`, `contact.md`)                  |
-| SEO and metadata                        | `docs/seo.md`                                                          |
-| Assets                                  | `docs/assets.md`                                                       |
-| Accessibility                           | `docs/accessibility.md`                                                |
-| Deployment                              | `docs/deployment.md`, `docs/go-live-checklist.md`                      |
-| Build issues                            | `docs/troubleshooting.md`                                              |
+| Area                                    | Read                                                                 |
+| --------------------------------------- | -------------------------------------------------------------------- |
+| Agent system (NEW)                      | This AGENTS.md section above                                         |
+| Agents — design standardizer (NEW)      | `.claude/agents/design-standardizer.md`                              |
+| Agents — site-review-auto (NEW)         | `.claude/agents/site-review-auto.md`                                 |
+| Agents — design contracts               | `.claude/references/design-consistency-contract.md`                  |
+| Agents — page-agent playbook            | `.claude/references/page-agent-playbook.md`                          |
+| Agents — authoring standard             | `.claude/references/page-agent-standard.md`                          |
+| Content authoring (schema-first JSON)   | `.claude/skills/portfolio-content-authoring/SKILL.md`                |
+| Visual verify (screenshot / reveal)     | `.claude/skills/portfolio-visual-verify/SKILL.md`                    |
+| SEO / metadata sync (URL, OG, JSON-LD)  | `.claude/skills/portfolio-seo-meta/SKILL.md`                         |
+| Accessibility / contrast (WCAG AA)      | `.claude/skills/portfolio-a11y-contrast/SKILL.md`                    |
+| Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`                       |
+| Icon size / chrome / color SSOT (skill) | `.claude/skills/portfolio-icon-standardization/SKILL.md`             |
+| Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                              |
+| UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`                     |
+| Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`                   |
+| Logo SVG authoring                      | `../image_gen/.claude/skills/logo-emblem-author/SKILL.md`            |
+| Setup and commands                      | `docs/getting-started.md`                                            |
+| Local server ports (workflows/symptoms) | `docs/troubleshooting.md#local-servers-and-ports`                    |
+| Long-running agent batches              | `docs/task-runner.md`                                                |
+| Multi-view design consistency           | `docs/page-team.md`, `.claude/skills/page-consistency-team/SKILL.md` |
+| Architecture and data flow              | `docs/architecture.md`                                               |
+| Languages, tooling, programmatic skills | `docs/environment-languages-skills.md`                               |
+| Content editing                         | `docs/content-editing.md`, `content/README.md`                       |
+| Section contracts                       | `docs/specification.md`                                              |
+| Per-route section intent                | `docs/page-briefs/` (incl. `vision.md`, `contact.md`)                |
+| SEO and metadata                        | `docs/seo.md`                                                        |
+| Assets                                  | `docs/assets.md`                                                     |
+| Accessibility                           | `docs/accessibility.md`                                              |
+| Deployment                              | `docs/deployment.md`, `docs/go-live-checklist.md`                    |
+| Build issues                            | `docs/troubleshooting.md`                                            |

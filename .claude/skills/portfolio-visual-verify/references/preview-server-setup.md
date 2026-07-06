@@ -2,7 +2,7 @@
 
 The capture script talks to a running server; getting that server right is half the
 job. All ports and semantics below are owned by `scripts/ports.mjs` and
-`AGENTS.md` §"Local servers and ports" — cited, not redefined here.
+`docs/troubleshooting.md` §"Local servers and ports" — cited, not redefined here.
 
 ## Port map (SSOT: `scripts/ports.mjs`)
 

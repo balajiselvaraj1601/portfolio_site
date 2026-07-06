@@ -54,9 +54,6 @@ Shelved (never enable, never audit): —
 
 ## Appendix C — Text & object hierarchy
 
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
-
 ### awards — `src/components/sections/Awards.astro` (interior: `RecogCardShell.astro`)
 
 - **Object:** §6 `default` band › §5 Tier C `.recog-tile` (summary) + `.recog-card` (grid, via `RecogCardShell`) › §5 mark: `.icon-tile.icon-tile--round.icon-tile--accented` (tiles), same on card headTop
@@ -110,7 +107,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2 (section title), T3 (card title), T6 (body prose), T7 (subtitle/lede), T8 (caps label), T9 (emphasis micro-label), T10 (metric number). Cite contract §3a for token values; weights follow: T2/T3 `--fw-regular`/`--fw-bold`, T6/T7 `--fw-regular`, T8 `--fw-semibold`, T9 `--fw-semibold`, T10 `--fw-semibold`.
+**T-levels present:** T2, T3, T6, T7, T8, T9, T10 (contract §3a).
 
 **Element theming (colour tokens, per §3e):**
 

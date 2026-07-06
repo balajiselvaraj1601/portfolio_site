@@ -54,9 +54,6 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 
 ## Appendix C — Text & object hierarchy
 
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
-
 ### publications — Publications.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
 
 - **Object:** §6 `alt` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
@@ -93,7 +90,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2, T3, T6, T7, T8. Token values per contract §3a.
+**T-levels present:** T2, T3, T6, T7, T8 (contract §3a).
 
 **Element theming (colour tokens, per §3e):**
 

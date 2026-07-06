@@ -41,7 +41,9 @@ Page brief: `docs/page-briefs/vision.md`
 | vision-impact   | `src/components/sections/VisionImpact.astro`   | `content/work/vision-board.json` |
 
 Guardian-owned shared components used here (audit-only, never edit):
-`ThemeCard.astro` (`src/components/cards/`, renders program & impact cards), `VisionHub.astro` (`src/components/ui/`, renders group hubs) — shared primitives; findings only, guardian owns the fix.
+`ThemeCard.astro` (`src/components/cards/`, renders program & impact cards), `VisionHub.astro` (`src/components/ui/`, renders group hubs)
+
+Shelved (never enable, never audit): —
 
 ## Appendix B — Audit checklist (view-specific)
 
@@ -52,9 +54,6 @@ Guardian-owned shared components used here (audit-only, never edit):
 5. Program badge and impact cards use `CardMark.astro` with proper icon-tile modifiers (V3).
 
 ## Appendix C — Text & object hierarchy
-
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
 
 Note: the `ProgramBadgeCard` / `OrgSnapshotCard` pair (contract §5 row) was merged into the
 single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not rendered in this view.
@@ -85,7 +84,7 @@ single `ThemeCard.astro` SSOT (see its header, DG-006); `PipelineStrip` is not r
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2, T3, T5, T6, T7, T8, T9, T10. Cite §3a for token values.
+**T-levels present:** T2, T3, T5, T6, T7, T8, T9, T10 (contract §3a).
 
 **Element theming (colour tokens, per §3e):**
 

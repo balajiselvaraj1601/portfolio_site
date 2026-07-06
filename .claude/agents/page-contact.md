@@ -52,9 +52,6 @@ Shelved (never enable, never audit): —
 
 ## Appendix C — Text & object hierarchy
 
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
-
 ### contact — `src/components/sections/Contact.astro`
 
 - **Object:** §6 `alt` band (`variant="alt"`) › §5 Tier A `.connect-card.card` (compact, `--card-padding`) › §5 round Lucide mark slot (`CardMark` → `.icon-tile.icon-tile--round`, `iconFallback="link"` — the §5 reference impl for round Lucide marks). Each `.connect-card` accent colour is set **per contact type** (not a fixed accent) via the `.connect-card--{type}` class → `--accent-card` cascade in `global.css`.
@@ -74,7 +71,7 @@ Cite level codes — token values live in the contract (SSOT). Use when auditing
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2, T3, T5, T6, T7, T8 (§3a).
+**T-levels present:** T2, T3, T5, T6, T7, T8 (contract §3a).
 
 **Element theming (colour tokens, per §3e):**
 

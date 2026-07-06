@@ -24,14 +24,14 @@ own — every value below is cited to the file that owns it.
 
 ## Authorities (SSOT — do not duplicate their values)
 
-| Source                                 | Owns                                                                              |
-| -------------------------------------- | --------------------------------------------------------------------------------- |
-| `scripts/baseline-shots.mjs`           | The capture procedure, the `SHOTS` list, and the reveal/settle helpers            |
-| `scripts/ports.mjs`                    | The preview/dev port values (`PREVIEW_PORT`, `DEV_PORT`)                          |
-| `src/scripts/section-views.ts`         | `PROGRAMMATIC_SCROLL_SETTLE_MS` — the scroll-settle constant the capture mirrors  |
-| `AGENTS.md` §"Local servers and ports" | Port map, stop/restart semantics, and the `--port`/`--host` anti-patterns         |
-| `docs/reference/screenshots/`          | The committed baseline images the capture writes to and you diff against          |
-| `package.json` scripts                 | Exact command names: `preview:restart`, `screenshots:baseline`, `smoke:localhost` |
+| Source                                               | Owns                                                                              |
+| ---------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `scripts/baseline-shots.mjs`                         | The capture procedure, the `SHOTS` list, and the reveal/settle helpers            |
+| `scripts/ports.mjs`                                  | The preview/dev port values (`PREVIEW_PORT`, `DEV_PORT`)                          |
+| `src/scripts/section-views.ts`                       | `PROGRAMMATIC_SCROLL_SETTLE_MS` — the scroll-settle constant the capture mirrors  |
+| `docs/troubleshooting.md` §"Local servers and ports" | Port map, stop/restart semantics, and the `--port`/`--host` anti-patterns         |
+| `docs/reference/screenshots/`                        | The committed baseline images the capture writes to and you diff against          |
+| `package.json` scripts                               | Exact command names: `preview:restart`, `screenshots:baseline`, `smoke:localhost` |
 
 Never restate a port number or a timing constant as if this skill owned it. Cite
 the file. Values mentioned below (e.g. 4331, 1400 ms) are for orientation only —

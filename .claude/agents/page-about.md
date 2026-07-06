@@ -54,9 +54,6 @@ Shelved (never enable, never audit): `LeadershipCard.astro`
 
 ## Appendix C — Text & object hierarchy
 
-Maps this view's elements to the contract §3a text ladder (T1–T10) and §3b/§5 object tiers.
-Cite level codes — token values live in the contract (SSOT). Use when auditing type/style consistency.
-
 ### hero — Hero.astro (wrapped by AboutLanding.astro)
 
 - **Object:** §1 AboutLanding landing wrapper (bespoke landing, not a §6 `Section` band) › no §5 card tier — `.hero-stat` are border-left accent stat blocks, not card shells › Portrait (`Portrait.astro`) + `AvailabilityBadge` (shared ui badge), neither a §5 card mark

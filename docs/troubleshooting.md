@@ -58,6 +58,91 @@ to Astro 5.
 **Fix:** Ensure the file exists in `content/` and is imported in `src/lib/content.ts` with a
 matching schema.
 
+## Local servers and ports
+
+Canonical prose home for the dev/preview server workflow. Port **values** SSOT:
+[`scripts/ports.mjs`](../scripts/ports.mjs) → imported by
+[`astro.config.mjs`](../astro.config.mjs) with `strictPort: true` (no silent port
+drift). Quick-reference port map: [AGENTS.md](../AGENTS.md#local-servers-and-ports).
+
+### Port map
+
+| Mode                    | Port | URL                    | npm script        |
+| ----------------------- | ---- | ---------------------- | ----------------- |
+| Dev (HMR)               | 4321 | http://localhost:4321/ | `npm run dev`     |
+| Preview (built `dist/`) | 4331 | http://localhost:4331/ | `npm run preview` |
+
+Dev and preview can run at the same time (different ports). Legacy port **4322** is
+cleared on stop but never used for serving.
+
+```mermaid
+flowchart LR
+  ports["scripts/ports.mjs"]
+  config["astro.config.mjs"]
+  devCmd["npm run dev"]
+  previewCmd["npm run preview"]
+  ports --> config
+  config --> devCmd
+  config --> previewCmd
+```
+
+### Stop/restart semantics
+
+Defined in [`scripts/dev-stop.mjs`](../scripts/dev-stop.mjs):
+
+| Function / script                                 | Scope                                | Use when                                      |
+| ------------------------------------------------- | ------------------------------------ | --------------------------------------------- |
+| `npm run dev:stop` → `stopAstroServers()`         | All 4300–4399 + both astro processes | Nuclear cleanup; stale/orphan listeners       |
+| `npm run dev:restart` → `stopDevServer()`         | 4321 + `astro dev` only              | Restart dev without killing preview           |
+| `npm run preview:restart` → `stopPreviewServer()` | 4331 + `astro preview` only          | Rebuild + restart preview without killing dev |
+
+### Startup workflows
+
+- **Dev only:** `npm run dev:restart` (or `dev:stop` then `npm run dev`)
+- **Preview only:** `npm run preview:restart` (stop preview → build → preview on 4331)
+- **Both concurrently:**
+
+  ```bash
+  npm run dev:stop    # once, clear orphans
+  npm run build       # preview needs dist/
+  npm run dev         # background → 4321
+  npm run preview     # background → 4331
+  ```
+
+  When server state is unknown, run `dev:stop` first. With selective-stop scripts,
+  `dev:restart` and `preview:restart` are safe individually and do not kill the
+  other server.
+
+### Hard rules (anti-patterns)
+
+- **Never** pass `--port` / `--host` to `astro dev` or `astro preview` — use npm scripts only.
+- **Never** run `astro preview --port 4321` — it occupies the dev port and leaves 4331 empty;
+  symptoms look like "preview not running."
+- **Never** start multiple `npm run dev` or `npm run preview` sessions without stopping first.
+- Preview requires a prior `npm run build`; dev does not.
+
+### Verify servers
+
+Agents run these before reporting port status:
+
+```bash
+ss -tlnp | grep -E ':(4321|4331)\s'
+curl -sf -o /dev/null -w 'dev:%{http_code}\n'  http://127.0.0.1:4321/
+curl -sf -o /dev/null -w 'preview:%{http_code}\n' http://127.0.0.1:4331/
+```
+
+Expected: both ports LISTEN, both return `200`. Optional deeper dev check:
+`npm run smoke:localhost`.
+
+### Remote / Cursor environments
+
+- Servers bind `host: true` on the remote machine; `localhost:PORT` in the **user's browser**
+  only works if the port is forwarded.
+- Local `.vscode/settings.json` (gitignored) configures `remote.autoForwardPorts` for 4321 and
+  4331 — preview started in a background terminal may not auto-forward; manually add **4331**
+  in the Cursor **Ports** panel if remote `curl` passes but the browser fails.
+- If `curl` on the remote host fails, fix the server first (don't assume a forwarding issue).
+
 ## Local development
 
 ### Port already in use / localhost:4321 won't load
@@ -70,17 +155,9 @@ matching schema.
 
 **Cause:** Multiple `astro dev` / `astro preview` processes compete for ports — common
 when agents, terminals, and the VS Code “Astro: dev preview” task all start servers
-independently, or when ad-hoc `--port` flags drift from the pinned values.
-
-**Fixed ports** (see `scripts/ports.mjs`):
-
-| Mode    | Port | URL                    |
-| ------- | ---- | ---------------------- |
-| Dev     | 4321 | http://localhost:4321/ |
-| Preview | 4331 | http://localhost:4331/ |
-
-Dev and preview can run at the same time (different ports). Never use ad-hoc
-`astro dev --port NNNN` or `astro preview --port NNNN` — use the npm scripts below.
+independently, or when ad-hoc `--port` flags drift from the pinned values. Pinned
+ports, stop/restart semantics, and the `--port`/`--host` anti-patterns:
+[Local servers and ports](#local-servers-and-ports) above.
 
 **Fix:**
 

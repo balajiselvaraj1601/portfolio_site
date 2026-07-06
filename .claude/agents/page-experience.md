@@ -65,7 +65,7 @@ still `content/work/experience.json` only.
 
 ### Typography & theming summary (this view)
 
-**T-levels present:** T2, T3, T5, T6, T7, T8.
+**T-levels present:** T2, T3, T5, T6, T7, T8 (contract §3a).
 
 **Element theming (colour tokens, per §3e):**
 
