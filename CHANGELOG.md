@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-07-06
+
+Vision view consolidation and page-label eyebrows across all nav views.
+
+### Added
+
+- Page-label eyebrows on view-opening sections: About, Experience, Research, Recognition (Vision and Contact unchanged)
+- `VisionImpactGrid.astro` — org-impact tiles rendered inside `vision-programs`
+
+### Changed
+
+- Vision view merged into a single `vision-programs` section; impact grid follows programs below an `h3` sub-heading
+- Experience eyebrow: Career → Experience
+- Design contract, page briefs, typography, and page-agent docs updated for eyebrow rules
+- Refreshed vision reference screenshots; baseline capture targets updated
+
+### Removed
+
+- Standalone `vision-impact` section (`VisionImpact.astro`) and its baseline screenshots
+
 ## [1.3.0] - 2026-07-06
 
 Post-refactor site review pass: design consistency, accessibility, content fixes, and follow-up hygiene.
