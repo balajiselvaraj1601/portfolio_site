@@ -67,7 +67,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
       }
 
       <p class="response-time">
-        <Icon name="clock" size={16} />
+        <Icon name="clock" size="sm" />
         {contactPage.responseTime}
       </p>
     </div>
@@ -105,7 +105,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
                 <p class="connect-val">{c.value}</p>
                 <span class="connect-action">
                   {actionLabel(c.type)}
-                  <Icon name="arrow-right" size={16} />
+                  <Icon name="arrow-right" size="sm" />
                 </span>
               </a>
             );

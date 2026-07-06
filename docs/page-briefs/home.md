@@ -11,10 +11,12 @@
 | `thirukural`      | `content/person/profile.json` (`heroQuote`)                         | What grounds it?                              | light  |
 | `leadership`      | `content/person/profile.json`, `content/person/collaborations.json` | Who are they, and why trust their leadership? | heavy  |
 
-The About group opens the page: hero and Thirukural couplet share an `AboutLanding` wrapper,
-then the merged profile and leadership section (`leadership`: bio, scan cards, philosophy, themes,
-collaboration logos). All sections are visible on `/` — the page scrolls through every group in
-nav order, and the **About** button scrolls to the leadership section (title: About).
+The About group opens the page: hero and Thirukural couplet share an `AboutLanding` wrapper
+(`#about-landing`) that forms the **hero band** — it ends flush above the leadership section.
+The merged profile and leadership section (`leadership`: bio, scan cards, philosophy, themes,
+collaboration logos) is the start of the About view. All sections are visible on `/` — the page
+scrolls through every group in nav order, and the **About** button scrolls to `#leadership`
+(title: About), with the full hero band scrolled out of view above it.
 
 ## Full DOM order on `/`
 

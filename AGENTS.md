@@ -247,14 +247,18 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 
 ### Skills (Reusable, invoked by agents)
 
-| Skill                            | Used by                                         | Reference                                                |
-| -------------------------------- | ----------------------------------------------- | -------------------------------------------------------- |
-| `site-review-fix`                | site-review-fix agent                           | `.claude/skills/site-review-fix/SKILL.md`                |
-| `page-consistency-team`          | site-consistency-orchestrator, site-review-auto | `.claude/skills/page-consistency-team/SKILL.md`          |
-| `portfolio-icon-audit`           | Manual invocation                               | `.claude/skills/portfolio-icon-audit/SKILL.md`           |
-| `portfolio-icon-standardization` | Manual invocation; design-guardian, page agents | `.claude/skills/portfolio-icon-standardization/SKILL.md` |
-| `svg-logo-crop`                  | Manual invocation                               | `.claude/skills/svg-logo-crop/SKILL.md`                  |
-| `icon-square-center`             | Manual invocation (raster prep)                 | `.claude/skills/icon-square-center/SKILL.md`             |
+| Skill                            | Used by                                                 | Reference                                                |
+| -------------------------------- | ------------------------------------------------------- | -------------------------------------------------------- |
+| `site-review-fix`                | site-review-fix agent                                   | `.claude/skills/site-review-fix/SKILL.md`                |
+| `page-consistency-team`          | site-consistency-orchestrator, site-review-auto         | `.claude/skills/page-consistency-team/SKILL.md`          |
+| `portfolio-icon-audit`           | Manual invocation                                       | `.claude/skills/portfolio-icon-audit/SKILL.md`           |
+| `portfolio-icon-standardization` | Manual invocation; design-guardian, page agents         | `.claude/skills/portfolio-icon-standardization/SKILL.md` |
+| `svg-logo-crop`                  | Manual invocation                                       | `.claude/skills/svg-logo-crop/SKILL.md`                  |
+| `icon-square-center`             | Manual invocation (raster prep)                         | `.claude/skills/icon-square-center/SKILL.md`             |
+| `portfolio-content-authoring`    | Manual invocation                                       | `.claude/skills/portfolio-content-authoring/SKILL.md`    |
+| `portfolio-visual-verify`        | Manual invocation                                       | `.claude/skills/portfolio-visual-verify/SKILL.md`        |
+| `portfolio-seo-meta`             | Manual invocation                                       | `.claude/skills/portfolio-seo-meta/SKILL.md`             |
+| `portfolio-a11y-contrast`        | Manual invocation; hands token edits to design-guardian | `.claude/skills/portfolio-a11y-contrast/SKILL.md`        |
 
 ## Icon / Logo Asset Pipeline
 
@@ -354,6 +358,10 @@ When the save button is loading, CSS sets `opacity: 0` on its child icon. After 
 | Agents — design contracts               | `.claude/references/design-consistency-contract.md`                    |
 | Agents — page-agent playbook            | `.claude/references/page-agent-playbook.md`                            |
 | Agents — authoring standard             | `.claude/references/page-agent-standard.md`                            |
+| Content authoring (schema-first JSON)   | `.claude/skills/portfolio-content-authoring/SKILL.md`                  |
+| Visual verify (screenshot / reveal)     | `.claude/skills/portfolio-visual-verify/SKILL.md`                      |
+| SEO / metadata sync (URL, OG, JSON-LD)  | `.claude/skills/portfolio-seo-meta/SKILL.md`                           |
+| Accessibility / contrast (WCAG AA)      | `.claude/skills/portfolio-a11y-contrast/SKILL.md`                      |
 | Icon / logo audit (Claude skill)        | `.claude/skills/portfolio-icon-audit/SKILL.md`                         |
 | Icon size / chrome / color SSOT (skill) | `.claude/skills/portfolio-icon-standardization/SKILL.md`               |
 | Logo SVG border crop (visible ink)      | `.claude/skills/svg-logo-crop/SKILL.md`                                |

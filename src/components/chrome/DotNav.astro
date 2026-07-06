@@ -78,6 +78,8 @@ const { sections } = Astro.props;
 </style>
 
 <script>
+  import { scrollToElement } from '../../scripts/scroll-to-section';
+
   const nav = document.getElementById('dot-nav');
   if (nav) {
     const dots = Array.from(nav.querySelectorAll<HTMLElement>('.dot-nav__dot'));
@@ -97,15 +99,7 @@ const { sections } = Astro.props;
       dot.hidden = false;
       dot.addEventListener('click', () => {
         const target = document.getElementById(dot.dataset.target ?? '');
-        if (target) {
-          const reduce = window.matchMedia(
-            '(prefers-reduced-motion: reduce)'
-          ).matches;
-          target.scrollIntoView({
-            behavior: reduce ? 'auto' : 'smooth',
-            block: 'start',
-          });
-        }
+        if (target) scrollToElement(target);
       });
     });
 

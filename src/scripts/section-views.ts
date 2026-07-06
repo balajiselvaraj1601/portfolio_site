@@ -1,4 +1,6 @@
 // NOTE: listeners/observers here assume MPA full-page loads (no teardown). If Astro view transitions are ever enabled, add AbortController-based cleanup.
+import { scrollToSectionId } from './scroll-to-section';
+
 /** Nav-driven single-page scroll for the home layout.
  *
  * All sections are always visible. The header nav buttons and deep links scroll
@@ -41,14 +43,7 @@ function updateNavActive(viewAnchor: string) {
 }
 
 function scrollToSection(sectionId: string | undefined) {
-  if (!sectionId) return;
-  const target = document.getElementById(sectionId);
-  if (!target) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  target.scrollIntoView({
-    behavior: reduce ? 'auto' : 'smooth',
-    block: 'start',
-  });
+  scrollToSectionId(sectionId);
 }
 
 export function initSectionViews(options: SectionViewsOptions) {

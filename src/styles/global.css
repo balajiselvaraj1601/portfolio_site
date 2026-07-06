@@ -206,6 +206,7 @@
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-spin: 0.7s;
   --header-h: 60px;
+  --header-h-compact: 52px;
 
   /* Responsive breakpoints — prefer these over ad-hoc px in media queries */
   --bp-sm: 560px;
@@ -1198,7 +1199,7 @@ button {
 /* Section rhythm */
 .section,
 .hero {
-  scroll-margin-top: var(--header-h);
+  scroll-margin-top: calc(var(--header-h) + var(--space-4));
 }
 .section {
   padding-block: var(--section-py-start) var(--section-py-end);
