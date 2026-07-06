@@ -6,13 +6,14 @@ Professional-grade raster → vector icon pipeline for the portfolio site.
 
 ```text
 scripts/
-├── svg-icon-generator.py          # Main pipeline — CANONICAL source of truth
-├── verify-icon.py                 # Independent margin/flush/centering check on a finished SVG
-├── batch-icon-generate.sh         # Convert every icon_box/icon_*.png in one pass (tight + cropped)
-├── check-skill-sync.sh            # Assert the .skill bundle ships the canonical script (no drift)
-├── SVG-ICON-GENERATOR.md          # Complete guide (quick-start + full methodology + troubleshooting)
-├── icon-generator-example.json    # Config template for advanced tuning
-└── generate-icon.sh               # Convenience shell wrapper
+├── check-skill-sync.sh                # Assert the .skill bundle ships the canonical script (no drift)
+└── icons/
+    ├── svg-icon-generator.py          # Main pipeline — CANONICAL source of truth
+    ├── verify-icon.py                 # Independent margin/flush/centering check on a finished SVG
+    ├── batch-icon-generate.sh         # Convert every icon_box/icon_*.png in one pass (tight + cropped)
+    ├── SVG-ICON-GENERATOR.md          # Complete guide (quick-start + full methodology + troubleshooting)
+    ├── icon-generator-example.json    # Config template for advanced tuning
+    └── generate-icon.sh               # Convenience shell wrapper
 ```
 
 > **Single source of truth.** `svg-icon-generator.py` is the one canonical
@@ -50,7 +51,7 @@ python3 -c "from svgelements import Path; print('✓ ready')"
 ```bash
 cd /home/engineer/workspace/portfolio_site
 
-python3 scripts/svg-icon-generator.py \
+python3 scripts/icons/svg-icon-generator.py \
   --source path/to/source.png \
   --name trophy
 ```
@@ -65,9 +66,9 @@ This creates:
 ### Using the convenience wrapper
 
 ```bash
-./scripts/generate-icon.sh ~/Downloads/icon.png my-icon
-./scripts/generate-icon.sh icon.png badge --sizes 24,32,48,512
-./scripts/generate-icon.sh icon.png skill --light-threshold 170 --no-badge
+./scripts/icons/generate-icon.sh ~/Downloads/icon.png my-icon
+./scripts/icons/generate-icon.sh icon.png badge --sizes 24,32,48,512
+./scripts/icons/generate-icon.sh icon.png skill --light-threshold 170 --no-badge
 ```
 
 ## How It Works
@@ -132,7 +133,7 @@ margin around the purple circle. Auto-crop (on by default) removes it before
 masking — safe because the glyph is white _inside_ the circle, so the non-white
 bounding box equals the circle and no glyph pixels are lost. Pair `--tight` with
 `--save-cropped` to emit both a border-free PNG and a border-free SVG in one pass.
-`scripts/batch-icon-generate.sh [DIR] [flags…]` does this for every
+`scripts/icons/batch-icon-generate.sh [DIR] [flags…]` does this for every
 `icon_*.png` in a directory (default `icon_box`), passing any extra flags through
 — e.g. `batch-icon-generate.sh …/icon_multimodal --colored-glyph --no-circle` for
 a colored-glyph-on-white set.
@@ -142,7 +143,7 @@ a colored-glyph-on-white set.
 Create a JSON config (or copy `icon-generator-example.json`) with precise tuning:
 
 ```bash
-python3 scripts/svg-icon-generator.py \
+python3 scripts/icons/svg-icon-generator.py \
   --source icon.png \
   --name icon \
   --config my-config.json
@@ -226,7 +227,7 @@ flush for `--tight`, center offset ~0 for the default square). For an **independ
 second measurement** taken straight from the finished file, run:
 
 ```bash
-python3 scripts/verify-icon.py src/assets/icons/*-icon-512.svg
+python3 scripts/icons/verify-icon.py src/assets/icons/*-icon-512.svg
 ```
 
 It reports each SVG's per-edge margins and a `tight`/`centered` verdict, exiting
@@ -256,7 +257,7 @@ The pipeline now combines **all** `<path>` elements in Phase 4 (`extract_flat_pa
 `turdsize` is suppressing intentional detail as noise. Lower it:
 
 ```bash
-python3 scripts/svg-icon-generator.py \
+python3 scripts/icons/svg-icon-generator.py \
   --source icon.png \
   --name icon \
   --config icon-config.json  # edit: "turdsize": 2 (default is 4)
@@ -351,7 +352,7 @@ If any fail, installation instructions appear in `SVG-ICON-GENERATOR.md`.
 ## Next Steps
 
 1. **Set up dependencies** (one-time, ~2 min)
-2. **Generate your first icon** (`./scripts/generate-icon.sh source.png icon-name`)
+2. **Generate your first icon** (`./scripts/icons/generate-icon.sh source.png icon-name`)
 3. **Verify visually** (check proportions, detail preservation, scaling)
 4. **Integrate into portfolio** (reference via `IconName` in `icon-paths.json`)
 5. **Tune as needed** (adjust `light_threshold`, `turdsize`, or bbox proportions per icon)

@@ -10,8 +10,8 @@ currentColor SVG icons with support for:
   - Full path flattening and optimization
 
 Usage:
-    python3 scripts/svg-icon-generator.py --source path/to/icon.png --name icon-name [options]
-    python3 scripts/svg-icon-generator.py --config config.json
+    python3 scripts/icons/svg-icon-generator.py --source path/to/icon.png --name icon-name [options]
+    python3 scripts/icons/svg-icon-generator.py --config config.json
 
 Requires:
     - System: potrace, npm (svgo)

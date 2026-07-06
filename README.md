@@ -48,7 +48,7 @@ portfolio_site/
 
 - **Content-driven (SSOT):** the site renders from JSON under `content/`. Don't hardcode copy in
   components — change a JSON file to change the site. Each file is validated at build time
-  against `src/schemas.ts`; an invalid shape fails the build. Content is **derived from the
+  against `src/schemas/`; an invalid shape fails the build. Content is **derived from the
   résumé** — see `content/README.md` for provenance and re-derivation.
 - **Privacy:** no phone number, no References surfaced (curated public set).
 - **Static & accessible:** GitHub Pages, Lighthouse 95+, WCAG 2.1 AA.

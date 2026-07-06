@@ -10,20 +10,20 @@
  * Brand marks are filled, so their path is rewritten to carry fill="#000"
  * stroke="none" (otherwise the fill="none" wrapper would render only a hairline).
  *
- * Usage:  node scripts/refresh-icon-geometry.mjs          # rewrite icon-paths.json
- *         node scripts/refresh-icon-geometry.mjs --dry     # print, don't write
+ * Usage:  node scripts/icons/refresh-icon-geometry.mjs          # rewrite icon-paths.json
+ *         node scripts/icons/refresh-icon-geometry.mjs --dry     # print, don't write
  *
  * After running, regenerate PNGs:
- *   node scripts/export-icon-svgs.mjs
- *   python3 scripts/process_logos.py --logos-dir scripts/.icon-stage --apply --min-trim-pct 100 --svg-scale 8
- *   cp scripts/.icon-stage/*.png public/assets/icons/ui/
+ *   node scripts/icons/export-icon-svgs.mjs
+ *   python3 scripts/icons/process_logos.py --logos-dir scripts/icons/.icon-stage --apply --min-trim-pct 100 --svg-scale 8
+ *   cp scripts/icons/.icon-stage/*.png public/assets/icons/ui/
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const root = resolve(here, '..');
+const root = resolve(here, '../..');
 const jsonPath = resolve(root, 'src/lib/icon-paths.json');
 
 const LUCIDE =

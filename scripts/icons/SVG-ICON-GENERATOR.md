@@ -16,7 +16,7 @@ pip install pillow numpy svgelements cairosvg
 
 ```bash
 # From source PNG, outputs to src/assets/icons/{name}-icon-*.svg
-python3 scripts/svg-icon-generator.py \
+python3 scripts/icons/svg-icon-generator.py \
   --source path/to/source.png \
   --name trophy \
   --output src/assets/icons
@@ -41,7 +41,7 @@ The pipeline implements **7 phases**:
 6. **Compose** — (If badge) Concatenate circle + glyph with `fill-rule="evenodd"`
 7. **Optimize** — svgo reduces file size ~70–80%
 
-All seven happen automatically in `python3 scripts/svg-icon-generator.py`.
+All seven happen automatically in `python3 scripts/icons/svg-icon-generator.py`.
 
 ## Philosophy
 
@@ -87,15 +87,15 @@ background** (default = light glyph on a dark/colored circle):
 A per-channel dark/light threshold shatters **colored** glyphs (a red pixel has a
 high R channel) — use `--colored-glyph` there. For a **transparent** PNG use
 `--alpha-glyph` (color-agnostic, most robust). For a whole set, run
-`scripts/batch-icon-generate.sh [DIR] [flags…]`.
+`scripts/icons/batch-icon-generate.sh [DIR] [flags…]`.
 
 ### Config file (full tuning)
 
 ```bash
-python3 scripts/svg-icon-generator.py \
+python3 scripts/icons/svg-icon-generator.py \
   --source icon.png \
   --name icon \
-  --config scripts/icon-generator-example.json
+  --config scripts/icons/icon-generator-example.json
 ```
 
 Edit `icon-generator-example.json` (all keys documented there with `comment_*`):
@@ -463,7 +463,7 @@ Not enough detail in source, or too much optimization. Lower `precision` in svgo
 Quick automated checks:
 
 ```bash
-python3 scripts/verify-icon.py src/assets/icons/*-icon-512.svg   # margins/flush/centered, exit!=0 on failure
+python3 scripts/icons/verify-icon.py src/assets/icons/*-icon-512.svg   # margins/flush/centered, exit!=0 on failure
 python3 tests/run-icon-tests.py                                  # golden-regression harness (all modes)
 ```
 
@@ -533,7 +533,7 @@ python3 -c "from svgelements import Path; print('OK')"
 
 ## References
 
-- Example Python code: `scripts/svg-icon-generator.py` (Phases 1–7)
+- Example Python code: `scripts/icons/svg-icon-generator.py` (Phases 1–7)
 - potrace docs: `man potrace` or https://potrace.sourceforge.net/
 - svgelements: https://github.com/meerk40t/svgelements
 - SVG fill-rule: https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/fill-rule

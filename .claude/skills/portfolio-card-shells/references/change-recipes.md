@@ -18,7 +18,7 @@ Step-by-step procedures for defining and changing boxes. Each: goal → files �
 ## B — Recolor one card or group (per-item)
 
 **Goal:** a card carries its own hue from a content key.
-**Files:** `src/schemas.ts`, `src/styles/global.css`, the section component.
+**Files:** `src/schemas/`, `src/styles/global.css`, the section component.
 **Steps:**
 
 1. If the hue is new, add the enum value to the relevant schema

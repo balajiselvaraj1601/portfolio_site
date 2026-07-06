@@ -7,7 +7,7 @@
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@lib/*": ["src/lib/*"],
-      "@schemas": ["src/schemas.ts"]
+      "@schemas": ["src/schemas/index.ts"]
     },
     "resolveJsonModule": true,
     "allowJs": true

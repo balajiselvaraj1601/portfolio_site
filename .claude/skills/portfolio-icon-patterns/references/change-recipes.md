@@ -42,8 +42,8 @@ batch edits to one file into a single pass.
 
 ## Define a new pipeline mark (raster → SVG → wired)
 
-1. Generate: `./scripts/batch-icon-generate.sh <src-dir> [flags]` (per-archetype mask flags — e.g. `--colored-glyph`, `--alpha-glyph` — trace raster PNG → optimized recolorable SVG on a 24×24 canvas). Requires `potrace` + `svgo`.
-2. Normalize: `python3 scripts/normalize-mark-viewbox.py apply` so the glyph sits optically centered at one scale.
+1. Generate: `./scripts/icons/batch-icon-generate.sh <src-dir> [flags]` (per-archetype mask flags — e.g. `--colored-glyph`, `--alpha-glyph` — trace raster PNG → optimized recolorable SVG on a 24×24 canvas). Requires `potrace` + `svgo`.
+2. Normalize: `python3 scripts/icons/normalize-mark-viewbox.py apply` so the glyph sits optically centered at one scale.
 3. Install: place the `logo_<name>.svg` in `public/assets/logos/marks/`.
 4. Wire: reference it as `VisionMark {kind:'logo', asset:'logo_<name>'}` (or a semantic `icon` if it's a UI glyph, per "Change glyph").
 5. Test the pipeline itself with `python3 tests/run-icon-tests.py` (golden byte-diff + semantic centering).
@@ -53,4 +53,4 @@ batch edits to one file into a single pass.
 1. Decide the single token that owns the aspect (e.g. `--mark-glyph` for glyph size, `--view-accent-<view>` for view tint).
 2. Edit it **once** in `global.css :root` (guardian's file).
 3. Read the affected view components in parallel and spot-check that none hardcode the value (see `anti-patterns.md`); fix any that bypass the token.
-4. Verify once: `npm run check:tokens` → `python3 scripts/normalize-mark-viewbox.py check` → `npm run build` (or `npm run verify`).
+4. Verify once: `npm run check:tokens` → `python3 scripts/icons/normalize-mark-viewbox.py check` → `npm run build` (or `npm run verify`).

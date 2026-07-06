@@ -79,7 +79,7 @@ Parallel: launch independent audit sweeps in one message
 ## Hard rules (all runs)
 
 - Copy in `content/` only — not components
-- Schema changes: `src/schemas.ts` first
+- Schema changes: `src/schemas/` first
 - `npm run verify` before handoff
 - No phone numbers; no dist commits
 - `@astrojs/sitemap` pinned at 3.6.0

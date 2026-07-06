@@ -16,12 +16,12 @@ This covers **two layers**:
 | Language / format             | Where it lives                                                             | Role                                                                      |
 | ----------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
 | **Astro** (`.astro`)          | `src/components/`, `src/pages/`, `src/layouts/`                            | Primary UI layer — ~69 files; HTML-like templates with TS frontmatter     |
-| **TypeScript** (`.ts`)        | `src/schemas.ts`, `src/lib/content.ts`, `src/scripts/*.ts`                 | Schema contracts, content loading, client-side nav/theme/save-page        |
+| **TypeScript** (`.ts`)        | `src/schemas/`, `src/lib/content.ts`, `src/scripts/*.ts`                   | Schema contracts, content loading, client-side nav/theme/save-page        |
 | **JavaScript (ESM)** (`.mjs`) | `astro.config.mjs`, `scripts/*.mjs`, `.cursor/scripts/smoke-localhost.mjs` | Build config, icon tooling, Playwright smoke tests                        |
 | **CSS**                       | `src/styles/global.css`                                                    | Hand-rolled design tokens and layout (no Tailwind/framework)              |
 | **JSON**                      | `content/**/*.json`, `content/site.json`                                   | **Single source of truth for all public copy** and route/section wiring   |
 | **Bash**                      | `.cursor/hooks/*.sh`, `.cursor/scripts/task-runner-*.sh`                   | Task-runner automation, Cursor hook glue                                  |
-| **Python**                    | `scripts/process_logos.py`                                                 | Logo normalization/trim pipeline (Pillow + Playwright)                    |
+| **Python**                    | `scripts/icons/process_logos.py`                                           | Logo normalization/trim pipeline (Pillow + Playwright)                    |
 | **YAML**                      | `.github/workflows/deploy.yml`                                             | CI build + GitHub Pages deploy                                            |
 | **Markdown**                  | `docs/`, `TASKS.md` (per-batch), `.cursor/skills/`                         | Specs, agent instructions, checkbox task queue (operational, not runtime) |
 
@@ -32,7 +32,7 @@ This covers **two layers**:
 ```mermaid
 flowchart LR
   json["content/**/*.json"]
-  zod["src/schemas.ts Zod"]
+  zod["src/schemas/ Zod"]
   loader["src/lib/content.ts"]
   astro["src/components + pages"]
   build["npm run build"]
@@ -106,7 +106,7 @@ flowchart TB
 
 - Schema-first field changes (`z.object`, `z.enum`, `z.infer`).
 - Interpreting build-time `safeParse` errors with field paths in `src/lib/content.ts`.
-- Extend `src/schemas.ts` before editing matching JSON under `content/`.
+- Extend `src/schemas/` before editing matching JSON under `content/`.
 
 **@astrojs/check** (optional dev check)
 
@@ -172,10 +172,10 @@ flowchart TB
 - Deploy job runs only when `github.repository == 'balajiselvaraj1601/balajiselvaraj1601.github.io'`.
 - Staging mirror validates builds without publishing.
 
-**Python + Pillow** (optional — `scripts/process_logos.py`)
+**Python + Pillow** (optional — `scripts/icons/process_logos.py`)
 
 - Logo normalization, format detection, and border trimming for `assets/source/logos/`.
-- Requires `pip install -r scripts/requirements-logos.txt` and Playwright Chromium.
+- Requires `pip install -r scripts/icons/requirements-logos.txt` and Playwright Chromium.
 
 ### Cross-stack skill clusters
 
@@ -210,7 +210,7 @@ Grouped by how much of day-to-day work each skill unlocks.
 
 ### Tier 1 — Covers ~70–80% of portfolio changes
 
-1. **TypeScript fundamentals** — modules, types, `z.infer`, reading/building on existing patterns in `src/schemas.ts` and `src/lib/content.ts`.
+1. **TypeScript fundamentals** — modules, types, `z.infer`, reading/building on existing patterns in `src/schemas/` and `src/lib/content.ts`.
 
 2. **Zod schema-first design** — add/change JSON fields in schema first, then content, then components. Build fails fast on mismatch (`npm run build`).
 
@@ -242,7 +242,7 @@ Grouped by how much of day-to-day work each skill unlocks.
 
 ### Tier 4 — Asset and cross-repo pipelines
 
-14. **Python + Pillow** — logo processing in `scripts/process_logos.py`.
+14. **Python + Pillow** — logo processing in `scripts/icons/process_logos.py`.
 
 15. **Icon/logo tooling** — Node scripts (`refresh-icon-geometry.mjs`, `export-icon-svgs.mjs`) and the `portfolio-icon-audit` skill; may delegate to `image_gen` for SVG authoring/rasterization.
 
@@ -285,15 +285,15 @@ To **programmatically maintain most of this environment**, a developer (or agent
 
 ## Quick command map (programmatic verification)
 
-| Goal                            | Command                                   |
-| ------------------------------- | ----------------------------------------- |
-| Install deps                    | `npm ci`                                  |
-| Dev server                      | `npm run dev`                             |
-| Validate + build                | `npm run build`                           |
-| Preview production build        | `npm run preview`                         |
-| Smoke test (dev server running) | `npm run smoke:localhost`                 |
-| Start agent task batch          | `./.cursor/scripts/task-runner-start.sh`  |
-| Process logos                   | `python scripts/process_logos.py --apply` |
+| Goal                            | Command                                         |
+| ------------------------------- | ----------------------------------------------- |
+| Install deps                    | `npm ci`                                        |
+| Dev server                      | `npm run dev`                                   |
+| Validate + build                | `npm run build`                                 |
+| Preview production build        | `npm run preview`                               |
+| Smoke test (dev server running) | `npm run smoke:localhost`                       |
+| Start agent task batch          | `./.cursor/scripts/task-runner-start.sh`        |
+| Process logos                   | `python scripts/icons/process_logos.py --apply` |
 
 ## Related docs
 

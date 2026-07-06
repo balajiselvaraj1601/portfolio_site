@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 from icon_brightness_lib import SET_CONFIG, list_svg_outputs
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 LOGO_DIR = PROJECT_ROOT / "public/assets/logos" / "marks"
 OUT_DIR = PROJECT_ROOT / "docs/reference/screenshots"
 

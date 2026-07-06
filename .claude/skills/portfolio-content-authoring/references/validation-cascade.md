@@ -9,7 +9,7 @@ the `load()` helper — treat those files as the SSOT for exact wording.
 ## 1. Content shape (Zod `safeParse`)
 
 The `load(name, schema, raw)` helper parses each file against its schema in
-`src/schemas.ts`. On failure it throws:
+`src/schemas/`. On failure it throws:
 
 ```
 Invalid content in <file>:

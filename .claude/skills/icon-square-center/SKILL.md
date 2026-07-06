@@ -21,7 +21,7 @@ translated verbatim, so it is provably lossless.
 - Any batch where "make them square and centered without losing the artwork" is the ask.
 
 Do **not** use for: SVG/vector logos (`svg-logo-crop`), acquiring new icons (`ui-icon-acquisition`),
-or recoloring/normalizing ink luminance (`scripts/normalize-icon-ink.py`).
+or recoloring/normalizing ink luminance (`scripts/icons/normalize-icon-ink.py`).
 
 ## How it works (no resizing)
 
@@ -71,7 +71,7 @@ take arbitrary `--src/--out` and accept either `--files NAME ...` or `--all`.
 
 ## Verification (two independent measurements + a falsifiable eye check)
 
-This follows the repo's existing convention — see `scripts/verify-icon.py`: _"the generator's own
+This follows the repo's existing convention — see `scripts/icons/verify-icon.py`: _"the generator's own
 `_verify()` asserts its output during a run; this is the second, independent measurement … two
 independent measurements agreeing is far stronger evidence than one."_
 

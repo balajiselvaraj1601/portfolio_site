@@ -3,14 +3,14 @@
 # borderless SVG (512 longest side) plus a white-border-cropped PNG.
 #
 # Usage:
-#   ./scripts/batch-icon-generate.sh [ICONS_DIR] [extra generator flags...]
+#   ./scripts/icons/batch-icon-generate.sh [ICONS_DIR] [extra generator flags...]
 #
 # Examples:
 #   # icon_box — white glyph on a solid circle (the default archetype):
-#   ./scripts/batch-icon-generate.sh
+#   ./scripts/icons/batch-icon-generate.sh
 #
 #   # icon_multimodal — colored/gradient glyph + ring outline on white:
-#   ./scripts/batch-icon-generate.sh ~/workspace/icon_multimodal \
+#   ./scripts/icons/batch-icon-generate.sh ~/workspace/icon_multimodal \
 #       --colored-glyph --no-circle
 #
 # The first argument (if it doesn't start with "-") is the target directory;
@@ -21,10 +21,10 @@ set -e
 
 # Default icon directory: override with ICON_BOX_DIR, else ~/workspace/icon_box.
 DEFAULT_DIR="${ICON_BOX_DIR:-$HOME/workspace/icon_box}"
-PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-GENERATOR="$PROJECT_ROOT/scripts/svg-icon-generator.py"
-NORMALIZER="$PROJECT_ROOT/scripts/normalize-icon-sources.py"
-INK_EQUALIZER="$PROJECT_ROOT/scripts/normalize-icon-ink.py"
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+GENERATOR="$PROJECT_ROOT/scripts/icons/svg-icon-generator.py"
+NORMALIZER="$PROJECT_ROOT/scripts/icons/normalize-icon-sources.py"
+INK_EQUALIZER="$PROJECT_ROOT/scripts/icons/normalize-icon-ink.py"
 
 # First arg = directory (unless it's a flag); the rest = pass-through flags.
 if [[ $# -gt 0 && "$1" != -* ]]; then
@@ -36,7 +36,7 @@ EXTRA_FLAGS=("$@")
 
 # Load known icon sets from the configuration.
 known_icon_sets() {
-  python3 -c "import json; print(' '.join(json.load(open('$PROJECT_ROOT/scripts/icon-sets.json'))['icon_sets'].keys()))"
+  python3 -c "import json; print(' '.join(json.load(open('$PROJECT_ROOT/scripts/icons/icon-sets.json'))['icon_sets'].keys()))"
 }
 
 if [[ ! -d "$ICONS_DIR" ]]; then

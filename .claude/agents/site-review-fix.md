@@ -34,7 +34,7 @@ These rules override EVERYTHING else.
 
 | #   | Rule                                                                                                                                                                         |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | **AGENTS.md is law.** Copy in `content/` only; schema-first (`src/schemas.ts`); `npm run verify` before handoff; no phone numbers; no `dist/` commits.                       |
+| 1   | **AGENTS.md is law.** Copy in `content/` only; schema-first (`src/schemas/`); `npm run verify` before handoff; no phone numbers; no `dist/` commits.                         |
 | 2   | **Sitemap pin.** Do not upgrade `@astrojs/sitemap` from exactly `3.6.0`.                                                                                                     |
 | 3   | **Fix all verified issues** — High, Medium, and Low where safe. Do not defer to a report-only pass.                                                                          |
 | 4   | **Baseline audit doc.** Read `docs/audits/full-site-review-2026-07-05.md` in Phase 2; re-verify every theme — do not assume prior fixes still hold.                          |

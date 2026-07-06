@@ -3,16 +3,16 @@
 # public/assets/logos/ with the logo_ prefix (underscores, not dashes).
 #
 # Usage:
-#   ./scripts/install-vision-logos.sh [icon_dir ...]
+#   ./scripts/icons/install-vision-logos.sh [icon_dir ...]
 #
-# Defaults: install_order from scripts/icon-sets.json under ~/workspace.
+# Defaults: install_order from scripts/icons/icon-sets.json under ~/workspace.
 
 set -euo pipefail
 
-PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 DEST="$PROJECT_ROOT/public/assets/logos/marks"
 WORKSPACE="${ICON_WORKSPACE:-$HOME/workspace}"
-CONFIG="$PROJECT_ROOT/scripts/icon-sets.json"
+CONFIG="$PROJECT_ROOT/scripts/icons/icon-sets.json"
 
 resolve_slug() {
   local set_name="$1"

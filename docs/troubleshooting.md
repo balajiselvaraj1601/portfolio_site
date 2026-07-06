@@ -13,12 +13,12 @@ Invalid content in profile.json:
   • contact.1.href: Invalid url
 ```
 
-**Cause:** JSON does not match the Zod schema in `src/schemas.ts`.
+**Cause:** JSON does not match the Zod schema in `src/schemas/`.
 
 **Fix:**
 
 1. Read the field path in the error message.
-2. Compare against the schema in `src/schemas.ts`.
+2. Compare against the schema in `src/schemas/`.
 3. Common mistakes: missing required field, invalid URL format, wrong `tier` enum value.
 
 See [Content editing](./content-editing.md).

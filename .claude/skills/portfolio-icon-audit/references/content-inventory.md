@@ -46,7 +46,7 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 ## 2. Logo files (VisionMark kind: logo)
 
 **Pattern:** `public/assets/logos/{slug}.svg`  
-**Schema:** `VisionMark` in `src/schemas.ts`
+**Schema:** `VisionMark` in `src/schemas/work.ts`
 
 ### vision-board.json — logo marks
 

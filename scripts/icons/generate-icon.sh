@@ -2,18 +2,18 @@
 # generate-icon.sh — convenience wrapper for svg-icon-generator.py
 #
 # Usage:
-#   ./scripts/generate-icon.sh path/to/source.png icon-name [options]
+#   ./scripts/icons/generate-icon.sh path/to/source.png icon-name [options]
 #
 # Examples:
-#   ./scripts/generate-icon.sh ~/Downloads/trophy.png trophy
-#   ./scripts/generate-icon.sh icon.png skill-badge --sizes 24,32,48,512
-#   ./scripts/generate-icon.sh icon.png doc --colored-glyph --no-circle --tight   # colored ink on white
-#   ./scripts/generate-icon.sh icon.png doc --alpha-glyph --no-circle --tight     # transparent-bg PNG
+#   ./scripts/icons/generate-icon.sh ~/Downloads/trophy.png trophy
+#   ./scripts/icons/generate-icon.sh icon.png skill-badge --sizes 24,32,48,512
+#   ./scripts/icons/generate-icon.sh icon.png doc --colored-glyph --no-circle --tight   # colored ink on white
+#   ./scripts/icons/generate-icon.sh icon.png doc --alpha-glyph --no-circle --tight     # transparent-bg PNG
 
 set -e
 
-PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-GENERATOR="$PROJECT_ROOT/scripts/svg-icon-generator.py"
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+GENERATOR="$PROJECT_ROOT/scripts/icons/svg-icon-generator.py"
 
 if [[ ! -f "$GENERATOR" ]]; then
     echo "Error: svg-icon-generator.py not found at $GENERATOR"
@@ -23,7 +23,7 @@ fi
 if [[ $# -lt 2 ]]; then
     echo "Usage: $(basename "$0") <source-image> <icon-name> [options]"
     echo ""
-    echo "Options (see 'python3 scripts/svg-icon-generator.py --help' for all):"
+    echo "Options (see 'python3 scripts/icons/svg-icon-generator.py --help' for all):"
     echo "  --output DIR                Output directory (default: src/assets/icons)"
     echo "  --sizes SIZE1,SIZE2,...     Comma-separated output sizes (default: 24,512)"
     echo "  --no-badge                  Skip badge variant generation"

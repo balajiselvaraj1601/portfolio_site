@@ -5,7 +5,7 @@ How to change what the site says without touching components.
 ## Golden rule
 
 **All copy lives in JSON under `content/`.** Components render data; they do not embed text.
-If you need a new field, update `src/schemas.ts` first, then the JSON, then the component.
+If you need a new field, update `src/schemas/` first, then the JSON, then the component.
 
 ## Workflow
 
@@ -140,7 +140,7 @@ Edit `content/person/profile.json` → `contact` array. Allowed public types: `e
 
 ## Schema rules
 
-Schemas live in `src/schemas.ts`. Key constraints:
+Schemas live in `src/schemas/`. Key constraints:
 
 | Schema                 | Notable rules                                                                                         |
 | ---------------------- | ----------------------------------------------------------------------------------------------------- |
@@ -155,7 +155,7 @@ Schemas live in `src/schemas.ts`. Key constraints:
 
 Adding a new field:
 
-1. Extend the Zod schema in `src/schemas.ts`
+1. Extend the Zod schema in `src/schemas/`
 2. Add the field to the JSON file
 3. Update the section component to render it
 4. Run `npm run build`

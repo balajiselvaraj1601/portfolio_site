@@ -9,7 +9,7 @@ constraints are load-bearing — one is a repo Hard Rule. Sources of truth:
 
 1. **No phone number, anywhere.** The résumé's phone field is omitted from all
    content. `AGENTS.md` Hard Rule 3 and `content/README.md` both state this.
-   Contact channels are constrained by `contactTypeSchema` in `src/schemas.ts`
+   Contact channels are constrained by `contactTypeSchema` in `src/schemas/person.ts`
    (`email`, `linkedin`, `github`, `kaggle`, `location`) — `phone` is not a
    member, so a phone contact will not even validate.
 2. **No References section.** The résumé's `references` block is private and must

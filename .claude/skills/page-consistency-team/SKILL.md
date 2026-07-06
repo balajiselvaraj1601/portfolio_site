@@ -84,7 +84,7 @@ Prompt: include agent file path (page-routing.csv agent_file column) + "return J
 ## Hard rules (all agents)
 
 - Copy in `content/` only — not components
-- Schema changes: `src/schemas.ts` first
+- Schema changes: `src/schemas/` first
 - `npm run build` before handoff
 - No phone numbers; no dist commits
 - `@astrojs/sitemap` pinned at 3.6.0

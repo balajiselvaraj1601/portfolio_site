@@ -23,6 +23,6 @@ pass; this list is the fast field guide.
 ## Verification commands
 
 - `npm run check:tokens` — `scripts/check-icon-token-sync.mjs`; fails on `--icon-*` ↔ `ICON_SIZE_TOKENS` drift (anti-pattern #10).
-- `python3 scripts/normalize-mark-viewbox.py check` — reports un-normalized mark viewBoxes (anti-pattern #7).
+- `python3 scripts/icons/normalize-mark-viewbox.py check` — reports un-normalized mark viewBoxes (anti-pattern #7).
 - `npm run build` — catches invalid icon names / schema violations (anti-pattern #9).
 - `npm run verify` — full gate (check + tokens + lint + format + build) before handoff.

@@ -3,13 +3,13 @@
 # assets/icon-collections-resized/ into public/assets/logos/{subfolder}/ by prefix rule.
 #
 # Usage:
-#   ./scripts/install-icon-collections-png.sh [SOURCE_DIR]
+#   ./scripts/icons/install-icon-collections-png.sh [SOURCE_DIR]
 #
 # Default SOURCE_DIR: $PROJECT_ROOT/assets/icon-collections-resized
 
 set -euo pipefail
 
-PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+PROJECT_ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
 SOURCE="${1:-$PROJECT_ROOT/assets/icon-collections-resized}"
 DEST_BASE="$PROJECT_ROOT/public/assets/logos"
 

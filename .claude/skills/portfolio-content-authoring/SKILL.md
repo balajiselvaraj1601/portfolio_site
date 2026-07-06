@@ -8,7 +8,7 @@ description: >-
   "schema-first", reorder/hide a section, wire a section into a view, link an
   organization, or fix a build-time content validation error. Components render
   data; they never embed copy — so every text change lands in content/ and every
-  new field starts in src/schemas.ts. Do NOT use for visual/token/card design
+  new field starts in src/schemas/. Do NOT use for visual/token/card design
   (portfolio-card-shells), for icons/marks/glyphs or missing logo assets
   (portfolio-icon-* skills), or for cross-view design conflicts
   (page-consistency-team).
@@ -27,7 +27,7 @@ value that another file owns.
 
 | Source                                  | Owns                                                                                                                                                |
 | --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `src/schemas.ts`                        | Content **shape** — every field, enum, and constraint. All types derive via `z.infer` (no parallel interfaces).                                     |
+| `src/schemas/`                          | Content **shape** — every field, enum, and constraint. All types derive via `z.infer` (no parallel interfaces).                                     |
 | `src/lib/content.ts`                    | Build-time **validation cascade**: `load()` per file, entity-slug + logo-asset + section/view wiring checks, and `logoSrc` / nav / view derivation. |
 | `content/README.md`                     | Provenance (curated snapshot of the résumé), curation rules, file→section map.                                                                      |
 | `docs/content-editing.md`               | Step-by-step editing workflow, per-file edit reference, schema-rule table.                                                                          |
@@ -39,14 +39,14 @@ Reference these files by path. Never copy an enum member, field list, or URL out
 ## Core rule
 
 > **The schema is the source of truth for shape; the JSON is the source of truth
-> for copy.** To add or change any field, edit `src/schemas.ts` **first** (types
+> for copy.** To add or change any field, edit `src/schemas/` **first** (types
 > flow from it via `z.infer`), then the JSON, then the component. To change words
 > only, edit the JSON alone. Never hardcode copy in a component, and never
 > hand-write a type that mirrors a schema.
 
 ## The five rules that fail the build if broken
 
-1. **Schema before field.** Types are derived (`z.infer` in `src/schemas.ts`). A
+1. **Schema before field.** Types are derived (`z.infer` in `src/schemas/`). A
    JSON field with no schema entry is dropped or rejected by `safeParse`. Extend
    the Zod schema **before** adding or renaming a JSON field. See
    [references/schema-first-recipe.md](references/schema-first-recipe.md).
@@ -60,7 +60,7 @@ Reference these files by path. Never copy an enum member, field list, or URL out
    route files stay generic — do not reorder in `src/pages/*.astro`. See
    [references/content-file-map.md](references/content-file-map.md).
 4. **Privacy (Hard Rule).** Never publish a phone number or a References section.
-   Contact channels are limited to the `contactTypeSchema` enum in `src/schemas.ts`.
+   Contact channels are limited to the `contactTypeSchema` enum in `src/schemas/person.ts`.
    See [references/privacy-and-curation.md](references/privacy-and-curation.md).
 5. **Validate with `npm run build`.** Zod runs automatically and fails fast — it
    reports the exact field path on a shape error and a named error on a broken slug

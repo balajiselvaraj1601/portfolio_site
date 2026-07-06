@@ -18,9 +18,9 @@ assigned to a family by slug prefix (families map 1:1 to render contexts).
 Slugs outside every family become singletons (square-pad only, zero shrink).
 
 Usage:
-    python3 scripts/normalize-mark-viewbox.py list                # show groups
-    python3 scripts/normalize-mark-viewbox.py apply [--group G] [--dry-run]
-    python3 scripts/normalize-mark-viewbox.py check [--group G]
+    python3 scripts/icons/normalize-mark-viewbox.py list                # show groups
+    python3 scripts/icons/normalize-mark-viewbox.py apply [--group G] [--dry-run]
+    python3 scripts/icons/normalize-mark-viewbox.py check [--group G]
 
 Idempotent: re-running apply after a marks/ batch regen (which re-traces tight
 viewBoxes) restores normalization. Run it after ANY regeneration of marks/ —
@@ -35,7 +35,7 @@ from pathlib import Path
 
 from svgelements import Path as SVGPath
 
-ROOT = Path(__file__).resolve().parent.parent
+ROOT = Path(__file__).resolve().parent.parent.parent
 MARKS = ROOT / "public" / "assets" / "logos" / "marks"
 
 # Ordered longest-prefix-first. Each family is one render context (identical

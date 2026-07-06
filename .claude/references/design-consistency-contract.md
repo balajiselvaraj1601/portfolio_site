@@ -349,7 +349,7 @@ Use token media queries — prefer `var(--bp-md)` etc. over raw `768px`.
 | C1    | Section order from `content/site.json → home.sections` only              |
 | C2    | Each section id in exactly one `viewSections` group                      |
 | C3    | Copy changes in `content/` paths listed in site.json `sections.*.source` |
-| C4    | Schema changes precede content (`src/schemas.ts`)                        |
+| C4    | Schema changes precede content (`src/schemas/`)                          |
 
 ---
 

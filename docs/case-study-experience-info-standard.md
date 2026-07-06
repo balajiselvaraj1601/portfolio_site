@@ -8,7 +8,7 @@ what format**, in the site's most information-dense section:
 Use it when adding or editing a role or nested project so every item is complete, comparable, and
 easy for anyone to analyze at a glance.
 
-> **Source of truth:** the field lists below mirror `experienceSchema` in `src/schemas.ts`. If the
+> **Source of truth:** the field lists below mirror `experienceSchema` in `src/schemas/work.ts`. If the
 > schema and this doc ever disagree, the schema wins — update this doc. Do **not** invent fields here
 > that the schema does not define.
 
@@ -107,13 +107,13 @@ rest are optional but part of the _ideal_ item (see the checklist).
 
 - **`entity` slugs** must exist in `entities.json` (`{ name, url }`). An unknown slug renders no
   logo/link.
-- **`icon` values** must be valid Lucide `IconName`s (see `iconNameSchema` in `src/schemas.ts`).
+- **`icon` values** must be valid Lucide `IconName`s (see `iconNameSchema` in `src/lib/icons.ts`).
 - **Impact-first writing** — lead with the quantified result, then method. Applies to experience
   `primary` bullets.
 - **No fabrication** — every line traces to the resume/wiki source; preserve canonical facts
   verbatim (team scale 1→12; "$3M+ = AI Lead *within*"; $20M–$50M is a program-level projection).
   See [content-map.md](./content-map.md).
-- **Schema first** — to add a field, update `src/schemas.ts`, then the JSON, then the component
+- **Schema first** — to add a field, update `src/schemas/`, then the JSON, then the component
   (the golden rule in [content-editing.md](./content-editing.md)), then this doc.
 
 ---
@@ -123,4 +123,4 @@ rest are optional but part of the _ideal_ item (see the checklist).
 - [Content editing](./content-editing.md) — how to edit the JSON files these items live in
 - [Content map](./content-map.md) — résumé → portfolio provenance and canonical-facts rules
 - [content/README.md](../content/README.md) — curation rules
-- `src/schemas.ts` — the enforced schema (source of truth for every field above)
+- `src/schemas/work.ts` — the enforced schema (source of truth for every field above)

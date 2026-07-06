@@ -29,7 +29,7 @@ installed under `public/assets/logos/{kaggle,vision,education,awards,general}/`.
    PNGs. Most hub/vision PNG concepts have an existing SVG equivalent.
 5. Header `save`/`sun`/`moon` have working `<Icon>` (Lucide) fallback branches;
    the PNGs win only because `logoSrc()` resolves them first.
-6. Pipeline SSOT: `scripts/icon-sets.json` (+ `svg-icon-generator.py`,
+6. Pipeline SSOT: `scripts/icons/icon-sets.json` (+ `svg-icon-generator.py`,
    `batch-icon-generate.sh`, golden tests `tests/run-icon-tests.py`). The
    legacy source dirs (`icon_box`, `icon_kaggle`, `icon_multimodal`) are gone;
    `icon_collections` is the only live source.
@@ -115,7 +115,7 @@ lookup resolves (vision G6 was a false alarm; page-vision re-confirms render).
 
 ## Pipeline configuration (new set)
 
-Add to `scripts/icon-sets.json`:
+Add to `scripts/icons/icon-sets.json`:
 
 ```json
 "icon_collections": {
@@ -143,8 +143,8 @@ MarkEmblem's `mask: contain` slots. After generating or batch-regenerating ANY
 file in `public/assets/logos/marks/`, run:
 
 ```bash
-python3 scripts/normalize-mark-viewbox.py apply   # idempotent
-python3 scripts/normalize-mark-viewbox.py check   # gate: must exit 0
+python3 scripts/icons/normalize-mark-viewbox.py apply   # idempotent
+python3 scripts/icons/normalize-mark-viewbox.py check   # gate: must exit 0
 ```
 
 This gives every glyph in a section group (groups derive from slug prefixes,

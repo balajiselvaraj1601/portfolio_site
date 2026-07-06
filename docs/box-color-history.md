@@ -5,7 +5,7 @@
 > transcripts, the `color-standardization-one-accent-per-view` memory, and the live
 > code. Token names and line ranges were cross-checked against
 > [`src/styles/global.css`](../src/styles/global.css) and
-> [`src/schemas.ts`](../src/schemas.ts) on 2026-07-06.
+> [`src/schemas/`](../src/schemas/) on 2026-07-06.
 
 ## TL;DR
 
@@ -70,12 +70,12 @@ Content JSON key (accent / level / medal)
 
 ### Content schemas (SSOT for allowed color keys)
 
-Defined in [`src/schemas.ts`](../src/schemas.ts); invalid keys fail the build:
+Defined in [`src/schemas/`](../src/schemas/); invalid keys fail the build:
 
-- `visionAccentSchema` (L35) — `impact | strategic | platform | people | ai | privacy | gxp`
-- `xpLevelSchema` (L270) — `principal | staff | senior | lead | associate | engineer`
-- `awardLevelSchema` (L339) — six executive nominator levels
-- `kaggleMedalSchema` (L389) — `Silver | Bronze`
+- `visionAccentSchema` ([`work.ts`](../src/schemas/work.ts)) — `impact | strategic | platform | people | ai | privacy | gxp`
+- `xpLevelSchema` ([`work.ts`](../src/schemas/work.ts)) — `principal | staff | senior | lead | associate | engineer`
+- `awardLevelSchema` ([`recognition.ts`](../src/schemas/recognition.ts)) — six executive nominator levels
+- `kaggleMedalSchema` ([`recognition.ts`](../src/schemas/recognition.ts)) — `Silver | Bronze`
 
 ## Known gaps & notes
 
@@ -99,7 +99,7 @@ Defined in [`src/schemas.ts`](../src/schemas.ts); invalid keys fail the build:
 - **Memory**: `color-standardization-one-accent-per-view.md`,
   `visual-verification-portfolio.md` (probe-scoping notes).
 - **Repo**: [`src/styles/global.css`](../src/styles/global.css),
-  [`src/schemas.ts`](../src/schemas.ts),
+  [`src/schemas/`](../src/schemas/),
   [`docs/design-direction.md`](./design-direction.md) ("Per-view accent family",
   "Per-page color assignment"),
   [`docs/audits/full-site-review-2026-07-05.md`](./audits/full-site-review-2026-07-05.md).

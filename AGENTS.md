@@ -9,7 +9,7 @@ read data, they do not hardcode copy.
 
 ```text
 content/**/*.json
-  → src/schemas.ts        (Zod schemas; types via z.infer)
+  → src/schemas/        (Zod schemas; types via z.infer)
   → src/lib/content.ts    (loads + validates each file, derives nav/views)
   → src/components/SectionRenderer.astro  (section id → component)
   → src/pages/*.astro      (routes)
@@ -19,7 +19,7 @@ content/**/*.json
 
 - Keep changes surgical and aligned with the existing Astro/component style.
 - Change public copy in `content/`, never in components.
-- Update `src/schemas.ts` first when adding or changing a JSON field — types are
+- Update `src/schemas/` first when adding or changing a JSON field — types are
   derived from the schema (`z.infer`), so the schema is the single source of truth.
 - Keep route/section order in `content/site.json`; route files stay generic.
 - Run `npm run build` before handoff after any code or content change. The build

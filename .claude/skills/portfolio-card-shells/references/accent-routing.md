@@ -2,7 +2,7 @@
 
 How a box shell gets its color. The full mechanism behind the `--accent-card` core
 rule. SSOT for the timeline and rationale is `docs/box-color-history.md`; schema
-enums live in `src/schemas.ts`.
+enums live in `src/schemas/`.
 
 ## The un-suppress pattern
 
@@ -66,7 +66,7 @@ views use per-item hues). They look unused but are load-bearing fallbacks — do
 
 ## Schema wiring (content JSON → box color)
 
-Per-item accents are typed enums in `src/schemas.ts`. A JSON key maps to a hook class
+Per-item accents are typed enums in `src/schemas/`. A JSON key maps to a hook class
 maps to an item token.
 
 | Schema (line)              | JSON key | Values                                                                  | Hook class prefix |

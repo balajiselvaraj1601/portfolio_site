@@ -3,13 +3,13 @@
  * export-icon-svgs.mjs — emit one wrapped SVG per UI icon for rasterization.
  *
  * Reads the single-source icon geometry from src/lib/icon-paths.json and writes
- * scripts/.icon-stage/<name>.png (SVG content under a .png extension so
+ * scripts/icons/.icon-stage/<name>.png (SVG content under a .png extension so
  * process_logos.py treats it as a "mislabeled" file and rasterizes it via
  * image_gen/scripts/render.py). Strokes are baked #000 for the light base theme;
  * Icon.astro applies a CSS invert filter for dark mode.
  *
- * Usage:  node scripts/export-icon-svgs.mjs
- * Then:   python3 scripts/process_logos.py --logos-dir scripts/.icon-stage --apply --min-trim-pct 100 --svg-scale 8
+ * Usage:  node scripts/icons/export-icon-svgs.mjs
+ * Then:   python3 scripts/icons/process_logos.py --logos-dir scripts/icons/.icon-stage --apply --min-trim-pct 100 --svg-scale 8
  */
 import {
   mkdirSync,
@@ -22,7 +22,7 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const here = dirname(fileURLToPath(import.meta.url));
-const root = resolve(here, '..');
+const root = resolve(here, '../..');
 const paths = JSON.parse(
   readFileSync(resolve(root, 'src/lib/icon-paths.json'), 'utf8')
 );

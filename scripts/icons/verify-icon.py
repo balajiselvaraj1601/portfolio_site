@@ -9,7 +9,7 @@ state with the generator — and reports per-edge margins as a fraction of the
 viewBox. Two independent measurements agreeing is far stronger evidence than one.
 
 Usage:
-    python3 scripts/verify-icon.py path/to/icon.svg [more.svg ...]
+    python3 scripts/icons/verify-icon.py path/to/icon.svg [more.svg ...]
 
 Exit code 0 if every file passes its detected mode's tolerance, 1 otherwise.
 A "tight" verdict is inferred when all four margins are ~0; otherwise the file is

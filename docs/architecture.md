@@ -8,7 +8,7 @@ Technical overview of the Astro 4 portfolio site.
 content/**/*.json
     │
     ▼
-src/lib/content.ts  ── validates against ──►  src/schemas.ts (Zod)
+src/lib/content.ts  ── validates against ──►  src/schemas/ (Zod)
     │
     ▼
 src/components/sections/*.astro  +  shared components
@@ -66,7 +66,7 @@ portfolio_site/
 | File                                      | Role                                                                          |
 | ----------------------------------------- | ----------------------------------------------------------------------------- |
 | `astro.config.mjs`                        | `SITE_URL`, `base: '/'`, sitemap integration                                  |
-| `src/schemas.ts`                          | Content shape contracts (SSOT for types)                                      |
+| `src/schemas/`                            | Content shape contracts (SSOT for types)                                      |
 | `src/lib/content.ts`                      | Imports JSON, validates, exports typed data                                   |
 | `content/site.json`                       | Page/route definitions (`pages`), section visibility, SEO, résumé path        |
 | `src/pages/index.astro`                   | Home route — renders all sections via `SectionRenderer` with scroll-spy views |

@@ -123,7 +123,7 @@ Keep published files optimized — prefer WebP, reasonable dimensions, lazy-load
 (`logo_achievement_award`, `logo_analytics_dashboard`, `logo_business_presentation`,
 `logo_financial_growth`, `logo_global_location`, `logo_target_goal_box`,
 `logo_team_growth`) that are intentionally referenced nowhere yet. They were produced by
-the SVG icon toolchain (`scripts/batch-icon-generate.sh` + `scripts/svg-icon-generator.py`)
+the SVG icon toolchain (`scripts/icons/batch-icon-generate.sh` + `scripts/icons/svg-icon-generator.py`)
 and are kept as a ready-to-wire palette for upcoming sections. Wiring happens via the
 `asset` fields in the content JSON — no component changes needed. Their inventory status
 is tracked as `unwired-future` in [`docs/audits/logo-manifest.csv`](./audits/logo-manifest.csv).

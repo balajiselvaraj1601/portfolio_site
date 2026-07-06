@@ -157,8 +157,8 @@ Glyph sizing inside tiles:
 
 ```bash
 # After any marks/ regeneration
-python3 scripts/normalize-mark-viewbox.py apply
-python3 scripts/normalize-mark-viewbox.py check   # must exit 0
+python3 scripts/icons/normalize-mark-viewbox.py apply
+python3 scripts/icons/normalize-mark-viewbox.py check   # must exit 0
 
 # After icon-sets.json / generator changes
 npm run test:icons   # = python3 tests/run-icon-tests.py
@@ -191,6 +191,6 @@ Install resized PNGs per `docs/icon-collections-install.md`, then generate SVGs.
 | `src/components/ui/Icon.astro`                      | Lucide + brand mono             |
 | `src/lib/icon-render.ts`                            | Brand mono set, size tokens     |
 | `src/lib/logo-display.ts`                           | `logoHasOwnRing`, badge routing |
-| `scripts/normalize-mark-viewbox.py`                 | Equal ink-footprint gate        |
+| `scripts/icons/normalize-mark-viewbox.py`           | Equal ink-footprint gate        |
 | `docs/icon-blend-strategy.md`                       | Ratified blend strategy         |
 | `.claude/references/design-consistency-contract.md` | §5 card/mark shells             |

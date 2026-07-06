@@ -22,7 +22,7 @@ square-and-center processing. Naming follows `icon_<set>_<name>.png` (see
 
 Slug map for SVG marks: `icon_<stem>` → `logo_<stem>` (e.g.
 `icon_education_calendar` → `logo_education_calendar`). Override:
-`trophy-awards` → `logo_trophy_badge` (see `scripts/icon-sets.json`).
+`trophy-awards` → `logo_trophy_badge` (see `scripts/icons/icon-sets.json`).
 
 ## Workflow
 
@@ -45,9 +45,9 @@ All three steps must pass before install.
 ### 2. Install rasters
 
 ```bash
-./scripts/install-icon-collections-png.sh
+./scripts/icons/install-icon-collections-png.sh
 # optional custom source:
-./scripts/install-icon-collections-png.sh /path/to/resized/dir
+./scripts/icons/install-icon-collections-png.sh /path/to/resized/dir
 ```
 
 Copies every `icon_*.png` into the correct `public/assets/logos/{subfolder}/`
@@ -59,9 +59,9 @@ by prefix rule. Exits non-zero if any file has no routing rule.
 `normalize-icon-sources.py`, which destroys square-centered line art. Use:
 
 ```bash
-./scripts/regenerate-marks-from-png.sh
+./scripts/icons/regenerate-marks-from-png.sh
 # optional custom source:
-./scripts/regenerate-marks-from-png.sh assets/icon-collections-resized
+./scripts/icons/regenerate-marks-from-png.sh assets/icon-collections-resized
 ```
 
 This traces each PNG with `svg-icon-generator.py` (`--tight --no-badge
@@ -73,8 +73,8 @@ This traces each PNG with `svg-icon-generator.py` (`--tight --no-badge
 After any `marks/` batch regen:
 
 ```bash
-python3 scripts/normalize-mark-viewbox.py apply
-python3 scripts/normalize-mark-viewbox.py check   # must exit 0
+python3 scripts/icons/normalize-mark-viewbox.py apply
+python3 scripts/icons/normalize-mark-viewbox.py check   # must exit 0
 ```
 
 See [`docs/icon-blend-strategy.md`](./icon-blend-strategy.md) for why this
@@ -110,5 +110,5 @@ changes needed when refreshing these PNGs.
 ## Related docs
 
 - [`docs/icon-blend-strategy.md`](./icon-blend-strategy.md) — vector delivery rules
-- [`scripts/SVG-ICON-GENERATOR.md`](../scripts/SVG-ICON-GENERATOR.md) — trace pipeline
+- [`scripts/icons/SVG-ICON-GENERATOR.md`](../scripts/icons/SVG-ICON-GENERATOR.md) — trace pipeline
 - [`AGENTS.md`](../AGENTS.md) — `logoSrc()` and naming conventions

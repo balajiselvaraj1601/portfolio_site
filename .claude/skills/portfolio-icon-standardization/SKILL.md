@@ -212,7 +212,7 @@ batch-icon-generate on this set — destroys line art).
 ### C — Verify before handoff
 
 ```bash
-python3 scripts/normalize-mark-viewbox.py check
+python3 scripts/icons/normalize-mark-viewbox.py check
 npm run check:tokens
 npm run build
 ```

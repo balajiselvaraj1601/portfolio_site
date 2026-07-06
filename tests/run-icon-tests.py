@@ -26,8 +26,8 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-GENERATOR = ROOT / "scripts" / "svg-icon-generator.py"
-VERIFY = ROOT / "scripts" / "verify-icon.py"
+GENERATOR = ROOT / "scripts" / "icons" / "svg-icon-generator.py"
+VERIFY = ROOT / "scripts" / "icons" / "verify-icon.py"
 FIXTURES = Path(__file__).resolve().parent / "fixtures"
 
 # One representative source per mask mode. Each dir holds exactly one icon_*.png

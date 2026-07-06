@@ -1,7 +1,7 @@
 #!/bin/bash
 # check-skill-sync.sh — assert the .skill bundle ships the canonical pipeline.
 #
-# Single source of truth: scripts/svg-icon-generator.py. The bundle carries a
+# Single source of truth: scripts/icons/svg-icon-generator.py. The bundle carries a
 # verbatim copy as icon_pipeline.py (prefixed with #SYNC# header lines) plus a
 # verbatim copy of verify-icon.py. This script proves they haven't drifted.
 #
@@ -12,8 +12,8 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 SKILL="$ROOT/../svg-icon-generator.skill"
-PROD="$ROOT/scripts/svg-icon-generator.py"
-VERIFY="$ROOT/scripts/verify-icon.py"
+PROD="$ROOT/scripts/icons/svg-icon-generator.py"
+VERIFY="$ROOT/scripts/icons/verify-icon.py"
 
 work="$(mktemp -d)"
 trap 'rm -rf "$work"' EXIT

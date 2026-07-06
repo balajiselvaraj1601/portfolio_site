@@ -10,14 +10,14 @@ either drops the data (Zod strips unknown keys) or fails the build.
 2. Run `npm run build` — Zod validates automatically.
 3. `npm run preview` and spot-check the section.
 
-No schema change: the field already exists in `src/schemas.ts`.
+No schema change: the field already exists in `src/schemas/`.
 
 ## B. Add or rename a field on an existing item
 
 Order matters — the schema owns the shape and all types derive from it via
 `z.infer`, so it changes **first**.
 
-1. **Schema first.** Extend the relevant Zod object in `src/schemas.ts`
+1. **Schema first.** Extend the relevant Zod object in `src/schemas/`
    (e.g. add `foo: z.string().optional()`). Prefer `.optional()` unless every
    existing record already has the value, or the build rejects the current JSON.
    Do **not** write a parallel `interface`/`type` — the exported type is already
@@ -31,7 +31,7 @@ Order matters — the schema owns the shape and all types derive from it via
 
 ## C. Add a whole new content item (award, role, publication, talk, competition…)
 
-1. Confirm the item's schema in `src/schemas.ts` (each list is an
+1. Confirm the item's schema in `src/schemas/` (each list is an
    `z.array(...)` — `awardsSchema.items`, `experienceSchema.roles`,
    `linkListSchema.items`, `speakersSchema.items`, `kaggleSchema.items`, etc.).
    Note required vs optional fields and any enums (e.g. `awardLevelSchema`,

@@ -13,12 +13,12 @@ Trimming notes (from logo analysis):
   - Transparent pixels are composited onto white before measuring borders.
 
 Setup:
-    pip install -r scripts/requirements-logos.txt
+    pip install -r scripts/icons/requirements-logos.txt
     python -m playwright install chromium   # if not already installed for image_gen
 
 Usage:
-    python scripts/process_logos.py              # dry-run analyze
-    python scripts/process_logos.py --apply      # backup + write
+    python scripts/icons/process_logos.py              # dry-run analyze
+    python scripts/icons/process_logos.py --apply      # backup + write
 """
 
 from __future__ import annotations
@@ -101,7 +101,7 @@ class FileReport:
 
 
 def repo_root() -> Path:
-    return Path(__file__).resolve().parent.parent
+    return Path(__file__).resolve().parent.parent.parent
 
 
 def detect_format(data: bytes) -> str:

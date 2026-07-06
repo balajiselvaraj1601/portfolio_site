@@ -36,7 +36,7 @@ typography (§3), and documented exceptions (§11); values in §11 are intention
 | 4   | **`border-radius: 50%` maps to `--radius-full`.** This token does not yet exist; add `--radius-full: 50%;` to the `:root` radius group (after `--radius-xl`), then replace all occurrences in component `<style>` blocks. Exception: `AvailabilityBadge.astro` dot-pulse glow rings are exempt. |
 | 5   | **Reduced-motion gate.** Any `:hover { transform: … }` or `:hover { animation: … }` block that lacks a `@media (prefers-reduced-motion: no-preference)` wrapper must have one added. Verify `LeadershipCard.astro .lcard:hover` specifically.                                                   |
 | 6   | **No redundant declarations.** Remove `font-family: var(--font-display)` on elements that inherit it from an ancestor already covered by `global.css` (e.g. `Contact.astro .contact__title` inherits from `h2`). Cite contract §3.                                                              |
-| 7   | **No content edits.** Never touch `content/**`, `src/schemas.ts`, or `src/pages/**`.                                                                                                                                                                                                            |
+| 7   | **No content edits.** Never touch `content/**`, `src/schemas/**`, or `src/pages/**`.                                                                                                                                                                                                            |
 | 8   | **Build gate.** Run `npm run build` after all edits before reporting. On failure, diagnose and fix; max 2 repair loops before marking `blocked`.                                                                                                                                                |
 
 ---
@@ -63,7 +63,7 @@ typography (§3), and documented exceptions (§11); values in §11 are intention
 | `src/styles/global.css` — `:root` block                  | Edit (restricted) | Additive token declarations only; never modify or delete existing tokens                 |
 | `src/styles/global.css` — rules below `:root`            | Audit-only        | Emit finding, escalate to design-guardian if modification needed                         |
 | `src/components/ui/**`, `src/components/cards/**` markup | Audit-only        | Never touch HTML/Astro structure; only report structural token usage issues              |
-| `content/**`, `src/schemas.ts`, `src/pages/**`           | Never touch       | Hard boundary per AGENTS.md                                                              |
+| `content/**`, `src/schemas/**`, `src/pages/**`           | Never touch       | Hard boundary per AGENTS.md                                                              |
 
 **Invocation authority:** When spawned directly by user or called via `/design-standardizer`, this agent has full edit rights on scoped files. When spawned as a sub-agent by `design-guardian` or `site-review-auto`, inherits their permissions delegation.
 

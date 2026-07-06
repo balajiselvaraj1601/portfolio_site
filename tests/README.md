@@ -1,6 +1,6 @@
 # Icon pipeline tests
 
-Golden-regression harness for `scripts/svg-icon-generator.py`. No pytest — just:
+Golden-regression harness for `scripts/icons/svg-icon-generator.py`. No pytest — just:
 
 ```bash
 python3 tests/run-icon-tests.py
@@ -11,7 +11,7 @@ Exit 0 = all green. It runs three layers:
 1. **Golden byte-diff** — regenerates each fixture (one per mask mode) with that
    mode's flags and asserts the optimized SVG is **byte-identical** to the committed
    golden. Locks the light / nonwhite / alpha mask modes + tight framing + auto-crop.
-2. **Semantic** — runs `scripts/verify-icon.py` on the goldens (independent
+2. **Semantic** — runs `scripts/icons/verify-icon.py` on the goldens (independent
    margin/flush/centered check).
 3. **Guard** — asserts the pipeline rejects the mode/source mismatches and bad
    config that used to fail silently: `--alpha-glyph` on an opaque source,

@@ -33,7 +33,7 @@ zero reference loads.
 | **Glyph** | A mark rendered as a fill — an icon or a masked logo tinted by context | `MarkEmblem.astro`                    | `currentColor` via `--mark-fg`      | `--mark-glyph` token            | `VisionMark` (`kind: 'icon' \| 'logo'`)             |
 | **Logo**  | External brand asset (PNG/SVG/WebP/AVIF)                               | `LogoBadge.astro` / `MarkEmblem` logo | image ink, or masked `currentColor` | `size` prop / CSS constrain     | `logo: <slug>` or `VisionMark {kind:'logo', asset}` |
 
-Registry: `iconNameSchema` / `IconName` in `src/lib/icons.ts` (62 names, `diamond`/`folder` fallbacks). `VisionMark` union in `src/schemas.ts`. Logos resolve by slug through `logoSrc()` against `public/assets/logos/{org,marks}/`.
+Registry: `iconNameSchema` / `IconName` in `src/lib/icons.ts` (62 names, `diamond`/`folder` fallbacks). `VisionMark` union in `src/schemas/work.ts`. Logos resolve by slug through `logoSrc()` against `public/assets/logos/{org,marks}/`.
 
 ## Render components
 
@@ -86,7 +86,7 @@ Set `--accent-card` on the wrapper and everything inside re-tints for free. The 
 
 ## Workflows
 
-- **Define a new mark** — raster → SVG via `scripts/batch-icon-generate.sh` → normalize viewBox → drop into `public/assets/logos/marks/` → reference as `VisionMark {kind:'logo', asset:'logo_x'}`, or add a name to `iconNameSchema` for a semantic icon. Full flow → `references/change-recipes.md`.
+- **Define a new mark** — raster → SVG via `scripts/icons/batch-icon-generate.sh` → normalize viewBox → drop into `public/assets/logos/marks/` → reference as `VisionMark {kind:'logo', asset:'logo_x'}`, or add a name to `iconNameSchema` for a semantic icon. Full flow → `references/change-recipes.md`.
 - **Change one aspect site-wide** — edit the token once in `global.css :root` (the design guardian owns `global.css`) → spot-check the seven views → verify. Full order → `references/change-recipes.md`.
 - **Quick consistency check** — run `npm run check:tokens`; scan for the drift signatures in `references/anti-patterns.md`.
 
@@ -110,7 +110,7 @@ The common case — _which token, which component, which cascade_ — is answere
 ## Verification
 
 - `npm run check:tokens` — `ICON_SIZE_TOKENS` ↔ `--icon-*` sync (`scripts/check-icon-token-sync.mjs`).
-- `python3 scripts/normalize-mark-viewbox.py check` — mark viewBoxes normalized.
+- `python3 scripts/icons/normalize-mark-viewbox.py check` — mark viewBoxes normalized.
 - `npm run build`, or `npm run verify` for the full gate.
 
 ## Quick reference: where to go deeper
