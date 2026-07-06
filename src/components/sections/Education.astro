@@ -1,76 +1,14 @@
 ---
 import Section from '@components/ui/Section.astro';
-import Icon from '@components/ui/Icon.astro';
-import MarkEmblem from '@components/ui/MarkEmblem.astro';
-import EntityLink from '@components/ui/EntityLink.astro';
-import CardMark from '@components/ui/CardMark.astro';
-import { education, getEntityUrl, logoSrc, site } from '@lib/content';
-import type { IconName } from '@lib/icons';
+import EducationHero from '@components/sections/recognition/EducationHero.astro';
+import EducationStats from '@components/sections/recognition/EducationStats.astro';
+import EducationHighlight from '@components/sections/recognition/EducationHighlight.astro';
+import { education, site } from '@lib/content';
 
 // Schema guarantees at least one record (educationSchema.records.min(1)); this guard
 // keeps rendering safe if the data ever degrades rather than throwing at build time.
 const [record] = education.records;
 if (!record) return;
-const logo = logoSrc(record.entity);
-const entityUrl = getEntityUrl(record.entity);
-const degreeShort = record.degree.split(' ')[0];
-const fieldLabel = record.field ?? record.degree.replace(/^[^\s]+\s*/, '');
-
-function formatGpa(value?: string) {
-  if (!value) return undefined;
-  return value.toLowerCase().startsWith('cgpa') ? value : `CGPA ${value}`;
-}
-
-const achievementLines = [record.achievement, record.achievementDetail].filter(
-  (line): line is string => Boolean(line)
-);
-
-type StatCell = {
-  icon: IconName;
-  img: string;
-  label: string;
-  value?: string;
-  lines?: string[];
-  href?: string;
-  linkLabel?: string;
-};
-
-const stats: StatCell[] = [
-  {
-    icon: 'institution',
-    img: 'logo_education_institution',
-    label: 'Institution',
-    value: record.institution,
-    href: entityUrl,
-    linkLabel: record.institution,
-  },
-  {
-    icon: 'calendar',
-    img: 'logo_education_calendar',
-    label: 'Period',
-    value: record.period,
-  },
-  ...(record.gpa
-    ? [
-        {
-          icon: 'chart' as IconName,
-          img: 'logo_education_cgpa',
-          label: 'GPA',
-          value: formatGpa(record.gpa)!,
-        },
-      ]
-    : []),
-  ...(achievementLines.length > 0
-    ? [
-        {
-          icon: 'trophy' as IconName,
-          img: 'logo_education_medal',
-          label: 'Achievement',
-          lines: achievementLines,
-        },
-      ]
-    : []),
-];
 ---
 
 <Section
@@ -82,80 +20,12 @@ const stats: StatCell[] = [
 >
   <article class="edu-panel card reveal edu-accent">
     <div class="edu-layout">
-      <div class="edu-hero">
-        <CardMark
-          logoUrl={logo}
-          slug={record.entity}
-          altText={record.institution + ' logo'}
-          logoSize="lg"
-          icon="graduation"
-          iconFallback="graduation"
-          variant="recog"
-          class={logo ? 'edu-hero__logo' : 'edu-hero__icon icon-tile--accented'}
-        />
-        <p class="edu-degree-short">{degreeShort}</p>
-        <h3 class="edu-field">{fieldLabel}</h3>
-        <div class="edu-rule" aria-hidden="true"></div>
-      </div>
+      <EducationHero record={record} />
 
       <div class="edu-body">
-        <dl class="edu-stats">
-          {
-            stats.map((s) => (
-              <div class="edu-stat">
-                <span
-                  class="icon-tile icon-tile--round icon-tile--accented edu-stat__icon"
-                  aria-hidden="true"
-                >
-                  {logoSrc(s.img) ? (
-                    <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
-                  ) : (
-                    <Icon name={s.icon} />
-                  )}
-                </span>
-                <div class="edu-stat__copy">
-                  <dt class="recog-label">{s.label}</dt>
-                  <dd
-                    class:list={[
-                      'recog-value',
-                      s.lines && 'edu-stat__value--stacked',
-                    ]}
-                  >
-                    {s.lines ? (
-                      s.lines.map((line) => (
-                        <span class="edu-stat__line">{line}</span>
-                      ))
-                    ) : s.href && s.linkLabel ? (
-                      <EntityLink href={s.href} label={s.linkLabel} />
-                    ) : (
-                      s.value
-                    )}
-                  </dd>
-                </div>
-              </div>
-            ))
-          }
-        </dl>
+        <EducationStats record={record} />
 
-        {
-          record.summary && (
-            <div class="card-tint card-tint--accent edu-highlight">
-              <span
-                class="icon-tile icon-tile--round icon-tile--accented edu-highlight__icon"
-                aria-hidden="true"
-              >
-                {logoSrc('logo_education_medal') ? (
-                  <MarkEmblem
-                    mark={{ kind: 'logo', asset: 'logo_education_medal' }}
-                  />
-                ) : (
-                  <Icon name="trophy" />
-                )}
-              </span>
-              <p class="edu-highlight__text">{record.summary}</p>
-            </div>
-          )
-        }
+        {record.summary && <EducationHighlight summary={record.summary} />}
       </div>
     </div>
   </article>
@@ -187,50 +57,6 @@ const stats: StatCell[] = [
     }
   }
 
-  .edu-hero {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--text-gap-inline);
-  }
-  .edu-hero__logo {
-    margin-bottom: var(--text-gap-pair);
-  }
-  .edu-hero__icon {
-    margin-bottom: var(--text-gap-pair);
-  }
-
-  .edu-degree-short {
-    font-family: var(--font-mono);
-    font-size: var(--fs-edu-lg);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-none);
-    color: var(--accent-card, var(--accent-gold));
-    margin: 0;
-  }
-
-  .edu-field {
-    font-family: var(--font-sans);
-    font-size: var(--fs-edu-sm);
-    font-weight: var(--fw-semibold);
-    line-height: var(--lh-tight);
-    color: var(--heading);
-    margin: 0;
-  }
-
-  .edu-rule {
-    width: min(100%, 12rem);
-    height: 2px;
-    margin-top: var(--space-2);
-    background: linear-gradient(
-      to right,
-      transparent,
-      var(--accent-card, var(--accent-gold)),
-      transparent
-    );
-    opacity: 0.85;
-  }
-
   .edu-body {
     display: flex;
     flex-direction: column;
@@ -243,74 +69,10 @@ const stats: StatCell[] = [
     }
   }
 
-  /* Accent hook + hairline grid — Kaggle .recog-summary / .blob-stats pattern. */
-  .edu-stats {
-    --accent-card: var(--view-accent-recognition);
-    --mark-fg: var(--accent-card);
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin: 0;
-    background: color-mix(in srgb, var(--accent-card) 20%, var(--border));
-    border: 1px solid color-mix(in srgb, var(--accent-card) 20%, var(--border));
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-
-  .edu-stat {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-3);
-    padding: var(--space-4);
-    background: color-mix(in srgb, var(--accent-card) 6%, var(--bg-elev));
-  }
-  .edu-stat__icon {
-    flex-shrink: 0;
-  }
-  .edu-stat__copy {
-    display: flex;
-    flex-direction: column;
-    gap: var(--text-gap-pair);
-    min-width: 0;
-  }
-  .edu-stat dd {
-    margin: 0;
-    font-size: var(--fs-md);
-    line-height: var(--lh-normal);
-  }
-  .edu-stat__value--stacked {
-    display: flex;
-    flex-direction: column;
-    gap: var(--text-gap-pair);
-  }
-  .edu-stat__line {
-    display: block;
-  }
-
-  .edu-highlight {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--space-4);
-    padding: var(--space-5);
-  }
-  .edu-highlight__icon {
-    flex-shrink: 0;
-  }
-  .edu-highlight__text {
-    margin: 0;
-    font-size: var(--fs-base);
-    line-height: var(--lh-relaxed);
-    color: var(--text);
-    max-width: none;
-  }
-
   @media (max-width: 767px) /* --bp-md - 1px */ {
     .edu-panel {
       display: flex;
       flex-direction: column;
-    }
-    .edu-stats {
-      grid-template-columns: 1fr;
     }
   }
 </style>

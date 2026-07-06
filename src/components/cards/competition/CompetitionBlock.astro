@@ -1,0 +1,87 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import type { IconName } from '@lib/icons';
+import { logoSrc } from '@lib/content';
+
+// Shared Summary / Evaluation Metric block (logo_* slug → MarkEmblem; Icon
+// fallback per BC5). Both variants render from this one component so the
+// .blob-block rules stay a single scoped definition.
+type Props = {
+  slug: string;
+  fallbackIcon: IconName;
+  label: string;
+  clamp: number;
+  body: string;
+  isEval?: boolean;
+};
+
+const { slug, fallbackIcon, label, clamp, body, isEval } = Astro.props;
+---
+
+<div class:list={['blob-block', isEval && 'blob-block--eval']}>
+  <div class="blob-block__head">
+    <span class="blob-block__icon" aria-hidden="true">
+      {
+        logoSrc(slug) ? (
+          <span class="blob-icon--sm">
+            <MarkEmblem mark={{ kind: 'logo', asset: slug }} />
+          </span>
+        ) : (
+          <Icon name={fallbackIcon} size="sm" />
+        )
+      }
+    </span>
+    <span class="blob-block__label recog-label">{label}</span>
+  </div>
+  <p
+    class="blob-block__body recog-body recog-clamp"
+    style={`--clamp: ${clamp}`}
+  >
+    {body}
+  </p>
+</div>
+
+<style>
+  /* ── Summary / Evaluation blocks ────────────────────────────────── */
+  .blob-block {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-inline);
+  }
+  /* Summary body: always occupy its full 3-line clamp box. */
+  .blob-block:not(.blob-block--eval) .blob-block__body {
+    min-height: calc(3 * var(--lh-relaxed) * 1em);
+  }
+  /* Pin the Evaluation Metric block to the bottom so every card's footer aligns
+     regardless of summary length — the engine of equal-height blob cards. */
+  .blob-block--eval {
+    margin-top: auto;
+  }
+  /* Eval body: reserve 2 lines (markup clamps to 2) so the metric starts at the
+     same spot in every card. */
+  .blob-block--eval .blob-block__body {
+    min-height: calc(2 * var(--lh-relaxed) * 1em);
+  }
+  .blob-block__head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .blob-block__icon {
+    color: var(--accent-card, var(--medal));
+    display: flex;
+  }
+  .blob-block__body {
+    margin: 0;
+    max-width: none;
+  }
+  /* Sized wrapper for MarkEmblem in bare-span icon contexts (TC2 binding sizes).
+     MarkEmblem's own width:100%/height:100% fills this fixed container. */
+  .blob-icon--sm {
+    width: var(--icon-sm); /* 16px — .blob-block__icon summary/eval (TC2) */
+    height: var(--icon-sm);
+    display: flex;
+    flex-shrink: 0;
+  }
+</style>

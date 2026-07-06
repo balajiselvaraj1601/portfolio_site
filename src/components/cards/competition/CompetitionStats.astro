@@ -1,0 +1,134 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import type { IconName } from '@lib/icons';
+import type { KaggleCompetition } from '@schemas';
+import { logoSrc } from '@lib/content';
+
+type Props = Pick<
+  KaggleCompetition,
+  'role' | 'medal' | 'rank' | 'percentile' | 'period' | 'stats'
+>;
+
+const { role, medal, rank, percentile, period, stats } = Astro.props;
+
+// Total Entrants is DERIVED from stats.entrants — single source of truth, never
+// a separate content field.
+const totalEntrants = stats?.entrants;
+
+// Fixed stat row mirroring the reference layout. Entries with no value drop out.
+// img slugs are logo_metric_kaggle_* (pipeline SVGs for MarkEmblem tinting — D5/TC2).
+// Icon fallback covers the gap while SVG assets are generated (BC5).
+const stats6: { icon: IconName; img: string; label: string; value?: string }[] =
+  [
+    {
+      icon: 'target',
+      img: 'logo_metric_kaggle_role',
+      label: 'Role',
+      value: role,
+    },
+    {
+      icon: 'trophy',
+      img: 'logo_metric_kaggle_medal',
+      label: 'Medal',
+      value: medal,
+    },
+    {
+      icon: 'chart',
+      img: 'logo_metric_kaggle_rank',
+      label: 'Rank',
+      value: rank,
+    },
+    {
+      icon: 'diamond',
+      img: 'logo_metric_kaggle_percentile',
+      label: 'Percentile',
+      value: percentile,
+    },
+    {
+      icon: 'calendar',
+      img: 'logo_metric_kaggle_time_period',
+      label: 'Period',
+      value: period,
+    },
+    {
+      icon: 'team',
+      img: 'logo_metric_kaggle_entrants',
+      label: 'Total Entrants',
+      value: totalEntrants,
+    },
+  ];
+const visibleStats = stats6.filter((s) => s.value);
+---
+
+<dl class="blob-stats">
+  {
+    visibleStats.map((s) => (
+      <div class="blob-stat">
+        <span class="blob-stat__icon" aria-hidden="true">
+          {logoSrc(s.img) ? (
+            <span class="blob-icon--md">
+              <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
+            </span>
+          ) : (
+            <Icon name={s.icon} size="sm" />
+          )}
+        </span>
+        <dt class="recog-label">{s.label}</dt>
+        <dd class="recog-value">{s.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  /* ── Stat grid ──────────────────────────────────────────────────── */
+  .blob-stats {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: color-mix(
+      in srgb,
+      var(--medal, var(--accent)) 20%,
+      var(--border)
+    );
+    border: 1px solid
+      color-mix(in srgb, var(--medal, var(--accent)) 20%, var(--border));
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .blob-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--text-gap-pair);
+    padding: var(--space-3) var(--space-2);
+    background: color-mix(
+      in srgb,
+      var(--medal, var(--accent)) 6%,
+      var(--bg-elev)
+    );
+  }
+  .blob-stat__icon {
+    color: var(--medal);
+    display: flex;
+  }
+  /* Sized wrapper for MarkEmblem in bare-span icon contexts (TC2 binding sizes).
+     MarkEmblem's own width:100%/height:100% fills this fixed container. */
+  .blob-icon--md {
+    width: var(--icon-md); /* 20px — .blob-stat__icon primary stats (TC2) */
+    height: var(--icon-md);
+    display: flex;
+    flex-shrink: 0;
+  }
+  .blob-stat dd {
+    margin: 0;
+  }
+  /* Reserve 2 lines per value so rank/period/role wrapping never changes a
+     grid row's height between cards. */
+  .blob-stat .recog-value {
+    min-height: calc(2 * var(--lh-normal) * 1em);
+  }
+</style>

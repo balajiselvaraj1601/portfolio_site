@@ -2,8 +2,9 @@
 import Icon from '@components/ui/Icon.astro';
 import MarkEmblem from '@components/ui/MarkEmblem.astro';
 import RecogCardShell from '@components/ui/RecogCardShell.astro';
+import CompetitionStats from '@components/cards/competition/CompetitionStats.astro';
+import CompetitionBlock from '@components/cards/competition/CompetitionBlock.astro';
 import { competitionIcon, resolveIcon } from '@lib/icons';
-import type { IconName } from '@lib/icons';
 import type { KaggleCompetition } from '@schemas';
 import { medalClass } from '@lib/recognition';
 import { logoSrc } from '@lib/content';
@@ -30,55 +31,7 @@ const {
 
 const headerIcon = resolveIcon(icon, competitionIcon(id, domain));
 
-// Total Entrants is DERIVED from stats.entrants — single source of truth, never
-// a separate content field.
-const totalEntrants = stats?.entrants;
-
 const medalCls = medalClass(medal);
-
-// Fixed stat row mirroring the reference layout. Entries with no value drop out.
-// img slugs are logo_metric_kaggle_* (pipeline SVGs for MarkEmblem tinting — D5/TC2).
-// Icon fallback covers the gap while SVG assets are generated (BC5).
-const stats6: { icon: IconName; img: string; label: string; value?: string }[] =
-  [
-    {
-      icon: 'target',
-      img: 'logo_metric_kaggle_role',
-      label: 'Role',
-      value: role,
-    },
-    {
-      icon: 'trophy',
-      img: 'logo_metric_kaggle_medal',
-      label: 'Medal',
-      value: medal,
-    },
-    {
-      icon: 'chart',
-      img: 'logo_metric_kaggle_rank',
-      label: 'Rank',
-      value: rank,
-    },
-    {
-      icon: 'diamond',
-      img: 'logo_metric_kaggle_percentile',
-      label: 'Percentile',
-      value: percentile,
-    },
-    {
-      icon: 'calendar',
-      img: 'logo_metric_kaggle_time_period',
-      label: 'Period',
-      value: period,
-    },
-    {
-      icon: 'team',
-      img: 'logo_metric_kaggle_entrants',
-      label: 'Total Entrants',
-      value: totalEntrants,
-    },
-  ];
-const visibleStats = stats6.filter((s) => s.value);
 
 // Slugs for summary/eval block icons (logo_* → MarkEmblem; Icon fallback per BC5).
 const summarySlug = 'logo_metric_kaggle_summary';
@@ -117,68 +70,38 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     >
   </h3>
 
-  <dl class="blob-stats">
-    {
-      visibleStats.map((s) => (
-        <div class="blob-stat">
-          <span class="blob-stat__icon" aria-hidden="true">
-            {logoSrc(s.img) ? (
-              <span class="blob-icon--md">
-                <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
-              </span>
-            ) : (
-              <Icon name={s.icon} size="sm" />
-            )}
-          </span>
-          <dt class="recog-label">{s.label}</dt>
-          <dd class="recog-value">{s.value}</dd>
-        </div>
-      ))
-    }
-  </dl>
+  <CompetitionStats
+    role={role}
+    medal={medal}
+    rank={rank}
+    percentile={percentile}
+    period={period}
+    stats={stats}
+  />
 
   {
     summary && (
-      <div class="blob-block">
-        <div class="blob-block__head">
-          <span class="blob-block__icon" aria-hidden="true">
-            {logoSrc(summarySlug) ? (
-              <span class="blob-icon--sm">
-                <MarkEmblem mark={{ kind: 'logo', asset: summarySlug }} />
-              </span>
-            ) : (
-              <Icon name="target" size="sm" />
-            )}
-          </span>
-          <span class="blob-block__label recog-label">Summary</span>
-        </div>
-        <p class="blob-block__body recog-body recog-clamp" style="--clamp: 3">
-          {summary}
-        </p>
-      </div>
+      <CompetitionBlock
+        slug={summarySlug}
+        fallbackIcon="target"
+        label="Summary"
+        clamp={3}
+        body={summary}
+      />
     )
   }
 
   {
     evaluationMetric && (
       <Fragment slot="footer">
-        <div class="blob-block blob-block--eval">
-          <div class="blob-block__head">
-            <span class="blob-block__icon" aria-hidden="true">
-              {logoSrc(evalSlug) ? (
-                <span class="blob-icon--sm">
-                  <MarkEmblem mark={{ kind: 'logo', asset: evalSlug }} />
-                </span>
-              ) : (
-                <Icon name="pulse" size="sm" />
-              )}
-            </span>
-            <span class="blob-block__label recog-label">Evaluation Metric</span>
-          </div>
-          <p class="blob-block__body recog-body recog-clamp" style="--clamp: 2">
-            {evaluationMetric}
-          </p>
-        </div>
+        <CompetitionBlock
+          slug={evalSlug}
+          fallbackIcon="pulse"
+          label="Evaluation Metric"
+          clamp={2}
+          body={evaluationMetric}
+          isEval
+        />
       </Fragment>
     )
   }
@@ -193,7 +116,8 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
   }
 
   /* Medal accent — drives border, icon tint, and stat dividers. Maps to the
-     shared --medal-* tokens (theme tuning lives once in global.css). */
+     shared --medal-* tokens (theme tuning lives once in global.css). Consumed
+     by the extracted stat grid / blocks via custom-property inheritance. */
   .blob--silver {
     --medal: var(--medal-silver);
   }
@@ -222,95 +146,6 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     min-height: calc(2 * var(--lh-snug) * 1em);
   }
 
-  /* ── Stat grid ──────────────────────────────────────────────────── */
-  .blob-stats {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1px;
-    margin: 0;
-    background: color-mix(
-      in srgb,
-      var(--medal, var(--accent)) 20%,
-      var(--border)
-    );
-    border: 1px solid
-      color-mix(in srgb, var(--medal, var(--accent)) 20%, var(--border));
-    border-radius: var(--radius-md);
-    overflow: hidden;
-  }
-  .blob-stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--text-gap-pair);
-    padding: var(--space-3) var(--space-2);
-    background: color-mix(
-      in srgb,
-      var(--medal, var(--accent)) 6%,
-      var(--bg-elev)
-    );
-  }
-  .blob-stat__icon {
-    color: var(--medal);
-    display: flex;
-  }
-  /* Sized wrappers for MarkEmblem in bare-span icon contexts (TC2 binding sizes).
-     MarkEmblem's own width:100%/height:100% fills these fixed containers. */
-  .blob-icon--md {
-    width: var(--icon-md); /* 20px — .blob-stat__icon primary stats (TC2) */
-    height: var(--icon-md);
-    display: flex;
-    flex-shrink: 0;
-  }
-  .blob-icon--sm {
-    width: var(--icon-sm); /* 16px — .blob-block__icon summary/eval (TC2) */
-    height: var(--icon-sm);
-    display: flex;
-    flex-shrink: 0;
-  }
-  .blob-stat dd {
-    margin: 0;
-  }
-  /* Reserve 2 lines per value so rank/period/role wrapping never changes a
-     grid row's height between cards. */
-  .blob-stat .recog-value {
-    min-height: calc(2 * var(--lh-normal) * 1em);
-  }
-
-  /* ── Summary / Evaluation blocks ────────────────────────────────── */
-  .blob-block {
-    display: flex;
-    flex-direction: column;
-    gap: var(--text-gap-inline);
-  }
-  /* Summary body: always occupy its full 3-line clamp box. */
-  .blob-block:not(.blob-block--eval) .blob-block__body {
-    min-height: calc(3 * var(--lh-relaxed) * 1em);
-  }
-  /* Pin the Evaluation Metric block to the bottom so every card's footer aligns
-     regardless of summary length — the engine of equal-height blob cards. */
-  .blob-block--eval {
-    margin-top: auto;
-  }
-  /* Eval body: reserve 2 lines (markup clamps to 2) so the metric starts at the
-     same spot in every card. */
-  .blob-block--eval .blob-block__body {
-    min-height: calc(2 * var(--lh-relaxed) * 1em);
-  }
-  .blob-block__head {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-  }
-  .blob-block__icon {
-    color: var(--accent-card, var(--medal));
-    display: flex;
-  }
-  .blob-block__body {
-    margin: 0;
-    max-width: none;
-  }
   @media (max-width: 600px) {
     :global(.recog-card) {
       padding: var(--card-padding);

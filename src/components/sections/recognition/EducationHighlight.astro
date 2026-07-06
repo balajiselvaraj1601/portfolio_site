@@ -1,0 +1,46 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import { logoSrc } from '@lib/content';
+
+type Props = {
+  summary: string;
+};
+
+const { summary } = Astro.props;
+---
+
+<div class="card-tint card-tint--accent edu-highlight">
+  <span
+    class="icon-tile icon-tile--round icon-tile--accented edu-highlight__icon"
+    aria-hidden="true"
+  >
+    {
+      logoSrc('logo_education_medal') ? (
+        <MarkEmblem mark={{ kind: 'logo', asset: 'logo_education_medal' }} />
+      ) : (
+        <Icon name="trophy" />
+      )
+    }
+  </span>
+  <p class="edu-highlight__text">{summary}</p>
+</div>
+
+<style>
+  .edu-highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-5);
+  }
+  .edu-highlight__icon {
+    flex-shrink: 0;
+  }
+  .edu-highlight__text {
+    margin: 0;
+    font-size: var(--fs-base);
+    line-height: var(--lh-relaxed);
+    color: var(--text);
+    max-width: none;
+  }
+</style>

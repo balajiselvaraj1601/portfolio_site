@@ -1,0 +1,156 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import MarkEmblem from '@components/ui/MarkEmblem.astro';
+import EntityLink from '@components/ui/EntityLink.astro';
+import { getEntityUrl, logoSrc } from '@lib/content';
+import type { IconName } from '@lib/icons';
+import type { EducationRecord } from '@schemas';
+
+type Props = {
+  record: EducationRecord;
+};
+
+const { record } = Astro.props;
+const entityUrl = getEntityUrl(record.entity);
+
+function formatGpa(value?: string) {
+  if (!value) return undefined;
+  return value.toLowerCase().startsWith('cgpa') ? value : `CGPA ${value}`;
+}
+
+const achievementLines = [record.achievement, record.achievementDetail].filter(
+  (line): line is string => Boolean(line)
+);
+
+type StatCell = {
+  icon: IconName;
+  img: string;
+  label: string;
+  value?: string;
+  lines?: string[];
+  href?: string;
+  linkLabel?: string;
+};
+
+const stats: StatCell[] = [
+  {
+    icon: 'institution',
+    img: 'logo_education_institution',
+    label: 'Institution',
+    value: record.institution,
+    href: entityUrl,
+    linkLabel: record.institution,
+  },
+  {
+    icon: 'calendar',
+    img: 'logo_education_calendar',
+    label: 'Period',
+    value: record.period,
+  },
+  ...(record.gpa
+    ? [
+        {
+          icon: 'chart' as IconName,
+          img: 'logo_education_cgpa',
+          label: 'GPA',
+          value: formatGpa(record.gpa)!,
+        },
+      ]
+    : []),
+  ...(achievementLines.length > 0
+    ? [
+        {
+          icon: 'trophy' as IconName,
+          img: 'logo_education_medal',
+          label: 'Achievement',
+          lines: achievementLines,
+        },
+      ]
+    : []),
+];
+---
+
+<dl class="edu-stats">
+  {
+    stats.map((s) => (
+      <div class="edu-stat">
+        <span
+          class="icon-tile icon-tile--round icon-tile--accented edu-stat__icon"
+          aria-hidden="true"
+        >
+          {logoSrc(s.img) ? (
+            <MarkEmblem mark={{ kind: 'logo', asset: s.img }} />
+          ) : (
+            <Icon name={s.icon} />
+          )}
+        </span>
+        <div class="edu-stat__copy">
+          <dt class="recog-label">{s.label}</dt>
+          <dd
+            class:list={['recog-value', s.lines && 'edu-stat__value--stacked']}
+          >
+            {s.lines ? (
+              s.lines.map((line) => <span class="edu-stat__line">{line}</span>)
+            ) : s.href && s.linkLabel ? (
+              <EntityLink href={s.href} label={s.linkLabel} />
+            ) : (
+              s.value
+            )}
+          </dd>
+        </div>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  /* Accent hook + hairline grid — Kaggle .recog-summary / .blob-stats pattern. */
+  .edu-stats {
+    --accent-card: var(--view-accent-recognition);
+    --mark-fg: var(--accent-card);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin: 0;
+    background: color-mix(in srgb, var(--accent-card) 20%, var(--border));
+    border: 1px solid color-mix(in srgb, var(--accent-card) 20%, var(--border));
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .edu-stat {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    background: color-mix(in srgb, var(--accent-card) 6%, var(--bg-elev));
+  }
+  .edu-stat__icon {
+    flex-shrink: 0;
+  }
+  .edu-stat__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
+    min-width: 0;
+  }
+  .edu-stat dd {
+    margin: 0;
+    font-size: var(--fs-md);
+    line-height: var(--lh-normal);
+  }
+  .edu-stat__value--stacked {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-pair);
+  }
+  .edu-stat__line {
+    display: block;
+  }
+
+  @media (max-width: 767px) /* --bp-md - 1px */ {
+    .edu-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
