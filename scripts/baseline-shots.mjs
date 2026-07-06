@@ -2,20 +2,20 @@
 /**
  * Capture design-reference baseline screenshots for docs/reference/screenshots/.
  *
- * Prerequisite: npm run preview (or dev) serving PREVIEW_URL (default http://127.0.0.1:4321).
+ * Prerequisite: npm run preview (or dev) serving PREVIEW_URL (default http://127.0.0.1:4331).
  */
 import { mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
+import { PREVIEW_PORT } from './ports.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const root = resolve(here, '..');
 const OUT_DIR = resolve(root, 'docs/reference/screenshots');
-const BASE = (process.env.PREVIEW_URL ?? 'http://127.0.0.1:4321').replace(
-  /\/?$/,
-  '/'
-);
+const BASE = (
+  process.env.PREVIEW_URL ?? `http://127.0.0.1:${PREVIEW_PORT}`
+).replace(/\/?$/, '/');
 
 /** Match section-views.ts PROGRAMMATIC_SCROLL_SETTLE_MS + smooth scroll buffer. */
 const SCROLL_SETTLE_MS = 1400;

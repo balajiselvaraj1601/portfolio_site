@@ -219,18 +219,8 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
     --accent-card: var(--cat, var(--view-accent-about));
     --mark-fg: var(--accent-card);
   }
-  /* Dark mode: the 2px top edge + icon tint read faintly on the dark bg, so
-     boost per-row prominence with a subtle colour wash and a thicker top edge.
-     Light mode already reads vividly, so scope this to the dark theme only. */
-  :global(:root[data-theme='dark']) .leadership__card-row .theme-card {
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, var(--cat) 12%, var(--bg-elev)),
-      color-mix(in srgb, var(--cat) 4%, var(--bg-elev))
-    );
-    border-color: color-mix(in srgb, var(--cat) 45%, var(--border));
-    border-top-width: 3px;
-  }
+  /* Dark-mode prominence wash is built into the base `.card` rule (global.css),
+     keyed to --accent-card (== --cat on each row). */
 
   .leadership__diff-heading {
     font-size: var(--fs-eyebrow);

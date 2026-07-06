@@ -69,7 +69,8 @@
   /* Mark slots — change these two values to resize circular icons site-wide */
   --mark-slot: 44px;
   --mark-glyph: 22px;
-  --mark-glyph-compact: 18px; /* smaller in-circle glyph — compact tiles + Vision impact */
+  --mark-glyph-compact: 18px; /* smaller in-circle glyph — compact tiles */
+  --vision-mark-glyph: 28px; /* unified Vision-page circle-mark glyph (hub + impact) */
   --vision-hub-glyph: var(
     --mark-glyph
   ); /* VisionHub center + satellite emblems */
@@ -330,6 +331,7 @@
   --view-accent-recognition: var(--accent-gold); /* gold  */
   --view-accent-vision: var(--lvl-director); /* teal  */
   --view-accent-contact: var(--accent); /* purple */
+  --vision-impact-accent: var(--cat-strategic); /* blue — #vision-impact only (VI-001) */
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -659,8 +661,8 @@ button {
   overflow: hidden;
   background: linear-gradient(
     180deg,
-    var(--bg-elev),
-    color-mix(in srgb, var(--bg-elev) 70%, var(--bg))
+    color-mix(in srgb, var(--accent-card, var(--accent)) 6%, var(--bg-elev)),
+    color-mix(in srgb, var(--accent-card, var(--accent)) 2%, var(--bg-elev))
   );
   border: 1px solid
     color-mix(in srgb, var(--accent-card, var(--accent)) 40%, var(--border));
@@ -686,6 +688,24 @@ button {
   }
 }
 
+/* Dark-mode accent wash — stronger 12→4% tint + thicker top edge for all card shells. */
+:root[data-theme='dark'] .card,
+:root[data-theme='dark'] .recog-card,
+:root[data-theme='dark'] .recog-tile,
+:root[data-theme='dark'] .content-card {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-card, var(--accent)) 12%, var(--bg-elev)),
+    color-mix(in srgb, var(--accent-card, var(--accent)) 4%, var(--bg-elev))
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--accent-card, var(--accent)) 45%,
+    var(--border)
+  );
+  border-top-width: 3px;
+}
+
 /* Circular mark chrome — SSOT for accented pipeline marks (Recognition, Vision) */
 .theme-card__icon,
 .icon-tile.icon-tile--round.icon-tile--accented {
@@ -696,6 +716,7 @@ button {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .theme-card__icon,
 .icon-tile.icon-tile--round.icon-tile--accented,
@@ -790,10 +811,10 @@ button {
   --accent-card: var(--cat-ai);
 } /* purple */
 
-/* Contact view — single accent: all cards inherit the brand purple. */
+/* Contact view — single accent: all cards inherit strategic blue. */
 #contact .card-accent {
-  --accent-card: var(--view-accent-contact);
-} /* purple */
+  --accent-card: var(--cat-strategic);
+} /* blue */
 
 /* Vision board categorical accents — content `accent` key → --cat hook (Leadership pattern) */
 .vision-accent-impact {
@@ -822,6 +843,13 @@ button {
      .vision-accent-* classes above), falling back to the vision hue (teal) when an
      element has no category class. */
   --accent-card: var(--cat, var(--view-accent-vision));
+  --mark-fg: var(--accent-card, var(--accent));
+}
+
+/* Vision impact — single blue accent, isolated from vision-programs multi-color
+   and from other --cat-* consumers (About, Research). Exception VI-001. */
+#vision-impact .vision-accent-hook {
+  --accent-card: var(--vision-impact-accent);
   --mark-fg: var(--accent-card, var(--accent));
 }
 

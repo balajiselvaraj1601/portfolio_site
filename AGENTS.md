@@ -26,6 +26,7 @@ content/**/*.json
   fails fast on schema violations and broken section/view wiring.
 - Batch work: see `TASKS.md`; invoke the `task-runner` skill (`.cursor/skills/task-runner/SKILL.md`).
 - Multi-view design consistency: invoke the page-consistency-team skill (`.claude/skills/page-consistency-team/SKILL.md`) or `/page-team` in Claude Code; see `docs/page-team.md`.
+- **Local dev ports:** see [Local servers and ports](#local-servers-and-ports).
 
 ## Page structure
 
@@ -107,14 +108,100 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 
 ## Commands
 
-| Task                        | Command           |
-| --------------------------- | ----------------- |
-| Install pinned dependencies | `npm ci`          |
-| Dev server                  | `npm run dev`     |
-| Production build            | `npm run build`   |
-| Preview build               | `npm run preview` |
+| Task                        | Command                                              |
+| --------------------------- | ---------------------------------------------------- |
+| Install pinned dependencies | `npm ci`                                             |
+| Dev server (4321)           | `npm run dev`                                        |
+| Stop all Astro 43xx servers | `npm run dev:stop`                                   |
+| Restart dev (4321)          | `npm run dev:restart`                                |
+| Production build            | `npm run build`                                      |
+| Preview build (4331)        | `npm run preview`                                    |
+| Rebuild + preview (4331)    | `npm run preview:restart`                            |
+| Verify dev + preview        | `ss` + `curl` (see [Local servers and ports](#local-servers-and-ports)) |
+| Dev smoke (Playwright)      | `npm run smoke:localhost`                            |
 
 CI builds on Node 20 (`package.json` engines: `>=18`).
+
+## Local servers and ports
+
+### Port map
+
+| Mode                    | Port | URL                      | npm script          |
+| ----------------------- | ---- | ------------------------ | ------------------- |
+| Dev (HMR)               | 4321 | http://localhost:4321/   | `npm run dev`       |
+| Preview (built `dist/`) | 4331 | http://localhost:4331/   | `npm run preview`   |
+
+SSOT: [`scripts/ports.mjs`](scripts/ports.mjs) → imported by [`astro.config.mjs`](astro.config.mjs)
+with `strictPort: true` (no silent port drift). Legacy port **4322** is cleared on stop but never
+used for serving.
+
+```mermaid
+flowchart LR
+  ports["scripts/ports.mjs"]
+  config["astro.config.mjs"]
+  devCmd["npm run dev"]
+  previewCmd["npm run preview"]
+  ports --> config
+  config --> devCmd
+  config --> previewCmd
+```
+
+### Stop/restart semantics
+
+Defined in [`scripts/dev-stop.mjs`](scripts/dev-stop.mjs):
+
+| Function / script                             | Scope                                  | Use when                                      |
+| --------------------------------------------- | -------------------------------------- | --------------------------------------------- |
+| `npm run dev:stop` → `stopAstroServers()`     | All 4300–4399 + both astro processes   | Nuclear cleanup; stale/orphan listeners       |
+| `npm run dev:restart` → `stopDevServer()`     | 4321 + `astro dev` only                | Restart dev without killing preview           |
+| `npm run preview:restart` → `stopPreviewServer()` | 4331 + `astro preview` only       | Rebuild + restart preview without killing dev |
+
+### Startup workflows
+
+- **Dev only:** `npm run dev:restart` (or `dev:stop` then `npm run dev`)
+- **Preview only:** `npm run preview:restart` (stop preview → build → preview on 4331)
+- **Both concurrently:**
+
+  ```bash
+  npm run dev:stop    # once, clear orphans
+  npm run build       # preview needs dist/
+  npm run dev         # background → 4321
+  npm run preview     # background → 4331
+  ```
+
+  When server state is unknown, run `dev:stop` first. With selective-stop scripts, `dev:restart`
+  and `preview:restart` are safe individually and do not kill the other server.
+
+### Hard rules (anti-patterns)
+
+- **Never** pass `--port` / `--host` to `astro dev` or `astro preview` — use npm scripts only.
+- **Never** run `astro preview --port 4321` — it occupies the dev port and leaves 4331 empty;
+  symptoms look like "preview not running."
+- **Never** start multiple `npm run dev` or `npm run preview` sessions without stopping first.
+- Preview requires a prior `npm run build`; dev does not.
+
+### Verify servers
+
+Agents run these before reporting port status:
+
+```bash
+ss -tlnp | grep -E ':(4321|4331)\s'
+curl -sf -o /dev/null -w 'dev:%{http_code}\n'  http://127.0.0.1:4321/
+curl -sf -o /dev/null -w 'preview:%{http_code}\n' http://127.0.0.1:4331/
+```
+
+Expected: both ports LISTEN, both return `200`. Optional deeper dev check: `npm run smoke:localhost`.
+
+### Remote / Cursor environments
+
+- Servers bind `host: true` on the remote machine; `localhost:PORT` in the **user's browser**
+  only works if the port is forwarded.
+- Local `.vscode/settings.json` (gitignored) configures `remote.autoForwardPorts` for 4321 and
+  4331 — preview started in a background terminal may not auto-forward; manually add **4331**
+  in the Cursor **Ports** panel if remote `curl` passes but the browser fails.
+- If `curl` on the remote host fails, fix the server first (don't assume a forwarding issue).
+
+Symptom deep-dive: [`docs/troubleshooting.md`](docs/troubleshooting.md#port-already-in-use--localhost4321-wont-load).
 
 ## Agents
 
@@ -171,23 +258,21 @@ Icons in this site come from two sources. Know which to use before touching any 
 Defined in `src/lib/content.ts`. At build time it scans `public/assets/logos/` across every subfolder listed in `LOGO_SUBDIRS`, building a `Map<filename, urlPath>`. At call time it tries `${slug}.png`, `.svg`, `.webp`, `.avif` in that order and returns the first match.
 
 ```ts
-const LOGO_SUBDIRS = [
-  'org',
-  'marks',
-  'kaggle',
-  'vision',
-  'education',
-  'general',
-  'awards',
-  '',
-] as const;
+const LOGO_SUBDIRS = ['org', 'marks', ''] as const;
 ```
 
-**To add a new image set:**
+`org/` holds real brand logos (keep their own color); `marks/` holds the
+generated mark set (`logo_kaggle_*`, `logo_hub_*`, `logo_vision_*`,
+`logo_education_*`, `logo_general_*`, …); the `''` entry is the root fallback.
+First match wins in that order.
 
-1. Create `public/assets/logos/<set>/` and copy PNGs there.
-2. Add `'<set>'` to `LOGO_SUBDIRS` in `src/lib/content.ts`.
-3. Call `logoSrc('icon_<set>_<name>')` — slug = filename without extension.
+**To add a new image:**
+
+1. Drop the file into `public/assets/logos/marks/` (generated marks) or
+   `public/assets/logos/org/` (brand logos) — no code change needed.
+2. Call `logoSrc('<slug>')` — slug = filename without extension.
+3. Only add a new subfolder to `LOGO_SUBDIRS` in `src/lib/content.ts` if you
+   genuinely need a new scanned directory.
 
 ### Naming convention
 
@@ -264,6 +349,7 @@ When the save button is loading, CSS sets `opacity: 0` on its child icon. After 
 | Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`                   |
 | Logo SVG authoring                      | `../image_gen/.claude/skills/logo-emblem-author/SKILL.md`            |
 | Setup and commands                      | `docs/getting-started.md`                                            |
+| Local server ports (symptoms)           | `docs/troubleshooting.md#port-already-in-use--localhost4321-wont-load` |
 | Long-running agent batches              | `docs/task-runner.md`                                                |
 | Multi-view design consistency           | `docs/page-team.md`, `.claude/skills/page-consistency-team/SKILL.md` |
 | Architecture and data flow              | `docs/architecture.md`                                               |

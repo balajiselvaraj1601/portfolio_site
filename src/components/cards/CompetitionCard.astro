@@ -214,8 +214,8 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1px;
     margin: 0;
-    background: var(--border);
-    border: 1px solid var(--border);
+    background: color-mix(in srgb, var(--medal, var(--accent)) 20%, var(--border));
+    border: 1px solid color-mix(in srgb, var(--medal, var(--accent)) 20%, var(--border));
     border-radius: var(--radius-md);
     overflow: hidden;
   }
@@ -226,7 +226,7 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     text-align: center;
     gap: var(--text-gap-pair);
     padding: var(--space-3) var(--space-2);
-    background: var(--bg-elev);
+    background: color-mix(in srgb, var(--medal, var(--accent)) 6%, var(--bg-elev));
   }
   .blob-stat__icon {
     color: var(--medal);
@@ -278,5 +278,17 @@ const evalSlug = 'logo_metric_kaggle_evaluation';
     :global(.recog-card) {
       padding: var(--card-padding);
     }
+  }
+
+  /* Dark mode: boost per-medal prominence (mirrors Awards). */
+  :global(:root[data-theme='dark']) :global(.recog-card.blob--silver),
+  :global(:root[data-theme='dark']) :global(.recog-card.blob--bronze) {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--medal) 12%, var(--bg-elev)),
+      color-mix(in srgb, var(--medal) 4%, var(--bg-elev))
+    );
+    border-color: color-mix(in srgb, var(--medal) 45%, var(--border));
+    border-top-width: 3px;
   }
 </style>

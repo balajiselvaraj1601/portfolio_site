@@ -193,6 +193,11 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
   .connect-card :global(.icon-tile) {
     margin-bottom: var(--space-3);
   }
+  /* Adopt the site-standard accent-blended glyph: brand marks inherit the card
+     accent (blue) instead of neutral --brand-mark ink. */
+  .connect-card :global(.icon--brand) {
+    color: var(--accent-card, var(--accent));
+  }
   .connect-name {
     font-size: var(--fs-card-title);
     font-weight: var(--fw-semibold);
@@ -214,7 +219,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     border-top: 1px solid var(--border);
     font-size: var(--fs-sm);
     font-weight: var(--fw-semibold);
-    color: var(--accent-light);
+    color: var(--accent-card, var(--accent-light));
   }
   .connect-action :global(svg) {
     transition: transform var(--dur) var(--ease);

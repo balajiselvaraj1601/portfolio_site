@@ -256,7 +256,7 @@ export const visionBoardSchema = z.object({
   ),
   orgCards: z.array(
     z.object({
-      accent: visionAccentSchema,
+      accent: visionAccentSchema.optional(),
       mark: VisionMark,
       title: z.string(),
       lines: z.array(z.string()),

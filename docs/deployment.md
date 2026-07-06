@@ -99,7 +99,7 @@ git push -u origin main
 ```bash
 npm ci
 npm run build
-npm run preview   # spot-check at http://localhost:4321
+npm run preview   # spot-check at http://localhost:4331
 ```
 
 Verify: [Go-live checklist](./go-live-checklist.md) · [Troubleshooting](./troubleshooting.md)

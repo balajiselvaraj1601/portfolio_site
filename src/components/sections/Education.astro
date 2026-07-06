@@ -172,36 +172,6 @@ const stats: StatCell[] = [
     position: relative;
     padding: var(--card-padding);
   }
-  .edu-panel::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    background:
-      radial-gradient(
-        circle at 0.4rem 0.4rem,
-        color-mix(
-            in srgb,
-            var(--accent-card, var(--accent-gold)) 12%,
-            transparent
-          )
-          0.5px,
-        transparent 0.5px
-      ),
-      radial-gradient(
-        120% 80% at 0% 0%,
-        color-mix(
-          in srgb,
-          var(--accent-card, var(--accent-gold)) 10%,
-          transparent
-        ),
-        transparent 55%
-      );
-    background-size:
-      18px 18px,
-      auto;
-    opacity: 0.55;
-  }
 
   .edu-layout {
     position: relative;

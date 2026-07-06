@@ -65,32 +65,39 @@ matching schema.
 **Symptoms:**
 
 - Browser shows connection refused or a blank page at http://localhost:4321
-- Terminal logs `Port 4321 is already in use`
-- Terminal shows the dev server on **4322** instead of 4321 (older sessions only)
+- Terminal logs `Port 4321 is already in use` (or `4331` for preview)
+- Stale agent sessions left listeners on random 43xx ports (4322, 4326, 4327, …)
 
-**Cause:** Multiple `astro dev` processes compete for port 4321 — common when agents,
-terminals, and the local VS Code “Astro: dev preview” task all start the server. Before
-`vite.server.strictPort` was set correctly, a second instance silently moved to 4322 while
-the browser stayed on 4321.
+**Cause:** Multiple `astro dev` / `astro preview` processes compete for ports — common
+when agents, terminals, and the VS Code “Astro: dev preview” task all start servers
+independently, or when ad-hoc `--port` flags drift from the pinned values.
+
+**Fixed ports** (see `scripts/ports.mjs`):
+
+| Mode    | Port | URL                         |
+| ------- | ---- | --------------------------- |
+| Dev     | 4321 | http://localhost:4321/      |
+| Preview | 4331 | http://localhost:4331/      |
+
+Dev and preview can run at the same time (different ports). Never use ad-hoc
+`astro dev --port NNNN` or `astro preview --port NNNN` — use the npm scripts below.
 
 **Fix:**
 
 ```bash
-npm run dev:restart
+npm run dev:stop      # stop all Astro listeners on 4300–4399
+npm run dev:restart   # clean dev server on 4321
 ```
 
-This kills stale listeners on 4321 and 4322, then starts one fresh dev server on 4321.
-
-Do **not** run several `npm run dev` or `npm run preview` sessions at once on the same
-port. If you use the local `.vscode/tasks.json` “Astro: dev preview” task, run it manually
-when needed — it is no longer auto-started on folder open.
-
-For preview of a production build, stop the dev server first:
+For a fresh production preview:
 
 ```bash
-npm run build
-npm run preview
+npm run preview:restart   # stop → build → preview on 4331
 ```
+
+Do **not** run several `npm run dev` or `npm run preview` sessions without stopping
+first. If you use the local `.vscode/tasks.json` “Astro: dev preview” task, run it
+manually when needed — it is no longer auto-started on folder open.
 
 ### Theme flash on load
 

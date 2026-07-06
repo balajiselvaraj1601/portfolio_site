@@ -103,23 +103,21 @@ const bronze = items.filter((i) => i.medal === 'Bronze').length;
 </Section>
 
 <style>
-  /* Medal accents — map to the shared --medal-* tokens (theme tuning lives once
-     in global.css) so tiles and filter chips match the cards. */
+  /* All stat tiles inherit gold via the summary wrapper — avoids the global purple fallback.
+     Custom properties cascade, so child .card elements pick this up automatically. */
+  .recog-summary {
+    --accent-card: var(--view-accent-recognition);
+  }
+  /* Medal tiles/chips override directly on the element (higher-priority than inherited) */
   .blob--silver {
     --medal: var(--medal-silver);
+    --accent-card: var(--medal-silver);
+    --mark-fg: var(--medal-silver);
   }
   .blob--bronze {
     --medal: var(--medal-bronze);
-  }
-  /* Multi-color per view: tiles and chips read each item's per-medal --medal so
-     silver and bronze show their own hue, falling back to the Recognition accent
-     (gold) when an element has no medal class. */
-  .recog-tile.blob--silver,
-  .recog-tile.blob--bronze,
-  .recog-chip.blob--silver,
-  .recog-chip.blob--bronze {
-    --accent-card: var(--medal, var(--view-accent-recognition));
-    --mark-fg: var(--accent-card);
+    --accent-card: var(--medal-bronze);
+    --mark-fg: var(--medal-bronze);
   }
 </style>
 

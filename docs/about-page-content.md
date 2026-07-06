@@ -75,7 +75,7 @@ Every item below is confirmed **not** on the hero.
 
 ## G. Research & scientific contribution
 
-- 7 peer-reviewed publications — 4× AACR, Journal for ImmunoTherapy of Cancer, 2× bioRxiv 🆕
+- 3 publications — Journal for ImmunoTherapy of Cancer (2021) + 2× bioRxiv preprints (2021); separately, 4 AACR conference presentations (2021, 2023, 2024, 2025) 🆕 (publications and conference talks are distinct sections on the site)
 - Research collaborations with the Broad Institute (Dr. Shantanu Singh), IIT Madras, Uppsala University, and AI Sweden ♻️
 - Led the AI workstream inside a €14M, 14-partner European research consortium 🆕
 - Aligned programs to 3 corporate R&D scorecards (Oncology R&D LT 2024, BioPharma R&D 2024, CPSS 2025) 🆕

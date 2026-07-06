@@ -5,7 +5,7 @@
     {
       "id": "idea",
       "label": "IDEA",
-      "accent": "ai",
+      "accent": "people",
       "lead": { "kind": "icon", "name": "kaggle" },
       "marks": [
         {
@@ -103,7 +103,7 @@
     {
       "title": "Broad Institute",
       "label": "Senior Group Leader",
-      "accent": "strategic",
+      "accent": "impact",
       "badge": {
         "kind": "logo",
         "asset": "logo_broad_institute",
@@ -118,7 +118,7 @@
     {
       "title": "Persister Analysis",
       "label": "Chief Scientist Backed",
-      "accent": "privacy",
+      "accent": "people",
       "badge": {
         "kind": "logo",
         "asset": "persist-seq",
@@ -134,7 +134,7 @@
     {
       "title": "AACR Conference 2025",
       "label": "Conference Presentation",
-      "accent": "platform",
+      "accent": "people",
       "badge": { "kind": "logo", "asset": "logo_aacr", "alt": "AACR" },
       "lines": ["3-month AI pipeline development", "2 AI engineers"],
       "entity": "aacr"
@@ -142,7 +142,6 @@
   ],
   "orgCards": [
     {
-      "accent": "impact",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_award",
@@ -152,7 +151,6 @@
       "lines": ["Awarded for", "Drug Safety Platform"]
     },
     {
-      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_gaia",
@@ -162,7 +160,6 @@
       "lines": ["Multimodal Vision — GITC Chennai"]
     },
     {
-      "accent": "impact",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_secure_funds",
@@ -172,7 +169,6 @@
       "lines": ["Secured multiple times", "for the team"]
     },
     {
-      "accent": "platform",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_scorecard",
@@ -182,7 +178,6 @@
       "lines": ["Projects aligned", "to 3 scorecards"]
     },
     {
-      "accent": "strategic",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_positioning",
@@ -192,7 +187,6 @@
       "lines": ["7 internal groups · 3 startups"]
     },
     {
-      "accent": "people",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_scaling_team",
@@ -202,7 +196,6 @@
       "lines": ["From 1 to 12", "team members"]
     },
     {
-      "accent": "people",
       "mark": {
         "kind": "logo",
         "asset": "logo_vision_global_team",

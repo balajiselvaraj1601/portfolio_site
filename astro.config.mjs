@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import { DEV_PORT, PREVIEW_PORT } from './scripts/ports.mjs';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Single source of truth for the absolute site URL.
@@ -24,11 +25,15 @@ export default defineConfig({
   site: SITE_URL,
   base: '/',
   trailingSlash: 'ignore',
-  // Pin port 4321 so Astro never silently moves to 4322 when busy.
-  // host: true binds all interfaces (localhost + network) for dev/preview.
-  // strictPort lives under `vite.server` — Astro's `server` type doesn't expose it.
-  server: { port: 4321, host: true },
-  vite: { server: { strictPort: true } },
+  // Dev: 4321, preview: 4331 — see scripts/ports.mjs. strictPort prevents silent port drift.
+  server: ({ command }) => ({
+    port: command === 'dev' ? DEV_PORT : PREVIEW_PORT,
+    host: true,
+  }),
+  vite: {
+    server: { strictPort: true },
+    preview: { strictPort: true },
+  },
   integrations: [
     sitemap({
       filter: (page) =>

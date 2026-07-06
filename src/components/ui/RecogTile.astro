@@ -1,10 +1,8 @@
 ---
 // Shared recognition summary stat tile (Awards, Kaggle). Spreads ...rest onto
 // the root so the parent's scoped-style attribute (and any accent class passed
-// via `class`) keeps matching — same pattern as RecogCardShell.
-import Icon from '@components/ui/Icon.astro';
-import MarkEmblem from '@components/ui/MarkEmblem.astro';
-import { logoSrc } from '@lib/content';
+// via `class`) keeps matching.
+import CardMark from '@components/ui/CardMark.astro';
 import type { IconName } from '@lib/icons';
 import type { HTMLAttributes } from 'astro/types';
 
@@ -22,19 +20,13 @@ interface Props {
 const { icon, markSlug, count, label, class: cls, ...rest } = Astro.props;
 ---
 
-<div class:list={['recog-tile', cls]} {...rest}>
-  <div
-    class="icon-tile icon-tile--round icon-tile--accented"
-    aria-hidden="true"
-  >
-    {
-      markSlug && logoSrc(markSlug) ? (
-        <MarkEmblem mark={{ kind: 'logo', asset: markSlug }} />
-      ) : (
-        <Icon name={icon} size={22} />
-      )
-    }
-  </div>
+<div class:list={['theme-card', 'card', cls]} {...rest}>
+  <CardMark
+    icon={icon}
+    mark={markSlug ? { kind: 'logo', asset: markSlug } : undefined}
+    context="theme-card"
+    emblemInCircle
+  />
   <div class="recog-tile__count">{count}</div>
-  <div class="recog-tile__label">{label}<slot name="label-extra" /></div>
+  <p class="recog-tile__label">{label}<slot name="label-extra" /></p>
 </div>

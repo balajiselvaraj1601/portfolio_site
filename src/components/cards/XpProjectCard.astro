@@ -47,10 +47,9 @@ const iconName = resolveIcon(icon, 'folder');
 <style>
   .xp-proj {
     /* Subordinate to the role/company anchor above: quieter than the parent
-       .card — standard padding (vs the company block's --card-padding-lg) and a
-       neutral top border instead of the inherited 2px accent stripe. */
+       .card — standard padding (vs the company block's --card-padding-lg). */
     padding: var(--card-padding);
-    border-top: 1px solid var(--border);
+    border-top: 2px solid var(--accent-card, var(--accent));
     display: flex;
     flex-direction: column;
     gap: var(--space-5);

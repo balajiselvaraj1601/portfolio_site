@@ -104,9 +104,10 @@ const nodes = group.marks.map((mark, i) => {
     /* Hub node/center circles track --mark-slot at reference hub width */
     --vision-hub-node: calc(100cqi * var(--mark-slot) / var(--vision-hub-max));
     --vision-hub-center: var(--vision-hub-node);
-    /* Glyph scales with node so 50% fill ratio holds at every hub width */
+    /* Glyph scales with node so the fill ratio holds at every hub width
+       (~64% at reference, from --vision-mark-glyph 28px / --mark-slot 44px) */
     --vision-hub-glyph: calc(
-      var(--vision-hub-node) * var(--mark-glyph) / var(--mark-slot)
+      var(--vision-hub-node) * var(--vision-mark-glyph) / var(--mark-slot)
     );
     --spoke-start: calc(var(--vision-hub-center) / 2);
     --spoke-len: calc(var(--orbit) - var(--vision-hub-node));

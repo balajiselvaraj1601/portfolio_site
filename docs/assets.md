@@ -36,7 +36,7 @@ public/
 | `.nojekyll` | `public/.nojekyll`                                | GitHub Pages (empty file is fine)    |
 
 After replacing any asset, run `npm run build && npm run preview` and verify the URL loads
-(e.g. http://localhost:4321/assets/resume/balaji-selvaraj-resume.pdf).
+(e.g. http://localhost:4331/assets/resume/balaji-selvaraj-resume.pdf).
 
 ## Résumé PDF
 
@@ -53,7 +53,7 @@ To update the file:
 2. Replace `public/assets/resume/balaji-selvaraj-resume.pdf` (or add a new filename and
    update any external links that point at the old path).
 3. Verify the URL loads after build: `npm run preview` →
-   `http://localhost:4321/assets/resume/balaji-selvaraj-resume.pdf`.
+   `http://localhost:4331/assets/resume/balaji-selvaraj-resume.pdf`.
 
 ## OG / social preview image
 

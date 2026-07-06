@@ -1,11 +1,9 @@
 ---
 import Section from '@components/ui/Section.astro';
-import Icon from '@components/ui/Icon.astro';
-import MarkEmblem from '@components/ui/MarkEmblem.astro';
-import RecogCardShell from '@components/ui/RecogCardShell.astro';
+import CardMark from '@components/ui/CardMark.astro';
 import RecogControls from '@components/ui/RecogControls.astro';
 import RecogTile from '@components/ui/RecogTile.astro';
-import { awards, site, logoSrc } from '@lib/content';
+import { awards, site } from '@lib/content';
 
 import { awardLevelSchema } from '@schemas';
 
@@ -41,19 +39,21 @@ const total = items.length;
   class="section--compact-bottom"
 >
   <!-- Summary stat tiles — counts by nominator level -->
-  <div class="recog-summary reveal">
+  <ul class="theme-grid awards-summary reveal" role="list">
     {
       LEVELS.map((level) => (
-        <RecogTile
-          class={`level-${slug(level)}`}
-          icon="trophy"
-          markSlug="logo_trophy_badge"
-          count={counts[level] ?? 0}
-          label={level}
-        />
+        <li>
+          <RecogTile
+            class={`level-${slug(level)}`}
+            icon="trophy"
+            markSlug="logo_trophy_badge"
+            count={counts[level] ?? 0}
+            label={level}
+          />
+        </li>
       ))
     }
-  </div>
+  </ul>
 
   <RecogControls
     countLabel="All Awards"
@@ -87,67 +87,43 @@ const total = items.length;
   </RecogControls>
 
   <!-- Award card grid -->
-  <div class="recog-grid reveal" data-awards-grid>
+  <ul class="theme-grid awards-grid reveal" data-awards-grid role="list">
     {
       items.map((a) => (
-        <RecogCardShell
-          class:list={[`level-${slug(a.level)}`]}
-          data-level={a.level}
-          data-title={a.title}
-          data-nominator={a.nominator}
-          data-reason={a.reason}
-        >
-          <Fragment slot="headTop">
-            <div
-              class="icon-tile icon-tile--round icon-tile--accented"
-              aria-hidden="true"
+        <li>
+          <article
+            class:list={['theme-card', 'card', `level-${slug(a.level)}`]}
+            data-level={a.level}
+            data-title={a.title}
+            data-nominator={a.nominator}
+            data-reason={a.reason}
+          >
+            <CardMark
+              mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
+              icon="trophy"
+              context="theme-card"
+              emblemInCircle
+            />
+            <p class="awards-card__kicker">{a.level}</p>
+            <h3 class="theme-card__title">{a.title}</h3>
+            <div class="recog-card-divider" aria-hidden="true" />
+            <p class="theme-card__desc">
+              {a.nominator} · {a.designation}
+            </p>
+            <p class="theme-card__desc">{a.reason}</p>
+            {a.date && <p class="theme-card__desc">{a.date}</p>}
+            <div class="recog-card-divider" aria-hidden="true" />
+            <p
+              class="theme-card__desc recog-clamp awards-card__message"
+              style="--clamp: 6"
             >
-              {logoSrc('logo_trophy_badge') ? (
-                <MarkEmblem
-                  mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
-                />
-              ) : (
-                <Icon name="trophy" size={22} />
-              )}
-            </div>
-            <span class="recog-badge">{a.level}</span>
-          </Fragment>
-          <h3 slot="title" class="recog-title">
-            {a.title}
-          </h3>
-
-          <dl class="recog-card-fields">
-            <div class="recog-card-field">
-              <dt class="recog-label">Nominator</dt>
-              <dd class="recog-value">
-                {a.nominator} · {a.designation}
-              </dd>
-            </div>
-            <div class="recog-card-field">
-              <dt class="recog-label">Award Reason</dt>
-              <dd class="recog-value">{a.reason}</dd>
-            </div>
-            {a.date && (
-              <div class="recog-card-field">
-                <dt class="recog-label">Date</dt>
-                <dd class="recog-value">{a.date}</dd>
-              </div>
-            )}
-          </dl>
-
-          <Fragment slot="footer">
-            <div class="recog-card-divider" />
-            <div class="recog-card-message">
-              <span class="field-label recog-label">Award Message</span>
-              <p class="recog-body recog-clamp" style="--clamp: 6">
-                {a.message}
-              </p>
-            </div>
-          </Fragment>
-        </RecogCardShell>
+              {a.message}
+            </p>
+          </article>
+        </li>
       ))
     }
-  </div>
+  </ul>
 
   <p class="recog-empty" data-awards-empty hidden>
     No awards match your search.
@@ -179,11 +155,82 @@ const total = items.length;
 
   /* Multi-color per view: cards/tiles read the shared --accent-card; feed it each
      item's per-level --lvl so every award level shows its own hue, falling back to
-     the Recognition accent (gold) when an element has no level class. */
-  .recog-tile,
-  .recog-card {
+     the Recognition accent (gold) when an element has no level class.
+     Scoped to #awards so the rule doesn't bleed into About/Vision theme-cards. */
+  :global(#awards .theme-card.card) {
     --accent-card: var(--lvl, var(--view-accent-recognition));
     --mark-fg: var(--accent-card);
+  }
+
+  .awards-summary {
+    --theme-cols: 3;
+    margin-bottom: var(--text-gap-section);
+  }
+
+  @media (min-width: 900px) {
+    .awards-summary {
+      --theme-cols: 6;
+    }
+  }
+
+  .awards-grid {
+    --theme-cols: 3;
+    grid-auto-rows: 1fr;
+  }
+
+  .awards-grid > li {
+    display: flex;
+  }
+
+  :global(#awards .awards-grid > li > .theme-card.card) {
+    flex: 1;
+    width: 100%;
+    height: 100%;
+  }
+
+  :global(#awards .awards-grid .awards-card__message) {
+    margin-top: auto;
+  }
+
+  @media (max-width: 980px) {
+    .awards-grid {
+      --theme-cols: 2;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .awards-grid {
+      --theme-cols: 1;
+      grid-auto-rows: auto;
+    }
+  }
+
+  .awards-summary :global(li),
+  .awards-grid :global(li) {
+    min-width: 0;
+  }
+
+  .awards-grid :global(.recog-card-divider) {
+    margin-block: var(--text-gap-inline);
+  }
+
+  :global(#awards .theme-card.card .recog-card-divider) {
+    background: color-mix(in srgb, var(--accent-card, var(--accent)) 40%, var(--border));
+  }
+
+  .awards-card__kicker {
+    font-family: var(--font-mono);
+    font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-semibold);
+    letter-spacing: var(--tracking-wider);
+    text-transform: uppercase;
+    color: var(--accent-card, var(--accent-ll));
+    margin: var(--text-gap-pair) 0 0;
+    max-width: none;
+  }
+
+  :global(#awards .theme-card.card.hidden) {
+    display: none;
   }
 </style>
 
@@ -195,6 +242,7 @@ const total = items.length;
     initRecogGrid({
       root,
       gridSelector: '[data-awards-grid]',
+      itemSelector: '.theme-card.card[data-level]',
       searchSelector: '[data-awards-search]',
       countSelector: '[data-awards-count]',
       emptySelector: '[data-awards-empty]',

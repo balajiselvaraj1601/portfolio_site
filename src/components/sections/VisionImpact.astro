@@ -18,7 +18,7 @@ import { visionBoard, site } from '@lib/content';
         role="list"
       >
         {visionBoard.orgCards.map((c) => (
-          <li class:list={['vision-accent-hook', `vision-accent-${c.accent}`]}>
+          <li class="vision-accent-hook">
             <ThemeCard mark={c.mark} title={c.title} lines={c.lines} />
           </li>
         ))}
@@ -35,8 +35,7 @@ import { visionBoard, site } from '@lib/content';
   .vision-impact__grid {
     grid-auto-rows: 1fr;
   }
-  /* Impact tiles color per-item by their JSON accent via .vision-accent-*
-     + .vision-accent-hook cascade. */
+  /* Impact tiles: single blue via #vision-impact .vision-accent-hook (VI-001). */
   .vision-impact__grid > li {
     display: flex;
   }
@@ -45,13 +44,13 @@ import { visionBoard, site } from '@lib/content';
     height: 100%;
   }
 
-  /* Impact-tile emblems fill their glyph box edge-to-edge (mask contain) and bake in
-     their own ring, so at the default 22px they crowd the 44px chrome circle. Trim the
-     glyph to the compact size for breathing room; the circle (--mark-slot 44px) is
-     unchanged. Scoped here so the Vision hub, program cards, and Recognition marks keep
+  /* Unify Impact-tile glyphs with the Vision hub marks (--vision-mark-glyph 28px).
+     The logo_vision_* emblems bake in their own ring and fill their glyph box
+     edge-to-edge (mask contain); 28px keeps an ~8px gap inside the 44px chrome
+     circle (--mark-slot unchanged). Scoped here so Recognition/About marks keep
      the site-default 22px. */
   .vision-impact__grid :global(.theme-card__icon) {
-    --mark-glyph: var(--mark-glyph-compact);
+    --mark-glyph: 32px;
   }
 
   /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).

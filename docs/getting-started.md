@@ -53,8 +53,9 @@ throws a Zod error with the field path.
 npm run preview
 ```
 
-Serves `dist/` at http://localhost:4321. Use this to verify assets, links, and theme
-behavior exactly as they will appear on GitHub Pages.
+Serves `dist/` at http://localhost:4331/. Use this to verify assets, links, and theme
+behavior exactly as they will appear on GitHub Pages. Dev (HMR) and preview can run
+simultaneously — dev stays on 4321, preview on 4331.
 
 ## What to edit
 
