@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-07-06
+
+Post-refactor site review pass: design consistency, accessibility, content fixes, and follow-up hygiene.
+
+### Added
+
+- Location contact card restored to the contact grid as a static block
+- Visually hidden screen-reader hints for external links in Contact
+- Dual-theme visual baselines (dark + light) with hero and experience shots; re-scroll-until-stable capture guard in `baseline-shots.mjs`
+- `task.md` — verified open items for follow-up agents
+
+### Changed
+
+- Card shell padding, typography tokens, kicker colors, mobile breakpoints, object-fit, and vision icon sizes standardized across sections
+- Awards summary grid refactored; `RecogCardShell` composition updated
+- Smoke test imports `DEV_PORT` from `scripts/ports.mjs` (ports SSOT)
+- Docs aligned to current schemas (`content-editing.md`, `specification.md`, `page-recognition.md`); refactor ledger follow-ups marked resolved
+
+### Fixed
+
+- `AGENTS.md` code-example syntax typo; design consistency contract updated
+
 ## [1.2.0] - 2026-07-06
 
 Internal zero-visual-change refactor (dist-diff gated against `refactor-baseline`); the only
