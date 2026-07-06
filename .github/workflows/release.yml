@@ -1,0 +1,141 @@
+# Release workflow — bumps package.json version, commits, tags, verifies, and publishes
+# a GitHub Release. No npm publish (private package).
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'Which semver part to bump (ignored if version is set)'
+        type: choice
+        required: false
+        default: patch
+        options:
+          - patch
+          - minor
+          - major
+      version:
+        description: 'Explicit version to set (X.Y.Z). If set, overrides bump.'
+        type: string
+        required: false
+      prerelease:
+        description: 'Mark the GitHub Release as a pre-release'
+        type: boolean
+        required: false
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Configure git author
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+      - name: Determine version
+        id: bump
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+          INPUT_BUMP: ${{ inputs.bump }}
+        run: |
+          set -euo pipefail
+          if [ "${GITHUB_EVENT_NAME}" = "push" ]; then
+            ref="${GITHUB_REF_NAME}"
+            if echo "${ref}" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+              echo "version=${ref#v}" >> "${GITHUB_OUTPUT}"
+              exit 0
+            fi
+            echo "Unexpected tag ref: ${ref}" >&2
+            exit 1
+          fi
+
+          if [ -n "${INPUT_VERSION}" ]; then
+            NEW_VERSION="$(node scripts/bump-version.mjs --new-version "${INPUT_VERSION}")"
+          else
+            NEW_VERSION="$(node scripts/bump-version.mjs --bump "${INPUT_BUMP}")"
+          fi
+          if [ -z "${NEW_VERSION}" ]; then
+            echo "Error: version bump script returned an empty version string" >&2
+            exit 1
+          fi
+          echo "version=${NEW_VERSION}" >> "${GITHUB_OUTPUT}"
+
+      - name: Commit version bump
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set -euo pipefail
+          git add package.json package-lock.json
+          git commit -m "chore(release): v${{ steps.bump.outputs.version }}"
+
+      - name: Create tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set -euo pipefail
+          git tag "v${{ steps.bump.outputs.version }}"
+
+      - name: Push commit and tag
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          set -euo pipefail
+          git push origin HEAD
+          git push origin "v${{ steps.bump.outputs.version }}"
+
+      - name: Verify release gate
+        if: github.event_name == 'push'
+        run: npm run verify
+
+      - name: Check for existing release
+        id: check_release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          if gh release view "v${{ steps.bump.outputs.version }}" >/dev/null 2>&1; then
+            echo "exists=true" >> "${GITHUB_OUTPUT}"
+          else
+            echo "exists=false" >> "${GITHUB_OUTPUT}"
+          fi
+
+      - name: Create GitHub Release
+        if: >-
+          github.event_name == 'workflow_dispatch' ||
+          (github.event_name == 'push' && steps.check_release.outputs.exists == 'false')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          PRERELEASE_FLAG=""
+          if [ "${{ inputs.prerelease }}" = "true" ]; then
+            PRERELEASE_FLAG="--prerelease"
+          fi
+          gh release create "v${{ steps.bump.outputs.version }}" \
+            --title "v${{ steps.bump.outputs.version }}" \
+            --generate-notes \
+            ${PRERELEASE_FLAG}

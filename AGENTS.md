@@ -119,8 +119,20 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 | Rebuild + preview (4331)    | `npm run preview:restart`                                               |
 | Verify dev + preview        | `ss` + `curl` (see [Local servers and ports](#local-servers-and-ports)) |
 | Dev smoke (Playwright)      | `npm run smoke:localhost`                                               |
+| Full verify (release gate)  | `npm run verify`                                                        |
+| Bump version                | `npm run release:bump -- --bump patch`                                   |
+| Cut release                 | `/release` or `.claude/commands/release.md`                             |
 
 CI builds on Node 20 (`package.json` engines: `>=18`).
+
+## Releases
+
+Version SSOT: `package.json` → `version` (synced to `package-lock.json` by `scripts/bump-version.mjs`).
+This package is `"private": true` — releases are git tags and [GitHub Releases](CHANGELOG.md), not npm publish.
+
+- **First-time / manual cut:** run `npm run verify`, tag `vX.Y.Z`, push `main` + tag; `.github/workflows/release.yml` verifies and creates the GitHub Release.
+- **Future bumps:** workflow dispatch on `release.yml` (patch/minor/major) or follow `.claude/commands/release.md`.
+- Deploy to GitHub Pages stays on push to `main` on the user-site repo; tags do not replace that trigger.
 
 ## Local servers and ports
 
