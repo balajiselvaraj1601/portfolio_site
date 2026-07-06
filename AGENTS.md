@@ -51,8 +51,9 @@ Routing and view wiring live in `content/site.json → pages`:
 
 Client behavior is wired by three scripts in `src/scripts/`:
 
-- **`site-chrome.ts`** — entry point (`initSiteChrome()`): theme toggle, mobile nav,
+- **`site-chrome.ts`** — entry point (`initSiteChrome()`): mobile nav,
   scrolled-header state, reveal animations; calls `initSectionViews()` on `/`.
+  (The theme toggle was removed by the dark-only theme, ec01162.)
 - **`section-views.ts`** — nav scroll + scroll-spy: scrolls to a view's first section on hash
   change and keeps nav state in sync. All sections remain visible.
 - **`save-page.ts`** — `savePage()`, downloads the page as self-contained HTML.
@@ -183,9 +184,11 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 | `site-review-fix`                | site-review-fix agent                                   | `.claude/skills/site-review-fix/SKILL.md`                |
 | `page-consistency-team`          | site-consistency-orchestrator, site-review-auto         | `.claude/skills/page-consistency-team/SKILL.md`          |
 | `portfolio-icon-audit`           | Manual invocation                                       | `.claude/skills/portfolio-icon-audit/SKILL.md`           |
+| `portfolio-icon-patterns`        | Manual invocation; design-guardian, page agents         | `.claude/skills/portfolio-icon-patterns/SKILL.md`        |
 | `portfolio-icon-standardization` | Manual invocation; design-guardian, page agents         | `.claude/skills/portfolio-icon-standardization/SKILL.md` |
 | `svg-logo-crop`                  | Manual invocation                                       | `.claude/skills/svg-logo-crop/SKILL.md`                  |
 | `icon-square-center`             | Manual invocation (raster prep)                         | `.claude/skills/icon-square-center/SKILL.md`             |
+| `portfolio-card-shells`          | Manual invocation; design-guardian                      | `.claude/skills/portfolio-card-shells/SKILL.md`          |
 | `portfolio-content-authoring`    | Manual invocation                                       | `.claude/skills/portfolio-content-authoring/SKILL.md`    |
 | `portfolio-visual-verify`        | Manual invocation                                       | `.claude/skills/portfolio-visual-verify/SKILL.md`        |
 | `portfolio-seo-meta`             | Manual invocation                                       | `.claude/skills/portfolio-seo-meta/SKILL.md`             |
@@ -250,16 +253,7 @@ CSS size the `<img>` to match the Icon pixel size — `size={22}` = `1.375rem`, 
 
 ### Theme-toggle show/hide classes
 
-The header theme toggle hides one icon via CSS `display: none` keyed on `.theme-toggle__sun` / `.theme-toggle__moon`. These classes **must live on the rendered element** — whether `<img>` or `<Icon>`. When replacing with an `<img>`, pass the class explicitly:
-
-```astro
-<img
-  src={sunImgSrc}
-  alt=""
-  class="header-icon theme-toggle__sun"
-  aria-hidden="true"
-/>
-```
+**Removed.** The header theme toggle was deleted by the dark-only theme migration (ec01162); `.theme-toggle__sun` / `.theme-toggle__moon` and their CSS no longer exist. Header action buttons are `save-btn` and `nav-toggle` only. If a component swaps an `<Icon>` for an `<img>`, any CSS keyed on the icon's class must still land on the rendered element — pass the class explicitly on the `<img>`.
 
 ### `save-btn` aria-busy rule
 

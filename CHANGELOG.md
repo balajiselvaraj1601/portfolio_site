@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0] - 2026-07-06
+
+Internal zero-visual-change refactor (dist-diff gated against `refactor-baseline`); the only
+visual change is the Contact copy/spacing edit. Full ledger: `docs/audits/refactor-2026-07-06.md`.
+
+### Added
+
+- `scripts/dist-diff.mjs` zero-visual-change refactor gate (strict + `--loose` modes) and `refactor-baseline` tag
+- Theme-token drift gate `scripts/check-theme-token-sync.mjs` wired into `check:tokens` (`THEME_BG` ↔ `--bg`)
+- `src/lib/views.ts` shared structural constants (dot ids, selectors, scroll-settle timing)
+- `scripts/icons/README.md` documenting icon-pipeline entry points and dormant utilities
+
+### Changed
+
+- Contact view copy and spacing: title "important" → "impactful"; subtitle moved below the section header (only visual change in this release)
+- `src/schemas.ts` split into `src/schemas/` modules behind the `@schemas` barrel; icon/logo pipeline scripts moved to `scripts/icons/`
+- Root restructure: `icons-grid.png` → `docs/reference/`, `SVG-ICON-SKILL-SETUP.md` → `docs/`, `icon_collections_resized/` → `assets/icon-collections-resized/`
+- Large components decomposed into sub-components (Experience, VisionPrograms, Hero, LeadershipPhilosophy, CompetitionCard, Education, SpeakingCard) — dist-verified render-identical
+- SSOT consolidation: typed `SECTIONS` registry, derived `homeViewAnchor`, table-driven content validation, `isContentPage` dedup, `medalCount()` helper
+- Agent-infra consolidation: page-agent skeletons deduplicated into the shared playbook, ports documentation SSOT moved to `docs/troubleshooting.md`, `AGENT-SYSTEM-SUMMARY.md` refreshed
+
+### Removed
+
+- `TASKS.md` and `CURSOR.md` root pointer/relic files
+- 79 dead CSS lines (orphaned `.recog-tile`/`.recog-badge` rules, unused view-accent tokens, `.accent-red`, stale `.theme-toggle` print rule)
+- Unrendered content fields (`profile.headline`/`photo`; kaggle `headline`, `architecture`/`lessons`/`highlights`, and stray unvalidated keys)
+
 ## [1.1.0] - 2026-07-06
 
 ### Added
@@ -64,7 +91,8 @@ First production release of the Balaji Selvaraj portfolio site.
 - Education stat tiles use Recognition gold hairline grid (aligned with Kaggle summary pattern)
 - Vision board IDEA lane uses `silver` accent for medal/recognition semantics
 
-[Unreleased]: https://github.com/balajiselvaraj1601/portfolio_site/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/balajiselvaraj1601/portfolio_site/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/balajiselvaraj1601/portfolio_site/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/balajiselvaraj1601/portfolio_site/compare/v1.0.1...v1.1.0
 [1.0.1]: https://github.com/balajiselvaraj1601/portfolio_site/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/balajiselvaraj1601/portfolio_site/releases/tag/v1.0.0

@@ -64,7 +64,7 @@ Shelved (never enable, never audit): —
     - `.recog-tile__label` → **T8** caps label
   - _Controls (`RecogControls`, shared/guardian-owned, audit-only):_ `.recog-chip` filter → **T8** caps label; count/search are UI chrome, off the prose ladder
   - _Card ×N (`.recog-card`):_
-    - `.recog-badge` (level) → **T8** caps label
+    - `.awards-card__kicker` (level; replaced `.recog-badge`, deleted in 94269ae) → **T8** caps label
     - `h3.recog-title` → **T3** card title
     - `dt.recog-label` (Nominator / Award Reason / Date) → **T9** emphasis micro-label
     - `dd.recog-value` → **T6** body prose
@@ -121,7 +121,7 @@ Shelved (never enable, never audit): —
 | `.icon-tile--accented` (tiles/cards) | `--accent-card` | color-mix w/ `--accent-card` | —               |
 | `.recog-card` (awards/kaggle)        | —               | `--bg-elev` (gradient)       | `--accent-card` |
 | `.recog-title`                       | `--heading`     | —                            | —               |
-| `.recog-badge`                       | `--heading`     | color-mix w/ `--accent-card` | —               |
+| `.awards-card__kicker`               | `--accent-card` | —                            | —               |
 | `dt.recog-label`                     | `--text-muted`  | —                            | —               |
 | `dd.recog-value`                     | `--text`        | —                            | —               |
 | `p.recog-body`                       | `--text`        | —                            | —               |

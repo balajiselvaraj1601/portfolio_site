@@ -191,16 +191,18 @@ Per `docs/design-direction.md § Section eyebrows`:
 ## 5. Card shells
 
 Four tiers govern box/card surfaces. **Default shell (2026-07-03):** `.card`, `.content-card`,
-`.recog-card`, and `.recog-tile` share the recognition-style treatment — accent top border
+and `.recog-card` share the recognition-style treatment — accent top border
 (`--accent-card`), `--radius-xl`, gradient background, hover lift. Set `--accent-card` on a
-wrapper (`.card-accent`, level/medal/category class) for contextual colour.
+wrapper (`.card-accent`, level/medal/category class) for contextual colour. _(The former
+`.recog-tile` shell alias was deleted with the dead recognition CSS (94269ae, 2026-07-06);
+summary stat tiles render `.theme-card.card` via `RecogTile.astro`.)_
 
-| Tier                | Shell class                                | Padding token              | Used by                                                              |
-| ------------------- | ------------------------------------------ | -------------------------- | -------------------------------------------------------------------- |
-| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | theme-card, connect-card, proj-card accordion                        |
-| **B — content**     | `.content-card`                            | `--card-padding-lg` (32px) | ResearchCard, SpeakingCard                                           |
-| **C — recognition** | `.recog-card`, `.recog-tile`, `.edu-panel` | `--card-padding` (24px)    | Awards, Kaggle, Education — **aliases of the default `.card` shell** |
-| **D — special**     | `.card--accent`, `.hub__ring`              | varies                     | Vision hub circle                                                    |
+| Tier                | Shell class                   | Padding token              | Used by                                                                                                                             |
+| ------------------- | ----------------------------- | -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| **A — compact**     | `.card`                       | `--card-padding` (24px)    | theme-card, connect-card, proj-card accordion                                                                                       |
+| **B — content**     | `.content-card`               | `--card-padding-lg` (32px) | ResearchCard, SpeakingCard                                                                                                          |
+| **C — recognition** | `.recog-card`, `.edu-panel`   | `--card-padding` (24px)    | Awards, Kaggle, Education — **aliases of the default `.card` shell** (summary stat tiles render `.theme-card.card` via `RecogTile`) |
+| **D — special**     | `.card--accent`, `.hub__ring` | varies                     | Vision hub circle                                                                                                                   |
 
 Shared primitives:
 
@@ -268,12 +270,12 @@ when paired with `--round`), `--elev` (white node on tinted callout).
 Set `--accent-card` on a wrapper (`.card-accent` or level/medal class) to tint Tier C shells.
 Use shared callout primitives for nested emphasis — do not reimplement `color-mix` per component.
 
-| Pattern     | Class                                          | Use                                                                  |
-| ----------- | ---------------------------------------------- | -------------------------------------------------------------------- |
-| Soft tint   | `.card-tint`                                   | Nested callouts (`--accent-soft` wash): pipeline, impact strip       |
-| Accent tint | `.card-tint--accent`                           | Contextual `--accent-card` wash: edu highlight, level-coloured bands |
-| Top stripe  | `.card--accent::before` or Tier C `border-top` | Card-level category emphasis (see §11)                               |
-| Radial wash | `.recog-tile::after`, `.edu-panel::before`     | Tier C hero/stat tiles only                                          |
+| Pattern     | Class                                          | Use                                                                                                       |
+| ----------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------------- |
+| Soft tint   | `.card-tint`                                   | Nested callouts (`--accent-soft` wash): pipeline, impact strip                                            |
+| Accent tint | `.card-tint--accent`                           | Contextual `--accent-card` wash: edu highlight, level-coloured bands                                      |
+| Top stripe  | `.card--accent::before` or Tier C `border-top` | Card-level category emphasis (see §11)                                                                    |
+| Radial wash | _(retired — no current consumers)_             | Former `.recog-tile::after` deleted with dead recog CSS (94269ae); `.edu-panel::before` no longer in code |
 
 **Contextual `--accent-card` sources:** Awards (`--lvl` per level), Kaggle (`--medal`), Education
 (`--accent-gold`), CompetitionCard (`--medal` per card).
@@ -284,13 +286,13 @@ Ratified from `docs/icon-blend-strategy.md`. The permission criterion is asset _
 
 > **Raster `<img>` is permitted only for org/collaboration brand marks (wordmarks, logotypes, brand identities) in `.logo-badge` / `.logo-badge--round` / `.logo-badge--plain` containers.** All monochrome semantic icons — regardless of whether an existing SVG is available — must be delivered as vector via `Icon.astro` (Lucide) or `MarkEmblem` + `logo_*.svg`. Header chrome action buttons are `Icon.astro`-only. `object-fit: cover` is exclusively `.comp-image` for the org-logo header tile in `CompetitionCard`; all other raster uses apply `object-fit: contain`.
 
-| Context                                                  | Delivery                                                       | Notes                                                     |
-| -------------------------------------------------------- | -------------------------------------------------------------- | --------------------------------------------------------- |
-| Header chrome (`save-btn`, `theme-toggle`, `nav-toggle`) | `Icon.astro` only                                              | No raster ever                                            |
-| `.icon-tile` stat/metric glyphs                          | `MarkEmblem` + `logo_*.svg` (currentColor tinting)             | `Icon.astro` fallback while SVG pending (BC5)             |
-| Org/collaboration logos                                  | `.logo-badge` raster PNG                                       | Brand-fidelity; never vectorize regardless of color count |
-| Competition entity marks                                 | `MarkEmblem` via `logo_kaggle_*.svg` in `.icon-tile--accented` | Medal tint via `currentColor`                             |
-| `object-fit: cover`                                      | Exclusively `.comp-image` in `CompetitionCard`                 | All other raster: `object-fit: contain`                   |
+| Context                                  | Delivery                                                       | Notes                                                        |
+| ---------------------------------------- | -------------------------------------------------------------- | ------------------------------------------------------------ |
+| Header chrome (`save-btn`, `nav-toggle`) | `Icon.astro` only                                              | No raster ever (`theme-toggle` removed by dark-only ec01162) |
+| `.icon-tile` stat/metric glyphs          | `MarkEmblem` + `logo_*.svg` (currentColor tinting)             | `Icon.astro` fallback while SVG pending (BC5)                |
+| Org/collaboration logos                  | `.logo-badge` raster PNG                                       | Brand-fidelity; never vectorize regardless of color count    |
+| Competition entity marks                 | `MarkEmblem` via `logo_kaggle_*.svg` in `.icon-tile--accented` | Medal tint via `currentColor`                                |
+| `object-fit: cover`                      | Exclusively `.comp-image` in `CompetitionCard`                 | All other raster: `object-fit: contain`                      |
 
 **`logo_*` slug detection:** Any slug starting with `logo_` is a pipeline SVG (`marks/` directory) and must route to `MarkEmblem`, not `<img src>`. The `logoHasOwnRing()` helper in `src/lib/logo-display.ts` encodes this rule. `ThemeCard` with `markDisplay='auto'` routes `logo_*` marks to emblem-in-circle automatically.
 
@@ -371,7 +373,7 @@ for approved divergences. Append rows; never delete history.
 
 | exception_id | views                                          | rule waived                            | reason                                                                                                                                                                                                                                                                            | date       |
 | ------------ | ---------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| EX-001       | recognition                                    | §5 `--radius` default                  | `.recog-card` / `.recog-tile` use `--radius-xl` (14px) to pair with top accent stripe                                                                                                                                                                                             | 2026-07-02 |
+| EX-001       | recognition                                    | §5 `--radius` default                  | `.recog-card` / `.recog-tile` use `--radius-xl` (14px) to pair with top accent stripe. **Note (2026-07-06):** `.recog-tile` retired (94269ae) — summary tiles render `.theme-card.card`; `--radius-xl` is now the default-shell radius, so this exception is absorbed by §5.      | 2026-07-02 |
 | EX-002       | recognition                                    | §5 solid `--bg-elev` shell             | `.recog-card` gradient background elevates recognition band above standard cards                                                                                                                                                                                                  | 2026-07-02 |
 | EX-003       | recognition                                    | §5 no top accent                       | `.recog-card` / `.edu-panel` use 2px solid `border-top: var(--accent-card)` as categorical colour identifier                                                                                                                                                                      | 2026-07-02 |
 | EX-004       | recognition                                    | §5 standard shell bg                   | `.edu-panel::before` dotted radial overlay — education hero treatment unique within Tier C                                                                                                                                                                                        | 2026-07-02 |
@@ -399,7 +401,7 @@ Design Guardian is the sole editor of all `.icon-tile` CSS and shared icon primi
 | Code | Constraint                                                                                                                                                                                                                                                                                                                                         |
 | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | IC1  | **No per-component raster img sizing classes.** Any `<img>` inside `.icon-tile` inherits `--mark-glyph` via the global TC1 rule (see `global.css`). Page agents must not add new scoped rem-literal sizing classes for icon images. New size needs go to the guardian for a token decision.                                                        |
-| IC2  | **No raster in Header chrome.** `Header.astro` action buttons (`save-btn`, `theme-toggle`, `nav-toggle`) use `Icon.astro` exclusively. No `<img>` or `logoSrc()` icon calls in that context.                                                                                                                                                       |
+| IC2  | **No raster in Header chrome.** `Header.astro` action buttons (`save-btn`, `nav-toggle`; the `theme-toggle` was removed by the dark-only theme, ec01162) use `Icon.astro` exclusively. No `<img>` or `logoSrc()` icon calls in that context.                                                                                                       |
 | IC3  | **`object-fit: cover` is exclusively `.comp-image`.** Only the org-logo header tile in `CompetitionCard` uses `cover`. All other raster contexts use `contain`.                                                                                                                                                                                    |
 | IC4  | **`.icon-tile--accented` tinting does not propagate to `<img>`.** The `color: var(--accent-card)` tint applies only to SVG/MarkEmblem children. Page agents must not rely on raster PNGs inside accented tiles receiving the contextual hue.                                                                                                       |
 | IC5  | **Do not add raster to `XpProjectCard`.** Its icon slot resolves via `resolveIcon()` → `IconName` → `Icon.astro`. No `logoSrc()` call should be added; the card is intentionally SVG-only.                                                                                                                                                         |
