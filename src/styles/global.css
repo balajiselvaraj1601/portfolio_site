@@ -320,6 +320,7 @@
   --vision-accent-ai: var(--cat-ai);
   --vision-accent-privacy: var(--cat-privacy);
   --vision-accent-gxp: var(--cat-gxp);
+  --vision-accent-silver: var(--medal-silver);
 
   /* Per-view accent SSOT — one accent per nav view (design-direction: unified
      per-view hue). Each references a theme-aware token, so light/dark track
@@ -331,7 +332,9 @@
   --view-accent-recognition: var(--accent-gold); /* gold  */
   --view-accent-vision: var(--lvl-director); /* teal  */
   --view-accent-contact: var(--accent); /* purple */
-  --vision-impact-accent: var(--cat-strategic); /* blue — #vision-impact only (VI-001) */
+  --vision-impact-accent: var(
+    --cat-strategic
+  ); /* blue — #vision-impact only (VI-001) */
   --hero-gradient: radial-gradient(
     120% 120% at 15% 0%,
     var(--accent-soft) 0%,
@@ -837,6 +840,9 @@ button {
 }
 .vision-accent-gxp {
   --cat: var(--vision-accent-gxp);
+}
+.vision-accent-silver {
+  --cat: var(--vision-accent-silver);
 }
 .vision-accent-hook {
   /* Multi-color per view: each hub/card uses its own per-group --cat (set by the
