@@ -182,7 +182,7 @@
   /* Line-height ladder — ONE set of steps; components reference by role. */
   --lh-none: 1; /* solid leading: display numbers, monogram, badge glyphs */
   --lh-tight: 1.1; /* headings h1–h4 */
-  --lh-snug: 1.25; /* recognition / card titles */
+  --lh-snug: 1.35; /* recognition / card titles */
   --lh-normal: 1.4; /* metrics, metadata, dense labels (absorbs 1.35) */
   --lh-relaxed: 1.6; /* body blocks, recog-body */
   --lh-body: 1.75; /* loose body prose */
@@ -561,6 +561,7 @@ button {
   letter-spacing: normal;
   font-size: var(--fs-card-title);
   font-weight: var(--fw-semibold);
+  line-height: var(--lh-snug);
   color: var(--heading);
   margin: 0;
 }
@@ -1014,6 +1015,84 @@ button {
   height: 1px;
   background: var(--border);
 }
+
+/* Collapsible recog-card body — opt-in via RecogCardShell `collapsible`
+   (Kaggle). Collapse is JS-gated (html.js) so no-script visitors see full
+   content; grid-template-rows 0fr→1fr animates variable-height content
+   without a max-height magic number. State SSOT: aria-expanded on the
+   toggle button. */
+html.js .recog-card--collapsible .recog-card-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+}
+html.js .recog-card--collapsible .recog-card-body > .recog-card-body-inner {
+  min-height: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--text-gap-inline);
+}
+html.js
+  .recog-card--collapsible:has(.recog-toggle[aria-expanded='true'])
+  .recog-card-body {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+@media (prefers-reduced-motion: no-preference) {
+  html.js .recog-card--collapsible .recog-card-body {
+    transition:
+      grid-template-rows var(--dur-slow) var(--ease),
+      visibility 0s var(--dur-slow);
+  }
+  html.js
+    .recog-card--collapsible:has(.recog-toggle[aria-expanded='true'])
+    .recog-card-body {
+    transition:
+      grid-template-rows var(--dur-slow) var(--ease),
+      visibility 0s;
+  }
+  .recog-toggle .icon {
+    transition: transform var(--dur) var(--ease);
+  }
+}
+
+/* Details/Hide label swap — same display-swap pattern as the header
+   nav-toggle (no JS text mutation). Pinned bottom-right of the card
+   (margin-top auto in the .recog-card flex column). Fill/border mirror the
+   .blob-stat grid interior (6% accent tint / 20% accent border);
+   --heading resolves to white in dark theme. */
+.recog-toggle {
+  align-self: flex-end;
+  margin-top: auto;
+  padding: var(--space-1) var(--space-3);
+  color: var(--heading);
+  background: color-mix(
+    in srgb,
+    var(--accent-card, var(--accent)) 6%,
+    var(--bg-elev)
+  );
+  border-color: color-mix(
+    in srgb,
+    var(--accent-card, var(--accent)) 20%,
+    var(--border)
+  );
+}
+.recog-toggle__hide {
+  display: none;
+}
+.recog-toggle[aria-expanded='true'] .recog-toggle__show {
+  display: none;
+}
+.recog-toggle[aria-expanded='true'] .recog-toggle__hide {
+  display: inline;
+}
+.recog-toggle[aria-expanded='true'] .icon {
+  transform: rotate(180deg);
+}
+html:not(.js) .recog-toggle {
+  display: none;
+}
 .recog-clamp {
   display: -webkit-box;
   -webkit-line-clamp: var(--clamp, 4);
@@ -1031,8 +1110,8 @@ button {
 
 /* shared type scale — title / label / value / body */
 .recog-title {
-  font-size: var(--fs-card-title-lg);
-  font-weight: var(--fw-bold);
+  font-size: var(--fs-card-title);
+  font-weight: var(--fw-semibold);
   line-height: var(--lh-snug);
   color: var(--heading);
   margin: 0;

@@ -97,7 +97,11 @@ const total = items.length;
           data-nominator={a.nominator}
           data-reason={a.reason}
         >
-          <RecogCardShell class:list={[`level-${slug(a.level)}`]}>
+          <RecogCardShell
+            class:list={[`level-${slug(a.level)}`]}
+            collapsible
+            detailsId={`awards-details-${a.id}`}
+          >
             <Fragment slot="headTop">
               <CardMark
                 mark={{ kind: 'logo', asset: 'logo_trophy_badge' }}
@@ -107,7 +111,7 @@ const total = items.length;
               />
               <p class="awards-card__kicker">{a.level}</p>
             </Fragment>
-            <h3 slot="title" class="recog-title theme-card__title">
+            <h3 slot="title" class="recog-title">
               {a.title}
             </h3>
 
@@ -188,19 +192,9 @@ const total = items.length;
     grid-auto-rows: auto;
   }
 
-  .awards-grid > li {
-    display: grid;
-    grid-row: span 6;
-    grid-template-rows: subgrid;
-  }
-
-  :global(#awards .awards-grid > li > .recog-card) {
-    display: grid;
-    grid-row: span 6;
-    grid-template-rows: subgrid;
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
+  /* Cards use the shell's default flex column (like Kaggle) — the old subgrid
+     row alignment across cards is meaningless once bodies collapse, and it
+     would break the collapsible header/body/toggle structure. */
 
   .awards-card__top {
     display: flex;

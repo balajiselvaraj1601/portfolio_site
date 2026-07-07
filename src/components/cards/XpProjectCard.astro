@@ -80,21 +80,15 @@ const iconName = resolveIcon(icon, 'folder');
   .xp-proj__name {
     /* h4 is a mono kicker globally; this one is a flagship card title (.cs-name anatomy) */
     font-family: var(--font-sans);
-    font-size: var(--fs-card-title-lg);
+    font-size: var(--fs-card-title);
     font-weight: var(--fw-semibold);
     color: var(--heading);
-    line-height: var(--lh-tight);
+    line-height: var(--lh-snug);
     letter-spacing: normal;
     text-transform: none;
     margin: 0;
   }
   .is-secondary {
     color: var(--text-muted);
-  }
-
-  @media (max-width: 560px) /* --bp-sm */ {
-    .xp-proj__name {
-      font-size: var(--fs-xxl);
-    }
   }
 </style>

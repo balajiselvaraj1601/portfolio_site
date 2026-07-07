@@ -28,7 +28,12 @@ const bronze = medalCount(items, 'Bronze');
 >
   <!-- Summary stat tiles — competition + medal counts and global rank -->
   <div class="recog-summary reveal">
-    <RecogTile icon="kaggle" count={total} label="Competitions" />
+    <RecogTile
+      class="blob--competitions"
+      icon="kaggle"
+      count={total}
+      label="Competitions"
+    />
     <RecogTile
       class="blob--silver"
       icon="trophy"
@@ -43,7 +48,12 @@ const bronze = medalCount(items, 'Bronze');
       count={bronze}
       label="Bronze"
     />
-    <RecogTile icon="target" count={kaggle.rank} label="Global Rank">
+    <RecogTile
+      class="blob--rank"
+      icon="target"
+      count={kaggle.rank}
+      label="Global Rank"
+    >
       {
         kaggle.rankDenominator && (
           <span slot="label-extra"> · {kaggle.rankDenominator}</span>
@@ -103,10 +113,14 @@ const bronze = medalCount(items, 'Bronze');
 </Section>
 
 <style>
-  /* All stat tiles inherit gold via the summary wrapper — avoids the global purple fallback.
-     Custom properties cascade, so child .card elements pick this up automatically. */
-  .recog-summary {
-    --accent-card: var(--view-accent-recognition);
+  /* Non-medal summary tiles — each gets its own hue (distinct from medals). */
+  .blob--competitions {
+    --accent-card: var(--cat-people);
+    --mark-fg: var(--cat-people);
+  }
+  .blob--rank {
+    --accent-card: var(--lvl-director);
+    --mark-fg: var(--lvl-director);
   }
   /* Medal tiles/chips override directly on the element (higher-priority than inherited) */
   .blob--silver {

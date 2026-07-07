@@ -73,3 +73,23 @@ export function initRecogGrid(options: RecogGridOptions): void {
 
   apply();
 }
+
+/** Expand/collapse toggles for collapsible recog cards (Kaggle). Delegated on
+ *  the grid so it works regardless of filter/search visibility state; CSS keys
+ *  the body animation and label swap off aria-expanded. */
+export function initRecogCardToggles(
+  root: HTMLElement,
+  gridSelector: string
+): void {
+  const grid = root.querySelector(gridSelector);
+  grid?.addEventListener('click', (e) => {
+    const btn = (e.target as Element | null)?.closest<HTMLButtonElement>(
+      '.recog-toggle'
+    );
+    if (!btn) return;
+    btn.setAttribute(
+      'aria-expanded',
+      String(btn.getAttribute('aria-expanded') !== 'true')
+    );
+  });
+}

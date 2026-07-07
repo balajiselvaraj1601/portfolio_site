@@ -1,5 +1,5 @@
 // NOTE: listeners/observers here assume MPA full-page loads (no teardown).
-import { initRecogGrid } from './recog-grid';
+import { initRecogCardToggles, initRecogGrid } from './recog-grid';
 import { initXpTimeline } from './xp-timeline';
 import { getScrollOffset, scrollToSectionId } from './scroll-to-section';
 
@@ -152,6 +152,7 @@ function initRecognitionGrids(): void {
       filterAttr: 'data-level',
       searchAttrs: ['data-title', 'data-nominator', 'data-reason'],
     });
+    initRecogCardToggles(awards, '[data-awards-grid]');
   }
 
   const kaggle = document.getElementById('kaggle');
@@ -165,6 +166,7 @@ function initRecognitionGrids(): void {
       filterAttr: 'data-medal',
       searchAttrs: ['data-name', 'data-domain', 'data-tags'],
     });
+    initRecogCardToggles(kaggle, '[data-kaggle-grid]');
   }
 
   const leadership = document.getElementById('leadership');

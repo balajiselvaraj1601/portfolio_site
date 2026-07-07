@@ -1,13 +1,23 @@
 ---
+import Icon from '@components/ui/Icon.astro';
+
 // Shared recognition-card interior layout (Awards, Education, …).
+// `collapsible` opts a card into the details toggle: the header stays visible
+// and everything from the divider down collapses (see .recog-card--collapsible
+// rules in global.css). Requires `detailsId` for aria-controls wiring.
 interface Props {
   class?: string;
+  collapsible?: boolean;
+  detailsId?: string;
 }
 
-const { class: cls, ...rest } = Astro.props;
+const { class: cls, collapsible = false, detailsId, ...rest } = Astro.props;
 ---
 
-<article class:list={['recog-card', cls]} {...rest}>
+<article
+  class:list={['recog-card', collapsible && 'recog-card--collapsible', cls]}
+  {...rest}
+>
   <header class="recog-card-head">
     <div class="recog-card-head-top">
       <slot name="headTop" />
@@ -15,9 +25,33 @@ const { class: cls, ...rest } = Astro.props;
     <slot name="title" />
   </header>
 
-  <div class="recog-card-divider"></div>
-
-  <slot />
-
-  <slot name="footer" />
+  {
+    collapsible ? (
+      <>
+        <div class="recog-card-body" id={detailsId}>
+          <div class="recog-card-body-inner">
+            <div class="recog-card-divider" />
+            <slot />
+            <slot name="footer" />
+          </div>
+        </div>
+        <button
+          type="button"
+          class="btn btn-secondary recog-toggle"
+          aria-expanded="false"
+          aria-controls={detailsId}
+        >
+          <span class="recog-toggle__show">Details</span>
+          <span class="recog-toggle__hide">Hide</span>
+          <Icon name="chevron" size="sm" />
+        </button>
+      </>
+    ) : (
+      <>
+        <div class="recog-card-divider" />
+        <slot />
+        <slot name="footer" />
+      </>
+    )
+  }
 </article>
