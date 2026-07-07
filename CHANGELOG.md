@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-07-07
+
+Education panel layout and wrapped card title line spacing.
+
+### Changed
+
+- Education hero left column: logo + degree grouped in top cluster, field anchored at bottom via `space-between`
+- `--lh-snug` and `--lh-normal` bumped from 1.35/1.4 → **1.45** for clearer gap on two-line card titles (Awards, Kaggle, all T3 surfaces)
+
 ## [1.5.0] - 2026-07-07
 
 Unified heading and sub-heading typography across all nav views.
