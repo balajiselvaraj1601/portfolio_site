@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.1] - 2026-07-07
+
+Collapsible recognition cards and improved wrapped-line spacing for card titles.
+
+### Added
+
+- Opt-in collapsible body on `RecogCardShell` with Details/Hide toggle (Awards, Kaggle)
+- `recog-grid.ts` toggle wiring and grid-template-rows collapse animation (JS-gated, no-script fallback)
+
+### Changed
+
+- `--lh-snug` bumped from 1.25 → 1.35 for card titles; applied to `.theme-card__title` and `.xp-proj__name`
+- Recognition card title typography aligned to `--fs-card-title` / `--fw-semibold`
+- Awards grid switched from subgrid to flex column to support collapsible shell structure
+- Refreshed reference screenshots (dark + light)
+
 ## [1.4.0] - 2026-07-06
 
 Vision view consolidation and page-label eyebrows across all nav views.
