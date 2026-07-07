@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-07-07
+
+Unified heading and sub-heading typography across all nav views.
+
+### Added
+
+- Global heading utilities: `.card-title` (T3), `.subhead-eyebrow`, `.subhead-kicker`, `.subhead-bar`
+
+### Changed
+
+- Standard card titles normalized to `--fs-card-title` / `--lh-snug` (vision-impact, edu-field, contact, experience)
+- Ad-hoc kicker/sub-head styles migrated to shared subhead utilities (leadership, awards, vision programs, experience)
+- Speaking card event name demoted to T7 subtitle so talk title reads as primary
+- `XpProjectCard` project name uses `<h3>` for correct heading order
+- Design contract and typography docs updated for new utilities
+
 ## [1.4.1] - 2026-07-07
 
 Collapsible recognition cards and improved wrapped-line spacing for card titles.
