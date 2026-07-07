@@ -14,19 +14,25 @@ const fieldLabel = record.field ?? record.degree.replace(/^[^\s]+\s*/, '');
 ---
 
 <div class="edu-hero">
-  <CardMark
-    logoUrl={logo}
-    slug={record.entity}
-    altText={record.institution + ' logo'}
-    logoSize="lg"
-    icon="graduation"
-    iconFallback="graduation"
-    variant="recog"
-    class={logo ? 'edu-hero__logo' : 'edu-hero__icon icon-tile--accented'}
-  />
-  <p class="edu-degree-short">{degreeShort}</p>
-  <h3 class="card-title edu-field">{fieldLabel}</h3>
-  <div class="edu-rule" aria-hidden="true"></div>
+  <div class="edu-hero__top">
+    <div class="edu-hero__mark">
+      <CardMark
+        logoUrl={logo}
+        slug={record.entity}
+        altText={record.institution + ' logo'}
+        logoSize="lg"
+        icon="graduation"
+        iconFallback="graduation"
+        variant="recog"
+        class={logo ? 'edu-hero__logo' : 'edu-hero__icon icon-tile--accented'}
+      />
+    </div>
+    <p class="edu-degree-short">{degreeShort}</p>
+  </div>
+  <div class="edu-hero__tail">
+    <h3 class="card-title edu-field">{fieldLabel}</h3>
+    <div class="edu-rule" aria-hidden="true"></div>
+  </div>
 </div>
 
 <style>
@@ -34,13 +40,21 @@ const fieldLabel = record.field ?? record.degree.replace(/^[^\s]+\s*/, '');
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    height: 100%;
+    gap: 0;
+  }
+  .edu-hero__top {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--stack-md);
+    width: 100%;
+  }
+  .edu-hero__tail {
+    display: flex;
+    flex-direction: column;
     gap: var(--text-gap-inline);
-  }
-  .edu-hero__logo {
-    margin-bottom: var(--text-gap-pair);
-  }
-  .edu-hero__icon {
-    margin-bottom: var(--text-gap-pair);
+    width: 100%;
   }
 
   .edu-degree-short {
@@ -63,5 +77,20 @@ const fieldLabel = record.field ?? record.degree.replace(/^[^\s]+\s*/, '');
       transparent
     );
     opacity: 0.85;
+  }
+
+  @media (min-width: 768px) /* --bp-md */ {
+    .edu-hero {
+      justify-content: space-between;
+      padding-top: var(--space-2);
+    }
+  }
+
+  @media (max-width: 767px) /* --bp-md - 1px */ {
+    .edu-hero {
+      height: auto;
+      padding-top: 0;
+      gap: var(--text-gap-inline);
+    }
   }
 </style>

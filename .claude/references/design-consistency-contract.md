@@ -69,8 +69,8 @@ line-height where a token exists.** Tracking stays in `em` so it scales with fon
 | Line-height token | Value | Use                                  |
 | ----------------- | ----- | ------------------------------------ |
 | `--lh-tight`      | 1.1   | Headings h1–h4                       |
-| `--lh-snug`       | 1.35  | Recognition / card titles            |
-| `--lh-normal`     | 1.4   | Metrics, metadata, dense caps labels |
+| `--lh-snug`       | 1.45  | Recognition / card titles            |
+| `--lh-normal`     | 1.45  | Metrics, metadata, dense caps labels |
 | `--lh-relaxed`    | 1.6   | Card descriptions, recog body        |
 | `--lh-body`       | 1.75  | Loose body prose, section subtitle   |
 
@@ -152,7 +152,7 @@ ONE ladder each — never hardcode a numeric `font-weight` or unitless `line-hei
 numbers, buttons) · `--fw-bold` 700 (monogram, recognition titles, statement emphasis).
 
 **Line-height:** `--lh-none` 1 (solid leading — display numbers, monogram, badge glyphs) ·
-`--lh-tight` 1.1 (headings) · `--lh-snug` 1.35 (card titles) · `--lh-normal` 1.4 (metrics,
+`--lh-tight` 1.1 (headings) · `--lh-snug` 1.45 (card titles) · `--lh-normal` 1.45 (metrics,
 dense labels) · `--lh-relaxed` 1.6 (body blocks) · `--lh-body` 1.75 (loose prose).
 
 **Violation:** `font-weight: 600` or `line-height: 1` where the token (`--fw-semibold` /

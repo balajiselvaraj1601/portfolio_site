@@ -182,8 +182,8 @@
   /* Line-height ladder — ONE set of steps; components reference by role. */
   --lh-none: 1; /* solid leading: display numbers, monogram, badge glyphs */
   --lh-tight: 1.1; /* headings h1–h4 */
-  --lh-snug: 1.35; /* recognition / card titles */
-  --lh-normal: 1.4; /* metrics, metadata, dense labels (absorbs 1.35) */
+  --lh-snug: 1.45; /* recognition / card titles */
+  --lh-normal: 1.45; /* metrics, metadata, dense labels */
   --lh-relaxed: 1.6; /* body blocks, recog-body */
   --lh-body: 1.75; /* loose body prose */
 
