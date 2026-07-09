@@ -57,7 +57,7 @@ All in `src/styles/global.css` `:root` unless noted.
 
 | View                 | Section IDs                         | Accent source                                   | Tier-1 mark color                             | Tier-3 logos                          |
 | -------------------- | ----------------------------------- | ----------------------------------------------- | --------------------------------------------- | ------------------------------------- |
-| About                | hero, thirukural, leadership        | `--cat` on focus rows                           | `--accent-card`                               | Collab org logos on white pill        |
+| About                | hero, thirukural, about             | `--cat` on focus rows                           | `--accent-card`                               | Collab org logos on white pill        |
 | Experience           | experience                          | `--lvl` per role seniority (`.xp-level-*`)      | Projects: compact accented tile (`--lvl` hue) | Company `LogoBadge`                   |
 | Research             | publications, conferences, speakers | section ID + `.card-accent`                     | `--accent-card` on fallback icons             | Org logos on white pill               |
 | Recognition          | awards, kaggle, education           | `--lvl`, `--medal`, gold                        | `--accent-card` everywhere in card            | None for pipeline marks               |
@@ -80,7 +80,7 @@ All in `src/styles/global.css` `:root` unless noted.
 | `.recog-card.blob--silver/bronze`                                               | `var(--medal)`                                                                                        |
 | `.edu-accent`                                                                   | `var(--accent-gold)`                                                                                  |
 | `.xp-stop` / `.xp-panel` (via `.xp-level-*`)                                    | `var(--lvl)` per role seniority                                                                       |
-| `.leadership__card-row.cat-*`                                                   | `var(--cat)`                                                                                          |
+| `.about__card-row.cat-*`                                                        | `var(--cat)`                                                                                          |
 | `.vision-accent-{key}` + `.vision-accent-hook`                                  | `var(--cat)` from content `accent` (vision-programs flow + impact grid; VI-001 superseded 2026-07-06) |
 
 When wrapper sets `--accent-card`, circular marks pick it up via `--mark-fg`

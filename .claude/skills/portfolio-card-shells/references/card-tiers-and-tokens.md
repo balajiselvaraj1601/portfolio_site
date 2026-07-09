@@ -12,7 +12,7 @@ differ only in padding and role.
 
 | Tier                | Shell class                                | Padding                    | Radius        | Role / used by                                                                                                            |
 | ------------------- | ------------------------------------------ | -------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | `--radius-xl` | Default surface: `.theme-card` (Vision programs + org snapshots, About leadership), connect-card, project accordion       |
+| **A — compact**     | `.card`                                    | `--card-padding` (24px)    | `--radius-xl` | Default surface: `.theme-card` (Vision programs + org snapshots, About section), connect-card, project accordion          |
 | **B — content**     | `.content-card`                            | `--card-padding-lg` (32px) | `--radius-xl` | Text-dense cards: `ResearchCard`, `SpeakingCard`. Sets `height: 100%` for equal-height grids                              |
 | **C — recognition** | `.recog-card`, `.recog-tile`, `.edu-panel` | `--card-padding` (24px)    | `--radius-xl` | Recognition band — Awards, Kaggle, Education. **Aliases of `.card`**: same base rule, extra header/divider/stat internals |
 | **D — special**     | `.card--accent`, `.vision-hub__ring`       | varies                     | varies        | Vision hub circle and other one-offs governed by EX rules                                                                 |

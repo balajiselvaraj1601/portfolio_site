@@ -173,22 +173,41 @@ export const homeSections = homePage.sections.filter(
   (id) => site.sections[id]?.visible !== false
 );
 
-/** Nav views — content pages with view metadata for section filtering. */
-export const navViews = site.pages.flatMap((p) => {
-  if (!isContentPage(p) || !p.viewSections?.length) return [];
-  const viewAnchor = p.viewAnchor ?? p.id;
-  return [
-    {
-      id: p.id,
-      label: p.label,
-      path: p.path,
-      viewAnchor,
-      viewSections: p.viewSections.filter(
-        (id) => site.sections[id]?.visible !== false
-      ),
-    },
-  ];
-});
+/**
+ * Synthetic hero view — the top landing band (`hero` + `thirukural`). It has no
+ * `site.pages` entry, so `Header.astro` renders no nav link for it; it exists
+ * only so the scroll-spy and dot-nav treat the hero band as its own view,
+ * distinct from About. SSOT for the "hero is not About" split.
+ */
+const heroView = {
+  id: HERO_DOT_ID,
+  label: 'Hero',
+  path: '/',
+  viewAnchor: HERO_DOT_ID,
+  viewSections: ['hero', 'thirukural'].filter(
+    (id) => site.sections[id]?.visible !== false
+  ),
+};
+
+/** Nav views — the synthetic hero band plus each content page with view metadata. */
+export const navViews = [
+  heroView,
+  ...site.pages.flatMap((p) => {
+    if (!isContentPage(p) || !p.viewSections?.length) return [];
+    const viewAnchor = p.viewAnchor ?? p.id;
+    return [
+      {
+        id: p.id,
+        label: p.label,
+        path: p.path,
+        viewAnchor,
+        viewSections: p.viewSections.filter(
+          (id) => site.sections[id]?.visible !== false
+        ),
+      },
+    ];
+  }),
+];
 
 /** Map each section id to the page view ids that include it. */
 export const sectionViewMap: Record<string, string[]> = {};
@@ -249,31 +268,22 @@ export type DotNavView = {
   scrollSection: string;
 };
 
-/** Right-side dot nav — Hero plus each header nav view (7 dots on home). */
-export const dotNavViews: DotNavView[] = [
-  { id: HERO_DOT_ID, label: 'Hero', scrollSection: 'hero' },
-  { id: homeViewAnchor, label: 'About', scrollSection: 'leadership' },
-  ...navViews
-    .filter((v) => v.id !== HOME_PAGE_ID)
-    .map((v) => ({
-      id: v.viewAnchor,
-      label: v.label,
-      scrollSection: v.viewSections[0],
-    })),
-];
+/**
+ * Right-side dot nav — one dot per view in order (Hero, About, then each header
+ * nav view: 7 dots on home). Derived from `navViews` so the hero/about split and
+ * the scroll targets stay in lockstep with the SSOT.
+ */
+export const dotNavViews: DotNavView[] = navViews.map((v) => ({
+  id: v.viewAnchor,
+  label: v.label,
+  scrollSection: v.viewSections[0],
+}));
 
 /** Map section id → dot id for scroll-spy (hero band split from About view). */
 export const sectionToDotNav: Record<string, string> = {};
-for (const sectionId of homeSections) {
-  if (sectionId === 'hero' || sectionId === 'thirukural') {
-    sectionToDotNav[sectionId] = HERO_DOT_ID;
-  } else if (sectionId === 'leadership') {
-    sectionToDotNav[sectionId] = homeViewAnchor;
-  } else {
-    const owner = navViews.find(
-      (v) => v.id !== HOME_PAGE_ID && v.viewSections.includes(sectionId)
-    );
-    if (owner) sectionToDotNav[sectionId] = owner.viewAnchor;
+for (const view of navViews) {
+  for (const sectionId of view.viewSections) {
+    sectionToDotNav[sectionId] = view.viewAnchor;
   }
 }
 

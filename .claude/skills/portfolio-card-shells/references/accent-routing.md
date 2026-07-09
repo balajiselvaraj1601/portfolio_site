@@ -48,7 +48,7 @@ falls back to the view's teal.
 | `#kaggle .recog-summary .blob--rank`                                            | `var(--lvl-director)` (teal — Global Rank tile)                                                                                              |
 | `.edu-accent`                                                                   | `var(--accent-gold)`                                                                                                                         |
 | `.xp-stop` / `.xp-panel` via `.xp-level-*`                                      | `var(--lvl-*)` per role seniority                                                                                                            |
-| `.leadership__card-row.cat-*`                                                   | `var(--about-cat-*)` per category                                                                                                            |
+| `.about__card-row.cat-*`                                                        | `var(--about-cat-*)` per category                                                                                                            |
 | `.vision-accent-{key}` + `.vision-accent-hook`                                  | `var(--cat, --view-accent-vision)` (flow + impact grid; impact orgCards use 3 accent groups ai/gxp/strategic — VI-001 superseded 2026-07-06) |
 
 ## Per-view fallback tokens

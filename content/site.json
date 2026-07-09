@@ -15,7 +15,7 @@
       "sections": [
         "hero",
         "thirukural",
-        "leadership",
+        "about",
         "experience",
         "publications",
         "conferences",
@@ -26,7 +26,7 @@
         "vision-programs",
         "contact"
       ],
-      "viewSections": ["leadership", "hero", "thirukural"],
+      "viewSections": ["about"],
       "viewAnchor": "about"
     },
     {
@@ -35,7 +35,7 @@
       "path": "/experience",
       "seo": {
         "title": "Experience — Balaji Selvaraj",
-        "description": "Delivering AI programs across Oncology, Biopharma R&D, and CPSS — supporting AstraZeneca's 3 R&D priority areas over three consecutive years, with role-by-role impact across drug safety, oncology, and clinical imaging."
+        "description": "Delivering AI programs across Oncology, Biopharma R&D, and CPSS — supporting AstraZeneca's 3 R&D priority areas over 3 consecutive years, with role-by-role impact across drug safety, oncology, and clinical imaging."
       },
       "sections": ["experience"],
       "viewSections": ["experience"]
@@ -98,8 +98,8 @@
       "source": "work/vision-board.json",
       "visible": true
     },
-    "leadership": {
-      "title": "About",
+    "about": {
+      "title": "Technical AI Leader",
       "eyebrow": "About",
       "source": "person/profile.json",
       "visible": true

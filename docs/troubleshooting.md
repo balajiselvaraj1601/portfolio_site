@@ -100,7 +100,15 @@ Defined in [`scripts/dev-stop.mjs`](../scripts/dev-stop.mjs):
 
 - **Dev only:** `npm run dev:restart` (or `dev:stop` then `npm run dev`)
 - **Preview only:** `npm run preview:restart` (stop preview → build → preview on 4331)
-- **Both concurrently:**
+- **Both concurrently (recommended):**
+
+  ```bash
+  npm run serve         # stop orphans + build; then open two terminals:
+  npm run dev:restart   # terminal 1 → 4321
+  npm run preview       # terminal 2 → 4331 (dist already built)
+  ```
+
+  Manual alternative:
 
   ```bash
   npm run dev:stop    # once, clear orphans

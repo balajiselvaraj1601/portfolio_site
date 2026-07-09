@@ -3,8 +3,8 @@ import Divider from '@components/ui/Divider.astro';
 import Hero from '@components/sections/Hero.astro';
 import VisionPrograms from '@components/sections/VisionPrograms.astro';
 import ThirukuralQuote from '@components/sections/ThirukuralQuote.astro';
-import AboutLanding from '@components/sections/AboutLanding.astro';
-import LeadershipPhilosophy from '@components/sections/LeadershipPhilosophy.astro';
+import HeroLanding from '@components/sections/HeroLanding.astro';
+import About from '@components/sections/About.astro';
 import Experience from '@components/sections/Experience.astro';
 import Education from '@components/sections/Education.astro';
 import Awards from '@components/sections/Awards.astro';
@@ -30,7 +30,7 @@ const SECTIONS = {
   hero: Hero,
   thirukural: ThirukuralQuote,
   'vision-programs': VisionPrograms,
-  leadership: LeadershipPhilosophy,
+  about: About,
   experience: Experience,
   education: Education,
   awards: Awards,
@@ -73,7 +73,7 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
         : undefined;
 
       return (
-        <AboutLanding>
+        <HeroLanding>
           {navViewsMode && heroViews ? (
             <div
               class={SECTION_VIEW_ROOT_CLASS}
@@ -96,7 +96,7 @@ const { sections, navViews: navViewsMode = false } = Astro.props;
           ) : (
             <ThirukuralQuote />
           )}
-        </AboutLanding>
+        </HeroLanding>
       );
     }
 

@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2026-07-09
+
+About view restructure, Thirukural alignment, and recognition filter updates.
+
+### Added
+
+- `HeroLanding.astro` wrapper for hero + Thirukural band (replaces `AboutLanding`)
+- About section (`#about`) replaces standalone leadership section — focus areas, collaborations, and intro unified under one view
+- `serve-prep.mjs` — stop stale listeners, build, print serve steps (`npm run serve`)
+- Page-about agent Appendix D — owner preferences for Thirukural spacing and text–portrait alignment
+- Design contract EX-018 — desktop Thirukural copy height matches portrait via `space-between`
+
+### Changed
+
+- Section id `leadership` → `about`; components renamed (`About.astro`, `AboutFocusAreas`, `AboutCollaborations`)
+- Thirukural: `3lh` surround spacing; desktop text lines distributed across portrait height; mobile tight `--kural-text-gap`
+- About section spacing: restored `--section-py-start`, wider filter-to-grid gap, card-row rhythm
+- Hero landing uses `justify-content: flex-start` (no viewport vertical centering)
+- Awards: Director / Associate Director levels in schema; default filter shows EVP through National Level
+- Hero metrics and about copy refreshed in `profile.json`
+- Refreshed reference screenshots (dark + light)
+- Baseline shot selector: `.about-landing` → `.hero-landing`
+
+### Fixed
+
+- Awards filter `includes` type check for extended award levels
+
 ## [1.5.1] - 2026-07-07
 
 Education panel layout and wrapped card title line spacing.

@@ -12,7 +12,7 @@ section using hash URLs (`/#experience`, `/#research`, …). All sections remain
 Legacy paths redirect to the matching hash on `/`.
 
 ```text
-/              About (default)  → viewSections: hero, thirukural, leadership
+/              About (default)  → viewSections: hero, thirukural, about
 /#experience   Experience       → experience
 /#research     Research         → publications, conferences, speakers
 /#recognition  Recognition      → awards, kaggle, education
@@ -29,7 +29,7 @@ Each section id appears in exactly one `viewSections` group (exclusive nav group
 is duplicated across nav buttons). Section ids and grouping are defined in `content/site.json → pages`.
 The renderer (`SectionRenderer`) iterates the home section list — do not hardcode section order in markup.
 
-**Full home DOM order** (12 section ids): `hero` → `thirukural` → `leadership` →
+**Full home DOM order** (12 section ids): `hero` → `thirukural` → `about` →
 `experience` → `publications` → `conferences` → `speakers` → `awards` → `kaggle` →
 `education` → `vision-programs` → `contact`.
 
@@ -45,10 +45,10 @@ App / Layout
 │   ├── Nav (from site.json.pages, active-route indicator)
 │   └── ThemeToggle
 ├── Main
-│   ├── AboutLanding (wraps hero + thirukural on home)
+│   ├── HeroLanding (wraps hero + thirukural on home)
 │   │   ├── HeroSection            ← person/profile.json
 │   │   └── ThirukuralSection      ← person/profile.json (heroQuote)
-│   ├── LeadershipSection          ← person/profile.json + collaborations.json
+│   ├── AboutSection               ← person/profile.json + collaborations.json
 │   ├── ExperienceSection          ← work/experience.json (roles[])
 │   ├── PublicationsSection        ← research/publications.json
 │   ├── ConferencesSection         ← research/conferences.json
@@ -66,21 +66,21 @@ Reused primitives (define once, use everywhere): `Section`, `Chip`, `ResearchCar
 
 ## 3. Per-section content contract
 
-| Section         | Source file                                         | Shape consumed                                                                                                                              | Rendering notes                                                            |
-| --------------- | --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Hero            | `person/profile.json`                               | `heroTag`, `greeting`, `heroTitle`, `availability`, `metrics[]`, `ctas[]`, `portrait`                                                       | Split layout; metric cards; value-oriented CTAs                            |
-| Thirukural      | `person/profile.json`                               | `heroQuote`                                                                                                                                 | Couplet + portrait band; wrapped in AboutLanding with hero                 |
-| Leadership      | `person/profile.json`, `person/collaborations.json` | `leadershipPhilosophy.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro → CTO pillar card rows → collaborations logo strip                   |
-| Experience      | `work/experience.json`                              | `title`, `intro`, `roles[] -> projects[] -> bullets[]`                                                                                      | Section header + interactive tabbed timeline + role panels                 |
-| Publications    | `research/publications.json`                        | `items[]`                                                                                                                                   | Stacked ResearchLinkGrid                                                   |
-| Conferences     | `research/conferences.json`                         | `items[]`                                                                                                                                   | Stacked ResearchLinkGrid                                                   |
-| Speakers        | `research/speakers.json`                            | `items[]`                                                                                                                                   | SpeakingCard stack                                                         |
-| Awards          | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, …)                                                                                              | Search + level filter chips; recog card grid                               |
-| Kaggle          | `recognition/kaggle.json`                           | `rank`, `profile`, `items[]`                                                                                                                | Global rank hero; medal filters; CompetitionCard grid                      |
-| Education       | `recognition/education.json`                        | `intro`, `records[]`                                                                                                                        | Split credential panel — degree hero, 2×2 stat grid, achievement highlight |
-| Vision Programs | `work/vision-board.json`                            | `hubs[]`, `programs[]`                                                                                                                      | Infographic hub + program cards (Vision view)                              |
-| Vision Impact   | `work/vision-board.json`                            | `orgCards[]`                                                                                                                                | Organizational impact cards (Vision view)                                  |
-| Contact         | `person/profile.json`                               | `contact[]`, `contactIntro`, `contactPage`                                                                                                  | Pitch + linked channels + optional booking CTA                             |
+| Section         | Source file                                         | Shape consumed                                                                                                               | Rendering notes                                                            |
+| --------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Hero            | `person/profile.json`                               | `heroTag`, `greeting`, `heroTitle`, `availability`, `metrics[]`, `ctas[]`, `portrait`                                        | Split layout; metric cards; value-oriented CTAs                            |
+| Thirukural      | `person/profile.json`                               | `heroQuote`                                                                                                                  | Couplet + portrait band; wrapped in HeroLanding with hero                  |
+| About           | `person/profile.json`, `person/collaborations.json` | `about.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro → CTO pillar card rows → collaborations logo strip                   |
+| Experience      | `work/experience.json`                              | `title`, `intro`, `roles[] -> projects[] -> bullets[]`                                                                       | Section header + interactive tabbed timeline + role panels                 |
+| Publications    | `research/publications.json`                        | `items[]`                                                                                                                    | Stacked ResearchLinkGrid                                                   |
+| Conferences     | `research/conferences.json`                         | `items[]`                                                                                                                    | Stacked ResearchLinkGrid                                                   |
+| Speakers        | `research/speakers.json`                            | `items[]`                                                                                                                    | SpeakingCard stack                                                         |
+| Awards          | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, …)                                                                               | Search + level filter chips; recog card grid                               |
+| Kaggle          | `recognition/kaggle.json`                           | `rank`, `profile`, `items[]`                                                                                                 | Global rank hero; medal filters; CompetitionCard grid                      |
+| Education       | `recognition/education.json`                        | `intro`, `records[]`                                                                                                         | Split credential panel — degree hero, 2×2 stat grid, achievement highlight |
+| Vision Programs | `work/vision-board.json`                            | `hubs[]`, `programs[]`                                                                                                       | Infographic hub + program cards (Vision view)                              |
+| Vision Impact   | `work/vision-board.json`                            | `orgCards[]`                                                                                                                 | Organizational impact cards (Vision view)                                  |
+| Contact         | `person/profile.json`                               | `contact[]`, `contactIntro`, `contactPage`                                                                                   | Pitch + linked channels + optional booking CTA                             |
 
 The renderer maps `site.json.sections[id].source` → file, and `…title` → heading text.
 

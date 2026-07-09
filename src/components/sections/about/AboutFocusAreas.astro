@@ -9,10 +9,9 @@ const {
   businessImpact,
   platform,
   peopleMentoring,
-  governanceAI,
-  governancePrivacy,
+  responsibleGovernance,
   governanceGxP,
-} = profile.leadershipPhilosophy;
+} = profile.about;
 
 const cardBlocks = [
   {
@@ -40,16 +39,10 @@ const cardBlocks = [
     items: peopleMentoring,
   },
   {
-    key: 'governanceAI',
-    heading: blockHeadings.governanceAI,
-    subheading: blockSubheadings?.governanceAI,
-    items: governanceAI,
-  },
-  {
-    key: 'governancePrivacy',
-    heading: blockHeadings.governancePrivacy,
-    subheading: blockSubheadings?.governancePrivacy,
-    items: governancePrivacy,
+    key: 'responsibleGovernance',
+    heading: blockHeadings.responsibleGovernance,
+    subheading: blockSubheadings?.responsibleGovernance,
+    items: responsibleGovernance,
   },
   {
     key: 'governanceGxP',
@@ -62,7 +55,7 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
 ---
 
 <div
-  class="leadership__filters reveal"
+  class="about__filters reveal"
   role="group"
   aria-label="Filter About focus areas"
 >
@@ -88,16 +81,16 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
   }
 </div>
 
-<div class="leadership__blocks" data-about-grid>
+<div class="about__blocks" data-about-grid>
   {
     visibleBlocks.map(({ key, heading, subheading, items }) => (
       <div
-        class:list={['leadership__card-row', 'reveal', `cat-${key}`]}
+        class:list={['about__card-row', 'reveal', `cat-${key}`]}
         data-category={key}
       >
-        <p class="subhead-eyebrow leadership__diff-heading">{heading}</p>
+        <p class="subhead-eyebrow about__diff-heading">{heading}</p>
         {subheading && (
-          <p class="subhead-eyebrow subhead-eyebrow--muted leadership__block-subheading">
+          <p class="subhead-eyebrow subhead-eyebrow--muted about__block-subheading">
             {subheading}
           </p>
         )}
@@ -116,13 +109,13 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
 </div>
 
 <style>
-  .leadership__filters {
+  .about__filters {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-3);
-    margin: 0 0 var(--text-gap-inline);
+    margin: 0 0 var(--text-gap-section);
   }
-  .leadership__card-row.hidden {
+  .about__card-row.hidden {
     display: none;
   }
 
@@ -141,20 +134,21 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
   .cat-peopleMentoring {
     --cat: var(--about-cat-people);
   }
-  .cat-governanceAI {
+  .cat-responsibleGovernance {
     --cat: var(--about-cat-ai);
-  }
-  .cat-governancePrivacy {
-    --cat: var(--about-cat-privacy);
   }
   .cat-governanceGxP {
     --cat: var(--about-cat-gxp);
   }
-  /* Per-group colour: each leadership row carries its own curated hue via --cat
+  /* Per-group colour: each about row carries its own curated hue via --cat
      (set by its .cat-* class); cards, borders, and icon marks inherit it. */
-  .leadership__card-row {
+  .about__card-row {
     --accent-card: var(--cat);
     --mark-fg: var(--accent-card);
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-block);
+    margin-top: 0;
   }
   /* Active category chip takes its hue; the "All" chip has no .cat-* class, so
      it falls back to the brand purple. */
@@ -165,25 +159,26 @@ const visibleBlocks = cardBlocks.filter((b) => b.items && b.items.length > 0);
   /* Dark-mode prominence wash is built into the base `.card` rule (global.css),
      keyed to --accent-card (== --cat on each row). */
 
-  .leadership__diff-heading {
+  .about__diff-heading {
     color: var(--accent-card, var(--accent-ll));
   }
 
-  .leadership__block-subheading {
-    margin-top: var(--text-gap-pair);
+  .about__block-subheading {
+    margin-top: 0;
     margin-bottom: 0;
   }
 
-  .leadership__blocks {
+  .about__blocks {
     display: flex;
     flex-direction: column;
     gap: var(--stack-xl);
   }
 
-  .leadership__card-row {
-    margin-top: 0;
+  .about__card-row .about__diff-heading,
+  .about__card-row .about__block-subheading {
+    margin-bottom: 0;
   }
-  .leadership__card-row .theme-grid {
+  .about__card-row .theme-grid {
     margin-top: 0;
   }
 </style>

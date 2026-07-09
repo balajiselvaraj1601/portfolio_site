@@ -3,11 +3,11 @@ import CardMark from '@components/ui/CardMark.astro';
 import { collaborations, getEntityUrl, logoSrc } from '@lib/content';
 ---
 
-<div class="leadership__collabs reveal">
-  <p class="subhead-eyebrow subhead-eyebrow--muted leadership__collabs-heading">
+<div class="about__collabs reveal">
+  <p class="subhead-eyebrow subhead-eyebrow--muted about__collabs-heading">
     {collaborations.title}
   </p>
-  <ul class="leadership__collabs-list" role="list">
+  <ul class="about__collabs-list" role="list">
     {
       collaborations.items.map((item) => {
         const href = getEntityUrl(item.entity);
@@ -17,7 +17,7 @@ import { collaborations, getEntityUrl, logoSrc } from '@lib/content';
           <li>
             <a
               href={href}
-              class="leadership__collab-mark"
+              class="about__collab-mark"
               aria-label={item.name}
               target="_blank"
               rel="noopener noreferrer"
@@ -38,13 +38,13 @@ import { collaborations, getEntityUrl, logoSrc } from '@lib/content';
 </div>
 
 <style>
-  .leadership__collabs {
+  .about__collabs {
     margin-top: var(--stack-xl);
   }
-  .leadership__collabs-heading {
+  .about__collabs-heading {
     margin-bottom: var(--text-gap-block);
   }
-  .leadership__collabs-list {
+  .about__collabs-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
     gap: var(--space-4);
@@ -54,10 +54,10 @@ import { collaborations, getEntityUrl, logoSrc } from '@lib/content';
     padding: 0;
     margin: 0;
   }
-  .leadership__collabs-list li {
+  .about__collabs-list li {
     min-width: 0;
   }
-  .leadership__collab-mark {
+  .about__collab-mark {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -74,32 +74,32 @@ import { collaborations, getEntityUrl, logoSrc } from '@lib/content';
       box-shadow var(--dur) var(--ease),
       transform var(--dur) var(--ease);
   }
-  .leadership__collab-mark:hover {
+  .about__collab-mark:hover {
     border-color: var(--accent-light);
     box-shadow:
       0 0 0 1px color-mix(in srgb, var(--accent-light) 25%, transparent),
       var(--shadow-md);
   }
   @media (prefers-reduced-motion: no-preference) {
-    .leadership__collab-mark:hover {
+    .about__collab-mark:hover {
       transform: translateY(var(--card-lift));
     }
   }
-  .leadership__collab-mark:focus-visible {
+  .about__collab-mark:focus-visible {
     outline: 2px solid var(--focus-ring);
     outline-offset: 2px;
   }
-  .leadership__collab-mark :global(.logo-badge) {
+  .about__collab-mark :global(.logo-badge) {
     max-width: min(var(--logo-w-max-lg), 100%);
   }
   @media (max-width: 768px) {
-    .leadership__collabs-list {
+    .about__collabs-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       width: 100%;
     }
   }
   @media (min-width: 769px) and (max-width: 1024px) {
-    .leadership__collabs-list {
+    .about__collabs-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       width: 90%;
     }

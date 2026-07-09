@@ -10,9 +10,9 @@ files remain the SSOT — this table is a pointer, not a copy.
 
 | Section id        | Source JSON (`sections[].source`) | Component (`src/components/sections/`)                     |
 | ----------------- | --------------------------------- | ---------------------------------------------------------- |
-| `hero`            | `person/profile.json`             | `Hero.astro` (in `AboutLanding`)                           |
+| `hero`            | `person/profile.json`             | `Hero.astro` (in `HeroLanding`)                            |
 | `thirukural`      | `person/profile.json`             | `ThirukuralQuote.astro`                                    |
-| `leadership`      | `person/profile.json`             | `LeadershipPhilosophy.astro`                               |
+| `about`           | `person/profile.json`             | `About.astro`                                              |
 | `experience`      | `work/experience.json`            | `Experience.astro`                                         |
 | `publications`    | `research/publications.json`      | `Publications.astro`                                       |
 | `conferences`     | `research/conferences.json`       | `Conferences.astro`                                        |
@@ -49,7 +49,7 @@ Nav view → sections (from `content/site.json → pages`):
 
 | Nav view / hash | Page id       | `viewSections`                            |
 | --------------- | ------------- | ----------------------------------------- |
-| `/` (About)     | `home`        | `leadership`, `hero`, `thirukural`        |
+| `/` (About)     | `home`        | `about`, `hero`, `thirukural`             |
 | `/#experience`  | `experience`  | `experience`                              |
 | `/#research`    | `research`    | `publications`, `conferences`, `speakers` |
 | `/#recognition` | `recognition` | `awards`, `kaggle`, `education`           |

@@ -88,7 +88,7 @@ async function main() {
 
   try {
     const clip = await page.evaluate(() => {
-      const landing = document.querySelector('.about-landing');
+      const landing = document.querySelector('.hero-landing');
       const kural = document.querySelector('#thirukural');
       if (!landing || !kural) return { ok: false, reason: 'missing element' };
       const lr = landing.getBoundingClientRect();

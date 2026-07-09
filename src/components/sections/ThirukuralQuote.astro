@@ -55,6 +55,10 @@ const quote = profile.heroQuote;
 
 <style>
   .kural {
+    --kural-img-w: clamp(72px, 12vw, 120px);
+    --kural-img-h: calc(var(--kural-img-w) * 480 / 448);
+    --kural-text-gap: var(--text-gap-inline);
+
     padding-block: 0;
   }
 
@@ -65,7 +69,7 @@ const quote = profile.heroQuote;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: var(--space-3);
+    gap: var(--hero-band-gap);
     width: fit-content;
     max-width: min(42rem, 100%);
   }
@@ -75,9 +79,27 @@ const quote = profile.heroQuote;
       align-items: flex-start;
       gap: clamp(1rem, 2.5vw, 1.75rem);
     }
-    /* Match .kural__tamil top margin so the portrait aligns with the couplet. */
+
+    /* Distribute Tamil, divider, translation, and author across image height. */
+    .kural__copy {
+      min-height: var(--kural-img-h);
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
+    }
+
+    .kural__text {
+      display: contents;
+    }
+
     .kural__img-wrap {
-      margin-top: 2lh;
+      width: var(--kural-img-w);
+      height: var(--kural-img-h);
+    }
+
+    .kural__img {
+      width: 100%;
+      height: 100%;
     }
   }
 
@@ -85,6 +107,7 @@ const quote = profile.heroQuote;
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: var(--kural-text-gap);
     flex: none;
     text-align: center;
   }
@@ -92,14 +115,18 @@ const quote = profile.heroQuote;
   .kural__text {
     margin: 0;
     flex: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--kural-text-gap);
     text-align: center;
   }
 
   .kural__divider {
     position: relative;
     width: min(8rem, 55%);
-    height: var(--space-2);
-    margin: var(--space-2) auto;
+    height: var(--space-1);
+    margin: 0 auto;
     background:
       linear-gradient(to right, var(--accent-light), var(--accent-light)) left
         center / calc(50% - 0.5rem) 1px no-repeat,
@@ -127,7 +154,7 @@ const quote = profile.heroQuote;
     font-weight: var(--fw-medium);
     line-height: var(--lh-normal);
     color: var(--heading);
-    margin: 2lh 0 var(--space-2);
+    margin: 0;
   }
   .kural__translation {
     font-family: var(--font-display);
@@ -143,7 +170,7 @@ const quote = profile.heroQuote;
     font-size: var(--fs-eyebrow);
     letter-spacing: var(--tracking-snug);
     color: var(--accent-light);
-    margin: var(--space-2) 0 0;
+    margin: 0;
   }
 
   .kural__img-wrap {
@@ -168,7 +195,7 @@ const quote = profile.heroQuote;
   .kural__img {
     position: relative;
     z-index: 1;
-    width: clamp(72px, 12vw, 120px);
+    width: var(--kural-img-w);
     height: auto;
     object-fit: contain;
     opacity: 0.92;
@@ -180,6 +207,7 @@ const quote = profile.heroQuote;
     }
     .kural__img {
       width: clamp(64px, 22vw, 96px);
+      height: auto;
     }
   }
 </style>

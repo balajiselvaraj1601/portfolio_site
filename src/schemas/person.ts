@@ -8,7 +8,7 @@ export const MetricItem = z.object({
   detail: z.string().optional(),
   icon: iconNameSchema.optional(),
 });
-/** Titled content block with an optional Lucide icon (leadership & vision lists). */
+/** Titled content block with an optional Lucide icon (about & vision lists). */
 const TitledIconItem = z.object({
   title: z.string(),
   description: z.string(),
@@ -35,6 +35,7 @@ export const profileSchema = z.object({
       tail: z.string().optional(),
     })
     .optional(),
+  heroSubtitle: z.string().optional(),
   heroQuote: z
     .object({
       tamil: z.string(),
@@ -55,15 +56,14 @@ export const profileSchema = z.object({
       icon: iconNameSchema.optional(),
     })
   ),
-  leadershipPhilosophy: z.object({
+  about: z.object({
     intro: z.union([z.string(), z.array(z.string())]).optional(),
     blockHeadings: z.object({
       strategicVision: z.string(),
       businessImpact: z.string(),
       platform: z.string(),
       peopleMentoring: z.string(),
-      governanceAI: z.string(),
-      governancePrivacy: z.string(),
+      responsibleGovernance: z.string(),
       governanceGxP: z.string(),
     }),
     blockSubheadings: z
@@ -72,18 +72,16 @@ export const profileSchema = z.object({
         businessImpact: z.string().optional(),
         platform: z.string().optional(),
         peopleMentoring: z.string().optional(),
-        governanceAI: z.string().optional(),
-        governancePrivacy: z.string().optional(),
+        responsibleGovernance: z.string().optional(),
         governanceGxP: z.string().optional(),
       })
       .optional(),
     strategicVision: z.array(TitledIconItem).optional(),
     businessImpact: z.array(TitledIconItem).optional(),
     platform: z.array(TitledIconItem).optional(),
-    // Team & Org Building block (heading set in LeadershipPhilosophy.astro)
+    // Team & Org Building block (heading set in About.astro)
     peopleMentoring: z.array(TitledIconItem).optional(),
-    governanceAI: z.array(TitledIconItem).optional(),
-    governancePrivacy: z.array(TitledIconItem).optional(),
+    responsibleGovernance: z.array(TitledIconItem).optional(),
     governanceGxP: z.array(TitledIconItem).optional(),
   }),
   contactIntro: z.string().optional(),

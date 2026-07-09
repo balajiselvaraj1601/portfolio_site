@@ -11,7 +11,7 @@ cross-view conflicts using these rules as binding authority.
 ## 1. Section wrapper
 
 Every live section must use `Section.astro` (`src/components/ui/Section.astro`) unless
-wrapped by `AboutLanding.astro` (hero + thirukural band).
+wrapped by `HeroLanding.astro` (hero + thirukural band).
 
 | Check | Rule                                                                    | Evidence                             |
 | ----- | ----------------------------------------------------------------------- | ------------------------------------ |
@@ -28,25 +28,26 @@ wrapped by `AboutLanding.astro` (hero + thirukural band).
 
 Use CSS variables — never raw px for layout rhythm.
 
-| Token                      | Value                  | Use                                             |
-| -------------------------- | ---------------------- | ----------------------------------------------- |
-| `--space-0-5`              | 2px                    | Hairline stack gaps (line-height compensation)  |
-| `--space-1` … `--space-24` | 4px scale              | All spacing                                     |
-| `--pill-padding-y` / `-x`  | 8px / 16px             | Pill / nav / tag chip padding (one shared pair) |
-| `--section-py-start`       | 96px (64px mobile)     | Section top padding                             |
-| `--section-py-end`         | 64px (48px mobile)     | Section bottom padding                          |
-| `--gutter-inline`          | clamp(24px, 4vw, 64px) | Container horizontal                            |
-| `--stack-sm`               | 16px                   | Tight vertical stacks                           |
-| `--stack-md`               | 24px                   | Default stacks                                  |
-| `--stack-lg`               | 32px                   | Card grids, section internals                   |
-| `--stack-xl`               | 48px                   | Major section sub-blocks                        |
-| `--card-padding`           | 24px                   | Standard card inner                             |
-| `--card-padding-lg`        | 32px                   | Large cards                                     |
-| `--section-cta-gap`        | 32px                   | CTA button groups                               |
-| `--text-gap-pair`          | 2px                    | T8→T6 label/value pairs (dt/dd, meta pairs)     |
-| `--text-gap-inline`        | 8px                    | T3→T6 title→body within a card                  |
-| `--text-gap-block`         | 16px                   | T5→T2, T2→T7 within section header              |
-| `--text-gap-section`       | 32px                   | Section header block → first content            |
+| Token                      | Value                  | Use                                                                                           |
+| -------------------------- | ---------------------- | --------------------------------------------------------------------------------------------- |
+| `--space-0-5`              | 2px                    | Hairline stack gaps (line-height compensation)                                                |
+| `--space-1` … `--space-24` | 4px scale              | All spacing                                                                                   |
+| `--pill-padding-y` / `-x`  | 8px / 16px             | Pill / nav / tag chip padding (one shared pair)                                               |
+| `--section-py-start`       | 96px (64px mobile)     | Section top padding                                                                           |
+| `--section-py-end`         | 64px (48px mobile)     | Section bottom padding                                                                        |
+| `--gutter-inline`          | clamp(24px, 4vw, 64px) | Container horizontal                                                                          |
+| `--stack-sm`               | 16px                   | Tight vertical stacks                                                                         |
+| `--stack-md`               | 24px                   | Default stacks                                                                                |
+| `--stack-lg`               | 32px                   | Card grids, section internals                                                                 |
+| `--stack-xl`               | 48px                   | Major section sub-blocks                                                                      |
+| `--hero-band-gap`          | 48px                   | Scoped on `.hero-landing`; landing top padding; horizontal gap in `.kural__band` mobile stack |
+| `--card-padding`           | 24px                   | Standard card inner                                                                           |
+| `--card-padding-lg`        | 32px                   | Large cards                                                                                   |
+| `--section-cta-gap`        | 32px                   | CTA button groups                                                                             |
+| `--text-gap-pair`          | 2px                    | T8→T6 label/value pairs (dt/dd, meta pairs)                                                   |
+| `--text-gap-inline`        | 8px                    | T3→T6 title→body within a card                                                                |
+| `--text-gap-block`         | 16px                   | T5→T2, T2→T7 within section header                                                            |
+| `--text-gap-section`       | 32px                   | Section header block → first content                                                          |
 
 **Violation:** Hardcoded `padding: 20px`, `gap: 18px`, or `margin: 30px` where a token exists.
 **Violation:** Text-stack vertical gaps using raw `--space-*` or hardcoded px where a `--text-gap-*` token applies.
@@ -181,13 +182,13 @@ element resolves to. Standard mappings:
 
 Per `docs/design-direction.md § Section eyebrows`:
 
-| Section type                                  | Eyebrow                                                      |
-| --------------------------------------------- | ------------------------------------------------------------ |
-| View intros with metrics/custom h2            | **Required** — `Eyebrow.astro` via `Section` prop            |
-| Content sections inside a view                | **Omit** — nav provides context                              |
-| Ad-hoc kickers (Vision lede, Leadership diff) | Match `.eyebrow` typography (`--accent-ll`, mono, uppercase) |
+| Section type                             | Eyebrow                                                      |
+| ---------------------------------------- | ------------------------------------------------------------ |
+| View intros with metrics/custom h2       | **Required** — `Eyebrow.astro` via `Section` prop            |
+| Content sections inside a view           | **Omit** — nav provides context                              |
+| Ad-hoc kickers (Vision lede, About diff) | Match `.eyebrow` typography (`--accent-ll`, mono, uppercase) |
 
-**View intros/sections with eyebrows:** `leadership`, `experience`, `publications`, `awards`, `vision-programs`, Contact (if eyebrow used).
+**View intros/sections with eyebrows:** `about`, `experience`, `publications`, `awards`, `vision-programs`, Contact (if eyebrow used).
 
 **Content sections without eyebrows:** `conferences`, `speakers`, `kaggle`, `education`.
 
@@ -309,11 +310,11 @@ SSOT for variant naming. `Section.astro` accepts a single `variant` prop
 (`'default' | 'alt' | 'full'`); additional variant classes may be layered via
 its `class` prop.
 
-| `variant` prop | Emitted class    | When                                                                                                    |
-| -------------- | ---------------- | ------------------------------------------------------------------------------------------------------- |
-| `default`      | (none)           | Standard band (experience, conferences, awards, education)                                              |
-| `alt`          | `.section--alt`  | Alternate background (`--bg-alt`); leadership, publications, speakers, kaggle, vision-programs, contact |
-| `full`         | `.section--full` | Full-bleed layout (deprecated as of Vision rewrite)                                                     |
+| `variant` prop | Emitted class    | When                                                                                               |
+| -------------- | ---------------- | -------------------------------------------------------------------------------------------------- |
+| `default`      | (none)           | Standard band (experience, conferences, awards, education)                                         |
+| `alt`          | `.section--alt`  | Alternate background (`--bg-alt`); about, publications, speakers, kaggle, vision-programs, contact |
+| `full`         | `.section--full` | Full-bleed layout (deprecated as of Vision rewrite)                                                |
 
 Adjacent sections should alternate `default` / `alt` where possible for visual rhythm.
 Agents cite this table — never ad-hoc class strings.
@@ -376,25 +377,26 @@ Intentional divergences from this contract, recorded by the Design Guardian duri
 Implement (Hard Rule: document exceptions). This table — not agent memory — is the SSOT
 for approved divergences. Append rows; never delete history.
 
-| exception_id | views                                          | rule waived                            | reason                                                                                                                                                                                                                                                                            | date       |
-| ------------ | ---------------------------------------------- | -------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
-| EX-001       | recognition                                    | §5 `--radius` default                  | `.recog-card` / `.recog-tile` use `--radius-xl` (14px) to pair with top accent stripe. **Note (2026-07-06):** `.recog-tile` retired (94269ae) — summary tiles render `.theme-card.card`; `--radius-xl` is now the default-shell radius, so this exception is absorbed by §5.      | 2026-07-02 |
-| EX-002       | recognition                                    | §5 solid `--bg-elev` shell             | `.recog-card` gradient background elevates recognition band above standard cards                                                                                                                                                                                                  | 2026-07-02 |
-| EX-003       | recognition                                    | §5 no top accent                       | `.recog-card` / `.edu-panel` use 2px solid `border-top: var(--accent-card)` as categorical colour identifier                                                                                                                                                                      | 2026-07-02 |
-| EX-004       | recognition                                    | §5 standard shell bg                   | `.edu-panel::before` dotted radial overlay — education hero treatment unique within Tier C                                                                                                                                                                                        | 2026-07-02 |
-| EX-005       | projects                                       | §5 recog-style top accent              | `.card--accent::before` 3px gradient stripe (decorative emphasis vs recog 2px solid). **Note (2026-07-04):** Superseded when the standalone Projects view merged into Experience.                                                                                                 | 2026-07-02 |
-| EX-006       | vision                                         | §5 rectangular `.card` shell           | `.hub__ring` circular surface — hover-only `--shadow-md` (not persistent at rest); emblem layout requirement. **Note (2026-07-03):** Superseded by Vision multi-section rewrite; hub-and-spoke diagram retired.                                                                   | 2026-07-02 |
-| EX-007       | home                                           | §5 `--radius` on logo tiles            | `.leadership__collab-mark` uses `--radius-md` (8px) for compact logo grid cells                                                                                                                                                                                                   | 2026-07-02 |
-| EX-008       | home, research, projects, recognition, contact | §3 single card-title token             | Three-tier `--fs-card-title` scale (0.95rem / var(--fs-h3) / 1.5rem) preserves intentional research-compact / standard / flagship title hierarchy                                                                                                                                 | 2026-07-03 |
-| EX-009       | research                                       | §2 single grid-col-min token           | Two-tier `--grid-col-min` scale (320px compact vs 420px full) matches different content grid widths across research and speaking sections                                                                                                                                         | 2026-07-03 |
-| EX-010       | recognition                                    | §2 tokenized gap                       | `CompetitionCard` stats grid uses a `1px` hairline `gap` as a visual cell divider (grid background shows through) — not a rhythm value; intentionally off the `--space-*` scale                                                                                                   | 2026-07-03 |
-| EX-011       | home                                           | §2 tokenized gap                       | `ThirukuralQuote` band uses a responsive `clamp(1rem, 2.5vw, 1.75rem)` gap for the fluid couplet layout; endpoints intentionally straddle `--space-4`/`--space-6` and stay a clamp, not a fixed token                                                                             | 2026-07-03 |
-| EX-012       | all (BoardHeader)                              | §2 tokenized margin                    | `.bhead__chev :global(svg)` uses `margin-inline: -5px` as an optical overlap nudge to tuck chevrons toward the title — negative icon kerning, not layout rhythm; off the positive `--space-*` grid by design                                                                      | 2026-07-03 |
-| EX-013       | home                                           | §1 S5 section py                       | `AboutLanding.astro` uses `padding-block: var(--stack-xl)` (48px) instead of full `--section-py-*` — landing band is wrapped outside `Section.astro` and vertically centers hero + thirukural in the viewport                                                                     | 2026-07-03 |
-| EX-014       | all multi-section views                        | §1 S5 section py                       | `.section--compact-top` / `.section--compact-bottom` halve stacked section padding at same-view boundaries (intro→content, content→content within a nav view)                                                                                                                     | 2026-07-03 |
-| EX-015       | all (org/collab logos)                         | §5 raster rule color-count             | Org/collaboration brand marks (`.logo-badge` containers) remain as raster PNG regardless of chromatic properties. Brand-fidelity requirement overrides the monochrome-→-vector general rule. Research view's recommendation to vectorize org logos was rejected on these grounds. | 2026-07-04 |
-| EX-016       | vision (VisionHub)                             | §5 uniform node fill ratio             | `.vision-hub__node-img` raster nodes use 72% fill vs 52% for MarkEmblem/SVG nodes — raster PNGs require proportionally more area to read legibly against tinted circles. Rule dies with the raster branch (TC5 cleanup gate).                                                     | 2026-07-04 |
-| EX-017       | experience                                     | §5 per-item/per-role accent uniformity | Experience timeline rail uses a unified violet→red gradient (`--accent` → `--accent-red`) as a temporal present→past axis, orthogonal to the per-role `--lvl-*` hue; intentionally not per-role.                                                                                  | 2026-07-05 |
+| exception_id | views                                          | rule waived                            | reason                                                                                                                                                                                                                                                                                                                                | date       |
+| ------------ | ---------------------------------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| EX-001       | recognition                                    | §5 `--radius` default                  | `.recog-card` / `.recog-tile` use `--radius-xl` (14px) to pair with top accent stripe. **Note (2026-07-06):** `.recog-tile` retired (94269ae) — summary tiles render `.theme-card.card`; `--radius-xl` is now the default-shell radius, so this exception is absorbed by §5.                                                          | 2026-07-02 |
+| EX-002       | recognition                                    | §5 solid `--bg-elev` shell             | `.recog-card` gradient background elevates recognition band above standard cards                                                                                                                                                                                                                                                      | 2026-07-02 |
+| EX-003       | recognition                                    | §5 no top accent                       | `.recog-card` / `.edu-panel` use 2px solid `border-top: var(--accent-card)` as categorical colour identifier                                                                                                                                                                                                                          | 2026-07-02 |
+| EX-004       | recognition                                    | §5 standard shell bg                   | `.edu-panel::before` dotted radial overlay — education hero treatment unique within Tier C                                                                                                                                                                                                                                            | 2026-07-02 |
+| EX-005       | projects                                       | §5 recog-style top accent              | `.card--accent::before` 3px gradient stripe (decorative emphasis vs recog 2px solid). **Note (2026-07-04):** Superseded when the standalone Projects view merged into Experience.                                                                                                                                                     | 2026-07-02 |
+| EX-006       | vision                                         | §5 rectangular `.card` shell           | `.hub__ring` circular surface — hover-only `--shadow-md` (not persistent at rest); emblem layout requirement. **Note (2026-07-03):** Superseded by Vision multi-section rewrite; hub-and-spoke diagram retired.                                                                                                                       | 2026-07-02 |
+| EX-007       | home                                           | §5 `--radius` on logo tiles            | `.about__collab-mark` uses `--radius-md` (8px) for compact logo grid cells                                                                                                                                                                                                                                                            | 2026-07-02 |
+| EX-008       | home, research, projects, recognition, contact | §3 single card-title token             | Three-tier `--fs-card-title` scale (0.95rem / var(--fs-h3) / 1.5rem) preserves intentional research-compact / standard / flagship title hierarchy                                                                                                                                                                                     | 2026-07-03 |
+| EX-009       | research                                       | §2 single grid-col-min token           | Two-tier `--grid-col-min` scale (320px compact vs 420px full) matches different content grid widths across research and speaking sections                                                                                                                                                                                             | 2026-07-03 |
+| EX-010       | recognition                                    | §2 tokenized gap                       | `CompetitionCard` stats grid uses a `1px` hairline `gap` as a visual cell divider (grid background shows through) — not a rhythm value; intentionally off the `--space-*` scale                                                                                                                                                       | 2026-07-03 |
+| EX-011       | home                                           | §2 tokenized gap                       | `ThirukuralQuote` band uses a responsive `clamp(1rem, 2.5vw, 1.75rem)` gap for the fluid couplet layout; endpoints intentionally straddle `--space-4`/`--space-6` and stay a clamp, not a fixed token                                                                                                                                 | 2026-07-03 |
+| EX-012       | all (BoardHeader)                              | §2 tokenized margin                    | `.bhead__chev :global(svg)` uses `margin-inline: -5px` as an optical overlap nudge to tuck chevrons toward the title — negative icon kerning, not layout rhythm; off the positive `--space-*` grid by design                                                                                                                          | 2026-07-03 |
+| EX-013       | home                                           | §1 S5 section py                       | `HeroLanding.astro` uses `--hero-band-gap` (48px) top padding; `#thirukural` surround is `margin-block: 3lh` (lh anchored to `--fs-kural` / `--lh-normal`), not fixed px half-band pads; landing `padding-bottom: 0` — gap to about comes from kural margin-bottom                                                                    | 2026-07-09 |
+| EX-014       | all multi-section views                        | §1 S5 section py                       | `.section--compact-top` / `.section--compact-bottom` halve stacked section padding at same-view boundaries (intro→content, content→content within a nav view)                                                                                                                                                                         | 2026-07-03 |
+| EX-015       | all (org/collab logos)                         | §5 raster rule color-count             | Org/collaboration brand marks (`.logo-badge` containers) remain as raster PNG regardless of chromatic properties. Brand-fidelity requirement overrides the monochrome-→-vector general rule. Research view's recommendation to vectorize org logos was rejected on these grounds.                                                     | 2026-07-04 |
+| EX-016       | vision (VisionHub)                             | §5 uniform node fill ratio             | `.vision-hub__node-img` raster nodes use 72% fill vs 52% for MarkEmblem/SVG nodes — raster PNGs require proportionally more area to read legibly against tinted circles. Rule dies with the raster branch (TC5 cleanup gate).                                                                                                         | 2026-07-04 |
+| EX-017       | experience                                     | §5 per-item/per-role accent uniformity | Experience timeline rail uses a unified violet→red gradient (`--accent` → `--accent-red`) as a temporal present→past axis, orthogonal to the per-role `--lvl-*` hue; intentionally not per-role.                                                                                                                                      | 2026-07-05 |
+| EX-018       | home (ThirukuralQuote)                         | §2 typographic alignment               | Desktop: `.kural__copy` `min-height` matches `--kural-img-h` (448×480 aspect); Tamil/author align portrait top/bottom via `justify-content: space-between` and `.kural__text { display: contents }`. Mobile: stacked portrait-first with `--kural-text-gap` (`--text-gap-inline`). Owner preference — see `page-about.md` Appendix D. | 2026-07-09 |
 
 ---
 

@@ -24,12 +24,12 @@ token inheritance.
 
 ## Decision timeline
 
-| Date                                             | Event                                                                                                                                                                                                  | Status     |
-| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- |
-| Early–late June 2026                             | Original multi-color scheme (`--cat-*`, `--lvl-*`, `--medal-*`, `--vision-accent-*`)                                                                                                                   | superseded |
-| 2026-06-28 (commit `77846cd` unify-view-accents) | **Unified to one accent per view**; Leadership re-suppressed to brand purple                                                                                                                           | reversed   |
-| 2026-07-05 (session `2b8c0377…`)                 | **Reversal to multi-color per view** at explicit user request ("use multiple colors per page… all views")                                                                                              | **active** |
-| 2026-07-05                                       | Leadership given dedicated `--about-cat-*` namespace; Vision positional→per-item; Experience 6-tier seniority timeline added; Research/Contact label fixes; WCAG re-measured; Playwright visual verify | **active** |
+| Date                                             | Event                                                                                                                                                                                             | Status     |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| Early–late June 2026                             | Original multi-color scheme (`--cat-*`, `--lvl-*`, `--medal-*`, `--vision-accent-*`)                                                                                                              | superseded |
+| 2026-06-28 (commit `77846cd` unify-view-accents) | **Unified to one accent per view**; About re-suppressed to brand purple                                                                                                                           | reversed   |
+| 2026-07-05 (session `2b8c0377…`)                 | **Reversal to multi-color per view** at explicit user request ("use multiple colors per page… all views")                                                                                         | **active** |
+| 2026-07-05                                       | About given dedicated `--about-cat-*` namespace; Vision positional→per-item; Experience 6-tier seniority timeline added; Research/Contact label fixes; WCAG re-measured; Playwright visual verify | **active** |
 
 ## Token architecture (the cascade)
 
@@ -58,7 +58,7 @@ Content JSON key (accent / level / medal)
 
 | View                     | Dimension        | Mechanism                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **About / Leadership**   | Category         | `.cat-*` classes → `--about-cat-*` (7 hues). See [`LeadershipPhilosophy.astro`](../src/components/sections/LeadershipPhilosophy.astro).                                                                                                                                                                                                                 |
+| **About**                | Category         | `.cat-*` classes → `--about-cat-*` (7 hues). See [`About.astro`](../src/components/sections/About.astro).                                                                                                                                                                                                                                               |
 | **Experience**           | Career seniority | `xpLevelSchema`: principal→purple, staff→blue/indigo, senior→teal, lead→gold, associate→pink, engineer→red. Timeline rail keeps its intentional violet→red temporal gradient (exception **EX-017**).                                                                                                                                                    |
 | **Research**             | Section          | Publications→`--cat-strategic` (blue/indigo), Conferences→`--cat-platform` (teal), Speakers→`--cat-ai` (purple). `global.css` ~L804–812. `.venue` label fixed to read `--accent-card`.                                                                                                                                                                  |
 | **Recognition / Awards** | Award level      | `.level-*` → `--lvl-*` (6 seniority hues). `awardLevelSchema`.                                                                                                                                                                                                                                                                                          |
@@ -92,8 +92,8 @@ Defined in [`src/schemas/`](../src/schemas/); invalid keys fail the build:
   defined but consumed only as fallbacks (Research uses section-ID selectors instead).
   Flagged as a design gap in the 2026-07-05 audit — **do not delete** the tokens.
 - **Verification harness gotchas** (per-view color probing): scope probes by section
-  id — `.theme-card` is shared by both About/Leadership and Vision, so a page-wide probe
-  reports two colors and looks like a bug. `.leadership__card-row` has no `border-top`,
+  id — `.theme-card` is shared by both About and Vision, so a page-wide probe
+  reports two colors and looks like a bug. `.about__card-row` has no `border-top`,
   so its computed border color is `--text`, not the accent — exclude it from accent
   probes.
 

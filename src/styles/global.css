@@ -281,7 +281,7 @@
   /* Medal accents — shared by Kaggle + Competition cards */
   --medal-silver: #8395b4;
   --medal-bronze: #b67e44;
-  /* Categorical accent palette (SSOT: Vision board + About leadership + shared
+  /* Categorical accent palette (SSOT: Vision board + About section + shared
      categorical hooks). 6 alias existing level and gold hues (auto theme-aware);
      GxP adds a fresh green. All hues belong to the harmonized accent family
      (violet/indigo/teal/amber/rose/green + semantic red). AA ≥3:1 on --bg-elev
@@ -298,7 +298,7 @@
   ); /* red    — Privacy & Data Protection */
   --cat-gxp: #2c8a45; /* green  — GxP Compliance (harmonized family) */
 
-  /* About leadership category rows — now alias the shared harmonized --cat-*
+  /* About section category rows — now alias the shared harmonized --cat-*
      family (previously a separate curated palette). One accent family across
      About + Vision; theme tracking comes for free from the --cat-* tokens. */
   --about-cat-strategic: var(--cat-strategic); /* indigo */
@@ -309,7 +309,7 @@
   --about-cat-privacy: var(--cat-privacy); /* red    */
   --about-cat-gxp: var(--cat-gxp); /* green  */
 
-  /* Categorical accent class hooks — Vision board (mirrors About leadership --cat-* mapping) */
+  /* Categorical accent class hooks — Vision board (mirrors About section --cat-* mapping) */
   --vision-accent-impact: var(--cat-impact);
   --vision-accent-strategic: var(--cat-strategic);
   --vision-accent-platform: var(--cat-platform);
@@ -591,7 +591,7 @@ button {
   line-height: var(--lh-normal);
 }
 
-/* Theme cards (LeadershipPhilosophy, Vision program + org snapshots) */
+/* Theme cards (About, Vision program + org snapshots) */
 .theme-grid {
   display: grid;
   grid-template-columns: repeat(var(--theme-cols, 4), minmax(0, 1fr));
@@ -642,6 +642,11 @@ button {
   );
   margin: 0;
   border: 0;
+}
+
+/* Hero band → About: keep the divider flush; #about.section--compact-top owns top rhythm. */
+.hero-landing + .divider {
+  margin-bottom: var(--stack-lg);
 }
 
 /* Buttons */
@@ -852,7 +857,7 @@ button {
   --accent-card: var(--cat-strategic);
 } /* blue */
 
-/* Vision board categorical accents — content `accent` key → --cat hook (Leadership pattern) */
+/* Vision board categorical accents — content `accent` key → --cat hook (About pattern) */
 .vision-accent-impact {
   --cat: var(--vision-accent-impact);
 }

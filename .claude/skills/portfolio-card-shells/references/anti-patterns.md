@@ -19,9 +19,9 @@ anti-patterns see `portfolio-icon-standardization/references/accent-matrix-and-a
 
 ## Verification gotchas (from box-color-history.md)
 
-- `.theme-card` is shared by **About/Leadership and Vision** — a page-wide color probe
+- `.theme-card` is shared by **About and Vision** — a page-wide color probe
   reports two hues for it. Scope probes by section id, not by `.theme-card`.
-- `.leadership__card-row` has **no `border-top`**, so its computed top border resolves
+- `.about__card-row` has **no `border-top`**, so its computed top border resolves
   to `--text`, not the accent. Don't read the accent off that selector.
 - Dark hero-stat contrast: `--accent` `#6c2fbf` on `#1a1530` measures ~2.34:1
   (decorative, intentionally unfixed) — don't "correct" it as a shell bug.

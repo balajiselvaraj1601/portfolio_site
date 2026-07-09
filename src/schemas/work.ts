@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { iconNameSchema } from '../lib/icons';
 import { EntitySlug } from './shared';
 
-/** Categorical accent keys — map to --cat-* tokens in global.css (shared with About leadership). */
+/** Categorical accent keys — map to --cat-* tokens in global.css (shared with About section). */
 export const visionAccentSchema = z.enum([
   'impact', // gold   — Business & P&L, EVP, Education, Speakers
   'strategic', // blue   — Strategy & sponsorship, Conferences

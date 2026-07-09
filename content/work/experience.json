@@ -8,14 +8,6 @@
       "organization": "AstraZeneca, Sweden",
       "orgShort": "AstraZeneca · Sweden",
       "blurb": "Leads production AI across drug-safety, oncology, and clinical-imaging programs.",
-      "tech": [
-        "Multimodal AI",
-        "Foundation Models",
-        "MLOps",
-        "Single-cell Omics",
-        "Med-PaLM Embeddings",
-        "Knowledge Graphs"
-      ],
       "period": {
         "start": "2023",
         "end": null,
@@ -118,13 +110,6 @@
       "organization": "AstraZeneca, India",
       "orgShort": "AstraZeneca · India",
       "blurb": "Delivered a CT tumor-segmentation pipeline that beat state-of-the-art and secured follow-on funding.",
-      "tech": [
-        "CT Segmentation",
-        "PyTorch",
-        "DDP / Model Parallelism",
-        "Test-Time Augmentation",
-        "Oncology Imaging"
-      ],
       "period": {
         "start": "2022",
         "end": "2023",
@@ -167,13 +152,6 @@
       "organization": "AstraZeneca, India",
       "orgShort": "AstraZeneca · India",
       "blurb": "Built AWS foundation-model and graph-neural-network platforms for digital pathology and clinical imaging.",
-      "tech": [
-        "Contrastive Learning",
-        "Graph Neural Networks",
-        "AWS ML Pipelines",
-        "Digital Pathology",
-        "Foundation Models"
-      ],
       "period": {
         "start": "2020",
         "end": "2022",
@@ -239,14 +217,6 @@
       "level": "lead",
       "organization": "HCLTech, India",
       "blurb": "Shipped production computer-vision systems for face, video, and pose analytics across enterprise deployments.",
-      "tech": [
-        "Computer Vision",
-        "Face / Video Analytics",
-        "ReID & MOT",
-        "Pose Estimation",
-        "Edge / Docker",
-        "TensorFlow"
-      ],
       "period": {
         "start": "2017",
         "end": "2020",
@@ -258,7 +228,7 @@
           "icon": "vision",
           "bullets": [
             {
-              "text": "Delivered an enterprise face analytics platform with real-time recognition, verification, and identity clustering across two client deployments.",
+              "text": "Delivered an enterprise face analytics platform with real-time recognition, verification, and identity clustering across 2 client deployments.",
               "tier": "primary"
             },
             {
@@ -314,13 +284,6 @@
       "organization": "HTIC & ICSR, IIT Madras, India",
       "orgShort": "IIT Madras",
       "blurb": "Developed real-time clinical imaging systems spanning endoscopy, retinal imaging, and 3D neuroanatomy.",
-      "tech": [
-        "Real-time Imaging",
-        "NVIDIA Jetson TX1",
-        "Endoscopy / NBI",
-        "3D Reconstruction",
-        "Image Registration"
-      ],
       "period": {
         "start": "2016",
         "end": "2017",
@@ -403,12 +366,6 @@
       "organization": "Healthware Pvt Ltd, India",
       "orgShort": "Healthware",
       "blurb": "Bridged clinical, engineering, and commercial teams across 50+ hospital sites to drive medical-imaging adoption.",
-      "tech": [
-        "Clinical Imaging Systems",
-        "Pre-sales Engineering",
-        "Deployment & Go-live",
-        "Clinical Training"
-      ],
       "period": {
         "start": "2014",
         "end": "2016",

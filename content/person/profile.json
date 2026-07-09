@@ -11,22 +11,22 @@
     "imageAvif": "/assets/images/thiruvalluvar.avif",
     "imageAlt": "Statue of the Tamil poet-philosopher Thiruvalluvar"
   },
-  "greeting": "Hi, I'm Balaji Selvaraj",
   "heroTitle": {
-    "lead": "Transforming data into",
-    "emphasis": "business impact",
-    "tail": "through AI"
+    "lead": "Building Enterprise AI that delivers",
+    "emphasis": "Business Impact",
+    "tail": ""
   },
+  "heroSubtitle": "Helping global organizations transform cutting-edge AI into production systems that deliver measurable business value.",
   "metrics": [
     { "value": "12+", "label": "Years in AI & ML", "icon": "chart" },
     {
       "value": "Top 0.3%",
-      "label": "Kaggle · 652 among 200K+ data scientists",
+      "label": "Kaggle · 652 / 200K+ data scientists",
       "icon": "trophy"
     },
     {
       "value": "$0.5M+",
-      "label": "Internal Funding",
+      "label": "Executive AI Investment",
       "detail": "Secured 2× · Influenced 1×",
       "icon": "funding"
     },
@@ -38,19 +38,19 @@
     },
     {
       "value": "2",
-      "label": "Secured & delivered",
-      "detail": "Executive projects · Chief Scientist & SVP",
+      "label": "Executive Sponsored Projects",
+      "detail": "Secured & delivered · Chief Scientist · SVP",
       "icon": "target"
     },
     {
       "value": "10+",
-      "label": "AI Projects delivered",
+      "label": "AI Solutions Delivered",
       "detail": "Across Product, Service, Startup Ecosystem",
       "icon": "chart"
     },
     {
-      "value": "5 Countries",
-      "label": "Globally distributed team",
+      "value": "Global\u00a0Leadership",
+      "label": "Distributed AI Team",
       "detail": "India, UK, Sweden, Mexico, China",
       "icon": "globe"
     }
@@ -64,40 +64,31 @@
     "width": 480,
     "height": 480
   },
-  "leadershipPhilosophy": {
+  "about": {
     "intro": [
       "Hands-on Technical AI Lead with 12+ years spanning product, services, and startup environments."
     ],
     "blockHeadings": {
       "strategicVision": "Strategy & Sponsorship",
-      "businessImpact": "Business & P&L Impact",
+      "businessImpact": "Business Impact",
       "platform": "Platform & Infrastructure",
-      "peopleMentoring": "Team & Org Building",
-      "governanceAI": "AI Governance",
-      "governancePrivacy": "Privacy & Data Protection",
-      "governanceGxP": "GxP Compliance"
-    },
-    "blockSubheadings": {
-      "governancePrivacy": "Partnered with the Data Office"
+      "peopleMentoring": "Team & Organization Building",
+      "responsibleGovernance": "Responsible AI & Data Governance",
+      "governanceGxP": "Regulatory Compliance"
     },
     "strategicVision": [
       {
         "title": "Executive Sponsorship & Portfolio Strategy",
-        "description": "Secured executive sponsorship and built consensus around a shared strategic direction, transforming five ambiguous initiatives into two funded, enterprise-scale programs.",
+        "description": "Secured executive sponsorship and built executive alignment around a shared strategic direction, transforming 5 exploratory initiatives into 2 funded, enterprise-scale programs.",
         "icon": "handshake"
       },
       {
-        "title": "Executive influence, VP to EVP",
-        "description": "Influence spanning VP → SVP → Chief Scientist → EVP, translating independently sourced AI ideas into sponsored, company-scale mandates.",
-        "icon": "institution"
-      },
-      {
-        "title": "Enterprise Positioning",
-        "description": "Established a newly formed AI team as a trusted enterprise partner across seven internal business groups and three startups through differentiated AI capabilities aligned to strategic business needs.",
+        "title": "Enterprise AI Capability Positioning",
+        "description": "Established a newly formed AI team as a trusted enterprise partner across 7 internal business groups and 3 startups through differentiated AI capabilities aligned to strategic business needs.",
         "icon": "link"
       },
       {
-        "title": "3 Scorecards",
+        "title": "Enterprise Portfolio Alignment",
         "description": "Delivered AI programs across Oncology, Biopharma R&D, and CPSS, aligning with AstraZeneca's 3 R&D priority areas over 3 consecutive years.",
         "icon": "chart"
       },
@@ -109,35 +100,35 @@
     ],
     "businessImpact": [
       {
-        "title": "$20–50M projected annual savings",
+        "title": "Projected Annual Savings ($20–50M)",
         "description": "Secured and delivered a $3M+ SVP-sponsored drug safety initiative, developing predictive AI toxicology models projected to save $20M–$50M annually.",
         "icon": "funding"
       },
       {
-        "title": "5 Years → 3 Years",
-        "description": "Accelerated drug safety programs by two years, reducing study timelines from five years to three through predictive AI toxicology.",
+        "title": "Program Timeline Acceleration (5 → 3 Years)",
+        "description": "Accelerated drug safety programs by 2 years, reducing study timelines from 5 years to 3 through predictive AI toxicology.",
         "icon": "clock"
       },
       {
         "title": "Portfolio Optimization",
-        "description": "Optimized the AI investment portfolio, recovering approximately six months of delivery capacity while reducing infrastructure costs.",
+        "description": "Optimized the AI investment portfolio, recovering approximately 6 months of delivery capacity while reducing infrastructure costs.",
         "icon": "hand"
       }
     ],
     "platform": [
       {
         "title": "Enterprise AI Platform",
-        "description": "Built and deployed a foundation-model platform that standardized training, inference, and evaluation across three clinical imaging modalities and 3 internal infrastructures.",
+        "description": "Built and deployed a foundation-model platform that standardized training, inference, and evaluation across 3 clinical imaging modalities and 3 internal infrastructures.",
         "icon": "blocks"
       },
       {
-        "title": "GxP-Compliant Production AI",
+        "title": "GxP-Compliant AI Platform",
         "description": "Engineered production AI pipelines within AstraZeneca's GxP-compliant platform, supporting validated, traceable, and audit-ready AI deployment.",
         "icon": "cloud"
       },
       {
         "title": "Distributed Foundation Model Training",
-        "description": "Built distributed training infrastructure with FSDP and DeepSpeed, reducing training bottlenecks and enabling enterprise-scale foundation model development.",
+        "description": "Built distributed training pipelines with FSDP and DeepSpeed, reducing training bottlenecks and enabling enterprise-scale foundation model development.",
         "icon": "layers"
       },
       {
@@ -149,7 +140,7 @@
     "peopleMentoring": [
       {
         "title": "Global Team Scaling",
-        "description": "Built and led a multicultural AI engineering team spanning five countries, scaling from 1 to 12 engineers.",
+        "description": "Built and led a multicultural AI engineering team spanning 5 countries, scaling from 1 to 12 engineers.",
         "icon": "team"
       },
       {
@@ -158,29 +149,22 @@
         "icon": "graduation"
       },
       {
-        "title": "AI Talent Development",
-        "description": "Developed and coached a team of three junior engineers to earn a Kaggle Bronze Medal, ranking 76th of 1,220 teams (Top 6%).",
+        "title": "AI Capability Development",
+        "description": "Developed and coached a team of 3 junior engineers to earn a Kaggle Bronze Medal, ranking 76th of 1,220 teams (Top 6%).",
         "icon": "trophy"
       },
       {
         "title": "Emerging Talent Development",
-        "description": "Developed and coached a four-student team to a Top 4 national finish at the Smart India Hackathon (2019).",
+        "description": "Developed and coached a 4-student team to a Top 4 national finish at the Smart India Hackathon (2019).",
         "icon": "target"
       }
     ],
-    "governanceAI": [
+    "responsibleGovernance": [
       {
-        "title": "EU AI Act risk mapping",
-        "description": "Mapped AI deployments against EU AI Act risk tiers — classifying clinical decision-support tools as high-risk and defining conformity assessment, logging, and human-oversight obligations before deployment.",
+        "title": "AI Regulatory Compliance",
+        "description": "Designed and delivered AI solutions aligned with EU AI Act requirements for high-risk clinical AI, embedding transparency, human oversight, audit logging, and governance controls into the solution architecture.",
         "icon": "institution"
       },
-      {
-        "title": "Transparency & audit-readiness",
-        "description": "Designed AI pipelines with model cards, decision logs, and explainability layers to satisfy EU AI Act transparency mandates for high-risk systems in clinical workflows.",
-        "icon": "layers"
-      }
-    ],
-    "governancePrivacy": [
       {
         "title": "Regulated Data Architecture",
         "description": "Ensured AI pipelines processing patient and clinical data complied with GDPR and HIPAA by embedding privacy and regulatory controls into the data architecture.",
@@ -196,8 +180,8 @@
   },
   "contactIntro": "Open to discussing AI leadership opportunities, research collaborations, and advisory roles.",
   "contactPage": {
-    "title": "Let's build something impactful",
-    "titleHighlight": "impactful",
+    "title": "Let's create impact",
+    "titleHighlight": "impact",
     "eyebrow": "Contact",
     "responseTime": "Typically respond within 24–48 hours.",
     "connectHeading": "Connect with me",

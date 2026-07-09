@@ -75,7 +75,7 @@ and `SectionRenderer.astro`. Quick pointers:
 
 | You want to change…                          | Edit                                 |
 | -------------------------------------------- | ------------------------------------ |
-| Hero, Leadership, Contact copy               | `content/person/profile.json`        |
+| Hero, About, Contact copy                    | `content/person/profile.json`        |
 | An experience role / project / bullet        | `content/work/experience.json`       |
 | An award row                                 | `content/recognition/awards.json`    |
 | A Kaggle competition card                    | `content/recognition/kaggle.json`    |

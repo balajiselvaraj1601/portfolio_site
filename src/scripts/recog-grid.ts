@@ -12,6 +12,10 @@ interface RecogGridOptions {
   filterAttr: string;
   /** Card attributes joined for search haystack matching. Omit when there is no search field. */
   searchAttrs?: string[];
+  /** Initial active filter chip value (data-filter). Defaults to 'all'. */
+  defaultFilter?: string;
+  /** Level values shown when defaultFilter is active (multi-level preset). */
+  defaultFilterLevels?: string[];
 }
 
 export function initRecogGrid(options: RecogGridOptions): void {
@@ -33,8 +37,22 @@ export function initRecogGrid(options: RecogGridOptions): void {
   const searchAttrs = options.searchAttrs ?? [];
   const chips = Array.from(options.root.querySelectorAll('.recog-chip'));
 
-  let activeFilter = 'all';
+  const defaultFilter = options.defaultFilter ?? 'all';
+  const defaultFilterLevels = options.defaultFilterLevels ?? [];
+  let activeFilter = defaultFilter;
   let query = '';
+
+  function matchesFilter(filterValue: string): boolean {
+    if (activeFilter === 'all') return true;
+    if (
+      defaultFilterLevels.length > 0 &&
+      activeFilter === defaultFilter &&
+      defaultFilter !== 'all'
+    ) {
+      return defaultFilterLevels.includes(filterValue);
+    }
+    return filterValue === activeFilter;
+  }
 
   function apply() {
     let visible = 0;
@@ -45,7 +63,7 @@ export function initRecogGrid(options: RecogGridOptions): void {
         .join(' ')
         .toLowerCase();
       const show =
-        (activeFilter === 'all' || filterValue === activeFilter) &&
+        matchesFilter(filterValue) &&
         (query === '' || haystack.includes(query));
       card.classList.toggle('hidden', !show);
       if (show) visible++;

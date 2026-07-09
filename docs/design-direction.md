@@ -59,7 +59,7 @@ Every nav view gets a primary accent (via `--view-accent-*`) and contextual sub-
 
 | View             | Primary (fallback)               | Per-item accents                                                                                                                                                                                         | Notes                                                                                                         |
 | ---------------- | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| **About** (home) | Violet (`--accent`, brand)       | Leadership categories via `--cat-*`: Strategy=indigo, Business Impact=amber, Platform=teal, People=rose, AI Governance=violet, Privacy=red, GxP=green. Education=amber (recognition-owned).              | Hero, Thirukural band, About headline use primary violet. Leadership rows use categorical color per role.     |
+| **About** (home) | Violet (`--accent`, brand)       | About categories via `--cat-*`: Strategy=indigo, Business Impact=amber, Platform=teal, People=rose, AI Governance=violet, Privacy=red, GxP=green. Education=amber (recognition-owned).                   | Hero, Thirukural band, About headline use primary violet. About rows use categorical color per role.          |
 | **Experience**   | Violet (`--accent`)              | Per career level via `--lvl-*`: principal=violet, staff=indigo, senior=teal, lead=amber, associate=rose, engineer=red. Timeline rail uses violet→red gradient (temporal axis, past→present, see EX-017). | Role badges colored by level; timeline spine is intentional unified gradient, not per-role.                   |
 | **Research**     | Indigo (`--lvl-senior-director`) | Publications=indigo, Conferences=teal, Speakers=violet.                                                                                                                                                  | Section-specific accent per content type; view fallback is indigo.                                            |
 | **Recognition**  | Amber/gold (`--accent-gold`)     | Awards per level (evp=amber, cio=violet, senior-director=indigo, director=teal, associate-director=red, national=rose); Kaggle medals (gold default, silver, bronze); Education=amber.                   | Card shells tinted by award level or medal. View fallback is amber/gold.                                      |
@@ -114,9 +114,9 @@ Three font roles — map by **semantic role**, not per-component preference. Tok
 
 ## Section eyebrows
 
-- **View intros** use a section-level eyebrow (`Section`'s `eyebrow` prop, or `Eyebrow.astro` for custom headers) on sections that open a nav view: About (`leadership`), Experience, Research (`publications`), Recognition (`awards`), Vision, Contact. The former standalone intro blocks are gone — each view-opening section carries its own eyebrow + intro subtitle directly.
+- **View intros** use a section-level eyebrow (`Section`'s `eyebrow` prop, or `Eyebrow.astro` for custom headers) on sections that open a nav view: About (`about`), Experience, Research (`publications`), Recognition (`awards`), Vision, Contact. The former standalone intro blocks are gone — each view-opening section carries its own eyebrow + intro subtitle directly.
 - **Content sections** inside a multi-section view (`conferences`, `speakers`, `kaggle`, `education`) omit eyebrows — the view label on the opening section provides context.
-- Ad-hoc kickers (Vision Board lede, Leadership diff heading) should match `.eyebrow` typography (`--accent-ll`, mono, uppercase).
+- Ad-hoc kickers (Vision Board lede, About diff heading) should match `.eyebrow` typography (`--accent-ll`, mono, uppercase).
 
 ## Components — visual notes
 

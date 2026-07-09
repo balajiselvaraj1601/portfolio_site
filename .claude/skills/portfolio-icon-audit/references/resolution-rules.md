@@ -116,7 +116,7 @@ Flag status `fallback` when:
 | Experience project has no `icon` and `projectIcon()` returns `folder` | `folder`         |
 | About card title not in `ABOUT_CARD_ICONS`                            | `diamond`        |
 | `resolveIcon(undefined, 'folder')` used                               | `folder`         |
-| `resolveIcon(undefined, 'diamond')` on leadership cards               | `diamond`        |
+| `resolveIcon(undefined, 'diamond')` on about cards                    | `diamond`        |
 | `resolveIcon(undefined, 'document')` on research cards                | `document`       |
 
 **Recommendation priority for fallbacks:**

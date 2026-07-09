@@ -37,10 +37,10 @@ function getDocumentBottom(el: HTMLElement): number {
 }
 
 function getHideBoundaryBefore(target: HTMLElement): number | null {
-  if (target.id === 'leadership') {
+  if (target.id === 'about') {
     const landing =
-      document.getElementById('about-landing') ??
-      document.querySelector('.about-landing');
+      document.getElementById('hero-landing') ??
+      document.querySelector('.hero-landing');
     if (landing instanceof HTMLElement) {
       return getDocumentBottom(landing);
     }

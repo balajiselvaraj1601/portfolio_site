@@ -62,7 +62,7 @@ Each page wrapper sets a view default; sections/categories override `--accent-ca
 
 ## Categorical accents
 
-Used by Vision board groups and About leadership; a section sets `--accent-card: var(--cat-x, var(--view-accent-…))`.
+Used by Vision board groups and the About section; a section sets `--accent-card: var(--cat-x, var(--view-accent-…))`.
 
 | Token             | Meaning                   | Light value                              |
 | ----------------- | ------------------------- | ---------------------------------------- |

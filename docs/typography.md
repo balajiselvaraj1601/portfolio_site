@@ -79,11 +79,11 @@ each section lists the fonts it actually surfaces.
 
 ### Home — `/` (About view + full scroll)
 
-| Section               | Component                    | Fonts surfaced                                                                                    |
-| --------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------- |
-| Hero                  | `Hero.astro`                 | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans                  |
-| Thirukural            | `ThirukuralQuote.astro`      | Tamil quote=sans (exception) · translation=display italic · author=mono                           |
-| Who I am & how I lead | `LeadershipPhilosophy.astro` | h2=display · eyebrow=mono · bio & card text=sans · statement=display (italic) · theme titles=sans |
+| Section               | Component               | Fonts surfaced                                                                                    |
+| --------------------- | ----------------------- | ------------------------------------------------------------------------------------------------- |
+| Hero                  | `Hero.astro`            | title=display · tag / greeting / stat-number / stat-label=mono · sub & body=sans                  |
+| Thirukural            | `ThirukuralQuote.astro` | Tamil quote=sans (exception) · translation=display italic · author=mono                           |
+| Who I am & how I lead | `About.astro`           | h2=display · eyebrow=mono · bio & card text=sans · statement=display (italic) · theme titles=sans |
 
 ### Experience — `/#experience`
 

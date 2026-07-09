@@ -32,8 +32,8 @@ const SHOTS = [
     selector: '#experience',
     revealAll: true,
   },
-  { file: 'thirukural.png', hash: '#about', selector: '#thirukural' },
-  { file: 'thiruvalluvar.png', hash: '#about', selector: '.about-landing' },
+  { file: 'thirukural.png', hash: '#hero', selector: '#thirukural' },
+  { file: 'thiruvalluvar.png', hash: '#hero', selector: '.hero-landing' },
   { file: 'publications.png', hash: '#research', selector: '#publications' },
   { file: 'speaking.png', hash: '#research', selector: '#speakers' },
   {

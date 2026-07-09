@@ -7,6 +7,7 @@ import RecogTile from '@components/ui/RecogTile.astro';
 import { awards, site } from '@lib/content';
 
 import { awardLevelSchema } from '@schemas';
+import type { AwardLevel } from '@schemas';
 
 /**
  * Nominator levels in seniority order — drives summary tiles + filters.
@@ -15,6 +16,14 @@ import { awardLevelSchema } from '@schemas';
  * Director and Associate Director.
  */
 const LEVELS = awardLevelSchema.options;
+
+/** Nominator levels shown on first load (Director / Associate Director via filters). */
+const DEFAULT_LEVELS = [
+  'EVP',
+  'CIO',
+  'Senior Director',
+  'National Level',
+] as const satisfies readonly AwardLevel[];
 
 const slug = (level: string) => level.toLowerCase().replace(/[^a-z]+/g, '-');
 
@@ -31,7 +40,9 @@ const levelOrder = Object.fromEntries(LEVELS.map((level, i) => [level, i]));
 const items = [...awards.items].sort(
   (a, b) => levelOrder[a.level] - levelOrder[b.level] || a.rank - b.rank
 );
-const total = items.length;
+const featuredCount = items.filter((a) =>
+  (DEFAULT_LEVELS as readonly string[]).includes(a.level)
+).length;
 ---
 
 <Section
@@ -58,7 +69,7 @@ const total = items.length;
 
   <RecogControls
     countLabel="All Awards"
-    total={total}
+    total={featuredCount}
     countDataAttr="data-awards-count"
     searchDataAttr="data-awards-search"
     searchPlaceholder="Search awards…"
@@ -68,8 +79,16 @@ const total = items.length;
     <button
       type="button"
       class="recog-chip is-active"
-      data-filter="all"
+      data-filter="featured"
       aria-pressed="true"
+    >
+      Leadership
+    </button>
+    <button
+      type="button"
+      class="recog-chip"
+      data-filter="all"
+      aria-pressed="false"
     >
       All
     </button>
@@ -92,6 +111,10 @@ const total = items.length;
     {
       items.map((a) => (
         <li
+          class:list={[
+            !(DEFAULT_LEVELS as readonly string[]).includes(a.level) &&
+              'hidden',
+          ]}
           data-level={a.level}
           data-title={a.title}
           data-nominator={a.nominator}

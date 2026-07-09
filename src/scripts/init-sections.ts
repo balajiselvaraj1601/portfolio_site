@@ -151,6 +151,8 @@ function initRecognitionGrids(): void {
       emptySelector: '[data-awards-empty]',
       filterAttr: 'data-level',
       searchAttrs: ['data-title', 'data-nominator', 'data-reason'],
+      defaultFilter: 'featured',
+      defaultFilterLevels: ['EVP', 'CIO', 'Senior Director', 'National Level'],
     });
     initRecogCardToggles(awards, '[data-awards-grid]');
   }
@@ -169,12 +171,12 @@ function initRecognitionGrids(): void {
     initRecogCardToggles(kaggle, '[data-kaggle-grid]');
   }
 
-  const leadership = document.getElementById('leadership');
-  if (leadership) {
+  const about = document.getElementById('about');
+  if (about) {
     initRecogGrid({
-      root: leadership,
+      root: about,
       gridSelector: '[data-about-grid]',
-      itemSelector: '.leadership__card-row',
+      itemSelector: '.about__card-row',
       filterAttr: 'data-category',
     });
   }

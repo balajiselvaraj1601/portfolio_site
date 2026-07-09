@@ -39,13 +39,25 @@ function isExternal(href: string) {
         )
       }
     </h1>
+    {
+      profile.heroSubtitle && (
+        <p class="hero__subtitle">{profile.heroSubtitle}</p>
+      )
+    }
   </div>
 
   <div class="hero-stats" role="list" aria-label="Career highlights">
     {
       profile.metrics.map((m) => (
         <div class="hero-stat" role="listitem">
-          <div class="hero-stat__num">{m.value}</div>
+          <div
+            class:list={[
+              'hero-stat__num',
+              { 'hero-stat__num--single-line': m.value.includes('Leadership') },
+            ]}
+          >
+            {m.value}
+          </div>
           <div class="hero-stat__label metric-label">{m.label}</div>
           {m.detail && (
             <div class="hero-stat__detail metric-label">{m.detail}</div>
@@ -120,7 +132,7 @@ function isExternal(href: string) {
   .hero__copy {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: var(--hero-band-gap);
   }
   .hero__copy > * {
     margin: 0;
@@ -128,13 +140,10 @@ function isExternal(href: string) {
   .hero__intro {
     display: flex;
     flex-direction: column;
-    gap: var(--text-gap-block);
+    gap: var(--text-gap-section);
   }
   .hero__intro > * {
     margin: 0;
-  }
-  .hero__intro + .hero-stats {
-    margin-top: var(--text-gap-section);
   }
   .hero__greeting {
     font-family: var(--font-mono);
@@ -160,14 +169,19 @@ function isExternal(href: string) {
     font-style: italic;
     color: var(--accent-ll);
   }
+  .hero__subtitle {
+    font-size: var(--fs-lg);
+    line-height: var(--lh-relaxed);
+    color: var(--text-muted);
+    max-width: 42rem;
+  }
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     align-items: start;
-    row-gap: var(--text-gap-section);
-    column-gap: var(--space-8);
-    margin-top: 0;
-    margin-bottom: 0;
+    row-gap: var(--hero-band-gap);
+    column-gap: var(--hero-band-gap);
+    margin: 0;
   }
   .hero-stat {
     border-left: 2px solid var(--accent);
@@ -179,6 +193,9 @@ function isExternal(href: string) {
     font-weight: var(--fw-semibold);
     color: var(--accent);
     line-height: var(--lh-none);
+  }
+  .hero-stat__num--single-line {
+    white-space: nowrap;
   }
   /* Dark theme: brighten the stat accent for AA contrast on --bg. The brand
      --accent (#6c2fbf) is only ~2.3:1 on the dark background; --accent-light
@@ -208,12 +225,9 @@ function isExternal(href: string) {
       white-space: nowrap;
     }
   }
-  .hero-stats + .hero__cta {
-    margin-top: var(--text-gap-section);
-  }
   .hero__cta {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--space-3);
+    gap: var(--section-cta-gap);
   }
 </style>

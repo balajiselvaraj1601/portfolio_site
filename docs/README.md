@@ -59,7 +59,7 @@ Per-view content intent and section weights — used by page agents during audit
 
 | Doc                                         | View                                |
 | ------------------------------------------- | ----------------------------------- |
-| [About / Home](./page-briefs/home.md)       | Hero, Thirukural, Leadership        |
+| [About / Home](./page-briefs/home.md)       | Hero, Thirukural, About             |
 | [Experience](./page-briefs/experience.md)   | Career timeline                     |
 | [Research](./page-briefs/research.md)       | Publications, Conferences, Speakers |
 | [Recognition](./page-briefs/recognition.md) | Awards, Kaggle, Education           |

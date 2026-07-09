@@ -1,0 +1,48 @@
+---
+import Section from '@components/ui/Section.astro';
+import AboutFocusAreas from '@components/sections/about/AboutFocusAreas.astro';
+import AboutCollaborations from '@components/sections/about/AboutCollaborations.astro';
+import { profile, site } from '@lib/content';
+
+const title = site.sections.about.title;
+const { intro } = profile.about;
+---
+
+<Section
+  id="about"
+  eyebrow={site.sections.about.eyebrow}
+  title={title}
+  variant="alt"
+  class="section--compact-top"
+>
+  {
+    intro && (
+      <div class="about__intro reveal">
+        {(Array.isArray(intro) ? intro : [intro]).map((line) => (
+          <p class="section__subtitle about__intro-line">{line}</p>
+        ))}
+      </div>
+    )
+  }
+
+  <AboutFocusAreas />
+
+  <AboutCollaborations />
+</Section>
+
+<style>
+  :global(#about.section--compact-top) {
+    --section-py-start: var(--stack-xl);
+  }
+
+  .about__intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--text-gap-block);
+    margin-bottom: var(--text-gap-section);
+  }
+  .about__intro-line {
+    max-width: none;
+    margin-bottom: 0;
+  }
+</style>

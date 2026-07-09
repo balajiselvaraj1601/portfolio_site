@@ -20,11 +20,11 @@ pointer for the authoritative definition.
 
 ### Orchestrators (sonnet)
 
-| Agent                         | Model  | Tools                                                   | Role                                                                                                                                                                             | File                                              |
-| ----------------------------- | ------ | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------- |
-| site-consistency-orchestrator | sonnet | Read, Grep, Glob, Bash, Agent(page-\*, design-guardian) | Runs the Page Consistency Team: reads page-routing.csv, spawns page agents + design guardian in parallel, manages `.cursor/page-team.state.json`; never edits content directly.  | `.claude/agents/site-consistency-orchestrator.md` |
-| site-review-fix               | sonnet | Read, Edit, Write, Grep, Glob, Bash, Agent              | End-to-end site review-and-fix: runs `npm run verify`, audits content SSOT, a11y, dead code, design consistency; fixes verified issues; commits if verify passes.                | `.claude/agents/site-review-fix.md`               |
-| site-review-auto              | sonnet | Read, Edit, Write, Grep, Glob, Bash, Agent              | Autonomous headless variant of site-review-fix: unconditional commit on verify success, mandatory dated audit doc in `docs/audits/`, design-standardizer sweep, no user prompts. | `.claude/agents/site-review-auto.md`              |
+| Agent                         | Model  | Tools                                                   | Role                                                                                                                                                                                 | File                                              |
+| ----------------------------- | ------ | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
+| site-consistency-orchestrator | sonnet | Read, Grep, Glob, Bash, Agent(page-\*, design-guardian) | Runs the Page Consistency Team: reads page-routing.csv, spawns page agents + design guardian in parallel, manages `.cursor/page-team.state.json`; never edits content directly.      | `.claude/agents/site-consistency-orchestrator.md` |
+| site-review-fix               | sonnet | Read, Edit, Write, Grep, Glob, Bash, Agent              | End-to-end site review-and-fix: runs `npm run verify`, audits content SSOT, a11y, dead code, design consistency; fixes verified issues; commits if verify passes.                    | `.claude/agents/site-review-fix.md`               |
+| site-review-auto              | sonnet | Read, Edit, Write, Grep, Glob, Bash, Agent              | Autonomous headless variant of site-review-fix: unconditional commit on verify success, mandatory dated audit doc in `docs/audits/`, design-standardizer sweep, and no user prompts. | `.claude/agents/site-review-auto.md`              |
 
 ### Specialists (sonnet)
 
@@ -41,7 +41,7 @@ components — never other views.
 
 | Agent            | Model | Role                                                                                            | File                                 |
 | ---------------- | ----- | ----------------------------------------------------------------------------------------------- | ------------------------------------ |
-| page-about       | haiku | About view (`view_id=home`): hero, thirukural, and leadership sections.                         | `.claude/agents/page-about.md`       |
+| page-about       | haiku | About view (`view_id=home`): hero, thirukural, and about sections.                              | `.claude/agents/page-about.md`       |
 | page-contact     | haiku | Contact view: `Contact.astro` only.                                                             | `.claude/agents/page-contact.md`     |
 | page-experience  | haiku | Experience view: `Experience.astro` and its view's content JSON.                                | `.claude/agents/page-experience.md`  |
 | page-recognition | haiku | Recognition view: Awards, Kaggle, and Education components.                                     | `.claude/agents/page-recognition.md` |

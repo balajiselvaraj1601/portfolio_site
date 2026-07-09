@@ -57,26 +57,26 @@ These `<Icon>` tags fire only through a wrapper; their effective size is almost 
 
 Where masked logos and card marks render (all sized by `--mark-glyph` inside their chrome, unless the hub overrides).
 
-| #   | View        | File                                  | Line     | Component    | Slot / context                           | Rendered glyph px                                 |
-| --- | ----------- | ------------------------------------- | -------- | ------------ | ---------------------------------------- | ------------------------------------------------- |
-| C1  | Recognition | `sections/Education.astro`            | 111      | `MarkEmblem` | `.icon-tile--round` (edu stat)           | 22                                                |
-| C2  | Recognition | `sections/Education.astro`            | 148      | `MarkEmblem` | `.icon-tile--round` (edu highlight)      | 22                                                |
-| C3  | Recognition | `cards/CompetitionCard.astro`         | 105      | `MarkEmblem` | `.icon-tile--round` (header)             | 22                                                |
-| C4  | Recognition | `cards/CompetitionCard.astro`         | 127      | `MarkEmblem` | `.blob-icon--md` (stat)                  | 20 (`--icon-md`, `CompetitionCard.astro:246-248`) |
-| C5  | Recognition | `cards/CompetitionCard.astro`         | 147      | `MarkEmblem` | `.blob-icon--sm` (summary)               | 16 (`--icon-sm`, `CompetitionCard.astro:252-254`) |
-| C6  | Recognition | `cards/CompetitionCard.astro`         | 170      | `MarkEmblem` | `.blob-icon--sm` (eval)                  | 16 (`--icon-sm`, `CompetitionCard.astro:252-254`) |
-| C7  | Vision      | `ui/VisionHub.astro`                  | 59       | `MarkEmblem` | `.vision-hub__center`                    | `--vision-hub-glyph` (fluid)                      |
-| C8  | Vision      | `ui/VisionHub.astro`                  | 70       | `MarkEmblem` | `.vision-hub__node`                      | `--vision-hub-glyph` (fluid)                      |
-| C9  | shared      | `ui/CardMark.astro`                   | 105, 110 | `MarkEmblem` | routed slot (`.theme-card__icon` / bare) | `--mark-glyph`                                    |
-| C10 | Recognition | `sections/Awards.astro`               | 101      | `CardMark`   | award theme card                         | `--mark-glyph`                                    |
-| C11 | About       | `sections/LeadershipPhilosophy.astro` | 116, 145 | `CardMark`   | leadership theme card                    | `--mark-glyph`                                    |
-| C12 | Experience  | `sections/Experience.astro`           | 83       | `CardMark`   | experience card                          | `--mark-glyph`                                    |
-| C13 | Contact     | `sections/Contact.astro`              | 99       | `CardMark`   | connect card (`variant="accented"`)      | `--mark-glyph`                                    |
-| C14 | Research    | `cards/SpeakingCard.astro`            | 26, 34   | `CardMark`   | speaker card                             | `--mark-glyph`                                    |
-| C15 | Research    | `cards/ResearchCard.astro`            | 47, 55   | `CardMark`   | publication / venue card                 | `--mark-glyph`                                    |
-| C16 | Recognition | `sections/Education.astro`            | 86       | `CardMark`   | education record head                    | `--mark-glyph`                                    |
-| C17 | shared      | `cards/ThemeCard.astro`               | 79, 87   | `CardMark`   | generic theme card                       | `--mark-glyph`                                    |
-| C18 | Recognition | `ui/RecogTile.astro`                  | 24       | `CardMark`   | recognition tile                         | `--mark-glyph`                                    |
+| #   | View        | File                          | Line     | Component    | Slot / context                           | Rendered glyph px                                 |
+| --- | ----------- | ----------------------------- | -------- | ------------ | ---------------------------------------- | ------------------------------------------------- |
+| C1  | Recognition | `sections/Education.astro`    | 111      | `MarkEmblem` | `.icon-tile--round` (edu stat)           | 22                                                |
+| C2  | Recognition | `sections/Education.astro`    | 148      | `MarkEmblem` | `.icon-tile--round` (edu highlight)      | 22                                                |
+| C3  | Recognition | `cards/CompetitionCard.astro` | 105      | `MarkEmblem` | `.icon-tile--round` (header)             | 22                                                |
+| C4  | Recognition | `cards/CompetitionCard.astro` | 127      | `MarkEmblem` | `.blob-icon--md` (stat)                  | 20 (`--icon-md`, `CompetitionCard.astro:246-248`) |
+| C5  | Recognition | `cards/CompetitionCard.astro` | 147      | `MarkEmblem` | `.blob-icon--sm` (summary)               | 16 (`--icon-sm`, `CompetitionCard.astro:252-254`) |
+| C6  | Recognition | `cards/CompetitionCard.astro` | 170      | `MarkEmblem` | `.blob-icon--sm` (eval)                  | 16 (`--icon-sm`, `CompetitionCard.astro:252-254`) |
+| C7  | Vision      | `ui/VisionHub.astro`          | 59       | `MarkEmblem` | `.vision-hub__center`                    | `--vision-hub-glyph` (fluid)                      |
+| C8  | Vision      | `ui/VisionHub.astro`          | 70       | `MarkEmblem` | `.vision-hub__node`                      | `--vision-hub-glyph` (fluid)                      |
+| C9  | shared      | `ui/CardMark.astro`           | 105, 110 | `MarkEmblem` | routed slot (`.theme-card__icon` / bare) | `--mark-glyph`                                    |
+| C10 | Recognition | `sections/Awards.astro`       | 101      | `CardMark`   | award theme card                         | `--mark-glyph`                                    |
+| C11 | About       | `sections/About.astro`        | 116, 145 | `CardMark`   | about theme card                         | `--mark-glyph`                                    |
+| C12 | Experience  | `sections/Experience.astro`   | 83       | `CardMark`   | experience card                          | `--mark-glyph`                                    |
+| C13 | Contact     | `sections/Contact.astro`      | 99       | `CardMark`   | connect card (`variant="accented"`)      | `--mark-glyph`                                    |
+| C14 | Research    | `cards/SpeakingCard.astro`    | 26, 34   | `CardMark`   | speaker card                             | `--mark-glyph`                                    |
+| C15 | Research    | `cards/ResearchCard.astro`    | 47, 55   | `CardMark`   | publication / venue card                 | `--mark-glyph`                                    |
+| C16 | Recognition | `sections/Education.astro`    | 86       | `CardMark`   | education record head                    | `--mark-glyph`                                    |
+| C17 | shared      | `cards/ThemeCard.astro`       | 79, 87   | `CardMark`   | generic theme card                       | `--mark-glyph`                                    |
+| C18 | Recognition | `ui/RecogTile.astro`          | 24       | `CardMark`   | recognition tile                         | `--mark-glyph`                                    |
 
 - `.blob-icon--md` (`--icon-md`, 20px) and `.blob-icon--sm` (`--icon-sm`, 16px) are CompetitionCard-local wrappers (`CompetitionCard.astro:246-257`). Note they size the mark with the **icon** size tokens (`--icon-md`/`--icon-sm`), not `--mark-glyph` — a deliberate local choice for these bare-span stat/summary/eval marks (`MarkEmblem` fills the fixed container at `width/height:100%`).
 

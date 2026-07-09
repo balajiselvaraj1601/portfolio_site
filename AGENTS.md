@@ -115,6 +115,7 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
 | Dev server (4321)           | `npm run dev`                                                                                         |
 | Stop all Astro 43xx servers | `npm run dev:stop`                                                                                    |
 | Restart dev (4321)          | `npm run dev:restart`                                                                                 |
+| Prep both (stop + build)    | `npm run serve`                                                                                       |
 | Production build            | `npm run build`                                                                                       |
 | Preview build (4331)        | `npm run preview`                                                                                     |
 | Rebuild + preview (4331)    | `npm run preview:restart`                                                                             |

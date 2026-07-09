@@ -47,7 +47,7 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 
 | Agent                           | View           | Sections                            |
 | ------------------------------- | -------------- | ----------------------------------- |
-| `page-about`                    | About (`home`) | hero, thirukural, leadership        |
+| `page-about`                    | About (`home`) | hero, thirukural, about             |
 | `page-experience`               | Experience     | experience                          |
 | `page-research`                 | Research       | publications, conferences, speakers |
 | `page-recognition`              | Recognition    | awards, kaggle, education           |

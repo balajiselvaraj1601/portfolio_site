@@ -40,14 +40,14 @@ import HeroCopy from '@components/sections/about/HeroCopy.astro';
     z-index: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--landing-gap, var(--space-8));
+    gap: var(--hero-band-gap);
     align-items: start;
     align-content: start;
   }
   @media (min-width: 1024px) {
     .hero__grid {
       grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
-      gap: var(--space-10);
+      gap: var(--hero-band-gap);
       align-items: start;
     }
   }

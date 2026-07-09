@@ -29,7 +29,7 @@
 ### Content sections (curated public set)
 
 - **M6** Render these sections, driven by `content/`:
-  Hero, Thirukural quote, About / Leadership philosophy, Experience (timeline),
+  Hero, Thirukural quote, About, Experience (timeline),
   Publications, Conferences, Speaking Engagements, Awards, Kaggle, Education,
   Vision (programs + org impact), Contact.
 - **M7** _(removed)_ — standalone Projects showcase was dropped; project narratives live in Experience roles.

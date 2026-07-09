@@ -22,7 +22,7 @@ If the change affects page structure, section order, or the overall narrative, u
 | File                         | Sections affected              | Typical edits                                                                                                                |
 | ---------------------------- | ------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
 | `site.json`                  | Global meta, nav, pages, SEO   | Title, tagline, nav labels, page sections, hide a section                                                                    |
-| `person/profile.json`        | Hero, Leadership, Contact      | `heroTag`/`heroTitle`, metrics, CTAs, `leadershipPhilosophy.*`, `contactIntro`, `contactPage`, contact channels              |
+| `person/profile.json`        | Hero, About, Contact           | `heroTag`/`heroTitle`, metrics, CTAs, `about.*`, `contactIntro`, `contactPage`, contact channels                             |
 | `person/collaborations.json` | Collaborations strip on About  | Organization names; optional `logo` slug → `public/assets/logos/{slug}.png`; optional `entity` slug → URL in `entities.json` |
 | `entities.json`              | Entity links (global registry) | Slug → `{ name, url }` for organizations referenced across sections                                                          |
 | `work/vision-board.json`     | Vision view (`/#vision`)       | Infographic hubs, program cards, org impact cards                                                                            |
@@ -142,16 +142,16 @@ Edit `content/person/profile.json` → `contact` array. Allowed public types: `e
 
 Schemas live in `src/schemas/`. Key constraints:
 
-| Schema                 | Notable rules                                                                                         |
-| ---------------------- | ----------------------------------------------------------------------------------------------------- |
-| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true`    |
-| `profileSchema`        | hero/leadership/contact fields; `contactIntro`, `contactPage`; `contact[].href` nullable for location |
-| `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                           |
-| `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                      |
-| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`         |
-| `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                   |
-| `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                     |
-| `kaggleSchema`         | `profile` URL required; `items[]` validated via `kaggleCompetitionSchema`                             |
+| Schema                 | Notable rules                                                                                      |
+| ---------------------- | -------------------------------------------------------------------------------------------------- |
+| `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true` |
+| `profileSchema`        | hero/about/contact fields; `contactIntro`, `contactPage`; `contact[].href` nullable for location   |
+| `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                        |
+| `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                   |
+| `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`      |
+| `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                |
+| `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                  |
+| `kaggleSchema`         | `profile` URL required; `items[]` validated via `kaggleCompetitionSchema`                          |
 
 Adding a new field:
 

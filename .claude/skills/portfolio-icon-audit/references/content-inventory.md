@@ -59,13 +59,13 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ### collaborations.json — optional logo field
 
-| entity_id      | name                   | slug                 | status                                |
-| -------------- | ---------------------- | -------------------- | ------------------------------------- |
-| coll-broad     | Broad Institute        | `broad-institute`    | wired in `LeadershipPhilosophy.astro` |
-| coll-cshl      | Cold Spring Harbor Lab | `cshl`               | wired                                 |
-| coll-iit       | IIT Madras             | `iit-madras`         | wired                                 |
-| coll-uppsala   | Uppsala University     | `uppsala-university` | wired                                 |
-| coll-ai-sweden | AI Sweden              | `ai-sweden`          | wired                                 |
+| entity_id      | name                   | slug                 | status                 |
+| -------------- | ---------------------- | -------------------- | ---------------------- |
+| coll-broad     | Broad Institute        | `broad-institute`    | wired in `About.astro` |
+| coll-cshl      | Cold Spring Harbor Lab | `cshl`               | wired                  |
+| coll-iit       | IIT Madras             | `iit-madras`         | wired                  |
+| coll-uppsala   | Uppsala University     | `uppsala-university` | wired                  |
+| coll-ai-sweden | AI Sweden              | `ai-sweden`          | wired                  |
 
 ---
 

@@ -169,7 +169,7 @@ Set `--accent-card` on the **owning wrapper**; marks inherit automatically.
 | Kaggle tiles/cards | `--medal` (silver/bronze classes)                                                         |
 | Education          | `.edu-accent { --accent-card: var(--accent-gold) }`                                       |
 | Experience         | `.xp-level-*` sets `--lvl`; `.xp-stop`/`.xp-panel` map it to `--accent-card`              |
-| Leadership         | `--cat` per category row                                                                  |
+| About              | `--cat` per category row                                                                  |
 | Research cards     | `.card-accent` + section ID override                                                      |
 | Vision (all slots) | `accent` key in JSON → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` palette) |
 | Contact            | default `.card-accent` (purple)                                                           |

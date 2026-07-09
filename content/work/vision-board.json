@@ -1,11 +1,11 @@
 {
-  "header": "AI Vision & Strategic Leadership",
-  "intro": "Translated ideas and knowledge from a Kaggle competition into an AI vision that became executive-sponsored strategic initiatives, including an SVP-sponsored program and a Chief Scientist-sponsored program.",
+  "header": "Enterprise AI Vision, Strategy & Execution",
+  "intro": "Identified enterprise AI opportunities from Kaggle and the broader AI ecosystem, established the organization's multimodal AI vision, secured executive sponsorship, and led enterprise-scale delivery of strategic AI initiatives sponsored by the SVP and Chief Scientist.",
   "orgHeader": "Enterprise Leadership & Organizational Impact",
   "groups": [
     {
       "id": "idea",
-      "label": "IDEA",
+      "label": "Opportunity Identification",
       "accent": "silver",
       "lead": { "kind": "icon", "name": "kaggle" },
       "marks": [
@@ -43,7 +43,7 @@
     },
     {
       "id": "vision",
-      "label": "VISION",
+      "label": "Enterprise AI Vision",
       "accent": "platform",
       "lead": {
         "kind": "logo",
@@ -87,7 +87,7 @@
   "programs": [
     {
       "title": "Drug Safety Platform",
-      "label": "SVP Backed",
+      "label": "SVP Sponsored",
       "accent": "impact",
       "badge": {
         "kind": "logo",
@@ -96,14 +96,14 @@
       },
       "lines": [
         "$20M–$50M annual savings",
-        "Secured project (for my group)",
-        "Led & Delivered"
+        "Secured strategic ownership",
+        "Led End-to-End Execution"
       ],
       "entity": "astrazeneca"
     },
     {
       "title": "Broad Institute",
-      "label": "Senior Group Leader",
+      "label": "Scientific Collaboration",
       "accent": "impact",
       "badge": {
         "kind": "logo",
@@ -111,15 +111,15 @@
         "alt": "Broad Institute"
       },
       "lines": [
-        "Initiated collaboration with",
+        "Initiated with Senior Group Leader",
         "Dr. Shantanu Singh",
-        "Co-developing AI pipelines"
+        "Co-developing AI workflows"
       ],
       "entity": "broad-institute"
     },
     {
       "title": "Persister Analysis",
-      "label": "Chief Scientist Backed",
+      "label": "Chief Scientist Sponsored",
       "accent": "people",
       "badge": {
         "kind": "logo",
@@ -128,17 +128,17 @@
       },
       "lines": [
         "€14M EU consortium",
-        "Secured project (for my group)",
-        "Led & Delivered"
+        "Secured strategic ownership",
+        "Spearheaded delivery"
       ],
       "entity": "persist-seq"
     },
     {
       "title": "AACR Conference 2025",
-      "label": "Conference Presentation",
+      "label": "Scientific Presentation",
       "accent": "people",
       "badge": { "kind": "logo", "asset": "logo_aacr", "alt": "AACR" },
-      "lines": ["3-month AI pipeline development", "2 AI engineers"],
+      "lines": ["Delivered AI pipeline in 3 months", "Team of 2 AI engineers"],
       "entity": "aacr"
     }
   ],
@@ -151,7 +151,7 @@
         "alt": "Achievement award"
       },
       "title": "EVP-Level Award",
-      "lines": ["Awarded for", "Drug Safety Platform"]
+      "lines": ["For delivering Drug Safety Platform"]
     },
     {
       "accent": "ai",
@@ -161,7 +161,7 @@
         "alt": "Business presentation"
       },
       "title": "Gartner Submission",
-      "lines": ["Multimodal Vision — GITC Chennai"]
+      "lines": ["Multimodal AI Vision — GITC Chennai"]
     },
     {
       "accent": "gxp",
@@ -170,8 +170,8 @@
         "asset": "logo_vision_secure_funds",
         "alt": "Financial growth"
       },
-      "title": "Twice Secured $0.5M+ Funds",
-      "lines": ["Secured internal funds", "for the team"]
+      "title": "Secured $0.5M+ (2×)",
+      "lines": ["Secured Executive funding", "for group"]
     },
     {
       "accent": "gxp",
@@ -180,7 +180,7 @@
         "asset": "logo_vision_scorecard",
         "alt": "Analytics dashboard"
       },
-      "title": "3 Scorecards",
+      "title": "3 Enterprise Scorecards",
       "lines": ["Delivered scorecard-aligned projects"]
     },
     {
@@ -190,7 +190,7 @@
         "asset": "logo_vision_positioning",
         "alt": "Strategic target"
       },
-      "title": "Strategic Team Positioning",
+      "title": "Enterprise Team Positioning",
       "lines": ["7 internal groups · 3 startups"]
     },
     {
@@ -200,7 +200,7 @@
         "asset": "logo_vision_scaling_team",
         "alt": "Team growth"
       },
-      "title": "Scaled Team",
+      "title": "Global Team Scaling",
       "lines": ["From 1 to 12", "team members"]
     },
     {
@@ -210,7 +210,7 @@
         "asset": "logo_vision_global_team",
         "alt": "Global locations"
       },
-      "title": "Global Team Management",
+      "title": "Global Team Leadership",
       "lines": ["UK, Sweden, India, Mexico, China"]
     }
   ]

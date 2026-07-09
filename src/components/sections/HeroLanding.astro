@@ -1,0 +1,35 @@
+---
+
+---
+
+<div id="hero-landing" class="hero-landing">
+  <slot />
+</div>
+
+<style>
+  .hero-landing {
+    --hero-band-gap: var(--stack-xl);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+    min-height: calc(100svh - var(--header-h));
+    padding-top: var(--hero-band-gap);
+    padding-bottom: 0;
+    overflow: visible;
+    background: var(--hero-gradient);
+  }
+
+  .hero-landing :global(#hero) {
+    background: transparent;
+    flex: 0 0 auto;
+  }
+
+  .hero-landing :global(#thirukural) {
+    flex: 0 0 auto;
+    font-size: var(--fs-kural);
+    line-height: var(--lh-normal);
+    margin-block: 3lh;
+  }
+</style>
