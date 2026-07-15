@@ -1,4 +1,4 @@
-# Icon standardization — reference
+# Icon standardization - reference
 
 Companion to [SKILL.md](SKILL.md). Load when auditing a specific view or
 debugging color/size drift.
@@ -14,7 +14,7 @@ All in `src/styles/global.css` `:root` unless noted.
 | `--mark-slot`             | 44px                                | 1     | Circular chrome outer diameter |
 | `--mark-glyph`            | 22px                                | 1     | Inner glyph size (50% fill)    |
 | `--vision-hub-glyph`      | `var(--mark-glyph)`                 | 1     | VisionHub emblems              |
-| `--icon-xs` … `--icon-xl` | 14–32px                             | 1     | Lucide `Icon` size prop scale  |
+| `--icon-xs` ... `--icon-xl` | 14-32px                             | 1     | Lucide `Icon` size prop scale  |
 | `--icon-md`               | 20px                                | 1     | Kaggle stat icons              |
 | `--icon-sm`               | 16px                                | 1     | Kaggle block icons             |
 | `--mark-border-width`     | 1px                                 | 2     | Accented circle border         |
@@ -43,13 +43,13 @@ All in `src/styles/global.css` `:root` unless noted.
 | Recog tile / award card header | 44            | 22           | `.icon-tile--round.icon-tile--accented`     |
 | Education stat / highlight     | 44            | 22           | same                                        |
 | Kaggle competition header      | 44            | 22           | same                                        |
-| Kaggle stat grid               | —             | 20           | `.blob-icon--md`, color via `--accent-card` |
-| Kaggle summary/eval            | —             | 16           | `.blob-icon--sm`, color via `--accent-card` |
+| Kaggle stat grid               | -             | 20           | `.blob-icon--md`, color via `--accent-card` |
+| Kaggle summary/eval            | -             | 16           | `.blob-icon--sm`, color via `--accent-card` |
 | Vision hub node/center         | cqi-scaled 44 | 22           | inherits circular mark chrome               |
 | Vision theme-card emblem       | 44            | 22           | `.theme-card__icon`                         |
 | Experience project             | 36            | 18           | `.icon-tile--compact.icon-tile--accented`   |
 | Contact connect                | 44            | 22           | `CardMark variant="accented"`               |
-| Header chrome                  | —             | Lucide md/lg | `Icon.astro` only, no raster                |
+| Header chrome                  | -             | Lucide md/lg | `Icon.astro` only, no raster                |
 
 ---
 
@@ -93,24 +93,24 @@ without extra props.
 ```
 Need a visual mark in a card?
 │
-├─ Multi-color org wordmark? → CardMark logoUrl → LogoBadge (Tier 3)
+├─ Multi-color org wordmark? - CardMark logoUrl - LogoBadge (Tier 3)
 │
 ├─ logo_* pipeline slug?
-│   ├─ In theme-card / emblem circle? → CardMark mark + context="theme-card"
-│   ├─ In accented tile (Recognition, Education stat)? → MarkEmblem in
+│   ├─ In theme-card / emblem circle? - CardMark mark + context="theme-card"
+│   ├─ In accented tile (Recognition, Education stat)? - MarkEmblem in
 │   │   .icon-tile.icon-tile--round.icon-tile--accented
-│   ├─ In bare stat span (Kaggle)? → MarkEmblem in .blob-icon--md/sm wrapper
-│   └─ Vision hub node? → MarkEmblem in .vision-hub__node (chrome inherited)
+│   ├─ In bare stat span (Kaggle)? - MarkEmblem in .blob-icon--md/sm wrapper
+│   └─ Vision hub node? - MarkEmblem in .vision-hub__node (chrome inherited)
 │
 └─ No asset / Lucide fallback?
-    ├─ Card has section/level accent? → CardMark variant="accented"
-    ├─ Subordinate nested card (Experience project)? → .icon-tile--compact.icon-tile--accented
-    └─ Generic soft slot? → .icon-tile (Tier 2)
+    ├─ Card has section/level accent? - CardMark variant="accented"
+    ├─ Subordinate nested card (Experience project)? - .icon-tile--compact.icon-tile--accented
+    └─ Generic soft slot? - .icon-tile (Tier 2)
 ```
 
 ---
 
-## CSS selectors — do not duplicate
+## CSS selectors - do not duplicate
 
 These are the **only** accented circular chrome definitions:
 
@@ -148,8 +148,8 @@ Glyph sizing inside tiles:
 | `#awards` accent bridge scoped to `.recog-card` only         | Purple stat tiles/chips despite `.level-*` | Include `.recog-summary .theme-card.card` + `.recog-chip.is-active` |
 | Fallback icon without `variant="accented"` on `.card-accent` | Purple icon, teal border                   | `CardMark variant="accented"`                                       |
 | `.blob-block__icon { color: var(--accent-light) }`           | Wrong hue in medal card                    | `--accent-card`                                                     |
-| VisionHub ring uses raw `--accent`                           | Ignores per-item `accent`                  | `.vision-accent-hook` → `--accent-card`                             |
-| Per-component scoped `.mark-emblem { width: … }`             | Overrides token hierarchy                  | Delete; use global glyph rule                                       |
+| VisionHub ring uses raw `--accent`                           | Ignores per-item `accent`                  | `.vision-accent-hook` - `--accent-card`                             |
+| Per-component scoped `.mark-emblem { width: ... }`             | Overrides token hierarchy                  | Delete; use global glyph rule                                       |
 | Skip `normalize-mark-viewbox.py` after regen                 | Uneven glyph footprints                    | apply + check                                                       |
 
 ---
@@ -164,7 +164,7 @@ python3 scripts/icons/normalize-mark-viewbox.py check   # must exit 0
 # After icon-sets.json / generator changes
 npm run test:icons   # = python3 tests/run-icon-tests.py
 
-# Icon size token SSOT (icon-render.ts vs global.css) — also part of npm run verify
+# Icon size token SSOT (icon-render.ts vs global.css) - also part of npm run verify
 npm run check:tokens
 
 # Build gate

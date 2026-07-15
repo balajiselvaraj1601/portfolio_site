@@ -1,6 +1,6 @@
 # Documentation Index
 
-Complete reference for the **Balaji Selvaraj** portfolio site — an Astro 4 static site
+Complete reference for the **Balaji Selvaraj** portfolio site - an Astro 4 static site
 deployed to GitHub Pages at https://balajiselvaraj1601.github.io.
 
 ## Start here
@@ -20,9 +20,9 @@ deployed to GitHub Pages at https://balajiselvaraj1601.github.io.
 | [Environment languages & skills](./environment-languages-skills.md)             | Languages, tooling, and skills for programmatic work |
 | [Requirements](./requirements.md)                                               | MoSCoW feature list and acceptance criteria          |
 | [Specification](./specification.md)                                             | IA, routes, component hierarchy, section contracts   |
-| [Content map](./content-map.md)                                                 | Résumé → portfolio traceability                      |
+| [Content map](./content-map.md)                                                 | Résumé - portfolio traceability                      |
 | [Design direction](./design-direction.md)                                       | Visual tokens, typography, motion principles         |
-| [Typography](./typography.md)                                                   | Font mapping: three typefaces, element → font spec   |
+| [Typography](./typography.md)                                                   | Font mapping: three typefaces, element - font spec   |
 | [Box color history](./box-color-history.md)                                     | Color system decision history and token cascade      |
 | [Case study experience info standard](./case-study-experience-info-standard.md) | Ideal format for Experience role and project entries |
 
@@ -31,8 +31,8 @@ deployed to GitHub Pages at https://balajiselvaraj1601.github.io.
 | Doc                                                          | Purpose                                         |
 | ------------------------------------------------------------ | ----------------------------------------------- |
 | [Icon blend strategy](./icon-blend-strategy.md)              | Vector delivery, rendered sizes, color blending |
-| [Icon collections install](./icon-collections-install.md)    | Square-center PNG → SVG marks refresh pipeline  |
-| [SVG icon generator](../scripts/icons/SVG-ICON-GENERATOR.md) | Raster → vector icon pipeline reference         |
+| [Icon collections install](./icon-collections-install.md)    | Square-center PNG - SVG marks refresh pipeline  |
+| [SVG icon generator](../scripts/icons/SVG-ICON-GENERATOR.md) | Raster - vector icon pipeline reference         |
 
 ## Quality & platform
 
@@ -48,7 +48,7 @@ deployed to GitHub Pages at https://balajiselvaraj1601.github.io.
 
 ## Page briefs
 
-Per-view content intent and section weights — used by page agents during audits.
+Per-view content intent and section weights - used by page agents during audits.
 
 | Doc                                         | View                                |
 | ------------------------------------------- | ----------------------------------- |
@@ -94,6 +94,6 @@ flowchart TD
 ```bash
 npm ci              # install pinned dependencies
 npm run dev         # local dev server (HMR)
-npm run build       # production build → dist/
+npm run build       # production build - dist/
 npm run preview     # serve dist/ locally
 ```

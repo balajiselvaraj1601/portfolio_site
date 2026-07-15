@@ -30,10 +30,10 @@ consistent design across all nav views.
 
 | Mode        | Phases          | Edits                |
 | ----------- | --------------- | -------------------- |
-| `audit`     | 0→1→2→3→7       | None                 |
-| `change`    | 0→1→2→3→4→7     | Plan only            |
-| `implement` | 0→5→6→7         | From state decisions |
-| `full`      | 0→1→2→3→4→5→6→7 | Audit + fix P0/P1    |
+| `audit`     | 0 to 1-2 to 3-7       | None                 |
+| `change`    | 0 to 1-2 to 3-4 to 7     | Plan only            |
+| `implement` | 0 to 5-6 to 7         | From state decisions |
+| `full`      | 0 to 1-2 to 3-4 to 5-6 to 7 | Audit + fix P0/P1    |
 
 Default: `full` when mode unspecified.
 
@@ -42,10 +42,10 @@ Default: `full` when mode unspecified.
 When this skill is invoked, adopt **site-consistency-orchestrator** behavior:
 
 1. Read `.claude/agents/site-consistency-orchestrator.md` (skipped when running AS that
-   subagent — the file is already your system prompt)
+   subagent - the file is already your system prompt)
 2. Follow `references/interaction-protocol.md` phase by phase
 3. Update `.cursor/page-team.state.json` after each phase
-4. Never edit site files directly — spawn scoped agents
+4. Never edit site files directly - spawn scoped agents
 
 ## Spawning sub-agents
 
@@ -54,7 +54,7 @@ When this skill is invoked, adopt **site-consistency-orchestrator** behavior:
 ```
 Agent tool, subagent_type from page-routing.csv agent_id column
 (e.g. page-experience, design-guardian). The agent file is the sub-agent's
-system prompt — pass run context only (mode, goal, run_id, decision subsets).
+system prompt - pass run context only (mode, goal, run_id, decision subsets).
 ```
 
 ### Cursor
@@ -67,7 +67,7 @@ Prompt: include agent file path (page-routing.csv agent_file column) + "return J
 
 ## Efficiency: batch edits and parallel calls
 
-- **Parallel agents:** spawn all page audits in a single message — one Agent/Task call each.
+- **Parallel agents:** spawn all page audits in a single message - one Agent/Task call each.
 - **Batch edits:** within an agent's scope, combine changes to one file into a single Edit.
 - **Read before edit:** read each file once, plan all changes, then apply the fewest edits.
 
@@ -78,12 +78,12 @@ Prompt: include agent file path (page-routing.csv agent_file column) + "return J
 | [interaction-protocol.md](references/interaction-protocol.md)     | Phase details     |
 | [finding-schema.md](references/finding-schema.md)                 | JSON shapes       |
 | [cursor-delegation.md](references/cursor-delegation.md)           | External dispatch |
-| [page-routing.csv](assets/page-routing.csv)                       | View → agent map  |
+| [page-routing.csv](assets/page-routing.csv)                       | View - agent map  |
 | [page-agent-standard.md](../../references/page-agent-standard.md) | Agent compliance  |
 
 ## Hard rules (all agents)
 
-- Copy in `content/` only — not components
+- Copy in `content/` only - not components
 - Schema changes: `src/schemas/` first
 - `npm run build` before handoff
 - No phone numbers; no dist commits

@@ -31,7 +31,7 @@ Orchestrate a comprehensive site health review and automated fix pass.
 | Mode    | Edits | Commit                   | Default |
 | ------- | ----- | ------------------------ | ------- |
 | `full`  | Yes   | If allowed + verify pass | yes     |
-| `audit` | No    | No                       | —       |
+| `audit` | No    | No                       | -       |
 
 Default: `full` when mode unspecified.
 
@@ -57,7 +57,7 @@ Or generalPurpose with agent file path for themed audit sweeps
 
 ```
 Task tool, subagent_type: site-consistency-orchestrator (design)
-Task tool, subagent_type: generalPurpose (themed audits — SSOT, a11y, dead code)
+Task tool, subagent_type: generalPurpose (themed audits - SSOT, a11y, dead code)
 Parallel: launch independent audit sweeps in one message
 ```
 
@@ -78,7 +78,7 @@ Parallel: launch independent audit sweeps in one message
 
 ## Hard rules (all runs)
 
-- Copy in `content/` only — not components
+- Copy in `content/` only - not components
 - Schema changes: `src/schemas/` first
 - `npm run verify` before handoff
 - No phone numbers; no dist commits

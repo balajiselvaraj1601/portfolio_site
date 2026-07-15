@@ -1,7 +1,7 @@
-# Site review fix — interaction protocol
+# Site review fix - interaction protocol
 
 Phased workflow for `.cursor/site-review.state.json`. All agents follow these phases
-in order unless mode is `audit` (Phases 0→1→2→3→7 only).
+in order unless mode is `audit` (Phases 0 to 1-2 to 3-7 only).
 
 ---
 
@@ -17,7 +17,7 @@ Path: `.cursor/site-review.state.json`
   "fire_at": "2026-07-03T004500Z",
   "phase": "init",
   "mode": "full",
-  "goal": "…",
+  "goal": "...",
   "allow_commit": true,
   "findings": [],
   "fixes": [],
@@ -34,8 +34,8 @@ Path: `.cursor/site-review.state.json`
   "id": "SR-001",
   "severity": "high",
   "theme": "ci",
-  "file": "src/…",
-  "summary": "…",
+  "file": "src/...",
+  "summary": "...",
   "status": "open"
 }
 ```
@@ -49,14 +49,14 @@ Themes: `ci`, `content`, `dead_code`, `a11y`, `seo`, `design`, `hygiene`, `ssot`
 ```json
 {
   "finding_id": "SR-001",
-  "summary": "…",
-  "files_changed": ["…"]
+  "summary": "...",
+  "files_changed": ["..."]
 }
 ```
 
 ---
 
-## Phase 0 — Initialize
+## Phase 0 - Initialize
 
 1. Parse goal from user prompt or `SITE_REVIEW_GOAL` env.
 2. Determine mode (`full` default; `audit` if read-only requested).
@@ -68,7 +68,7 @@ Themes: `ci`, `content`, `dead_code`, `a11y`, `seo`, `design`, `hygiene`, `ssot`
 
 ---
 
-## Phase 1 — Baseline verify
+## Phase 1 - Baseline verify
 
 1. Run `npm run verify` from repo root.
 2. Capture stdout/stderr; parse failures into `findings[]` with severity `critical` or `high`.
@@ -79,7 +79,7 @@ Themes: `ci`, `content`, `dead_code`, `a11y`, `seo`, `design`, `hygiene`, `ssot`
 
 ---
 
-## Phase 2 — Audit (parallel sweeps)
+## Phase 2 - Audit (parallel sweeps)
 
 Launch independent audits. Merge all into `findings[]`.
 
@@ -97,7 +97,7 @@ Set `phase: "audit_complete"`.
 
 ---
 
-## Phase 3 — Triage
+## Phase 3 - Triage
 
 1. Deduplicate overlapping findings.
 2. Sort: verify blockers (critical/high + theme ci) first, then high, medium, low.
@@ -108,9 +108,9 @@ Set `phase: "audit_complete"`.
 
 ---
 
-## Phase 4 — Fix
+## Phase 4 - Fix
 
-1. Fix items in triage order — surgical edits only.
+1. Fix items in triage order - surgical edits only.
 2. For each fix, append to `fixes[]` and set finding `status: "fixed"`.
 3. Re-run targeted checks after each batch (e.g. `npm run format:check` after markdown edits).
 4. If design fixes needed, ensure page-team implement phase completed.
@@ -120,7 +120,7 @@ Set `phase: "audit_complete"`.
 
 ---
 
-## Phase 5 — Verify
+## Phase 5 - Verify
 
 1. Run `npm run verify`.
 2. On failure: return to Phase 4 for remaining blockers; max 3 verify loops.
@@ -130,11 +130,11 @@ Set `phase: "audit_complete"`.
 
 ---
 
-## Phase 6 — Commit
+## Phase 6 - Commit
 
 Skip if `allow_commit` is false or mode is `audit`.
 
-1. `git status` — review changed paths.
+1. `git status` - review changed paths.
 2. Stage only site files (never `.cursor/site-review.state.json`, logs, `dist/`).
 3. Commit with structured message (see agent file template).
 4. Record `commit_sha` from `git rev-parse HEAD`.
@@ -144,7 +144,7 @@ Skip if `allow_commit` is false or mode is `audit`.
 
 ---
 
-## Phase 7 — Report
+## Phase 7 - Report
 
 1. Set `phase: "complete"`, `enabled: false`.
 2. Write summary: findings count by severity, fixes count, verify status, commit sha.
@@ -156,7 +156,7 @@ Skip if `allow_commit` is false or mode is `audit`.
 
 ## Audit-only mode
 
-Phases 0→1→2→3→7. No Phase 4–6. Report findings for user action.
+Phases 0 to 1-2 to 3-7. No Phase 4-6. Report findings for user action.
 
 ---
 

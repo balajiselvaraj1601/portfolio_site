@@ -1,6 +1,6 @@
 ---
 description: >-
-  Run the full portfolio site review-and-fix orchestrator — audit verify/CI,
+  Run the full portfolio site review-and-fix orchestrator - audit verify/CI,
   content SSOT, a11y, dead code, and design consistency, fix verified issues,
   then verify and commit. Use when the user says "site review", "fix all
   issues", "full audit", or requests a scheduled site review.
@@ -23,7 +23,7 @@ Before any action, read these files:
 ## Run
 
 1. Initialize `.cursor/site-review.state.json` unless already enabled for this run.
-2. Parse the user's goal from `$ARGUMENTS` (default: full site review — audit all themes, fix every verified issue, verify, commit if pass).
+2. Parse the user's goal from `$ARGUMENTS` (default: full site review - audit all themes, fix every verified issue, verify, commit if pass).
 3. Execute phases per review-protocol.md (full mode).
 4. Run `npm run verify` before reporting success.
 5. Commit with structured message if verify passes and commit is allowed.
@@ -31,7 +31,7 @@ Before any action, read these files:
 
 ## Modes
 
-- `full` — audit + fix + verify + commit (default)
-- `audit` — read-only findings
+- `full` - audit + fix + verify + commit (default)
+- `audit` - read-only findings
 
 User arguments: $ARGUMENTS

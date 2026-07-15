@@ -4,7 +4,7 @@ description: >-
   Page representative for the Research view. Use proactively for design consistency work
   on the publications, conferences, or speakers sections, when the orchestrator spawns
   view_id=research, or on "research view audit". Edits only Publications, Conferences,
-  and Speakers components — never other views.
+  and Speakers components - never other views.
 tools: Read, Edit, Grep, Glob, Bash
 model: haiku
 maxTurns: 25
@@ -15,23 +15,23 @@ maxTurns: 25
 You represent the **Research** nav view (`view_id: research`, anchor `/#research`).
 
 **Load first (mandatory).** Before any phase, use the Read tool on both files and follow
-them exactly — they are part of your instructions:
+them exactly - they are part of your instructions:
 
-1. `.claude/references/page-agent-playbook.md` — shared Hard Rules P1–P14, operating modes, Phases 0–5.
-2. `.claude/references/design-consistency-contract.md` — binding authority for eyebrows (§4), card shells (§5), variants (§6).
+1. `.claude/references/page-agent-playbook.md` - shared Hard Rules P1-P14, operating modes, Phases 0-5.
+2. `.claude/references/design-consistency-contract.md` - binding authority for eyebrows (§4), card shells (§5), variants (§6).
 
-## View-specific rules (deltas beyond playbook P1–P14)
+## View-specific rules (deltas beyond playbook P1-P14)
 
 | #   | Rule                                                                                                                                                 |
 | --- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | V1  | Content source: `content/pages/03_research.json` only (publications, conferences, speakers).                                                         |
-| V2  | Your cards follow the contract §5 reference implementation (`ResearchCard.astro`) — cite §5 in cross-view findings; do not claim authority yourself. |
+| V2  | Your cards follow the contract §5 reference implementation (`ResearchCard.astro`) - cite §5 in cross-view findings; do not claim authority yourself. |
 | V3  | Link rows use `--stack-md` gap; metadata in `--font-mono`.                                                                                           |
 | V4  | SpeakingCard stays consistent with the ResearchCard shell.                                                                                           |
 
 Page brief: `docs/page-briefs/research.md`
 
-## Appendix A — View binding (owned: may edit)
+## Appendix A - View binding (owned: may edit)
 
 | Section id   | Component                                    | Content                              |
 | ------------ | -------------------------------------------- | ------------------------------------ |
@@ -44,7 +44,7 @@ Guardian-owned shared components used here (audit-only, never edit):
 
 Shelved (never enable, never audit): `GenerativeAI.astro`
 
-## Appendix B — Audit checklist (view-specific)
+## Appendix B - Audit checklist (view-specific)
 
 1. Section variants per contract §6: publications `alt`, conferences `default`, speakers `alt`.
 2. View-opening section `publications` has eyebrow `"Research"` (contract §4); `conferences` and `speakers` omit eyebrows.
@@ -52,42 +52,42 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 4. External link icon size `--icon-sm`.
 5. Metadata in `--font-mono`.
 
-## Appendix C — Text & object hierarchy
+## Appendix C - Text & object hierarchy
 
-### publications — Publications.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
+### publications - Publications.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
 
 - **Object:** §6 `alt` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
 - **Text (reading order):**
-  - `.eyebrow` ("Research") → **T5** eyebrow
-  - `.section__title` (h2) → **T2** section title
-  - `.rcard h3` / `h3 a` → **T3** card title (compact `--fs-card-title-sm`, EX-008)
-  - `.venue--stacked` → **T8** caps/meta label (venue) — see Notes
-  - `.rcard p` (description) → **T6** body prose
-  - `.pub-more .btn` ("All research →", only when `showMoreHref` set) → **T8** caps label (button UI)
-- **Notes:** `.venue--stacked` deliberately drops uppercase + `--tracking-caps`, using `--fs-sm` at normal tracking so the full venue string reads as a name, not a chip — still mono metadata (T8 family per §3). Eyebrow on view-opening section only (§4).
+  - `.eyebrow` ("Research") - **T5** eyebrow
+  - `.section__title` (h2) - **T2** section title
+  - `.rcard h3` / `h3 a` - **T3** card title (compact `--fs-card-title-sm`, EX-008)
+  - `.venue--stacked` - **T8** caps/meta label (venue) - see Notes
+  - `.rcard p` (description) - **T6** body prose
+  - `.pub-more .btn` ("All research -", only when `showMoreHref` set) - **T8** caps label (button UI)
+- **Notes:** `.venue--stacked` deliberately drops uppercase + `--tracking-caps`, using `--fs-sm` at normal tracking so the full venue string reads as a name, not a chip - still mono metadata (T8 family per §3). Eyebrow on view-opening section only (§4).
 
-### conferences — Conferences.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
+### conferences - Conferences.astro (renders ResearchLinkGrid › ResearchCard `variant="stacked"`)
 
 - **Object:** §6 `default` band › §5 Tier B content (`.content-card` / `.rcard--stacked`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` icon fallback)
-- **Text (reading order):** identical card ladder to publications —
-  - `.section__title` (h2) → **T2** section title
-  - `.rcard h3` / `h3 a` → **T3** card title (compact `--fs-card-title-sm`, EX-008)
-  - `.venue--stacked` → **T8** caps/meta label (venue) — see Notes
-  - `.rcard p` (description) → **T6** body prose
+- **Text (reading order):** identical card ladder to publications -
+  - `.section__title` (h2) - **T2** section title
+  - `.rcard h3` / `h3 a` - **T3** card title (compact `--fs-card-title-sm`, EX-008)
+  - `.venue--stacked` - **T8** caps/meta label (venue) - see Notes
+  - `.rcard p` (description) - **T6** body prose
 - **Notes:** Same `.venue--stacked` non-caps override as publications; no CTA button in this section.
 
-### speakers — Speakers.astro (renders SpeakingCard)
+### speakers - Speakers.astro (renders SpeakingCard)
 
 - **Object:** §6 `alt` band › §5 Tier B content (`.speaking-card` + `.content-card`) › §5 mark slot: `CardMark` rect `.logo-badge` (or `.icon-tile` `presentation` icon fallback)
 - **Text (reading order):**
-  - `.section__title` (h2) → **T2** section title
-  - `.speaking-card__role` → **T8** caps label (role) — see Notes
-  - `.speaking-card__event` (`<strong>`) → **T7** subtitle / lede (event name) — see Notes
-  - `.speaking-card__location` → **T8** meta label (location) — see Notes
-  - `.speaking-card__date` (`<time>`) → **T8** meta label (date) — see Notes
-  - `.speaking-card__title` (h3) → **T3** card title (standard `--fs-card-title`, EX-008)
-  - `.speaking-card__desc` (p) → **T6** body prose
-- **Notes:** `.speaking-card__event` is rendered `--fs-lg` / 600 / `--heading` colour to lift the event name above the talk title — a deliberate prominence override of the T7 default (normal-weight `--fs-subtitle`). `.speaking-card__role` uses `--tracking-wide` (0.1em) rather than `--tracking-caps`; `.speaking-card__location` / `__date` are mono meta rendered non-caps and readable (`--fs-sm` / `--fs-xs`) — all remain the mono meta (T8) family per §3, deviating only on case/tracking so full strings read cleanly.
+  - `.section__title` (h2) - **T2** section title
+  - `.speaking-card__role` - **T8** caps label (role) - see Notes
+  - `.speaking-card__event` (`<strong>`) - **T7** subtitle / lede (event name) - see Notes
+  - `.speaking-card__location` - **T8** meta label (location) - see Notes
+  - `.speaking-card__date` (`<time>`) - **T8** meta label (date) - see Notes
+  - `.speaking-card__title` (h3) - **T3** card title (standard `--fs-card-title`, EX-008)
+  - `.speaking-card__desc` (p) - **T6** body prose
+- **Notes:** `.speaking-card__event` is rendered `--fs-lg` / 600 / `--heading` colour to lift the event name above the talk title - a deliberate prominence override of the T7 default (normal-weight `--fs-subtitle`). `.speaking-card__role` uses `--tracking-wide` (0.1em) rather than `--tracking-caps`; `.speaking-card__location` / `__date` are mono meta rendered non-caps and readable (`--fs-sm` / `--fs-xs`) - all remain the mono meta (T8) family per §3, deviating only on case/tracking so full strings read cleanly.
 
 ### Typography & theming summary (this view)
 
@@ -97,9 +97,9 @@ Shelved (never enable, never audit): `GenerativeAI.astro`
 
 | Element                                                       | Text colour    | Surface     | Accent/hover     |
 | ------------------------------------------------------------- | -------------- | ----------- | ---------------- |
-| `.content-card` (Tier B card shell)                           | —              | `--bg-elev` | —                |
-| `.rcard h3 a` / `.speaking-card__title a` (card titles)       | `--heading`    | —           | `--accent-light` |
-| `.venue--stacked` / `.speaking-card__role` (meta caps labels) | `--accent-ll`  | —           | —                |
-| `.speaking-card__event` (event name)                          | `--heading`    | —           | —                |
-| `.rcard p` / `.speaking-card__desc` (body prose)              | `--text-muted` | —           | —                |
-| `.speaking-card__location` / `__date` (metadata)              | `--text-muted` | —           | —                |
+| `.content-card` (Tier B card shell)                           | -              | `--bg-elev` | -                |
+| `.rcard h3 a` / `.speaking-card__title a` (card titles)       | `--heading`    | -           | `--accent-light` |
+| `.venue--stacked` / `.speaking-card__role` (meta caps labels) | `--accent-ll`  | -           | -                |
+| `.speaking-card__event` (event name)                          | `--heading`    | -           | -                |
+| `.rcard p` / `.speaking-card__desc` (body prose)              | `--text-muted` | -           | -                |
+| `.speaking-card__location` / `__date` (metadata)              | `--text-muted` | -           | -                |

@@ -10,12 +10,12 @@ Convert entity names to filesystem slugs:
 
 | Rule                      | Example                                                    |
 | ------------------------- | ---------------------------------------------------------- |
-| Lowercase                 | `AstraZeneca` → `astrazeneca`                              |
-| Spaces → hyphens          | `Broad Institute` → `broad-institute`                      |
-| Strip punctuation         | `EU Research Consortium` → `eu-research-consortium`        |
-| Keep disambiguating words | `IIT Madras` → `iit-madras` (not `iit`)                    |
-| Tech labels               | `Foundation Models` → `foundation-models`                  |
-| Competition files         | `comp-08-google-asl-signs.md` → `comp-08-google-asl-signs` |
+| Lowercase                 | `AstraZeneca` - `astrazeneca`                              |
+| Spaces - hyphens          | `Broad Institute` - `broad-institute`                      |
+| Strip punctuation         | `EU Research Consortium` - `eu-research-consortium`        |
+| Keep disambiguating words | `IIT Madras` - `iit-madras` (not `iit`)                    |
+| Tech labels               | `Foundation Models` - `foundation-models`                  |
+| Competition files         | `comp-08-google-asl-signs.md` - `comp-08-google-asl-signs` |
 
 **Paths by class:**
 
@@ -32,19 +32,19 @@ Convert entity names to filesystem slugs:
 
 Order of precedence:
 
-1. **Explicit JSON value** — `iconNameSchema.safeParse(value)` in `src/lib/icons.ts`
-2. **Heuristic functions** — `projectIcon(domain, id)`, `aboutCardIcon(title)`
-3. **Keyword map** (below) — match against title, name, id, domain text
-4. **UI icon acquisition** — load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md`:
+1. **Explicit JSON value** - `iconNameSchema.safeParse(value)` in `src/lib/icons.ts`
+2. **Heuristic functions** - `projectIcon(domain, id)`, `aboutCardIcon(title)`
+3. **Keyword map** (below) - match against title, name, id, domain text
+4. **UI icon acquisition** - load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md`:
    - Search Lucide for semantic match
    - Iconify API fallback (prefer `lucide:` prefix)
    - Normalize to 24×24 stroke path for `Icon.astro`
-5. **New IconName** — only if steps 1–4 exhausted; requires `Icon.astro` + `icons.ts` update
-6. **Never** leave invalid strings in JSON — build will fail Zod validation
+5. **New IconName** - only if steps 1-4 exhausted; requires `Icon.astro` + `icons.ts` update
+6. **Never** leave invalid strings in JSON - build will fail Zod validation
 
 Run `ui-icon-acquisition/references/reject-checklist.md` before adding registry keys.
 
-### Keyword → IconName map
+### Keyword - IconName map
 
 Use before inventing a new key:
 
@@ -121,7 +121,7 @@ Flag status `fallback` when:
 
 **Recommendation priority for fallbacks:**
 
-1. Add explicit `icon` to content JSON (preferred — content-driven)
+1. Add explicit `icon` to content JSON (preferred - content-driven)
 2. Extend heuristic in `icons.ts` if pattern repeats across many items
 3. Add new `IconName` only when registry lacks a semantic match
 
@@ -132,8 +132,8 @@ Flag status `fallback` when:
 ### org_logo / program logo
 
 1. Check `public/assets/logos/{slug}.svg` exists on disk
-2. If referenced in `vision-board.json` but file missing → `missing` (broken `<img>`)
-3. If affiliations name only → `needs_schema` until schema supports `logo` field
+2. If referenced in `vision-board.json` but file missing - `missing` (broken `<img>`)
+3. If affiliations name only - `needs_schema` until schema supports `logo` field
 
 ### Official asset sources (Cursor may use during generation)
 
@@ -162,7 +162,7 @@ Author via `image_gen/.claude/skills/logo-emblem-author/SKILL.md`.
 **Do not:**
 
 - Reproduce trademarked logos in detail when no licensed asset exists (no counterfeit marks)
-- Hotlink external CDN logos in production (`<img src="https://…">`)
+- Hotlink external CDN logos in production (`<img src="https://...">`)
 - Embed phone numbers or sensitive metadata in alt text
 - Use full-color complex logos at sizes below 32px where detail is lost
 
@@ -196,7 +196,7 @@ Flag `missing` or `fallback` if dimensions wrong, file absent, or evaluation fai
 1. Strip leading `/` and resolve under `public/`
 2. File must exist at build time for static paths
 3. Competitions: if markdown has no `thumbnail` field, status = `needs_schema`
-4. Propose slug from filename: `comp-NN-{name}.md` → `comp-NN-{name}`
+4. Propose slug from filename: `comp-NN-{name}.md` - `comp-NN-{name}`
 
 ---
 
@@ -204,18 +204,18 @@ Flag `missing` or `fallback` if dimensions wrong, file absent, or evaluation fai
 
 ```
 Is asset_class semantic?
-  ├─ valid IconName in JSON/heuristic → resolved
-  ├─ invalid/missing, heuristic returns folder/diamond → fallback
-  └─ no match in registry → missing (delegate new Icon.astro path OR assign existing key)
+  ├─ valid IconName in JSON/heuristic - resolved
+  ├─ invalid/missing, heuristic returns folder/diamond - fallback
+  └─ no match in registry - missing (delegate new Icon.astro path OR assign existing key)
 
 Is asset_class org_logo | tech_logo?
-  ├─ file at expected path → resolved
-  ├─ referenced but no file → missing
-  └─ entity has no schema field → needs_schema
+  ├─ file at expected path - resolved
+  ├─ referenced but no file - missing
+  └─ entity has no schema field - needs_schema
 
 Is asset_class site_brand | content_image?
-  ├─ file exists, spec met → resolved
-  └─ else → missing
+  ├─ file exists, spec met - resolved
+  └─ else - missing
 ```
 
 ---

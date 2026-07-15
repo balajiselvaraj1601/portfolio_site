@@ -13,7 +13,7 @@ should be introduced without updating this doc.
 | Token            | Family               | Role in one word | Fallbacks                                       | Loaded via                                        |
 | ---------------- | -------------------- | ---------------- | ----------------------------------------------- | ------------------------------------------------- |
 | `--font-display` | **DM Serif Display** | Editorial        | Georgia, Times New Roman, serif                 | `@fontsource/dm-serif-display` (400 + 400-italic) |
-| `--font-sans`    | **Inter Variable**   | Reading          | system-ui / -apple-system / Segoe UI / Roboto … | `@fontsource-variable/inter`                      |
+| `--font-sans`    | **Inter Variable**   | Reading          | system-ui / -apple-system / Segoe UI / Roboto ... | `@fontsource-variable/inter`                      |
 | `--font-mono`    | **JetBrains Mono**   | Data / labels    | ui-monospace, SF Mono, Menlo, Consolas          | `@fontsource/jetbrains-mono` (400, 600)           |
 
 **Rule of thumb**
@@ -22,32 +22,32 @@ should be introduced without updating this doc.
 > **sans** = anything you read in sentences, plus buttons ·
 > **mono** = every small "data/label" token (eyebrows, tags, dates, metrics, metadata).
 
-## Element → font spec
+## Element - font spec
 
 When building a new component, pick the row that matches the element's role and reuse the
-token — don't decide per element.
+token - don't decide per element.
 
 | Element / role                                                                    | Family           | Weight  | Size                  | Notes                                                                      |
 | --------------------------------------------------------------------------------- | ---------------- | ------- | --------------------- | -------------------------------------------------------------------------- |
 | Hero / page title (`h1`, `.hero__title`)                                          | display          | 400     | `--fs-h1`             | `<em>` renders italic accent                                               |
-| Section title (`h2`, `.section__title`, BoardHeader, Contact/Vision titles)       | display          | 400     | `--fs-h2`             | —                                                                          |
+| Section title (`h2`, `.section__title`, BoardHeader, Contact/Vision titles)       | display          | 400     | `--fs-h2`             | -                                                                          |
 | Editorial pull-quote / leadership statement                                       | display          | 400     | large                 | italic                                                                     |
-| Brand wordmark (Header `.brand`)                                                  | display          | —       | —                     | identity mark                                                              |
-| Sub-heading / card title (`h3`; SpeakingCard, OrgSnapshotCard, Education degree)  | sans             | 600     | `--fs-h3` (1.15rem)   | —                                                                          |
-| Kicker / micro-label (`h4`)                                                       | **mono**         | 600     | 0.9rem                | uppercase, tracked — a label, not prose                                    |
-| Eyebrow / section label (`.eyebrow`, `Eyebrow`)                                   | mono             | 400–600 | `--fs-eyebrow`        | uppercase, 0.18em                                                          |
+| Brand wordmark (Header `.brand`)                                                  | display          | -       | -                     | identity mark                                                              |
+| Sub-heading / card title (`h3`; SpeakingCard, OrgSnapshotCard, Education degree)  | sans             | 600     | `--fs-h3` (1.15rem)   | -                                                                          |
+| Kicker / micro-label (`h4`)                                                       | **mono**         | 600     | 0.9rem                | uppercase, tracked - a label, not prose                                    |
+| Eyebrow / section label (`.eyebrow`, `Eyebrow`)                                   | mono             | 400-600 | `--fs-eyebrow`        | uppercase, 0.18em                                                          |
 | Tag / chip / badge (Chip, ProgramBadge, AvailabilityBadge, HubCircle, gold-badge) | mono             | 600     | ~0.7rem               | uppercase                                                                  |
-| Date / venue / metadata (Experience, SpeakingCard, Footer, Contact email)         | mono             | 400–600 | 0.7–0.8rem            | —                                                                          |
+| Date / venue / metadata (Experience, SpeakingCard, Footer, Contact email)         | mono             | 400-600 | 0.7-0.8rem            | -                                                                          |
 | Metric number (`.metric-card__value`, `.hero-stat__num`, Kaggle rank)             | mono             | 600     | `--fs-metric`         | tabular figures                                                            |
 | Metric label (`.metric-label`)                                                    | mono             | 400     | `--fs-small`          | descriptor under a number                                                  |
-| Quote attribution / author                                                        | mono             | 400     | `--fs-eyebrow`        | —                                                                          |
-| Body / paragraph / intro / list items                                             | sans             | 400     | `--fs-body` / 0.88rem | —                                                                          |
-| Inline links (`a`, EntityLink, ContactLink)                                       | sans (inherited) | inherit | inherit               | —                                                                          |
-| Button (`.btn`)                                                                   | sans             | 600     | `--fs-btn`            | uppercase 0.08em — a distinct interactive role, intentionally **not** mono |
+| Quote attribution / author                                                        | mono             | 400     | `--fs-eyebrow`        | -                                                                          |
+| Body / paragraph / intro / list items                                             | sans             | 400     | `--fs-body` / 0.88rem | -                                                                          |
+| Inline links (`a`, EntityLink, ContactLink)                                       | sans (inherited) | inherit | inherit               | -                                                                          |
+| Button (`.btn`)                                                                   | sans             | 600     | `--fs-btn`            | uppercase 0.08em - a distinct interactive role, intentionally **not** mono |
 
-**Weight tokens (SSOT — never hardcode a numeric `font-weight`):** the numeric weights above
-resolve to the `--fw-*` ladder — `--fw-regular` 400 · `--fw-medium` 500 · `--fw-semibold` 600 ·
-`--fw-bold` 700. Likewise `line-height: 1` → `--lh-none`. See design-consistency-contract.md §3a/§3d.
+**Weight tokens (SSOT - never hardcode a numeric `font-weight`):** the numeric weights above
+resolve to the `--fw-*` ladder - `--fw-regular` 400 · `--fw-medium` 500 · `--fw-semibold` 600 ·
+`--fw-bold` 700. Likewise `line-height: 1` - `--lh-none`. See design-consistency-contract.md §3a/§3d.
 
 ### Deliberate exceptions
 
@@ -77,7 +77,7 @@ each section lists the fonts it actually surfaces.
 | DotNav                                 | no text (aria labels only) |
 | BoardHeader title                      | display                    |
 
-### Home — `/` (About view + full scroll)
+### Home - `/` (About view + full scroll)
 
 | Section               | Component               | Fonts surfaced                                                                                    |
 | --------------------- | ----------------------- | ------------------------------------------------------------------------------------------------- |
@@ -85,42 +85,42 @@ each section lists the fonts it actually surfaces.
 | Thirukural            | `ThirukuralQuote.astro` | Tamil quote=sans (exception) · translation=display italic · author=mono                           |
 | Who I am & how I lead | `About.astro`           | h2=display · eyebrow=mono · bio & card text=sans · statement=display (italic) · theme titles=sans |
 
-### Experience — `/#experience`
+### Experience - `/#experience`
 
 | Section    | Component          | Fonts surfaced                                                            |
 | ---------- | ------------------ | ------------------------------------------------------------------------- |
 | Experience | `Experience.astro` | h2=display · eyebrow=mono · year & role-meta=mono · role titles/body=sans |
 
-### Research — `/research`
+### Research - `/research`
 
 | Section              | Component                                             | Fonts surfaced                                                          |
 | -------------------- | ----------------------------------------------------- | ----------------------------------------------------------------------- |
-| Publications         | `Publications.astro` → ResearchCard                   | h2=display · eyebrow=mono · venue=mono · title=sans                     |
-| Conferences          | `Conferences.astro` → ResearchLinkGrid → ResearchCard | venue=mono · title=sans · body=sans                                     |
-| Speaking Engagements | `Speakers.astro` → SpeakingCard                       | h2=display · role/date/venue=mono · title=sans (600) · description=sans |
+| Publications         | `Publications.astro` - ResearchCard                   | h2=display · eyebrow=mono · venue=mono · title=sans                     |
+| Conferences          | `Conferences.astro` - ResearchLinkGrid - ResearchCard | venue=mono · title=sans · body=sans                                     |
+| Speaking Engagements | `Speakers.astro` - SpeakingCard                       | h2=display · role/date/venue=mono · title=sans (600) · description=sans |
 
-### Recognition — `/recognition`
+### Recognition - `/recognition`
 
 | Section              | Component                        | Fonts surfaced                                                                |
 | -------------------- | -------------------------------- | ----------------------------------------------------------------------------- |
-| Awards & Recognition | `Awards.astro` → recog card grid | h2=display · eyebrow=mono · level kicker=**mono** · award title & detail=sans |
+| Awards & Recognition | `Awards.astro` - recog card grid | h2=display · eyebrow=mono · level kicker=**mono** · award title & detail=sans |
 | Kaggle Competitions  | `Kaggle.astro`                   | h2=display · rank number=mono · rank detail=mono                              |
 | Education            | `Education.astro`                | `h4` label=**mono** · degree `h3`=sans · details=sans · gold-badge=mono       |
 
-### Vision — `/vision`
+### Vision - `/vision`
 
 | Section            | Component                                                | Fonts surfaced                                                                      |
 | ------------------ | -------------------------------------------------------- | ----------------------------------------------------------------------------------- |
 | Vision Programs    | `VisionPrograms.astro`                                   | Section h2=display · eyebrow=mono · hub/program kickers=mono · ThemeCard title=sans |
 | Vision Impact grid | `vision/VisionImpactGrid.astro` (inside vision-programs) | h3 sub-heading=sans T3 (`.card-title`) · ThemeCard title=sans, body=sans            |
 
-### Contact — `/contact`
+### Contact - `/contact`
 
 | Section | Component       | Fonts surfaced                                |
 | ------- | --------------- | --------------------------------------------- |
 | Contact | `Contact.astro` | title=display · email/labels=mono · body=sans |
 
-### 404 — `/404` (hardcoded, not content-driven)
+### 404 - `/404` (hardcoded, not content-driven)
 
 | Element                               | Font            |
 | ------------------------------------- | --------------- |

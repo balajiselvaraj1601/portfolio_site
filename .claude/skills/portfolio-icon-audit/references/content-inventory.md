@@ -1,4 +1,4 @@
-# Content inventory — icons, logos, and images
+# Content inventory - icons, logos, and images
 
 Entity map for portfolio icon audits. Extend this table on each run when content changes.
 
@@ -8,7 +8,7 @@ Entity map for portfolio icon audits. Extend this table on each run when content
 
 ## 1. Semantic icons (IconName registry)
 
-**Registry:** `src/lib/icons.ts` → `iconNameSchema` (43 keys as of last audit)  
+**Registry:** `src/lib/icons.ts` - `iconNameSchema` (43 keys as of last audit)  
 **Renderer:** `src/components/Icon.astro`
 
 ### profile.json
@@ -20,18 +20,18 @@ Entity map for portfolio icon audits. Extend this table on each run when content
 | contact.kaggle   | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 | contact.location | `contact[].icon` | yes      | `ContactLink.astro` |                   |
 
-### experience.json — projects
+### experience.json - projects
 
 Only projects with explicit `"icon"` in JSON; all others fall back to `folder` via `XpProjectCard.astro`.
 
 | entity_id                | project name                | icon in JSON | heuristic if missing                       |
 | ------------------------ | --------------------------- | ------------ | ------------------------------------------ |
-| exp-drug-safety          | Drug Safety AI Platform     | `pill`       | `projectIcon` → `pill`                     |
+| exp-drug-safety          | Drug Safety AI Platform     | `pill`       | `projectIcon` - `pill`                     |
 | exp-tumor-recurrence     | Tumor Recurrence Prediction | `microscope` | `microscope`                               |
 | exp-foundation-framework | Foundation Model Framework  | `blocks`     | `blocks`                                   |
-| exp-* (remaining ~11)    | various                     | **none**     | `projectIcon(domain, id)` → often `folder` |
+| exp-* (remaining ~11)    | various                     | **none**     | `projectIcon(domain, id)` - often `folder` |
 
-### vision-board.json — semantic marks
+### vision-board.json - semantic marks
 
 | entity_id                    | field               | kind   | value                                            | component         |
 | ---------------------------- | ------------------- | ------ | ------------------------------------------------ | ----------------- |
@@ -48,7 +48,7 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 **Pattern:** `public/assets/logos/{slug}.svg`  
 **Schema:** `VisionMark` in `src/schemas/work.ts`
 
-### vision-board.json — logo marks
+### vision-board.json - logo marks
 
 | entity_id              | slug              | alt             | file expected                             | component         |
 | ---------------------- | ----------------- | --------------- | ----------------------------------------- | ----------------- |
@@ -57,7 +57,7 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 | vb-program.broad.badge | `broad-institute` | Broad Institute | `assets/source/logos/broad-institute.png` | `ThemeCard.astro` |
 | vb-program.aacr.badge  | `aacr`            | AACR            | `assets/source/logos/aacr.png`            |                   |
 
-### collaborations.json — optional logo field
+### collaborations.json - optional logo field
 
 | entity_id      | name                   | slug                 | status                 |
 | -------------- | ---------------------- | -------------------- | ---------------------- |
@@ -71,16 +71,16 @@ Only projects with explicit `"icon"` in JSON; all others fall back to `folder` v
 
 ## 3. Heuristic-only (no JSON icon field)
 
-### experience.json → projectIcon(domain, id)
+### experience.json - projectIcon(domain, id)
 
 Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 
 | domain                            | default icon           | id keyword overrides              |
 | --------------------------------- | ---------------------- | --------------------------------- |
-| Biopharma R&D                     | `pill`                 | drug-safety → pill                |
-| Translational Oncology            | `microscope`           | tumor, oncology → microscope      |
-| Clinical / Oncology Imaging       | `scan`                 | imaging, segmentation → scan      |
-| Digital / Computational Pathology | `microscope` / `graph` | pathology, gnn → microscope/graph |
+| Biopharma R&D                     | `pill`                 | drug-safety - pill                |
+| Translational Oncology            | `microscope`           | tumor, oncology - microscope      |
+| Clinical / Oncology Imaging       | `scan`                 | imaging, segmentation - scan      |
+| Digital / Computational Pathology | `microscope` / `graph` | pathology, gnn - microscope/graph |
 | Enterprise Vision                 | `vision`               |                                   |
 | Academic Research                 | `graduation`           |                                   |
 | (unknown domain)                  | `folder`               |                                   |
@@ -94,8 +94,8 @@ Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 | `Contact.astro`      | graduation                      | education block                               |
 | `Conferences.astro`  | presentation (via ResearchCard) | prop default                                  |
 | `Publications.astro` | document (via ResearchCard)     | prop default                                  |
-| `Header.astro`       | Unicode ☀/☾/☰/✕                | **not** Icon.astro (sun/moon/menu/close idle) |
-| `Kaggle.astro`       | emoji 🏆                        | **not** Icon.astro                            |
+| `Header.astro`       | Unicode ///                | **not** Icon.astro (sun/moon/menu/close idle) |
+| `Kaggle.astro`       | emoji                         | **not** Icon.astro                            |
 
 ### link lists with logo field (LabeledLink.logo)
 
@@ -123,10 +123,10 @@ Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 | pwa-192     | `public/assets/icons/icon-192.png`         | 192×192                   | `site.webmanifest`          |
 | pwa-512     | `public/assets/icons/icon-512.png`         | 512×512                   | manifest                    |
 | apple-touch | `public/assets/icons/apple-touch-icon.png` | 180×180                   | `BaseHead.astro`            |
-| og-image    | `public/assets/og/og-image.png`            | 1200×630, <1MB            | `site.json` → `seo.ogImage` |
+| og-image    | `public/assets/og/og-image.png`            | 1200×630, <1MB            | `site.json` - `seo.ogImage` |
 | monogram    | CSS via `Monogram.astro`                   | initials from `site.name` | `Header.astro`              |
 
-**Note:** `favicon.svg` uses `#2563eb`; design tokens specify accent `#6C2FBF` — flag for regeneration.
+**Note:** `favicon.svg` uses `#2563eb`; design tokens specify accent `#6C2FBF` - flag for regeneration.
 
 ---
 
@@ -141,7 +141,7 @@ Used by `XpProjectCard.astro` / project accordions inside `Experience.astro`.
 ### content/drafts/competitions/*.md (unwired / not in build)
 
 16 competition markdown files. Typical frontmatter: `id`, `name`, `organizer`, `year`.  
-No thumbnail field yet — propose `thumbnail: /assets/images/competitions/{slug}.png` when integrated.
+No thumbnail field yet - propose `thumbnail: /assets/images/competitions/{slug}.png` when integrated.
 
 | file pattern                       | proposed slug example           |
 | ---------------------------------- | ------------------------------- |
@@ -157,7 +157,7 @@ Organizer logos (Kaggle, Google, AWS) may reuse `tech_logo` / `org_logo` slugs w
 | item                                                                    | issue                                                        |
 | ----------------------------------------------------------------------- | ------------------------------------------------------------ |
 | Icon keys `sun`, `moon`, `menu`, `close`, `arrow-up`, `external`, `dna` | in registry; Header uses Unicode instead                     |
-| `Impact.jpg` (repo root)                                                | untracked; not wired — flag if user intends as content image |
+| `Impact.jpg` (repo root)                                                | untracked; not wired - flag if user intends as content image |
 
 ---
 

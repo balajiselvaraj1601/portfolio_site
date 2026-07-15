@@ -1,7 +1,7 @@
 # Content Layer
 
 Tech-agnostic, presentation-free content for the portfolio. Every section of the site
-derives from a file here — this is the **single source of truth** for site content.
+derives from a file here - this is the **single source of truth** for site content.
 
 ## Provenance
 
@@ -34,7 +34,7 @@ nav-view order.
 | `pages/06_contact.json`     | Contact page copy and public contact channels                  | `personal.contact[]` (no phone) |
 | `pages/99_entities.json`    | Shared entity URL/name registry                                | derived                         |
 
-Project narratives are nested inside `pages/02_experience.json` → `roles[].projects[]`.
+Project narratives are nested inside `pages/02_experience.json` - `roles[].projects[]`.
 
 ## Editing guide
 

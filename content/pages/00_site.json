@@ -1,7 +1,7 @@
 {
   "name": "Balaji Selvaraj",
   "title": "Technical AI Leader",
-  "tagline": "Hands-on Technical AI Lead — turning data into business impact through AI.",
+  "tagline": "Hands-on Technical AI Lead - turning data into business impact through AI.",
   "location": "Gothenburg, Sweden",
   "pages": [
     {
@@ -9,7 +9,7 @@
       "label": "About",
       "path": "/",
       "seo": {
-        "title": "Balaji Selvaraj — Technical AI Leader",
+        "title": "Balaji Selvaraj - Technical AI Leader",
         "description": "Hands-on Technical AI Lead with 12+ years spanning product, services, and startup environments, delivering enterprise AI systems with multimillion-dollar business impact at AstraZeneca. Ranked top 0.3% globally on Kaggle (652/200K+ data scientists)."
       },
       "sections": [
@@ -34,8 +34,8 @@
       "label": "Experience",
       "path": "/experience",
       "seo": {
-        "title": "Experience — Balaji Selvaraj",
-        "description": "Delivering AI programs across Oncology, Biopharma R&D, and CPSS — supporting AstraZeneca's 3 R&D priority areas over 3 consecutive years, with role-by-role impact across drug safety, oncology, and clinical imaging."
+        "title": "Experience - Balaji Selvaraj",
+        "description": "Delivering AI programs across Oncology, Biopharma R&D, and CPSS - supporting AstraZeneca's 3 R&D priority areas over 3 consecutive years, with role-by-role impact across drug safety, oncology, and clinical imaging."
       },
       "sections": ["experience"],
       "viewSections": ["experience"]
@@ -45,7 +45,7 @@
       "label": "Research",
       "path": "/research",
       "seo": {
-        "title": "Research — Balaji Selvaraj",
+        "title": "Research - Balaji Selvaraj",
         "description": "Publications, conference talks, and speaking engagements across medical imaging and drug development."
       },
       "sections": ["publications", "conferences", "speakers"],
@@ -56,7 +56,7 @@
       "label": "Recognition",
       "path": "/recognition",
       "seo": {
-        "title": "Recognition — Balaji Selvaraj",
+        "title": "Recognition - Balaji Selvaraj",
         "description": "Awards & Recognition, Kaggle competition results (top 0.3% globally, 652/200K+ data scientists), and education."
       },
       "sections": ["awards", "kaggle", "education"],
@@ -67,8 +67,8 @@
       "label": "Vision",
       "path": "/vision",
       "seo": {
-        "title": "Vision — Balaji Selvaraj",
-        "description": "AI leadership & strategic impact — from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
+        "title": "Vision - Balaji Selvaraj",
+        "description": "AI leadership & strategic impact - from a Kaggle idea to executive-sponsored programs across drug safety, oncology, and global research partnerships."
       },
       "sections": ["vision-programs"],
       "viewSections": ["vision-programs"]
@@ -78,7 +78,7 @@
       "label": "Contact",
       "path": "/contact",
       "seo": {
-        "title": "Contact — Balaji Selvaraj",
+        "title": "Contact - Balaji Selvaraj",
         "description": "Get in touch with Balaji Selvaraj, Technical AI Leader based in Gothenburg, Sweden."
       },
       "sections": ["contact"],
@@ -153,7 +153,7 @@
     }
   },
   "seo": {
-    "title": "Balaji Selvaraj — Technical AI Leader",
+    "title": "Balaji Selvaraj - Technical AI Leader",
     "description": "Hands-on Technical AI Lead with 12+ years spanning product, services, and startup environments, delivering enterprise AI systems with multimillion-dollar business impact at AstraZeneca. Ranked top 0.3% globally on Kaggle (652/200K+ data scientists).",
     "keywords": [
       "Technical AI Leader",
@@ -185,12 +185,12 @@
       "watchOnYouTubePrefix": "Watch",
       "onYouTubeSuffix": " on YouTube",
       "videoThumbnailPrefix": "Video thumbnail: ",
-      "videoTitleSuffix": " — video"
+      "videoTitleSuffix": " - video"
     },
     "header": {
       "primaryNavLabel": "Primary",
       "savePageLabel": "Save page as HTML",
-      "saveFailedLabel": "Save failed — try again",
+      "saveFailedLabel": "Save failed - try again",
       "openMenuLabel": "Open menu",
       "closeMenuLabel": "Close menu"
     },
@@ -217,7 +217,7 @@
       },
       "awards": {
         "countLabel": "All Awards",
-        "searchPlaceholder": "Search awards…",
+        "searchPlaceholder": "Search awards...",
         "searchAriaLabel": "Search awards by title, nominator, or reason",
         "filterGroupLabel": "Filter by nominator level",
         "featuredFilter": "Default",
@@ -231,7 +231,7 @@
         "silverLabel": "Silver",
         "bronzeLabel": "Bronze",
         "globalRankLabel": "Global Rank",
-        "searchPlaceholder": "Search competitions…",
+        "searchPlaceholder": "Search competitions...",
         "searchAriaLabel": "Search competitions by name, domain, or tag",
         "filterGroupLabel": "Filter by medal",
         "profileLinkLabel": "View Kaggle profile",
@@ -264,16 +264,16 @@
       }
     },
     "notFound": {
-      "titleTemplate": "Page not found — {name}",
+      "titleTemplate": "Page not found - {name}",
       "description": "The page you were looking for could not be found.",
       "code": "404",
       "heading": "Page not found",
-      "message": "The page you were looking for doesn’t exist or may have moved.",
+      "message": "The page you were looking for doesn't exist or may have moved.",
       "backHome": "Back to home",
       "viewExperience": "View experience"
     },
     "redirect": {
-      "title": "Redirecting…"
+      "title": "Redirecting..."
     }
   }
 }

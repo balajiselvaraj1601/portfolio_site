@@ -11,7 +11,7 @@
   "comment_threshold": "Brightness cutoff (0-255) for 'light'/'dark' modes",
 
   "white_threshold": 235,
-  "comment_white_threshold": "Off-white cutoff (0-255) for 'nonwhite' mode — a pixel is ink if min(r,g,b) is below this",
+  "comment_white_threshold": "Off-white cutoff (0-255) for 'nonwhite' mode - a pixel is ink if min(r,g,b) is below this",
 
   "alpha_threshold": 128,
   "comment_alpha_threshold": "Opacity cutoff (0-255) for 'alpha' mode; also excludes transparent pixels in 'nonwhite' mode",

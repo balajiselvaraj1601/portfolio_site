@@ -15,7 +15,7 @@ Load with `.claude/skills/page-consistency-team/SKILL.md`.
 
 ---
 
-## Phase 0 — Initialize
+## Phase 0 - Initialize
 
 1. Run `./.cursor/scripts/page-team-start.sh` OR create state from example template.
 2. Read user goal; set `mode` (default `full`).
@@ -24,11 +24,11 @@ Load with `.claude/skills/page-consistency-team/SKILL.md`.
 
 ---
 
-## Phase 1 — Parallel audit
+## Phase 1 - Parallel audit
 
 **Claude Code:** Use Agent tool × 6, one per active view row in CSV, spawned **by
 subagent type** (`agent_id` column, e.g. `page-experience`). The agent file is the
-sub-agent's system prompt — do not tell it to read its own file. Templates:
+sub-agent's system prompt - do not tell it to read its own file. Templates:
 orchestrator agent file, Appendix A.
 
 **Cursor:** Use Task tool × 6 (`subagent_type: generalPurpose`), parallel in one message.
@@ -50,7 +50,7 @@ Merge all `findings` into state file. Set `phase: "audit_complete"`.
 
 ---
 
-## Phase 2 — Synthesize
+## Phase 2 - Synthesize
 
 Orchestrator (no sub-agent):
 
@@ -61,11 +61,11 @@ Orchestrator (no sub-agent):
 
 ---
 
-## Phase 3 — Ultimatum
+## Phase 3 - Ultimatum
 
 Spawn **design-guardian**:
 
-**Claude Code** — by subagent type (no self-read needed):
+**Claude Code** - by subagent type (no self-read needed):
 
 ```
 Agent(subagent_type: design-guardian)
@@ -75,7 +75,7 @@ Conflicts: {paste from state}
 Return JSON: {"decisions":[...]}
 ```
 
-**Cursor** — generalPurpose Task:
+**Cursor** - generalPurpose Task:
 
 ```
 Read .claude/agents/design-guardian.md and
@@ -90,7 +90,7 @@ Write `decisions[]`. Set `phase: "ultimatum"`.
 
 ---
 
-## Phase 4 — Accept
+## Phase 4 - Accept
 
 Parallel page agents for each `affected_views` in decisions (Claude: by subagent type;
 Cursor: generalPurpose Task with agent file path):
@@ -107,7 +107,7 @@ Set `phase: "accepted"`.
 
 ---
 
-## Phase 5 — Implement
+## Phase 5 - Implement
 
 1. For each decision with `implementation_owner: page-*`, spawn that page agent (Implement mode).
 2. For `design-guardian` decisions, spawn guardian (Implement mode).
@@ -118,7 +118,7 @@ Set `phase: "accepted"`.
 
 ---
 
-## Phase 6 — Verify
+## Phase 6 - Verify
 
 ```bash
 cd /home/engineer/workspace/portfolio_site && npm run build
@@ -134,7 +134,7 @@ Record `build: "pass"|"fail"`. Set `phase: "verified"`.
 
 ---
 
-## Phase 7 — Report
+## Phase 7 - Report
 
 Human-readable summary:
 

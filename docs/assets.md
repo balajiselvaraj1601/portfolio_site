@@ -28,7 +28,7 @@ public/
 
 | Asset       | Path                                              | Referenced by                                 |
 | ----------- | ------------------------------------------------- | --------------------------------------------- |
-| Résumé PDF  | `public/assets/resume/balaji-selvaraj-resume.pdf` | **Asset only** — not in nav/header            |
+| Résumé PDF  | `public/assets/resume/balaji-selvaraj-resume.pdf` | **Asset only** - not in nav/header            |
 | OG image    | `public/assets/og/og-image.png`                   | `content/pages/00_site.json` -> `seo.ogImage` |
 | Favicon SVG | `public/favicon.svg`                              | `BaseHead.astro`, manifest                    |
 | Favicon ICO | `public/favicon.ico`                              | `BaseHead.astro`                              |
@@ -42,7 +42,7 @@ After replacing any asset, run `npm run build && npm run preview` and verify the
 
 **Current path:** `/assets/resume/balaji-selvaraj-resume.pdf`
 
-The PDF is a **static asset only** — it ships from `public/assets/resume/` and is
+The PDF is a **static asset only** - it ships from `public/assets/resume/` and is
 direct-linkable (e.g. for email signatures or LinkedIn), but it is **not** linked from
 header nav, contact CTAs, or `content/pages/00_site.json`. To wire it into the site UI later,
 add a `resume` block to `site.json` and update the header/contact components.
@@ -52,7 +52,7 @@ To update the file:
 1. Export a new PDF from the résumé builder (no phone number on the public version).
 2. Replace `public/assets/resume/balaji-selvaraj-resume.pdf` (or add a new filename and
    update any external links that point at the old path).
-3. Verify the URL loads after build: `npm run preview` →
+3. Verify the URL loads after build: `npm run preview` -
    `http://localhost:4331/assets/resume/balaji-selvaraj-resume.pdf`.
 
 ## OG / social preview image
@@ -64,7 +64,7 @@ To update the file:
 | Dimensions | 1200 × 630 px (Twitter/LinkedIn large card)        |
 | Format     | PNG or JPG                                         |
 | Max size   | < 1 MB                                             |
-| Content    | Name, title, accent background — text-led, minimal |
+| Content    | Name, title, accent background - text-led, minimal |
 
 Referenced as absolute URL in OG/Twitter tags via `Astro.site` + `site.seo.ogImage`.
 
@@ -115,7 +115,7 @@ To add or replace a headshot:
 3. Set `content/pages/01_about.json` -> `portrait` to the public path (e.g. `/assets/images/balaji.png`).
 4. Always include descriptive `alt` text in the content/component.
 
-Keep published files optimized — prefer WebP, reasonable dimensions, lazy-load below the fold.
+Keep published files optimized - prefer WebP, reasonable dimensions, lazy-load below the fold.
 
 ## Logo palette (unwired SVGs)
 
@@ -125,7 +125,7 @@ Keep published files optimized — prefer WebP, reasonable dimensions, lazy-load
 `logo_team_growth`) that are intentionally referenced nowhere yet. They were produced by
 the SVG icon toolchain (`scripts/icons/batch-icon-generate.sh` + `scripts/icons/svg-icon-generator.py`)
 and are kept as a ready-to-wire palette for upcoming sections. Wiring happens via the
-`asset` fields in the content JSON — no component changes needed. Their inventory status
+`asset` fields in the content JSON - no component changes needed. Their inventory status
 is tracked as `unwired-future` in [`docs/audits/logo-manifest.csv`](./audits/logo-manifest.csv).
 
 ### Hero portrait
@@ -139,7 +139,7 @@ The home-page hero (`src/components/sections/Hero.astro`) renders a square portr
 | `public/assets/images/balaji.webp` | WebP   | LCP (preloaded)   |
 | `public/assets/images/balaji.avif` | AVIF   | Modern browsers   |
 
-References from content: `content/pages/01_about.json` → `portrait.src`, `portrait.webp`,
+References from content: `content/pages/01_about.json` - `portrait.src`, `portrait.webp`,
 `portrait.avif`, `portrait.alt`, `portrait.width`, `portrait.height`.
 
 ### Image optimization pipeline
@@ -206,7 +206,7 @@ domain changes.
 
 ## What not to commit
 
-- Generated `dist/` (git-ignored — CI rebuilds)
+- Generated `dist/` (git-ignored - CI rebuilds)
 - Large unoptimized originals in `public/` or the repo root
 - Private documents, references, or phone-containing résumé variants
 
@@ -217,18 +217,18 @@ workspace). Regenerate live `logo_*.svg` marks in `public/assets/logos/marks/` v
 `./scripts/icons/regenerate-marks-from-png.sh`. The site no longer ships redundant
 `icon_*.png` rasters under `public/assets/logos/`. Full repeatable steps:
 
-→ [`docs/icon-collections-install.md`](./icon-collections-install.md)
+- [`docs/icon-collections-install.md`](./icon-collections-install.md)
 
 Rendered sizes for `MarkEmblem` slots (tokens, per-view rules): see
-[Icon blend strategy — Rendered icon sizes](./icon-blend-strategy.md#rendered-icon-sizes-ssot-2026-07-05).
+[Icon blend strategy - Rendered icon sizes](./icon-blend-strategy.md#rendered-icon-sizes-ssot-2026-07-05).
 
 Color blending (`--accent-card`, `--mark-fg`, three delivery tiers): see
-[Icon blend strategy — Color blending](./icon-blend-strategy.md#color-blending-ssot-2026-07-05-phase-3).
+[Icon blend strategy - Color blending](./icon-blend-strategy.md#color-blending-ssot-2026-07-05-phase-3).
 
 ## Related docs
 
-- [Icon blend strategy](./icon-blend-strategy.md) — vector delivery, rendered sizes, color blending
-- [Icon collections install](./icon-collections-install.md) — square-center → PNG → SVG marks
-- [SEO](./seo.md) — how assets appear in meta tags
-- [Deployment](./deployment.md) — artifact checklist
-- [Content editing](./content-editing.md) — JSON paths for résumé and OG references
+- [Icon blend strategy](./icon-blend-strategy.md) - vector delivery, rendered sizes, color blending
+- [Icon collections install](./icon-collections-install.md) - square-center - PNG - SVG marks
+- [SEO](./seo.md) - how assets appear in meta tags
+- [Deployment](./deployment.md) - artifact checklist
+- [Content editing](./content-editing.md) - JSON paths for résumé and OG references

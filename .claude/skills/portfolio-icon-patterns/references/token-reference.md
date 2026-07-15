@@ -1,6 +1,6 @@
 # Token reference
 
-Exact icon / mark token names and values. **These tables mirror the code SSOT** —
+Exact icon / mark token names and values. **These tables mirror the code SSOT** -
 `src/styles/global.css` (`:root`) and `src/lib/icon-render.ts`. They are for
 lookup and drift-checking, not a second source of truth: if a value here disagrees
 with the source file, the source file wins and this table is stale. `npm run
@@ -17,7 +17,7 @@ Mirrors `ICON_SIZE_TOKENS` in `src/lib/icon-render.ts`; consumed by `Icon.astro`
 | `md`  | `--icon-md`  | 20 (Icon default)  |
 | `lg`  | `--icon-lg`  | 24                 |
 | `xl`  | `--icon-xl`  | 32                 |
-| —     | `--size-dot` | 8 (indicator dots) |
+| -     | `--size-dot` | 8 (indicator dots) |
 
 ## Mark chrome (circular icon container)
 
@@ -30,7 +30,7 @@ Mirrors `ICON_SIZE_TOKENS` in `src/lib/icon-render.ts`; consumed by `Icon.astro`
 | `--vision-hub-glyph`   | `var(--mark-glyph)` | VisionHub center + satellite emblems                      |
 | `--mark-border-width`  | `1px`               | chrome ring width                                         |
 
-> Comment in source: "**change these two values to resize circular icons site-wide**" — `--mark-slot` and `--mark-glyph`.
+> Comment in source: "**change these two values to resize circular icons site-wide**" - `--mark-slot` and `--mark-glyph`.
 
 ## Color mixing
 
@@ -45,7 +45,7 @@ Mirrors `ICON_SIZE_TOKENS` in `src/lib/icon-render.ts`; consumed by `Icon.astro`
 
 ## Accent hook
 
-`--accent-card` is the single tint hook set on the owning wrapper (`.card-accent` sets `--accent-card: var(--accent)` and re-derives `--mark-fg`). Marks read `--mark-fg` / `--mark-chrome` from it — see the cascade diagram in SKILL.md.
+`--accent-card` is the single tint hook set on the owning wrapper (`.card-accent` sets `--accent-card: var(--accent)` and re-derives `--mark-fg`). Marks read `--mark-fg` / `--mark-chrome` from it - see the cascade diagram in SKILL.md.
 
 ## Per-view accent matrix
 
@@ -62,7 +62,7 @@ Each page wrapper sets a view default; sections/categories override `--accent-ca
 
 ## Categorical accents
 
-Used by Vision board groups and the About section; a section sets `--accent-card: var(--cat-x, var(--view-accent-…))`.
+Used by Vision board groups and the About section; a section sets `--accent-card: var(--cat-x, var(--view-accent-...))`.
 
 | Token             | Meaning                   | Light value                              |
 | ----------------- | ------------------------- | ---------------------------------------- |
@@ -78,6 +78,6 @@ Vision mirrors these as `--vision-accent-*` (e.g. `--vision-accent-ai: var(--cat
 
 ## Registry & classification sets (`src/lib/icon-render.ts`)
 
-- `FILLED_ICONS` = `linkedin, kaggle, github, gmail, trophy-cup` — rendered filled (Simple Icons geometry); all others stroked (Lucide, `stroke-width` 1.8).
-- `BRAND_MONO_ICONS` = `linkedin, github, kaggle, gmail` — rendered in `--brand-mark` neutral ink, not the context accent. (`trophy-cup` is filled but **not** a brand, so intentionally excluded.)
-- `iconBody(name)` swaps `fill="#000"` → `fill="currentColor"` for filled icons at render time.
+- `FILLED_ICONS` = `linkedin, kaggle, github, gmail, trophy-cup` - rendered filled (Simple Icons geometry); all others stroked (Lucide, `stroke-width` 1.8).
+- `BRAND_MONO_ICONS` = `linkedin, github, kaggle, gmail` - rendered in `--brand-mark` neutral ink, not the context accent. (`trophy-cup` is filled but **not** a brand, so intentionally excluded.)
+- `iconBody(name)` swaps `fill="#000"` - `fill="currentColor"` for filled icons at render time.

@@ -1,12 +1,12 @@
-# Portfolio — Feature Requirements
+# Portfolio - Feature Requirements
 
 > This is the "required skills" deliverable: the capabilities the portfolio website must
-> provide. It is **tech-stack-agnostic** — no framework is assumed. Priorities use MoSCoW
+> provide. It is **tech-stack-agnostic** - no framework is assumed. Priorities use MoSCoW
 > (Must / Should / Could / Won't-this-stage).
 
 ## Target & context
 
-- **Owner:** Balaji Selvaraj — Technical AI Leader (oncology / drug-safety / biopharma R&D AI).
+- **Owner:** Balaji Selvaraj - Technical AI Leader (oncology / drug-safety / biopharma R&D AI).
 - **Goal:** a fast, credible, public personal portfolio, deployable to GitHub Pages.
 - **Audience:** hiring managers, research collaborators, conference/industry peers.
 - **Content source:** JSON under `../content/` (single source of truth; see `content-map.md`).
@@ -24,7 +24,7 @@
 ### Responsiveness & theming
 
 - **M4** Fully responsive across mobile / tablet / desktop with no horizontal scroll.
-- **M5** **Dark/light mode** — respects `prefers-color-scheme` and offers a manual toggle that persists (e.g. `localStorage`); no flash of incorrect theme on load.
+- **M5** **Dark/light mode** - respects `prefers-color-scheme` and offers a manual toggle that persists (e.g. `localStorage`); no flash of incorrect theme on load.
 
 ### Content sections (curated public set)
 
@@ -32,8 +32,8 @@
   Hero, Thirukural quote, About, Experience (timeline),
   Publications, Conferences, Speaking Engagements, Awards, Kaggle, Education,
   Vision (programs + org impact), Contact.
-- **M7** _(removed)_ — standalone Projects showcase was dropped; project narratives live in Experience roles.
-- **M8** **Experience** renders as a chronological timeline of roles → projects → bullets,
+- **M7** _(removed)_ - standalone Projects showcase was dropped; project narratives live in Experience roles.
+- **M8** **Experience** renders as a chronological timeline of roles - projects - bullets,
   preserving bullet `tier` (primary/secondary) for emphasis.
 
 ### Navigation
@@ -70,7 +70,7 @@
 
 ### Resources & errors
 
-- **M22** Résumé **PDF download** link (`/assets/resume/…`), shown in header and/or contact.
+- **M22** Résumé **PDF download** link (`/assets/resume/...`), shown in header and/or contact.
 - **M23** Custom **404** page consistent with site styling.
 - **M24** Favicon and a basic web app manifest (name, icons, theme color).
 
@@ -89,20 +89,20 @@
 
 ---
 
-## Could have (deferred — needs a service or the chosen stack)
+## Could have (deferred - needs a service or the chosen stack)
 
-- **C1** Contact **form** (e.g. Formspree / Web3Forms) — needs a third-party endpoint; not wired now.
+- **C1** Contact **form** (e.g. Formspree / Web3Forms) - needs a third-party endpoint; not wired now.
 - **C2** **Blog / writing** section (Markdown/MDX) for articles and talks.
 - **C3** Privacy-friendly **analytics** (e.g. Plausible / GoatCounter).
 - **C4** **Custom domain** via `CNAME`.
-- **C5** Internationalization (i18n) — currently `en` only.
+- **C5** Internationalization (i18n) - currently `en` only.
 - **C6** Light interactive extras (filter projects by tag/domain, copy-email button).
 
 ---
 
 ## Won't (this stage)
 
-- **W1** ~~No framework choice or CI/CD~~ — **resolved:** Astro 4 + GitHub Actions deploy
+- **W1** ~~No framework choice or CI/CD~~ - **resolved:** Astro 4 + GitHub Actions deploy
   (see `deployment.md`, `architecture.md`).
 - **W2** No backend, database, auth, or CMS.
 
@@ -112,11 +112,11 @@
 
 | Area                   | Status                                                             |
 | ---------------------- | ------------------------------------------------------------------ |
-| Stack                  | ✅ Astro 4.16, Zod, hand-rolled CSS                                |
-| All Must-have (M1–M24) | ✅ Implemented                                                     |
-| CI/CD                  | ✅ `.github/workflows/deploy.yml`                                  |
-| Static assets          | ✅ Résumé PDF, OG image, favicons, `.nojekyll`                     |
-| GitHub Pages live      | ⏳ Pending — repo push + Pages enable (see `go-live-checklist.md`) |
+| Stack                  |  Astro 4.16, Zod, hand-rolled CSS                                |
+| All Must-have (M1-M24) |  Implemented                                                     |
+| CI/CD                  |  `.github/workflows/deploy.yml`                                  |
+| Static assets          |  Résumé PDF, OG image, favicons, `.nojekyll`                     |
+| GitHub Pages live      | ⏳ Pending - repo push + Pages enable (see `go-live-checklist.md`) |
 | Lighthouse 95+ (S1)    | ⏳ Run manually post-deploy                                        |
 | Link validation (S8)   | ⏳ Manual pass recommended                                         |
 

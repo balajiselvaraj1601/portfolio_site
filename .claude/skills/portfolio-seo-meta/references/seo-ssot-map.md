@@ -1,8 +1,8 @@
-# SEO SSOT map — which file owns which tag
+# SEO SSOT map - which file owns which tag
 
 The SEO surface is split across several files. Each tag/field has **one** owner; the
 renderer (`src/components/chrome/BaseHead.astro`) reads the owners and emits the markup.
-To change a value, edit its owner — never the rendered output, and never a second copy.
+To change a value, edit its owner - never the rendered output, and never a second copy.
 Read the owning file for the live value; the _Owner_ column names it, it is not repeated
 here.
 
@@ -10,9 +10,9 @@ here.
 
 | Tag / output                             | Owner (edit here)                           | Notes                                                           |
 | ---------------------------------------- | ------------------------------------------- | --------------------------------------------------------------- |
-| `<title>`                                | `content/pages/00_site.json` → `seo.title`  | Per-page override via `BaseHead` `title` prop; defaults to site |
-| `<meta name="description">`              | `content/pages/00_site.json` → `seo.description` | Per-page override via `description` prop                   |
-| `<meta name="keywords">`                 | `content/pages/00_site.json` → `seo.keywords` | Joined with `, ` in `BaseHead`; also feeds JSON-LD `knowsAbout` |
+| `<title>`                                | `content/pages/00_site.json` - `seo.title`  | Per-page override via `BaseHead` `title` prop; defaults to site |
+| `<meta name="description">`              | `content/pages/00_site.json` - `seo.description` | Per-page override via `description` prop                   |
+| `<meta name="keywords">`                 | `content/pages/00_site.json` - `seo.keywords` | Joined with `, ` in `BaseHead`; also feeds JSON-LD `knowsAbout` |
 | `<link rel="canonical">`                 | `SITE_URL` (`astro.config.mjs`) + page path | `new URL(path, Astro.site)` in `BaseHead`                       |
 | `<meta name="viewport">`                 | `BaseHead.astro` (static)                   | `width=device-width, initial-scale=1`                           |
 | `<meta name="theme-color">` (light/dark) | `src/lib/theme-colors` (`THEME_BG`)         | Two `media`-scoped variants                                     |
@@ -28,9 +28,9 @@ here.
 | `og:description` / `twitter:description` | `site.seo.description` (or `description` prop) |                                                  |
 | `og:url`                                 | `SITE_URL` + page path                         | Same derivation as canonical                     |
 | `og:image` / `twitter:image`             | `site.seo.ogImage` + `SITE_URL`                | Path resolved to absolute; file 1200×630, < 1 MB |
-| `og:image:alt` / `twitter:image:alt`     | `profile.name` + `profile.title`               | Emitted as `${name} — ${title}`                  |
+| `og:image:alt` / `twitter:image:alt`     | `profile.name` + `profile.title`               | Emitted as `${name} - ${title}`                  |
 | `og:locale`                              | `BaseHead.astro` (static)                      | `en`                                             |
-| `twitter:card`                           | `content/pages/00_site.json` → `seo.twitterCard` | `summary_large_image`                         |
+| `twitter:card`                           | `content/pages/00_site.json` - `seo.twitterCard` | `summary_large_image`                         |
 
 ## JSON-LD `Person`
 
@@ -39,26 +39,26 @@ Assembled in `BaseHead.astro` frontmatter, emitted as one `is:inline`
 
 | JSON-LD field   | Source                                                  |
 | --------------- | ------------------------------------------------------- |
-| `name`          | `content/pages/01_about.json` → `name`                  |
-| `jobTitle`      | `content/pages/01_about.json` → `title`                 |
-| `email`         | `content/pages/06_contact.json` → `contact[type=email].value` |
-| `address`       | `content/pages/00_site.json` → `location` (locality + country) |
+| `name`          | `content/pages/01_about.json` - `name`                  |
+| `jobTitle`      | `content/pages/01_about.json` - `title`                 |
+| `email`         | `content/pages/06_contact.json` - `contact[type=email].value` |
+| `address`       | `content/pages/00_site.json` - `location` (locality + country) |
 | `url`           | `SITE_URL` (root)                                       |
-| `sameAs`        | `content/pages/06_contact.json` → `contact[]` linkedin / github / kaggle |
-| `knowsAbout`    | `content/pages/00_site.json` → `seo.keywords`           |
-| `worksFor.name` | `content/pages/02_experience.json` → first role's organization |
+| `sameAs`        | `content/pages/06_contact.json` - `contact[]` linkedin / github / kaggle |
+| `knowsAbout`    | `content/pages/00_site.json` - `seo.keywords`           |
+| `worksFor.name` | `content/pages/02_experience.json` - first role's organization |
 
 ## Sitemap + robots
 
 | Output                                     | Owner                                           | Notes                                                     |
 | ------------------------------------------ | ----------------------------------------------- | --------------------------------------------------------- |
 | `dist/sitemap-index.xml` / `sitemap-0.xml` | `@astrojs/sitemap` integration                  | Generated at build; **never** hand-edit XML               |
-| Sitemap page inclusion                     | `REDIRECT_STUB_PATHS` (`astro.config.mjs`)      | Filter drops any path containing a listed stub → `/` only |
+| Sitemap page inclusion                     | `REDIRECT_STUB_PATHS` (`astro.config.mjs`)      | Filter drops any path containing a listed stub - `/` only |
 | `robots.txt` rules                         | `public/robots.txt`                             | Static file                                               |
-| `robots.txt` `Sitemap:` URL                | `public/robots.txt` (hand-synced to `SITE_URL`) | Not wired to the build — see the URL-change checklist     |
+| `robots.txt` `Sitemap:` URL                | `public/robots.txt` (hand-synced to `SITE_URL`) | Not wired to the build - see the URL-change checklist     |
 
 ## Boundary
 
 Wording of `title` / `description` / `keywords` as _content_ belongs to
 content authoring (overlaps `portfolio-content-authoring`). This map governs the
-plumbing — which file to open — not the prose.
+plumbing - which file to open - not the prose.

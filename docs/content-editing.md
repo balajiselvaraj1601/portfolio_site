@@ -10,7 +10,7 @@ If you need a new field, update `src/schemas/` first, then the JSON, then the co
 ## Workflow
 
 1. Edit the relevant numbered JSON file under `content/pages/`.
-2. Run `npm run build` — Zod validation runs automatically.
+2. Run `npm run build` - Zod validation runs automatically.
 3. Fix any schema errors (the build output shows the exact field path).
 4. Preview with `npm run preview` and spot-check the section.
 
@@ -28,7 +28,7 @@ If the change affects page structure, section order, or the overall narrative, u
 | `pages/04_recognition.json` | Awards, Kaggle, Education                    | Award rows, Kaggle global rank + case-study cards, education record                     |
 | `pages/05_vision.json`      | Vision view (`/#vision`)                     | Infographic hubs, program cards, org impact cards                                       |
 | `pages/06_contact.json`     | Contact                                      | `contactIntro`, `contactPage`, public contact channels                                  |
-| `pages/99_entities.json`    | Entity links (global registry)               | Slug → `{ name, url }` for organizations referenced across sections                     |
+| `pages/99_entities.json`    | Entity links (global registry)               | Slug - `{ name, url }` for organizations referenced across sections                     |
 
 Provenance and résumé mapping: [Content map](./content-map.md) · [content/README.md](../content/README.md).
 
@@ -48,30 +48,30 @@ Edit `content/pages/00_site.json`:
 }
 ```
 
-Also update `person/profile.json` → `title` if the hero should match.
+Also update `person/profile.json` - `title` if the hero should match.
 
 ### Reorder, move, or hide a section
 
 Edit `content/pages/00_site.json`:
 
-- **Reorder on `/`** — change the order of ids in `pages[id=home].sections` (full DOM order).
-- **Change which nav view shows a section** — edit that page's `viewSections` array (each section
+- **Reorder on `/`** - change the order of ids in `pages[id=home].sections` (full DOM order).
+- **Change which nav view shows a section** - edit that page's `viewSections` array (each section
   id should appear in exactly one view).
-- **Show/hide** — toggle `sections[id].visible`.
+- **Show/hide** - toggle `sections[id].visible`.
 
-Do **not** reorder sections in `src/pages/index.astro` — it reads the home section list from
+Do **not** reorder sections in `src/pages/index.astro` - it reads the home section list from
 `site.json` via `SectionRenderer`.
 
 ### Update SEO meta
 
-Edit `content/pages/00_site.json` → `seo`:
+Edit `content/pages/00_site.json` - `seo`:
 
 ```json
 {
   "seo": {
-    "title": "Balaji Selvaraj — Technical AI Leader",
-    "description": "…",
-    "keywords": ["…"],
+    "title": "Balaji Selvaraj - Technical AI Leader",
+    "description": "...",
+    "keywords": ["..."],
     "ogImage": "/assets/og/og-image.png",
     "twitterCard": "summary_large_image"
   }
@@ -82,7 +82,7 @@ OG image path is relative to site root. Implementation: [SEO](./seo.md).
 
 ### Add an experience bullet
 
-Edit `content/pages/02_experience.json` → find the role → project → `bullets` array:
+Edit `content/pages/02_experience.json` - find the role - project - `bullets` array:
 
 ```json
 {
@@ -93,12 +93,12 @@ Edit `content/pages/02_experience.json` → find the role → project → `bulle
 
 Use `"tier": "secondary"` for supporting bullets (rendered with muted styling).
 
-Project narratives live inside each role's `projects[]` array in `work/experience.json` — see
+Project narratives live inside each role's `projects[]` array in `work/experience.json` - see
 [Case study & experience info standard](./case-study-experience-info-standard.md).
 
 ### Update contact links
 
-Edit `content/pages/06_contact.json` → `contact` array. Allowed public types: `email`, `linkedin`,
+Edit `content/pages/06_contact.json` - `contact` array. Allowed public types: `email`, `linkedin`,
 `github`, `kaggle`, `location`.
 
 ```json
@@ -111,7 +111,7 @@ Edit `content/pages/06_contact.json` → `contact` array. Allowed public types: 
 }
 ```
 
-**Never add a phone number** — public-site privacy rule.
+**Never add a phone number** - public-site privacy rule.
 
 ### Link an organization
 
@@ -132,7 +132,7 @@ Edit `content/pages/06_contact.json` → `contact` array. Allowed public types: 
 { "organization": "HCL Technology, India", "entity": "hcl" }
 ```
 
-3. Run `npm run build` — URLs are validated once in `entities.json`; components render links via `EntityLink`.
+3. Run `npm run build` - URLs are validated once in `entities.json`; components render links via `EntityLink`.
 
 ## Schema rules
 
@@ -143,7 +143,7 @@ Schemas live in `src/schemas/`. Key constraints:
 | `siteSchema`           | internal `pages[]` entries require `seo` and `sections`; external entries require `external: true` |
 | `profileSchema`        | hero/about/contact fields; `contactIntro`, `contactPage`; `contact[].href` nullable for location   |
 | `collaborationsSchema` | `items[].name` required; optional `items[].logo` and `items[].entity` slugs                        |
-| `entitiesSchema`       | Record of slug → `{ name, url }`; all `url` values must be valid                                   |
+| `entitiesSchema`       | Record of slug - `{ name, url }`; all `url` values must be valid                                   |
 | `experienceSchema`     | `tier` must be `"primary"` or `"secondary"`; `period.end` nullable; optional `roles[].entity`      |
 | `visionBoardSchema`    | hubs, programs, orgCards with accent tokens and optional logo marks                                |
 | `linkListSchema`       | Publications/conferences: `url` must be valid URL                                                  |
@@ -162,7 +162,7 @@ When the upstream résumé changes (`resume_builder/.../resume_healthcare.json`)
 
 1. Re-derive affected JSON files under `content/pages/` (do not edit resume and portfolio independently).
 2. Follow the mapping in [Content map](./content-map.md).
-3. Re-run privacy greps — no phone, no references:
+3. Re-run privacy greps - no phone, no references:
 
 ```bash
 grep -ri phone content/
@@ -184,6 +184,6 @@ Fix the JSON field at that path and rebuild. See [Troubleshooting](./troubleshoo
 
 ## Related docs
 
-- [Assets](./assets.md) — résumé PDF (asset-only), images (not JSON)
-- [Specification](./specification.md) — per-section rendering contracts
-- [Architecture](./architecture.md) — how content flows to components
+- [Assets](./assets.md) - résumé PDF (asset-only), images (not JSON)
+- [Specification](./specification.md) - per-section rendering contracts
+- [Architecture](./architecture.md) - how content flows to components

@@ -13,7 +13,7 @@ Awards filter label update.
 
 ### Changed
 
-- Awards featured filter chip label: Leadership → Default
+- Awards featured filter chip label: Leadership - Default
 
 ## [1.6.0] - 2026-07-09
 
@@ -22,21 +22,21 @@ About view restructure, Thirukural alignment, and recognition filter updates.
 ### Added
 
 - `HeroLanding.astro` wrapper for hero + Thirukural band (replaces `AboutLanding`)
-- About section (`#about`) replaces standalone leadership section — focus areas, collaborations, and intro unified under one view
-- `serve-prep.mjs` — stop stale listeners, build, print serve steps (`npm run serve`)
-- Page-about agent Appendix D — owner preferences for Thirukural spacing and text–portrait alignment
-- Design contract EX-018 — desktop Thirukural copy height matches portrait via `space-between`
+- About section (`#about`) replaces standalone leadership section - focus areas, collaborations, and intro unified under one view
+- `serve-prep.mjs` - stop stale listeners, build, print serve steps (`npm run serve`)
+- Page-about agent Appendix D - owner preferences for Thirukural spacing and text-portrait alignment
+- Design contract EX-018 - desktop Thirukural copy height matches portrait via `space-between`
 
 ### Changed
 
-- Section id `leadership` → `about`; components renamed (`About.astro`, `AboutFocusAreas`, `AboutCollaborations`)
+- Section id `leadership` - `about`; components renamed (`About.astro`, `AboutFocusAreas`, `AboutCollaborations`)
 - Thirukural: `3lh` surround spacing; desktop text lines distributed across portrait height; mobile tight `--kural-text-gap`
 - About section spacing: restored `--section-py-start`, wider filter-to-grid gap, card-row rhythm
 - Hero landing uses `justify-content: flex-start` (no viewport vertical centering)
 - Awards: Director / Associate Director levels in schema; default filter shows EVP through National Level
 - Hero metrics and about copy refreshed in `profile.json`
 - Refreshed reference screenshots (dark + light)
-- Baseline shot selector: `.about-landing` → `.hero-landing`
+- Baseline shot selector: `.about-landing` - `.hero-landing`
 
 ### Fixed
 
@@ -49,7 +49,7 @@ Education panel layout and wrapped card title line spacing.
 ### Changed
 
 - Education hero left column: logo + degree grouped in top cluster, field anchored at bottom via `space-between`
-- `--lh-snug` and `--lh-normal` bumped from 1.35/1.4 → **1.45** for clearer gap on two-line card titles (Awards, Kaggle, all T3 surfaces)
+- `--lh-snug` and `--lh-normal` bumped from 1.35/1.4 - **1.45** for clearer gap on two-line card titles (Awards, Kaggle, all T3 surfaces)
 
 ## [1.5.0] - 2026-07-07
 
@@ -78,7 +78,7 @@ Collapsible recognition cards and improved wrapped-line spacing for card titles.
 
 ### Changed
 
-- `--lh-snug` bumped from 1.25 → 1.35 for card titles; applied to `.theme-card__title` and `.xp-proj__name`
+- `--lh-snug` bumped from 1.25 to 1.35 for card titles; applied to `.theme-card__title` and `.xp-proj__name`
 - Recognition card title typography aligned to `--fs-card-title` / `--fw-semibold`
 - Awards grid switched from subgrid to flex column to support collapsible shell structure
 - Refreshed reference screenshots (dark + light)
@@ -90,12 +90,12 @@ Vision view consolidation and page-label eyebrows across all nav views.
 ### Added
 
 - Page-label eyebrows on view-opening sections: About, Experience, Research, Recognition (Vision and Contact unchanged)
-- `VisionImpactGrid.astro` — org-impact tiles rendered inside `vision-programs`
+- `VisionImpactGrid.astro` - org-impact tiles rendered inside `vision-programs`
 
 ### Changed
 
 - Vision view merged into a single `vision-programs` section; impact grid follows programs below an `h3` sub-heading
-- Experience eyebrow: Career → Experience
+- Experience eyebrow: Career - Experience
 - Design contract, page briefs, typography, and page-agent docs updated for eyebrow rules
 - Refreshed vision reference screenshots; baseline capture targets updated
 
@@ -112,7 +112,7 @@ Post-refactor site review pass: design consistency, accessibility, content fixes
 - Location contact card restored to the contact grid as a static block
 - Visually hidden screen-reader hints for external links in Contact
 - Dual-theme visual baselines (dark + light) with hero and experience shots; re-scroll-until-stable capture guard in `baseline-shots.mjs`
-- `docs/audits/open-tasks-2026-07-06.md` — verified open items for follow-up agents
+- `docs/audits/open-tasks-2026-07-06.md` - verified open items for follow-up agents
 
 ### Changed
 
@@ -139,10 +139,10 @@ visual change is the Contact copy/spacing edit. Full ledger: `docs/audits/refact
 
 ### Changed
 
-- Contact view copy and spacing: title "important" → "impactful"; subtitle moved below the section header (only visual change in this release)
+- Contact view copy and spacing: title "important" - "impactful"; subtitle moved below the section header (only visual change in this release)
 - `src/schemas.ts` split into `src/schemas/` modules behind the `@schemas` barrel; icon/logo pipeline scripts moved to `scripts/icons/`
-- Root restructure: `icons-grid.png` → `docs/reference/`, `SVG-ICON-SKILL-SETUP.md` → `docs/`, `icon_collections_resized/` → `assets/source/icon-collections-resized/`
-- Large components decomposed into sub-components (Experience, VisionPrograms, Hero, LeadershipPhilosophy, CompetitionCard, Education, SpeakingCard) — dist-verified render-identical
+- Root restructure: `icons-grid.png` - `docs/reference/`, `SVG-ICON-SKILL-SETUP.md` - `docs/`, `icon_collections_resized/` - `assets/source/icon-collections-resized/`
+- Large components decomposed into sub-components (Experience, VisionPrograms, Hero, LeadershipPhilosophy, CompetitionCard, Education, SpeakingCard) - dist-verified render-identical
 - SSOT consolidation: typed `SECTIONS` registry, derived `homeViewAnchor`, table-driven content validation, `isContentPage` dedup, `medalCount()` helper
 - Agent-infra consolidation: page-agent skeletons deduplicated into the shared playbook, ports documentation SSOT moved to `docs/troubleshooting.md`, `AGENT-SYSTEM-SUMMARY.md` refreshed
 
@@ -169,7 +169,7 @@ visual change is the Contact copy/spacing edit. Full ledger: `docs/audits/refact
 - Chrome: BaseHead font preload, Header/Footer/SiteChromeBoot cleanup
 - Section updates: Awards, Education, Experience, Hero, Kaggle, LeadershipPhilosophy, ThirukuralQuote, LogoBadge, VisionHub
 - Refreshed SVG logo marks and reference screenshots across views
-- Dot nav scroll-spy maps sections to view dots (hero/thirukural → Hero, leadership → About)
+- Dot nav scroll-spy maps sections to view dots (hero/thirukural - Hero, leadership - About)
 - Removed `dotNav` / `dotNavLabel` from section schema (dots derived from nav views)
 
 ## [1.0.1] - 2026-07-06

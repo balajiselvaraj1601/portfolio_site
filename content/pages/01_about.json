@@ -16,7 +16,7 @@
     "emphasis": "Business Impact",
     "tail": ""
   },
-  "heroSubtitle": "Helping global organizations transform cutting-edge AI into production systems that deliver measurable business value.",
+  "heroSubtitle": "Helping global organizations transform advanced AI into production systems that deliver measurable business value.",
   "metrics": [
     {
       "value": "12+",
@@ -35,7 +35,7 @@
       "icon": "funding"
     },
     {
-      "value": "$20–50M",
+      "value": "$20-50M",
       "label": "Projected Annual Savings",
       "detail": "Flagship Project Delivered",
       "icon": "funding"
@@ -53,7 +53,7 @@
       "icon": "chart"
     },
     {
-      "value": "Global Leadership",
+      "value": "Global Leadership",
       "label": "Distributed AI Team",
       "detail": "India, UK, Sweden, Mexico, China",
       "icon": "globe"
@@ -83,7 +83,7 @@
     "strategicVision": [
       {
         "title": "Executive Sponsorship & Portfolio Strategy",
-        "description": "Secured executive sponsorship and built executive alignment around a shared strategic direction, transforming 5 exploratory initiatives into 2 funded, enterprise-scale programs.",
+        "description": "Secured executive sponsorship and forged alignment around a shared strategic direction, transforming 5 exploratory initiatives into 2 funded, enterprise-scale programs.",
         "icon": "handshake"
       },
       {
@@ -104,12 +104,12 @@
     ],
     "businessImpact": [
       {
-        "title": "Projected Annual Savings ($20–50M)",
-        "description": "Secured and delivered a $3M+ SVP-sponsored drug safety initiative, developing predictive AI toxicology models projected to save $20M–$50M annually.",
+        "title": "Projected Annual Savings ($20-50M)",
+        "description": "Secured and delivered a $3M+ SVP-sponsored drug safety initiative, developing predictive AI toxicology models projected to save $20M-$50M annually.",
         "icon": "funding"
       },
       {
-        "title": "Program Timeline Acceleration (5 → 3 Years)",
+        "title": "Program Timeline Acceleration (5 to 3 Years)",
         "description": "Accelerated drug safety programs by 2 years, reducing study timelines from 5 years to 3 through predictive AI toxicology.",
         "icon": "clock"
       },
@@ -122,17 +122,17 @@
     "platform": [
       {
         "title": "Enterprise AI Platform",
-        "description": "Built and deployed a foundation-model platform that standardized training, inference, and evaluation across 3 clinical imaging modalities and 3 internal infrastructures.",
+        "description": "Established and deployed a foundation-model platform that standardized training, inference, and evaluation across 3 clinical imaging modalities and 3 internal infrastructures.",
         "icon": "blocks"
       },
       {
         "title": "GxP-Compliant AI Platform",
-        "description": "Engineered production AI pipelines within AstraZeneca's GxP-compliant platform, supporting validated, traceable, and audit-ready AI deployment.",
+        "description": "Developed production AI pipelines within AstraZeneca's GxP-compliant platform, supporting validated, traceable, and audit-ready AI deployment.",
         "icon": "cloud"
       },
       {
         "title": "Distributed Foundation Model Training",
-        "description": "Built distributed training pipelines with FSDP and DeepSpeed, reducing training bottlenecks and enabling enterprise-scale foundation model development.",
+        "description": "Implemented distributed training pipelines with FSDP and DeepSpeed, reducing training bottlenecks and enabling enterprise-scale foundation model development.",
         "icon": "layers"
       },
       {
@@ -149,7 +149,7 @@
       },
       {
         "title": "Talent Development",
-        "description": "Mentored 10 AI/ML graduate trainees across AstraZeneca and HCL, with 8 transitioning to full-time industry roles and others progressing to postgraduate studies.",
+        "description": "Guided 10 AI/ML graduate trainees in technical and professional development, with 8 transitioning to full-time industry roles and 2 pursuing higher education.",
         "icon": "graduation"
       },
       {
@@ -159,7 +159,7 @@
       },
       {
         "title": "Emerging Talent Development",
-        "description": "Developed and coached a 4-student team to a Top 4 national finish at the Smart India Hackathon (2019).",
+        "description": "Guided a 4-student team to a Top 4 national finish at the Smart India Hackathon (2019).",
         "icon": "target"
       }
     ],
@@ -176,7 +176,7 @@
       },
       {
         "title": "FAIR Data Governance",
-        "description": "Ensured AI training data adhered to FAIR (Findable, Accessible, Interoperable, Reusable) principles, enabling scientifically rigorous, interoperable, and reusable datasets across clinical studies and AI models.",
+        "description": "Governed AI training data in line with FAIR (Findable, Accessible, Interoperable, Reusable) principles, enabling scientifically rigorous, interoperable, and reusable datasets across clinical studies and AI models.",
         "icon": "globe"
       }
     ],
@@ -201,7 +201,7 @@
         "name": "IIT Madras",
         "logo": "iit-madras",
         "entity": "iit-madras",
-        "detail": "Research collaboration co-developing cutting-edge AI models and computational pipelines"
+        "detail": "Research collaboration co-developing advanced AI models and computational pipelines"
       },
       {
         "name": "Uppsala University",

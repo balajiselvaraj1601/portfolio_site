@@ -1,4 +1,4 @@
-# Content Map — Resume → Portfolio
+# Content Map - Resume - Portfolio
 
 Traceability from the source resume to the portfolio content layer. Source:
 `resume_builder/jobs/generalized_ai_tech_lead/resume/resume_healthcare.json` (schemaVersion 3).
@@ -23,8 +23,8 @@ Traceability from the source resume to the portfolio content layer. Source:
 
 | Resume location                  | Why excluded                                                                                             |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `personal.contact[type="phone"]` | Personal phone — privacy on a public site                                                                |
-| `sections[id="references"]`      | References (named individuals) — private, not for public display                                         |
+| `personal.contact[type="phone"]` | Personal phone - privacy on a public site                                                                |
+| `sections[id="references"]`      | References (named individuals) - private, not for public display                                         |
 | `sections[id="kaggle"]` (raw)    | Duplicate of per-competition wiki pages; long descriptions now live in `pages/04_recognition.json` items |
 | `sections[id="generative_ai"]`   | Not part of final site scope                                                                             |
 | `sections[id="tools"]`           | Skills section not in final site                                                                         |
@@ -35,8 +35,8 @@ Traceability from the source resume to the portfolio content layer. Source:
 - **Title:** the resume's `personal.title` is blank; "Technical AI Leader" is taken from the
   positioning contract (`ai-tech-lead-positioning.md`) and summary line 1. Adjust the `title`
   field in `pages/01_about.json` and `pages/06_contact.json` if a different title is preferred.
-- **Canonical facts** (team scale 1→12 across 5 countries; "$3M+ initiative = AI Lead *within*";
-  $20M–$50M is a program-level projection) are preserved verbatim — do not rephrase in a way
+- **Canonical facts** (team scale 1 to 12 across 5 countries; "$3M+ initiative = AI Lead *within*";
+  $20M-$50M is a program-level projection) are preserved verbatim - do not rephrase in a way
   that overstates personal scope.
 - **No fabrication:** every line traces to the resume or wiki sources. Summaries in
   `pages/04_recognition.json` and nested experience projects are re-presentations of existing bullets, not new claims.
@@ -45,7 +45,7 @@ Traceability from the source resume to the portfolio content layer. Source:
 
 ## Related docs
 
-- [Content editing](./content-editing.md) — how to edit derived files
-- [Case study & experience info standard](./case-study-experience-info-standard.md) — ideal field set for Experience roles
-- [content/README.md](../content/README.md) — curation rules
-- [Requirements](./requirements.md) — privacy acceptance criteria
+- [Content editing](./content-editing.md) - how to edit derived files
+- [Case study & experience info standard](./case-study-experience-info-standard.md) - ideal field set for Experience roles
+- [content/README.md](../content/README.md) - curation rules
+- [Requirements](./requirements.md) - privacy acceptance criteria

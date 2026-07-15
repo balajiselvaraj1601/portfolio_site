@@ -35,9 +35,9 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 
 | Tool        | Invoke                                               |
 | ----------- | ---------------------------------------------------- |
-| Claude Code | `/page-team` or "Run page team full mode: …"         |
+| Claude Code | `/page-team` or "Run page team full mode: ..."         |
 | Claude Code | Read `.claude/skills/page-consistency-team/SKILL.md` |
-| Cursor      | "Run page-consistency-team skill …"                  |
+| Cursor      | "Run page-consistency-team skill ..."                  |
 | Cursor      | `.cursor/skills/page-consistency-team/SKILL.md`      |
 | Dual path   | `.agents/skills/page-consistency-team/` (symlink)    |
 
@@ -70,7 +70,7 @@ Shared runtime rules for page agents: `.claude/references/page-agent-playbook.md
 | `audit`     | Findings + guardian decisions; no file edits         |
 | `change`    | Plan + decisions; no implement unless asked          |
 | `implement` | Apply decisions already in state file                |
-| `full`      | Audit → ultimatum → accept → implement P0/P1 → build |
+| `full`      | Audit - ultimatum - accept - implement P0/P1 - build |
 
 Set mode via env: `PAGE_TEAM_MODE=audit ./.cursor/scripts/page-team-start.sh`
 
@@ -78,14 +78,14 @@ Set mode via env: `PAGE_TEAM_MODE=audit ./.cursor/scripts/page-team-start.sh`
 
 ## Protocol phases
 
-1. **Init** — create `.cursor/page-team.state.json`
-2. **Audit** — parallel page agents emit structured findings
-3. **Synthesize** — orchestrator flags cross-view conflicts
-4. **Ultimatum** — design guardian issues binding decisions
-5. **Accept** — page agents accept or raise one objection
-6. **Implement** — scoped edits per view + guardian for tokens
-7. **Verify** — `npm run build`
-8. **Report** — summary to user
+1. **Init** - create `.cursor/page-team.state.json`
+2. **Audit** - parallel page agents emit structured findings
+3. **Synthesize** - orchestrator flags cross-view conflicts
+4. **Ultimatum** - design guardian issues binding decisions
+5. **Accept** - page agents accept or raise one objection
+6. **Implement** - scoped edits per view + guardian for tokens
+7. **Verify** - `npm run build`
+8. **Report** - summary to user
 
 Details: `.claude/skills/page-consistency-team/references/interaction-protocol.md`
 
@@ -96,7 +96,7 @@ Details: `.claude/skills/page-consistency-team/references/interaction-protocol.m
 Checklist SSOT: `.claude/references/design-consistency-contract.md`
 
 Page agents audit against it. Guardian resolves conflicts with binding decisions.
-Severity: P0 (build/a11y) → P1 (cross-view consistency) → P2 (polish, report-only).
+Severity: P0 (build/a11y) - P1 (cross-view consistency) - P2 (polish, report-only).
 
 ---
 
@@ -132,7 +132,7 @@ Finding/decision JSON shapes:
 
 ## Example invocations
 
-- _"Page team audit — eyebrows only"_
+- _"Page team audit - eyebrows only"_
 - _"Page team full: align Recognition card padding to Research"_
 - _"Run page agents for Vision hub icon consistency"_
 

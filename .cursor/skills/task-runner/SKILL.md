@@ -21,7 +21,7 @@ Process the repo-root `TASKS.md` checklist until every item is checked or a BLOC
 
 1. Read `TASKS.md` at the repo root.
 2. Pick the **first** unchecked `- [ ]` item only (skip items under Conventions).
-3. If that item starts with `BLOCKED:`, report the blocker and stop — do not continue.
+3. If that item starts with `BLOCKED:`, report the blocker and stop - do not continue.
 4. Implement that item fully (follow repo `AGENTS.md`).
 5. Run `npm run build` (or the AC named on the item).
 6. If verify passes, edit `TASKS.md` to `- [x]` for that item.
@@ -34,11 +34,11 @@ Process the repo-root `TASKS.md` checklist until every item is checked or a BLOC
 - Never mark an item done without verification.
 - If blocked after two attempts on the same item, edit it to `- [ ] BLOCKED: <reason>` and stop.
 - Do not commit unless the user asked.
-- Update checkboxes in `TASKS.md` — not only in chat.
+- Update checkboxes in `TASKS.md` - not only in chat.
 
 ## Efficiency: batch edits and parallel calls
 
-- **Batch edits:** implement each item with the fewest edits — combine changes to one file into a single edit.
+- **Batch edits:** implement each item with the fewest edits - combine changes to one file into a single edit.
 - **Read before edit:** read each file once, plan all changes, then apply them together.
 - **One item at a time:** never batch-mark checkboxes; verify before flipping `- [ ]` to `- [x]`.
 

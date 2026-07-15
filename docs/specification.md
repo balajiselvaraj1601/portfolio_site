@@ -1,37 +1,37 @@
 # Site Specification
 
 Tech-agnostic specification: information architecture, routing options, component hierarchy,
-per-section content contract, and behavior. Pairs with `requirements.md` (the "what") — this
+per-section content contract, and behavior. Pairs with `requirements.md` (the "what") - this
 is the "how it's structured".
 
 ## 1. Information architecture
 
 Primary structure: **single-page home** with **nav views**. All sections render once on `/` in
-DOM order (`content/pages/00_site.json → pages[id=home].sections`). Header nav scrolls to a view's first
-section using hash URLs (`/#experience`, `/#research`, …). All sections remain visible on scroll.
+DOM order (`content/pages/00_site.json - pages[id=home].sections`). Header nav scrolls to a view's first
+section using hash URLs (`/#experience`, `/#research`, ...). All sections remain visible on scroll.
 Legacy paths redirect to the matching hash on `/`.
 
 ```text
-/              About (default)  → viewSections: hero, thirukural, about
-/#experience   Experience       → experience
-/#research     Research         → publications, conferences, speakers
-/#recognition  Recognition      → awards, kaggle, education
-/#vision       Vision           → vision-programs
-/#contact      Contact          → contact
-/experience … /contact         → redirect stubs (noindex) → /#{viewAnchor}
+/              About (default)  - viewSections: hero, thirukural, about
+/#experience   Experience       - experience
+/#research     Research         - publications, conferences, speakers
+/#recognition  Recognition      - awards, kaggle, education
+/#vision       Vision           - vision-programs
+/#contact      Contact          - contact
+/experience ... /contact         - redirect stubs (noindex) - /#{viewAnchor}
 /404           custom not-found page
 ```
 
 The resume PDF remains a static asset at `public/assets/resume/balaji-selvaraj-resume.pdf`
 (direct-linkable), but has no nav entry and no site-config wiring.
 
-Each section id appears in exactly one `viewSections` group (exclusive nav grouping — no section
-is duplicated across nav buttons). Section ids and grouping are defined in `content/pages/00_site.json → pages`.
-The renderer (`SectionRenderer`) iterates the home section list — do not hardcode section order in markup.
+Each section id appears in exactly one `viewSections` group (exclusive nav grouping - no section
+is duplicated across nav buttons). Section ids and grouping are defined in `content/pages/00_site.json - pages`.
+The renderer (`SectionRenderer`) iterates the home section list - do not hardcode section order in markup.
 
-**Full home DOM order** (12 section ids): `hero` → `thirukural` → `about` →
-`experience` → `publications` → `conferences` → `speakers` → `awards` → `kaggle` →
-`education` → `vision-programs` → `contact`.
+**Full home DOM order** (12 section ids): `hero` - `thirukural` - `about` -
+`experience` - `publications` - `conferences` - `speakers` - `awards` - `kaggle` -
+`education` - `vision-programs` - `contact`.
 
 ## 2. Component hierarchy (logical, framework-neutral)
 
@@ -70,26 +70,26 @@ Reused primitives (define once, use everywhere): `Section`, `Chip`, `ResearchCar
 | --------------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
 | Hero            | `person/profile.json`                               | `heroTag`, `greeting`, `heroTitle`, `availability`, `metrics[]`, `ctas[]`, `portrait`                                        | Split layout; metric cards; value-oriented CTAs                            |
 | Thirukural      | `person/profile.json`                               | `heroQuote`                                                                                                                  | Couplet + portrait band; wrapped in HeroLanding with hero                  |
-| About           | `person/profile.json`, `person/collaborations.json` | `about.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro → CTO pillar card rows → collaborations logo strip                   |
+| About           | `person/profile.json`, `person/collaborations.json` | `about.*` (intro, strategicVision, businessImpact, platform, peopleMentoring, governanceAI/Privacy/GxP), collaboration logos | Intro - CTO pillar card rows - collaborations logo strip                   |
 | Experience      | `work/experience.json`                              | `title`, `intro`, `roles[] -> projects[] -> bullets[]`                                                                       | Section header + interactive tabbed timeline + role panels                 |
 | Publications    | `research/publications.json`                        | `items[]`                                                                                                                    | Stacked ResearchLinkGrid                                                   |
 | Conferences     | `research/conferences.json`                         | `items[]`                                                                                                                    | Stacked ResearchLinkGrid                                                   |
 | Speakers        | `research/speakers.json`                            | `items[]`                                                                                                                    | SpeakingCard stack                                                         |
-| Awards          | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, …)                                                                               | Search + level filter chips; recog card grid                               |
+| Awards          | `recognition/awards.json`                           | `items[]` (level, title, nominator, reason, ...)                                                                               | Search + level filter chips; recog card grid                               |
 | Kaggle          | `recognition/kaggle.json`                           | `rank`, `profile`, `items[]`                                                                                                 | Global rank hero; medal filters; CompetitionCard grid                      |
-| Education       | `recognition/education.json`                        | `intro`, `records[]`                                                                                                         | Split credential panel — degree hero, 2×2 stat grid, achievement highlight |
+| Education       | `recognition/education.json`                        | `intro`, `records[]`                                                                                                         | Split credential panel - degree hero, 2×2 stat grid, achievement highlight |
 | Vision Programs | `work/vision-board.json`                            | `hubs[]`, `programs[]`                                                                                                       | Infographic hub + program cards (Vision view)                              |
 | Vision Impact   | `work/vision-board.json`                            | `orgCards[]`                                                                                                                 | Organizational impact cards (Vision view)                                  |
 | Contact         | `person/profile.json`                               | `contact[]`, `contactIntro`, `contactPage`                                                                                   | Pitch + linked channels + optional booking CTA                             |
 
-The renderer maps `site.json.sections[id].source` → file, and `…title` → heading text.
+The renderer maps `site.json.sections[id].source` - file, and `...title` - heading text.
 
 ## 4. Responsive behavior
 
-- **Breakpoints (suggested):** mobile `< 640px`, tablet `640–1024px`, desktop `> 1024px`.
+- **Breakpoints (suggested):** mobile `< 640px`, tablet `640-1024px`, desktop `> 1024px`.
 - **Mobile-first**: single column; card grids collapse to 1 column on narrow viewports.
 - **Tablet:** Experience tabbed rail keeps a single column.
-- **Desktop:** comfortable max content width (~70–80ch for text).
+- **Desktop:** comfortable max content width (~70-80ch for text).
 - Header collapses to a hamburger menu below the tablet breakpoint.
 - No fixed heights that clip content; respect dynamic viewport units on mobile.
 
@@ -110,7 +110,7 @@ The renderer maps `site.json.sections[id].source` → file, and `…title` → h
 
 ## Related docs
 
-- [Architecture](./architecture.md) — how sections map to components
-- [Content editing](./content-editing.md) — changing JSON per section
-- [Requirements](./requirements.md) — feature scope
-- [Design direction](./design-direction.md) — visual treatment per component type
+- [Architecture](./architecture.md) - how sections map to components
+- [Content editing](./content-editing.md) - changing JSON per section
+- [Requirements](./requirements.md) - feature scope
+- [Design direction](./design-direction.md) - visual treatment per component type

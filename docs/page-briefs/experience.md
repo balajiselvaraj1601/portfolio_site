@@ -13,7 +13,7 @@
 
 Single `experience` section; the section header carries the view intro (eyebrow **Experience**,
 title, intro subtitle). The interactive career timeline follows, stacked top to bottom:
-a horizontal timeline bar (one `role="tab"` stop per role — marker on a gradient line, period +
+a horizontal timeline bar (one `role="tab"` stop per role - marker on a gradient line, period +
 short org label; current role selected by default, arrow-key navigable), then the focused role's
 company block (`card` shell: logo, position, org link, period/location, blurb, tech chips), then
 a project selector chip row (site-standard `recog-chip` filter buttons with an **All** default,

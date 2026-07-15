@@ -1,4 +1,4 @@
-# Balaji Selvaraj — Portfolio Site
+# Balaji Selvaraj - Portfolio Site
 
 A personal portfolio for **Balaji Selvaraj** (Technical AI Leader), built from his résumé
 content. It is a **static [Astro](https://astro.build) 4 site** that renders entirely from a
@@ -25,7 +25,7 @@ portfolio_site/
 │   ├── lib/content.ts     Loads content/**/*.json and validates against schemas.ts
 │   ├── schemas.ts         Zod schemas for every content file (build-time validation)
 │   └── styles/global.css  Design tokens, light/dark theme, utilities
-├── content/               ★ Single source of truth — site content (curated from résumé)
+├── content/                Single source of truth - site content (curated from résumé)
 │   ├── README.md            Provenance + curation rules
 │   ├── site.json            Site meta, pages/routes, section visibility, SEO defaults, theme
 │   ├── person/              Profile and affiliations
@@ -37,19 +37,19 @@ portfolio_site/
 │   ├── robots.txt         References the absolute Sitemap URL (keep in sync with SITE_URL)
 │   ├── .nojekyll          Stops GitHub Pages running Jekyll over _astro/
 │   └── site.webmanifest
-├── docs/                  Full documentation — start at docs/README.md
+├── docs/                  Full documentation - start at docs/README.md
 │                          Specs: requirements, specification, architecture, content-editing,
 │                          seo, accessibility, deployment, go-live-checklist, troubleshooting
 └── .github/workflows/
-    └── deploy.yml         npm ci → npm run build → upload dist/ → deploy-pages
+    └── deploy.yml         npm ci - npm run build - upload dist/ - deploy-pages
 ```
 
 ## Principles
 
 - **Content-driven (SSOT):** the site renders from JSON under `content/`. Don't hardcode copy in
-  components — change a JSON file to change the site. Each file is validated at build time
+  components - change a JSON file to change the site. Each file is validated at build time
   against `src/schemas/`; an invalid shape fails the build. Content is **derived from the
-  résumé** — see `content/README.md` for provenance and re-derivation.
+  résumé** - see `content/README.md` for provenance and re-derivation.
 - **Privacy:** no phone number, no References surfaced (curated public set).
 - **Static & accessible:** GitHub Pages, Lighthouse 95+, WCAG 2.1 AA.
 
@@ -58,11 +58,11 @@ portfolio_site/
 ```bash
 npm ci          # install pinned deps (use this, not `npm install`)
 npm run dev      # local dev server with HMR
-npm run build    # production build → dist/
+npm run build    # production build - dist/
 npm run preview  # serve the built dist/ locally to verify
 ```
 
-> **⚠️ Do not `npm update` `@astrojs/sitemap`.** It is pinned to **exactly `3.6.0`**.
+> **️ Do not `npm update` `@astrojs/sitemap`.** It is pinned to **exactly `3.6.0`**.
 > Versions ≥ 3.6.1 read routes from the `astro:routes:resolved` hook, which only exists in
 > **Astro 5**. Under Astro 4 that hook never fires and the integration crashes the build at
 > `astro:build:done` with `Cannot read properties of undefined (reading 'reduce')`. Keep the
@@ -71,9 +71,9 @@ npm run preview  # serve the built dist/ locally to verify
 ## Deploy (GitHub Pages user site)
 
 1. Create a repo named **`balajiselvaraj1601.github.io`** and push this folder to `main`.
-2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Every push to `main` runs `.github/workflows/deploy.yml` (`npm ci` → `npm run build` →
-   upload `dist/` → `deploy-pages`). The site publishes at https://balajiselvaraj1601.github.io.
+2. In the repo: **Settings - Pages - Build and deployment - Source: GitHub Actions**.
+3. Every push to `main` runs `.github/workflows/deploy.yml` (`npm ci` - `npm run build` -
+   upload `dist/` - `deploy-pages`). The site publishes at https://balajiselvaraj1601.github.io.
 
 The absolute site URL is set **once** in `astro.config.mjs` (`SITE_URL`); `Astro.site`,
 canonical/OG tags, and the sitemap all derive from it. `public/robots.txt` carries the same
@@ -92,7 +92,7 @@ Full index: **[docs/README.md](./docs/README.md)**
 | [environment-languages-skills.md](./docs/environment-languages-skills.md) | Languages, tooling, programmatic skills |
 | [requirements.md](./docs/requirements.md)                                 | MoSCoW features                         |
 | [specification.md](./docs/specification.md)                               | IA, routes, section contracts           |
-| [content-map.md](./docs/content-map.md)                                   | Résumé → portfolio traceability         |
+| [content-map.md](./docs/content-map.md)                                   | Résumé - portfolio traceability         |
 | [design-direction.md](./docs/design-direction.md)                         | Visual tokens and motion                |
 | [seo.md](./docs/seo.md)                                                   | Meta, OG, JSON-LD, sitemap              |
 | [accessibility.md](./docs/accessibility.md)                               | WCAG 2.1 AA checklist                   |
@@ -100,4 +100,4 @@ Full index: **[docs/README.md](./docs/README.md)**
 | [assets.md](./docs/assets.md)                                             | Résumé PDF, OG image, favicons          |
 | [troubleshooting.md](./docs/troubleshooting.md)                           | Common errors and fixes                 |
 
-`content/` and `docs/` are self-contained — no need to re-read the source résumé.
+`content/` and `docs/` are self-contained - no need to re-read the source résumé.

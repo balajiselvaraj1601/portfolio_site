@@ -23,7 +23,7 @@ Each Task prompt must include:
 3. Mode: Audit / Accept / Implement
 4. Requirement to return **JSON only**
 
-Example (parallel audits — send all Tasks in one message):
+Example (parallel audits - send all Tasks in one message):
 
 ```
 Read .claude/agents/page-experience.md, .claude/references/page-agent-playbook.md,
@@ -50,7 +50,7 @@ See [`docs/page-team.md`](../../docs/page-team.md).
 
 ## Efficiency: batch edits and parallel calls
 
-- **Parallel Tasks:** launch all page audits in a single message — one Task call each.
+- **Parallel Tasks:** launch all page audits in a single message - one Task call each.
 - **Batch edits:** within a Task's scope, combine changes to one file into a single edit.
 
 ## Quick reference: where to go deeper
@@ -58,5 +58,5 @@ See [`docs/page-team.md`](../../docs/page-team.md).
 | Topic                        | Reference file                                                                                                                       |
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
 | Full workflow, modes, phases | [`.claude/skills/page-consistency-team/SKILL.md`](../../.claude/skills/page-consistency-team/SKILL.md)                               |
-| View → agent map             | [`.claude/skills/page-consistency-team/assets/page-routing.csv`](../../.claude/skills/page-consistency-team/assets/page-routing.csv) |
+| View - agent map             | [`.claude/skills/page-consistency-team/assets/page-routing.csv`](../../.claude/skills/page-consistency-team/assets/page-routing.csv) |
 | Operator guide               | [`docs/page-team.md`](../../docs/page-team.md)                                                                                       |

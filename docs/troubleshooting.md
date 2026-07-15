@@ -61,7 +61,7 @@ matching schema.
 ## Local servers and ports
 
 Canonical prose home for the dev/preview server workflow. Port **values** SSOT:
-[`scripts/ports.mjs`](../scripts/ports.mjs) → imported by
+[`scripts/ports.mjs`](../scripts/ports.mjs) - imported by
 [`astro.config.mjs`](../astro.config.mjs) with `strictPort: true` (no silent port
 drift). Quick-reference port map: [AGENTS.md](../AGENTS.md#local-servers-and-ports).
 
@@ -92,20 +92,20 @@ Defined in [`scripts/dev-stop.mjs`](../scripts/dev-stop.mjs):
 
 | Function / script                                 | Scope                                | Use when                                      |
 | ------------------------------------------------- | ------------------------------------ | --------------------------------------------- |
-| `npm run dev:stop` → `stopAstroServers()`         | All 4300–4399 + both astro processes | Nuclear cleanup; stale/orphan listeners       |
-| `npm run dev:restart` → `stopDevServer()`         | 4321 + `astro dev` only              | Restart dev without killing preview           |
-| `npm run preview:restart` → `stopPreviewServer()` | 4331 + `astro preview` only          | Rebuild + restart preview without killing dev |
+| `npm run dev:stop` - `stopAstroServers()`         | All 4300-4399 + both astro processes | Nuclear cleanup; stale/orphan listeners       |
+| `npm run dev:restart` - `stopDevServer()`         | 4321 + `astro dev` only              | Restart dev without killing preview           |
+| `npm run preview:restart` - `stopPreviewServer()` | 4331 + `astro preview` only          | Rebuild + restart preview without killing dev |
 
 ### Startup workflows
 
 - **Dev only:** `npm run dev:restart` (or `dev:stop` then `npm run dev`)
-- **Preview only:** `npm run preview:restart` (stop preview → build → preview on 4331)
+- **Preview only:** `npm run preview:restart` (stop preview - build - preview on 4331)
 - **Both concurrently (recommended):**
 
   ```bash
   npm run serve         # stop orphans + build; then open two terminals:
-  npm run dev:restart   # terminal 1 → 4321
-  npm run preview       # terminal 2 → 4331 (dist already built)
+  npm run dev:restart   # terminal 1 to 4321
+  npm run preview       # terminal 2 to 4331 (dist already built)
   ```
 
   Manual alternative:
@@ -113,8 +113,8 @@ Defined in [`scripts/dev-stop.mjs`](../scripts/dev-stop.mjs):
   ```bash
   npm run dev:stop    # once, clear orphans
   npm run build       # preview needs dist/
-  npm run dev         # background → 4321
-  npm run preview     # background → 4331
+  npm run dev         # background - 4321
+  npm run preview     # background - 4331
   ```
 
   When server state is unknown, run `dev:stop` first. With selective-stop scripts,
@@ -123,8 +123,8 @@ Defined in [`scripts/dev-stop.mjs`](../scripts/dev-stop.mjs):
 
 ### Hard rules (anti-patterns)
 
-- **Never** pass `--port` / `--host` to `astro dev` or `astro preview` — use npm scripts only.
-- **Never** run `astro preview --port 4321` — it occupies the dev port and leaves 4331 empty;
+- **Never** pass `--port` / `--host` to `astro dev` or `astro preview` - use npm scripts only.
+- **Never** run `astro preview --port 4321` - it occupies the dev port and leaves 4331 empty;
   symptoms look like "preview not running."
 - **Never** start multiple `npm run dev` or `npm run preview` sessions without stopping first.
 - Preview requires a prior `npm run build`; dev does not.
@@ -147,7 +147,7 @@ Expected: both ports LISTEN, both return `200`. Optional deeper dev check:
 - Servers bind `host: true` on the remote machine; `localhost:PORT` in the **user's browser**
   only works if the port is forwarded.
 - Local `.vscode/settings.json` (gitignored) configures `remote.autoForwardPorts` for 4321 and
-  4331 — preview started in a background terminal may not auto-forward; manually add **4331**
+  4331 - preview started in a background terminal may not auto-forward; manually add **4331**
   in the Cursor **Ports** panel if remote `curl` passes but the browser fails.
 - If `curl` on the remote host fails, fix the server first (don't assume a forwarding issue).
 
@@ -159,10 +159,10 @@ Expected: both ports LISTEN, both return `200`. Optional deeper dev check:
 
 - Browser shows connection refused or a blank page at http://localhost:4321
 - Terminal logs `Port 4321 is already in use` (or `4331` for preview)
-- Stale agent sessions left listeners on random 43xx ports (4322, 4326, 4327, …)
+- Stale agent sessions left listeners on random 43xx ports (4322, 4326, 4327, ...)
 
-**Cause:** Multiple `astro dev` / `astro preview` processes compete for ports — common
-when agents, terminals, and the VS Code “Astro: dev preview” task all start servers
+**Cause:** Multiple `astro dev` / `astro preview` processes compete for ports - common
+when agents, terminals, and the VS Code "Astro: dev preview" task all start servers
 independently, or when ad-hoc `--port` flags drift from the pinned values. Pinned
 ports, stop/restart semantics, and the `--port`/`--host` anti-patterns:
 [Local servers and ports](#local-servers-and-ports) above.
@@ -170,19 +170,19 @@ ports, stop/restart semantics, and the `--port`/`--host` anti-patterns:
 **Fix:**
 
 ```bash
-npm run dev:stop      # stop all Astro listeners on 4300–4399
+npm run dev:stop      # stop all Astro listeners on 4300-4399
 npm run dev:restart   # clean dev server on 4321
 ```
 
 For a fresh production preview:
 
 ```bash
-npm run preview:restart   # stop → build → preview on 4331
+npm run preview:restart   # stop - build - preview on 4331
 ```
 
 Do **not** run several `npm run dev` or `npm run preview` sessions without stopping
-first. If you use the local `.vscode/tasks.json` “Astro: dev preview” task, run it
-manually when needed — it is no longer auto-started on folder open.
+first. If you use the local `.vscode/tasks.json` "Astro: dev preview" task, run it
+manually when needed - it is no longer auto-started on folder open.
 
 ### Theme flash on load
 
@@ -234,7 +234,7 @@ if: github.repository == 'balajiselvaraj1601/balajiselvaraj1601.github.io'
 times out. Later runs fail with:
 
 ```text
-Deployment request failed … due to in progress deployment. Please cancel <sha> first
+Deployment request failed ... due to in progress deployment. Please cancel <sha> first
 ```
 
 **Cause:** A prior Pages deployment was cancelled or wedged; GitHub still holds a lock on
@@ -277,7 +277,7 @@ The workflow uses `cancel-in-progress: true` so overlapping pushes do not stack 
 
 ### Assets 404 on live site (`/_astro/`, `/assets/`)
 
-**Cause:** Missing `.nojekyll` — GitHub Pages Jekyll ignores folders starting with `_`.
+**Cause:** Missing `.nojekyll` - GitHub Pages Jekyll ignores folders starting with `_`.
 
 **Fix:** Ensure `public/.nojekyll` exists (empty file). Rebuild and redeploy.
 
@@ -319,13 +319,13 @@ Run Lighthouse against `npm run preview` output or the live URL. See [Accessibil
 **Cause:** Social platforms cache preview images aggressively.
 
 **Fix:** Use LinkedIn Post Inspector or add a cache-busting query param temporarily after
-replacing `og-image.png`. Allow 24–48h for cache expiry.
+replacing `og-image.png`. Allow 24-48h for cache expiry.
 
 ## Getting help
 
-1. Run `npm run build` locally — most issues surface here.
+1. Run `npm run build` locally - most issues surface here.
 2. Check the GitHub Actions log for the failing step.
 3. Consult the relevant doc:
-   - Content → [Content editing](./content-editing.md)
-   - Deploy → [Deployment](./deployment.md) · [Go-live checklist](./go-live-checklist.md)
-   - Architecture → [Architecture](./architecture.md)
+   - Content - [Content editing](./content-editing.md)
+   - Deploy - [Deployment](./deployment.md) · [Go-live checklist](./go-live-checklist.md)
+   - Architecture - [Architecture](./architecture.md)

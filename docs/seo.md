@@ -1,33 +1,33 @@
 # SEO Plan
 
-SEO contract for the portfolio site. Defaults live in `content/pages/00_site.json → seo`; the renderer
+SEO contract for the portfolio site. Defaults live in `content/pages/00_site.json - seo`; the renderer
 injects them via `src/components/chrome/BaseHead.astro`.
 
-**Live site URL:** https://balajiselvaraj1601.github.io (configured in `astro.config.mjs` → `SITE_URL`).
+**Live site URL:** https://balajiselvaraj1601.github.io (configured in `astro.config.mjs` - `SITE_URL`).
 
 ## Implementation
 
 | Item                    | Status | Where                                               |
 | ----------------------- | ------ | --------------------------------------------------- |
-| `<title>` + description | ✅     | `content/pages/00_site.json` → `BaseHead.astro`     |
-| Canonical URL           | ✅     | Derived from `Astro.site` + page path               |
-| OpenGraph tags          | ✅     | `BaseHead.astro`                                    |
-| Twitter card            | ✅     | `summary_large_image`                               |
-| JSON-LD `Person`        | ✅     | Built from numbered page JSON + `site.seo.keywords` |
-| Sitemap                 | ✅     | `@astrojs/sitemap` → `dist/sitemap-index.xml`       |
-| robots.txt              | ✅     | `public/robots.txt`                                 |
-| OG image                | ✅     | `/assets/og/og-image.png` (1200×630)                |
-| `lang="en"`             | ✅     | `Layout.astro`                                      |
+| `<title>` + description |      | `content/pages/00_site.json` - `BaseHead.astro`     |
+| Canonical URL           |      | Derived from `Astro.site` + page path               |
+| OpenGraph tags          |      | `BaseHead.astro`                                    |
+| Twitter card            |      | `summary_large_image`                               |
+| JSON-LD `Person`        |      | Built from numbered page JSON + `site.seo.keywords` |
+| Sitemap                 |      | `@astrojs/sitemap` - `dist/sitemap-index.xml`       |
+| robots.txt              |      | `public/robots.txt`                                 |
+| OG image                |      | `/assets/og/og-image.png` (1200×630)                |
+| `lang="en"`             |      | `Layout.astro`                                      |
 
 ## Meta (per page)
 
-- `<title>` — `pages/00_site.json.seo.title` (e.g. "Balaji Selvaraj — Technical AI Leader").
-- `<meta name="description">` — `pages/00_site.json.seo.description`.
-- `<meta name="keywords">` — from `pages/00_site.json.seo.keywords`.
+- `<title>` - `pages/00_site.json.seo.title` (e.g. "Balaji Selvaraj - Technical AI Leader").
+- `<meta name="description">` - `pages/00_site.json.seo.description`.
+- `<meta name="keywords">` - from `pages/00_site.json.seo.keywords`.
 - `<link rel="canonical" href="https://balajiselvaraj1601.github.io/">`.
 - `<html lang="en">`.
 - `<meta name="viewport" content="width=device-width, initial-scale=1">`.
-- `<meta name="theme-color">` — light/dark via `media` variants.
+- `<meta name="theme-color">` - light/dark via `media` variants.
 
 ## OpenGraph + Twitter
 
@@ -35,16 +35,16 @@ Rendered in `BaseHead.astro`:
 
 ```html
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Balaji Selvaraj — Technical AI Leader" />
+<meta property="og:title" content="Balaji Selvaraj - Technical AI Leader" />
 <meta property="og:description" content="{{seo.description}}" />
 <meta property="og:url" content="https://balajiselvaraj1601.github.io/" />
 <meta
   property="og:image"
   content="https://balajiselvaraj1601.github.io/assets/og/og-image.png"
 />
-<meta property="og:image:alt" content="Balaji Selvaraj — Technical AI Leader" />
+<meta property="og:image:alt" content="Balaji Selvaraj - Technical AI Leader" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Balaji Selvaraj — Technical AI Leader" />
+<meta name="twitter:title" content="Balaji Selvaraj - Technical AI Leader" />
 <meta name="twitter:description" content="{{seo.description}}" />
 <meta
   name="twitter:image"
@@ -52,10 +52,10 @@ Rendered in `BaseHead.astro`:
 />
 ```
 
-To change copy: edit `content/pages/00_site.json` → `seo`. To change the image: replace
+To change copy: edit `content/pages/00_site.json` - `seo`. To change the image: replace
 `public/assets/og/og-image.png` (see [Assets](./assets.md)).
 
-## JSON-LD — `Person`
+## JSON-LD - `Person`
 
 Populated at build time from `content/pages/01_about.json`, `content/pages/06_contact.json`,
 and `site.seo.keywords`:
@@ -78,7 +78,7 @@ and `site.seo.keywords`:
     "https://github.com/balajiselvaraj1601",
     "https://www.kaggle.com/dhakshiin1601"
   ],
-  "knowsAbout": ["Technical AI Leader", "Applied AI", "…"],
+  "knowsAbout": ["Technical AI Leader", "Applied AI", "..."],
   "worksFor": { "@type": "Organization", "name": "AstraZeneca" }
 }
 ```
@@ -96,9 +96,9 @@ Generated automatically by `@astrojs/sitemap` (pinned 3.6.0). Output:
 - `dist/sitemap-0.xml`
 
 The sitemap lists **`/` only** as the canonical content URL. Legacy redirect stubs
-(`/experience`, `/projects`, …) are filtered out in `astro.config.mjs` because they are
+(`/experience`, `/projects`, ...) are filtered out in `astro.config.mjs` because they are
 `noindex` JS redirects to hash views on `/`. Hash URLs (`/#experience`, etc.) are intentionally
-not in the sitemap — search engines index the full single-page DOM at `/`.
+not in the sitemap - search engines index the full single-page DOM at `/`.
 
 Do not hand-maintain sitemap XML.
 
@@ -137,6 +137,6 @@ If moving to a custom domain (C4):
 
 ## Related docs
 
-- [Assets](./assets.md) — OG image specs
-- [Architecture](./architecture.md) — URL SSOT
-- [Content editing](./content-editing.md) — changing SEO fields in JSON
+- [Assets](./assets.md) - OG image specs
+- [Architecture](./architecture.md) - URL SSOT
+- [Content editing](./content-editing.md) - changing SEO fields in JSON

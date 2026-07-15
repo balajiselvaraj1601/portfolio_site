@@ -1,9 +1,9 @@
-# Cursor delegation — page team
+# Cursor delegation - page team
 
 When the orchestrator runs in **Claude Code** and implementation requires heavy
 multi-file edits across views, delegate to Cursor via codespace dispatch.
 
-**Cursor-native sessions:** skip dispatch — implement directly in workspace.
+**Cursor-native sessions:** skip dispatch - implement directly in workspace.
 
 ---
 

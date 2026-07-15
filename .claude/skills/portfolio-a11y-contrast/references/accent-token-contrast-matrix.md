@@ -1,7 +1,7 @@
 # Accent-token contrast matrix
 
 Every accent family and the surface it must be checked against. Reference token
-**names** only — the values live in `src/styles/global.css` `:root` (light + dark
+**names** only - the values live in `src/styles/global.css` `:root` (light + dark
 blocks), owned by `design-guardian`. Per `docs/design-direction.md`, the accent
 family is tuned to clear **AA ≥ 3:1 on `--bg-elev`** in both themes; this matrix
 is what you walk to verify that claim.
@@ -9,9 +9,9 @@ is what you walk to verify that claim.
 ## Rule of thumb
 
 - Accents render as **card top-borders, icon strokes, badges, and eyebrow /
-  link text** — all UI/large-text roles → **≥ 3:1** against their surface.
+  link text** - all UI/large-text roles - **≥ 3:1** against their surface.
 - When an accent is used as **body-size text** (e.g. inline links), the ≥ 4.5:1
-  body threshold applies instead — check the role, not just the token.
+  body threshold applies instead - check the role, not just the token.
 - The **surface** for card-shell accents is `--bg-elev` (cards); page-level
   accent text is on `--bg` / `--bg-alt`. Check each accent against the surface
   it actually paints on.
@@ -32,10 +32,10 @@ is what you walk to verify that claim.
 
 ## Notes on aliasing (follow the chain before measuring)
 
-- Many tokens are `var()` aliases (e.g. `--cat-impact` → `--accent-gold`;
-  `--lvl-evp` → `--accent-gold`; `--about-cat-*` → `--cat-*`; `--view-accent-*`
+- Many tokens are `var()` aliases (e.g. `--cat-impact` - `--accent-gold`;
+  `--lvl-evp` - `--accent-gold`; `--about-cat-*` - `--cat-*`; `--view-accent-*`
   point at `--accent` / `--lvl-*` / `--accent-gold`). Resolve to the literal hex
-  **in each theme block** before computing — see
+  **in each theme block** before computing - see
   `contrast-check-procedure.md`.
 - Because tokens alias, one failing base token cascades to every view/category
   that references it. Report the **base** token, and note the downstream views

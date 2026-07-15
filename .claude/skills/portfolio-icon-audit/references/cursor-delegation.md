@@ -60,7 +60,7 @@ INVALID IF: invented schema fields; wrong dimensions; raster-only when SVG requi
 
 ```
 DELEGATE_TO: Cursor Agent
-WORKSPACE: /home/engineer/workspace/image_gen  (author) → portfolio_site (install)
+WORKSPACE: /home/engineer/workspace/image_gen  (author) - portfolio_site (install)
 
 TASK
 Create org/program logo SVG and install at public/assets/logos/{slug}.svg.
@@ -103,7 +103,7 @@ WORKFLOW
 
 ```
 DELEGATE_TO: Cursor Agent
-WORKSPACE: /home/engineer/workspace/image_gen → portfolio_site
+WORKSPACE: /home/engineer/workspace/image_gen - portfolio_site
 
 TASK
 Create tech brand mark SVG and install at public/assets/logos/tech/{slug}.svg.
@@ -146,9 +146,9 @@ CONTEXT
 - New key: {new_key}
 - Entity: {entity_id} in {content_file}
 - Field: {field}
-- Style: 24×24 viewBox, stroke width ~1.5–2, fill="none" on strokes, match existing Icon.astro paths
+- Style: 24×24 viewBox, stroke width ~1.5-2, fill="none" on strokes, match existing Icon.astro paths
 - Reference icons: pill, microscope, blocks in src/components/Icon.astro
-- Acquisition: workspace/.claude/skills/ui-icon-acquisition/SKILL.md (Lucide → Iconify)
+- Acquisition: workspace/.claude/skills/ui-icon-acquisition/SKILL.md (Lucide - Iconify)
 
 CONSTRAINTS
 - Add key to iconNameSchema in src/lib/icons.ts (alphabetical-ish order in enum).
@@ -174,7 +174,7 @@ INVALID IF: key added to JSON but not registry; broken SVG path
 
 ```
 DELEGATE_TO: Cursor Agent
-WORKSPACE: /home/engineer/workspace/image_gen → portfolio_site
+WORKSPACE: /home/engineer/workspace/image_gen - portfolio_site
 
 TASK
 Regenerate site brand asset(s): {list: favicon | pwa-192 | pwa-512 | apple-touch | og-image}.
@@ -183,7 +183,7 @@ CONTEXT
 - Monogram: "BS" for Balaji Selvaraj
 - Accent: #6C2FBF (not legacy #2563eb in current favicon.svg)
 - Background: #0D0B1E
-- OG: 1200×630 text-led poster — name, title, accent background
+- OG: 1200×630 text-led poster - name, title, accent background
 - PWA: 192, 512, 180 (apple-touch) from master SVG
 
 CONSTRAINTS
@@ -211,7 +211,7 @@ OUTPUT FORMAT
 
 ```
 DELEGATE_TO: Cursor Agent
-WORKSPACE: /home/engineer/workspace/image_gen → portfolio_site
+WORKSPACE: /home/engineer/workspace/image_gen - portfolio_site
 
 TASK
 Create content image for {entity_id} at public/assets/images/{path}.
@@ -245,19 +245,19 @@ When 3+ assets share a class, batch into one package:
 
 ```
 DELEGATE_TO: Cursor Agent
-WORKSPACE: /home/engineer/workspace/image_gen → portfolio_site
+WORKSPACE: /home/engineer/workspace/image_gen - portfolio_site
 
 TASK
 Generate and install {N} tech_logo SVGs for the portfolio tech stack.
 
 CONTEXT
 Slugs and labels:
-- pytorch → PyTorch
-- aws → AWS
-- docker → Docker
-- langchain → LangChain
-- foundation-models → Foundation Models
-- rag → RAG
+- pytorch - PyTorch
+- aws - AWS
+- docker - Docker
+- langchain - LangChain
+- foundation-models - Foundation Models
+- rag - RAG
 
 (shared CONTEXT/CONSTRAINTS from tech_logo template)
 
@@ -276,10 +276,10 @@ INVALID IF: partial completion without listing failures
 
 ---
 
-## After Cursor returns — Claude checklist
+## After Cursor returns - Claude checklist
 
 1. Parse JSON output against VALID/INVALID criteria from delegation skill
-2. If `build: fail` → re-delegate with tighter constraints or fix instructions
+2. If `build: fail` - re-delegate with tighter constraints or fix instructions
 3. Run Phase F: `npm run build` independently to confirm
 4. Re-run audit inventory; update report
 5. Flag `needs_schema` items for separate implementation PR

@@ -12,10 +12,10 @@ enums live in `src/schemas/`.
 
 A card's shell always reads `var(--accent-card, var(--accent))`. Three ways to feed it:
 
-1. **Nothing set** → falls back to `--accent` (brand purple).
-2. **View wrapper sets it** → all cards in the section share one hue.
+1. **Nothing set** - falls back to `--accent` (brand purple).
+2. **View wrapper sets it** - all cards in the section share one hue.
 3. **Item hook class sets an item token** (`--cat` / `--lvl` / `--medal`) and the
-   card reads `var(--<item-token>, var(--view-accent-X))` — the item hue "un-suppresses"
+   card reads `var(--<item-token>, var(--view-accent-X))` - the item hue "un-suppresses"
    over the view fallback.
 
 Example (Vision programs, `global.css` ~L851):
@@ -29,8 +29,8 @@ Example (Vision programs, `global.css` ~L851):
 }
 ```
 
-`<li class="vision-accent-hook vision-accent-impact">` → `--cat` = gold →
-`--accent-card` = gold → shell + marks recolor. Drop the item class and the card
+`<li class="vision-accent-hook vision-accent-impact">` - `--cat` = gold -
+`--accent-card` = gold - shell + marks recolor. Drop the item class and the card
 falls back to the view's teal.
 
 ## What sets `--accent-card` (exhaustive)
@@ -44,29 +44,29 @@ falls back to the view's teal.
 | `#awards .recog-summary .theme-card.card` + `#awards .recog-card` level classes | `var(--lvl-*)` per award level (stat tiles + grid cards)                                                                                     |
 | `#awards .recog-chip.is-active` (with `.level-*`)                               | `var(--lvl-*)` per award level (active filter chip)                                                                                          |
 | `.recog-card.blob--silver / --bronze`                                           | `var(--medal-*)`                                                                                                                             |
-| `#kaggle .recog-summary .blob--competitions`                                    | `var(--cat-people)` (rose — Competitions tile)                                                                                               |
-| `#kaggle .recog-summary .blob--rank`                                            | `var(--lvl-director)` (teal — Global Rank tile)                                                                                              |
+| `#kaggle .recog-summary .blob--competitions`                                    | `var(--cat-people)` (rose - Competitions tile)                                                                                               |
+| `#kaggle .recog-summary .blob--rank`                                            | `var(--lvl-director)` (teal - Global Rank tile)                                                                                              |
 | `.edu-accent`                                                                   | `var(--accent-gold)`                                                                                                                         |
 | `.xp-stop` / `.xp-panel` via `.xp-level-*`                                      | `var(--lvl-*)` per role seniority                                                                                                            |
 | `.about__card-row.cat-*`                                                        | `var(--about-cat-*)` per category                                                                                                            |
-| `.vision-accent-{key}` + `.vision-accent-hook`                                  | `var(--cat, --view-accent-vision)` (flow + impact grid; impact orgCards use 3 accent groups ai/gxp/strategic — VI-001 superseded 2026-07-06) |
+| `.vision-accent-{key}` + `.vision-accent-hook`                                  | `var(--cat, --view-accent-vision)` (flow + impact grid; impact orgCards use 3 accent groups ai/gxp/strategic - VI-001 superseded 2026-07-06) |
 
 ## Per-view fallback tokens
 
-`global.css` `:root` (~L329) — one accent per nav view, used only as the fallback
+`global.css` `:root` (~L329) - one accent per nav view, used only as the fallback
 arm of the un-suppress `var()`:
 
 ```
---view-accent-about / -experience / -contact  → var(--accent)   (purple)
---view-accent-research     → var(--lvl-senior-director)  (blue)
---view-accent-recognition  → var(--accent-gold)          (gold)
---view-accent-vision       → var(--lvl-director)         (teal)
+--view-accent-about / -experience / -contact  - var(--accent)   (purple)
+--view-accent-research     - var(--lvl-senior-director)  (blue)
+--view-accent-recognition  - var(--accent-gold)          (gold)
+--view-accent-vision       - var(--lvl-director)         (teal)
 ```
 
 `--view-accent-experience` and `--view-accent-research` are **fallback-only** (their
-views use per-item hues). They look unused but are load-bearing fallbacks — do not delete.
+views use per-item hues). They look unused but are load-bearing fallbacks - do not delete.
 
-## Schema wiring (content JSON → box color)
+## Schema wiring (content JSON - box color)
 
 Per-item accents are typed enums in `src/schemas/`. A JSON key maps to a hook class
 maps to an item token.
@@ -78,18 +78,18 @@ maps to an item token.
 | `awardLevelSchema` (L340)  | `level`  | EVP, CIO, Senior Director, Director, Associate Director, National Level | `.level-`         |
 | `kaggleMedalSchema` (L390) | medal    | Silver, Bronze                                                          | `.blob--`         |
 
-Adding a new accent value means: extend the enum → add the class→token map in
-`global.css` → ensure the item token exists (`--cat-*` / `--lvl-*` / `--medal-*`).
+Adding a new accent value means: extend the enum - add the class-token map in
+`global.css` - ensure the item token exists (`--cat-*` / `--lvl-*` / `--medal-*`).
 See `change-recipes.md` §B.
 
-## Per-view (single) vs per-item (multi-color) — decide
+## Per-view (single) vs per-item (multi-color) - decide
 
-| Choose single per-view accent when…                                          | Choose per-item multi-color when…                                         |
+| Choose single per-view accent when...                                          | Choose per-item multi-color when...                                         |
 | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------- |
-| Cards are peers with no meaningful category (Contact links, Education stats) | Cards encode a real dimension — seniority, category, medal, program theme |
+| Cards are peers with no meaningful category (Contact links, Education stats) | Cards encode a real dimension - seniority, category, medal, program theme |
 | The section reads as one band                                                | Color carries information the reader should decode                        |
 | Fewer than ~3 distinct hues would apply                                      | A typed enum already exists for the dimension                             |
 
 Current shipped direction is **multi-color per view** (reverted 2026-07-05); the wash
 was universalized 2026-07-06. Confirm the current intent in `box-color-history.md`
-before flipping a view's strategy — this has been reversed before.
+before flipping a view's strategy - this has been reversed before.

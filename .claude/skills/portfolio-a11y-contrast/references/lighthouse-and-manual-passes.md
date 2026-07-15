@@ -2,18 +2,18 @@
 
 The automated and manual verification steps that close the a11y gate. Sourced
 from `docs/accessibility.md` ("Verification") and `docs/go-live-checklist.md`
-(Phase 3). Run these **post-deploy** — they are the acceptance gate, not an
+(Phase 3). Run these **post-deploy** - they are the acceptance gate, not an
 edit step.
 
 ## Automated: Lighthouse
 
 - **Target:** Accessibility **≥ 95**, with **zero serious violations**.
 - **When:** post-deploy, against the live URL
-  (`https://balajiselvaraj1601.github.io`) — `docs/go-live-checklist.md`
+  (`https://balajiselvaraj1601.github.io`) - `docs/go-live-checklist.md`
   Phase 3.
 - Go-live checklist also expects Lighthouse **≥ 95 on Performance, Best
   Practices, and SEO**; this skill owns the **Accessibility** score specifically.
-- A score ≥ 95 does **not** waive the manual passes below — automated tooling
+- A score ≥ 95 does **not** waive the manual passes below - automated tooling
   misses keyboard-flow and screen-reader issues.
 
 ## Manual: keyboard pass (`docs/accessibility.md`)
@@ -40,7 +40,7 @@ Walk the site with the keyboard only:
 ## Manual: motion & preferences
 
 - With **reduced motion** requested by the OS, non-essential animation is
-  suppressed — motion is gated behind `prefers-reduced-motion: no-preference`
+  suppressed - motion is gated behind `prefers-reduced-motion: no-preference`
   in `global.css` (owned by `design-guardian`). No flashing content.
 - Theme respects `prefers-color-scheme`; the manual toggle persists and carries
   an `aria-label`. **Both** resulting themes must pass the contrast matrix.

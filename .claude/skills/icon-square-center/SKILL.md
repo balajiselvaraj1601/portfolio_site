@@ -1,7 +1,7 @@
 ---
 name: icon-square-center
 description: >-
-  Square-and-center black-background raster icons (PNG) WITHOUT resizing — crop to
+  Square-and-center black-background raster icons (PNG) WITHOUT resizing - crop to
   content, center on a square canvas, trim excess black margin. Trigger on "square the
   icons", "center the icons", "trim black margins", "icons aren't square", "icon not
   centered", or when a batch of raster icons has uneven/large black borders. NOT for SVG
@@ -11,8 +11,8 @@ description: >-
 # Icon square center Skill
 
 Fixes a folder of raster icons that sit on a near-black background but are **non-square**,
-**off-center**, or have **large uneven black margins** — producing square, centered icons with
-a small symmetric margin. **Pixels are never resized/resampled** — content is cropped and
+**off-center**, or have **large uneven black margins** - producing square, centered icons with
+a small symmetric margin. **Pixels are never resized/resampled** - content is cropped and
 translated verbatim, so it is provably lossless.
 
 ## When to use
@@ -27,9 +27,9 @@ or recoloring/normalizing ink luminance (`scripts/icons/normalize-icon-ink.py`).
 
 1. **Inclusive crop bbox** (`crop_bbox`): union of main ink (`max(R,G,B) > THR`, default 20) and
    dim anti-aliasing tail (`> PROBE_THR`, default 6). Crops all non-black ink down to the noise
-   floor — no faint halos left in the source black field.
+   floor - no faint halos left in the source black field.
 2. **Full-bleed guard**: if the union bbox covers **>92%** of the source canvas, stair-step to
-   higher ink thresholds (200 → 240). If still >92%, **fail fast** (`FullBleedSourceError`) —
+   higher ink thresholds (200 to 240). If still >92%, **fail fast** (`FullBleedSourceError`) -
    re-render the source with more black margin (glyph too large for the artboard).
 3. Crop **exactly** to `crop_bbox` (never inside it), then paste **centered** on a square black
    canvas of side `max(cw,ch) + 2·max(1, round(MARGIN·max(cw,ch)))` (default MARGIN 0.08 ≈ 8%
@@ -46,7 +46,7 @@ rule can never drift.
 
 Run in batches (Haiku sub-agents are fine for parallel execution; see discipline note below).
 `icon_collections_fixed/` typically lives outside the repo, so writes may need
-`dangerouslyDisableSandbox` — the sandbox write-allowlist does not cover arbitrary workspace dirs.
+`dangerouslyDisableSandbox` - the sandbox write-allowlist does not cover arbitrary workspace dirs.
 
 ```bash
 S=.claude/skills/icon-square-center/scripts
@@ -71,20 +71,20 @@ take arbitrary `--src/--out` and accept either `--files NAME ...` or `--all`.
 
 ## Verification (two independent measurements + a falsifiable eye check)
 
-This follows the repo's existing convention — see `scripts/icons/verify-icon.py`: _"the generator's own
-`_verify()` asserts its output during a run; this is the second, independent measurement … two
+This follows the repo's existing convention - see `scripts/icons/verify-icon.py`: _"the generator's own
+`_verify()` asserts its output during a run; this is the second, independent measurement ... two
 independent measurements agreeing is far stronger evidence than one."_
 
 - **`validate-square-center.py`** re-derives geometry from the finished OUTPUT and byte-compares
-  `source[crop_bbox]` against `output[paste-region]` (`content_identical`) — the authoritative
+  `source[crop_bbox]` against `output[paste-region]` (`content_identical`) - the authoritative
   no-loss gate. Also checks square, centered, no-edge-clip, and `probe_sanity` (zero ink pixels
   above `PROBE_THR` outside `crop_bbox` on the source).
 - **`verify-crop-visual.py`** additionally counts ink pixels (`PROBE_THR`) lying **outside** the
   kept `crop_bbox` (`fg_pixels_outside_crop`, must be 0) and renders composites where any such
-  pixel is painted magenta. Clean crop → no magenta, and the green frame has a visible black gap
+  pixel is painted magenta. Clean crop - no magenta, and the green frame has a visible black gap
   around the object.
 
-## Verification discipline (lessons — read before trusting a check)
+## Verification discipline (lessons - read before trusting a check)
 
 1. **Prove a metric measures what you claim, and audit the FALSE-PASS direction.** A no-loss check
    on foreground _count_ + bbox _dims_ can pass even if pixels were altered (same count, same box).
@@ -94,24 +94,24 @@ independent measurements agreeing is far stronger evidence than one."_
    the ring is bounded by the same threshold it compared against, so it was near-tautological.)
 
 2. **Back a metric check with a check that can FALSIFY it.** The first composite drew the rectangle
-   _on_ the tight bbox — the object always visually "touches" a tight box, so vision reviewers can't
+   _on_ the tight bbox - the object always visually "touches" a tight box, so vision reviewers can't
    distinguish "touches" (fine) from "exceeds" (bad), and they raised false alarms. The fix: an
-   outward-gapped frame plus a magenta overlay of any genuinely-excluded pixel — a picture that is
+   outward-gapped frame plus a magenta overlay of any genuinely-excluded pixel - a picture that is
    blank when correct and unmistakable when wrong.
 
 3. **Sub-agent fan-out over a deterministic script is parallel EXECUTION, not verification.** Fanning
-   Haiku agents across a batch to run this cropper adds throughput, not correctness — the real gate
+   Haiku agents across a batch to run this cropper adds throughput, not correctness - the real gate
    is the deterministic scripts above. Reserve sub-agents for genuine per-item _judgment_ (e.g. the
    vision pass), and treat their subjective flags as candidates to reconcile against the deterministic
    proof, not as ground truth.
 
 ## When to load references
 
-| If the task involves…                     | Load                                           |
+| If the task involves...                     | Load                                           |
 | ----------------------------------------- | ---------------------------------------------- |
 | The exact detection thresholds / geometry | Read `scripts/icon_common.py` (SSOT constants) |
-| Running the crop / validate / verify pass | Run the scripts below — no doc load needed     |
-| Simple square-and-center (default)        | Inline guidance above — no reference needed    |
+| Running the crop / validate / verify pass | Run the scripts below - no doc load needed     |
+| Simple square-and-center (default)        | Inline guidance above - no reference needed    |
 
 ## Efficiency: batch edits and parallel calls
 

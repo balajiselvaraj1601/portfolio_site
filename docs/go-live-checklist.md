@@ -14,7 +14,7 @@ Step-by-step guide to publishing the portfolio at https://balajiselvaraj1601.git
 
 ---
 
-## Phase 1 — Local verification
+## Phase 1 - Local verification
 
 Run before any push:
 
@@ -51,7 +51,7 @@ npm run preview
 
 ---
 
-## Phase 2 — GitHub setup
+## Phase 2 - GitHub setup
 
 ### Authenticate
 
@@ -69,7 +69,7 @@ If it does not exist:
 ```bash
 gh repo create balajiselvaraj1601.github.io \
   --public \
-  --description "Balaji Selvaraj — Technical AI Leader portfolio (GitHub Pages)"
+  --description "Balaji Selvaraj - Technical AI Leader portfolio (GitHub Pages)"
 ```
 
 Or create manually on GitHub with the exact name `balajiselvaraj1601.github.io`.
@@ -85,8 +85,8 @@ git push -u origin main
 
 In the repo on GitHub:
 
-1. **Settings** → **Pages**
-2. **Build and deployment** → **Source:** select **GitHub Actions**
+1. **Settings** - **Pages**
+2. **Build and deployment** - **Source:** select **GitHub Actions**
 3. Do not use "Deploy from a branch"
 
 ### Verify workflow
@@ -100,7 +100,7 @@ Both **build** and **deploy** jobs must succeed.
 
 ---
 
-## Phase 3 — Post-deploy verification
+## Phase 3 - Post-deploy verification
 
 Visit https://balajiselvaraj1601.github.io
 
@@ -113,8 +113,8 @@ Visit https://balajiselvaraj1601.github.io
 
 ### SEO validation
 
-- [ ] [Google Rich Results Test](https://search.google.com/test/rich-results) — JSON-LD valid
-- [ ] [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) — OG image renders
+- [ ] [Google Rich Results Test](https://search.google.com/test/rich-results) - JSON-LD valid
+- [ ] [LinkedIn Post Inspector](https://www.linkedin.com/post-inspector/) - OG image renders
 - [ ] Lighthouse ≥ 95 on Performance, Accessibility, Best Practices, SEO
 
 ### Optional staging mirror
@@ -130,11 +130,11 @@ Deploy is skipped on staging; build job still validates every push.
 
 ---
 
-## Phase 4 — Announce
+## Phase 4 - Announce
 
 - [ ] Update LinkedIn profile with site URL
 - [ ] Add URL to résumé PDF (next export)
-- [ ] Test sharing the URL in Slack/email — confirm OG card preview
+- [ ] Test sharing the URL in Slack/email - confirm OG card preview
 
 ---
 
@@ -143,8 +143,8 @@ Deploy is skipped on staging; build job still validates every push.
 | Task                | When           | How                                                     |
 | ------------------- | -------------- | ------------------------------------------------------- |
 | Update copy         | Résumé changes | Re-derive JSON under `content/` -> push                 |
-| Update résumé PDF   | New export     | Replace `public/assets/resume/*.pdf` → push             |
-| Content-only change | Anytime        | Edit JSON → `npm run build` → push                      |
+| Update résumé PDF   | New export     | Replace `public/assets/resume/*.pdf` - push             |
+| Content-only change | Anytime        | Edit JSON - `npm run build` - push                      |
 | Dependency update   | Cautiously     | Never bump `@astrojs/sitemap` without Astro 5 migration |
 
 Every push to `main` on the user-site repo auto-deploys within ~2 minutes.
@@ -173,6 +173,6 @@ Prefer `git revert` over force-push on `main`.
 
 ## Related docs
 
-- [Deployment](./deployment.md) — CI/CD details and artifact table
-- [Troubleshooting](./troubleshooting.md) — if something fails
-- [Getting started](./getting-started.md) — local dev reference
+- [Deployment](./deployment.md) - CI/CD details and artifact table
+- [Troubleshooting](./troubleshooting.md) - if something fails
+- [Getting started](./getting-started.md) - local dev reference

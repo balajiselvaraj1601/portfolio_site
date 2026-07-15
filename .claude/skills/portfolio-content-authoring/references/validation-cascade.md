@@ -1,10 +1,10 @@
 # Validation cascade
 
 `npm run build` runs `src/lib/content.ts`, which loads and validates every
-content file at build time and throws on the first failure — so malformed
+content file at build time and throws on the first failure - so malformed
 content never ships. The checks run in this order; know the failure shapes so you
 can jump straight to the cause. The messages below are quoted from `content.ts` /
-the `load()` helper — treat those files as the SSOT for exact wording.
+the `load()` helper - treat those files as the SSOT for exact wording.
 
 ## 1. Content shape (Zod `safeParse`)
 
@@ -17,8 +17,8 @@ Invalid content in <file>:
 ```
 
 e.g. `Invalid content in profile.json:` / `• contact.2.href: Invalid url`. The
-path is the JSON location. **Fix:** correct the field at that path, or — if you
-meant to add a new field — extend the schema first (see
+path is the JSON location. **Fix:** correct the field at that path, or - if you
+meant to add a new field - extend the schema first (see
 `schema-first-recipe.md`).
 
 ## 2. Entity slug resolution
@@ -31,7 +31,7 @@ and Vision programs. A dangling slug throws:
 <context>: unknown entity slug "<slug>"
 ```
 
-**Fix:** add `"<slug>": { "name": …, "url": … }` to `content/pages/99_entities.json`
+**Fix:** add `"<slug>": { "name": ..., "url": ... }` to `content/pages/99_entities.json`
 (the `url` must itself be a valid URL, enforced by `entitiesSchema`), or correct
 the slug in the content file.
 
@@ -40,7 +40,7 @@ the slug in the content file.
 `assertLogoAsset()` checks every referenced logo slug against the files scanned
 from `public/assets/logos/` (subfolders in `LOGO_SUBDIRS = ['org','marks','']`,
 extensions tried in `LOGO_EXTS = ['png','svg','webp','avif']`). Referenced slugs
-come from Collaborations `logo`, Vision marks (`kind:'logo'` → `asset`),
+come from Collaborations `logo`, Vision marks (`kind:'logo'` - `asset`),
 publications/conferences/speakers `logo`, and Kaggle `logo`. Missing asset throws:
 
 ```
@@ -48,7 +48,7 @@ content logo reference: missing logo asset "<slug>" under public/assets/logos/
 ```
 
 **Fix:** drop the file into `public/assets/logos/org/` (brand logos) or
-`.../marks/` (generated marks) with the slug as its filename — no code change —
+`.../marks/` (generated marks) with the slug as its filename - no code change -
 or remove/correct the `logo`/`asset` reference. (Adding the _image itself_ is the
 `portfolio-icon-*` skills' domain; this skill only cares that the slug resolves.)
 
@@ -77,14 +77,14 @@ has a component in both `SectionRenderer.astro` and `section-ids.ts`.
 Not content, but the same build asserts every `iconNameSchema` option has
 geometry in `src/lib/icon-paths.json`:
 `icon-paths.json: missing geometry for icon "<name>"`. Owned by the
-`portfolio-icon-*` skills — noted here so the error isn't mistaken for a content
+`portfolio-icon-*` skills - noted here so the error isn't mistaken for a content
 bug.
 
 ## Diagnosis order
 
-1. Read the thrown line. `Invalid content in …` → shape (step 1). A bare
-   `unknown entity slug` / `missing logo asset` / `section …` → steps 2–4.
-2. Jump to the named file and path. Do not re-run repeatedly to bisect — the
+1. Read the thrown line. `Invalid content in ...` - shape (step 1). A bare
+   `unknown entity slug` / `missing logo asset` / `section ...` - steps 2-4.
+2. Jump to the named file and path. Do not re-run repeatedly to bisect - the
    message already localizes the fault.
 3. Rebuild after the fix; the loader is fail-fast, so one clean build means all
    cascades passed.

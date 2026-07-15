@@ -1,4 +1,4 @@
-# scripts/icons/ — icon & logo pipeline
+# scripts/icons/ - icon & logo pipeline
 
 Tooling that turns raster icon sources (PNG) into the optimized, recolorable
 SVG marks and UI glyphs the site ships (`public/assets/logos/`,
@@ -9,12 +9,12 @@ SVG marks and UI glyphs the site ships (`public/assets/logos/`,
 
 | Command                                              | Purpose                                                                  |
 | ---------------------------------------------------- | ------------------------------------------------------------------------ |
-| `./scripts/icons/batch-icon-generate.sh [DIR] [...]` | Trace every `icon_*.png` in a set → tight SVG (per-archetype mask flags) |
+| `./scripts/icons/batch-icon-generate.sh [DIR] [...]` | Trace every `icon_*.png` in a set - tight SVG (per-archetype mask flags) |
 | `./scripts/icons/generate-icon.sh SRC NAME [...]`    | One-off wrapper around the generator                                     |
-| `python3 scripts/icons/svg-icon-generator.py`        | Canonical 7-phase trace pipeline (SSOT — see `SVG-ICON-GENERATOR.md`)    |
+| `python3 scripts/icons/svg-icon-generator.py`        | Canonical 7-phase trace pipeline (SSOT - see `SVG-ICON-GENERATOR.md`)    |
 | `python3 scripts/icons/verify-icon.py *.svg`         | Independent margin/flush/centering check (used by `npm run test:icons`)  |
-| `python3 scripts/icons/normalize-mark-viewbox.py`    | `apply`/`check` — equal ink-footprint gate for `logos/marks/`            |
-| `./scripts/icons/regenerate-marks-from-png.sh`       | PNG → `logo_*.svg` marks without the batch normalizer                    |
+| `python3 scripts/icons/normalize-mark-viewbox.py`    | `apply`/`check` - equal ink-footprint gate for `logos/marks/`            |
+| `./scripts/icons/regenerate-marks-from-png.sh`       | PNG - `logo_*.svg` marks without the batch normalizer                    |
 | `./scripts/icons/install-icon-collections-png.sh`    | Copy square-centered PNGs into `public/assets/logos/{subdir}/`           |
 | `./scripts/icons/install-vision-logos.sh`            | Install `*-icon-512.svg` outputs as `logo_*` marks                       |
 | `node scripts/icons/export-icon-svgs.mjs`            | Stage UI icon SVGs into `.icon-stage/` for geometry refresh              |
@@ -23,7 +23,7 @@ SVG marks and UI glyphs the site ships (`public/assets/logos/`,
 
 Config SSOT: `icon-sets.json` (set registry, mask archetypes, install
 overrides). Tuning template: `icon-generator-example.json`. Golden tests:
-`npm run test:icons` → `tests/run-icon-tests.py`.
+`npm run test:icons` - `tests/run-icon-tests.py`.
 
 ## Dormant manual utilities (kept for reference)
 

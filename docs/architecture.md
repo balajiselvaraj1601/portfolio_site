@@ -8,7 +8,7 @@ Technical overview of the Astro 4 portfolio site.
 content/**/*.json
     │
     ▼
-src/lib/content.ts  ── validates against ──►  src/schemas/ (Zod)
+src/lib/content.ts  ── validates against ──-  src/schemas/ (Zod)
     │
     ▼
 src/components/sections/*.astro  +  shared components
@@ -33,7 +33,7 @@ GitHub Pages  (via .github/workflows/deploy.yml)
 | Framework  | Astro 4.16               | Static output only; minimal client JS           |
 | Validation | Zod 3                    | Build-time content validation                   |
 | Styling    | Hand-rolled CSS          | Design tokens in `global.css`; no CSS framework |
-| Sitemap    | `@astrojs/sitemap` 3.6.0 | **Pinned** — do not upgrade on Astro 4          |
+| Sitemap    | `@astrojs/sitemap` 3.6.0 | **Pinned** - do not upgrade on Astro 4          |
 | Hosting    | GitHub Pages             | User site at domain root                        |
 | CI         | GitHub Actions           | Build on push; deploy gated to user-site repo   |
 
@@ -53,9 +53,9 @@ portfolio_site/
 └── src/
     ├── components/
     │   ├── SectionRenderer.astro
-    │   ├── chrome/          Header, Footer, BaseHead, …
-    │   ├── ui/              Chip, Icon, Section, …
-    │   ├── cards/           CompetitionCard, HubCircle, …
+    │   ├── chrome/          Header, Footer, BaseHead, ...
+    │   ├── ui/              Chip, Icon, Section, ...
+    │   ├── cards/           CompetitionCard, HubCircle, ...
     │   └── sections/        Page section components
     ├── layouts/  lib/  pages/  scripts/  styles/
     └── schemas.ts
@@ -69,9 +69,9 @@ portfolio_site/
 | `src/schemas/`                            | Content shape contracts (SSOT for types)                                      |
 | `src/lib/content.ts`                      | Imports JSON, validates, exports typed data                                   |
 | `content/pages/00_site.json`              | Page/route definitions (`pages`), section visibility, SEO, résumé path        |
-| `src/pages/index.astro`                   | Home route — renders all sections via `SectionRenderer` with scroll-spy views |
+| `src/pages/index.astro`                   | Home route - renders all sections via `SectionRenderer` with scroll-spy views |
 | `src/pages/{view}.astro` (stubs)          | Legacy paths redirect to `/#anchor` via `ViewRedirect` (no section rendering) |
-| `src/components/SectionRenderer.astro`    | Section id → component map (SSOT); renders an ordered list of section ids     |
+| `src/components/SectionRenderer.astro`    | Section id - component map (SSOT); renders an ordered list of section ids     |
 | `src/components/chrome/BaseHead.astro`    | Meta, OG, Twitter, JSON-LD                                                    |
 | `src/components/chrome/ThemeScript.astro` | Inline theme bootstrap (no flash)                                             |
 | `src/components/chrome/Header.astro`      | Route nav (server-side active state), mobile menu, theme toggle, résumé CTA   |
@@ -79,25 +79,25 @@ portfolio_site/
 
 ## Content layer
 
-All site copy lives in JSON under `content/`. Components import from `@lib/content` — they never
+All site copy lives in JSON under `content/`. Components import from `@lib/content` - they never
 embed strings for section content.
 
 Validation is **fail-fast**: `load()` in `content.ts` calls `schema.safeParse()` and throws
 with a field path on mismatch. This catches drift at `npm run build`, not in production.
 
-TypeScript types are derived via `z.infer<typeof schema>` — no parallel hand-written interfaces.
+TypeScript types are derived via `z.infer<typeof schema>` - no parallel hand-written interfaces.
 
 ## Rendering model
 
 ### Single-page scroll with nav anchors
 
-All sections render once on `/` in the order defined by `site.json → pages[id=home].sections`
-and are **always visible** — the home page is a continuous scroll through every section, grouped
+All sections render once on `/` in the order defined by `site.json - pages[id=home].sections`
+and are **always visible** - the home page is a continuous scroll through every section, grouped
 contiguously in nav-button order. Header nav does not load separate pages and does not hide
 anything; clicking a button **scrolls** to that view's first section (hash URLs `/#research`,
-`/#experience`, …) and a scroll-spy keeps the active button in sync as you scroll.
+`/#experience`, ...) and a scroll-spy keeps the active button in sync as you scroll.
 
-Legacy route files under `src/pages/` (`experience.astro`, `research.astro`, …) are thin
+Legacy route files under `src/pages/` (`experience.astro`, `research.astro`, ...) are thin
 redirect stubs to the matching hash on `/`.
 
 ```typescript
@@ -109,7 +109,7 @@ initSectionViews({ views, defaultView }); // nav buttons scroll to a view's firs
 ```
 
 The `viewSections` arrays still group sections under exactly one nav button (validated at build
-time) — they now drive the scroll target and active-state mapping rather than visibility.
+time) - they now drive the scroll target and active-state mapping rather than visibility.
 
 Adding a section requires: JSON under `content/`, Zod schema, section component, entry in
 `SectionRenderer`, `sections[id]` in `site.json`, listing in `home.sections`, and assignment
@@ -119,7 +119,7 @@ to at least one `viewSections` array. `content.ts` validates view wiring at buil
 
 JS provides progressive enhancement on `/`:
 
-- Nav scroll + scroll-spy (`section-views.ts`) — buttons scroll to a section; active state tracks
+- Nav scroll + scroll-spy (`section-views.ts`) - buttons scroll to a section; active state tracks
   scroll position. Without JS, all sections remain visible and hash anchors still jump natively.
 - Theme toggle + `localStorage` persistence
 - Mobile menu (focus trap, Esc to close)
@@ -158,9 +158,9 @@ Single source of truth: `SITE_URL` in `astro.config.mjs`.
 
 Derived from it:
 
-- `Astro.site` → canonical URLs, OG image absolute URLs
-- `@astrojs/sitemap` → sitemap entries
-- Must stay in sync manually: `public/robots.txt` → `Sitemap:` line
+- `Astro.site` - canonical URLs, OG image absolute URLs
+- `@astrojs/sitemap` - sitemap entries
+- Must stay in sync manually: `public/robots.txt` - `Sitemap:` line
 
 For a GitHub Pages **user site**, `base` is `'/'`. A project repo would need `base: '/repo-name/'`.
 
@@ -168,8 +168,8 @@ For a GitHub Pages **user site**, `base` is `'/'`. A project repo would need `ba
 
 `.github/workflows/deploy.yml`:
 
-1. **build** job — runs on every push to `main` in any repo
-2. **deploy** job — runs only when `github.repository == 'balajiselvaraj1601/balajiselvaraj1601.github.io'`
+1. **build** job - runs on every push to `main` in any repo
+2. **deploy** job - runs only when `github.repository == 'balajiselvaraj1601/balajiselvaraj1601.github.io'`
 
 The staging mirror `balajiselvaraj1601/portfolio_site` validates builds without publishing.
 
@@ -182,12 +182,12 @@ Details: [Deployment](./deployment.md).
 | New section          | JSON + schema + component + site.json nav entry                      |
 | Project detail pages | New route `src/pages/projects/[id].astro` + link from Projects cards |
 | Custom domain        | `public/CNAME` + DNS + update `SITE_URL`                             |
-| Contact form         | Third-party endpoint (Formspree/Web3Forms) — see requirements C1     |
-| Analytics            | Plausible/GoatCounter script in Layout — see requirements C3         |
+| Contact form         | Third-party endpoint (Formspree/Web3Forms) - see requirements C1     |
+| Analytics            | Plausible/GoatCounter script in Layout - see requirements C3         |
 
 ## Related docs
 
-- [Specification](./specification.md) — section contracts and IA
-- [Content editing](./content-editing.md) — how to change JSON safely
-- [Environment languages & skills](./environment-languages-skills.md) — languages, automation, skill tiers
-- [Requirements](./requirements.md) — feature scope
+- [Specification](./specification.md) - section contracts and IA
+- [Content editing](./content-editing.md) - how to change JSON safely
+- [Environment languages & skills](./environment-languages-skills.md) - languages, automation, skill tiers
+- [Requirements](./requirements.md) - feature scope

@@ -18,15 +18,15 @@ Orchestrate a full audit of visual assets across the portfolio site. **Claude in
 - **Repo:** `/home/engineer/workspace/portfolio_site` (AgentMemory slug: `portfolio_site`)
 - **Read on demand:** `AGENTS.md`, `docs/design-direction.md`, `docs/assets.md`
 - **Reference files (load when executing):**
-  - [references/content-inventory.md](references/content-inventory.md) — entity → field → component map
-  - [references/resolution-rules.md](references/resolution-rules.md) — matching logic, slugs, trademark policy
-  - [references/cursor-delegation.md](references/cursor-delegation.md) — Cursor handoff templates
+  - [references/content-inventory.md](references/content-inventory.md) - entity - field - component map
+  - [references/resolution-rules.md](references/resolution-rules.md) - matching logic, slugs, trademark policy
+  - [references/cursor-delegation.md](references/cursor-delegation.md) - Cursor handoff templates
 
-## Two asset systems — never conflate
+## Two asset systems - never conflate
 
 | Asset class            | Source of truth                              | Output location                                                 |
 | ---------------------- | -------------------------------------------- | --------------------------------------------------------------- |
-| **Semantic UI icon**   | `src/lib/icons.ts` + `Icon.astro`            | Inline SVG via `<Icon name="…" />`                              |
+| **Semantic UI icon**   | `src/lib/icons.ts` + `Icon.astro`            | Inline SVG via `<Icon name="..." />`                              |
 | **Org / program logo** | `VisionMark` `{ kind: "logo", asset: slug }` | `public/assets/logos/{slug}.svg`                                |
 | **Site brand**         | `docs/assets.md`                             | `public/favicon.*`, `public/assets/icons/`, `public/assets/og/` |
 | **Content image**      | `portrait`, competitions frontmatter         | `public/assets/images/`                                         |
@@ -47,16 +47,16 @@ Copy this checklist and track progress:
 
 ```
 Audit Progress:
-- [ ] Phase A — Inventory
-- [ ] Phase B — Classify
-- [ ] Phase C — Resolve
-- [ ] Phase C.5 — Evaluate (site_brand / org_logo)
-- [ ] Phase D — Report
-- [ ] Phase E — Delegate missing (Cursor)
-- [ ] Phase F — Verify (after Cursor returns)
+- [ ] Phase A - Inventory
+- [ ] Phase B - Classify
+- [ ] Phase C - Resolve
+- [ ] Phase C.5 - Evaluate (site_brand / org_logo)
+- [ ] Phase D - Report
+- [ ] Phase E - Delegate missing (Cursor)
+- [ ] Phase F - Verify (after Cursor returns)
 ```
 
-### Phase A — Inventory
+### Phase A - Inventory
 
 Walk every source in [references/content-inventory.md](references/content-inventory.md). For each entity needing a visual, add a row:
 
@@ -64,12 +64,12 @@ Walk every source in [references/content-inventory.md](references/content-invent
 
 **Scan these sources:**
 
-1. **JSON with icon fields** — `profile.json` (contact), `experience.json` (projects), `vision-board.json`, `collaborations.json`
-2. **Heuristic-only** — `experience.json` nested projects via `XpProjectCard.astro` / `projectIcon()`
-3. **Logo refs** — `vision-board.json` `VisionMark`; `collaborations.json` `items[].logo`
-4. **Site brand** — `site.json`, `BaseHead.astro`, `site.webmanifest`
-5. **Content images** — `profile.portrait`, `content/drafts/competitions/*.md`
-6. **Orphans** — Header Unicode vs idle `Icon.astro` keys
+1. **JSON with icon fields** - `profile.json` (contact), `experience.json` (projects), `vision-board.json`, `collaborations.json`
+2. **Heuristic-only** - `experience.json` nested projects via `XpProjectCard.astro` / `projectIcon()`
+3. **Logo refs** - `vision-board.json` `VisionMark`; `collaborations.json` `items[].logo`
+4. **Site brand** - `site.json`, `BaseHead.astro`, `site.webmanifest`
+5. **Content images** - `profile.portrait`, `content/drafts/competitions/*.md`
+6. **Orphans** - Header Unicode vs idle `Icon.astro` keys
 
 Also list files on disk:
 
@@ -83,21 +83,21 @@ ls public/assets/images/
 
 Cross-check `iconNameSchema` keys in `src/lib/icons.ts` against `Icon.astro` paths.
 
-### Phase B — Classify
+### Phase B - Classify
 
 Assign each row `asset_class`:
 
-- `semantic` — inline IconName
-- `org_logo` — organization / program mark
-- `site_brand` — favicon, PWA, OG, monogram
-- `content_image` — portrait, competition thumbnail, section hero
+- `semantic` - inline IconName
+- `org_logo` - organization / program mark
+- `site_brand` - favicon, PWA, OG, monogram
+- `content_image` - portrait, competition thumbnail, section hero
 
-### Phase C — Resolve
+### Phase C - Resolve
 
 Apply [references/resolution-rules.md](references/resolution-rules.md):
 
-1. **Semantic:** `iconNameSchema.safeParse(value)` → heuristics (`projectIcon`, `aboutCardIcon`, keyword map)
-2. **Before inventing a new IconName:** load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md` — Lucide → Iconify → keyword map
+1. **Semantic:** `iconNameSchema.safeParse(value)` - heuristics (`projectIcon`, `aboutCardIcon`, keyword map)
+2. **Before inventing a new IconName:** load `workspace/.claude/skills/ui-icon-acquisition/SKILL.md` - Lucide - Iconify - keyword map
 3. **Logo:** file exists at `public/assets/logos/{slug}.svg`
 4. **Site brand:** file on disk + dimensions per `docs/assets.md`
 5. **Content image:** path resolves under `public/`
@@ -108,10 +108,10 @@ Mark status:
 | -------------- | ------------------------------------------------------------ |
 | `resolved`     | Asset exists and matches                                     |
 | `fallback`     | Renders but uses generic key (`folder`, `diamond`)           |
-| `missing`      | No asset — queue for Cursor                                  |
+| `missing`      | No asset - queue for Cursor                                  |
 | `needs_schema` | Content has no field yet (e.g. optional logo on a list item) |
 
-### Phase C.5 — Evaluate (site_brand / org_logo)
+### Phase C.5 - Evaluate (site_brand / org_logo)
 
 For rows with `asset_class` `site_brand` or `org_logo` marked `fallback`, or when
 the user requests a brand refresh:
@@ -119,24 +119,24 @@ the user requests a brand refresh:
 1. Load `workspace/.claude/skills/brand-logo-evaluation/SKILL.md`
 2. Run weighted scoring on existing mark vs recommended direction
 3. Run theme compatibility checklist (16 px favicon, light/dark, monochrome)
-4. Include evaluation summary in Phase D report — do not auto-regenerate unless user asks
+4. Include evaluation summary in Phase D report - do not auto-regenerate unless user asks
 
 Skip Phase C.5 for `semantic` and `content_image` rows.
 
-### Phase D — Report
+### Phase D - Report
 
 Deliver markdown report with:
 
-1. **Summary** — counts by status and asset_class
-2. **Resolved** — no action needed
-3. **Fallback** — recommended semantic key or logo slug upgrade; Phase C.5 scores if run
-4. **Missing** — queued for delegation (list slugs)
-5. **Schema gaps** — implementation follow-ups after assets exist
-6. **Brand evaluation** — Phase C.5 scoring table (when applicable)
+1. **Summary** - counts by status and asset_class
+2. **Resolved** - no action needed
+3. **Fallback** - recommended semantic key or logo slug upgrade; Phase C.5 scores if run
+4. **Missing** - queued for delegation (list slugs)
+5. **Schema gaps** - implementation follow-ups after assets exist
+6. **Brand evaluation** - Phase C.5 scoring table (when applicable)
 
-Do not edit content JSON or components unless the user explicitly asks — this skill audits and delegates by default.
+Do not edit content JSON or components unless the user explicitly asks - this skill audits and delegates by default.
 
-### Phase E — Delegate missing assets
+### Phase E - Delegate missing assets
 
 **Claude does NOT generate production assets.** For every `missing` row:
 
@@ -173,7 +173,7 @@ ln -sf /home/engineer/workspace/image_gen/.claude/skills/refine-image \
        /home/engineer/workspace/portfolio_site/.claude/skills/refine-image
 ```
 
-### Phase F — Verify
+### Phase F - Verify
 
 After Cursor returns:
 
@@ -190,7 +190,7 @@ npm run preview   # spot-check broken images
 - Monochrome black and white variants pass (or CSS `currentColor` / vars)
 - OG image meets `docs/assets.md` spec (1200×630, < 1 MB)
 
-Re-run Phases A–C. All rows should be `resolved` or explicitly deferred.
+Re-run Phases A-C. All rows should be `resolved` or explicitly deferred.
 
 ---
 
@@ -198,14 +198,14 @@ Re-run Phases A–C. All rows should be `resolved` or explicitly deferred.
 
 | Skill                   | Role                                               |
 | ----------------------- | -------------------------------------------------- |
-| `ui-icon-acquisition`   | Lucide → Iconify workflow for semantic icons       |
+| `ui-icon-acquisition`   | Lucide - Iconify workflow for semantic icons       |
 | `brand-logo-evaluation` | Score site_brand / org_logo candidates (Phase C.5) |
 | `logo-emblem-author`    | Cursor authors logo SVGs in image_gen              |
 | `delegation`            | Package format for every Cursor handoff            |
 | `image_gen`             | Router + `render.py` for raster derivatives        |
 | `refine-image`          | Optional polish pass on generated marks            |
 
-**Never** use Claude's built-in image generation for production assets — always delegate to Cursor running the `image_gen` pipeline.
+**Never** use Claude's built-in image generation for production assets - always delegate to Cursor running the `image_gen` pipeline.
 
 ---
 
@@ -228,7 +228,7 @@ These are follow-up implementation tasks after assets exist.
 
 | Topic                                   | Reference file                                                     |
 | --------------------------------------- | ------------------------------------------------------------------ |
-| Entity → field → component map          | [references/content-inventory.md](references/content-inventory.md) |
+| Entity - field - component map          | [references/content-inventory.md](references/content-inventory.md) |
 | Matching logic, slugs, trademark policy | [references/resolution-rules.md](references/resolution-rules.md)   |
 | Cursor handoff templates                | [references/cursor-delegation.md](references/cursor-delegation.md) |
 

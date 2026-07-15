@@ -1,6 +1,6 @@
 {
   "title": "Experience",
-  "intro": "12+ years of experience building and leading production AI across drug safety, oncology, and clinical imaging — translating executive-sponsored research into measurable, multimillion-dollar business outcomes.",
+  "intro": "12+ years of experience building and leading production AI across drug safety, oncology, and clinical imaging - translating executive-sponsored research into measurable, multimillion-dollar business outcomes.",
   "roles": [
     {
       "position": "Senior Deep Learning Engineer / AI Associate Principal",
@@ -26,7 +26,7 @@
               "tier": "primary"
             },
             {
-              "text": "Designed the platform for cross-assay, cross-compound scalability, integrating multi-vendor biological data across heterogeneous modalities.",
+              "text": "Structured the platform for cross-assay, cross-compound scalability, integrating multi-vendor biological data across heterogeneous modalities.",
               "tier": "primary"
             },
             {
@@ -34,7 +34,7 @@
               "tier": "primary"
             },
             {
-              "text": "Oversaw 3 parallel drug safety delivery streams with a 12-member team, managing stakeholders, resources, risks, and technical direction.",
+              "text": "Coordinated 3 parallel drug safety delivery streams with a 12-member team, managing stakeholders, resources, risks, and technical direction.",
               "tier": "primary"
             },
             {
@@ -53,7 +53,7 @@
               "tier": "primary"
             },
             {
-              "text": "Engineered a pipeline generalizable across drugs, treatment conditions, and heterogeneous data sources (organoids, xenografts, and clinical studies).",
+              "text": "Developed a pipeline generalizable across drugs, treatment conditions, and heterogeneous data sources (organoids, xenografts, and clinical studies).",
               "tier": "primary"
             },
             {
@@ -69,7 +69,7 @@
               "tier": "primary"
             },
             {
-              "text": "Led a 2-member engineering team over 6 months, driving technical direction, experimentation strategy, roadmap ownership, and end-to-end delivery.",
+              "text": "Led a 2-member engineering team over 6 months, setting technical direction, experimentation strategy, roadmap ownership, and end-to-end delivery.",
               "tier": "primary"
             }
           ],
@@ -80,7 +80,7 @@
           "name": "Foundation Model Framework",
           "bullets": [
             {
-              "text": "Architected a reusable cross-platform framework to accelerate imaging use-case onboarding and enable rapid experimentation and deployment.",
+              "text": "Established a reusable cross-platform framework to accelerate imaging use-case onboarding and enable rapid experimentation and deployment.",
               "tier": "primary"
             },
             {
@@ -88,7 +88,7 @@
               "tier": "primary"
             },
             {
-              "text": "Scaled the framework across 3 clinical imaging modalities — CT, Endoscopy, and Echocardiography — and 3 internal AZ infrastructures.",
+              "text": "Scaled the framework across 3 clinical imaging modalities - CT, Endoscopy, and Echocardiography - and 3 internal AZ infrastructures.",
               "tier": "primary"
             },
             {
@@ -109,7 +109,7 @@
       "level": "staff",
       "organization": "AstraZeneca, India",
       "orgShort": "AstraZeneca · India",
-      "blurb": "Delivered a CT tumor-segmentation pipeline that beat state-of-the-art and secured follow-on funding.",
+      "blurb": "Delivered a CT tumor-segmentation pipeline that exceeded state-of-the-art and secured follow-on funding.",
       "period": {
         "start": "2022",
         "end": "2023",
@@ -117,7 +117,7 @@
       },
       "projects": [
         {
-          "name": "CT Segmentation — Oncology Imaging",
+          "name": "CT Segmentation - Oncology Imaging",
           "icon": "scan",
           "bullets": [
             {
@@ -168,7 +168,7 @@
               "tier": "primary"
             },
             {
-              "text": "Architected an end-to-end AWS ML pipeline spanning data ingestion, preprocessing, distributed training, model interpretability, and inference.",
+              "text": "Developed an end-to-end AWS ML pipeline spanning data ingestion, preprocessing, distributed training, model interpretability, and inference.",
               "tier": "primary"
             },
             {
@@ -176,7 +176,7 @@
               "tier": "primary"
             },
             {
-              "text": "Engineered an ink-removal pipeline using classical image processing techniques, achieving performance parity with deep learning-based methods.",
+              "text": "Designed an ink-removal pipeline using classical image processing techniques, achieving performance parity with deep learning-based methods.",
               "tier": "primary"
             },
             {
@@ -246,7 +246,7 @@
           "icon": "vision",
           "bullets": [
             {
-              "text": "Engineered scalable video analytics pipelines for person re-identification (ReID) and multi-object tracking (MOT) across indoor and outdoor surveillance.",
+              "text": "Built scalable video analytics pipelines for person re-identification (ReID) and multi-object tracking (MOT) across indoor and outdoor surveillance.",
               "tier": "primary"
             },
             {
@@ -268,7 +268,7 @@
               "tier": "primary"
             },
             {
-              "text": "Engineered thermal-imaging-based physiological monitoring pipelines for real-time body vitals estimation across diverse operational environments.",
+              "text": "Developed thermal-imaging-based physiological monitoring pipelines for real-time body vitals estimation across diverse operational environments.",
               "tier": "primary"
             }
           ]
@@ -313,7 +313,7 @@
               "tier": "primary"
             },
             {
-              "text": "Engineered real-time algorithms for polyp detection, blood vessel segmentation, illumination correction, enhancement, inpainting, and artifact removal.",
+              "text": "Implemented real-time algorithms for polyp detection, blood vessel segmentation, illumination correction, enhancement, inpainting, and artifact removal.",
               "tier": "primary"
             }
           ]
@@ -327,7 +327,7 @@
               "tier": "primary"
             },
             {
-              "text": "Pioneered algorithms for neuron connectivity analysis, neuron tracing, and neuronal network topology mapping from coordinate-based 3D points.",
+              "text": "Introduced algorithms for neuron connectivity analysis, neuron tracing, and neuronal network topology mapping from coordinate-based 3D points.",
               "tier": "primary"
             },
             {
@@ -342,7 +342,7 @@
           "icon": "target",
           "bullets": [
             {
-              "text": "Championed Verification & Validation (V&V) protocols for an ultrasound-guided (US-guided) robotic navigation system for liver tumor ablation.",
+              "text": "Established Verification & Validation (V&V) protocols for an ultrasound-guided (US-guided) robotic navigation system for liver tumor ablation.",
               "tier": "primary"
             },
             {
@@ -365,7 +365,7 @@
       "level": "engineer",
       "organization": "Healthware Pvt Ltd, India",
       "orgShort": "Healthware",
-      "blurb": "Bridged clinical, engineering, and commercial teams across 50+ hospital sites to drive medical-imaging adoption.",
+      "blurb": "Bridged clinical, engineering, and commercial teams across 50+ hospital sites to accelerate medical-imaging adoption.",
       "period": {
         "start": "2014",
         "end": "2016",
@@ -378,7 +378,7 @@
           "icon": "handshake",
           "bullets": [
             {
-              "text": "Directed alignment as primary liaison across clinicians, biomedical engineers, sales teams, service teams, and hospital leadership spanning 50+ sites.",
+              "text": "Coordinated alignment as primary liaison across clinicians, biomedical engineers, sales teams, service teams, and hospital leadership spanning 50+ sites.",
               "tier": "primary"
             },
             {
@@ -386,7 +386,7 @@
               "tier": "primary"
             },
             {
-              "text": "Headed value-based pre-sales engagements covering needs assessments, clinical evaluations, economic justification, and competitive displacement.",
+              "text": "Led value-based pre-sales engagements covering needs assessments, clinical evaluations, economic justification, and competitive displacement.",
               "tier": "primary"
             },
             {

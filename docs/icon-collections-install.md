@@ -9,9 +9,9 @@ Use `~/workspace/icon_collections/` (external workspace) for raw and square-cent
 `icon_*.png` batches. Naming follows `icon_<set>_<name>.png` (see
 [`AGENTS.md`](../AGENTS.md) Icon / Logo Asset Pipeline).
 
-Slug map for SVG marks: `icon_<stem>` → `logo_<stem>` (e.g.
-`icon_education_calendar` → `logo_education_calendar`). Override:
-`trophy-awards` → `logo_trophy_badge` (see `scripts/icons/icon-sets.json`).
+Slug map for SVG marks: `icon_<stem>` - `logo_<stem>` (e.g.
+`icon_education_calendar` - `logo_education_calendar`). Override:
+`trophy-awards` - `logo_trophy_badge` (see `scripts/icons/icon-sets.json`).
 
 ## Workflow
 
@@ -33,7 +33,7 @@ All three steps must pass before mark regeneration.
 
 ### 2. Regenerate SVG marks
 
-**Do not** run `batch-icon-generate.sh` on this set — it invokes
+**Do not** run `batch-icon-generate.sh` on this set - it invokes
 `normalize-icon-sources.py`, which destroys square-centered line art. Use:
 
 ```bash
@@ -73,11 +73,11 @@ if you need raster fallbacks. The live site renders `logo_*.svg` marks only.
 ## Header chrome
 
 `icon_general_{save,sun,moon}` remain available in the external icon set for
-asset parity. The header uses Lucide `Icon.astro` only (design contract D1) —
+asset parity. The header uses Lucide `Icon.astro` only (design contract D1) -
 no component changes needed when refreshing these sources.
 
 ## Related docs
 
-- [`docs/icon-blend-strategy.md`](./icon-blend-strategy.md) — vector delivery rules
-- [`scripts/icons/SVG-ICON-GENERATOR.md`](../scripts/icons/SVG-ICON-GENERATOR.md) — trace pipeline
-- [`AGENTS.md`](../AGENTS.md) — `logoSrc()` and naming conventions
+- [`docs/icon-blend-strategy.md`](./icon-blend-strategy.md) - vector delivery rules
+- [`scripts/icons/SVG-ICON-GENERATOR.md`](../scripts/icons/SVG-ICON-GENERATOR.md) - trace pipeline
+- [`AGENTS.md`](../AGENTS.md) - `logoSrc()` and naming conventions

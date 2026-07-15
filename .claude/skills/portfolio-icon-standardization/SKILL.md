@@ -39,10 +39,10 @@ blending** (phase 3) across the Astro portfolio. Ratified in
 ## Core rule
 
 > **Monochrome semantics ⇒ vector delivery.** Any icon whose meaning survives a
-> single ink color must render as `currentColor` vector — `Icon.astro` (Lucide /
+> single ink color must render as `currentColor` vector - `Icon.astro` (Lucide /
 > Simple Icons) for UI chrome, `MarkEmblem` + `logo_*.svg` for content marks.
 
-Raster `<img>` is **Tier 3 only** — org wordmarks in `.logo-badge` /
+Raster `<img>` is **Tier 3 only** - org wordmarks in `.logo-badge` /
 `.comp-image`. Opaque PNGs cannot be tinted; never route pipeline marks through
 `<img>`.
 
@@ -52,13 +52,13 @@ Raster `<img>` is **Tier 3 only** — org wordmarks in `.logo-badge` /
 
 | Tier                  | Mechanism                                          | Color                                   | When                                           |
 | --------------------- | -------------------------------------------------- | --------------------------------------- | ---------------------------------------------- |
-| **1 — Vector tinted** | `MarkEmblem` (CSS mask) or `Icon` (`currentColor`) | `--mark-fg` / parent `color`            | Pipeline `logo_*`, Lucide fallbacks, hub nodes |
-| **2 — Soft tile**     | `.icon-tile` without `--accented`                  | `--accent-soft` bg, `--accent-ll` glyph | Generic fallback when no section accent needed |
-| **3 — Full-color**    | `LogoBadge` `<img>`                                | Brand pixels unchanged                  | Org wordmarks, collaboration logos             |
+| **1 - Vector tinted** | `MarkEmblem` (CSS mask) or `Icon` (`currentColor`) | `--mark-fg` / parent `color`            | Pipeline `logo_*`, Lucide fallbacks, hub nodes |
+| **2 - Soft tile**     | `.icon-tile` without `--accented`                  | `--accent-soft` bg, `--accent-ll` glyph | Generic fallback when no section accent needed |
+| **3 - Full-color**    | `LogoBadge` `<img>`                                | Brand pixels unchanged                  | Org wordmarks, collaboration logos             |
 
-**Intentional exceptions (do not “fix”):**
+**Intentional exceptions (do not "fix"):**
 
-- Contact connect tiles: brand icons use `.icon--brand` → `--brand-mark` inside accented circles
+- Contact connect tiles: brand icons use `.icon--brand` - `--brand-mark` inside accented circles
 - Experience nested projects: `.icon-tile--compact.icon-tile--accented` (seniority-hued, subordinate to company block)
 - Org logos: never mask or recolor
 
@@ -66,7 +66,7 @@ Raster `<img>` is **Tier 3 only** — org wordmarks in `.logo-badge` /
 
 ## Token SSOT (`src/styles/global.css`)
 
-Change **these tokens** to resize or retint marks site-wide — never hardcode px/rem
+Change **these tokens** to resize or retint marks site-wide - never hardcode px/rem
 on mark slots.
 
 ### Size (phase 1)
@@ -80,7 +80,7 @@ on mark slots.
 | `--icon-sm`           | 16px                    | Kaggle summary/eval (`.blob-icon--sm`) |
 | `.icon-tile--compact` | 36 / 18                 | Compact tiles (Experience projects)    |
 
-**Kaggle in-card size hierarchy (binding):** header 22px → stats 20px → blocks 16px.
+**Kaggle in-card size hierarchy (binding):** header 22px - stats 20px - blocks 16px.
 Do not collapse to one size.
 
 ### Chrome (phase 2)
@@ -109,8 +109,8 @@ and `icon-tile--accented`. Never hand-roll accent washes on new slots.
 | `--mark-fg`     | `var(--accent-card, var(--accent))`       | Glyph + circle wash + border              |
 | `.card-accent`  | sets both `--accent-card` and `--mark-fg` | Default purple card shells                |
 
-**Color flow:** wrapper sets `--accent-card` → the circular mark chrome rule reads
-`--mark-fg` → `MarkEmblem` mask fills with `currentColor`.
+**Color flow:** wrapper sets `--accent-card` - the circular mark chrome rule reads
+`--mark-fg` - `MarkEmblem` mask fills with `currentColor`.
 
 Section overrides (Research): `#publications .card-accent` (teal),
 `#conferences` (blue), `#speakers` (gold).
@@ -119,7 +119,7 @@ Section overrides (Research): `#publications .card-accent` (teal),
 
 ## Component routing
 
-### `CardMark.astro` — SSOT for card marks
+### `CardMark.astro` - SSOT for card marks
 
 | Input                                               | Renders as                            |
 | --------------------------------------------------- | ------------------------------------- |
@@ -130,8 +130,8 @@ Section overrides (Research): `#publications .card-accent` (teal),
 
 **Variants:**
 
-- `variant="accented"` or `variant="recog"` → adds `icon-tile--accented`
-- `variant="compact"` → 36/18 slot
+- `variant="accented"` or `variant="recog"` - adds `icon-tile--accented`
+- `variant="compact"` - 36/18 slot
 - On `.card-accent` shells with section hue: always pass `variant="accented"` for Lucide fallbacks
 
 ### `MarkEmblem.astro`
@@ -155,7 +155,7 @@ Section overrides (Research): `#publications .card-accent` (teal),
 ### `Icon.astro`
 
 - Default: `currentColor`
-- Brand mono (`gmail`, `linkedin`, `github`, `kaggle`): `.icon--brand` → `--brand-mark`
+- Brand mono (`gmail`, `linkedin`, `github`, `kaggle`): `.icon--brand` - `--brand-mark`
 
 ---
 
@@ -171,7 +171,7 @@ Set `--accent-card` on the **owning wrapper**; marks inherit automatically.
 | Experience         | `.xp-level-*` sets `--lvl`; `.xp-stop`/`.xp-panel` map it to `--accent-card`              |
 | About              | `--cat` per category row                                                                  |
 | Research cards     | `.card-accent` + section ID override                                                      |
-| Vision (all slots) | `accent` key in JSON → `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` palette) |
+| Vision (all slots) | `accent` key in JSON - `.vision-accent-{key}` + `.vision-accent-hook` (`--cat-*` palette) |
 | Contact            | default `.card-accent` (purple)                                                           |
 
 Full matrix: [references/accent-matrix-and-anti-patterns.md](references/accent-matrix-and-anti-patterns.md).
@@ -180,12 +180,12 @@ Full matrix: [references/accent-matrix-and-anti-patterns.md](references/accent-m
 
 ## Workflows
 
-### A — Add a new pipeline mark
+### A - Add a new pipeline mark
 
 ```
 Progress:
 - [ ] Source PNG square-centered (icon-square-center) if from icon_collections
-- [ ] Generate logo_<stem>.svg → public/assets/logos/marks/
+- [ ] Generate logo_<stem>.svg - public/assets/logos/marks/
 - [ ] normalize-mark-viewbox.py apply && check
 - [ ] npm run test:icons (if generator config changed)
 - [ ] Wire slug in content JSON as { kind: "logo", asset: "logo_..." }
@@ -196,9 +196,9 @@ Progress:
 
 Generator flags for icon_collections line art:
 `--sizes 512 --no-badge --tight --turdsize 2 --no-circle` (do **not** run full
-batch-icon-generate on this set — destroys line art).
+batch-icon-generate on this set - destroys line art).
 
-### B — Audit icon consistency on a view
+### B - Audit icon consistency on a view
 
 1. List every mark slot in the view (tiles, card headers, stats, hubs)
 2. For each slot, verify:
@@ -209,7 +209,7 @@ batch-icon-generate on this set — destroys line art).
 3. Flag drift using [references/accent-matrix-and-anti-patterns.md § Anti-patterns](references/accent-matrix-and-anti-patterns.md#anti-patterns)
 4. Fix guardian-owned tokens in `global.css` first; then page-owned markup
 
-### C — Verify before handoff
+### C - Verify before handoff
 
 ```bash
 python3 scripts/icons/normalize-mark-viewbox.py check
@@ -235,7 +235,7 @@ fallback icons), Vision (hub ring + nodes), Contact (brand neutral marks).
 
 ---
 
-## Quick reference — common markup
+## Quick reference - common markup
 
 **Recognition summary tile:**
 
@@ -269,15 +269,15 @@ fallback icons), Vision (hub ring + nodes), Contact (brand neutral marks).
 
 ## When to load references
 
-| If the task involves…                                     | Load                                              |
+| If the task involves...                                     | Load                                              |
 | --------------------------------------------------------- | ------------------------------------------------- |
 | The full per-view accent matrix or an anti-pattern check  | `references/accent-matrix-and-anti-patterns.md`   |
 | Ratified blend decisions / design-contract wording        | `docs/icon-blend-strategy.md`, design contract §5 |
-| Adding or auditing a mark with the tokens above (default) | Inline guidance — no reference needed             |
+| Adding or auditing a mark with the tokens above (default) | Inline guidance - no reference needed             |
 
 ## Efficiency: batch edits and parallel calls
 
-- **Guardian tokens first:** edit `global.css` tokens in one pass, then page markup — never interleave.
+- **Guardian tokens first:** edit `global.css` tokens in one pass, then page markup - never interleave.
 - **Batch edits:** combine multiple token or markup changes to one file into a single Edit call.
 - **Parallel checks:** run `normalize-mark-viewbox.py check` and the `npm run build` verification together.
 
