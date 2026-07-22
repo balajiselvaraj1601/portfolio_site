@@ -7,7 +7,7 @@ description: >-
   guardian in parallel, manages .cursor/page-team.state.json, and runs npm run build.
   Never edits site content or components directly - delegates to page agents and guardian.
 tools: Read, Grep, Glob, Bash, Agent(page-about, page-experience, page-research, page-recognition, page-vision, page-contact, design-guardian)
-model: sonnet
+model: haiku
 skills:
   - page-consistency-team
 maxTurns: 80

@@ -8,7 +8,7 @@ description: >-
   and shared ui/ and cards/ primitives. Never edits content JSON or view-specific
   section markup unless a decision assigns it.
 tools: Read, Edit, Grep, Glob, Bash
-model: sonnet
+model: haiku
 maxTurns: 40
 ---
 

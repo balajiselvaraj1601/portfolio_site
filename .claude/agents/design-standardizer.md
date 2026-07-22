@@ -8,7 +8,7 @@ description: >-
   Trigger on "token sweep", "standardize tokens", "fix hardcoded values", "design standardizer",
   or when invoked as a sub-agent by design-guardian or site-review-auto.
 tools: Read, Edit, Grep, Glob, Bash
-model: sonnet
+model: haiku
 maxTurns: 60
 ---
 

@@ -7,7 +7,7 @@ description: >-
   fixes all verified issues; commits if verify passes. Trigger on "site review",
   "fix all issues", or /site-review.
 tools: Read, Edit, Write, Grep, Glob, Bash, Agent
-model: sonnet
+model: haiku
 skills:
   - site-review-fix
 maxTurns: 100
