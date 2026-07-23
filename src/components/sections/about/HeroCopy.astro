@@ -49,15 +49,14 @@ function isExternal(href: string) {
   <div class="hero-stats" role="list" aria-label="Career highlights">
     {
       profile.metrics.map((m) => (
-        <div class="hero-stat" role="listitem">
-          <div
-            class:list={[
-              'hero-stat__num',
-              { 'hero-stat__num--single-line': m.value.includes('Leadership') },
-            ]}
-          >
-            {m.value}
-          </div>
+        <div
+          class:list={[
+            'hero-stat',
+            { 'hero-stat--wide': m.value.includes('Leadership') },
+          ]}
+          role="listitem"
+        >
+          <div class="hero-stat__num">{m.value}</div>
           <div class="hero-stat__label metric-label">{m.label}</div>
           {m.detail && (
             <div class="hero-stat__detail metric-label">{m.detail}</div>
@@ -183,9 +182,19 @@ function isExternal(href: string) {
     column-gap: var(--hero-band-gap);
     margin: 0;
   }
+  @media (max-width: 559px) /* --bp-sm - 1px */ {
+    .hero-stats {
+      grid-template-columns: minmax(0, 1fr);
+      row-gap: var(--stack-lg);
+    }
+  }
   .hero-stat {
     border-left: 2px solid var(--accent);
     padding-left: var(--space-4);
+    min-width: 0;
+  }
+  .hero-stat--wide {
+    grid-column: 1 / -1;
   }
   .hero-stat__num {
     font-family: var(--font-mono);
@@ -193,9 +202,7 @@ function isExternal(href: string) {
     font-weight: var(--fw-semibold);
     color: var(--accent);
     line-height: var(--lh-none);
-  }
-  .hero-stat__num--single-line {
-    white-space: nowrap;
+    overflow-wrap: anywhere;
   }
   /* Dark theme: brighten the stat accent for AA contrast on --bg. The brand
      --accent (#6c2fbf) is only ~2.3:1 on the dark background; --accent-light
@@ -219,11 +226,7 @@ function isExternal(href: string) {
     margin-top: var(--text-gap-pair);
     line-height: var(--lh-normal);
     max-width: none;
-  }
-  @media (min-width: 640px) {
-    .hero-stat__detail {
-      white-space: nowrap;
-    }
+    overflow-wrap: anywhere;
   }
   .hero__cta {
     display: flex;

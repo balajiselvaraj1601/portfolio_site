@@ -44,7 +44,7 @@ import HeroCopy from '@components/sections/about/HeroCopy.astro';
     align-items: start;
     align-content: start;
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) /* inline nav / save — matches Header */ {
     .hero__grid {
       grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
       gap: var(--hero-band-gap);
@@ -59,12 +59,12 @@ import HeroCopy from '@components/sections/about/HeroCopy.astro';
   .hero__portrait :global(.portrait) {
     width: clamp(260px, 38vw, 500px);
   }
-  @media (min-width: 1024px) {
+  @media (min-width: 1025px) {
     .hero__portrait {
       align-self: start;
     }
   }
-  @media (max-width: 1023px) {
+  @media (max-width: 1024px) {
     .hero__portrait {
       order: -1;
     }

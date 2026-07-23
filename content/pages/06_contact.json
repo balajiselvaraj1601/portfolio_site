@@ -28,6 +28,13 @@
       "icon": "linkedin"
     },
     {
+      "type": "calendly",
+      "label": "Calendly",
+      "value": "30-min intro call",
+      "href": "https://calendly.com/balaji-selvaraj-ai/30min",
+      "icon": "calendar"
+    },
+    {
       "type": "github",
       "label": "GitHub",
       "value": "balajiselvaraj1601",

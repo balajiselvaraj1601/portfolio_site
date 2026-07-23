@@ -17,6 +17,7 @@ const TitledIconItem = z.object({
 export const contactTypeSchema = z.enum([
   'email',
   'linkedin',
+  'calendly',
   'github',
   'kaggle',
   'location',

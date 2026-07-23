@@ -258,6 +258,7 @@
       "actions": {
         "email": "Send email",
         "linkedin": "View profile",
+        "calendly": "Schedule a call",
         "github": "View profile",
         "kaggle": "View profile",
         "location": "View location"

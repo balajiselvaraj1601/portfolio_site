@@ -95,8 +95,12 @@ const { header } = site.ui;
         aria-expanded="false"
         aria-controls="primary-nav"
       >
-        <Icon name="menu" size="sm" class="nav-toggle__open" />
-        <Icon name="close" size="sm" class="nav-toggle__close" />
+        <span class="nav-toggle__open" aria-hidden="true">
+          <Icon name="menu" size="sm" />
+        </span>
+        <span class="nav-toggle__close" aria-hidden="true">
+          <Icon name="close" size="sm" />
+        </span>
       </button>
     </div>
   </div>
@@ -271,6 +275,12 @@ const { header } = site.ui;
       font-size: var(--fs-ml);
     }
   }
+  .nav-toggle__open,
+  .nav-toggle__close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
   .nav-toggle__close {
     display: none;
   }
@@ -278,7 +288,7 @@ const { header } = site.ui;
     display: none;
   }
   .nav-toggle[aria-expanded='true'] .nav-toggle__close {
-    display: inline-block;
+    display: inline-flex;
   }
 </style>
 
