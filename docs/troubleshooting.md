@@ -190,7 +190,7 @@ manually when needed - it is no longer auto-started on folder open.
 
 **Cause:** `ThemeScript.astro` must be the first element in `<head>` (before CSS).
 
-**Fix:** Do not move or defer the inline theme script. It sets `data-theme` before first paint.
+**Fix:** Do not move or defer the inline theme script. `data-theme` is server-rendered on `<html>` (Layout.astro, from `site.theme.default`); the script only adds the `js` class before first paint.
 
 ### Mobile menu stuck open
 

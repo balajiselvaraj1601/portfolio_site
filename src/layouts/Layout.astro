@@ -45,16 +45,12 @@ const navViewsConfig = singlePageViews
       defaultView: homeViewAnchor,
     }
   : undefined;
-// Anchors whose hash the browser would natively scroll to a DOM element that is
-// NOT the view's first section — only then must the head script freeze scroll.
+// Multi-section views whose anchor is not their first section's id: on
+// back/reload the browser's scrollRestoration would replay a stale offset
+// before the client router resolves the hash — freeze scroll for these.
 const hashCollisionAnchors =
   navViewsConfig?.views
-    .filter(
-      (v) =>
-        v.viewSections[0] &&
-        v.viewSections[0] !== v.viewAnchor &&
-        homeSections.includes(v.viewAnchor)
-    )
+    .filter((v) => v.viewSections[0] && v.viewSections[0] !== v.viewAnchor)
     .map((v) => v.viewAnchor) ?? [];
 const preloadPortrait =
   path === '/' && profile.portrait
