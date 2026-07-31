@@ -308,7 +308,7 @@ When the save button is loading, CSS sets `opacity: 0` on its child icon. After 
 | UI icon sourcing (Lucide / Iconify)     | `../.claude/skills/ui-icon-acquisition/SKILL.md`                     |
 | Logo evaluation / favicon scoring       | `../.claude/skills/brand-logo-evaluation/SKILL.md`                   |
 | Logo SVG authoring                      | `../image_gen/.claude/skills/logo-emblem-author/SKILL.md`            |
-| Setup and commands                      | `docs/getting-started.md`                                            |
+| Local dev walkthrough                   | `docs/getting-started.md`                                            |
 | Local server ports (workflows/symptoms) | `docs/troubleshooting.md#local-servers-and-ports`                    |
 | Long-running agent batches              | `docs/task-runner.md`                                                |
 | Multi-view design consistency           | `docs/page-team.md`, `.claude/skills/page-consistency-team/SKILL.md` |

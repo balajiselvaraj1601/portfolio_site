@@ -1,6 +1,9 @@
 # Getting Started
 
-Local development guide for the portfolio site.
+Local development walkthrough for the portfolio site. The command reference
+(every npm script, in table form) lives in [AGENTS.md](../AGENTS.md) — that file
+is the SSOT when a script name or port changes; this guide explains the workflow
+around those commands.
 
 ## Prerequisites
 
@@ -81,7 +84,7 @@ portfolio_site/
 │   ├── layouts/       Layout.astro
 │   ├── lib/content.ts Loader + validation
 │   ├── pages/         index, experience, projects, research, recognition, vision, contact, 404 (+ redirect stubs - /#anchor)
-│   ├── schemas.ts     Zod schemas for content/
+│   ├── schemas/       Zod schemas for content/
 │   └── styles/        global.css
 ├── astro.config.mjs   SITE_URL, base path, integrations
 └── docs/              This documentation
