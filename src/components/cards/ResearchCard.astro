@@ -15,7 +15,6 @@ interface Props {
   logo?: string;
   variant?: 'default' | 'stacked';
   logoBadge?: boolean;
-  featured?: boolean;
 }
 const {
   icon,
@@ -28,7 +27,6 @@ const {
   logo,
   variant = 'default',
   logoBadge: logoBadgeOverride,
-  featured = false,
 } = Astro.props;
 const isStacked = variant === 'stacked';
 
@@ -45,8 +43,6 @@ const { common } = site.ui;
     'card-accent',
     'reveal',
     { 'rcard--stacked': isStacked },
-    { 'rcard--featured': featured },
-    { 'reveal--clip': featured },
   ]}
 >
   {
@@ -223,25 +219,7 @@ const { common } = site.ui;
     border: 0;
   }
 
-  /* Featured card - promotes first item in publications to prominence.
-     Transitions come from the shared .content-card shell (global.css). */
-  .rcard--featured {
-    grid-column: 1 / -1;
-    box-shadow: var(--shadow-accent);
-  }
-
-  .rcard--featured:hover {
-    box-shadow: var(--shadow-accent), var(--shadow-md);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .rcard--featured:hover {
-      transform: translateY(var(--card-lift-lg));
-    }
-  }
-
-  /* Standard card hover elevation */
-  .rcard:not(.rcard--featured):hover {
+  .rcard:hover {
     box-shadow: var(--shadow-lg);
   }
 </style>
