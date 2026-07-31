@@ -201,6 +201,15 @@
   --dur-slow: 320ms; /* larger surface transitions: panel expand/collapse */
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
   --dur-spin: 0.7s;
+  --dur-reveal: 600ms; /* scroll-entrance timing (was inline in .reveal) */
+  --ease-out: cubic-bezier(
+    0.16,
+    1,
+    0.3,
+    1
+  ); /* exponential ease-out for entrances */
+  --stagger-step: 60ms; /* incremental delay between staggered reveal children */
+  --card-lift-lg: -6px; /* featured/flagship hover lift (base --card-lift is -2px) */
   --header-h: 60px;
   --header-h-compact: 52px;
 
@@ -269,6 +278,9 @@
   --shadow: 0 1px 2px rgba(26, 21, 48, 0.06), 0 4px 16px rgba(26, 21, 48, 0.06);
   --shadow-sm: 0 1px 2px rgba(26, 21, 48, 0.05);
   --shadow-md: 0 10px 30px rgba(26, 21, 48, 0.1);
+  --shadow-lg: 0 24px 56px rgba(26, 21, 48, 0.16);
+  --shadow-accent: 0 14px 40px
+    color-mix(in srgb, var(--accent) 22%, transparent);
   --shadow-raised: 0 6px 20px rgba(0, 0, 0, 0.25);
   /* Award-level accents (SSOT: Awards summary tiles + cards). AA ≥3:1 on --bg-elev. */
   --accent-gold: #b8790a; /* amber — harmonized family; shared by EVP award level + education */
@@ -359,6 +371,10 @@
   --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 6px 22px rgba(0, 0, 0, 0.45);
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
   --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.55);
+  --shadow-raised: 0 6px 20px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 26px 60px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 16px 44px
+    color-mix(in srgb, var(--accent) 32%, transparent);
   --accent-gold: #f0b429; /* amber — harmonized family */
   --lvl-evp: var(--accent-gold);
   --lvl-cio: #a87bf0;
@@ -1295,18 +1311,88 @@ html:not(.js) .recog-toggle {
   contain-intrinsic-size: auto 800px;
 }
 
-/* Entrance animation */
+/* Entrance animation — one base entrance, differentiated variants, and a
+   JS-free child stagger. The base .reveal keeps its prior rise; variants let
+   each view choose a distinct authored entrance instead of one identical fade
+   site-wide. A .reveal-group MUST also carry .reveal (the observer only toggles
+   .is-visible on .reveal elements). All gated on no-preference; under
+   reduced-motion none of this applies and content is visible by default. */
 @media (prefers-reduced-motion: no-preference) {
   html.js .reveal {
     opacity: 0;
     transform: translateY(24px);
     transition:
-      opacity 600ms var(--ease),
-      transform 600ms var(--ease);
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out),
+      clip-path var(--dur-reveal) var(--ease-out),
+      filter var(--dur-reveal) var(--ease-out);
   }
   html.js .reveal.is-visible {
     opacity: 1;
     transform: none;
+  }
+
+  /* Variant: soft-focus — blur to sharp (reaches past transform + opacity). */
+  html.js .reveal--blur {
+    filter: blur(10px);
+  }
+  html.js .reveal--blur.is-visible {
+    filter: none;
+  }
+
+  /* Variant: clip wipe — reveal from the bottom edge upward. */
+  html.js .reveal--clip {
+    clip-path: inset(0 0 12% 0);
+  }
+  html.js .reveal--clip.is-visible {
+    clip-path: inset(0 0 0 0);
+  }
+
+  /* Variant: settle — subtle scale-up. */
+  html.js .reveal--scale {
+    transform: translateY(16px) scale(0.98);
+  }
+  html.js .reveal--scale.is-visible {
+    transform: none;
+  }
+
+  /* Child stagger — a revealed .reveal-group cascades its DIRECT children.
+     Children hide until the group gains .is-visible, then each eases in with an
+     incremental delay. Do not nest .reveal inside a .reveal-group. */
+  html.js .reveal-group > * {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity var(--dur-reveal) var(--ease-out),
+      transform var(--dur-reveal) var(--ease-out);
+  }
+  html.js .reveal-group.is-visible > * {
+    opacity: 1;
+    transform: none;
+  }
+  html.js .reveal-group.is-visible > *:nth-child(1) {
+    transition-delay: 0ms;
+  }
+  html.js .reveal-group.is-visible > *:nth-child(2) {
+    transition-delay: calc(var(--stagger-step) * 1);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(3) {
+    transition-delay: calc(var(--stagger-step) * 2);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(4) {
+    transition-delay: calc(var(--stagger-step) * 3);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(5) {
+    transition-delay: calc(var(--stagger-step) * 4);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(6) {
+    transition-delay: calc(var(--stagger-step) * 5);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(7) {
+    transition-delay: calc(var(--stagger-step) * 6);
+  }
+  html.js .reveal-group.is-visible > *:nth-child(n + 8) {
+    transition-delay: calc(var(--stagger-step) * 7);
   }
 }
 
