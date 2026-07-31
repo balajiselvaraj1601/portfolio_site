@@ -1051,6 +1051,9 @@ button {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--stack-sm);
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .recog-card {
