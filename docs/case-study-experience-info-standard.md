@@ -21,24 +21,24 @@ rest are optional but part of the _ideal_ item (see the checklist).
 
 | Field                  | Type                         | Req | Purpose                                             | Where rendered                      |
 | ---------------------- | ---------------------------- | :-: | --------------------------------------------------- | ----------------------------------- |
-| `id`                   | string                       |    | Stable slug key (e.g. `az-sweden`)                  | Map key (not visible)               |
-| `position`             | string                       |    | Job title                                           | `h3.xp-title`                       |
-| `organization`         | string                       |    | Employer, incl. locale (e.g. `AstraZeneca, Sweden`) | `EntityLink` in role head           |
+| `id`                   | string                       |     | Stable slug key (e.g. `az-sweden`)                  | Map key (not visible)               |
+| `position`             | string                       |     | Job title                                           | `h3.xp-title`                       |
+| `organization`         | string                       |     | Employer, incl. locale (e.g. `AstraZeneca, Sweden`) | `EntityLink` in role head           |
 | `entity`               | slug                         |  -  | Links to `entities.json` for logo + URL             | `CardMark` logo + link target       |
 | `location`             | string                       |  -  | City, Country                                       | Head meta line (after period, `·`)  |
 | `blurb`                | string                       |  -  | One-line "what this role was about"                 | `p.xp-blurb`                        |
 | `tech[]`               | string[]                     |  -  | Skill/stack chips                                   | `Chip` list                         |
-| `period`               | object                       |    | `{ start, end, endLabel }`                          | Head meta line, via `periodLabel()` |
-| `period.start`         | string                       |    | Start year, e.g. `"2023"`                           | -                                   |
-| `period.end`           | string \| null               |    | End year, or `null` if current                      | -                                   |
-| `period.endLabel`      | string                       |    | `"Present"` for current, else `""`                  | -                                   |
-| `projects[]`           | object[]                     |    | Notable work in the role                            | Project cards inside role panel     |
-| `projects[].name`      | string                       |    | Project title                                       | Project header                      |
+| `period`               | object                       |     | `{ start, end, endLabel }`                          | Head meta line, via `periodLabel()` |
+| `period.start`         | string                       |     | Start year, e.g. `"2023"`                           | -                                   |
+| `period.end`           | string \| null               |     | End year, or `null` if current                      | -                                   |
+| `period.endLabel`      | string                       |     | `"Present"` for current, else `""`                  | -                                   |
+| `projects[]`           | object[]                     |     | Notable work in the role                            | Project cards inside role panel     |
+| `projects[].name`      | string                       |     | Project title                                       | Project header                      |
 | `projects[].subtitle`  | string                       |  -  | Role · sponsorship · scale                          | Project header sub                  |
 | `projects[].icon`      | IconName                     |  -  | Lucide icon for the project                         | Project glyph                       |
-| `projects[].bullets[]` | object[]                     |    | Achievements                                        | Project body                        |
-| `bullets[].text`       | string                       |    | The achievement sentence                            | Bullet text                         |
-| `bullets[].tier`       | `'primary'` \| `'secondary'` |    | Emphasis / ordering                                 | Styling weight                      |
+| `projects[].bullets[]` | object[]                     |     | Achievements                                        | Project body                        |
+| `bullets[].text`       | string                       |     | The achievement sentence                            | Bullet text                         |
+| `bullets[].tier`       | `'primary'` \| `'secondary'` |     | Emphasis / ordering                                 | Styling weight                      |
 
 **Top-level section fields** (once per file, not per role): `title` , `intro`, `headline`,
 `headlineHighlight`.

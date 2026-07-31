@@ -234,12 +234,12 @@ level/medal class). Circular chrome reads it via **`--mark-chrome`**
 `--accent-card` over inherited `--mark-fg` (which otherwise resolves to site
 purple from `:root`).
 
-| Layer                               | Token / mechanism                | Resolves to                  |
-| ----------------------------------- | -------------------------------- | ---------------------------- |
-| Glyph (MarkEmblem / Lucide / brand) | parent `color` - `--mark-chrome` | `--accent-card` on wrapper   |
+| Layer                               | Token / mechanism                | Resolves to                    |
+| ----------------------------------- | -------------------------------- | ------------------------------ |
+| Glyph (MarkEmblem / Lucide / brand) | parent `color` - `--mark-chrome` | `--accent-card` on wrapper     |
 | Circle background wash              | `--mark-bg-mix` (14%)            | `color-mix(--mark-chrome ...)` |
 | Circle border tint                  | `--mark-border-mix` (35%)        | `color-mix(--mark-chrome ...)` |
-| Card shell border/top               | `--accent-card`                  | level / medal / section hue  |
+| Card shell border/top               | `--accent-card`                  | level / medal / section hue    |
 
 **Three delivery tiers:**
 

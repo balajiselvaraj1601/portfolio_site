@@ -45,17 +45,17 @@ validates the site, but publish is skipped (Pages is not enabled there).
 
 ## Required static artifacts
 
-| Artifact            | Status       | Location                                              |
-| ------------------- | ------------ | ----------------------------------------------------- |
-| `index.html`        |  Built     | `dist/index.html`                                     |
-| `404.html`          |  Built     | `dist/404.html`                                       |
-| `robots.txt`        |  Present   | `public/robots.txt`                                   |
-| `sitemap-index.xml` |  Generated | `@astrojs/sitemap` (pinned 3.6.0)                     |
-| `.nojekyll`         |  Present   | `public/.nojekyll` (required for `_astro/`)           |
-| Résumé PDF          |  Present   | `public/assets/resume/balaji-selvaraj-resume.pdf`     |
-| OG image            |  Present   | `public/assets/og/og-image.png`                       |
-| Favicon set         |  Present   | `public/favicon.svg`, `favicon.ico`, `assets/icons/*` |
-| Web manifest        |  Present   | `public/site.webmanifest`                             |
+| Artifact            | Status    | Location                                              |
+| ------------------- | --------- | ----------------------------------------------------- |
+| `index.html`        | Built     | `dist/index.html`                                     |
+| `404.html`          | Built     | `dist/404.html`                                       |
+| `robots.txt`        | Present   | `public/robots.txt`                                   |
+| `sitemap-index.xml` | Generated | `@astrojs/sitemap` (pinned 3.6.0)                     |
+| `.nojekyll`         | Present   | `public/.nojekyll` (required for `_astro/`)           |
+| Résumé PDF          | Present   | `public/assets/resume/balaji-selvaraj-resume.pdf`     |
+| OG image            | Present   | `public/assets/og/og-image.png`                       |
+| Favicon set         | Present   | `public/favicon.svg`, `favicon.ico`, `assets/icons/*` |
+| Web manifest        | Present   | `public/site.webmanifest`                             |
 
 ## Pre-deploy checklist
 

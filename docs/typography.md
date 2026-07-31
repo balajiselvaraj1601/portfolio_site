@@ -10,11 +10,11 @@ The site uses exactly three families, defined once as CSS variables in `global.c
 referenced everywhere via `var(--font-*)`. No component hardcodes a typeface; no new font
 should be introduced without updating this doc.
 
-| Token            | Family               | Role in one word | Fallbacks                                       | Loaded via                                        |
-| ---------------- | -------------------- | ---------------- | ----------------------------------------------- | ------------------------------------------------- |
-| `--font-display` | **DM Serif Display** | Editorial        | Georgia, Times New Roman, serif                 | `@fontsource/dm-serif-display` (400 + 400-italic) |
+| Token            | Family               | Role in one word | Fallbacks                                         | Loaded via                                        |
+| ---------------- | -------------------- | ---------------- | ------------------------------------------------- | ------------------------------------------------- |
+| `--font-display` | **DM Serif Display** | Editorial        | Georgia, Times New Roman, serif                   | `@fontsource/dm-serif-display` (400 + 400-italic) |
 | `--font-sans`    | **Inter Variable**   | Reading          | system-ui / -apple-system / Segoe UI / Roboto ... | `@fontsource-variable/inter`                      |
-| `--font-mono`    | **JetBrains Mono**   | Data / labels    | ui-monospace, SF Mono, Menlo, Consolas          | `@fontsource/jetbrains-mono` (400, 600)           |
+| `--font-mono`    | **JetBrains Mono**   | Data / labels    | ui-monospace, SF Mono, Menlo, Consolas            | `@fontsource/jetbrains-mono` (400, 600)           |
 
 **Rule of thumb**
 

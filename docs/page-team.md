@@ -35,9 +35,9 @@ Works in **Claude Code** (`/page-team`) and **Cursor** (page-consistency-team sk
 
 | Tool        | Invoke                                               |
 | ----------- | ---------------------------------------------------- |
-| Claude Code | `/page-team` or "Run page team full mode: ..."         |
+| Claude Code | `/page-team` or "Run page team full mode: ..."       |
 | Claude Code | Read `.claude/skills/page-consistency-team/SKILL.md` |
-| Cursor      | "Run page-consistency-team skill ..."                  |
+| Cursor      | "Run page-consistency-team skill ..."                |
 | Cursor      | `.cursor/skills/page-consistency-team/SKILL.md`      |
 | Dual path   | `.agents/skills/page-consistency-team/` (symlink)    |
 

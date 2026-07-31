@@ -112,10 +112,10 @@
 
 | Area                   | Status                                                             |
 | ---------------------- | ------------------------------------------------------------------ |
-| Stack                  |  Astro 4.16, Zod, hand-rolled CSS                                |
-| All Must-have (M1-M24) |  Implemented                                                     |
-| CI/CD                  |  `.github/workflows/deploy.yml`                                  |
-| Static assets          |  Résumé PDF, OG image, favicons, `.nojekyll`                     |
+| Stack                  | Astro 4.16, Zod, hand-rolled CSS                                   |
+| All Must-have (M1-M24) | Implemented                                                        |
+| CI/CD                  | `.github/workflows/deploy.yml`                                     |
+| Static assets          | Résumé PDF, OG image, favicons, `.nojekyll`                        |
 | GitHub Pages live      | ⏳ Pending - repo push + Pages enable (see `go-live-checklist.md`) |
 | Lighthouse 95+ (S1)    | ⏳ Run manually post-deploy                                        |
 | Link validation (S8)   | ⏳ Manual pass recommended                                         |

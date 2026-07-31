@@ -28,7 +28,7 @@ token inheritance.
 | ------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | Early-late June 2026                             | Original multi-color scheme (`--cat-*`, `--lvl-*`, `--medal-*`, `--vision-accent-*`)                                                                                                              | superseded |
 | 2026-06-28 (commit `77846cd` unify-view-accents) | **Unified to one accent per view**; About re-suppressed to brand purple                                                                                                                           | reversed   |
-| 2026-07-05 (session `2b8c0377...`)                 | **Reversal to multi-color per view** at explicit user request ("use multiple colors per page... all views")                                                                                         | **active** |
+| 2026-07-05 (session `2b8c0377...`)               | **Reversal to multi-color per view** at explicit user request ("use multiple colors per page... all views")                                                                                       | **active** |
 | 2026-07-05                                       | About given dedicated `--about-cat-*` namespace; Vision positional-per-item; Experience 6-tier seniority timeline added; Research/Contact label fixes; WCAG re-measured; Playwright visual verify | **active** |
 
 ## Token architecture (the cascade)

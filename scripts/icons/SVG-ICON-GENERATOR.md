@@ -357,19 +357,19 @@ Every SVG includes:
 
 **Guarantees:**
 
--  `fill="currentColor"` - inherits CSS `color` property
--  Explicit `width`/`height` - sensible default size
--  `viewBox` - fully scalable, overridable by CSS
--  One `<path>` only - no embedded raster, no metadata
--  Badge variant uses `evenodd` for correct cutout rendering
+- `fill="currentColor"` - inherits CSS `color` property
+- Explicit `width`/`height` - sensible default size
+- `viewBox` - fully scalable, overridable by CSS
+- One `<path>` only - no embedded raster, no metadata
+- Badge variant uses `evenodd` for correct cutout rendering
 
 **currentColor caveat:**
 
 `currentColor` only resolves when the SVG is **inlined**:
 
--  Inline `<svg>` in HTML
--  Used as a React/Vue component
--  `<img src="icon.svg">` reference does **not** inherit page CSS
+- Inline `<svg>` in HTML
+- Used as a React/Vue component
+- `<img src="icon.svg">` reference does **not** inherit page CSS
 
 An `<img>` will render with `currentColor` as black (or whatever `color` defaults to) regardless of your stylesheet.
 

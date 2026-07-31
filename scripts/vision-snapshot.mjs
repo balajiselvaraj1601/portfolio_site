@@ -63,9 +63,7 @@ async function main() {
     await page.locator('#vision-programs').screenshot({ path: OUT });
     console.log(`wrote ${OUT}`);
   } catch (err) {
-    console.error(
-      `Failed — is a server running at ${BASE}? (${err})`
-    );
+    console.error(`Failed — is a server running at ${BASE}? (${err})`);
     process.exitCode = 1;
   } finally {
     await browser.close();

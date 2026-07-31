@@ -9,15 +9,15 @@ injects them via `src/components/chrome/BaseHead.astro`.
 
 | Item                    | Status | Where                                               |
 | ----------------------- | ------ | --------------------------------------------------- |
-| `<title>` + description |      | `content/pages/00_site.json` - `BaseHead.astro`     |
-| Canonical URL           |      | Derived from `Astro.site` + page path               |
-| OpenGraph tags          |      | `BaseHead.astro`                                    |
-| Twitter card            |      | `summary_large_image`                               |
-| JSON-LD `Person`        |      | Built from numbered page JSON + `site.seo.keywords` |
-| Sitemap                 |      | `@astrojs/sitemap` - `dist/sitemap-index.xml`       |
-| robots.txt              |      | `public/robots.txt`                                 |
-| OG image                |      | `/assets/og/og-image.png` (1200×630)                |
-| `lang="en"`             |      | `Layout.astro`                                      |
+| `<title>` + description |        | `content/pages/00_site.json` - `BaseHead.astro`     |
+| Canonical URL           |        | Derived from `Astro.site` + page path               |
+| OpenGraph tags          |        | `BaseHead.astro`                                    |
+| Twitter card            |        | `summary_large_image`                               |
+| JSON-LD `Person`        |        | Built from numbered page JSON + `site.seo.keywords` |
+| Sitemap                 |        | `@astrojs/sitemap` - `dist/sitemap-index.xml`       |
+| robots.txt              |        | `public/robots.txt`                                 |
+| OG image                |        | `/assets/og/og-image.png` (1200×630)                |
+| `lang="en"`             |        | `Layout.astro`                                      |
 
 ## Meta (per page)
 

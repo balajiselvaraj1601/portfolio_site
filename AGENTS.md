@@ -199,10 +199,10 @@ The repo runs a coordinated multi-agent system for design consistency, full-site
 
 Icons in this site come from two sources. Know which to use before touching any icon:
 
-| Source                       | Format           | Render method                                 | When                                                     |
-| ---------------------------- | ---------------- | --------------------------------------------- | -------------------------------------------------------- |
-| `src/lib/icon-paths.json`    | SVG path data    | `<Icon name="...">` - CSS mask (`currentColor`) | UI icons: trophy, calendar, save, sun, moon...             |
-| `public/assets/logos/<set>/` | PNG / SVG / WebP | `<img>` via `logoSrc(slug)`                   | Brand / decorative images that must keep their own color |
+| Source                       | Format           | Render method                                   | When                                                     |
+| ---------------------------- | ---------------- | ----------------------------------------------- | -------------------------------------------------------- |
+| `src/lib/icon-paths.json`    | SVG path data    | `<Icon name="...">` - CSS mask (`currentColor`) | UI icons: trophy, calendar, save, sun, moon...           |
+| `public/assets/logos/<set>/` | PNG / SVG / WebP | `<img>` via `logoSrc(slug)`                     | Brand / decorative images that must keep their own color |
 
 ### `logoSrc(slug)` - how it works
 

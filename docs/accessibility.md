@@ -3,7 +3,7 @@
 Acceptance checklist for the portfolio site. Target: **WCAG 2.1 AA** in both light and dark themes.
 
 > **Implementation note:** Core patterns are built into `Layout.astro`, `Header.astro`,
-> `Section.astro`, and `global.css`. Items marked  are implemented; ⏳ need manual verification
+> `Section.astro`, and `global.css`. Items marked are implemented; ⏳ need manual verification
 > post-deploy (Lighthouse, screen reader pass).
 
 ## Structure & semantics
