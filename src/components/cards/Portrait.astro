@@ -100,15 +100,4 @@ const hasModern = Boolean(webp || avif);
     display: block;
     filter: drop-shadow(0 18px 28px var(--shadow-drop-color));
   }
-  @media (prefers-reduced-motion: no-preference) {
-    .portrait__frame {
-      transition:
-        transform var(--dur) var(--ease),
-        box-shadow var(--dur) var(--ease);
-    }
-    .portrait:hover .portrait__frame {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 36px var(--shadow-drop-color-strong);
-    }
-  }
 </style>
