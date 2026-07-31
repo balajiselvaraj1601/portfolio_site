@@ -15,7 +15,7 @@ const logoUrl = logoSrc(item.logo);
 const { common } = site.ui;
 ---
 
-<article class="speaking-card content-card card-accent">
+<article class="speaking-card content-card card-accent reveal">
   <header class="speaking-card__head">
     {
       logoUrl ? (
@@ -145,6 +145,11 @@ const { common } = site.ui;
     line-height: var(--lh-relaxed);
     margin: 0;
     max-width: none;
+  }
+
+  /* Hover elevation — transition comes from the shared .content-card shell. */
+  .speaking-card:hover {
+    box-shadow: var(--shadow-lg);
   }
 
   @media (max-width: 560px) /* --bp-sm */ {

@@ -4,16 +4,18 @@ import type { LinkList } from '@schemas';
 
 interface Props {
   items: LinkList['items'];
+  featuredFirst?: boolean;
 }
 
-const { items } = Astro.props;
+const { items, featuredFirst = false } = Astro.props;
 ---
 
-<div class="research-grid reveal">
+<div class="research-grid reveal reveal-group">
   {
-    items.map((p) => (
+    items.map((p, idx) => (
       <ResearchCard
         variant="stacked"
+        featured={featuredFirst && idx === 0}
         venue={p.label}
         title={p.title}
         description={p.description}

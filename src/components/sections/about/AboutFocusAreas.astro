@@ -95,7 +95,7 @@ const { common, about: aboutUi } = site.ui;
             {subheading}
           </p>
         )}
-        <ul class="theme-grid" role="list">
+        <ul class="theme-grid reveal reveal-group" role="list">
           {(items ?? []).map((item) => (
             <li class="theme-card card">
               {item.icon && <CardMark icon={item.icon} context="theme-card" />}
@@ -181,6 +181,12 @@ const { common, about: aboutUi } = site.ui;
   }
   .about__card-row .theme-grid {
     margin-top: 0;
+  }
+
+  /* Hover elevation: each card gains subtle accent-tinted shadow, keyed to
+     the row's --accent-card, giving the wall tactile depth and grouping. */
+  .about__card-row .theme-card:hover {
+    box-shadow: var(--shadow-accent);
   }
 
   /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).

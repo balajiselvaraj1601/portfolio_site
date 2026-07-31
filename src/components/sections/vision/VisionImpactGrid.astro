@@ -15,7 +15,7 @@ interface Props {
 const { cards } = Astro.props;
 ---
 
-<ul class="theme-grid vision-impact__grid reveal" role="list">
+<ul class="theme-grid vision-impact__grid reveal reveal-group" role="list">
   {
     cards.map((c) => (
       <li
@@ -105,5 +105,16 @@ const { cards } = Astro.props;
     .vision-impact__grid > li:nth-child(7) {
       grid-column: auto;
     }
+  }
+
+  /* Subtle accent-tinted hover elevation: each tile's accent (set by
+     .vision-accent-* classes via --cat) tints the shadow, adding tactile depth. */
+  .vision-impact__grid > li > :global(.theme-card) {
+    transition: box-shadow var(--dur) var(--ease-out);
+  }
+  .vision-impact__grid > li:hover > :global(.theme-card) {
+    box-shadow:
+      0 14px 40px color-mix(in srgb, var(--cat) 22%, transparent),
+      var(--shadow-lg);
   }
 </style>

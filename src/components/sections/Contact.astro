@@ -5,10 +5,6 @@ import Eyebrow from '@components/ui/Eyebrow.astro';
 import Icon from '@components/ui/Icon.astro';
 import SectionHeading from '@components/ui/SectionHeading.astro';
 import { profile, site } from '@lib/content';
-import type { z } from 'zod';
-import { contactTypeSchema } from '@schemas';
-
-type ContactType = z.infer<typeof contactTypeSchema>;
 
 const { contactPage } = profile;
 
@@ -16,17 +12,9 @@ const contactChannels = profile.contact;
 
 const isExternal = (href: string) => href.startsWith('http');
 
-// Type-safe map of contact types to action labels.
-const actionLabelMap: Record<ContactType, string> = {
-  email: site.ui.contact.actions.email,
-  linkedin: site.ui.contact.actions.linkedin,
-  calendly: site.ui.contact.actions.calendly,
-  github: site.ui.contact.actions.github,
-  kaggle: site.ui.contact.actions.kaggle,
-  location: site.ui.contact.actions.location,
-};
-
-const actionLabel = (type: ContactType): string => actionLabelMap[type];
+// Action labels are schema-typed per contact type (site.ui.contact.actions).
+const actionLabel = (type: (typeof contactChannels)[number]['type']): string =>
+  site.ui.contact.actions[type];
 ---
 
 <Section
@@ -79,7 +67,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
         <span class="connect-rule" aria-hidden="true"></span>
       </div>
 
-      <div class="connect-grid">
+      <div class="connect-grid reveal reveal-group reveal--scale">
         {
           contactChannels.map((c) => {
             const external = c.href ? isExternal(c.href) : false;
@@ -142,6 +130,24 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
   }
 
   /* ── Left column ──────────────────────────────────────────── */
+  .contact-left {
+    position: relative;
+  }
+
+  .contact-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse at 50% 20%,
+      var(--accent-card, var(--accent)) 0%,
+      transparent 85%
+    );
+    opacity: 0.08;
+    filter: blur(30px);
+    pointer-events: none;
+  }
+
   .contact-subtitle {
     max-width: 38ch;
     margin-top: var(--text-gap-block);
@@ -225,6 +231,7 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
     grid-column: span 2;
     aspect-ratio: 1 / 1;
     min-height: 0;
+    /* Transitions come from the shared .card shell (global.css). */
   }
   /* Top row right-aligned over bottom 3 so right borders share a column:
         [1] [2]
@@ -244,6 +251,17 @@ const actionLabel = (type: ContactType): string => actionLabelMap[type];
       var(--border)
     );
   }
+
+  a.connect-card:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    a.connect-card:hover {
+      transform: translateY(var(--card-lift-lg));
+    }
+  }
+
   .connect-card :global(.icon-tile) {
     margin-bottom: var(--space-3);
   }
