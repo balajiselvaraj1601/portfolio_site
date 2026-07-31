@@ -89,7 +89,8 @@ const { cards } = Astro.props;
 
   /* Single-column phones — restate the base .theme-grid collapse (this scoped
      rule out-specifies it). */
-  @media (max-width: 480px) {
+  @media (max-width: 560px) {
+    /* 560px — matches --bp-sm (aligned with VisionProgramGrid) */
     .vision-impact__grid {
       grid-template-columns: 1fr;
       /* Single column: content-sized cards (don't force tallest height × 7). */

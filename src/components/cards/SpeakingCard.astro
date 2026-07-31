@@ -94,7 +94,7 @@ const { common } = site.ui;
 
   .speaking-card__event {
     font-size: var(--fs-subtitle);
-    font-weight: var(--fw-regular);
+    font-weight: var(--fw-semibold);
     color: var(--heading);
     line-height: var(--lh-body);
   }
@@ -140,10 +140,26 @@ const { common } = site.ui;
   }
 
   .speaking-card__desc {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-body);
     color: var(--text-muted);
     line-height: var(--lh-relaxed);
     margin: 0;
     max-width: none;
+  }
+
+  @media (max-width: 560px) /* --bp-sm */ {
+    .speaking-card__head {
+      grid-template-columns: auto 1fr;
+    }
+    .speaking-card__when {
+      grid-column: 2;
+      align-items: flex-start;
+      text-align: left;
+      min-width: 0;
+    }
+    .speaking-card__location,
+    .speaking-card__date {
+      white-space: normal;
+    }
   }
 </style>

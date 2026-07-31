@@ -545,6 +545,10 @@ button {
   text-transform: none;
   letter-spacing: normal;
 }
+/* T3 recog override — recognition titles use bold */
+.recog-title {
+  font-weight: var(--fw-bold);
+}
 
 /* T5 — in-section eyebrow sub-head */
 .subhead-eyebrow {
@@ -610,7 +614,7 @@ button {
   margin-bottom: var(--text-gap-inline);
 }
 .theme-card__desc {
-  font-size: var(--fs-base);
+  font-size: var(--fs-body);
   color: var(--text-muted);
   line-height: var(--lh-relaxed);
   margin: 0;
@@ -1002,7 +1006,7 @@ button {
   border: 1px solid var(--border);
   color: var(--text-muted);
   border-radius: var(--radius-pill);
-  padding: 0.35rem 0.8rem;
+  padding: var(--pill-padding-y) var(--pill-padding-x);
   cursor: pointer;
   transition:
     color var(--dur) var(--ease),
@@ -1030,7 +1034,7 @@ button {
 .recog-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-5);
+  gap: var(--stack-sm);
 }
 
 .recog-card {
@@ -1164,7 +1168,7 @@ html:not(.js) .recog-toggle {
 }
 .recog-label {
   font-family: var(--font-mono);
-  font-size: var(--fs-3xs);
+  font-size: var(--fs-2xs);
   letter-spacing: var(--tracking-wide);
   text-transform: uppercase;
   color: var(--text-muted);

@@ -69,12 +69,12 @@ const { role, periodLabel } = Astro.props;
     padding: var(--card-padding-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: var(--text-gap-inline);
   }
   .xp-company__head {
     display: flex;
     align-items: center;
-    gap: var(--space-5);
+    gap: var(--stack-sm);
   }
   .xp-company__titles {
     display: flex;
@@ -85,7 +85,9 @@ const { role, periodLabel } = Astro.props;
   .xp-meta {
     font-family: var(--font-mono);
     font-size: var(--fs-eyebrow);
+    font-weight: var(--fw-semibold);
     letter-spacing: var(--tracking-caps);
+    line-height: var(--lh-normal);
     color: var(--accent-card, var(--accent-ll));
     display: flex;
     flex-wrap: wrap;

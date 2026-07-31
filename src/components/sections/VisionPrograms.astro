@@ -66,9 +66,10 @@ import { visionBoard, site } from '@lib/content';
      program-card grid styles → vision/VisionProgramGrid.astro;
      impact-grid styles → vision/VisionImpactGrid.astro. */
 
-  /* Sub-heading above the org-impact grid — T3 card-title with section spacing. */
+  /* Sub-heading above the org-impact grid — larger than card titles (fs-card-title-lg). */
   .vision-impact__heading {
-    margin: var(--space-12) 0 var(--stack-xl);
+    font-size: var(--fs-card-title-lg);
+    margin: var(--stack-xl) 0 var(--stack-xl);
   }
 
   .vision-flow {
@@ -83,7 +84,7 @@ import { visionBoard, site } from '@lib/content';
       auto
       var(--vision-hub-w)
       auto
-      minmax(300px, 1fr);
+      minmax(var(--grid-col-min), 1fr);
     justify-content: center;
     /* Hubs and chevrons centre on the row's vertical middle — the midpoint
        between the two rows of the 2×2 program grid (the tallest item). */
@@ -92,11 +93,16 @@ import { visionBoard, site } from '@lib/content';
     width: 100%;
   }
 
-  .vision-flow > :global(.vision-hub) {
+  /* Hubs nest under .vision-hub-accent (accent cascade) — size the wrapper
+     grid item; margin override targets the nested .vision-hub. */
+  .vision-flow > .vision-hub-accent {
     width: var(--vision-hub-w);
     max-width: var(--vision-hub-max);
     justify-self: center;
     min-width: 0;
+  }
+
+  .vision-flow > .vision-hub-accent :global(.vision-hub) {
     /* Grid centres the MARGIN box; the label footer is out-of-flow and the row
        is far taller than the hub here, so drop the reservation to put the
        circle's centre exactly on the row middle. Restored when stacked. */
@@ -124,14 +130,14 @@ import { visionBoard, site } from '@lib/content';
       --vision-hub-stage-mid: calc(var(--vision-hub-w) / 2);
     }
 
-    .vision-flow > :global(.vision-hub):first-of-type {
+    .vision-flow > .vision-hub-accent:nth-of-type(1) {
       grid-column: 1;
       grid-row: 1;
       width: var(--vision-hub-w);
       max-width: var(--vision-hub-max-md);
     }
 
-    .vision-flow > :global(.vision-hub):last-of-type {
+    .vision-flow > .vision-hub-accent:nth-of-type(2) {
       grid-column: 3;
       grid-row: 1;
       width: var(--vision-hub-w);
@@ -140,7 +146,7 @@ import { visionBoard, site } from '@lib/content';
 
     /* The cards row sits directly below the hubs here — restore the space the
        out-of-flow rule + label footer needs. */
-    .vision-flow > :global(.vision-hub) {
+    .vision-flow > .vision-hub-accent :global(.vision-hub) {
       margin-bottom: var(--vision-hub-footer-h);
     }
   }

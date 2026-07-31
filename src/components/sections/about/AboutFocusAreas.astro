@@ -182,4 +182,13 @@ const { common, about: aboutUi } = site.ui;
   .about__card-row .theme-grid {
     margin-top: 0;
   }
+
+  /* 1180px — matches --bp-2xl (CSS vars invalid in @media features).
+     Base .theme-grid keeps 4 cols down to 769px, which crushes cards
+     (~195px at 900px). Drop to 2 cols at the same breakpoint as VisionImpactGrid. */
+  @media (max-width: 1180px) {
+    .about__card-row .theme-grid {
+      --theme-cols: 2;
+    }
+  }
 </style>

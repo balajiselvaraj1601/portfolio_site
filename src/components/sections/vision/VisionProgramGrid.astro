@@ -104,12 +104,12 @@ function resolveProgramLogoSlug(p: VisionProgram): string {
     justify-content: center;
     background: color-mix(
       in srgb,
-      var(--accent-card, var(--accent)) 8%,
+      var(--accent-card, var(--accent)) var(--mark-bg-mix),
       var(--logo-surface)
     );
     border-color: color-mix(
       in srgb,
-      var(--accent-card, var(--accent)) 35%,
+      var(--accent-card, var(--accent)) var(--mark-border-mix),
       var(--border)
     );
   }

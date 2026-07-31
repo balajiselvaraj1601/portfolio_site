@@ -109,7 +109,7 @@ const { awards: awardsUi } = recognition;
   </RecogControls>
 
   <!-- Award card grid -->
-  <ul class="theme-grid awards-grid reveal" data-awards-grid role="list">
+  <ul class="recog-grid awards-grid reveal" data-awards-grid role="list">
     {
       items.map((a) => (
         <li
@@ -160,7 +160,7 @@ const { awards: awardsUi } = recognition;
             </dl>
             <div class="recog-card-divider" aria-hidden="true" />
             <p
-              class="theme-card__desc recog-clamp awards-card__message"
+              class="recog-body recog-clamp awards-card__message"
               style="--clamp: 6"
             >
               {a.message}
@@ -212,14 +212,10 @@ const { awards: awardsUi } = recognition;
     --mark-fg: var(--accent-card);
   }
 
-  .awards-grid {
-    --theme-cols: 3;
-    grid-auto-rows: auto;
-  }
-
   /* Cards use the shell's default flex column (like Kaggle) — the old subgrid
      row alignment across cards is meaningless once bodies collapse, and it
-     would break the collapsible header/body/toggle structure. */
+     would break the collapsible header/body/toggle structure. Grid columns
+     come from shared .recog-grid (global.css); no local --theme-cols overrides. */
 
   .awards-card__top {
     display: flex;
@@ -246,19 +242,6 @@ const { awards: awardsUi } = recognition;
 
   .awards-card__meta dd {
     margin: 0;
-  }
-
-  @media (max-width: 980px) {
-    .awards-grid {
-      --theme-cols: 2;
-    }
-  }
-
-  @media (max-width: 560px) {
-    .awards-grid {
-      --theme-cols: 1;
-      grid-auto-rows: auto;
-    }
   }
 
   .awards-grid :global(li) {

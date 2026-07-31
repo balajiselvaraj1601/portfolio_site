@@ -1,5 +1,6 @@
 ---
 import CardMark from '@components/ui/CardMark.astro';
+import Icon from '@components/ui/Icon.astro';
 import { logoSrc, site } from '@lib/content';
 import { youtubeId } from '@lib/youtube';
 
@@ -68,6 +69,7 @@ const { common } = site.ui;
       <h3>
         <a href={href} target="_blank" rel="noopener noreferrer">
           {title}
+          <Icon name="external" size="sm" />
           <span class="visually-hidden">{common.opensInNewWindow}</span>
         </a>
       </h3>
@@ -174,8 +176,11 @@ const { common } = site.ui;
   .rcard h3 a:hover {
     color: var(--accent-light);
   }
+  .rcard h3 a :global(.icon) {
+    margin-inline-start: var(--space-1);
+  }
   .rcard p {
-    font-size: var(--fs-sm);
+    font-size: var(--fs-body);
     color: var(--text-muted);
     line-height: var(--lh-relaxed);
     max-width: none;

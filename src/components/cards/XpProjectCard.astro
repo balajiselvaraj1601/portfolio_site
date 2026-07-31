@@ -29,7 +29,7 @@ const iconName = resolveIcon(icon, 'folder');
       <Icon name={iconName} />
     </div>
     <div class="xp-proj__titles">
-      {subtitle && <p class="xp-proj__meta">{subtitle}</p>}
+      {subtitle && <p class="subhead-kicker">{subtitle}</p>}
       <h3 class="card-title xp-proj__name">{name}</h3>
     </div>
   </header>
@@ -52,7 +52,7 @@ const iconName = resolveIcon(icon, 'folder');
     border-top: 2px solid var(--accent-card, var(--accent));
     display: flex;
     flex-direction: column;
-    gap: var(--space-5);
+    gap: var(--text-gap-inline);
     scroll-margin-top: calc(var(--header-h) + var(--space-4));
   }
   /* Toggled by the shared recog-grid filter behaviour (chip selector). */
@@ -68,14 +68,6 @@ const iconName = resolveIcon(icon, 'folder');
     display: flex;
     flex-direction: column;
     gap: var(--text-gap-pair);
-  }
-  .xp-proj__meta {
-    font-family: var(--font-mono);
-    font-size: var(--fs-eyebrow);
-    letter-spacing: var(--tracking-caps);
-    text-transform: uppercase;
-    color: var(--accent-card, var(--accent-ll));
-    margin: 0;
   }
   .is-secondary {
     color: var(--text-muted);
