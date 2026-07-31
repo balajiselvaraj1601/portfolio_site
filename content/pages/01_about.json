@@ -56,7 +56,8 @@
       "value": "Global Leadership",
       "label": "Distributed AI Team",
       "detail": "India, UK, Sweden, Mexico, China",
-      "icon": "globe"
+      "icon": "globe",
+      "wide": true
     }
   ],
   "ctas": [],

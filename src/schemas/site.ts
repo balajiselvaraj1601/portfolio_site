@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { contactTypeSchema } from './person';
 
 const PageSeo = z.object({ title: z.string(), description: z.string() });
 const ContentPage = z.object({
@@ -121,7 +122,13 @@ export const siteSchema = z
         }),
       }),
       contact: z.object({
-        actions: z.record(z.string()),
+        // One action label per contact channel type — keys derive from
+        // contactTypeSchema (SSOT), so adding a channel type forces a label.
+        actions: z.object(
+          Object.fromEntries(
+            contactTypeSchema.options.map((type) => [type, z.string()])
+          ) as Record<(typeof contactTypeSchema.options)[number], z.ZodString>
+        ),
       }),
       notFound: z.object({
         titleTemplate: z.string(),

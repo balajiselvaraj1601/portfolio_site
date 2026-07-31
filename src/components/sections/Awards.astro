@@ -217,16 +217,6 @@ const { awards: awardsUi } = recognition;
      would break the collapsible header/body/toggle structure. Grid columns
      come from shared .recog-grid (global.css); no local --theme-cols overrides. */
 
-  .awards-card__top {
-    display: flex;
-    flex-direction: column;
-    gap: var(--text-gap-pair);
-  }
-
-  :global(.awards-card__top .theme-card__icon) {
-    margin-bottom: 0;
-  }
-
   .awards-card__meta {
     display: flex;
     flex-direction: column;

@@ -1,6 +1,4 @@
-# AGENTS.md - Portfolio Site
-
-## What This Repo Is
+# AGENTS.md — Portfolio Site
 
 A production-focused **Astro 4** portfolio for **Balaji Selvaraj** (Technical AI Leader),
 deployed to GitHub Pages as a user site at <https://balajiselvaraj1601.github.io>.
@@ -14,6 +12,63 @@ content/pages/*.json
   - src/components/SectionRenderer.astro  (section id - component)
   - src/pages/*.astro      (routes)
 ```
+
+## Setup commands
+
+| Task                        | Command               |
+| --------------------------- | --------------------- |
+| Install pinned dependencies | `npm ci`              |
+| Dev server (4321)           | `npm run dev`         |
+| Stop all Astro 43xx servers | `npm run dev:stop`    |
+| Restart dev (4321)          | `npm run dev:restart` |
+| Prep both (stop + build)    | `npm run serve`       |
+
+CI builds on Node 20 (`package.json` engines: `>=18`).
+
+## Code style
+
+No dedicated code-style commands live outside the sections below. Content is schema-first (see Working Rules) and `src/schemas/` is the single source of truth for JSON field types (`z.infer`); `@astrojs/sitemap` is pinned to exactly `3.6.0` (see Hard Rules).
+
+## Dev environment tips
+
+### Local servers and ports
+
+| Mode                    | Port | URL                    | npm script        |
+| ----------------------- | ---- | ---------------------- | ----------------- |
+| Dev (HMR)               | 4321 | http://localhost:4321/ | `npm run dev`     |
+| Preview (built `dist/`) | 4331 | http://localhost:4331/ | `npm run preview` |
+
+Port **values** SSOT: [`scripts/ports.mjs`](scripts/ports.mjs) (imported by
+`astro.config.mjs` with `strictPort: true`). Workflows, stop/restart semantics,
+anti-patterns, and verify commands:
+[docs/troubleshooting.md §Local servers and ports](docs/troubleshooting.md#local-servers-and-ports).
+
+## Testing instructions
+
+| Task                       | Command                                                                                               |
+| -------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Production build           | `npm run build`                                                                                       |
+| Preview build (4331)       | `npm run preview`                                                                                     |
+| Rebuild + preview (4331)   | `npm run preview:restart`                                                                             |
+| Verify dev + preview       | `ss` + `curl` (see [docs/troubleshooting.md §Verify servers](docs/troubleshooting.md#verify-servers)) |
+| Dev smoke (Playwright)     | `npm run smoke:localhost`                                                                             |
+| Full verify (release gate) | `npm run verify`                                                                                      |
+
+## PR instructions
+
+Version SSOT: `package.json` - `version` (synced to `package-lock.json` by `scripts/bump-version.mjs`).
+This package is `"private": true` - releases are git tags and [GitHub Releases](CHANGELOG.md), not npm publish.
+
+- **First-time / manual cut:** run `npm run verify`, tag `vX.Y.Z`, push `main` + tag; `.github/workflows/release.yml` verifies and creates the GitHub Release.
+- **Future bumps:** workflow dispatch on `release.yml` (patch/minor/major) or follow `.claude/commands/release.md`.
+- Deploy to GitHub Pages stays on push to `main` on the user-site repo; tags do not replace that trigger.
+
+| Task         | Command                                     |
+| ------------ | ------------------------------------------- |
+| Bump version | `npm run release:bump -- --bump patch`      |
+| Cut release  | `/release` or `.claude/commands/release.md` |
+
+<!-- House extensions (beyond the agents.md standard) -->
 
 ## Working Rules
 
@@ -106,47 +161,6 @@ When `navViews={true}`, sections are wrapped with `data-nav-views` for scroll-sp
    `astro.config.mjs` - keep that list aligned with the stub pages.
 3. Never publish a phone number or a References section.
 4. Do not commit `dist/`; CI rebuilds it through `.github/workflows/deploy.yml`.
-
-## Commands
-
-| Task                        | Command                                                                                               |
-| --------------------------- | ----------------------------------------------------------------------------------------------------- |
-| Install pinned dependencies | `npm ci`                                                                                              |
-| Dev server (4321)           | `npm run dev`                                                                                         |
-| Stop all Astro 43xx servers | `npm run dev:stop`                                                                                    |
-| Restart dev (4321)          | `npm run dev:restart`                                                                                 |
-| Prep both (stop + build)    | `npm run serve`                                                                                       |
-| Production build            | `npm run build`                                                                                       |
-| Preview build (4331)        | `npm run preview`                                                                                     |
-| Rebuild + preview (4331)    | `npm run preview:restart`                                                                             |
-| Verify dev + preview        | `ss` + `curl` (see [docs/troubleshooting.md §Verify servers](docs/troubleshooting.md#verify-servers)) |
-| Dev smoke (Playwright)      | `npm run smoke:localhost`                                                                             |
-| Full verify (release gate)  | `npm run verify`                                                                                      |
-| Bump version                | `npm run release:bump -- --bump patch`                                                                |
-| Cut release                 | `/release` or `.claude/commands/release.md`                                                           |
-
-CI builds on Node 20 (`package.json` engines: `>=18`).
-
-## Releases
-
-Version SSOT: `package.json` - `version` (synced to `package-lock.json` by `scripts/bump-version.mjs`).
-This package is `"private": true` - releases are git tags and [GitHub Releases](CHANGELOG.md), not npm publish.
-
-- **First-time / manual cut:** run `npm run verify`, tag `vX.Y.Z`, push `main` + tag; `.github/workflows/release.yml` verifies and creates the GitHub Release.
-- **Future bumps:** workflow dispatch on `release.yml` (patch/minor/major) or follow `.claude/commands/release.md`.
-- Deploy to GitHub Pages stays on push to `main` on the user-site repo; tags do not replace that trigger.
-
-## Local servers and ports
-
-| Mode                    | Port | URL                    | npm script        |
-| ----------------------- | ---- | ---------------------- | ----------------- |
-| Dev (HMR)               | 4321 | http://localhost:4321/ | `npm run dev`     |
-| Preview (built `dist/`) | 4331 | http://localhost:4331/ | `npm run preview` |
-
-Port **values** SSOT: [`scripts/ports.mjs`](scripts/ports.mjs) (imported by
-`astro.config.mjs` with `strictPort: true`). Workflows, stop/restart semantics,
-anti-patterns, and verify commands:
-[docs/troubleshooting.md §Local servers and ports](docs/troubleshooting.md#local-servers-and-ports).
 
 ## Agents
 

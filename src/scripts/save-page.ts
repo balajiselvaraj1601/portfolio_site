@@ -120,7 +120,7 @@ export async function savePage(): Promise<void> {
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
     a.href = objectUrl;
-    a.download = 'outputs/' + (slug || 'page') + '.html';
+    a.download = (slug || 'page') + '.html';
     a.click();
 
     setTimeout(() => URL.revokeObjectURL(objectUrl), 10_000);

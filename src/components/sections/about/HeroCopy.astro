@@ -50,10 +50,7 @@ function isExternal(href: string) {
     {
       profile.metrics.map((m) => (
         <div
-          class:list={[
-            'hero-stat',
-            { 'hero-stat--wide': m.value.includes('Leadership') },
-          ]}
+          class:list={['hero-stat', { 'hero-stat--wide': m.wide }]}
           role="listitem"
         >
           <div class="hero-stat__num">{m.value}</div>

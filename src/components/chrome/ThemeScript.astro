@@ -1,6 +1,4 @@
 <script is:inline>
-  (function () {
-    document.documentElement.classList.add('js');
-    document.documentElement.setAttribute('data-theme', 'dark');
-  })();
+  // data-theme is server-rendered on <html> from site.theme.default (SSOT).
+  document.documentElement.classList.add('js');
 </script>

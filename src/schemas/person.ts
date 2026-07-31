@@ -7,6 +7,8 @@ export const MetricItem = z.object({
   label: z.string(),
   detail: z.string().optional(),
   icon: iconNameSchema.optional(),
+  /** Span the full hero-stats row (layout flag — replaces copy-string sniffing). */
+  wide: z.boolean().optional(),
 });
 /** Titled content block with an optional Lucide icon (about & vision lists). */
 const TitledIconItem = z.object({

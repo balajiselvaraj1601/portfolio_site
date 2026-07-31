@@ -1,8 +1,8 @@
 # CLAUDE.md
 
-Canonical guide: [`AGENTS.md`](AGENTS.md).
+**Shared knowledge lives in [AGENTS.md](AGENTS.md) — read it first.**
 
-## Claude-specific
+## Claude-specific notes
 
 - **Page Consistency Team:** `/page-team` or `.claude/commands/page-team.md`
 - **Skills:** `.claude/skills/` (also via `.agents/skills/` symlink)
