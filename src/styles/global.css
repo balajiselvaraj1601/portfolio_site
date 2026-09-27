@@ -1314,11 +1314,9 @@ html:not(.js) .recog-toggle {
   contain-intrinsic-size: auto 800px;
 }
 
-/* Entrance animation — one base entrance, differentiated variants, and a
-   JS-free child stagger. The base .reveal keeps its prior rise; variants let
-   each view choose a distinct authored entrance instead of one identical fade
-   site-wide. A .reveal-group MUST also carry .reveal (the observer only toggles
-   .is-visible on .reveal elements). All gated on no-preference; under
+/* Entrance animation — one base entrance, an opt-in variant, and a JS-free
+   child stagger. A .reveal-group MUST also carry .reveal (the observer only
+   toggles .is-visible on .reveal elements). All gated on no-preference; under
    reduced-motion none of this applies and content is visible by default. */
 @media (prefers-reduced-motion: no-preference) {
   html.js .reveal {
@@ -1326,29 +1324,11 @@ html:not(.js) .recog-toggle {
     transform: translateY(24px);
     transition:
       opacity var(--dur-reveal) var(--ease-out),
-      transform var(--dur-reveal) var(--ease-out),
-      clip-path var(--dur-reveal) var(--ease-out),
-      filter var(--dur-reveal) var(--ease-out);
+      transform var(--dur-reveal) var(--ease-out);
   }
   html.js .reveal.is-visible {
     opacity: 1;
     transform: none;
-  }
-
-  /* Variant: soft-focus — blur to sharp (reaches past transform + opacity). */
-  html.js .reveal--blur {
-    filter: blur(10px);
-  }
-  html.js .reveal--blur.is-visible {
-    filter: none;
-  }
-
-  /* Variant: clip wipe — reveal from the bottom edge upward. */
-  html.js .reveal--clip {
-    clip-path: inset(0 0 12% 0);
-  }
-  html.js .reveal--clip.is-visible {
-    clip-path: inset(0 0 0 0);
   }
 
   /* Variant: settle — subtle scale-up. */

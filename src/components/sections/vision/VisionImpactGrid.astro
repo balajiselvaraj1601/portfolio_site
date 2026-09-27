@@ -108,10 +108,8 @@ const { cards } = Astro.props;
   }
 
   /* Subtle accent-tinted hover elevation: each tile's accent (set by
-     .vision-accent-* classes via --cat) tints the shadow, adding tactile depth. */
-  .vision-impact__grid > li > :global(.theme-card) {
-    transition: box-shadow var(--dur) var(--ease-out);
-  }
+     .vision-accent-* classes via --cat) tints the shadow, adding tactile depth.
+     Transition comes from the shared .card shell (global.css). */
   .vision-impact__grid > li:hover > :global(.theme-card) {
     box-shadow:
       0 14px 40px color-mix(in srgb, var(--cat) 22%, transparent),

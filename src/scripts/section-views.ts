@@ -48,10 +48,6 @@ function updateNavActive(viewAnchor: string) {
     });
 }
 
-function scrollToSection(sectionId: string | undefined) {
-  scrollToSectionId(sectionId);
-}
-
 export function initSectionViews(options: SectionViewsOptions) {
   if (normalizePath(window.location.pathname) !== '/') return;
 
@@ -74,7 +70,7 @@ export function initSectionViews(options: SectionViewsOptions) {
     updateNavActive(anchor);
     if (scroll) {
       programmaticScrollUntil = Date.now() + PROGRAMMATIC_SCROLL_SETTLE_MS;
-      scrollToSection(firstSectionOf(anchor));
+      scrollToSectionId(firstSectionOf(anchor));
     }
   };
 
@@ -123,7 +119,7 @@ export function initSectionViews(options: SectionViewsOptions) {
 
     if (anchor && document.getElementById(anchor)) {
       programmaticScrollUntil = Date.now() + PROGRAMMATIC_SCROLL_SETTLE_MS;
-      scrollToSection(anchor);
+      scrollToSectionId(anchor);
       const viewAnchor = sectionToView.get(anchor);
       if (viewAnchor) updateNavActive(viewAnchor);
       return;

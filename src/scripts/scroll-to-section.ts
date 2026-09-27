@@ -22,7 +22,7 @@ function findPreviousSection(target: HTMLElement): HTMLElement | null {
   return idx > 0 ? sections[idx - 1] : null;
 }
 
-export function getDocumentTop(el: HTMLElement): number {
+function getDocumentTop(el: HTMLElement): number {
   let y = 0;
   let node: HTMLElement | null = el;
   while (node) {
@@ -50,6 +50,7 @@ function getHideBoundaryBefore(target: HTMLElement): number | null {
 }
 
 /**
+ * Scroll so the target sits below the fixed header, clamped so no earlier
  * section remains visible above it (nav view boundaries should feel clean).
  */
 export function scrollToElement(target: HTMLElement): void {

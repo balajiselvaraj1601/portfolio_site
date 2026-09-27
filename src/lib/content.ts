@@ -134,16 +134,15 @@ export function logoSrc(slug?: string): string | undefined {
   }
   return undefined;
 }
+/** Drop sections hidden via `site.sections[id].visible === false`. */
+const visibleSections = (ids: readonly string[]) =>
+  ids.filter((id) => site.sections[id]?.visible !== false);
+
 /** Content-driven pages only — excludes external nav entries (e.g. a link to an external profile). */
 export const pages = site.pages.flatMap((p) => {
   if (p.external) return [];
 
-  return [
-    {
-      ...p,
-      sections: p.sections.filter((id) => site.sections[id]?.visible !== false),
-    },
-  ];
+  return [{ ...p, sections: visibleSections(p.sections) }];
 });
 
 /** All nav entries including external links. */
@@ -170,9 +169,7 @@ if (!homePage) throw new Error('site.json: missing home page');
 export const homeViewAnchor = homePage.viewAnchor ?? homePage.id;
 
 /** Full ordered section list rendered on `/`. */
-export const homeSections = homePage.sections.filter(
-  (id) => site.sections[id]?.visible !== false
-);
+export const homeSections = visibleSections(homePage.sections);
 
 /**
  * Synthetic hero view — the top landing band (`hero` + `thirukural`). It has no
@@ -185,9 +182,7 @@ const heroView = {
   label: 'Hero',
   path: '/',
   viewAnchor: HERO_DOT_ID,
-  viewSections: ['hero', 'thirukural'].filter(
-    (id) => site.sections[id]?.visible !== false
-  ),
+  viewSections: visibleSections(['hero', 'thirukural']),
 };
 
 /** Nav views — the synthetic hero band plus each content page with view metadata. */
@@ -202,9 +197,7 @@ export const navViews = [
         label: p.label,
         path: p.path,
         viewAnchor,
-        viewSections: p.viewSections.filter(
-          (id) => site.sections[id]?.visible !== false
-        ),
+        viewSections: visibleSections(p.viewSections),
       },
     ];
   }),
@@ -280,13 +273,15 @@ export const dotNavViews: DotNavView[] = navViews.map((v) => ({
   scrollSection: v.viewSections[0],
 }));
 
-/** Map section id → dot id for scroll-spy (hero band split from About view). */
-export const sectionToDotNav: Record<string, string> = {};
-for (const view of navViews) {
-  for (const sectionId of view.viewSections) {
-    sectionToDotNav[sectionId] = view.viewAnchor;
-  }
-}
+/** Map section id → dot id for scroll-spy (hero band split from About view).
+ *  Derived from sectionViewMap — single ownership is enforced above, so each
+ *  section's sole view anchor IS its dot. */
+export const sectionToDotNav: Record<string, string> = Object.fromEntries(
+  Object.entries(sectionViewMap).map(([sectionId, [anchor]]) => [
+    sectionId,
+    anchor,
+  ])
+);
 
 const entityKeys = new Set(Object.keys(entities));
 function assertEntitySlug(slug: string | undefined, context: string) {
@@ -297,9 +292,7 @@ function assertEntitySlug(slug: string | undefined, context: string) {
 }
 
 function assertLogoAsset(slug: string, context: string) {
-  for (const ext of LOGO_EXTS) {
-    if (logoFiles.has(`${slug}.${ext}`)) return;
-  }
+  if (logoSrc(slug)) return;
   throw new Error(
     `${context}: missing logo asset "${slug}" under public/assets/logos/`
   );

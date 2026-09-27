@@ -1,11 +1,12 @@
 ---
 import { profile } from '@lib/content';
+import { isExternalHref, newTabAttrs } from '@lib/url';
 import Icon from '@components/ui/Icon.astro';
 import AvailabilityBadge from '@components/ui/AvailabilityBadge.astro';
 
-function isExternal(href: string) {
-  return href.startsWith('http') || href.startsWith('/assets/');
-}
+// New-tab CTAs: external links, plus /assets/ downloads (e.g. resume PDF).
+const opensNewTab = (href: string) =>
+  isExternalHref(href) || href.startsWith('/assets/');
 ---
 
 <div class="hero__copy">
@@ -76,9 +77,7 @@ function isExternal(href: string) {
               },
             ]}
             href={cta.href}
-            {...(isExternal(cta.href)
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
+            {...newTabAttrs(opensNewTab(cta.href))}
           >
             {cta.icon && <Icon name={cta.icon} size="sm" />}
             {cta.label}

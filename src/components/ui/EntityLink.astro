@@ -1,5 +1,6 @@
 ---
 import { site } from '@lib/content';
+import { isExternalHref, newTabAttrs } from '@lib/url';
 
 interface Props {
   href?: string;
@@ -8,7 +9,7 @@ interface Props {
 }
 
 const { href, label, class: className } = Astro.props;
-const isExternal = !!href && /^https?:\/\//.test(href);
+const isExternal = !!href && isExternalHref(href);
 const { common } = site.ui;
 ---
 
@@ -17,7 +18,7 @@ const { common } = site.ui;
     <a
       href={href}
       class:list={['entity-link', className]}
-      {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      {...newTabAttrs(isExternal)}
     >
       {label}
       {isExternal && (

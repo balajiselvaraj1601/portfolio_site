@@ -1,5 +1,6 @@
 ---
 import { site, profile } from '@lib/content';
+import { isExternalHref, newTabAttrs } from '@lib/url';
 import Icon from '@components/ui/Icon.astro';
 import { resolveIcon } from '@lib/icons';
 
@@ -31,7 +32,7 @@ const { footer } = site.ui;
     <ul class="site-footer__social" aria-label={footer.socialLinksLabel}>
       {
         socialLinks.map((c) => {
-          const external = c.href!.startsWith('http');
+          const external = isExternalHref(c.href!);
           return (
             <li>
               <a
@@ -40,9 +41,7 @@ const { footer } = site.ui;
                 aria-label={
                   external ? `${c.label}${footer.opensInNewTabSuffix}` : c.label
                 }
-                {...(external
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
+                {...newTabAttrs(external)}
               >
                 <Icon
                   name={resolveIcon(c.icon, 'email')}

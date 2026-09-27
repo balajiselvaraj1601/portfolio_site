@@ -5,12 +5,11 @@ import Eyebrow from '@components/ui/Eyebrow.astro';
 import Icon from '@components/ui/Icon.astro';
 import SectionHeading from '@components/ui/SectionHeading.astro';
 import { profile, site } from '@lib/content';
+import { isExternalHref, newTabAttrs } from '@lib/url';
 
 const { contactPage } = profile;
 
 const contactChannels = profile.contact;
-
-const isExternal = (href: string) => href.startsWith('http');
 
 // Action labels are schema-typed per contact type (site.ui.contact.actions).
 const actionLabel = (type: (typeof contactChannels)[number]['type']): string =>
@@ -70,14 +69,12 @@ const actionLabel = (type: (typeof contactChannels)[number]['type']): string =>
       <div class="connect-grid reveal reveal-group reveal--scale">
         {
           contactChannels.map((c) => {
-            const external = c.href ? isExternal(c.href) : false;
+            const external = c.href ? isExternalHref(c.href) : false;
             return c.href ? (
               <a
                 class:list={['connect-card', 'card', 'card-accent']}
                 href={c.href}
-                {...(external
-                  ? { target: '_blank', rel: 'noopener noreferrer' }
-                  : {})}
+                {...newTabAttrs(external)}
               >
                 <CardMark
                   icon={c.icon}
@@ -230,7 +227,9 @@ const actionLabel = (type: (typeof contactChannels)[number]['type']): string =>
     text-decoration: none;
     grid-column: span 2;
     min-height: 0;
-    /* Transitions come from the shared .card shell (global.css). */
+    /* Transitions + reduced-motion-gated hover lift come from the shared
+       .card shell (global.css); only the lift distance is upgraded here. */
+    --card-lift: var(--card-lift-lg);
   }
   /* Top row right-aligned over bottom 3 so right borders share a column:
         [1] [2]
@@ -253,12 +252,6 @@ const actionLabel = (type: (typeof contactChannels)[number]['type']): string =>
 
   a.connect-card:hover {
     box-shadow: var(--shadow-lg);
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    a.connect-card:hover {
-      transform: translateY(var(--card-lift-lg));
-    }
   }
 
   .connect-card :global(.icon-tile) {
